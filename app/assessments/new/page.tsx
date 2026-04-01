@@ -154,64 +154,43 @@ export default function NewAssessmentPage() {
         }
       }
 
-      // 4. Store line items DIRECTLY via Supabase client
+      // 4. Store line items via API route (handles inserts one-by-one for robustness)
       const lineItems = parsedProposal.lineItems
-      console.log("[v0] Inserting", lineItems.length, "line items directly via Supabase client")
+      console.log("[v0] Storing", lineItems.length, "line items via API")
       
       if (lineItems.length > 0) {
-        // Insert line items using the parsed AssessmentLineItem structure
-        const lineItemsToInsert = lineItems.map((item, index) => ({
-          assessment_id: assessment.id,
-          procedure_name: item.description || "Unknown",
+        // Map to the format expected by the API
+        const lineItemsForApi = lineItems.map((item, index) => ({
+          description: item.description || "Unknown",
+          additionalInformation: item.description,
           site: item.site || null,
-          additional_information: item.description,
-          category: item.costCategory || null,
-          unit: item.unitType || null,
-          number_of_unit: item.numberOfUnits,
-          unit_price: item.unitPrice,
-          total_cost: item.totalCost,
+          costCategory: item.costCategory || null,
+          unitType: item.unitType || null,
+          numberOfUnit: item.numberOfUnits,
+          unitPrice: item.unitPrice,
+          totalCost: item.totalCost,
           currency: item.currency || "USD",
-          row_index: index
+          rowIndex: index
         }))
 
-        console.log("[v0] Line items to insert:", lineItemsToInsert.slice(0, 2))
+        console.log("[v0] Sending to API:", lineItemsForApi.slice(0, 2))
 
-        const { data: insertedItems, error: insertError } = await supabase
-          .from("assessment_line_items")
-          .insert(lineItemsToInsert)
-          .select("id")
+        const storeResponse = await fetch("/api/assessments/store-items", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            assessmentId: assessment.id,
+            lineItems: lineItemsForApi
+          })
+        })
 
-        if (insertError) {
-          console.error("[v0] Error inserting line items:", insertError)
+        if (!storeResponse.ok) {
+          const errorData = await storeResponse.json()
+          console.error("[v0] Error storing line items:", errorData)
         } else {
-          console.log("[v0] Successfully inserted", insertedItems?.length, "line items")
-          
-          // Create comparison records
-          if (insertedItems && insertedItems.length > 0) {
-            const comparisons = insertedItems.map((item: any) => ({
-              assessment_id: assessment.id,
-              line_item_id: item.id,
-              flag: "NO_MATCH",
-              ai_description: "Pending benchmark comparison"
-            }))
-
-            const { error: compError } = await supabase
-              .from("assessment_comparisons")
-              .insert(comparisons)
-
-            if (compError) {
-              console.error("[v0] Error inserting comparisons:", compError)
-            } else {
-              console.log("[v0] Successfully inserted", comparisons.length, "comparisons")
-            }
-          }
+          const result = await storeResponse.json()
+          console.log("[v0] Successfully stored", result.insertedCount, "line items")
         }
-
-        // Update assessment status
-        await supabase
-          .from("assessments")
-          .update({ status: "completed" })
-          .eq("id", assessment.id)
       }
 
       // 5. Navigate to assessment detail page
