@@ -29,6 +29,7 @@ export function AssessmentsContent() {
   // Fetch assessments from Supabase on mount
   useEffect(() => {
     const fetchAssessments = async () => {
+      console.log("[v0] Fetching assessments from Supabase...")
       setIsLoading(true)
       try {
         const supabase = createClient()
@@ -37,11 +38,14 @@ export function AssessmentsContent() {
           .select("*")
           .order("created_at", { ascending: false })
 
+        console.log("[v0] Assessments fetch result - count:", dbAssessments?.length, "error:", error?.message)
+        
         if (error) {
           console.log("[v0] Error fetching assessments:", error.message)
           // Fall back to mock data if DB fails
           setAllAssessments(mockAssessments)
         } else if (dbAssessments && dbAssessments.length > 0) {
+          console.log("[v0] First assessment from DB:", dbAssessments[0]?.name, dbAssessments[0]?.id)
           // Map DB assessments to Assessment type
           const mappedAssessments: Assessment[] = dbAssessments.map((a: any) => ({
             id: a.id,
