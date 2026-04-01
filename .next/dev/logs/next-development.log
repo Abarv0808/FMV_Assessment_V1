@@ -1579,3 +1579,63 @@ Import trace:
 [03:40:11.689] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [03:40:11.689] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [03:40:11.689] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775051524023} /_vercel/insights/view
+[03:40:13.445] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775051526761} /_vercel/insights/view
+[03:40:15.802] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/96dfdb8f-cbd0-4110-953f-87ba8944fd2a color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/96dfdb8f-cbd0-4110-953f-87ba8944fd2a","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775051529121} /_vercel/insights/view
+[03:40:17.347] Server  LOG     [v0] Run comparison API called
+[03:40:17.347] Server  LOG     [v0] Assessment ID: "96dfdb8f-cbd0-4110-953f-87ba8944fd2a"
+[03:40:17.348] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[03:40:17.351] Server  LOG     [v0] Fetching line items...
+[03:40:17.489] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[03:40:17.490] Server  LOG     [v0] Fetching benchmark procedures...
+[03:40:17.596] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[03:40:17.798] Server  LOG     [v0] Benchmark query result: 500 "raw," 462 "valid names," 0 "with pricing"
+[03:40:17.798] Server  LOG     [v0] === SAMPLE DATA COMPARISON ===
+[03:40:17.798] Server  LOG     [v0] LINE ITEMS FROM ASSESSMENT (first 3):
+[03:40:17.798] Server  LOG     [v0]   1. "The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person"
+[03:40:17.798] Server  LOG     [v0]   2. "250RMB/hour*2 hours*4 visits"
+[03:40:17.799] Server  LOG     [v0]   3. "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field."
+[03:40:17.799] Server  LOG     [v0] BENCHMARK PROCEDURES (first 10):
+[03:40:17.799] Server  LOG     [v0]   1. "ICD Code" | HasPricing: false | P90: null
+[03:40:17.799] Server  LOG     [v0]   2. "277.6 (ICD9)" | HasPricing: false | P90: null
+[03:40:17.799] Server  LOG     [v0]   3. "Sub-Studies (0)" | HasPricing: false | P90: null
+[03:40:17.799] Server  LOG     [v0]   4. "Screened Per Site:" | HasPricing: false | P90: null
+[03:40:17.800] Server  LOG     [v0]   5. "Grant Negotiator:" | HasPricing: false | P90: null
+[03:40:17.800] Server  LOG     [v0]   6. "Budget Column" | HasPricing: false | P90: null
+[03:40:17.800] Server  LOG     [v0]   7. "Code" | HasPricing: false | P90: null
+[03:40:17.800] Server  LOG     [v0]   8. "INCON" | HasPricing: false | P90: null
+[03:40:17.800] Server  LOG     [v0]   9. "T0708" | HasPricing: false | P90: null
+[03:40:17.801] Server  LOG     [v0]   10. "T9209" | HasPricing: false | P90: null
+[03:40:17.801] Server  LOG     [v0] === END SAMPLE DATA ===
+[03:40:17.801] Server  LOG     [v0] Processing line item: "\"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person\""
+[03:40:18.596] Server  LOG     [v0] AI returned 0 "matches for:" "The cost for CMV-specific T cell tests i"
+[03:40:18.596] Server  LOG     [v0] Processing line item: "\"250RMB/hour*2 hours*4 visits\""
+[03:40:19.585] Server  LOG     [v0] AI returned 0 "matches for:" "250RMB/hour*2 hours*4 visits"
+[03:40:19.586] Server  LOG     [v0] Processing line item: "\"Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field.\""
+[03:40:20.494] Server  LOG     [v0] AI returned 0 "matches for:" "Project supervision and quality control,"
+[03:40:20.495] Server  LOG     [v0] Processing line item: "\"Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field.\""
+[03:40:21.345] Server  LOG     [v0] AI returned 0 "matches for:" "Clinical research coordinator. The HCP i"
+[03:40:21.345] Server  LOG     [v0] Processing line item: "\"Local Ethics Committee fee\""
+[03:40:28.397] Server  LOG     [v0] AI returned 3 "matches for:" "Local Ethics Committee fee"
+[03:40:28.398] Server  LOG     [v0]   Match 1: "Code" (70% similar)
+[03:40:28.398] Server  LOG     [v0]   Match 2: "SC001" (65% similar)
+[03:40:28.398] Server  LOG     [v0]   Match 3: "SC003" (60% similar)
+[03:40:28.399] Server  LOG     [v0] Processing line item: "\"Hospital management fee: 3%.\""
+[03:40:32.084] Server  LOG     [v0] AI returned 0 "matches for:" "Hospital management fee: 3%."
+[03:40:32.084] Server  LOG     [v0] Processing line item: "\"Tax: 12%\""
+[03:40:33.171] Server  LOG     [v0] AI returned 0 "matches for:" "Tax: 12%"
+[03:40:33.171] Server  LOG     [v0] Updating 7 "comparison records"
+[03:40:33.296] Server  LOG     [v0] Update result for "62dadea3-9c9d-42f6-bc34-41772cb57383" ":" 1 "rows, error:" undefined
+[03:40:33.423] Server  LOG     [v0] Update result for "4e56feb4-18da-4dca-9de8-70da87884f94" ":" 1 "rows, error:" undefined
+[03:40:33.534] Server  LOG     [v0] Update result for "99195343-f4aa-4c21-933d-6637149cc296" ":" 1 "rows, error:" undefined
+[03:40:33.646] Server  LOG     [v0] Update result for "4db9c79a-abe2-4185-aa2d-98cba03f8b43" ":" 1 "rows, error:" undefined
+[03:40:33.758] Server  LOG     [v0] Update result for "a927eda8-78b3-474b-abed-e5b7be64fcd5" ":" 1 "rows, error:" undefined
+[03:40:33.865] Server  LOG     [v0] Update result for "25726375-c1e2-48f5-b33d-1fb177c6f087" ":" 1 "rows, error:" undefined
+[03:40:33.973] Server  LOG     [v0] Update result for "462c3eca-8eb5-4405-a88c-fbcde678cb6e" ":" 1 "rows, error:" undefined
+[03:40:34.117] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 462 benchmarks","results":[{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"62dadea3-9c9d-42f6-bc34-41772cb57383","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"4e56feb4-18da-4dca-9de8-70da87884f94","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"99195343-f4aa-4c21-933d-6637149cc296","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"4db9c79a-abe2-4185-aa2d-98cba03f8b43","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"878f361b-ffcb-4454-bd93-2dcc2456bd04","category":"Site Costs","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"Code","reasoning":"The Local Ethics Committee fee relates to necessary costs incurred at the site level, reflecting oversight and ethics compliance in medical procedures.","similarity":0.7},"flag":"MULTIPLE_MATCHES","lineItemId":"a927eda8-78b3-474b-abed-e5b7be64fcd5","matchCount":3,"matches":[{"benchmarkId":"878f361b-ffcb-4454-bd93-2dcc2456bd04","category":"Site Costs","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"Code","reasoning":"The Local Ethics Committee fee relates to necessary costs incurred at the site level, reflecting oversight and ethics compliance in medical procedures.","similarity":0.7},{"benchmarkId":"d71ef0ae-0e01-411f-8c11-e8d22ae2388b","category":"Site Costs","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"SC001","reasoning":"This benchmark represents a site cost, akin to the ethical review costs incurred during a medical study.","similarity":0.65},{"benchmarkId":"bf8e6d13-1224-4103-85e7-50e6f0ab413e","category":"Site Costs","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"SC003","reasoning":"This is another site-related cost that may include administrative expenses, similar in nature to the ethics committee fee.","similarity":0.6}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"25726375-c1e2-48f5-b33d-1fb177c6f087","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"462c3eca-8eb5-4405-a88c-fbcde678cb6e","matchCount":0,"matches":[]}],"success":true}
+[03:40:34.117] Browser LOG     [v0] Refreshing comparisons data...
+[03:40:34.397] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[03:40:34.397] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[03:43:59.849] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[03:43:59.849] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[03:43:59.849] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775051752158} /_vercel/insights/view
+[03:43:59.959] Server  LOG        Reload env: .env.development.local
