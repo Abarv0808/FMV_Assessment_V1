@@ -142,6 +142,10 @@ async function POST(request) {
         let benchmarks = [];
         let benchmarksError = null;
         try {
+            // First, try simple query without join to see if procedures exist
+            const { data: simpleCheck, error: simpleError } = await supabase.from("benchmark_procedures").select("id, procedure_name").limit(5);
+            console.log("[v0] Simple benchmark check:", simpleCheck?.length, "procedures, error:", simpleError?.message);
+            // Now fetch with full data
             let benchmarkQuery = supabase.from("benchmark_procedures").select(`
           id,
           procedure_name,
@@ -152,13 +156,7 @@ async function POST(request) {
           p75,
           p90,
           p100,
-          benchmark_file_id,
-          benchmark_files!inner (
-            id,
-            indication,
-            country,
-            currency
-          )
+          benchmark_file_id
         `).limit(500);
             if (benchmarkFileIds && benchmarkFileIds.length > 0) {
                 benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds);

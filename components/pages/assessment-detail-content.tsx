@@ -393,10 +393,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       
       const result = await response.json()
       
+      console.log("[v0] Comparison API result:", result)
+      
       if (result.success) {
         // Refresh the comparisons data
+        console.log("[v0] Refreshing comparisons data...")
         const supabase = createClient()
-        const { data: comparisonsData } = await supabase
+        const { data: comparisonsData, error: refreshError } = await supabase
           .from("assessment_comparisons")
           .select(`
             *,
@@ -411,7 +414,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           .eq("assessment_id", id)
           .order("created_at", { ascending: true })
 
-        if (comparisonsData) {
+        console.log("[v0] Refresh result - data:", comparisonsData?.length, "error:", refreshError?.message)
+        
+        if (comparisonsData && comparisonsData.length > 0) {
+          console.log("[v0] Sample comparison from DB:", JSON.stringify(comparisonsData[0], null, 2))
           const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {
             const procedureName = comp.assessment_line_items.procedure_name || ""
             const [description, extraDataStr] = procedureName.split("|||")
@@ -451,7 +457,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
               userSelected: comp.user_selected
             }
           })
+          console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item flag:", mappedComparisons[0]?.flag)
           setComparisons(mappedComparisons)
+        } else {
+          console.log("[v0] No comparisons data returned from refresh query")
         }
         
         setComparisonComplete(true)
