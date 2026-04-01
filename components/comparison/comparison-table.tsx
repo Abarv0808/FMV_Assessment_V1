@@ -202,8 +202,8 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       {comparison.lineItem.site}
                     </Badge>
                   </TableCell>
-                  <TableCell className="max-w-[300px]">
-                    <div className="truncate font-medium">
+                  <TableCell className="min-w-[250px] max-w-[400px]">
+                    <div className="text-sm font-medium whitespace-normal break-words">
                       {comparison.lineItem.additionalInformation || comparison.lineItem.description}
                     </div>
                   </TableCell>

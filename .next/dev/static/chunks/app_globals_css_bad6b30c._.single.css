@@ -1217,6 +1217,10 @@
     max-width: 300px;
   }
 
+  .max-w-\[400px\] {
+    max-width: 400px;
+  }
+
   .max-w-\[calc\(100\%-2rem\)\] {
     max-width: calc(100% - 2rem);
   }
@@ -1299,6 +1303,10 @@
 
   .min-w-\[220px\] {
     min-width: 220px;
+  }
+
+  .min-w-\[250px\] {
+    min-width: 250px;
   }
 
   .min-w-\[var\(--radix-select-trigger-width\)\] {
@@ -2538,6 +2546,10 @@
 
   .break-words {
     overflow-wrap: break-word;
+  }
+
+  .whitespace-normal {
+    white-space: normal;
   }
 
   .whitespace-nowrap {
