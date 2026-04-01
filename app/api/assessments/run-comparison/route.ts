@@ -50,6 +50,15 @@ export async function POST(request: Request) {
     let benchmarksError: any = null
     
     try {
+      // First, try simple query without join to see if procedures exist
+      const { data: simpleCheck, error: simpleError } = await supabase
+        .from("benchmark_procedures")
+        .select("id, procedure_name")
+        .limit(5)
+      
+      console.log("[v0] Simple benchmark check:", simpleCheck?.length, "procedures, error:", simpleError?.message)
+      
+      // Now fetch with full data
       let benchmarkQuery = supabase
         .from("benchmark_procedures")
         .select(`
@@ -62,13 +71,7 @@ export async function POST(request: Request) {
           p75,
           p90,
           p100,
-          benchmark_file_id,
-          benchmark_files!inner (
-            id,
-            indication,
-            country,
-            currency
-          )
+          benchmark_file_id
         `)
         .limit(500)
 
