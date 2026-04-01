@@ -36,7 +36,6 @@ interface ComparisonTableProps {
   onComparisonChange?: (id: string, field: "benchmarkDescription" | "comment", value: string) => void
   onBenchmarkTypeChange?: (id: string, benchmarkType: BenchmarkType) => void
   onDecisionChange?: (id: string, decision: ItemDecision) => void
-  onMatchSelect?: (id: string, match: any) => void
 }
 
 const flagConfig: Record<string, { label: string; color: string }> = {
@@ -111,7 +110,7 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
 
 const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment"]
 
-export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect }: ComparisonTableProps) {
+export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange }: ComparisonTableProps) {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
   
   // Calculate total cost sum
@@ -288,38 +287,12 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </SelectContent>
                     </Select>
                   </TableCell>
-                  <TableCell className="max-w-[250px]" onClick={(e) => e.stopPropagation()}>
-                    {comparison.possibleMatches && comparison.possibleMatches.length > 0 ? (
-                      <Select
-                        value={comparison.userSelected || ""}
-                        onValueChange={(val) => {
-                          const selectedMatch = comparison.possibleMatches?.find((m: any) => m.benchmarkId === val)
-                          if (selectedMatch && onMatchSelect) {
-                            onMatchSelect(comparison.id, selectedMatch)
-                          }
-                        }}
-                      >
-                        <SelectTrigger className="h-8 text-xs min-w-[180px] border-border/40">
-                          <SelectValue placeholder="Select benchmark match..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {comparison.possibleMatches.map((match: any, idx: number) => (
-                            <SelectItem key={match.benchmarkId || idx} value={match.benchmarkId}>
-                              <div className="flex flex-col">
-                                <span className="truncate max-w-[200px]">{match.procedureName}</span>
-                                <span className="text-xs text-muted-foreground">
-                                  {Math.round(match.similarity * 100)}% match - {match.category}
-                                </span>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    ) : comparison.flag === "NO_MATCH" ? (
+                  <TableCell className="max-w-[250px]">
+                    {comparison.flag === "NO_MATCH" ? (
                       <span className="text-xs text-muted-foreground italic">No match found</span>
                     ) : (
                       <span className="text-xs text-muted-foreground">
-                        {comparison.benchmarkDescription || "-"}
+                        {comparison.benchmarkDescription || "Pending comparison"}
                       </span>
                     )}
                   </TableCell>

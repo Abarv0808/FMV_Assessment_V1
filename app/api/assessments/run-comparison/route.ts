@@ -245,13 +245,18 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
     console.log("[v0] Updating", results.length, "comparison records")
     
     for (const result of results) {
-      // Only use columns that we know exist in the DB
+      // Only use columns that exist in the DB schema
+      // Note: possible_matches column doesn't exist, flag only allows GREEN/YELLOW/RED/NO_MATCH
+      const validFlag = result.flag === "MULTIPLE_MATCHES" ? "YELLOW" : result.flag
+      
       const updateData: any = {
-        flag: result.flag,
-        possible_matches: result.matches.length > 0 ? JSON.stringify(result.matches) : null,
+        flag: validFlag,
         ai_description: result.bestMatch 
-          ? `${result.bestMatch.procedureName} (${Math.round(result.bestMatch.similarity * 100)}% match)`
-          : "No matching benchmark found"
+          ? `${result.bestMatch.procedureName} (${Math.round(result.bestMatch.similarity * 100)}% match)${result.matches.length > 1 ? ` - ${result.matches.length} possible matches` : ''}`
+          : "No matching benchmark found",
+        matched_procedure_name: result.bestMatch?.procedureName || null,
+        ai_confidence: result.bestMatch ? result.bestMatch.similarity * 100 : null,
+        match_type: result.bestMatch ? (result.bestMatch.similarity > 0.8 ? 'semantic' : 'fuzzy') : 'no_match'
       }
 
       // Try to update existing record

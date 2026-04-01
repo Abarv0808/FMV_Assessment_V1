@@ -191,11 +191,11 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           benchmarkLow: comp.benchmark_low,
           selectedBenchmarkType: "p90" as BenchmarkType,
           variance: comp.variance_percent ? (comp.assessment_line_items.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
-          variancePercent: comp.variance_percent || 0,
-          flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
-          benchmarkDescription: comp.ai_description || "AI-generated comparison",
-          possibleMatches: comp.possible_matches ? JSON.parse(comp.possible_matches) : null,
-          userSelected: comp.user_selected
+  variancePercent: comp.variance_percent || 0,
+  flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
+  benchmarkDescription: comp.ai_description || "Pending comparison",
+  possibleMatches: null,
+  userSelected: null
         }})
 
         setComparisons(mappedComparisons)
@@ -457,10 +457,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 selectedBenchmarkType: "p90" as BenchmarkType,
                 variance: comp.variance_percent ? (lineItem?.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
                 variancePercent: comp.variance_percent || 0,
-                flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
-                benchmarkDescription: comp.ai_description || "AI-generated comparison",
-                possibleMatches: comp.possible_matches ? JSON.parse(comp.possible_matches) : null,
-                userSelected: comp.user_selected
+                flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
+                benchmarkDescription: comp.ai_description || "Pending comparison",
+                possibleMatches: null,
+                userSelected: null
               }})
           console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item flag:", mappedComparisons[0]?.flag)
           setComparisons(mappedComparisons)
@@ -820,7 +820,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 </div>
 
                 {/* Comparison Table */}
-                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} onMatchSelect={handleMatchSelect} />
+                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} />
               </CardContent>
             </Card>
           </TabsContent>
