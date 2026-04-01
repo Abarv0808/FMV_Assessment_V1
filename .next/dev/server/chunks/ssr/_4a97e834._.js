@@ -740,7 +740,9 @@ function DropdownMenuSubContent({ className, ...props }) {
 
 __turbopack_context__.s([
     "SECURITY_GROUPS",
-    ()=>SECURITY_GROUPS
+    ()=>SECURITY_GROUPS,
+    "THERAPEUTIC_AREAS",
+    ()=>THERAPEUTIC_AREAS
 ]);
 const SECURITY_GROUPS = [
     "USBU",
@@ -748,6 +750,18 @@ const SECURITY_GROUPS = [
     "APAC",
     "LATAM",
     "GLOBAL"
+];
+const THERAPEUTIC_AREAS = [
+    "Oncology",
+    "Immunology",
+    "Neuroscience",
+    "Cardiovascular",
+    "Rare Diseases",
+    "Infectious Diseases",
+    "Respiratory",
+    "Dermatology",
+    "Ophthalmology",
+    "Other"
 ];
 }),
 "[project]/app/login/page.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {

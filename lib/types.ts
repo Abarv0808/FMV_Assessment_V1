@@ -8,6 +8,21 @@ export const SECURITY_GROUPS = [
 
 export type SecurityGroup = (typeof SECURITY_GROUPS)[number]
 
+export const THERAPEUTIC_AREAS = [
+  "Oncology",
+  "Immunology",
+  "Neuroscience",
+  "Cardiovascular",
+  "Rare Diseases",
+  "Infectious Diseases",
+  "Respiratory",
+  "Dermatology",
+  "Ophthalmology",
+  "Other",
+] as const
+
+export type TherapeuticArea = (typeof THERAPEUTIC_AREAS)[number]
+
 export type UserRole = "VIEWER" | "ANALYST" | "APPROVER" | "ADMIN"
 
 export interface User {

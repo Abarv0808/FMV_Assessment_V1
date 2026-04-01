@@ -837,7 +837,9 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 
 __turbopack_context__.s([
     "SECURITY_GROUPS",
-    ()=>SECURITY_GROUPS
+    ()=>SECURITY_GROUPS,
+    "THERAPEUTIC_AREAS",
+    ()=>THERAPEUTIC_AREAS
 ]);
 const SECURITY_GROUPS = [
     "USBU",
@@ -845,6 +847,18 @@ const SECURITY_GROUPS = [
     "APAC",
     "LATAM",
     "GLOBAL"
+];
+const THERAPEUTIC_AREAS = [
+    "Oncology",
+    "Immunology",
+    "Neuroscience",
+    "Cardiovascular",
+    "Rare Diseases",
+    "Infectious Diseases",
+    "Respiratory",
+    "Dermatology",
+    "Ophthalmology",
+    "Other"
 ];
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
