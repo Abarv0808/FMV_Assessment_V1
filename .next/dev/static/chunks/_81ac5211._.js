@@ -806,6 +806,597 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
+"[project]/lib/excel-parser.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "parseExcelFile",
+    ()=>parseExcelFile,
+    "parseExcelFileMultiSheet",
+    ()=>parseExcelFileMultiSheet,
+    "parseVendorProposal",
+    ()=>parseVendorProposal
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$xlsx$40$0$2e$18$2e$5$2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/xlsx@0.18.5/node_modules/xlsx/xlsx.mjs [app-client] (ecmascript)");
+;
+// ============================================
+// VENDOR PROPOSAL PARSING (Sponsor Tab)
+// ============================================
+// Column header mappings for the Sponsor tab
+const SPONSOR_COLUMN_MAPPINGS = {
+    site: [
+        "Site",
+        "Site (Optional)",
+        "Site Name"
+    ],
+    costCategory: [
+        "Cost category",
+        "Cost Category",
+        "Cost category (dropdown)"
+    ],
+    description: [
+        "Description of costs",
+        "Description",
+        "Additional Information"
+    ],
+    unitType: [
+        "Unit Type",
+        "Unit Type (dropdown)"
+    ],
+    numberOfUnits: [
+        "Number of Units",
+        "Number of units",
+        "Number of Units (number)",
+        "Qty",
+        "Quantity"
+    ],
+    unitPrice: [
+        "Unit Price",
+        "Unit Price (overhead not included, number)",
+        "Rate",
+        "Price"
+    ],
+    totalCost: [
+        "Total Cost",
+        "Total cost",
+        "Total Cost (automatically calculated)",
+        "Total"
+    ],
+    currency: [
+        "Currency",
+        "Currency (dropdown)"
+    ],
+    takedaSupported: [
+        "Takeda supported",
+        "Takeda supported (optional, dropdown)"
+    ],
+    costType: [
+        "Type of cost",
+        "Type of cost (FMV lead)"
+    ],
+    acceptedUnitPrice: [
+        "Accepted Unit Price",
+        "Accepted Unit Price (FMV lead)"
+    ],
+    acceptedTotalCost: [
+        "Accepted Total Costs",
+        "Accepted Total Costs (FMV lead)"
+    ],
+    decision: [
+        "Takeda Decision",
+        "Takeda Decision (FMV lead)"
+    ]
+};
+// Find header row and map column indices
+function findSponsorHeaders(data) {
+    for(let rowIndex = 0; rowIndex < Math.min(20, data.length); rowIndex++){
+        const row = data[rowIndex];
+        if (!row || row.length === 0) continue;
+        const columnMap = {};
+        let matchedColumns = 0;
+        for(let colIndex = 0; colIndex < row.length; colIndex++){
+            const cellValue = String(row[colIndex] || "").trim();
+            if (!cellValue) continue;
+            // Check each mapping
+            for (const [fieldName, possibleHeaders] of Object.entries(SPONSOR_COLUMN_MAPPINGS)){
+                for (const header of possibleHeaders){
+                    if (cellValue.toLowerCase().includes(header.toLowerCase()) || header.toLowerCase().includes(cellValue.toLowerCase())) {
+                        if (columnMap[fieldName] === undefined) {
+                            columnMap[fieldName] = colIndex;
+                            matchedColumns++;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        // Require at least 3 key columns to be found (site, description, totalCost or similar)
+        if (matchedColumns >= 3) {
+            return {
+                headerRowIndex: rowIndex,
+                columnMap
+            };
+        }
+    }
+    return null;
+}
+// Parse a number from Excel cell
+function parseNumber(value) {
+    if (value === undefined || value === null || value === "") return 0;
+    if (typeof value === "number") return value;
+    const cleaned = String(value).trim().replace(/,/g, "").replace(/[$€£¥]/g, "");
+    const num = parseFloat(cleaned);
+    return isNaN(num) ? 0 : num;
+}
+// Generate a unique ID
+function generateId() {
+    return `li-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+}
+function parseVendorProposal(buffer, assessmentId = "") {
+    const workbook = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$xlsx$40$0$2e$18$2e$5$2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["read"](buffer, {
+        type: "array"
+    });
+    // Find the "Sponsor" sheet (case-insensitive)
+    let sponsorSheet = null;
+    let sponsorSheetName = "";
+    for (const sheetName of workbook.SheetNames){
+        if (sheetName.toLowerCase().includes("sponsor")) {
+            sponsorSheet = workbook.Sheets[sheetName];
+            sponsorSheetName = sheetName;
+            break;
+        }
+    }
+    // If no Sponsor sheet found, use the first sheet
+    if (!sponsorSheet) {
+        sponsorSheetName = workbook.SheetNames[0];
+        sponsorSheet = workbook.Sheets[sponsorSheetName];
+    }
+    // Convert sheet to array of arrays
+    const data = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$xlsx$40$0$2e$18$2e$5$2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["utils"].sheet_to_json(sponsorSheet, {
+        header: 1
+    });
+    // Find headers
+    const headerInfo = findSponsorHeaders(data);
+    if (!headerInfo) {
+        console.warn("[v0] Could not find valid header row in Sponsor sheet");
+        return {
+            lineItems: [],
+            metadata: {
+                sheetName: sponsorSheetName,
+                rowCount: 0,
+                parsedAt: new Date().toISOString()
+            }
+        };
+    }
+    const { headerRowIndex, columnMap } = headerInfo;
+    const lineItems = [];
+    // Parse data rows (skip header row)
+    for(let rowIndex = headerRowIndex + 1; rowIndex < data.length; rowIndex++){
+        const row = data[rowIndex];
+        if (!row || row.length === 0) continue;
+        // Skip empty rows - check if at least one key field has data
+        const hasData = columnMap.description !== undefined && row[columnMap.description] || columnMap.totalCost !== undefined && row[columnMap.totalCost] || columnMap.site !== undefined && row[columnMap.site];
+        if (!hasData) continue;
+        // Skip subtotal/total rows
+        const firstCell = String(row[0] || "").toLowerCase();
+        if (firstCell.includes("total") || firstCell.includes("subtotal") || firstCell.includes("sub-total")) {
+            continue;
+        }
+        const lineItem = {
+            id: generateId(),
+            assessmentId,
+            site: columnMap.site !== undefined ? String(row[columnMap.site] || "").trim() : "",
+            costCategory: columnMap.costCategory !== undefined ? String(row[columnMap.costCategory] || "").trim() : "",
+            description: columnMap.description !== undefined ? String(row[columnMap.description] || "").trim() : "",
+            unitType: columnMap.unitType !== undefined ? String(row[columnMap.unitType] || "").trim() : "",
+            numberOfUnits: columnMap.numberOfUnits !== undefined ? parseNumber(row[columnMap.numberOfUnits]) : 0,
+            unitPrice: columnMap.unitPrice !== undefined ? parseNumber(row[columnMap.unitPrice]) : 0,
+            totalCost: columnMap.totalCost !== undefined ? parseNumber(row[columnMap.totalCost]) : 0,
+            currency: columnMap.currency !== undefined ? String(row[columnMap.currency] || "USD").trim() : "USD",
+            takedaSupported: columnMap.takedaSupported !== undefined ? String(row[columnMap.takedaSupported] || "").trim() : undefined,
+            costType: columnMap.costType !== undefined ? String(row[columnMap.costType] || "").trim() : undefined,
+            acceptedUnitPrice: columnMap.acceptedUnitPrice !== undefined ? parseNumber(row[columnMap.acceptedUnitPrice]) : undefined,
+            acceptedTotalCost: columnMap.acceptedTotalCost !== undefined ? parseNumber(row[columnMap.acceptedTotalCost]) : undefined,
+            decision: null,
+            // Initialize benchmark fields
+            benchmarkLow: undefined,
+            benchmarkMed: undefined,
+            benchmarkHigh: undefined,
+            benchmark90th: undefined,
+            variance: undefined,
+            flag: null,
+            benchmarkDescription: undefined,
+            takedaQuestions: [],
+            investigatorResponses: []
+        };
+        // Parse decision if present
+        if (columnMap.decision !== undefined && row[columnMap.decision]) {
+            const decisionValue = String(row[columnMap.decision]).trim().toLowerCase();
+            if (decisionValue.includes("accept")) lineItem.decision = "Accepted";
+            else if (decisionValue.includes("reject")) lineItem.decision = "Rejected";
+            else if (decisionValue.includes("pending")) lineItem.decision = "Pending";
+            else if (decisionValue.includes("review")) lineItem.decision = "Needs Review";
+        }
+        lineItems.push(lineItem);
+    }
+    return {
+        lineItems,
+        metadata: {
+            sheetName: sponsorSheetName,
+            rowCount: lineItems.length,
+            parsedAt: new Date().toISOString()
+        }
+    };
+}
+// Parse a number from IQVIA format (e.g., " 7,050" -> 7050)
+function parseIQVIANumber(value) {
+    if (value === undefined || value === null || value === "") return null;
+    if (typeof value === "number") return value;
+    // Remove spaces, quotes, and commas, then parse
+    const cleaned = String(value).trim().replace(/,/g, "").replace(/"/g, "");
+    if (cleaned === "" || cleaned === "0") return 0;
+    const num = parseFloat(cleaned);
+    return isNaN(num) ? null : num;
+}
+// Country to Currency mapping
+const COUNTRY_CURRENCY_MAP = {
+    'Albania': 'ALL',
+    'Argentina': 'USD',
+    'Australia': 'AUD',
+    'Austria': 'EUR',
+    'Belgium': 'EUR',
+    'Bosnia-Hercegovina': 'BAM',
+    'Brazil': 'BRL',
+    'Bulgaria': 'BGN',
+    'Cambodia': 'KHR',
+    'Canada': 'CAD',
+    'Chile': 'CLP',
+    'China': 'CNY',
+    'Colombia': 'COP',
+    'Croatia': 'EUR',
+    'Cyprus': 'EUR',
+    'Czech Republic': 'CZK',
+    'Denmark': 'DKK',
+    'Egypt': 'EGP',
+    'Estonia': 'EUR',
+    'Finland': 'EUR',
+    'France': 'EUR',
+    'Germany': 'EUR',
+    'Greece': 'EUR',
+    'Hong Kong': 'HKD',
+    'Hungary': 'HUF',
+    'Iceland': 'ISK',
+    'India': 'INR',
+    'Ireland': 'EUR',
+    'Israel': 'NIS',
+    'Italy': 'EUR',
+    'Japan': 'JPY',
+    'Kazakhstan': 'KZT',
+    'Kuwait': 'KWD',
+    'Latvia': 'EUR',
+    'Lebanon': 'LBP',
+    'Lithuania': 'EUR',
+    'Macedonia': 'MKD',
+    'Malta': 'EUR',
+    'Mexico': 'MXN',
+    'Morocco': 'MAD',
+    'Netherlands': 'EUR',
+    'Norway': 'NOK',
+    'Oman': 'OMR',
+    'Peru': 'PEN',
+    'Poland': 'PLN',
+    'Portugal': 'EUR',
+    'Qatar': 'QAR',
+    'Romania': 'RON',
+    'Russia': 'RUB',
+    'Saudi Arabia': 'SAR',
+    'Serbia': 'RSD',
+    'Singapore': 'SGD',
+    'Slovak Republic': 'EUR',
+    'Slovenia': 'EUR',
+    'South Africa': 'ZAR',
+    'South Korea': 'KRW',
+    'Spain': 'EUR',
+    'Sweden': 'SEK',
+    'Switzerland': 'CHF',
+    'Taiwan': 'TWD',
+    'Tanzania': 'TZS',
+    'Thailand': 'THB',
+    'Tunisia': 'TND',
+    'Turkey': 'USD',
+    'United Arab Emirates': 'AED',
+    'United Kingdom': 'GBP',
+    'United States': 'USD',
+    'Venezuela': 'USD',
+    'Vietnam': 'VND'
+};
+// Extract currency code from subtotal row text
+function extractCurrencyFromSubtotal(text) {
+    // Match patterns like "Procedures Sub Total (USD)" or "Site Costs Sub Total (EUR)"
+    const match = text.match(/\(([A-Z]{3})\)/);
+    return match ? match[1] : null;
+}
+// Get currency by country name (case-insensitive matching)
+function getCurrencyByCountry(country) {
+    // Try exact match first
+    if (COUNTRY_CURRENCY_MAP[country]) {
+        return COUNTRY_CURRENCY_MAP[country];
+    }
+    // Try case-insensitive match
+    const countryLower = country.toLowerCase();
+    for (const [key, value] of Object.entries(COUNTRY_CURRENCY_MAP)){
+        if (key.toLowerCase() === countryLower) {
+            return value;
+        }
+    }
+    // Default to USD if not found
+    return 'USD';
+}
+// Detect section headers in the data
+function detectSectionStart(row) {
+    const firstCell = String(row[0] || "").trim();
+    // Match patterns like "Procedures (93)", "Non Procedures (69)", "Site Costs (86)"
+    const proceduresMatch = firstCell.match(/^(Procedures|Non Procedures|Site Costs|Country Costs|Conditional Procedures)\s*\((\d+)\)$/i);
+    if (proceduresMatch) {
+        // Extract country from second cell
+        const countryCell = String(row[1] || "").trim();
+        const countryMatch = countryCell.match(/^([A-Za-z\s]+)\s+Sub-Study/i);
+        const country = countryMatch ? countryMatch[1].trim() : countryCell.split("Sub-Study")[0].trim();
+        return {
+            type: proceduresMatch[1],
+            country: country || "Unknown"
+        };
+    }
+    // Match "Country Details" section
+    if (firstCell === "Country Details") {
+        const countryCell = String(row[1] || "").trim();
+        const countryMatch = countryCell.match(/^([A-Za-z\s]+)\s+Sub-Study/i);
+        return {
+            type: "Country Details",
+            country: countryMatch ? countryMatch[1].trim() : countryCell.split("Sub-Study")[0].trim()
+        };
+    }
+    return null;
+}
+// Check if row is a header row for procedure data
+function isHeaderRow(row) {
+    const firstCell = String(row[0] || "").toLowerCase().trim();
+    const secondCell = String(row[1] || "").toLowerCase().trim();
+    return firstCell === "code" && (secondCell.includes("procedure") || secondCell.includes("site cost") || secondCell.includes("non procedure"));
+}
+// Check if row is a data row (has a code in first column)
+function isDataRow(row) {
+    const firstCell = String(row[0] || "").trim();
+    // Data rows have a non-empty code that's not a section header
+    if (!firstCell || firstCell === "") return false;
+    if (firstCell.toLowerCase().includes("sub total")) return false;
+    if (firstCell.toLowerCase().includes("procedures")) return false;
+    if (firstCell.toLowerCase().includes("site costs")) return false;
+    if (firstCell.toLowerCase().includes("country costs")) return false;
+    return true;
+}
+function parseExcelFile(buffer) {
+    const workbook = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$xlsx$40$0$2e$18$2e$5$2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["read"](buffer, {
+        type: "array"
+    });
+    // Get the first sheet (or iterate through all sheets)
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    // Convert sheet to array of arrays
+    const data = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$xlsx$40$0$2e$18$2e$5$2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["utils"].sheet_to_json(sheet, {
+        header: 1
+    });
+    const result = {
+        studyCode: "",
+        phase: "",
+        budgetType: "",
+        patientType: "",
+        countries: []
+    };
+    // Parse study details from top rows
+    for(let i = 0; i < Math.min(20, data.length); i++){
+        const row = data[i];
+        const firstCell = String(row[0] || "").trim();
+        const secondCell = String(row[1] || "").trim();
+        if (firstCell === "Study Code:") result.studyCode = secondCell;
+        if (firstCell === "Phase:") result.phase = secondCell;
+        if (firstCell === "Budget Type:") result.budgetType = secondCell;
+        if (firstCell === "Patient Type:") result.patientType = secondCell;
+        if (firstCell === "Created:") result.createdDate = secondCell;
+        if (firstCell === "Modified:") result.modifiedDate = secondCell;
+    }
+    // Track current parsing state
+    let currentCountry = null;
+    let currentSection = null;
+    let expectingHeader = false;
+    let expectingData = false;
+    const countriesMap = new Map();
+    for(let i = 0; i < data.length; i++){
+        const row = data[i];
+        if (!row || row.length === 0) continue;
+        // Check for section start
+        const section = detectSectionStart(row);
+        if (section) {
+            currentSection = section.type;
+            // Get or create country data
+            if (!countriesMap.has(section.country)) {
+                countriesMap.set(section.country, {
+                    country: section.country,
+                    currency: "USD",
+                    procedures: [],
+                    metadata: {}
+                });
+            }
+            currentCountry = countriesMap.get(section.country);
+            // Parse country details metadata
+            if (section.type === "Country Details") {
+                // Look ahead for metadata
+                for(let j = i + 1; j < Math.min(i + 15, data.length); j++){
+                    const metaRow = data[j];
+                    const key = String(metaRow[0] || "").trim();
+                    const value = String(metaRow[1] || "").trim();
+                    if (key === "Screened:") currentCountry.metadata.screened = parseInt(value) || 0;
+                    if (key === "Visits:") currentCountry.metadata.visits = parseInt(value) || 0;
+                    if (key === "Sites:") currentCountry.metadata.sites = parseInt(value) || 0;
+                    if (key === "Overhead:") currentCountry.metadata.overhead = value;
+                    if (key === "Lab Costs:") currentCountry.metadata.labCosts = value;
+                    if (key === "Budget Column") currentCountry.metadata.budgetColumn = value;
+                    // Stop at next section
+                    if (detectSectionStart(metaRow)) break;
+                }
+                currentSection = null;
+                continue;
+            }
+            expectingHeader = true;
+            expectingData = false;
+            continue;
+        }
+        // Skip header row
+        if (expectingHeader && isHeaderRow(row)) {
+            expectingHeader = false;
+            expectingData = true;
+            continue;
+        }
+        // Parse data rows
+        if (expectingData && currentCountry && currentSection && isDataRow(row)) {
+            const category = currentSection;
+            const procedure = {
+                code: String(row[0] || "").trim(),
+                name: String(row[1] || "").trim(),
+                category,
+                quantity: parseIQVIANumber(row[2]) || 1,
+                overhead: String(row[3] || "").trim(),
+                total: parseIQVIANumber(row[4]) || 0,
+                p25: parseIQVIANumber(row[5]),
+                p50: parseIQVIANumber(row[6]),
+                p75: parseIQVIANumber(row[7]),
+                p90: parseIQVIANumber(row[8]),
+                p100: parseIQVIANumber(row[9]),
+                sourceRef: String(row[10] || "").trim()
+            };
+            currentCountry.procedures.push(procedure);
+        }
+        // Check if we've hit a sub-total row (end of section)
+        const firstCell = String(row[0] || "").trim();
+        const firstCellLower = firstCell.toLowerCase();
+        if (firstCellLower.includes("sub total")) {
+            // Extract currency from subtotal row (e.g., "Procedures Sub Total (USD)")
+            const currency = extractCurrencyFromSubtotal(firstCell);
+            if (currency && currentCountry) {
+                currentCountry.currency = currency;
+            }
+            expectingData = false;
+            currentSection = null;
+        }
+    }
+    result.countries = Array.from(countriesMap.values());
+    return result;
+}
+function parseExcelFileMultiSheet(buffer) {
+    const workbook = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$xlsx$40$0$2e$18$2e$5$2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["read"](buffer, {
+        type: "array"
+    });
+    const result = {
+        studyCode: "",
+        phase: "",
+        budgetType: "",
+        patientType: "",
+        countries: []
+    };
+    // Filter out sheets to skip
+    const countrySheets = workbook.SheetNames.filter((sheetName)=>{
+        const sheetNameLower = sheetName.toLowerCase().trim();
+        return !(sheetNameLower.includes("summary") || sheetNameLower.includes("overview") || sheetNameLower.includes("contents") || sheetNameLower === "all" || sheetNameLower === "all countries");
+    });
+    // If only one valid country sheet, use single sheet parser
+    if (countrySheets.length === 1) {
+        const singleSheetResult = parseExcelFile(buffer);
+        if (singleSheetResult.countries.length > 0) {
+            return singleSheetResult;
+        }
+    }
+    // Parse each country sheet separately
+    for (const sheetName of countrySheets){
+        const sheet = workbook.Sheets[sheetName];
+        const data = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$xlsx$40$0$2e$18$2e$5$2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["utils"].sheet_to_json(sheet, {
+            header: 1
+        });
+        // Parse this sheet assuming it's a country
+        const countryData = {
+            country: sheetName.trim(),
+            currency: "USD",
+            procedures: [],
+            metadata: {}
+        };
+        let currentSection = null;
+        let expectingHeader = false;
+        let expectingData = false;
+        // Also extract study metadata from first sheet
+        if (workbook.SheetNames.indexOf(sheetName) === 0) {
+            for(let i = 0; i < Math.min(20, data.length); i++){
+                const row = data[i];
+                const firstCell = String(row[0] || "").trim();
+                const secondCell = String(row[1] || "").trim();
+                if (firstCell === "Study Code:") result.studyCode = secondCell;
+                if (firstCell === "Phase:") result.phase = secondCell;
+                if (firstCell === "Budget Type:") result.budgetType = secondCell;
+                if (firstCell === "Patient Type:") result.patientType = secondCell;
+            }
+        }
+        for(let i = 0; i < data.length; i++){
+            const row = data[i];
+            if (!row || row.length === 0) continue;
+            const section = detectSectionStart(row);
+            if (section && section.type !== "Country Details") {
+                currentSection = section.type;
+                expectingHeader = true;
+                expectingData = false;
+                continue;
+            }
+            if (expectingHeader && isHeaderRow(row)) {
+                expectingHeader = false;
+                expectingData = true;
+                continue;
+            }
+            if (expectingData && currentSection && isDataRow(row)) {
+                const category = currentSection;
+                const procedure = {
+                    code: String(row[0] || "").trim(),
+                    name: String(row[1] || "").trim(),
+                    category,
+                    quantity: parseIQVIANumber(row[2]) || 1,
+                    overhead: String(row[3] || "").trim(),
+                    total: parseIQVIANumber(row[4]) || 0,
+                    p25: parseIQVIANumber(row[5]),
+                    p50: parseIQVIANumber(row[6]),
+                    p75: parseIQVIANumber(row[7]),
+                    p90: parseIQVIANumber(row[8]),
+                    p100: parseIQVIANumber(row[9]),
+                    sourceRef: String(row[10] || "").trim()
+                };
+                countryData.procedures.push(procedure);
+            }
+            const firstCell = String(row[0] || "").trim();
+            const firstCellLower = firstCell.toLowerCase();
+            // Check for subtotal rows to end section
+            const isSubtotalRow = firstCellLower.includes("sub total") || firstCellLower.includes("subtotal") || firstCellLower.includes("sub-total") || firstCellLower.includes("procedure") && firstCellLower.includes("total");
+            if (isSubtotalRow) {
+                expectingData = false;
+                currentSection = null;
+            }
+        }
+        // Set currency from country mapping (much more reliable than parsing)
+        countryData.currency = getCurrencyByCountry(countryData.country);
+        if (countryData.procedures.length > 0) {
+            result.countries.push(countryData);
+        }
+    }
+    return result;
+}
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
 "[project]/components/ui/card.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
@@ -6223,6 +6814,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$ne
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/next@16.0.10_@opentelemetry+api@1.9.0_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/next@16.0.10_@opentelemetry+api@1.9.0_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/navigation.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$app$2d$shell$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/app-shell.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$excel$2d$parser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/excel-parser.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/card.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$progress$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/progress.tsx [app-client] (ecmascript)");
@@ -6237,6 +6829,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2f$client$2e
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -6345,130 +6938,47 @@ function NewAssessmentPage() {
                     console.error("[v0] Error linking benchmark files:", linkError);
                 }
             }
-            // 3. Parse vendor Excel file with correct field mapping
-            // File Header -> UI Field mapping:
-            // Site (optional) -> Site
-            // Description -> Additional Information
-            // Number of unit -> Number of Unit
-            // Unit Price -> Unit Price
-            // Total Cost -> Total Cost
-            // Currency -> Currency (from country_currencies table)
-            let vendorLineItems = [];
+            // 3. Parse vendor Excel file from "Sponsor" tab
+            // Excel column mapping:
+            // - Site (optional) -> site
+            // - Description of costs -> description (Additional Information)
+            // - Number of Units -> numberOfUnits
+            // - Unit Price -> unitPrice
+            // - Total Cost -> totalCost
+            // - Currency -> currency
+            let parsedProposal = {
+                lineItems: [],
+                metadata: {
+                    sheetName: "",
+                    rowCount: 0,
+                    parsedAt: ""
+                }
+            };
             if (formData.vendorProposal) {
                 const arrayBuffer = await formData.vendorProposal.arrayBuffer();
-                const workbook = XLSX.read(arrayBuffer, {
-                    type: "array"
-                });
-                // Find the Sponsor sheet (or similar) - this contains the vendor data
-                let sheetName = workbook.SheetNames[0] // default to first sheet
-                ;
-                for (const name of workbook.SheetNames){
-                    const lowerName = name.toLowerCase();
-                    if (lowerName.includes("sponsor") || lowerName.includes("vendor") || lowerName.includes("budget")) {
-                        sheetName = name;
-                        break;
-                    }
+                parsedProposal = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$excel$2d$parser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["parseVendorProposal"])(arrayBuffer, assessment.id);
+                console.log("[v0] Parsed vendor proposal from sheet:", parsedProposal.metadata.sheetName);
+                console.log("[v0] Found", parsedProposal.lineItems.length, "line items");
+                if (parsedProposal.lineItems.length > 0) {
+                    console.log("[v0] Sample line item:", parsedProposal.lineItems[0]);
                 }
-                console.log("[v0] Using sheet:", sheetName, "Available sheets:", workbook.SheetNames);
-                const sheet = workbook.Sheets[sheetName];
-                const jsonData = XLSX.utils.sheet_to_json(sheet, {
-                    header: 1
-                });
-                // Find header row (look for common column names)
-                let headerRowIndex = 0;
-                for(let i = 0; i < Math.min(10, jsonData.length); i++){
-                    const row = jsonData[i];
-                    if (row && row.some((cell)=>typeof cell === "string" && (cell.toLowerCase().includes("description") || cell.toLowerCase().includes("cost") || cell.toLowerCase().includes("site") || cell.toLowerCase().includes("unit")))) {
-                        headerRowIndex = i;
-                        break;
-                    }
-                }
-                const headers = jsonData[headerRowIndex] || [];
-                const headerMap = {};
-                console.log("[v0] Found headers:", headers);
-                headers.forEach((h, idx)=>{
-                    if (typeof h === "string") {
-                        const lower = h.toLowerCase().trim();
-                        // Site (Optional) -> Site
-                        if (lower.includes("site")) {
-                            headerMap.site = idx;
-                        }
-                        // Cost category (dropdown) -> Cost Category
-                        if (lower.includes("cost category")) {
-                            headerMap.costCategory = idx;
-                        }
-                        // Description -> Additional Information
-                        if (lower === "description" || lower.startsWith("description")) {
-                            headerMap.additionalInformation = idx;
-                        }
-                        // Unit Type (dropdown) -> Unit Type
-                        if (lower.includes("unit type")) {
-                            headerMap.unitType = idx;
-                        }
-                        // Number of Units (number) -> Number of Unit
-                        if (lower.includes("number of unit")) {
-                            headerMap.numberOfUnit = idx;
-                        }
-                        // Unit Price (overhead not included, number) -> Unit Price
-                        if (lower.includes("unit price")) {
-                            headerMap.unitPrice = idx;
-                        }
-                        // Total Cost (automatically calculated) -> Total Cost
-                        if (lower.includes("total cost")) {
-                            headerMap.totalCost = idx;
-                        }
-                        // Currency (dropdown) -> Currency
-                        if (lower.includes("currency") && !lower.includes("cost")) {
-                            headerMap.currency = idx;
-                        }
-                    }
-                });
-                console.log("[v0] Header mapping:", headerMap);
-                // Helper to parse numeric values (may have currency prefix like "EUR 60.00")
-                const parseNumericValue = (val)=>{
-                    if (val === null || val === undefined || val === "") return null;
-                    if (typeof val === "number") return val;
-                    const cleaned = String(val).replace(/[^0-9.-]/g, "");
-                    const num = parseFloat(cleaned);
-                    return isNaN(num) ? null : num;
-                };
-                // Extract line items
-                for(let i = headerRowIndex + 1; i < jsonData.length; i++){
-                    const row = jsonData[i];
-                    if (!row || row.length === 0) continue;
-                    // Use description as primary identifier
-                    const description = row[headerMap.additionalInformation];
-                    if (!description || String(description).trim() === "") continue;
-                    // Get currency from file
-                    const currency = row[headerMap.currency] ? String(row[headerMap.currency]).trim() : "EUR";
-                    vendorLineItems.push({
-                        site: row[headerMap.site] ? String(row[headerMap.site]).trim() : null,
-                        costCategory: row[headerMap.costCategory] ? String(row[headerMap.costCategory]).trim() : null,
-                        additionalInformation: String(description).trim(),
-                        unitType: row[headerMap.unitType] ? String(row[headerMap.unitType]).trim() : null,
-                        numberOfUnit: parseNumericValue(row[headerMap.numberOfUnit]),
-                        unitPrice: parseNumericValue(row[headerMap.unitPrice]),
-                        totalCost: parseNumericValue(row[headerMap.totalCost]),
-                        currency: currency
-                    });
-                }
-                console.log("[v0] Parsed line items:", vendorLineItems.length, vendorLineItems.slice(0, 2));
             }
-            // 4. Store line items DIRECTLY via Supabase client (bypasses broken API route)
-            console.log("[v0] Inserting", vendorLineItems.length, "line items directly via Supabase client");
-            if (vendorLineItems.length > 0) {
-                // Insert line items directly
-                const lineItemsToInsert = vendorLineItems.map((item, index)=>({
+            // 4. Store line items DIRECTLY via Supabase client
+            const lineItems = parsedProposal.lineItems;
+            console.log("[v0] Inserting", lineItems.length, "line items directly via Supabase client");
+            if (lineItems.length > 0) {
+                // Insert line items using the parsed AssessmentLineItem structure
+                const lineItemsToInsert = lineItems.map((item, index)=>({
                         assessment_id: assessment.id,
-                        procedure_name: item.additionalInformation || "Unknown",
-                        site: item.site,
-                        additional_information: item.additionalInformation,
-                        category: item.costCategory,
-                        unit: item.unitType,
-                        number_of_unit: item.numberOfUnit,
+                        procedure_name: item.description || "Unknown",
+                        site: item.site || null,
+                        additional_information: item.description,
+                        category: item.costCategory || null,
+                        unit: item.unitType || null,
+                        number_of_unit: item.numberOfUnits,
                         unit_price: item.unitPrice,
                         total_cost: item.totalCost,
-                        currency: item.currency || "EUR",
+                        currency: item.currency || "USD",
                         row_index: index
                     }));
                 console.log("[v0] Line items to insert:", lineItemsToInsert.slice(0, 2));
@@ -6531,12 +7041,12 @@ function NewAssessmentPage() {
                                 className: "h-4 w-4"
                             }, void 0, false, {
                                 fileName: "[project]/app/assessments/new/page.tsx",
-                                lineNumber: 342,
+                                lineNumber: 243,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 341,
+                            lineNumber: 242,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6546,7 +7056,7 @@ function NewAssessmentPage() {
                                     children: "New Assessment"
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 345,
+                                    lineNumber: 246,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6554,19 +7064,19 @@ function NewAssessmentPage() {
                                     children: "Create a new FMV assessment"
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 346,
+                                    lineNumber: 247,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 344,
+                            lineNumber: 245,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 340,
+                    lineNumber: 241,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6585,7 +7095,7 @@ function NewAssessmentPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 352,
+                                    lineNumber: 253,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6593,13 +7103,13 @@ function NewAssessmentPage() {
                                     children: currentStep.title
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 355,
+                                    lineNumber: 256,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 351,
+                            lineNumber: 252,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$progress$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Progress"], {
@@ -6607,13 +7117,13 @@ function NewAssessmentPage() {
                             className: "h-2"
                         }, void 0, false, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 357,
+                            lineNumber: 258,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 350,
+                    lineNumber: 251,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6633,18 +7143,18 @@ function NewAssessmentPage() {
                                                 className: "h-5 w-5"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/assessments/new/page.tsx",
-                                                lineNumber: 376,
+                                                lineNumber: 277,
                                                 columnNumber: 36
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: index + 1
                                             }, void 0, false, {
                                                 fileName: "[project]/app/assessments/new/page.tsx",
-                                                lineNumber: 376,
+                                                lineNumber: 277,
                                                 columnNumber: 68
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/assessments/new/page.tsx",
-                                            lineNumber: 367,
+                                            lineNumber: 268,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6655,7 +7165,7 @@ function NewAssessmentPage() {
                                                     children: step.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                                    lineNumber: 379,
+                                                    lineNumber: 280,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6663,38 +7173,38 @@ function NewAssessmentPage() {
                                                     children: step.description
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                                    lineNumber: 382,
+                                                    lineNumber: 283,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/assessments/new/page.tsx",
-                                            lineNumber: 378,
+                                            lineNumber: 279,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 366,
+                                    lineNumber: 267,
                                     columnNumber: 17
                                 }, this),
                                 index < steps.length - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: `h-[2px] w-full -mt-12 ${isCompleted ? "bg-primary" : "bg-border"}`
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 386,
+                                    lineNumber: 287,
                                     columnNumber: 19
                                 }, this)
                             ]
                         }, step.id, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 365,
+                            lineNumber: 266,
                             columnNumber: 15
                         }, this);
                     })
                 }, void 0, false, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 360,
+                    lineNumber: 261,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -6706,20 +7216,20 @@ function NewAssessmentPage() {
                                     children: currentStep.title
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 395,
+                                    lineNumber: 296,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                     children: currentStep.description
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 396,
+                                    lineNumber: 297,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 394,
+                            lineNumber: 295,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -6731,7 +7241,7 @@ function NewAssessmentPage() {
                                     showErrors: showErrors
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 399,
+                                    lineNumber: 300,
                                     columnNumber: 43
                                 }, this),
                                 currentStep.id === "upload" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$wizard$2f$proposal$2d$upload$2d$step$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ProposalUploadStep"], {
@@ -6739,26 +7249,26 @@ function NewAssessmentPage() {
                                     onChange: updateFormData
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 400,
+                                    lineNumber: 301,
                                     columnNumber: 45
                                 }, this),
                                 currentStep.id === "review" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$wizard$2f$review$2d$step$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ReviewStep"], {
                                     data: formData
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 401,
+                                    lineNumber: 302,
                                     columnNumber: 45
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 398,
+                            lineNumber: 299,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 393,
+                    lineNumber: 294,
                     columnNumber: 9
                 }, this),
                 submitError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6766,7 +7276,7 @@ function NewAssessmentPage() {
                     children: submitError
                 }, void 0, false, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 406,
+                    lineNumber: 307,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6781,14 +7291,14 @@ function NewAssessmentPage() {
                                     className: "h-4 w-4 mr-2"
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 413,
+                                    lineNumber: 314,
                                     columnNumber: 13
                                 }, this),
                                 "Back"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 412,
+                            lineNumber: 313,
                             columnNumber: 11
                         }, this),
                         currentStepIndex < steps.length - 1 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -6799,13 +7309,13 @@ function NewAssessmentPage() {
                                     className: "h-4 w-4 ml-2"
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 419,
+                                    lineNumber: 320,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 417,
+                            lineNumber: 318,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                             onClick: handleSubmit,
@@ -6816,7 +7326,7 @@ function NewAssessmentPage() {
                                         className: "h-4 w-4 mr-2 animate-spin"
                                     }, void 0, false, {
                                         fileName: "[project]/app/assessments/new/page.tsx",
-                                        lineNumber: 425,
+                                        lineNumber: 326,
                                         columnNumber: 19
                                     }, this),
                                     "Processing..."
@@ -6827,7 +7337,7 @@ function NewAssessmentPage() {
                                         className: "h-4 w-4 mr-2"
                                     }, void 0, false, {
                                         fileName: "[project]/app/assessments/new/page.tsx",
-                                        lineNumber: 430,
+                                        lineNumber: 331,
                                         columnNumber: 19
                                     }, this),
                                     "Create Assessment"
@@ -6835,24 +7345,24 @@ function NewAssessmentPage() {
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 422,
+                            lineNumber: 323,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 411,
+                    lineNumber: 312,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/assessments/new/page.tsx",
-            lineNumber: 339,
+            lineNumber: 240,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/assessments/new/page.tsx",
-        lineNumber: 338,
+        lineNumber: 239,
         columnNumber: 5
     }, this);
 }
@@ -6870,4 +7380,4 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 }),
 ]);
 
-//# sourceMappingURL=_7114b55a._.js.map
+//# sourceMappingURL=_81ac5211._.js.map
