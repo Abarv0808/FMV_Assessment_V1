@@ -1281,3 +1281,72 @@ Import trace:
 [02:38:29.329] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [02:38:29.329] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [02:38:29.329] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775047821733} /_vercel/insights/view
+[02:38:35.227] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775047828608} /_vercel/insights/view
+[02:39:00.546] Server  LOG     [v0] Store Items API called
+[02:39:00.548] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[02:39:00.548] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
+[02:39:00.548] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[02:39:00.548] Browser LOG     [v0] Sheet data has 131 rows
+[02:39:00.548] Browser LOG     [v0] First 5 rows of data:
+[02:39:00.548] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
+[02:39:00.548] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
+[02:39:00.548] Browser LOG     [v0] Row 2 : [null,123,"Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
+[02:39:00.548] Browser LOG     [v0] Row 3 : [null,232,"Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
+[02:39:00.548] Browser LOG     [v0] Row 4 : [null,222,"Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
+[02:39:00.548] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
+[02:39:00.548] Browser LOG     [v0] Row 0 matched 0 columns: []
+[02:39:00.548] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
+[02:39:00.548] Browser LOG     [v0] Matched column 1 -> site via header: Site
+[02:39:00.548] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
+[02:39:00.548] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
+[02:39:00.548] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
+[02:39:00.548] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
+[02:39:00.548] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
+[02:39:00.548] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
+[02:39:00.548] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
+[02:39:00.548] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
+[02:39:00.548] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
+[02:39:00.548] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
+[02:39:00.548] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
+[02:39:00.548] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
+[02:39:00.548] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
+[02:39:00.548] Browser LOG     [v0] Stopping at row 9 - Description is empty
+[02:39:00.548] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
+[02:39:00.548] Browser LOG     [v0] Found 7 line items
+[02:39:00.548] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"2cc0aefd-d8eb-46c8-9360-baa627209374","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"Accepted","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1775047853923-rfxtoknnh","investigatorResponses":[],"numberOfUnits":160,"site":"123","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
+[02:39:00.548] Browser LOG     [v0] Storing 7 line items via API
+[02:39:00.548] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"123","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"232","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
+[02:39:00.553] Server  LOG     [v0] Storing 7 "line items for assessment" "2cc0aefd-d8eb-46c8-9360-baa627209374"
+[02:39:00.782] Server  LOG     [v0] Created comparison for line item: "f46bfd77-bb3d-47c9-ac2b-5fc98786d2db"
+[02:39:00.972] Server  LOG     [v0] Created comparison for line item: "eef3f71e-82ca-44b5-a3fb-83cf0e044051"
+[02:39:01.154] Server  LOG     [v0] Created comparison for line item: "40566b88-9c9e-4e0f-a5ca-eb8b1ef04bd3"
+[02:39:01.344] Server  LOG     [v0] Created comparison for line item: "0df1943f-6f0d-4fbe-9e3e-8ab08866f077"
+[02:39:01.530] Server  LOG     [v0] Created comparison for line item: "bda1dc32-6a80-4098-873b-0919eb9d5343"
+[02:39:01.727] Server  LOG     [v0] Created comparison for line item: "8b181ebd-4842-4fe0-accc-8055f9624d27"
+[02:39:01.922] Server  LOG     [v0] Created comparison for line item: "88b88050-166f-491b-9c50-807b0cc0dbe1"
+[02:39:01.923] Server  LOG     [v0] Inserted 7 "line items"
+[02:39:02.313] Browser LOG     [v0] Successfully stored 7 line items
+[02:39:02.686] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/2cc0aefd-d8eb-46c8-9360-baa627209374 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/2cc0aefd-d8eb-46c8-9360-baa627209374","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775047855974} /_vercel/insights/view
+[02:39:20.930] Server  LOG     [v0] Run comparison API called
+[02:39:20.931] Server  LOG     [v0] Assessment ID: "2cc0aefd-d8eb-46c8-9360-baa627209374"
+[02:39:20.933] Server  LOG     [v0] Fetching line items...
+[02:39:20.939] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[02:39:21.200] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[02:39:21.201] Server  LOG     [v0] Fetching benchmark procedures...
+[02:39:21.298] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[02:39:21.475] Server  LOG     [v0] Benchmark query result: 500 "procedures found"
+[02:39:40.314] Server  LOG     [v0] Updating 7 "comparison records"
+[02:39:40.417] Server  LOG     [v0] Update result for "f46bfd77-bb3d-47c9-ac2b-5fc98786d2db" ":" 1 "rows, error:" undefined
+[02:39:40.512] Server  LOG     [v0] Update result for "eef3f71e-82ca-44b5-a3fb-83cf0e044051" ":" 1 "rows, error:" undefined
+[02:39:40.602] Server  LOG     [v0] Update result for "40566b88-9c9e-4e0f-a5ca-eb8b1ef04bd3" ":" 1 "rows, error:" undefined
+[02:39:40.697] Server  LOG     [v0] Update result for "0df1943f-6f0d-4fbe-9e3e-8ab08866f077" ":" 1 "rows, error:" undefined
+[02:39:40.785] Server  LOG     [v0] Update result for "bda1dc32-6a80-4098-873b-0919eb9d5343" ":" 1 "rows, error:" undefined
+[02:39:40.878] Server  LOG     [v0] Update result for "8b181ebd-4842-4fe0-accc-8055f9624d27" ":" 1 "rows, error:" undefined
+[02:39:40.973] Server  LOG     [v0] Update result for "88b88050-166f-491b-9c50-807b0cc0dbe1" ":" 1 "rows, error:" undefined
+[02:39:41.125] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 500 benchmarks","results":[{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"f46bfd77-bb3d-47c9-ac2b-5fc98786d2db","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"81fb5257e-9ddc-4146-8454-39f4f45632a5","category":"Procedures","procedureName":"Visits:","reasoning":"The line item description involves multiple visits, aligning closely with the 'Visits' benchmark.","similarity":0.9},"flag":"MULTIPLE_MATCHES","lineItemId":"eef3f71e-82ca-44b5-a3fb-83cf0e044051","matchCount":3,"matches":[{"benchmarkId":"81fb5257e-9ddc-4146-8454-39f4f45632a5","category":"Procedures","procedureName":"Visits:","reasoning":"The line item description involves multiple visits, aligning closely with the 'Visits' benchmark.","similarity":0.9},{"benchmarkId":"8fb5257e-9ddc-4146-8454-39f4f45632a5","category":"Procedures","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"Visits:","reasoning":"Similar to the previous match, this is another benchmark related to visits, which corresponds directly to the described service.","similarity":0.85},{"benchmarkId":"72xe4f3-xx35-455a-bb8c-a1c8f85ae4d6","category":"Procedures","procedureName":"Drug / Compound:","reasoning":"While somewhat less directly related, any recurring procedure may involve medications or compounds, leading to a slight semantic overlap.","similarity":0.65}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"40566b88-9c9e-4e0f-a5ca-eb8b1ef04bd3","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"3552c370-4f4e-4e8e-9b2f-e07a6ae1e1d7","category":"Procedures","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"Study Details","reasoning":"This procedure relates to clinical research, which aligns closely with the role of a clinical research coordinator. It involves overseeing research efforts, which connects to the hematologist's expertise.","similarity":0.7},"flag":"MULTIPLE_MATCHES","lineItemId":"0df1943f-6f0d-4fbe-9e3e-8ab08866f077","matchCount":3,"matches":[{"benchmarkId":"3552c370-4f4e-4e8e-9b2f-e07a6ae1e1d7","category":"Procedures","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"Study Details","reasoning":"This procedure relates to clinical research, which aligns closely with the role of a clinical research coordinator. It involves overseeing research efforts, which connects to the hematologist's expertise.","similarity":0.7},{"benchmarkId":"ebd7dd9e-9922-448d-9688-ef1b82ff74ad","category":"Procedures","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"Study Type","reasoning":"The study type is relevant to clinical research, potentially involving hematology studies, which reflects the HCP's specialty.","similarity":0.65},{"benchmarkId":"d7167fbd-98c8-410f-b24b-53052d091190","category":"Procedures","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"Patient Type","reasoning":"Understanding the patient type is critical in clinical research, especially in hematological studies, making this a relevant match.","similarity":0.6}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"bda1dc32-6a80-4098-873b-0919eb9d5343","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"8b181ebd-4842-4fe0-accc-8055f9624d27","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"88b88050-166f-491b-9c50-807b0cc0dbe1","matchCount":0,"matches":[]}],"success":true}
+[02:39:41.125] Browser LOG     [v0] Refreshing comparisons data...
+[02:39:41.494] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[02:39:41.494] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[02:43:07.463] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[02:43:07.463] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[02:43:07.463] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775048099868} /_vercel/insights/view

@@ -137,6 +137,19 @@ export async function POST(request: Request) {
       })
     }
 
+    // Log sample data for debugging
+    console.log("[v0] === SAMPLE DATA COMPARISON ===")
+    console.log("[v0] LINE ITEMS FROM ASSESSMENT (first 3):")
+    lineItems.slice(0, 3).forEach((li: any, idx: number) => {
+      const [desc] = (li.procedure_name || "").split("|||")
+      console.log(`[v0]   ${idx + 1}. "${desc.trim()}" | Cost: ${li.vendor_cost} ${li.currency} | Country: ${li.country}`)
+    })
+    console.log("[v0] BENCHMARK PROCEDURES FROM DATABASE (first 5):")
+    benchmarks.slice(0, 5).forEach((bm: any, idx: number) => {
+      console.log(`[v0]   ${idx + 1}. "${bm.procedure_name}" | Category: ${bm.category} | P90: ${bm.p90}`)
+    })
+    console.log("[v0] === END SAMPLE DATA ===")
+
     // Group benchmarks by category for context
     const benchmarksByCategory: Record<string, any[]> = {}
     for (const bm of benchmarks) {
@@ -154,6 +167,8 @@ export async function POST(request: Request) {
       const [description] = procedureName.split("|||")
       const cleanDescription = description.trim()
 
+      console.log("[v0] Processing line item:", `"${cleanDescription}"`)
+      
       if (!cleanDescription || cleanDescription === "Unknown") {
         // No description - mark as no match
         results.push({
@@ -200,6 +215,13 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
           }),
         })
 
+        console.log("[v0] AI returned", output?.matches?.length || 0, "matches for:", cleanDescription.substring(0, 40))
+        if (output?.matches?.length > 0) {
+          output.matches.forEach((m: any, i: number) => {
+            console.log(`[v0]   Match ${i + 1}: "${m.procedureName}" (${Math.round(m.similarity * 100)}% similar)`)
+          })
+        }
+        
         if (output && output.matches && output.matches.length > 0) {
           // Get full benchmark data for matched items
           const matchedBenchmarks = output.matches.map((match: any) => {
