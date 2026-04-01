@@ -379,7 +379,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
   // Run AI benchmark comparison
   const handleRunComparison = useCallback(async () => {
-    if (comparisons.length === 0) return
+    console.log("[v0] handleRunComparison called, comparisons.length:", comparisons.length)
     
     setIsRunningComparison(true)
     appendAudit("Started AI Benchmark Comparison")
@@ -691,7 +691,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                     </div>
                     <Button
                       onClick={handleRunComparison}
-                      disabled={isRunningComparison || comparisons.length === 0}
+                      disabled={isRunningComparison}
                       className="min-w-[200px]"
                     >
                       {isRunningComparison ? (

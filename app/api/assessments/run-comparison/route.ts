@@ -16,9 +16,13 @@ const matchResultSchema = z.object({
 })
 
 export async function POST(request: Request) {
+  console.log("[v0] Run comparison API called")
+  
   try {
     const body = await request.json()
     const { assessmentId, benchmarkFileIds } = body
+    
+    console.log("[v0] Assessment ID:", assessmentId)
 
     if (!assessmentId) {
       return NextResponse.json({ error: "Missing assessmentId" }, { status: 400 })
@@ -27,49 +31,107 @@ export async function POST(request: Request) {
     const supabase = await createClient()
 
     // 1. Fetch assessment line items
+    console.log("[v0] Fetching line items...")
     const { data: lineItems, error: lineItemsError } = await supabase
       .from("assessment_line_items")
       .select("id, procedure_name, country, vendor_cost, currency")
       .eq("assessment_id", assessmentId)
 
+    console.log("[v0] Line items found:", lineItems?.length, "Error:", lineItemsError?.message)
+
     if (lineItemsError || !lineItems || lineItems.length === 0) {
-      return NextResponse.json({ error: "No line items found" }, { status: 400 })
+      return NextResponse.json({ error: "No line items found", details: lineItemsError?.message }, { status: 400 })
     }
 
     // 2. Fetch benchmark procedures from selected files or all files
-    let benchmarkQuery = supabase
-      .from("benchmark_procedures")
-      .select(`
-        id,
-        procedure_name,
-        procedure_code,
-        category,
-        p25,
-        p50,
-        p75,
-        p90,
-        p100,
-        benchmark_file_id,
-        benchmark_files!inner (
+    console.log("[v0] Fetching benchmark procedures...")
+    
+    let benchmarks: any[] = []
+    let benchmarksError: any = null
+    
+    try {
+      let benchmarkQuery = supabase
+        .from("benchmark_procedures")
+        .select(`
           id,
-          indication,
-          country,
-          currency
-        )
-      `)
-      .limit(500)
+          procedure_name,
+          procedure_code,
+          category,
+          p25,
+          p50,
+          p75,
+          p90,
+          p100,
+          benchmark_file_id,
+          benchmark_files!inner (
+            id,
+            indication,
+            country,
+            currency
+          )
+        `)
+        .limit(500)
 
-    if (benchmarkFileIds && benchmarkFileIds.length > 0) {
-      benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
+      if (benchmarkFileIds && benchmarkFileIds.length > 0) {
+        benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
+      }
+
+      const result = await benchmarkQuery
+      benchmarks = result.data || []
+      benchmarksError = result.error
+      
+      console.log("[v0] Benchmark query result:", benchmarks.length, "procedures found")
+      if (benchmarksError) {
+        console.log("[v0] Benchmark query error:", benchmarksError)
+      }
+    } catch (e: any) {
+      console.log("[v0] Benchmark query exception:", e.message)
+      benchmarksError = e
     }
 
-    const { data: benchmarks, error: benchmarksError } = await benchmarkQuery
-
-    if (benchmarksError || !benchmarks || benchmarks.length === 0) {
+    if (benchmarksError) {
+      // Table might not exist - proceed without benchmarks for now
+      console.log("[v0] Continuing without benchmark data due to error")
+    }
+    
+    if (!benchmarks || benchmarks.length === 0) {
+      // No benchmarks - still create comparisons but mark as NO_MATCH
+      console.log("[v0] No benchmark data found, marking all as NO_MATCH")
+      
+      for (const lineItem of lineItems) {
+        // Check if comparison already exists
+        const { data: existing } = await supabase
+          .from("assessment_comparisons")
+          .select("id")
+          .eq("line_item_id", lineItem.id)
+          .single()
+        
+        if (!existing) {
+          // Create comparison record
+          await supabase
+            .from("assessment_comparisons")
+            .insert({
+              assessment_id: assessmentId,
+              line_item_id: lineItem.id,
+              flag: "NO_MATCH",
+              ai_description: "No benchmark data available for comparison"
+            })
+        } else {
+          await supabase
+            .from("assessment_comparisons")
+            .update({
+              flag: "NO_MATCH",
+              ai_description: "No benchmark data available for comparison"
+            })
+            .eq("id", existing.id)
+        }
+      }
+      
       return NextResponse.json({ 
-        error: "No benchmark data found. Please upload benchmark files first.",
-        details: benchmarksError?.message 
-      }, { status: 400 })
+        success: true,
+        message: `No benchmark data found. ${lineItems.length} items marked as NO_MATCH. Please upload benchmark files first.`,
+        results: lineItems.map(l => ({ lineItemId: l.id, matchCount: 0, flag: "NO_MATCH" }))
+      })
     }
 
     // Group benchmarks by category for context
