@@ -819,35 +819,43 @@ const SPONSOR_COLUMN_MAPPINGS = {
 };
 // Find header row and map column indices
 function findSponsorHeaders(data) {
+    console.log("[v0] findSponsorHeaders: Searching through", Math.min(20, data.length), "rows");
     for(let rowIndex = 0; rowIndex < Math.min(20, data.length); rowIndex++){
         const row = data[rowIndex];
         if (!row || row.length === 0) continue;
         const columnMap = {};
         let matchedColumns = 0;
         for(let colIndex = 0; colIndex < row.length; colIndex++){
-            const cellValue = String(row[colIndex] || "").trim();
+            // Normalize cell value - remove line breaks and extra spaces
+            const rawValue = row[colIndex];
+            const cellValue = String(rawValue || "").replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
             if (!cellValue) continue;
             // Check each mapping
             for (const [fieldName, possibleHeaders] of Object.entries(SPONSOR_COLUMN_MAPPINGS)){
                 for (const header of possibleHeaders){
-                    if (cellValue.toLowerCase().includes(header.toLowerCase()) || header.toLowerCase().includes(cellValue.toLowerCase())) {
+                    const headerLower = header.toLowerCase();
+                    if (cellValue.includes(headerLower) || headerLower.includes(cellValue)) {
                         if (columnMap[fieldName] === undefined) {
                             columnMap[fieldName] = colIndex;
                             matchedColumns++;
+                            console.log("[v0] Matched column", colIndex, "->", fieldName, "via header:", header);
                         }
                         break;
                     }
                 }
             }
         }
+        console.log("[v0] Row", rowIndex, "matched", matchedColumns, "columns:", Object.keys(columnMap));
         // Require at least 3 key columns to be found (site, description, totalCost or similar)
         if (matchedColumns >= 3) {
+            console.log("[v0] Found header row at index", rowIndex, "with columns:", columnMap);
             return {
                 headerRowIndex: rowIndex,
                 columnMap
             };
         }
     }
+    console.log("[v0] Could not find header row with at least 3 matching columns");
     return null;
 }
 // Parse a number from Excel cell
@@ -863,9 +871,11 @@ function generateId() {
     return `li-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 function parseVendorProposal(buffer, assessmentId = "") {
+    console.log("[v0] parseVendorProposal: Starting to parse Excel file");
     const workbook = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$xlsx$40$0$2e$18$2e$5$2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["read"](buffer, {
         type: "array"
     });
+    console.log("[v0] Available sheets in workbook:", workbook.SheetNames);
     // Find the "Sponsor" sheet (case-insensitive)
     let sponsorSheet = null;
     let sponsorSheetName = "";
@@ -873,6 +883,7 @@ function parseVendorProposal(buffer, assessmentId = "") {
         if (sheetName.toLowerCase().includes("sponsor")) {
             sponsorSheet = workbook.Sheets[sheetName];
             sponsorSheetName = sheetName;
+            console.log("[v0] Found Sponsor sheet:", sheetName);
             break;
         }
     }
@@ -880,11 +891,20 @@ function parseVendorProposal(buffer, assessmentId = "") {
     if (!sponsorSheet) {
         sponsorSheetName = workbook.SheetNames[0];
         sponsorSheet = workbook.Sheets[sponsorSheetName];
+        console.log("[v0] No Sponsor sheet found, using first sheet:", sponsorSheetName);
     }
     // Convert sheet to array of arrays
     const data = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$xlsx$40$0$2e$18$2e$5$2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["utils"].sheet_to_json(sponsorSheet, {
         header: 1
     });
+    console.log("[v0] Sheet data has", data.length, "rows");
+    // Log first few rows for debugging
+    if (data.length > 0) {
+        console.log("[v0] First 5 rows of data:");
+        for(let i = 0; i < Math.min(5, data.length); i++){
+            console.log("[v0] Row", i, ":", JSON.stringify(data[i]?.slice(0, 8)));
+        }
+    }
     // Find headers
     const headerInfo = findSponsorHeaders(data);
     if (!headerInfo) {

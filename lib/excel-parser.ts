@@ -33,6 +33,8 @@ export interface ParsedVendorProposal {
 
 // Find header row and map column indices
 function findSponsorHeaders(data: (string | number | undefined)[][]): { headerRowIndex: number; columnMap: Record<string, number> } | null {
+  console.log("[v0] findSponsorHeaders: Searching through", Math.min(20, data.length), "rows")
+  
   for (let rowIndex = 0; rowIndex < Math.min(20, data.length); rowIndex++) {
     const row = data[rowIndex]
     if (!row || row.length === 0) continue
@@ -41,17 +43,20 @@ function findSponsorHeaders(data: (string | number | undefined)[][]): { headerRo
     let matchedColumns = 0
     
     for (let colIndex = 0; colIndex < row.length; colIndex++) {
-      const cellValue = String(row[colIndex] || "").trim()
+      // Normalize cell value - remove line breaks and extra spaces
+      const rawValue = row[colIndex]
+      const cellValue = String(rawValue || "").replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim().toLowerCase()
       if (!cellValue) continue
       
       // Check each mapping
       for (const [fieldName, possibleHeaders] of Object.entries(SPONSOR_COLUMN_MAPPINGS)) {
         for (const header of possibleHeaders) {
-          if (cellValue.toLowerCase().includes(header.toLowerCase()) || 
-              header.toLowerCase().includes(cellValue.toLowerCase())) {
+          const headerLower = header.toLowerCase()
+          if (cellValue.includes(headerLower) || headerLower.includes(cellValue)) {
             if (columnMap[fieldName] === undefined) {
               columnMap[fieldName] = colIndex
               matchedColumns++
+              console.log("[v0] Matched column", colIndex, "->", fieldName, "via header:", header)
             }
             break
           }
@@ -59,12 +64,16 @@ function findSponsorHeaders(data: (string | number | undefined)[][]): { headerRo
       }
     }
     
+    console.log("[v0] Row", rowIndex, "matched", matchedColumns, "columns:", Object.keys(columnMap))
+    
     // Require at least 3 key columns to be found (site, description, totalCost or similar)
     if (matchedColumns >= 3) {
+      console.log("[v0] Found header row at index", rowIndex, "with columns:", columnMap)
       return { headerRowIndex: rowIndex, columnMap }
     }
   }
   
+  console.log("[v0] Could not find header row with at least 3 matching columns")
   return null
 }
 
@@ -94,7 +103,10 @@ function generateId(): string {
  * - Excel "Currency" → currency
  */
 export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = ""): ParsedVendorProposal {
+  console.log("[v0] parseVendorProposal: Starting to parse Excel file")
   const workbook = XLSX.read(buffer, { type: "array" })
+  
+  console.log("[v0] Available sheets in workbook:", workbook.SheetNames)
   
   // Find the "Sponsor" sheet (case-insensitive)
   let sponsorSheet: XLSX.WorkSheet | null = null
@@ -104,6 +116,7 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
     if (sheetName.toLowerCase().includes("sponsor")) {
       sponsorSheet = workbook.Sheets[sheetName]
       sponsorSheetName = sheetName
+      console.log("[v0] Found Sponsor sheet:", sheetName)
       break
     }
   }
@@ -112,10 +125,20 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
   if (!sponsorSheet) {
     sponsorSheetName = workbook.SheetNames[0]
     sponsorSheet = workbook.Sheets[sponsorSheetName]
+    console.log("[v0] No Sponsor sheet found, using first sheet:", sponsorSheetName)
   }
   
   // Convert sheet to array of arrays
   const data: (string | number | undefined)[][] = XLSX.utils.sheet_to_json(sponsorSheet, { header: 1 })
+  console.log("[v0] Sheet data has", data.length, "rows")
+  
+  // Log first few rows for debugging
+  if (data.length > 0) {
+    console.log("[v0] First 5 rows of data:")
+    for (let i = 0; i < Math.min(5, data.length); i++) {
+      console.log("[v0] Row", i, ":", JSON.stringify(data[i]?.slice(0, 8)))
+    }
+  }
   
   // Find headers
   const headerInfo = findSponsorHeaders(data)
