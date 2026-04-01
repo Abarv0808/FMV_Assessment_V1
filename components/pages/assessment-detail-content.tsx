@@ -133,7 +133,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         auditEvents: []
       }
 
-      // Fetch comparisons with line items - using only columns that exist in DB
+      // Fetch comparisons with line items - using ONLY basic columns that exist
       const { data: comparisonsData, error: comparisonsError } = await supabase
         .from("assessment_comparisons")
         .select(`
@@ -143,49 +143,43 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             procedure_name,
             country,
             vendor_cost,
-            currency,
-            raw_data
+            currency
           )
         `)
         .eq("assessment_id", id)
         .order("created_at", { ascending: true })
 
       if (!comparisonsError && comparisonsData) {
-        const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {
-          // Extract data from raw_data JSONB if available
-          const rawData = comp.assessment_line_items.raw_data || {}
-          
-          return {
+        const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => ({
           id: comp.id,
           lineItem: {
             id: comp.assessment_line_items.id,
             assessmentId: id,
-            description: rawData.description || comp.assessment_line_items.procedure_name,
-            unitType: rawData.unitType || "Per Unit",
-            unitPrice: rawData.unitPrice || comp.assessment_line_items.vendor_cost || 0,
-            site: rawData.site || comp.assessment_line_items.country || "Global",
-            costCategory: rawData.costCategory || "Procedure",
+            description: comp.assessment_line_items.procedure_name,
+            unitType: "Per Unit",
+            unitPrice: comp.assessment_line_items.vendor_cost || 0,
+            site: comp.assessment_line_items.country || "Global",
+            costCategory: "Procedure",
             source: `Line ${idx + 1}`,
             decision: "Pending" as ItemDecision,
-            // Fields from raw_data
-            numberOfUnit: rawData.numberOfUnit || 1,
-            totalCost: rawData.totalCost || comp.assessment_line_items.vendor_cost || 0,
-            currency: comp.assessment_line_items.currency || rawData.currency || "USD",
+            numberOfUnit: 1,
+            totalCost: comp.assessment_line_items.vendor_cost || 0,
+            currency: comp.assessment_line_items.currency || "USD",
             country: comp.assessment_line_items.country,
-            additionalInformation: rawData.description
+            additionalInformation: comp.assessment_line_items.procedure_name
           },
           benchmark90th: comp.benchmark_90th,
           benchmarkHigh: comp.benchmark_high,
           benchmarkMed: comp.benchmark_median || comp.benchmark_90th,
           benchmarkLow: comp.benchmark_low,
           selectedBenchmarkType: "p90" as BenchmarkType,
-          variance: comp.variance_percent ? (rawData.unitPrice || comp.assessment_line_items.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
+          variance: comp.variance_percent ? (comp.assessment_line_items.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
           variancePercent: comp.variance_percent || 0,
           flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
           benchmarkDescription: comp.ai_description || "AI-generated comparison",
           possibleMatches: comp.possible_matches ? JSON.parse(comp.possible_matches) : null,
           userSelected: comp.user_selected
-        }})
+        }))
 
         setComparisons(mappedComparisons)
         mappedAssessment.totalLineItems = mappedComparisons.length
