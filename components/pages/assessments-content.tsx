@@ -78,11 +78,10 @@ export function AssessmentsContent() {
     fetchAssessments()
   }, [])
 
-  // Apply BU-based visibility and exclude archived
+  // Show all assessments except archived (removed user filtering for now)
   const assessments = useMemo(() => {
-    const filtered = filterAssessmentsByUser(allAssessments, user)
-    return filtered.filter((a) => a.status !== "ARCHIVED")
-  }, [allAssessments, user])
+    return allAssessments.filter((a) => a.status !== "ARCHIVED")
+  }, [allAssessments])
 
   const handleStatusChange = useCallback((id: string, newStatus: AssessmentStatus) => {
     setAllAssessments((prev) =>
