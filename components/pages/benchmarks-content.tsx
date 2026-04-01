@@ -41,7 +41,19 @@ import {
   FileSpreadsheet,
   ChevronRight,
   ChevronDown,
+  Trash2,
+  AlertTriangle,
 } from "lucide-react"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { format } from "date-fns"
 import { BenchmarkUploadDialog } from "@/components/benchmarks/upload-dialog"
 
@@ -55,11 +67,31 @@ export function BenchmarksContent() {
   const [indicationFilter, setIndicationFilter] = useState<string>(ALL_VALUE)
   const [phaseFilter, setPhaseFilter] = useState<string>(ALL_VALUE)
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false)
+  const [clearDialogOpen, setClearDialogOpen] = useState(false)
+  const [isClearing, setIsClearing] = useState(false)
   const [benchmarkFiles, setBenchmarkFiles] = useState<BenchmarkFile[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [expandedIndications, setExpandedIndications] = useState<Set<string>>(new Set())
 
   const isAdmin = user?.role === "ADMIN"
+
+  const handleClearAllData = async () => {
+    setIsClearing(true)
+    try {
+      const response = await fetch("/api/bm/clear", { method: "DELETE" })
+      const result = await response.json()
+      if (result.success) {
+        setBenchmarkFiles([])
+        setClearDialogOpen(false)
+      } else {
+        alert("Failed to clear data: " + result.error)
+      }
+    } catch (err: any) {
+      alert("Error clearing data: " + err.message)
+    } finally {
+      setIsClearing(false)
+    }
+  }
 
   const toggleIndication = (indication: string) => {
     setExpandedIndications(prev => {
@@ -281,10 +313,16 @@ export function BenchmarksContent() {
             Export
           </Button>
           {isAdmin && (
-            <Button size="sm" onClick={() => setUploadDialogOpen(true)}>
-              <Upload className="h-4 w-4 mr-2" />
-              Upload Benchmark Data
-            </Button>
+            <>
+              <Button variant="destructive" size="sm" onClick={() => setClearDialogOpen(true)}>
+                <Trash2 className="h-4 w-4 mr-2" />
+                Clear All Data
+              </Button>
+              <Button size="sm" onClick={() => setUploadDialogOpen(true)}>
+                <Upload className="h-4 w-4 mr-2" />
+                Upload Benchmark Data
+              </Button>
+            </>
           )}
         </div>
       </div>
@@ -570,6 +608,32 @@ export function BenchmarksContent() {
           )}
         </CardContent>
       </Card>
+
+      {/* Clear All Data Confirmation Dialog */}
+      <AlertDialog open={clearDialogOpen} onOpenChange={setClearDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Clear All Benchmark Data
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently delete ALL benchmark files and procedures from the database.
+              This action cannot be undone. You will need to re-upload your benchmark files after clearing.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isClearing}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleClearAllData}
+              disabled={isClearing}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {isClearing ? "Clearing..." : "Clear All Data"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }
