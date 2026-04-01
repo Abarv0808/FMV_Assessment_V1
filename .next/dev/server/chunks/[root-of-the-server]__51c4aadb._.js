@@ -162,9 +162,40 @@ async function POST(request) {
                 benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds);
             }
             const result = await benchmarkQuery;
-            benchmarks = result.data || [];
+            const rawBenchmarks = result.data || [];
             benchmarksError = result.error;
-            console.log("[v0] Benchmark query result:", benchmarks.length, "procedures found");
+            // IMPORTANT: Filter out invalid benchmark records that don't have actual pricing data
+            // These are likely header rows or metadata that were incorrectly parsed
+            benchmarks = rawBenchmarks.filter((bm)=>{
+                // Must have a procedure name that's not a metadata label
+                const name = (bm.procedure_name || "").toLowerCase();
+                const invalidNames = [
+                    'study details',
+                    'study code:',
+                    'short name:',
+                    'drug / compound:',
+                    'title:',
+                    'phase:',
+                    'created:',
+                    'modified:',
+                    'budget type:',
+                    'patient type:',
+                    'indications',
+                    'study type',
+                    'visits:',
+                    'screened:',
+                    'sites:',
+                    'overhead:',
+                    'lab costs:',
+                    'country details',
+                    'single patient duration:'
+                ];
+                if (invalidNames.some((inv)=>name.includes(inv.toLowerCase()))) return false;
+                // Must have at least one pricing value (p25, p50, p75, p90, or p100)
+                const hasPrice = bm.p25 != null || bm.p50 != null || bm.p75 != null || bm.p90 != null || bm.p100 != null;
+                return hasPrice;
+            });
+            console.log("[v0] Benchmark query result:", rawBenchmarks.length, "raw,", benchmarks.length, "with valid pricing data");
             if (benchmarksError) {
                 console.log("[v0] Benchmark query error:", benchmarksError);
             }
@@ -214,9 +245,9 @@ async function POST(request) {
             const [desc] = (li.procedure_name || "").split("|||");
             console.log(`[v0]   ${idx + 1}. "${desc.trim()}" | Cost: ${li.vendor_cost} ${li.currency} | Country: ${li.country}`);
         });
-        console.log("[v0] BENCHMARK PROCEDURES FROM DATABASE (first 5):");
+        console.log("[v0] BENCHMARK PROCEDURES WITH PRICING (first 5):");
         benchmarks.slice(0, 5).forEach((bm, idx)=>{
-            console.log(`[v0]   ${idx + 1}. "${bm.procedure_name}" | Category: ${bm.category} | P90: ${bm.p90}`);
+            console.log(`[v0]   ${idx + 1}. "${bm.procedure_name}" | P25: ${bm.p25} | P50: ${bm.p50} | P75: ${bm.p75} | P90: ${bm.p90}`);
         });
         console.log("[v0] === END SAMPLE DATA ===");
         // Group benchmarks by category for context

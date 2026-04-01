@@ -83,22 +83,27 @@ export async function POST(request: Request) {
       const rawBenchmarks = result.data || []
       benchmarksError = result.error
       
-      // IMPORTANT: Filter out invalid benchmark records that don't have actual pricing data
-      // These are likely header rows or metadata that were incorrectly parsed
+      // Filter out metadata rows (headers that were incorrectly parsed as procedures)
+      // But DO NOT require pricing data - the Excel may not have been parsed correctly
+      const metadataLabels = ['study details', 'study code:', 'short name:', 'drug / compound:', 'title:', 
+        'phase:', 'created:', 'modified:', 'budget type:', 'patient type:', 'indications (', 'study type',
+        'visits:', 'screened:', 'sites:', 'overhead:', 'lab costs:', 'country details', 'single patient duration:',
+        'study population type', 'sub total']
+      
       benchmarks = rawBenchmarks.filter((bm: any) => {
-        // Must have a procedure name that's not a metadata label
-        const name = (bm.procedure_name || "").toLowerCase()
-        const invalidNames = ['study details', 'study code:', 'short name:', 'drug / compound:', 'title:', 
-          'phase:', 'created:', 'modified:', 'budget type:', 'patient type:', 'indications', 'study type',
-          'visits:', 'screened:', 'sites:', 'overhead:', 'lab costs:', 'country details', 'single patient duration:']
-        if (invalidNames.some(inv => name.includes(inv.toLowerCase()))) return false
-        
-        // Must have at least one pricing value (p25, p50, p75, p90, or p100)
-        const hasPrice = bm.p25 != null || bm.p50 != null || bm.p75 != null || bm.p90 != null || bm.p100 != null
-        return hasPrice
+        const name = (bm.procedure_name || "").toLowerCase().trim()
+        // Filter out empty names and metadata labels
+        if (!name || name.length < 2) return false
+        if (metadataLabels.some(label => name.includes(label))) return false
+        return true
       })
       
-      console.log("[v0] Benchmark query result:", rawBenchmarks.length, "raw,", benchmarks.length, "with valid pricing data")
+      // Count how many have actual pricing data
+      const withPricing = benchmarks.filter((bm: any) => 
+        bm.p25 != null || bm.p50 != null || bm.p75 != null || bm.p90 != null
+      )
+      
+      console.log("[v0] Benchmark query result:", rawBenchmarks.length, "raw,", benchmarks.length, "valid names,", withPricing.length, "with pricing")
       if (benchmarksError) {
         console.log("[v0] Benchmark query error:", benchmarksError)
       }
@@ -157,11 +162,12 @@ export async function POST(request: Request) {
     console.log("[v0] LINE ITEMS FROM ASSESSMENT (first 3):")
     lineItems.slice(0, 3).forEach((li: any, idx: number) => {
       const [desc] = (li.procedure_name || "").split("|||")
-      console.log(`[v0]   ${idx + 1}. "${desc.trim()}" | Cost: ${li.vendor_cost} ${li.currency} | Country: ${li.country}`)
+      console.log(`[v0]   ${idx + 1}. "${desc.trim()}"`)
     })
-    console.log("[v0] BENCHMARK PROCEDURES WITH PRICING (first 5):")
-    benchmarks.slice(0, 5).forEach((bm: any, idx: number) => {
-      console.log(`[v0]   ${idx + 1}. "${bm.procedure_name}" | P25: ${bm.p25} | P50: ${bm.p50} | P75: ${bm.p75} | P90: ${bm.p90}`)
+    console.log("[v0] BENCHMARK PROCEDURES (first 10):")
+    benchmarks.slice(0, 10).forEach((bm: any, idx: number) => {
+      const hasPricing = bm.p25 != null || bm.p50 != null || bm.p75 != null || bm.p90 != null
+      console.log(`[v0]   ${idx + 1}. "${bm.procedure_name}" | HasPricing: ${hasPricing} | P90: ${bm.p90}`)
     })
     console.log("[v0] === END SAMPLE DATA ===")
 
