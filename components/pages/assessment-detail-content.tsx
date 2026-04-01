@@ -44,6 +44,8 @@ import {
   HelpCircle,
   ArchiveX,
   RotateCcw,
+  Sparkles,
+  Loader2,
 } from "lucide-react"
 import {
   mockAssessments,
@@ -85,6 +87,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   const [showRestoreConfirm, setShowRestoreConfirm] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isRealAssessment, setIsRealAssessment] = useState(false)
+  const [isRunningComparison, setIsRunningComparison] = useState(false)
+  const [comparisonComplete, setComparisonComplete] = useState(false)
 
   // Try mock data first for backward compatibility
   const mockInitial = mockAssessments.find((a) => a.id === id)
@@ -310,6 +314,42 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     )
   }, [appendAudit])
 
+  // Handle user selecting a benchmark match from dropdown
+  const handleMatchSelect = useCallback((compId: string, match: any) => {
+    setComparisons((prev) =>
+      prev.map((c) => {
+        if (c.id !== compId) return c
+        // Update comparison with selected benchmark values
+        const benchmarkLow = match.p25 || null
+        const benchmarkMed = match.p50 || null
+        const benchmarkHigh = match.p75 || null
+        const benchmark90th = match.p90 || null
+        
+        // Calculate variance against selected benchmark type
+        const selectedVal = benchmark90th || benchmarkHigh || benchmarkMed || 0
+        const variance = selectedVal > 0 ? c.lineItem.unitPrice - selectedVal : 0
+        const variancePercent = selectedVal > 0 ? (variance / selectedVal) * 100 : 0
+        let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
+        if (variancePercent > 15) flag = "RED"
+        else if (variancePercent > 5) flag = "YELLOW"
+        
+        return {
+          ...c,
+          benchmarkLow,
+          benchmarkMed,
+          benchmarkHigh,
+          benchmark90th,
+          variance,
+          variancePercent,
+          flag,
+          benchmarkDescription: `${match.procedureName} (${Math.round(match.similarity * 100)}% match)`,
+          userSelected: match.benchmarkId
+        }
+      })
+    )
+    appendAudit(`Selected benchmark match: ${match.procedureName}`)
+  }, [appendAudit])
+
   const handleArchive = useCallback(() => {
     setAssessment((prev) =>
       prev ? { ...prev, status: "ARCHIVED" as AssessmentStatus, updatedAt: new Date().toISOString() } : prev
@@ -336,6 +376,95 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     setShowRestoreConfirm(false)
     router.push("/dashboard")
   }, [id, appendAudit, router])
+
+  // Run AI benchmark comparison
+  const handleRunComparison = useCallback(async () => {
+    if (comparisons.length === 0) return
+    
+    setIsRunningComparison(true)
+    appendAudit("Started AI Benchmark Comparison")
+    
+    try {
+      const response = await fetch("/api/assessments/run-comparison", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ assessmentId: id })
+      })
+      
+      const result = await response.json()
+      
+      if (result.success) {
+        // Refresh the comparisons data
+        const supabase = createClient()
+        const { data: comparisonsData } = await supabase
+          .from("assessment_comparisons")
+          .select(`
+            *,
+            assessment_line_items!inner (
+              id,
+              procedure_name,
+              country,
+              vendor_cost,
+              currency
+            )
+          `)
+          .eq("assessment_id", id)
+          .order("created_at", { ascending: true })
+
+        if (comparisonsData) {
+          const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {
+            const procedureName = comp.assessment_line_items.procedure_name || ""
+            const [description, extraDataStr] = procedureName.split("|||")
+            let extraData = { numberOfUnit: 1, unitPrice: 0, unitType: null, costCategory: null }
+            try {
+              if (extraDataStr) extraData = JSON.parse(extraDataStr)
+            } catch (e) {}
+            
+            return {
+              id: comp.id,
+              lineItem: {
+                id: comp.assessment_line_items.id,
+                assessmentId: id,
+                description: description.trim(),
+                unitType: extraData.unitType || "Per Unit",
+                unitPrice: extraData.unitPrice || 0,
+                site: comp.assessment_line_items.country || "Global",
+                costCategory: extraData.costCategory || "Procedure",
+                source: `Line ${idx + 1}`,
+                decision: "In-review" as ItemDecision,
+                numberOfUnit: extraData.numberOfUnit || 1,
+                totalCost: comp.assessment_line_items.vendor_cost || 0,
+                currency: comp.assessment_line_items.currency || "USD",
+                country: comp.assessment_line_items.country,
+                additionalInformation: description.trim()
+              },
+              benchmark90th: comp.benchmark_90th,
+              benchmarkHigh: comp.benchmark_high,
+              benchmarkMed: comp.benchmark_median || comp.benchmark_90th,
+              benchmarkLow: comp.benchmark_low,
+              selectedBenchmarkType: "p90" as BenchmarkType,
+              variance: comp.variance_percent ? (comp.assessment_line_items.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
+              variancePercent: comp.variance_percent || 0,
+              flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
+              benchmarkDescription: comp.ai_description || "AI-generated comparison",
+              possibleMatches: comp.possible_matches ? JSON.parse(comp.possible_matches) : null,
+              userSelected: comp.user_selected
+            }
+          })
+          setComparisons(mappedComparisons)
+        }
+        
+        setComparisonComplete(true)
+        appendAudit(`Completed AI Benchmark Comparison: ${result.message}`)
+      } else {
+        appendAudit(`Benchmark Comparison failed: ${result.error}`)
+      }
+    } catch (error: any) {
+      appendAudit(`Benchmark Comparison error: ${error.message}`)
+    } finally {
+      setIsRunningComparison(false)
+    }
+  }, [id, comparisons.length, appendAudit])
 
   // Get unique sites from line items
   const sites = useMemo(() => {
@@ -551,6 +680,40 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                {/* Run Benchmark Comparison Button */}
+                {isRealAssessment && (
+                  <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border border-border/40">
+                    <div>
+                      <h4 className="font-medium">AI Benchmark Matching</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Use AI to match line items against benchmark procedures
+                      </p>
+                    </div>
+                    <Button
+                      onClick={handleRunComparison}
+                      disabled={isRunningComparison || comparisons.length === 0}
+                      className="min-w-[200px]"
+                    >
+                      {isRunningComparison ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Running Comparison...
+                        </>
+                      ) : comparisonComplete ? (
+                        <>
+                          <Sparkles className="h-4 w-4 mr-2" />
+                          Re-run Comparison
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="h-4 w-4 mr-2" />
+                          Run Benchmark Comparison
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                )}
+                
                 {/* Filters */}
                 <div className="flex flex-wrap gap-4">
                   <div className="relative flex-1 min-w-[200px]">
@@ -643,7 +806,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 </div>
 
                 {/* Comparison Table */}
-                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} />
+                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} onMatchSelect={handleMatchSelect} />
               </CardContent>
             </Card>
           </TabsContent>

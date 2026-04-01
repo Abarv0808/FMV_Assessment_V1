@@ -1281,6 +1281,10 @@
     max-width: var(--container-4xl);
   }
 
+  .max-w-\[200px\] {
+    max-width: 200px;
+  }
+
   .max-w-\[250px\] {
     max-width: 250px;
   }
@@ -2728,6 +2732,10 @@
 
   .text-yellow-500 {
     color: var(--color-yellow-500);
+  }
+
+  .italic {
+    font-style: italic;
   }
 
   .tabular-nums {

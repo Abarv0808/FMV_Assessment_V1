@@ -101,3 +101,52 @@ export interface BenchmarkFile {
   uploadedAt: string
   uploadedBy: string
 }
+
+// Benchmark type selection
+export type BenchmarkType = "p90" | "high" | "med" | "low"
+
+// Item decision type
+export type ItemDecision = "In-review" | "Accepted" | "Pending" | "Not amended" | "Not accepted" | "Manual assessment"
+
+// Extended line item with additional comparison fields
+export interface LineItemWithComparison extends AssessmentLineItem {
+  numberOfUnit?: number
+  country?: string
+  additionalInformation?: string
+  noteLogic?: string
+  questionComment?: string
+  source?: string
+}
+
+// Possible match from AI comparison
+export interface PossibleMatch {
+  benchmarkId: string
+  procedureName: string
+  category: string
+  similarity: number
+  reasoning?: string
+  p25?: number
+  p50?: number
+  p75?: number
+  p90?: number
+  p100?: number
+}
+
+// Assessment comparison - linking line item to benchmark data
+export interface AssessmentComparison {
+  id: string
+  lineItem: LineItemWithComparison
+  benchmarkLow?: number
+  benchmarkMed?: number
+  benchmarkHigh?: number
+  benchmark90th?: number
+  benchmarkHighPercentile?: number
+  selectedBenchmarkType: BenchmarkType
+  variance: number
+  variancePercent: number
+  flag: "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES"
+  aiSuggestion?: string
+  benchmarkDescription?: string
+  possibleMatches?: PossibleMatch[]
+  userSelected?: string
+}
