@@ -83,6 +83,7 @@ export interface AssessmentLineItem {
   takedaSupported?: string
 }
 
+// Benchmark data source types
 export type BenchmarkSource = "IQVIA_GRANTPLAN" | "IQVIA_GPI_GRANTSMANAGER"
 
 export type TrialPhase = "Phase I" | "Phase II" | "Phase III" | "Phase IV"
