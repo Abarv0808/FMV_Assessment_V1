@@ -113,18 +113,27 @@ async function POST(request) {
         // Insert line items one by one to avoid any schema issues
         const insertedIds = [];
         for (const item of lineItems){
+            // Store parsed data in raw_data JSONB and use existing columns
+            const rawData = {
+                site: item.site || null,
+                description: item.additionalInformation || item.description || null,
+                numberOfUnit: item.numberOfUnit || null,
+                unitPrice: item.unitPrice || null,
+                totalCost: item.totalCost || null,
+                unitType: item.unitType || null,
+                costCategory: item.costCategory || item.category || null,
+                rowIndex: item.rowIndex || 0
+            };
             const { data, error } = await supabase.from("assessment_line_items").insert({
                 assessment_id: assessmentId,
                 procedure_name: item.additionalInformation || item.description || "Unknown",
-                site: item.site || null,
-                additional_information: item.additionalInformation || item.description || null,
-                category: item.costCategory || item.category || null,
-                unit: item.unitType || null,
-                number_of_unit: item.numberOfUnit || null,
-                unit_price: item.unitPrice || null,
-                total_cost: item.totalCost || null,
+                country: item.site || "Unknown",
+                vendor_cost: item.totalCost || 0,
                 currency: item.currency || "USD",
-                row_index: item.rowIndex || 0
+                category: item.costCategory || item.category || null,
+                unit_type: item.unitType || null,
+                quantity: item.numberOfUnit || 1,
+                raw_data: rawData
             }).select("id").single();
             if (error) {
                 console.error("[v0] Error inserting line item:", error);

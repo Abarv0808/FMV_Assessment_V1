@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const insertedIds: string[] = []
     
     for (const item of lineItems) {
-      // Store parsed data in raw_data JSONB and use existing columns
+      // Store ALL parsed data in raw_data JSONB - only use guaranteed columns
       const rawData = {
         site: item.site || null,
         description: item.additionalInformation || item.description || null,
@@ -29,9 +29,11 @@ export async function POST(request: Request) {
         totalCost: item.totalCost || null,
         unitType: item.unitType || null,
         costCategory: item.costCategory || item.category || null,
+        currency: item.currency || "USD",
         rowIndex: item.rowIndex || 0
       }
       
+      // Use ONLY columns that definitely exist in the base schema
       const { data, error } = await supabase
         .from("assessment_line_items")
         .insert({
@@ -40,9 +42,6 @@ export async function POST(request: Request) {
           country: item.site || "Unknown",
           vendor_cost: item.totalCost || 0,
           currency: item.currency || "USD",
-          category: item.costCategory || item.category || null,
-          unit_type: item.unitType || null,
-          quantity: item.numberOfUnit || 1,
           raw_data: rawData
         })
         .select("id")
