@@ -828,7 +828,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 </div>
 
                 {/* Comparison Table */}
-                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} />
+                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} onMatchSelect={handleMatchSelect} />
               </CardContent>
             </Card>
           </TabsContent>

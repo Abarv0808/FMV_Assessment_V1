@@ -36,6 +36,7 @@ interface ComparisonTableProps {
   onComparisonChange?: (id: string, field: "benchmarkDescription" | "comment", value: string) => void
   onBenchmarkTypeChange?: (id: string, benchmarkType: BenchmarkType) => void
   onDecisionChange?: (id: string, decision: ItemDecision) => void
+  onMatchSelect?: (id: string, match: any) => void
 }
 
 const flagConfig: Record<string, { label: string; color: string }> = {
@@ -110,7 +111,7 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
 
 const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment"]
 
-export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange }: ComparisonTableProps) {
+export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect }: ComparisonTableProps) {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
   
   // Calculate total cost sum
@@ -149,6 +150,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableHead className="w-[40px]"></TableHead>
             <TableHead>Site</TableHead>
             <TableHead>Additional Information</TableHead>
+            <TableHead className="min-w-[220px]">Benchmark Match</TableHead>
             <TableHead className="text-right">Number of Unit</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>
             <TableHead className="text-right">Total Cost</TableHead>
@@ -157,7 +159,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableHead className="text-right">Variance</TableHead>
             <TableHead>Flag</TableHead>
             <TableHead>Decision</TableHead>
-            <TableHead className="min-w-[180px]">Benchmark Description</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -205,6 +206,45 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     <div className="truncate font-medium">
                       {comparison.lineItem.additionalInformation || comparison.lineItem.description}
                     </div>
+                  </TableCell>
+                  <TableCell className="max-w-[250px]" onClick={(e) => e.stopPropagation()}>
+                    {comparison.possibleMatches && comparison.possibleMatches.length > 1 ? (
+                      <Select
+                        value={comparison.userSelected || comparison.possibleMatches[0]?.benchmarkId || ""}
+                        onValueChange={(val) => {
+                          const selectedMatch = comparison.possibleMatches?.find((m: any) => m.benchmarkId === val)
+                          if (selectedMatch && onMatchSelect) {
+                            onMatchSelect(comparison.id, selectedMatch)
+                          }
+                        }}
+                      >
+                        <SelectTrigger className="h-8 text-xs border-border/40">
+                          <SelectValue placeholder="Select match..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {comparison.possibleMatches.map((match: any, idx: number) => (
+                            <SelectItem key={match.benchmarkId || idx} value={match.benchmarkId || String(idx)}>
+                              <div className="flex flex-col py-1">
+                                <span className="text-xs font-medium truncate max-w-[200px]">{match.procedureName}</span>
+                                <span className="text-xs text-muted-foreground">
+                                  {Math.round(match.similarity * 100)}% match
+                                </span>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : comparison.flag === "NO_MATCH" ? (
+                      <span className="text-xs text-muted-foreground italic">No match found</span>
+                    ) : comparison.possibleMatches && comparison.possibleMatches.length === 1 ? (
+                      <span className="text-xs text-muted-foreground">
+                        {comparison.possibleMatches[0].procedureName} ({Math.round(comparison.possibleMatches[0].similarity * 100)}%)
+                      </span>
+                    ) : (
+                      <span className="text-xs text-muted-foreground">
+                        {comparison.benchmarkDescription || "Pending comparison"}
+                      </span>
+                    )}
                   </TableCell>
                   <TableCell className="text-right">
                     {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
@@ -287,52 +327,11 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </SelectContent>
                     </Select>
                   </TableCell>
-                  <TableCell className="max-w-[280px]" onClick={(e) => e.stopPropagation()}>
-                    {comparison.possibleMatches && comparison.possibleMatches.length > 1 ? (
-                      <Select
-                        value={comparison.userSelected || comparison.possibleMatches[0]?.benchmarkId || ""}
-                        onValueChange={(val) => {
-                          const selectedMatch = comparison.possibleMatches?.find((m: any) => m.benchmarkId === val)
-                          if (selectedMatch && onComparisonChange) {
-                            // Update the comparison with selected match info
-                            onComparisonChange(comparison.id, "benchmarkDescription", 
-                              `${selectedMatch.procedureName} (${Math.round(selectedMatch.similarity * 100)}% match)`)
-                          }
-                        }}
-                      >
-                        <SelectTrigger className="h-8 text-xs border-border/40">
-                          <SelectValue placeholder="Select match..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {comparison.possibleMatches.map((match: any, idx: number) => (
-                            <SelectItem key={match.benchmarkId || idx} value={match.benchmarkId || String(idx)}>
-                              <div className="flex flex-col py-1">
-                                <span className="text-xs font-medium truncate max-w-[220px]">{match.procedureName}</span>
-                                <span className="text-xs text-muted-foreground">
-                                  {Math.round(match.similarity * 100)}% match
-                                </span>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    ) : comparison.flag === "NO_MATCH" ? (
-                      <span className="text-xs text-muted-foreground italic">No match found</span>
-                    ) : comparison.possibleMatches && comparison.possibleMatches.length === 1 ? (
-                      <span className="text-xs text-muted-foreground">
-                        {comparison.possibleMatches[0].procedureName} ({Math.round(comparison.possibleMatches[0].similarity * 100)}%)
-                      </span>
-                    ) : (
-                      <span className="text-xs text-muted-foreground">
-                        {comparison.benchmarkDescription || "Pending comparison"}
-                      </span>
-                    )}
-                  </TableCell>
                 </TableRow>
 
                 {isExpanded && (
                   <TableRow className="border-border/40 bg-accent/30">
-                    <TableCell colSpan={12}>
+                    <TableCell colSpan={13}>
                       <div className="py-4 px-2 space-y-4">
                         {/* Item Details */}
                         <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-sm">

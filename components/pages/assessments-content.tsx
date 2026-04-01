@@ -29,7 +29,6 @@ export function AssessmentsContent() {
   // Fetch assessments from Supabase on mount
   useEffect(() => {
     const fetchAssessments = async () => {
-      console.log("[v0] Fetching assessments from Supabase...")
       setIsLoading(true)
       try {
         const supabase = createClient()
@@ -37,15 +36,11 @@ export function AssessmentsContent() {
           .from("assessments")
           .select("*")
           .order("created_at", { ascending: false })
-
-        console.log("[v0] Assessments fetch result - count:", dbAssessments?.length, "error:", error?.message)
         
         if (error) {
-          console.log("[v0] Error fetching assessments:", error.message)
           // Fall back to mock data if DB fails
           setAllAssessments(mockAssessments)
         } else if (dbAssessments && dbAssessments.length > 0) {
-          console.log("[v0] First assessment from DB:", dbAssessments[0]?.name, dbAssessments[0]?.id)
           // Map DB assessments to Assessment type
           const mappedAssessments: Assessment[] = dbAssessments.map((a: any) => ({
             id: a.id,
@@ -74,7 +69,6 @@ export function AssessmentsContent() {
           setAllAssessments(mockAssessments)
         }
       } catch (e: any) {
-        console.log("[v0] Exception fetching assessments:", e.message)
         setAllAssessments(mockAssessments)
       } finally {
         setIsLoading(false)
@@ -86,13 +80,8 @@ export function AssessmentsContent() {
 
   // Apply BU-based visibility and exclude archived
   const assessments = useMemo(() => {
-    console.log("[v0] User for filtering:", user?.role, user?.securityGroups)
-    console.log("[v0] All assessments count:", allAssessments.length)
     const filtered = filterAssessmentsByUser(allAssessments, user)
-    console.log("[v0] After user filter:", filtered.length)
-    const nonArchived = filtered.filter((a) => a.status !== "ARCHIVED")
-    console.log("[v0] After excluding archived:", nonArchived.length)
-    return nonArchived
+    return filtered.filter((a) => a.status !== "ARCHIVED")
   }, [allAssessments, user])
 
   const handleStatusChange = useCallback((id: string, newStatus: AssessmentStatus) => {

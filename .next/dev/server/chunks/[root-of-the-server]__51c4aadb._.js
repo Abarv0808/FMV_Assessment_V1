@@ -329,7 +329,9 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
             results: results.map((r)=>({
                     lineItemId: r.lineItemId,
                     matchCount: r.matches.length,
-                    flag: r.flag
+                    flag: r.flag,
+                    matches: r.matches,
+                    bestMatch: r.bestMatch
                 }))
         });
     } catch (error) {
