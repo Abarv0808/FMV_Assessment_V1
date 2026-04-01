@@ -192,8 +192,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           selectedBenchmarkType: "p90" as BenchmarkType,
           variance: comp.variance_percent ? (comp.assessment_line_items.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
   variancePercent: comp.variance_percent || 0,
-  flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
-  benchmarkDescription: comp.ai_description || "Pending comparison",
+  flag: (comp.flag || "NO_MATCH") as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
+  benchmarkDescription: comp.flag === "GREEN" ? "Match found" : comp.flag === "YELLOW" ? "Multiple matches" : "Pending comparison",
   possibleMatches: null,
   userSelected: null
         }})
@@ -457,8 +457,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 selectedBenchmarkType: "p90" as BenchmarkType,
                 variance: comp.variance_percent ? (lineItem?.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
                 variancePercent: comp.variance_percent || 0,
-                flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
-                benchmarkDescription: comp.ai_description || "Pending comparison",
+                flag: (comp.flag || "NO_MATCH") as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
+                benchmarkDescription: comp.flag === "GREEN" ? "Match found" : comp.flag === "YELLOW" ? "Multiple matches" : "Pending comparison",
                 possibleMatches: null,
                 userSelected: null
               }})

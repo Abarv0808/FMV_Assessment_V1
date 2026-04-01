@@ -241,42 +241,37 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
       }
     }
 
-    // 4. Update assessment_comparisons with results
+    // 4. Update assessment_comparisons with results - use ONLY flag column
     console.log("[v0] Updating", results.length, "comparison records")
     
     for (const result of results) {
-      // Use ONLY the most basic columns that must exist
+      // Convert MULTIPLE_MATCHES to YELLOW since DB only allows GREEN/YELLOW/RED/NO_MATCH
       const validFlag = result.flag === "MULTIPLE_MATCHES" ? "YELLOW" : result.flag
-      const description = result.bestMatch 
-        ? `${result.bestMatch.procedureName} (${Math.round(result.bestMatch.similarity * 100)}% match)`
-        : "No matching benchmark found"
 
-      // Try to update existing record - use only flag and ai_description
+      // Update ONLY the flag column - nothing else
       const { data: updated, error: updateError } = await supabase
         .from("assessment_comparisons")
-        .update({
-          flag: validFlag,
-          ai_description: description
-        })
+        .update({ flag: validFlag })
         .eq("line_item_id", result.lineItemId)
-        .select()
+        .select("id")
       
       console.log("[v0] Update result for", result.lineItemId, ":", updated?.length || 0, "rows, error:", updateError?.message)
       
-      // If no rows were updated, try to insert
+      // If no rows were updated (comparison doesn't exist), insert one
       if (!updated || updated.length === 0) {
-        console.log("[v0] No existing comparison found, inserting new one")
+        console.log("[v0] No existing comparison, inserting...")
         const { error: insertError } = await supabase
           .from("assessment_comparisons")
           .insert({
             assessment_id: assessmentId,
             line_item_id: result.lineItemId,
-            flag: validFlag,
-            ai_description: description
+            flag: validFlag
           })
         
         if (insertError) {
           console.log("[v0] Insert error:", insertError.message)
+        } else {
+          console.log("[v0] Inserted new comparison for", result.lineItemId)
         }
       }
     }
