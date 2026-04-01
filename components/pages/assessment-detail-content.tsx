@@ -396,66 +396,77 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       console.log("[v0] Comparison API result:", result)
       
       if (result.success) {
-        // Refresh the comparisons data
+        // Refresh the comparisons data - fetch comparisons and line items separately
         console.log("[v0] Refreshing comparisons data...")
         const supabase = createClient()
-        const { data: comparisonsData, error: refreshError } = await supabase
+        
+        // Fetch comparisons
+        const { data: comparisonsData, error: compError } = await supabase
           .from("assessment_comparisons")
-          .select(`
-            *,
-            assessment_line_items!inner (
-              id,
-              procedure_name,
-              country,
-              vendor_cost,
-              currency
-            )
-          `)
+          .select("*")
           .eq("assessment_id", id)
           .order("created_at", { ascending: true })
-
-        console.log("[v0] Refresh result - data:", comparisonsData?.length, "error:", refreshError?.message)
         
-        if (comparisonsData && comparisonsData.length > 0) {
+        // Fetch line items
+        const { data: lineItemsData, error: liError } = await supabase
+          .from("assessment_line_items")
+          .select("*")
+          .eq("assessment_id", id)
+
+        console.log("[v0] Refresh result - comparisons:", comparisonsData?.length, "lineItems:", lineItemsData?.length)
+        console.log("[v0] Errors - comp:", compError?.message, "li:", liError?.message)
+        
+        if (comparisonsData && comparisonsData.length > 0 && lineItemsData) {
+          // Create a map of line items by ID
+          const lineItemMap = new Map(lineItemsData.map((li: any) => [li.id, li]))
+          
           console.log("[v0] Sample comparison from DB:", JSON.stringify(comparisonsData[0], null, 2))
-          const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {
-            const procedureName = comp.assessment_line_items.procedure_name || ""
-            const [description, extraDataStr] = procedureName.split("|||")
-            let extraData = { numberOfUnit: 1, unitPrice: 0, unitType: null, costCategory: null }
-            try {
-              if (extraDataStr) extraData = JSON.parse(extraDataStr)
-            } catch (e) {}
-            
-            return {
-              id: comp.id,
-              lineItem: {
-                id: comp.assessment_line_items.id,
-                assessmentId: id,
-                description: description.trim(),
-                unitType: extraData.unitType || "Per Unit",
-                unitPrice: extraData.unitPrice || 0,
-                site: comp.assessment_line_items.country || "Global",
-                costCategory: extraData.costCategory || "Procedure",
-                source: `Line ${idx + 1}`,
-                decision: "In-review" as ItemDecision,
-                numberOfUnit: extraData.numberOfUnit || 1,
-                totalCost: comp.assessment_line_items.vendor_cost || 0,
-                currency: comp.assessment_line_items.currency || "USD",
-                country: comp.assessment_line_items.country,
-                additionalInformation: description.trim()
-              },
-              benchmark90th: comp.benchmark_90th,
-              benchmarkHigh: comp.benchmark_high,
-              benchmarkMed: comp.benchmark_median || comp.benchmark_90th,
-              benchmarkLow: comp.benchmark_low,
-              selectedBenchmarkType: "p90" as BenchmarkType,
-              variance: comp.variance_percent ? (comp.assessment_line_items.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
-              variancePercent: comp.variance_percent || 0,
-              flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
-              benchmarkDescription: comp.ai_description || "AI-generated comparison",
-              possibleMatches: comp.possible_matches ? JSON.parse(comp.possible_matches) : null,
-              userSelected: comp.user_selected
-            }
+          const mappedComparisons: AssessmentComparison[] = comparisonsData
+            .filter((comp: any) => lineItemMap.has(comp.line_item_id))
+            .map((comp: any, idx: number) => {
+              const lineItem = lineItemMap.get(comp.line_item_id)
+              const procedureName = lineItem?.procedure_name || ""
+              const [description, extraDataStr] = procedureName.split("|||")
+              let extraData = { numberOfUnit: 1, unitPrice: 0, unitType: null, costCategory: null }
+              try {
+                if (extraDataStr) extraData = JSON.parse(extraDataStr)
+              } catch (e) {}
+              
+              return {
+                id: comp.id,
+                lineItem: {
+                  id: lineItem?.id || comp.line_item_id,
+                  assessmentId: id,
+                  description: description.trim(),
+                  unitType: extraData.unitType || "Per Unit",
+                  unitPrice: extraData.unitPrice || 0,
+                  site: lineItem?.country || "Global",
+                  costCategory: extraData.costCategory || "Procedure",
+                  source: `Line ${idx + 1}`,
+                  decision: "In-review" as ItemDecision,
+                  numberOfUnit: extraData.numberOfUnit || 1,
+                  totalCost: lineItem?.vendor_cost || 0,
+                  currency: lineItem?.currency || "USD",
+                  country: lineItem?.country,
+                  additionalInformation: description.trim()
+                },
+                benchmark90th: comp.benchmark_90th,
+                benchmarkHigh: comp.benchmark_high,
+                benchmarkMed: comp.benchmark_median || comp.benchmark_90th,
+                benchmarkLow: comp.benchmark_low,
+                selectedBenchmarkType: "p90" as BenchmarkType,
+                variance: comp.variance_percent ? (lineItem?.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
+                variancePercent: comp.variance_percent || 0,
+                flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
+                benchmarkDescription: comp.ai_description || "AI-generated comparison",
+                possibleMatches: comp.possible_matches ? JSON.parse(comp.possible_matches) : null,
+                userSelected: comp.user_selected
+              }})
+          console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item flag:", mappedComparisons[0]?.flag)
+          setComparisons(mappedComparisons)
+        } else {
+          console.log("[v0] No comparisons data returned from refresh query")
+        }
           })
           console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item flag:", mappedComparisons[0]?.flag)
           setComparisons(mappedComparisons)

@@ -618,3 +618,94 @@ Import trace:
 [02:01:56.676] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [02:01:56.676] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [02:01:56.676] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775045629148} /_vercel/insights/view
+[02:02:01.996] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775045635452} /_vercel/insights/view
+[02:02:30.461] Server  LOG     [v0] Store Items API called
+[02:02:30.464] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[02:02:30.464] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
+[02:02:30.464] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[02:02:30.464] Browser LOG     [v0] Sheet data has 131 rows
+[02:02:30.464] Browser LOG     [v0] First 5 rows of data:
+[02:02:30.464] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
+[02:02:30.464] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
+[02:02:30.464] Browser LOG     [v0] Row 2 : [null,123,"Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
+[02:02:30.464] Browser LOG     [v0] Row 3 : [null,232,"Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
+[02:02:30.464] Browser LOG     [v0] Row 4 : [null,222,"Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
+[02:02:30.464] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
+[02:02:30.464] Browser LOG     [v0] Row 0 matched 0 columns: []
+[02:02:30.464] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
+[02:02:30.464] Browser LOG     [v0] Matched column 1 -> site via header: Site
+[02:02:30.464] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
+[02:02:30.464] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
+[02:02:30.464] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
+[02:02:30.464] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
+[02:02:30.464] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
+[02:02:30.464] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
+[02:02:30.464] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
+[02:02:30.464] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
+[02:02:30.464] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
+[02:02:30.464] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
+[02:02:30.464] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
+[02:02:30.464] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
+[02:02:30.464] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
+[02:02:30.464] Browser LOG     [v0] Stopping at row 9 - Description is empty
+[02:02:30.464] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
+[02:02:30.464] Browser LOG     [v0] Found 7 line items
+[02:02:30.464] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"20bb7d84-12d8-4c64-8d2e-efaf5f8b0527","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"Accepted","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1775045663898-lbuvce0zz","investigatorResponses":[],"numberOfUnits":160,"site":"123","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
+[02:02:30.464] Browser LOG     [v0] Storing 7 line items via API
+[02:02:30.464] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"123","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"232","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
+[02:02:30.470] Server  LOG     [v0] Storing 7 "line items for assessment" "20bb7d84-12d8-4c64-8d2e-efaf5f8b0527"
+[02:02:31.926] Server  LOG     [v0] Inserted 7 "line items"
+[02:02:32.324] Browser LOG     [v0] Successfully stored 7 line items
+[02:02:32.468] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/20bb7d84-12d8-4c64-8d2e-efaf5f8b0527 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/20bb7d84-12d8-4c64-8d2e-efaf5f8b0527","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775045665931} /_vercel/insights/view
+[02:02:37.967] Server  LOG     [v0] Run comparison API called
+[02:02:37.968] Server  LOG     [v0] Assessment ID: "20bb7d84-12d8-4c64-8d2e-efaf5f8b0527"
+[02:02:37.969] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[02:02:37.970] Server  LOG     [v0] Fetching line items...
+[02:02:38.125] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[02:02:38.125] Server  LOG     [v0] Fetching benchmark procedures...
+[02:02:38.248] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[02:02:38.453] Server  LOG     [v0] Benchmark query result: 500 "procedures found"
+[02:03:09.131] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 500 benchmarks","results":[{"flag":"NO_MATCH","lineItemId":"b7c2993b-8a21-4cc1-afa6-559ebc018610","matchCount":0},{"flag":"MULTIPLE_MATCHES","lineItemId":"bc60af23-5614-4644-8100-ee40fc9fb8af","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"90bc720c-f9a1-4452-9622-f7a294e42ab8","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"1ece1d56-2624-4b4a-a873-43c1836167fe","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"dd423fad-4275-4251-b63b-7b201a3c22be","matchCount":3},{"flag":"NO_MATCH","lineItemId":"9453de15-6957-40b4-a1af-f9714d2a2aa6","matchCount":0},{"flag":"NO_MATCH","lineItemId":"60a5280e-4afc-4f82-ad98-ccc5e4aa4372","matchCount":0}],"success":true}
+[02:03:09.132] Browser LOG     [v0] Refreshing comparisons data...
+[02:03:09.338] Browser LOG     [v0] Refresh result - data: 7 error: undefined
+[02:03:09.338] Browser LOG     [v0] Sample comparison from DB: {
+  "id": "53b094e8-9cba-4dac-bef0-63e41251a347",
+  "assessment_id": "20bb7d84-12d8-4c64-8d2e-efaf5f8b0527",
+  "line_item_id": "b7c2993b-8a21-4cc1-afa6-559ebc018610",
+  "matched_procedure_id": null,
+  "benchmark_file_id": null,
+  "benchmark_low": null,
+  "benchmark_high": null,
+  "benchmark_90th": null,
+  "variance_percent": null,
+  "flag": "NO_MATCH",
+  "ai_description": "Pending benchmark comparison",
+  "confidence_score": null,
+  "created_at": "2026-04-01T12:14:24.34072+00:00",
+  "assessment_line_items": {
+    "id": "b7c2993b-8a21-4cc1-afa6-559ebc018610",
+    "country": "123",
+    "currency": "CNY/RMB",
+    "vendor_cost": 160000,
+    "procedure_name": "The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person|||{\"numberOfUnit\":160,\"unitPrice\":1000,\"unitType\":\"Unit cost\",\"costCategory\":\"Other (costs that do not fit in any other category)\"}"
+  }
+}
+[02:03:09.338] Browser LOG     [v0] Mapped comparisons: 7 First item flag: NO_MATCH
+[02:04:46.557] Server  LOG      ✓ Compiled in 49ms
+[02:04:47.280] Browser ERROR   ./components/pages/assessment-detail-content.tsx:470:12
+Parsing ecmascript source code failed
+  468 |           console.log("[v0] No comparisons data returned from refresh query")
+  469 |         }
+> 470 |           })
+      |            ^
+  471 |           console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item flag:", mappedComparisons[0]?.flag)
+  472 |           setComparisons(mappedComparisons)
+  473 |         } else {
+
+Expression expected
+
+Import trace:
+  Server Component:
+    ./components/pages/assessment-detail-content.tsx
+    ./app/assessments/[id]/page.tsx
+[02:05:08.630] Server  LOG        Reload env: .env.development.local
