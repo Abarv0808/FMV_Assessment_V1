@@ -28,7 +28,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
+import { Search } from "lucide-react"
 import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
 
 interface ComparisonTableProps {
@@ -113,6 +121,21 @@ const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "N
 
 export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect }: ComparisonTableProps) {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
+  const [matchModalOpen, setMatchModalOpen] = useState(false)
+  const [selectedComparison, setSelectedComparison] = useState<AssessmentComparison | null>(null)
+
+  const openMatchModal = (comparison: AssessmentComparison) => {
+    setSelectedComparison(comparison)
+    setMatchModalOpen(true)
+  }
+
+  const handleSelectMatch = (match: any) => {
+    if (selectedComparison && onMatchSelect) {
+      onMatchSelect(selectedComparison.id, match)
+    }
+    setMatchModalOpen(false)
+    setSelectedComparison(null)
+  }
   
   // Calculate total cost sum
   const totalCostSum = comparisons.reduce((sum, comp) => sum + (comp.lineItem.totalCost || 0), 0)
@@ -207,39 +230,23 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       {comparison.lineItem.additionalInformation || comparison.lineItem.description}
                     </div>
                   </TableCell>
-                  <TableCell className="max-w-[250px]" onClick={(e) => e.stopPropagation()}>
-                    {comparison.possibleMatches && comparison.possibleMatches.length > 1 ? (
-                      <Select
-                        value={comparison.userSelected || comparison.possibleMatches[0]?.benchmarkId || ""}
-                        onValueChange={(val) => {
-                          const selectedMatch = comparison.possibleMatches?.find((m: any) => m.benchmarkId === val)
-                          if (selectedMatch && onMatchSelect) {
-                            onMatchSelect(comparison.id, selectedMatch)
-                          }
-                        }}
+                  <TableCell className="min-w-[220px]" onClick={(e) => e.stopPropagation()}>
+                    {comparison.possibleMatches && comparison.possibleMatches.length > 0 ? (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-8 text-xs w-full justify-start gap-2"
+                        onClick={() => openMatchModal(comparison)}
                       >
-                        <SelectTrigger className="h-8 text-xs border-border/40">
-                          <SelectValue placeholder="Select match..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {comparison.possibleMatches.map((match: any, idx: number) => (
-                            <SelectItem key={match.benchmarkId || idx} value={match.benchmarkId || String(idx)}>
-                              <div className="flex flex-col py-1">
-                                <span className="text-xs font-medium truncate max-w-[200px]">{match.procedureName}</span>
-                                <span className="text-xs text-muted-foreground">
-                                  {Math.round(match.similarity * 100)}% match
-                                </span>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        <Search className="h-3 w-3" />
+                        <span className="truncate">
+                          {comparison.userSelected 
+                            ? comparison.possibleMatches.find((m: any) => m.benchmarkId === comparison.userSelected)?.procedureName || "View Matches"
+                            : `${comparison.possibleMatches.length} match${comparison.possibleMatches.length > 1 ? 'es' : ''} found`}
+                        </span>
+                      </Button>
                     ) : comparison.flag === "NO_MATCH" ? (
                       <span className="text-xs text-muted-foreground italic">No match found</span>
-                    ) : comparison.possibleMatches && comparison.possibleMatches.length === 1 ? (
-                      <span className="text-xs text-muted-foreground">
-                        {comparison.possibleMatches[0].procedureName} ({Math.round(comparison.possibleMatches[0].similarity * 100)}%)
-                      </span>
                     ) : (
                       <span className="text-xs text-muted-foreground">
                         {comparison.benchmarkDescription || "Pending comparison"}
@@ -458,6 +465,81 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
           </TableRow>
         </TableBody>
       </Table>
+
+      {/* Benchmark Match Selection Modal */}
+      <Dialog open={matchModalOpen} onOpenChange={setMatchModalOpen}>
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
+          <DialogHeader>
+            <DialogTitle>Select Benchmark Match</DialogTitle>
+            <DialogDescription>
+              {selectedComparison && (
+                <span>
+                  Matching benchmarks for: <strong>{selectedComparison.lineItem.additionalInformation || selectedComparison.lineItem.description}</strong>
+                </span>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="flex-1 overflow-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[300px]">Procedure Name</TableHead>
+                  <TableHead className="text-right">P25 (Low)</TableHead>
+                  <TableHead className="text-right">P50 (Med)</TableHead>
+                  <TableHead className="text-right">P75 (High)</TableHead>
+                  <TableHead className="text-right">P90</TableHead>
+                  <TableHead className="w-[100px]">Action</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {selectedComparison?.possibleMatches?.map((match: any, idx: number) => (
+                  <TableRow key={match.benchmarkId || idx} className="hover:bg-muted/50">
+                    <TableCell>
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-sm">{match.procedureName}</span>
+                        {match.category && (
+                          <Badge variant="outline" className="w-fit text-xs">
+                            {match.category}
+                          </Badge>
+                        )}
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-right font-mono text-sm">
+                      {match.p25 != null ? formatCurrency(match.p25, selectedComparison.lineItem.currency || "USD") : "-"}
+                    </TableCell>
+                    <TableCell className="text-right font-mono text-sm">
+                      {match.p50 != null ? formatCurrency(match.p50, selectedComparison.lineItem.currency || "USD") : "-"}
+                    </TableCell>
+                    <TableCell className="text-right font-mono text-sm">
+                      {match.p75 != null ? formatCurrency(match.p75, selectedComparison.lineItem.currency || "USD") : "-"}
+                    </TableCell>
+                    <TableCell className="text-right font-mono text-sm font-semibold">
+                      {match.p90 != null ? formatCurrency(match.p90, selectedComparison.lineItem.currency || "USD") : "-"}
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        size="sm"
+                        onClick={() => handleSelectMatch(match)}
+                        className="w-full"
+                      >
+                        Select
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {(!selectedComparison?.possibleMatches || selectedComparison.possibleMatches.length === 0) && (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                      No matching benchmarks found
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
