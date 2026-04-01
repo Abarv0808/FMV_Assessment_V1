@@ -242,26 +242,42 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
     }
 
     // 4. Update assessment_comparisons with results
+    console.log("[v0] Updating", results.length, "comparison records")
+    
     for (const result of results) {
+      // Only use columns that we know exist in the DB
       const updateData: any = {
         flag: result.flag,
         possible_matches: result.matches.length > 0 ? JSON.stringify(result.matches) : null,
+        ai_description: result.bestMatch 
+          ? `${result.bestMatch.procedureName} (${Math.round(result.bestMatch.similarity * 100)}% match)`
+          : "No matching benchmark found"
       }
 
-      if (result.bestMatch) {
-        updateData.benchmark_low = result.bestMatch.p25 || null
-        updateData.benchmark_median = result.bestMatch.p50 || null
-        updateData.benchmark_high = result.bestMatch.p75 || null
-        updateData.benchmark_90th = result.bestMatch.p90 || null
-        updateData.ai_description = `${result.bestMatch.procedureName} (${Math.round(result.bestMatch.similarity * 100)}% match)`
-      } else {
-        updateData.ai_description = "No matching benchmark found"
-      }
-
-      await supabase
+      // Try to update existing record
+      const { data: updated, error: updateError } = await supabase
         .from("assessment_comparisons")
         .update(updateData)
         .eq("line_item_id", result.lineItemId)
+        .select()
+      
+      console.log("[v0] Update result for", result.lineItemId, ":", updated?.length || 0, "rows, error:", updateError?.message)
+      
+      // If no rows were updated, try to insert
+      if (!updated || updated.length === 0) {
+        console.log("[v0] No existing comparison found, inserting new one")
+        const { error: insertError } = await supabase
+          .from("assessment_comparisons")
+          .insert({
+            assessment_id: assessmentId,
+            line_item_id: result.lineItemId,
+            ...updateData
+          })
+        
+        if (insertError) {
+          console.log("[v0] Insert error:", insertError.message)
+        }
+      }
     }
 
     return NextResponse.json({

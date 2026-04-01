@@ -49,11 +49,13 @@ const AssessmentDetailContent = (0, __TURBOPACK__imported__module__$5b$project$5
     throw new Error("Attempted to call AssessmentDetailContent() from the server but AssessmentDetailContent is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
 }, "[project]/components/pages/assessment-detail-content.tsx", "AssessmentDetailContent");
 }),
-"[project]/components/pages/assessment-detail-content.tsx [app-rsc] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"[project]/components/pages/assessment-detail-content.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
 
-const e = new Error("Could not parse module '[project]/components/pages/assessment-detail-content.tsx'\n\nExpression expected");
-e.code = 'MODULE_UNPARSABLE';
-throw e;
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$pages$2f$assessment$2d$detail$2d$content$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/components/pages/assessment-detail-content.tsx [app-rsc] (client reference proxy) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$pages$2f$assessment$2d$detail$2d$content$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__ = __turbopack_context__.i("[project]/components/pages/assessment-detail-content.tsx [app-rsc] (client reference proxy)");
+;
+__turbopack_context__.n(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$pages$2f$assessment$2d$detail$2d$content$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__);
 }),
 "[project]/app/assessments/[id]/page.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
 "use strict";

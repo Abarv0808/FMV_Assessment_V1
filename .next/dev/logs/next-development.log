@@ -834,3 +834,76 @@ Import trace:
 [02:09:41.406] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [02:09:41.406] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [02:09:41.406] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775046093870} /_vercel/insights/view
+[02:09:44.502] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/1 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/1","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775046097955} /_vercel/insights/view
+[02:09:53.413] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775046106812} /_vercel/insights/view
+[02:09:54.332] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775046107763} /_vercel/insights/view
+[02:10:18.267] Server  LOG     [v0] Store Items API called
+[02:10:18.269] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[02:10:18.269] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
+[02:10:18.269] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[02:10:18.269] Browser LOG     [v0] Sheet data has 131 rows
+[02:10:18.269] Browser LOG     [v0] First 5 rows of data:
+[02:10:18.269] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
+[02:10:18.269] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
+[02:10:18.269] Browser LOG     [v0] Row 2 : [null,123,"Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
+[02:10:18.269] Browser LOG     [v0] Row 3 : [null,232,"Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
+[02:10:18.269] Browser LOG     [v0] Row 4 : [null,222,"Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
+[02:10:18.269] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
+[02:10:18.269] Browser LOG     [v0] Row 0 matched 0 columns: []
+[02:10:18.269] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
+[02:10:18.269] Browser LOG     [v0] Matched column 1 -> site via header: Site
+[02:10:18.269] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
+[02:10:18.269] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
+[02:10:18.269] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
+[02:10:18.269] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
+[02:10:18.269] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
+[02:10:18.269] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
+[02:10:18.269] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
+[02:10:18.269] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
+[02:10:18.269] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
+[02:10:18.269] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
+[02:10:18.269] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
+[02:10:18.269] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
+[02:10:18.269] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
+[02:10:18.269] Browser LOG     [v0] Stopping at row 9 - Description is empty
+[02:10:18.269] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
+[02:10:18.269] Browser LOG     [v0] Found 7 line items
+[02:10:18.269] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"0fcf7275-8175-4f66-a723-12b2fe5fefbd","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"Accepted","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1775046131704-0pd7rrbqa","investigatorResponses":[],"numberOfUnits":160,"site":"123","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
+[02:10:18.269] Browser LOG     [v0] Storing 7 line items via API
+[02:10:18.269] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"123","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"232","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
+[02:10:18.274] Server  LOG     [v0] Storing 7 "line items for assessment" "0fcf7275-8175-4f66-a723-12b2fe5fefbd"
+[02:10:20.159] Server  LOG     [v0] Inserted 7 "line items"
+[02:10:20.433] Browser LOG     [v0] Successfully stored 7 line items
+[02:10:20.585] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/0fcf7275-8175-4f66-a723-12b2fe5fefbd color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/0fcf7275-8175-4f66-a723-12b2fe5fefbd","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775046134037} /_vercel/insights/view
+[02:10:25.465] Server  LOG     [v0] Run comparison API called
+[02:10:25.466] Server  LOG     [v0] Assessment ID: "0fcf7275-8175-4f66-a723-12b2fe5fefbd"
+[02:10:25.473] Server  LOG     [v0] Fetching line items...
+[02:10:25.476] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[02:10:25.583] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[02:10:25.583] Server  LOG     [v0] Fetching benchmark procedures...
+[02:10:25.685] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[02:10:25.863] Server  LOG     [v0] Benchmark query result: 500 "procedures found"
+[02:11:08.010] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 500 benchmarks","results":[{"flag":"MULTIPLE_MATCHES","lineItemId":"a124741c-c877-41d7-bd25-c516299094ca","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"edae30d6-4379-4d20-a96a-84a0dbd74729","matchCount":2},{"flag":"MULTIPLE_MATCHES","lineItemId":"632dbd19-1d9c-4b51-938d-7919f8ac6014","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"ca1043cc-9ed1-4121-acfe-1e13f8ef4097","matchCount":3},{"flag":"NO_MATCH","lineItemId":"3f5b07d3-d930-46b8-84bd-94f290e28560","matchCount":0},{"flag":"MULTIPLE_MATCHES","lineItemId":"8b240c40-80cd-421f-88c5-703778deca04","matchCount":3},{"flag":"NO_MATCH","lineItemId":"050c8507-e691-4944-a8b6-b940eb9cd702","matchCount":0}],"success":true}
+[02:11:08.010] Browser LOG     [v0] Refreshing comparisons data...
+[02:11:08.402] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[02:11:08.402] Browser LOG     [v0] Errors - comp: undefined li: undefined
+[02:11:08.402] Browser LOG     [v0] Sample comparison from DB: {
+  "id": "f9ae7141-202a-4498-8727-1a19f0edad8e",
+  "assessment_id": "0fcf7275-8175-4f66-a723-12b2fe5fefbd",
+  "line_item_id": "a124741c-c877-41d7-bd25-c516299094ca",
+  "matched_procedure_id": null,
+  "benchmark_file_id": null,
+  "benchmark_low": null,
+  "benchmark_high": null,
+  "benchmark_90th": null,
+  "variance_percent": null,
+  "flag": "NO_MATCH",
+  "ai_description": "Pending benchmark comparison",
+  "confidence_score": null,
+  "created_at": "2026-04-01T12:22:12.344365+00:00"
+}
+[02:11:08.402] Browser LOG     [v0] Mapped comparisons: 7 First item flag: NO_MATCH
+[02:13:16.905] Server  LOG        Reload env: .env.development.local
+[02:13:17.869] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[02:13:17.869] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[02:13:17.869] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775046310334} /_vercel/insights/view
