@@ -1009,3 +1009,92 @@ Import trace:
 [02:19:04.165] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [02:19:04.166] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [02:19:04.166] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775046656577} /_vercel/insights/view
+[02:20:07.526] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775046720959} /_vercel/insights/view
+[02:20:36.828] Server  LOG     [v0] Store Items API called
+[02:20:36.831] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[02:20:36.831] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
+[02:20:36.831] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[02:20:36.831] Browser LOG     [v0] Sheet data has 131 rows
+[02:20:36.831] Browser LOG     [v0] First 5 rows of data:
+[02:20:36.831] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
+[02:20:36.831] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
+[02:20:36.831] Browser LOG     [v0] Row 2 : [null,123,"Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
+[02:20:36.831] Browser LOG     [v0] Row 3 : [null,232,"Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
+[02:20:36.831] Browser LOG     [v0] Row 4 : [null,222,"Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
+[02:20:36.831] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
+[02:20:36.831] Browser LOG     [v0] Row 0 matched 0 columns: []
+[02:20:36.831] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
+[02:20:36.831] Browser LOG     [v0] Matched column 1 -> site via header: Site
+[02:20:36.831] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
+[02:20:36.831] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
+[02:20:36.831] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
+[02:20:36.831] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
+[02:20:36.831] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
+[02:20:36.831] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
+[02:20:36.831] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
+[02:20:36.831] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
+[02:20:36.831] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
+[02:20:36.831] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
+[02:20:36.831] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
+[02:20:36.831] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
+[02:20:36.831] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
+[02:20:36.831] Browser LOG     [v0] Stopping at row 9 - Description is empty
+[02:20:36.831] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
+[02:20:36.831] Browser LOG     [v0] Found 7 line items
+[02:20:36.831] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"7cdc0538-85c7-4032-86b8-0403044c4a39","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"Accepted","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1775046750236-hi9dlchwn","investigatorResponses":[],"numberOfUnits":160,"site":"123","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
+[02:20:36.831] Browser LOG     [v0] Storing 7 line items via API
+[02:20:36.831] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"123","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"232","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
+[02:20:36.837] Server  LOG     [v0] Storing 7 "line items for assessment" "7cdc0538-85c7-4032-86b8-0403044c4a39"
+[02:20:38.191] Server  LOG     [v0] Inserted 7 "line items"
+[02:20:38.555] Browser LOG     [v0] Successfully stored 7 line items
+[02:20:38.710] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/7cdc0538-85c7-4032-86b8-0403044c4a39 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-o1bezcj2sp7jwi7u8ogp7g.vusercontent.net/assessments/7cdc0538-85c7-4032-86b8-0403044c4a39","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775046752146} /_vercel/insights/view
+[02:20:43.107] Server  LOG     [v0] Run comparison API called
+[02:20:43.108] Server  LOG     [v0] Assessment ID: "7cdc0538-85c7-4032-86b8-0403044c4a39"
+[02:20:43.111] Server  LOG     [v0] Fetching line items...
+[02:20:43.114] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[02:20:43.218] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[02:20:43.219] Server  LOG     [v0] Fetching benchmark procedures...
+[02:20:43.314] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[02:20:43.489] Server  LOG     [v0] Benchmark query result: 500 "procedures found"
+[02:21:19.514] Server  LOG     [v0] Updating 7 "comparison records"
+[02:21:19.621] Server  LOG     [v0] Update result for "41d1be72-cf45-4729-8b73-42801150b9bf" ":" 0 "rows, error:" "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:19.621] Server  LOG     [v0] No existing comparison found, inserting new one
+[02:21:19.737] Server  LOG     [v0] Insert error: "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:19.837] Server  LOG     [v0] Update result for "ea43d669-2319-48bc-b629-5e13c588219a" ":" 0 "rows, error:" "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:19.837] Server  LOG     [v0] No existing comparison found, inserting new one
+[02:21:19.933] Server  LOG     [v0] Insert error: "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.049] Server  LOG     [v0] Update result for "7a4ee701-cbbc-4735-a44c-12e531d04b54" ":" 0 "rows, error:" "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.049] Server  LOG     [v0] No existing comparison found, inserting new one
+[02:21:20.140] Server  LOG     [v0] Insert error: "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.256] Server  LOG     [v0] Update result for "534e9575-3002-437c-92ff-7f52d115132d" ":" 0 "rows, error:" "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.256] Server  LOG     [v0] No existing comparison found, inserting new one
+[02:21:20.372] Server  LOG     [v0] Insert error: "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.490] Server  LOG     [v0] Update result for "547e3c2f-a979-49cf-9488-d297d4a8cb6c" ":" 0 "rows, error:" "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.490] Server  LOG     [v0] No existing comparison found, inserting new one
+[02:21:20.581] Server  LOG     [v0] Insert error: "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.672] Server  LOG     [v0] Update result for "1e88624f-3082-43ce-9fc2-9b892e8514d7" ":" 0 "rows, error:" "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.672] Server  LOG     [v0] No existing comparison found, inserting new one
+[02:21:20.765] Server  LOG     [v0] Insert error: "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.854] Server  LOG     [v0] Update result for "f9215acb-24b5-4a69-a12a-e5fbe4d39090" ":" 0 "rows, error:" "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:20.855] Server  LOG     [v0] No existing comparison found, inserting new one
+[02:21:20.949] Server  LOG     [v0] Insert error: "Could not find the 'ai_confidence' column of 'assessment_comparisons' in the schema cache"
+[02:21:21.096] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 500 benchmarks","results":[{"flag":"MULTIPLE_MATCHES","lineItemId":"41d1be72-cf45-4729-8b73-42801150b9bf","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"ea43d669-2319-48bc-b629-5e13c588219a","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"7a4ee701-cbbc-4735-a44c-12e531d04b54","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"534e9575-3002-437c-92ff-7f52d115132d","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"547e3c2f-a979-49cf-9488-d297d4a8cb6c","matchCount":3},{"flag":"MULTIPLE_MATCHES","lineItemId":"1e88624f-3082-43ce-9fc2-9b892e8514d7","matchCount":3},{"flag":"NO_MATCH","lineItemId":"f9215acb-24b5-4a69-a12a-e5fbe4d39090","matchCount":0}],"success":true}
+[02:21:21.096] Browser LOG     [v0] Refreshing comparisons data...
+[02:21:21.468] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[02:21:21.468] Browser LOG     [v0] Errors - comp: undefined li: undefined
+[02:21:21.468] Browser LOG     [v0] Sample comparison from DB: {
+  "id": "fb447c3f-8117-44a3-931b-aa03a482b96a",
+  "assessment_id": "7cdc0538-85c7-4032-86b8-0403044c4a39",
+  "line_item_id": "41d1be72-cf45-4729-8b73-42801150b9bf",
+  "matched_procedure_id": null,
+  "benchmark_file_id": null,
+  "benchmark_low": null,
+  "benchmark_high": null,
+  "benchmark_90th": null,
+  "variance_percent": null,
+  "flag": "NO_MATCH",
+  "ai_description": "Pending benchmark comparison",
+  "confidence_score": null,
+  "created_at": "2026-04-01T12:32:30.671132+00:00"
+}
+[02:21:21.468] Browser LOG     [v0] Mapped comparisons: 7 First item flag: NO_MATCH

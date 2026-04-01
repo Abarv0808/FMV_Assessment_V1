@@ -245,24 +245,19 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
     console.log("[v0] Updating", results.length, "comparison records")
     
     for (const result of results) {
-      // Only use columns that exist in the DB schema
-      // Note: possible_matches column doesn't exist, flag only allows GREEN/YELLOW/RED/NO_MATCH
+      // Use ONLY the most basic columns that must exist
       const validFlag = result.flag === "MULTIPLE_MATCHES" ? "YELLOW" : result.flag
-      
-      const updateData: any = {
-        flag: validFlag,
-        ai_description: result.bestMatch 
-          ? `${result.bestMatch.procedureName} (${Math.round(result.bestMatch.similarity * 100)}% match)${result.matches.length > 1 ? ` - ${result.matches.length} possible matches` : ''}`
-          : "No matching benchmark found",
-        matched_procedure_name: result.bestMatch?.procedureName || null,
-        ai_confidence: result.bestMatch ? result.bestMatch.similarity * 100 : null,
-        match_type: result.bestMatch ? (result.bestMatch.similarity > 0.8 ? 'semantic' : 'fuzzy') : 'no_match'
-      }
+      const description = result.bestMatch 
+        ? `${result.bestMatch.procedureName} (${Math.round(result.bestMatch.similarity * 100)}% match)`
+        : "No matching benchmark found"
 
-      // Try to update existing record
+      // Try to update existing record - use only flag and ai_description
       const { data: updated, error: updateError } = await supabase
         .from("assessment_comparisons")
-        .update(updateData)
+        .update({
+          flag: validFlag,
+          ai_description: description
+        })
         .eq("line_item_id", result.lineItemId)
         .select()
       
@@ -276,7 +271,8 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
           .insert({
             assessment_id: assessmentId,
             line_item_id: result.lineItemId,
-            ...updateData
+            flag: validFlag,
+            ai_description: description
           })
         
         if (insertError) {
