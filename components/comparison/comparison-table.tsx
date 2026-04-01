@@ -65,6 +65,10 @@ const decisionConfig: Record<
   ItemDecision,
   { label: string; color: string }
 > = {
+  "In-review": {
+    label: "In-review",
+    color: "text-orange-500 bg-orange-500/10 border-orange-500/20",
+  },
   Accepted: {
     label: "Accepted",
     color: "text-green-500 bg-green-500/10 border-green-500/20",
@@ -104,10 +108,14 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
   low: "Low",
 }
 
-const DECISION_OPTIONS: ItemDecision[] = ["Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment"]
+const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment"]
 
 export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange }: ComparisonTableProps) {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
+  
+  // Calculate total cost sum
+  const totalCostSum = comparisons.reduce((sum, comp) => sum + (comp.lineItem.totalCost || 0), 0)
+  const primaryCurrency = comparisons[0]?.lineItem.currency || "USD"
 
   const toggleRow = (id: string) => {
     const newExpanded = new Set(expandedRows)
@@ -409,6 +417,23 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
               </Fragment>
             )
           })}
+          {/* Total Row */}
+          <TableRow className="border-border/40 bg-muted/50 font-semibold">
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell className="text-right font-bold">
+              Total: {formatCurrency(totalCostSum, primaryCurrency)}
+            </TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </div>

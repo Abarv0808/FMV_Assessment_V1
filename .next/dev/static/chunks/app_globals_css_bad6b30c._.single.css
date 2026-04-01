@@ -81,6 +81,7 @@
     --color-red-500: #fb2c36;
     --color-red-600: #e40014;
     --color-red-700: #bf000f;
+    --color-orange-500: #fe6e00;
     --color-amber-500: #f99c00;
     --color-yellow-500: #edb200;
     --color-green-100: #dcfce7;
@@ -113,6 +114,7 @@
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
+    --font-weight-bold: 700;
     --tracking-tight: -.025em;
     --tracking-widest: .1em;
     --leading-snug: 1.375;
@@ -139,6 +141,7 @@
       --color-red-500: lab(55.4814% 75.0732 48.8528);
       --color-red-600: lab(48.4493% 77.4328 61.5452);
       --color-red-700: lab(40.4273% 67.2623 53.7441);
+      --color-orange-500: lab(64.272% 57.1788 90.3583);
       --color-amber-500: lab(72.7183% 31.8672 97.9407);
       --color-yellow-500: lab(76.3898% 14.5258 98.4589);
       --color-green-100: lab(96.1861% -13.8464 6.52365);
@@ -1872,6 +1875,16 @@
     border-color: var(--muted);
   }
 
+  .border-orange-500\/20 {
+    border-color: #fe6e0033;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-orange-500\/20 {
+      border-color: color-mix(in oklab, var(--color-orange-500) 20%, transparent);
+    }
+  }
+
   .border-primary {
     border-color: var(--primary);
   }
@@ -2091,6 +2104,16 @@
   @supports (color: color-mix(in lab, red, red)) {
     .bg-muted\/50 {
       background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+    }
+  }
+
+  .bg-orange-500\/10 {
+    background-color: #fe6e001a;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-orange-500\/10 {
+      background-color: color-mix(in oklab, var(--color-orange-500) 10%, transparent);
     }
   }
 
@@ -2469,6 +2492,11 @@
     line-height: var(--leading-snug);
   }
 
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
@@ -2562,6 +2590,10 @@
 
   .text-muted-foreground {
     color: var(--muted-foreground);
+  }
+
+  .text-orange-500 {
+    color: var(--color-orange-500);
   }
 
   .text-popover-foreground {

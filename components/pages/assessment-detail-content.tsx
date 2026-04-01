@@ -150,23 +150,36 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         .order("created_at", { ascending: true })
 
       if (!comparisonsError && comparisonsData) {
-        const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => ({
+        const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {
+          // Parse extra data from procedure_name (format: "description|||{json}")
+          const procedureName = comp.assessment_line_items.procedure_name || ""
+          const [description, extraDataStr] = procedureName.split("|||")
+          let extraData = { numberOfUnit: 1, unitPrice: 0, unitType: null, costCategory: null }
+          try {
+            if (extraDataStr) {
+              extraData = JSON.parse(extraDataStr)
+            }
+          } catch (e) {
+            // Keep defaults if parsing fails
+          }
+          
+          return {
           id: comp.id,
           lineItem: {
             id: comp.assessment_line_items.id,
             assessmentId: id,
-            description: comp.assessment_line_items.procedure_name,
-            unitType: "Per Unit",
-            unitPrice: comp.assessment_line_items.vendor_cost || 0,
+            description: description.trim(),
+            unitType: extraData.unitType || "Per Unit",
+            unitPrice: extraData.unitPrice || 0,
             site: comp.assessment_line_items.country || "Global",
-            costCategory: "Procedure",
+            costCategory: extraData.costCategory || "Procedure",
             source: `Line ${idx + 1}`,
-            decision: "Pending" as ItemDecision,
-            numberOfUnit: 1,
+            decision: "In-review" as ItemDecision,
+            numberOfUnit: extraData.numberOfUnit || 1,
             totalCost: comp.assessment_line_items.vendor_cost || 0,
             currency: comp.assessment_line_items.currency || "USD",
             country: comp.assessment_line_items.country,
-            additionalInformation: comp.assessment_line_items.procedure_name
+            additionalInformation: description.trim()
           },
           benchmark90th: comp.benchmark_90th,
           benchmarkHigh: comp.benchmark_high,
@@ -179,7 +192,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           benchmarkDescription: comp.ai_description || "AI-generated comparison",
           possibleMatches: comp.possible_matches ? JSON.parse(comp.possible_matches) : null,
           userSelected: comp.user_selected
-        }))
+        }})
 
         setComparisons(mappedComparisons)
         mappedAssessment.totalLineItems = mappedComparisons.length

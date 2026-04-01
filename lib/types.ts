@@ -67,7 +67,7 @@ export interface AssessmentLineItem {
   costType?: string
   acceptedUnitPrice?: number
   acceptedTotalCost?: number
-  decision?: "Accepted" | "Rejected" | "Pending" | "Needs Review" | null
+  decision?: "In-review" | "Accepted" | "Rejected" | "Pending" | "Needs Review" | "Not amended" | "Not accepted" | "Manual assessment" | null
   // Benchmark comparison fields
   benchmarkLow?: number
   benchmarkMed?: number

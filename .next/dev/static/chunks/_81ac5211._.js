@@ -991,12 +991,17 @@ function parseVendorProposal(buffer, assessmentId = "") {
     const { headerRowIndex, columnMap } = headerInfo;
     const lineItems = [];
     // Parse data rows (skip header row)
+    // STOP when "Description of costs" is empty - this marks the end of valid data
     for(let rowIndex = headerRowIndex + 1; rowIndex < data.length; rowIndex++){
         const row = data[rowIndex];
         if (!row || row.length === 0) continue;
-        // Skip empty rows - check if at least one key field has data
-        const hasData = columnMap.description !== undefined && row[columnMap.description] || columnMap.totalCost !== undefined && row[columnMap.totalCost] || columnMap.site !== undefined && row[columnMap.site];
-        if (!hasData) continue;
+        // Check if Description of costs has data - this is the PRIMARY condition
+        const description = columnMap.description !== undefined ? String(row[columnMap.description] || "").trim() : "";
+        // STOP parsing when Description is empty - we've reached the end of valid data
+        if (!description) {
+            console.log("[v0] Stopping at row", rowIndex, "- Description is empty");
+            break;
+        }
         // Skip subtotal/total rows
         const firstCell = String(row[0] || "").toLowerCase();
         if (firstCell.includes("total") || firstCell.includes("subtotal") || firstCell.includes("sub-total")) {
