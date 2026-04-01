@@ -395,7 +395,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       
       console.log("[v0] Comparison API result:", result)
       
-      if (result.success) {
+      if (result.success && result.results) {
+        // Build a map of AI results by lineItemId for easy lookup
+        const aiResultsMap = new Map(result.results.map((r: any) => [r.lineItemId, r]))
+        
         // Refresh the comparisons data - fetch comparisons and line items separately
         console.log("[v0] Refreshing comparisons data...")
         const supabase = createClient()
@@ -414,13 +417,11 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           .eq("assessment_id", id)
 
         console.log("[v0] Refresh result - comparisons:", comparisonsData?.length, "lineItems:", lineItemsData?.length)
-        console.log("[v0] Errors - comp:", compError?.message, "li:", liError?.message)
         
         if (comparisonsData && comparisonsData.length > 0 && lineItemsData) {
           // Create a map of line items by ID
           const lineItemMap = new Map(lineItemsData.map((li: any) => [li.id, li]))
           
-          console.log("[v0] Sample comparison from DB:", JSON.stringify(comparisonsData[0], null, 2))
           const mappedComparisons: AssessmentComparison[] = comparisonsData
             .filter((comp: any) => lineItemMap.has(comp.line_item_id))
             .map((comp: any, idx: number) => {
@@ -431,6 +432,11 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
               try {
                 if (extraDataStr) extraData = JSON.parse(extraDataStr)
               } catch (e) {}
+              
+              // Get AI matches for this line item
+              const aiResult = aiResultsMap.get(comp.line_item_id)
+              const matches = aiResult?.matches || []
+              const bestMatch = aiResult?.bestMatch
               
               return {
                 id: comp.id,
@@ -450,19 +456,21 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                   country: lineItem?.country,
                   additionalInformation: description.trim()
                 },
-                benchmark90th: comp.benchmark_90th,
-                benchmarkHigh: comp.benchmark_high,
-                benchmarkMed: comp.benchmark_median || comp.benchmark_90th,
-                benchmarkLow: comp.benchmark_low,
+                benchmark90th: bestMatch?.p90 || null,
+                benchmarkHigh: bestMatch?.p75 || null,
+                benchmarkMed: bestMatch?.p50 || null,
+                benchmarkLow: bestMatch?.p25 || null,
                 selectedBenchmarkType: "p90" as BenchmarkType,
-                variance: comp.variance_percent ? (lineItem?.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
-                variancePercent: comp.variance_percent || 0,
+                variance: 0,
+                variancePercent: 0,
                 flag: (comp.flag || "NO_MATCH") as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
-                benchmarkDescription: comp.flag === "GREEN" ? "Match found" : comp.flag === "YELLOW" ? "Multiple matches" : "Pending comparison",
-                possibleMatches: null,
+                benchmarkDescription: bestMatch 
+                  ? `${bestMatch.procedureName} (${Math.round(bestMatch.similarity * 100)}% match)`
+                  : "No match found",
+                possibleMatches: matches.length > 0 ? matches : null,
                 userSelected: null
               }})
-          console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item flag:", mappedComparisons[0]?.flag)
+          console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item matches:", mappedComparisons[0]?.possibleMatches?.length)
           setComparisons(mappedComparisons)
         } else {
           console.log("[v0] No comparisons data returned from refresh query")

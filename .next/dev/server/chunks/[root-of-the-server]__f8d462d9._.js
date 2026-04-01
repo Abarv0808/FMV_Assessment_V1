@@ -134,12 +134,16 @@ async function POST(request) {
             } else if (data) {
                 insertedIds.push(data.id);
                 // Create comparison record
-                await supabase.from("assessment_comparisons").insert({
+                const { error: compError } = await supabase.from("assessment_comparisons").insert({
                     assessment_id: assessmentId,
                     line_item_id: data.id,
-                    flag: "NO_MATCH",
-                    ai_description: "Pending benchmark comparison"
+                    flag: "NO_MATCH"
                 });
+                if (compError) {
+                    console.error("[v0] Error inserting comparison:", compError.message);
+                } else {
+                    console.log("[v0] Created comparison for line item:", data.id);
+                }
             }
         }
         console.log("[v0] Inserted", insertedIds.length, "line items");

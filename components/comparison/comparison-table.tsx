@@ -287,9 +287,41 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </SelectContent>
                     </Select>
                   </TableCell>
-                  <TableCell className="max-w-[250px]">
-                    {comparison.flag === "NO_MATCH" ? (
+                  <TableCell className="max-w-[280px]" onClick={(e) => e.stopPropagation()}>
+                    {comparison.possibleMatches && comparison.possibleMatches.length > 1 ? (
+                      <Select
+                        value={comparison.userSelected || comparison.possibleMatches[0]?.benchmarkId || ""}
+                        onValueChange={(val) => {
+                          const selectedMatch = comparison.possibleMatches?.find((m: any) => m.benchmarkId === val)
+                          if (selectedMatch && onComparisonChange) {
+                            // Update the comparison with selected match info
+                            onComparisonChange(comparison.id, "benchmarkDescription", 
+                              `${selectedMatch.procedureName} (${Math.round(selectedMatch.similarity * 100)}% match)`)
+                          }
+                        }}
+                      >
+                        <SelectTrigger className="h-8 text-xs border-border/40">
+                          <SelectValue placeholder="Select match..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {comparison.possibleMatches.map((match: any, idx: number) => (
+                            <SelectItem key={match.benchmarkId || idx} value={match.benchmarkId || String(idx)}>
+                              <div className="flex flex-col py-1">
+                                <span className="text-xs font-medium truncate max-w-[220px]">{match.procedureName}</span>
+                                <span className="text-xs text-muted-foreground">
+                                  {Math.round(match.similarity * 100)}% match
+                                </span>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : comparison.flag === "NO_MATCH" ? (
                       <span className="text-xs text-muted-foreground italic">No match found</span>
+                    ) : comparison.possibleMatches && comparison.possibleMatches.length === 1 ? (
+                      <span className="text-xs text-muted-foreground">
+                        {comparison.possibleMatches[0].procedureName} ({Math.round(comparison.possibleMatches[0].similarity * 100)}%)
+                      </span>
                     ) : (
                       <span className="text-xs text-muted-foreground">
                         {comparison.benchmarkDescription || "Pending comparison"}
