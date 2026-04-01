@@ -467,12 +467,6 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         } else {
           console.log("[v0] No comparisons data returned from refresh query")
         }
-          })
-          console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item flag:", mappedComparisons[0]?.flag)
-          setComparisons(mappedComparisons)
-        } else {
-          console.log("[v0] No comparisons data returned from refresh query")
-        }
         
         setComparisonComplete(true)
         appendAudit(`Completed AI Benchmark Comparison: ${result.message}`)
