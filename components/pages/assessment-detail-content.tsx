@@ -167,6 +167,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             // Keep defaults if parsing fails
           }
           
+          // Parse ai_matches from database
+          let matches: any[] = []
+          if (comp.ai_matches) {
+            try {
+              matches = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
+            } catch (e) {
+              matches = []
+            }
+          }
+          const bestMatch = matches[0]
+          
           return {
           id: comp.id,
           lineItem: {
@@ -185,17 +196,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             country: comp.assessment_line_items.country,
             additionalInformation: description.trim()
           },
-          benchmark90th: comp.benchmark_90th,
-          benchmarkHigh: comp.benchmark_high,
-          benchmarkMed: comp.benchmark_median || comp.benchmark_90th,
-          benchmarkLow: comp.benchmark_low,
+          benchmark90th: comp.benchmark_90th || bestMatch?.p90,
+          benchmarkHigh: comp.benchmark_high || bestMatch?.p75,
+          benchmarkMed: comp.benchmark_median || comp.benchmark_90th || bestMatch?.p50,
+          benchmarkLow: comp.benchmark_low || bestMatch?.p25,
           selectedBenchmarkType: "p90" as BenchmarkType,
           variance: comp.variance_percent ? (comp.assessment_line_items.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
   variancePercent: comp.variance_percent || 0,
-  flag: (comp.flag || "NO_MATCH") as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
-  benchmarkDescription: comp.flag === "GREEN" ? "Match found" : comp.flag === "YELLOW" ? "Multiple matches" : "Pending comparison",
-  possibleMatches: null,
-  userSelected: null
+  flag: (comp.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")) as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
+  benchmarkDescription: bestMatch ? `${bestMatch.procedureName} (${Math.round((bestMatch.similarity || 0) * 100)}% match)` : "No match found",
+  possibleMatches: matches.length > 0 ? matches : null,
+  userSelected: comp.user_selected_benchmark_id || null
         }})
 
         setComparisons(mappedComparisons)

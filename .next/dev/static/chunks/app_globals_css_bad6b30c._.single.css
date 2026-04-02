@@ -97,7 +97,6 @@
     --container-md: 28rem;
     --container-lg: 32rem;
     --container-2xl: 42rem;
-    --container-3xl: 48rem;
     --container-4xl: 56rem;
     --container-5xl: 64rem;
     --text-xs: .75rem;
@@ -1021,10 +1020,6 @@
     max-height: var(--radix-select-content-available-height);
   }
 
-  .max-h-\[80vh\] {
-    max-height: 80vh;
-  }
-
   .max-h-\[85vh\] {
     max-height: 85vh;
   }
@@ -1189,10 +1184,6 @@
     width: 180px;
   }
 
-  .w-\[300px\] {
-    width: 300px;
-  }
-
   .w-auto {
     width: auto;
   }
@@ -1215,10 +1206,6 @@
 
   .max-w-\(--skeleton-width\) {
     max-width: var(--skeleton-width);
-  }
-
-  .max-w-3xl {
-    max-width: var(--container-3xl);
   }
 
   .max-w-4xl {

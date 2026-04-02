@@ -5280,3 +5280,99 @@
 [01:14:23.079] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [01:14:23.080] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [01:14:23.080] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102265153} /_vercel/insights/view
+[01:15:01.128] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102304146} /_vercel/insights/view
+[01:15:01.533] Server  LOG     [v0] Fetched 35 "assessments from database"
+[01:15:01.744] Server  LOG     [v0] Fetched 35 "assessments from database"
+[01:15:01.839] Browser LOG     [v0] Assessments fetch result: 35 items, error: undefined
+[01:15:01.839] Browser LOG     [v0] Got 35 assessments from DB, mapping...
+[01:15:01.964] Browser LOG     [v0] Assessments fetch result: 35 items, error: undefined
+[01:15:01.964] Browser LOG     [v0] Got 35 assessments from DB, mapping...
+[01:15:03.224] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102306194} /_vercel/insights/view
+[01:15:07.934] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102310953} /_vercel/insights/view
+[01:15:08.188] Server  LOG     [v0] Fetched 35 "assessments from database"
+[01:15:08.459] Browser LOG     [v0] Assessments fetch result: 35 items, error: undefined
+[01:15:08.459] Browser LOG     [v0] Got 35 assessments from DB, mapping...
+[01:15:08.623] Server  LOG     [v0] Fetched 35 "assessments from database"
+[01:15:08.790] Browser LOG     [v0] Assessments fetch result: 35 items, error: undefined
+[01:15:08.791] Browser LOG     [v0] Got 35 assessments from DB, mapping...
+[01:15:10.059] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/fe183a20-c255-4950-a2c0-d66332f920ab color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/fe183a20-c255-4950-a2c0-d66332f920ab","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102313074} /_vercel/insights/view
+[01:15:17.659] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102320631} /_vercel/insights/view
+[01:15:19.474] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102322496} /_vercel/insights/view
+[01:15:19.548] Server  LOG     [v0] Fetched 35 "assessments from database"
+[01:15:19.770] Server  LOG     [v0] Fetched 35 "assessments from database"
+[01:15:19.797] Browser LOG     [v0] Assessments fetch result: 35 items, error: undefined
+[01:15:19.797] Browser LOG     [v0] Got 35 assessments from DB, mapping...
+[01:15:19.931] Browser LOG     [v0] Assessments fetch result: 35 items, error: undefined
+[01:15:19.931] Browser LOG     [v0] Got 35 assessments from DB, mapping...
+[01:15:47.936] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/fe183a20-c255-4950-a2c0-d66332f920ab color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/fe183a20-c255-4950-a2c0-d66332f920ab","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102350956} /_vercel/insights/view
+[01:15:52.998] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102356018} /_vercel/insights/view
+[01:15:53.082] Server  LOG     [v0] Fetched 35 "assessments from database"
+[01:15:53.390] Server  LOG     [v0] Fetched 35 "assessments from database"
+[01:15:53.482] Browser LOG     [v0] Assessments fetch result: 35 items, error: undefined
+[01:15:53.482] Browser LOG     [v0] Got 35 assessments from DB, mapping...
+[01:15:53.583] Browser LOG     [v0] Assessments fetch result: 35 items, error: undefined
+[01:15:53.583] Browser LOG     [v0] Got 35 assessments from DB, mapping...
+[01:15:54.759] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102357780} /_vercel/insights/view
+[01:16:15.749] Server  LOG     [v0] Store Items API called
+[01:16:15.754] Server  LOG     [v0] Storing 7 "line items for assessment" "66c1ce68-b642-4202-a12e-9f0d032fa788"
+[01:16:15.768] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[01:16:15.768] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
+[01:16:15.768] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[01:16:15.768] Browser LOG     [v0] Sheet data has 131 rows
+[01:16:15.768] Browser LOG     [v0] First 5 rows of data:
+[01:16:15.768] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
+[01:16:15.768] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
+[01:16:15.768] Browser LOG     [v0] Row 2 : [null,123,"Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
+[01:16:15.768] Browser LOG     [v0] Row 3 : [null,232,"Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
+[01:16:15.768] Browser LOG     [v0] Row 4 : [null,222,"Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
+[01:16:15.768] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
+[01:16:15.768] Browser LOG     [v0] Row 0 matched 0 columns: []
+[01:16:15.768] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
+[01:16:15.768] Browser LOG     [v0] Matched column 1 -> site via header: Site
+[01:16:15.768] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
+[01:16:15.768] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
+[01:16:15.768] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
+[01:16:15.768] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
+[01:16:15.768] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
+[01:16:15.768] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
+[01:16:15.768] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
+[01:16:15.768] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
+[01:16:15.768] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
+[01:16:15.768] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
+[01:16:15.768] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
+[01:16:15.768] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
+[01:16:15.768] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
+[01:16:15.768] Browser LOG     [v0] Stopping at row 9 - Description is empty
+[01:16:15.768] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
+[01:16:15.768] Browser LOG     [v0] Found 7 line items
+[01:16:15.768] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"66c1ce68-b642-4202-a12e-9f0d032fa788","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"Accepted","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1775102378786-d7isb0amb","investigatorResponses":[],"numberOfUnits":160,"site":"123","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
+[01:16:15.768] Browser LOG     [v0] Storing 7 line items via API
+[01:16:15.768] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"123","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"232","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
+[01:16:16.001] Server  LOG     [v0] Created comparison for line item: "8e016f2a-dbbe-49c9-a384-0245a7a12bb2"
+[01:16:16.217] Server  LOG     [v0] Created comparison for line item: "1a8692ce-7632-4fb1-8f42-6febb5955bb6"
+[01:16:16.418] Server  LOG     [v0] Created comparison for line item: "b7286bca-efa6-419a-93d8-b03b4090bed6"
+[01:16:16.635] Server  LOG     [v0] Created comparison for line item: "185a1984-d60c-4a87-b5ec-197a6c0f40b8"
+[01:16:16.835] Server  LOG     [v0] Created comparison for line item: "8276d454-b61c-4f1c-8619-ac35eba11821"
+[01:16:17.042] Server  LOG     [v0] Created comparison for line item: "01f1f607-b4ea-4503-abfe-801eb9785e55"
+[01:16:17.244] Server  LOG     [v0] Created comparison for line item: "62f7ff73-9eb7-448d-814c-83cf2069fc8d"
+[01:16:17.244] Server  LOG     [v0] Inserted 7 "line items"
+[01:16:17.522] Browser LOG     [v0] Successfully stored 7 line items
+[01:16:17.667] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/66c1ce68-b642-4202-a12e-9f0d032fa788 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/66c1ce68-b642-4202-a12e-9f0d032fa788","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102380686} /_vercel/insights/view
+[01:16:29.383] Server  LOG      ✓ Compiled in 180ms
+[01:16:35.759] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102398706} /_vercel/insights/view
+[01:16:36.195] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102399214} /_vercel/insights/view
+[01:16:36.270] Server  LOG     [v0] Fetched 36 "assessments from database"
+[01:16:36.458] Server  LOG     [v0] Fetched 36 "assessments from database"
+[01:16:36.585] Browser LOG     [v0] Assessments fetch result: 36 items, error: undefined
+[01:16:36.585] Browser LOG     [v0] Got 36 assessments from DB, mapping...
+[01:16:36.698] Browser LOG     [v0] Assessments fetch result: 36 items, error: undefined
+[01:16:36.698] Browser LOG     [v0] Got 36 assessments from DB, mapping...
+[01:16:37.660] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/66c1ce68-b642-4202-a12e-9f0d032fa788 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/66c1ce68-b642-4202-a12e-9f0d032fa788","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102400677} /_vercel/insights/view
+[01:17:38.234] Server  LOG      ✓ Compiled in 146ms
+[01:17:46.711] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102469727} /_vercel/insights/view
+[01:17:46.922] Server  LOG     [v0] Fetched 36 "assessments from database"
+[01:17:47.376] Server  LOG     [v0] Fetched 36 "assessments from database"
+[01:19:03.153] Server  LOG      ✓ Compiled in 58ms
+[01:19:34.342] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:19:34.342] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:19:34.342] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775102576359} /_vercel/insights/view
