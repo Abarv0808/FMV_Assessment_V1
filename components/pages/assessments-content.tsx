@@ -32,12 +32,16 @@ export function AssessmentsContent() {
       setIsLoading(true)
       try {
         const supabase = createClient()
+        console.log("[v0] Fetching assessments from Supabase...")
         const { data: dbAssessments, error } = await supabase
           .from("assessments")
           .select("*")
           .order("created_at", { ascending: false })
         
+        console.log("[v0] Assessments fetch result:", dbAssessments?.length, "items, error:", error?.message)
+        
         if (error) {
+          console.log("[v0] Error fetching assessments, using mock data")
           // Fall back to mock data if DB fails
           setAllAssessments(mockAssessments)
         } else if (dbAssessments && dbAssessments.length > 0) {
