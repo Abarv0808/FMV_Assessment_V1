@@ -461,12 +461,12 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
         </TableBody>
       </Table>
 
-      {/* Benchmark Match Selection Modal */}
+      {/* Benchmark Match Selection Modal - Full Width */}
       <Dialog open={matchModalOpen} onOpenChange={setMatchModalOpen}>
-        <DialogContent className="max-w-[98vw] w-full max-h-[90vh] overflow-hidden flex flex-col">
-          <DialogHeader>
-            <DialogTitle className="text-lg">Select Benchmark Match</DialogTitle>
-            <DialogDescription className="text-sm">
+        <DialogContent className="!max-w-[95vw] !w-[95vw] !max-h-[90vh] overflow-hidden flex flex-col p-6">
+          <DialogHeader className="pb-4">
+            <DialogTitle className="text-xl">Select Benchmark Match</DialogTitle>
+            <DialogDescription>
               {selectedComparison && (
                 <span>
                   Matching benchmarks for: <strong className="text-foreground">{selectedComparison.lineItem.additionalInformation || selectedComparison.lineItem.description}</strong>
@@ -475,17 +475,17 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             </DialogDescription>
           </DialogHeader>
           
-          <div className="flex-1 overflow-auto border rounded-lg">
+          <div className="flex-1 overflow-auto border rounded-lg min-h-[400px]">
             <Table>
-              <TableHeader className="sticky top-0 bg-background z-10">
+              <TableHeader className="sticky top-0 bg-background z-10 border-b">
                 <TableRow>
-                  <TableHead className="min-w-[300px]">Procedure Name</TableHead>
-                  <TableHead className="min-w-[100px]">Country</TableHead>
-                  <TableHead className="text-right min-w-[110px]">P25 (Low)</TableHead>
-                  <TableHead className="text-right min-w-[110px]">P50 (Med)</TableHead>
-                  <TableHead className="text-right min-w-[110px]">P75 (High)</TableHead>
-                  <TableHead className="text-right min-w-[110px]">P90</TableHead>
-                  <TableHead className="w-[90px] text-center">Action</TableHead>
+                  <TableHead className="w-[40%]">Procedure Name</TableHead>
+                  <TableHead className="w-[12%]">Country</TableHead>
+                  <TableHead className="text-right w-[10%]">P25 (Low)</TableHead>
+                  <TableHead className="text-right w-[10%]">P50 (Med)</TableHead>
+                  <TableHead className="text-right w-[10%]">P75 (High)</TableHead>
+                  <TableHead className="text-right w-[10%]">P90</TableHead>
+                  <TableHead className="w-[8%] text-center">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>

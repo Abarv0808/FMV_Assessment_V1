@@ -1007,6 +1007,10 @@
     height: 100svh;
   }
 
+  .\!max-h-\[90vh\] {
+    max-height: 90vh !important;
+  }
+
   .max-h-\(--radix-context-menu-content-available-height\) {
     max-height: var(--radix-context-menu-content-available-height);
   }
@@ -1065,6 +1069,10 @@
 
   .min-h-svh {
     min-height: 100svh;
+  }
+
+  .\!w-\[95vw\] {
+    width: 95vw !important;
   }
 
   .w-\(--cell-size\) {
@@ -1151,6 +1159,22 @@
     width: --radix-dropdown-menu-trigger-width;
   }
 
+  .w-\[8\%\] {
+    width: 8%;
+  }
+
+  .w-\[10\%\] {
+    width: 10%;
+  }
+
+  .w-\[12\%\] {
+    width: 12%;
+  }
+
+  .w-\[40\%\] {
+    width: 40%;
+  }
+
   .w-\[40px\] {
     width: 40px;
   }
@@ -1201,6 +1225,10 @@
 
   .w-px {
     width: 1px;
+  }
+
+  .\!max-w-\[95vw\] {
+    max-width: 95vw !important;
   }
 
   .max-w-\(--skeleton-width\) {

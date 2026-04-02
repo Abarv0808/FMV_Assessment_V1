@@ -65,8 +65,34 @@ export async function POST(request: Request) {
       
       console.log("[v0] Total benchmark procedures in database:", totalCount)
       
-      // Fetch benchmark procedures with country from benchmark_files
-      // Use a higher limit to get procedures from all countries
+      // Strategy: Get UNIQUE procedure names first (same procedure exists in each country)
+      // We'll fetch from multiple countries to get diverse procedure names
+      // Then after AI matches, we'll fetch pricing for all countries for matched procedures
+      
+      // Get distinct procedure names by sampling from different benchmark files
+      let benchmarkFileFilter = benchmarkFileIds
+      if (!benchmarkFileFilter || benchmarkFileFilter.length === 0) {
+        // Get all benchmark files to sample from
+        const { data: allFiles } = await supabase
+          .from("benchmark_files")
+          .select("id, country")
+          .limit(100)
+        
+        if (allFiles && allFiles.length > 0) {
+          // Take first file from each indication (they all have same procedure names, different pricing)
+          const uniqueCountries = new Map<string, string>()
+          for (const file of allFiles) {
+            if (file.country && !uniqueCountries.has(file.country)) {
+              uniqueCountries.set(file.country, file.id)
+            }
+          }
+          // Just take ONE file - all have same procedure names
+          benchmarkFileFilter = [allFiles[0].id]
+          console.log("[v0] Using benchmark file:", allFiles[0].country, "to get procedure names")
+        }
+      }
+      
+      // Fetch benchmark procedures from ONE country (they all have same procedure names)
       let benchmarkQuery = supabase
         .from("benchmark_procedures")
         .select(`
@@ -82,11 +108,11 @@ export async function POST(request: Request) {
           benchmark_file_id,
           benchmark_files(country)
         `)
-        .limit(5000)
+        .limit(2000)
 
-      // Filter by benchmark file IDs if specified
-      if (benchmarkFileIds && benchmarkFileIds.length > 0) {
-        benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
+      // Filter to ONE benchmark file to get unique procedure names
+      if (benchmarkFileFilter && benchmarkFileFilter.length > 0) {
+        benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileFilter)
       }
 
       const result = await benchmarkQuery
@@ -257,20 +283,65 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
         }
         
         if (output && output.matches && output.matches.length > 0) {
-          // Get full benchmark data for matched items including country
-          const matchedBenchmarks = output.matches.map((match: any) => {
-            const fullBenchmark = benchmarks.find((b: any) => b.id === match.benchmarkId)
-            return {
-              ...match,
-              p25: fullBenchmark?.p25,
-              p50: fullBenchmark?.p50,
-              p75: fullBenchmark?.p75,
-              p90: fullBenchmark?.p90,
-              p100: fullBenchmark?.p100,
-              country: fullBenchmark?.benchmark_files?.country || null,
-              category: fullBenchmark?.category || match.category
+          // For each matched procedure, fetch pricing from ALL countries
+          const matchedProcedureNames = output.matches.map((m: any) => m.procedureName)
+          
+          // Query all benchmark procedures with these names (from all countries)
+          const { data: allCountryPricing } = await supabase
+            .from("benchmark_procedures")
+            .select(`
+              id,
+              procedure_name,
+              category,
+              p25,
+              p50,
+              p75,
+              p90,
+              p100,
+              benchmark_files(country)
+            `)
+            .in("procedure_name", matchedProcedureNames)
+            .limit(500)
+          
+          // Build matches with all countries' pricing
+          const matchedBenchmarks: any[] = []
+          for (const match of output.matches) {
+            // Find all country versions of this procedure
+            const allCountryVersions = (allCountryPricing || []).filter(
+              (bp: any) => bp.procedure_name === match.procedureName
+            )
+            
+            if (allCountryVersions.length > 0) {
+              // Add each country's pricing as a separate match option
+              for (const version of allCountryVersions) {
+                matchedBenchmarks.push({
+                  benchmarkId: version.id,
+                  procedureName: version.procedure_name,
+                  similarity: match.similarity,
+                  p25: version.p25,
+                  p50: version.p50,
+                  p75: version.p75,
+                  p90: version.p90,
+                  p100: version.p100,
+                  country: version.benchmark_files?.country || "Unknown",
+                  category: version.category || match.category
+                })
+              }
+            } else {
+              // Fallback to original match data
+              const fullBenchmark = benchmarks.find((b: any) => b.id === match.benchmarkId)
+              matchedBenchmarks.push({
+                ...match,
+                p25: fullBenchmark?.p25,
+                p50: fullBenchmark?.p50,
+                p75: fullBenchmark?.p75,
+                p90: fullBenchmark?.p90,
+                p100: fullBenchmark?.p100,
+                country: fullBenchmark?.benchmark_files?.country || null,
+                category: fullBenchmark?.category || match.category
+              })
             }
-          })
+          }
 
           results.push({
             lineItemId: lineItem.id,
