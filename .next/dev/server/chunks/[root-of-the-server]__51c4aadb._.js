@@ -145,7 +145,7 @@ async function POST(request) {
             // First, try simple query without join to see if procedures exist
             const { data: simpleCheck, error: simpleError } = await supabase.from("benchmark_procedures").select("id, procedure_name").limit(5);
             console.log("[v0] Simple benchmark check:", simpleCheck?.length, "procedures, error:", simpleError?.message);
-            // Now fetch with full data
+            // Now fetch with full data including country from benchmark_files
             let benchmarkQuery = supabase.from("benchmark_procedures").select(`
           id,
           procedure_name,
@@ -156,7 +156,8 @@ async function POST(request) {
           p75,
           p90,
           p100,
-          benchmark_file_id
+          benchmark_file_id,
+          benchmark_files!inner(country)
         `).limit(500);
             if (benchmarkFileIds && benchmarkFileIds.length > 0) {
                 benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds);
@@ -314,7 +315,7 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
                     });
                 }
                 if (output && output.matches && output.matches.length > 0) {
-                    // Get full benchmark data for matched items
+                    // Get full benchmark data for matched items including country
                     const matchedBenchmarks = output.matches.map((match)=>{
                         const fullBenchmark = benchmarks.find((b)=>b.id === match.benchmarkId);
                         return {
@@ -324,7 +325,8 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
                             p75: fullBenchmark?.p75,
                             p90: fullBenchmark?.p90,
                             p100: fullBenchmark?.p100,
-                            benchmarkFile: fullBenchmark?.benchmark_files
+                            country: fullBenchmark?.benchmark_files?.country || null,
+                            category: fullBenchmark?.category || match.category
                         };
                     });
                     results.push({
