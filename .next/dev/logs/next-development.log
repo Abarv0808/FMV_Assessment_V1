@@ -5531,3 +5531,53 @@
 [01:42:23.804] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [01:42:23.804] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [01:42:23.804] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775103945734} /_vercel/insights/view
+[01:42:38.797] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/66c1ce68-b642-4202-a12e-9f0d032fa788 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/66c1ce68-b642-4202-a12e-9f0d032fa788","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775103961769} /_vercel/insights/view
+[01:42:41.443] Server  LOG     [v0] Run comparison API called
+[01:42:41.444] Server  LOG     [v0] Assessment ID: "66c1ce68-b642-4202-a12e-9f0d032fa788"
+[01:42:41.453] Server  LOG     [v0] Fetching line items...
+[01:42:41.457] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[01:42:41.563] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[01:42:41.563] Server  LOG     [v0] Fetching benchmark procedures...
+[01:42:41.564] Server  LOG     [v0] Line item countries: ["123","232","222","234","323","221"]
+[01:42:41.867] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[01:42:45.019] Server  LOG     [v0] Benchmark query result: 0 "raw," 0 "valid names," 0 "with pricing"
+[01:42:45.019] Server  LOG     [v0] Benchmark countries found: ""
+[01:42:45.019] Server  LOG     [v0] Benchmark query error: {}
+[01:42:45.019] Server  LOG     [v0] Continuing without benchmark data due to error
+[01:42:45.019] Server  LOG     [v0] No benchmark data found, marking all as NO_MATCH
+[01:42:46.571] Browser LOG     [v0] Comparison API result: {"message":"No benchmark data found. 7 items marked as NO_MATCH. Please upload benchmark files first.","results":[{"flag":"NO_MATCH","lineItemId":"8e016f2a-dbbe-49c9-a384-0245a7a12bb2","matchCount":0},{"flag":"NO_MATCH","lineItemId":"1a8692ce-7632-4fb1-8f42-6febb5955bb6","matchCount":0},{"flag":"NO_MATCH","lineItemId":"b7286bca-efa6-419a-93d8-b03b4090bed6","matchCount":0},{"flag":"NO_MATCH","lineItemId":"185a1984-d60c-4a87-b5ec-197a6c0f40b8","matchCount":0},{"flag":"NO_MATCH","lineItemId":"8276d454-b61c-4f1c-8619-ac35eba11821","matchCount":0},{"flag":"NO_MATCH","lineItemId":"01f1f607-b4ea-4503-abfe-801eb9785e55","matchCount":0},{"flag":"NO_MATCH","lineItemId":"62f7ff73-9eb7-448d-814c-83cf2069fc8d","matchCount":0}],"success":true}
+[01:42:46.571] Browser LOG     [v0] Refreshing comparisons data...
+[01:42:46.821] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[01:42:46.821] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[01:45:22.446] Server  LOG     [v0] Run comparison API called
+[01:45:22.446] Server  LOG     [v0] Assessment ID: "66c1ce68-b642-4202-a12e-9f0d032fa788"
+[01:45:22.452] Server  LOG     [v0] Fetching line items...
+[01:45:22.456] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[01:45:22.688] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[01:45:22.688] Server  LOG     [v0] Fetching benchmark procedures...
+[01:45:22.812] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[01:45:23.064] Server  LOG     [v0] Benchmark query result: 500 "raw," 500 "valid names," 493 "with pricing"
+[01:45:23.065] Server  LOG     [v0] Benchmark countries found: "Albania, Chile, Argentina, Australia"
+[01:45:23.065] Server  LOG     [v0] === SAMPLE DATA COMPARISON ===
+[01:45:23.065] Server  LOG     [v0] LINE ITEMS FROM ASSESSMENT (first 3):
+[01:45:23.065] Server  LOG     [v0]   1. "The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person"
+[01:45:23.065] Server  LOG     [v0]   2. "250RMB/hour*2 hours*4 visits"
+[01:45:23.066] Server  LOG     [v0]   3. "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field."
+[01:45:23.066] Server  LOG     [v0] BENCHMARK PROCEDURES (first 10):
+[01:45:23.066] Server  LOG     [v0]   1. "Insertion of implantable intra-arterial infusion pump (eg, for chemotherapy of liver)" | HasPricing: true | P90: 231363
+[01:45:23.066] Server  LOG     [v0]   2. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional, not to be used for routine venipuncture, femoral or jugular vein" | HasPricing: true | P90: 7326
+[01:45:23.066] Server  LOG     [v0]   3. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional,  (separate procedure), for diagnostic or therapeutic purposes. (Not to be used for routine venipuncture)" | HasPricing: true | P90: 5302
+[01:45:23.066] Server  LOG     [v0]   4. "Collection of capillary blood specimen (eg, finger, heel, ear stick)" | HasPricing: true | P90: 4049
+[01:45:23.066] Server  LOG     [v0]   5. "Transfusion; blood, serum or components" | HasPricing: true | P90: 21112
+[01:45:23.067] Server  LOG     [v0]   6. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); diagnostic; with or without collection of specimen by brushing or washing; moderate sedation" | HasPricing: true | P90: 99197
+[01:45:23.067] Server  LOG     [v0]   7. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); with biopsy; single or multiple; moderate sedation" | HasPricing: true | P90: 150868
+[01:45:23.067] Server  LOG     [v0]   8. "Colonoscopy, flexible, proximal to splenic flexure; diagnostic, with or without collection of specimen(s) by brushing or washing, with or without colondecompression (separate procedure); moderate sedation" | HasPricing: true | P90: 105270
+[01:45:23.067] Server  LOG     [v0]   9. "Colonoscopy, flexible; with biopsy, single or multiple" | HasPricing: true | P90: 245341
+[01:45:23.067] Server  LOG     [v0]   10. "Colonoscopy, flexible; with directed submucosal injection(s), any substance" | HasPricing: true | P90: 125129
+[01:45:23.067] Server  LOG     [v0] === END SAMPLE DATA ===
+[01:45:23.068] Server  LOG     [v0] Processing line item: "\"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person\""
+[01:45:28.372] Server  LOG     [v0] Fetched 36 "assessments from database"
+[01:45:28.570] Server  LOG     [v0] Fetched 36 "assessments from database"
+[01:45:29.272] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:45:29.272] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:45:29.272] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775104131083} /_vercel/insights/view

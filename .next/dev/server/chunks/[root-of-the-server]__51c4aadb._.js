@@ -137,7 +137,7 @@ async function POST(request) {
                 status: 400
             });
         }
-        // 2. Fetch benchmark procedures from selected files or all files
+        // 2. Fetch benchmark procedures from database
         console.log("[v0] Fetching benchmark procedures...");
         let benchmarks = [];
         let benchmarksError = null;
@@ -145,7 +145,7 @@ async function POST(request) {
             // First, try simple query without join to see if procedures exist
             const { data: simpleCheck, error: simpleError } = await supabase.from("benchmark_procedures").select("id, procedure_name").limit(5);
             console.log("[v0] Simple benchmark check:", simpleCheck?.length, "procedures, error:", simpleError?.message);
-            // Now fetch with full data including country from benchmark_files
+            // Fetch benchmark procedures with country from benchmark_files
             let benchmarkQuery = supabase.from("benchmark_procedures").select(`
           id,
           procedure_name,
@@ -157,8 +157,9 @@ async function POST(request) {
           p90,
           p100,
           benchmark_file_id,
-          benchmark_files!inner(country)
+          benchmark_files(country)
         `).limit(500);
+            // Filter by benchmark file IDs if specified
             if (benchmarkFileIds && benchmarkFileIds.length > 0) {
                 benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds);
             }
@@ -199,7 +200,12 @@ async function POST(request) {
             });
             // Count how many have actual pricing data
             const withPricing = benchmarks.filter((bm)=>bm.p25 != null || bm.p50 != null || bm.p75 != null || bm.p90 != null);
+            // Log countries found in benchmarks
+            const benchmarkCountries = [
+                ...new Set(benchmarks.map((b)=>b.benchmark_files?.country).filter(Boolean))
+            ];
             console.log("[v0] Benchmark query result:", rawBenchmarks.length, "raw,", benchmarks.length, "valid names,", withPricing.length, "with pricing");
+            console.log("[v0] Benchmark countries found:", benchmarkCountries.join(", "));
             if (benchmarksError) {
                 console.log("[v0] Benchmark query error:", benchmarksError);
             }

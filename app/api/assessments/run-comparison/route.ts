@@ -43,12 +43,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No line items found", details: lineItemsError?.message }, { status: 400 })
     }
 
-    // 2. Fetch benchmark procedures filtered by countries in assessment
+    // 2. Fetch benchmark procedures from database
     console.log("[v0] Fetching benchmark procedures...")
-    
-    // Get unique countries from line items
-    const lineItemCountries = [...new Set(lineItems.map(li => li.country).filter(Boolean))]
-    console.log("[v0] Line item countries:", lineItemCountries)
     
     let benchmarks: any[] = []
     let benchmarksError: any = null
@@ -62,8 +58,7 @@ export async function POST(request: Request) {
       
       console.log("[v0] Simple benchmark check:", simpleCheck?.length, "procedures, error:", simpleError?.message)
       
-      // Now fetch with full data including country from benchmark_files
-      // Filter by countries that are in the assessment's line items
+      // Fetch benchmark procedures with country from benchmark_files
       let benchmarkQuery = supabase
         .from("benchmark_procedures")
         .select(`
@@ -77,21 +72,14 @@ export async function POST(request: Request) {
           p90,
           p100,
           benchmark_file_id,
-          benchmark_files!inner(country)
+          benchmark_files(country)
         `)
+        .limit(500)
 
       // Filter by benchmark file IDs if specified
       if (benchmarkFileIds && benchmarkFileIds.length > 0) {
         benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
       }
-      
-      // Filter by countries - only get benchmarks for countries in the assessment
-      if (lineItemCountries.length > 0) {
-        benchmarkQuery = benchmarkQuery.in("benchmark_files.country", lineItemCountries)
-      }
-      
-      // Remove limit to get all matching procedures for the specific countries
-      benchmarkQuery = benchmarkQuery.limit(2000)
 
       const result = await benchmarkQuery
       const rawBenchmarks = result.data || []
