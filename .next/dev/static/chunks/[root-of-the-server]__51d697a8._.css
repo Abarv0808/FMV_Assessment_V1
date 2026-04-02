@@ -1294,24 +1294,8 @@
     max-width: var(--container-4xl);
   }
 
-  .max-w-\[200px\] {
-    max-width: 200px;
-  }
-
-  .max-w-\[220px\] {
-    max-width: 220px;
-  }
-
   .max-w-\[250px\] {
     max-width: 250px;
-  }
-
-  .max-w-\[280px\] {
-    max-width: 280px;
-  }
-
-  .max-w-\[300px\] {
-    max-width: 300px;
   }
 
   .max-w-\[400px\] {
@@ -1384,10 +1368,6 @@
 
   .min-w-\[170px\] {
     min-width: 170px;
-  }
-
-  .min-w-\[180px\] {
-    min-width: 180px;
   }
 
   .min-w-\[185px\] {

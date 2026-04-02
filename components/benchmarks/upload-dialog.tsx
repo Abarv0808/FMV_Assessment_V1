@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -150,7 +151,7 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
   const [indication, setIndication] = useState<Indication | "">("")
   const [dataSource, setDataSource] = useState<"IQVIA GrantPlan" | "IQVIA GPI">("IQVIA GrantPlan")
   const [trialPhase, setTrialPhase] = useState<"All Phases" | "Phase 4">("All Phases")
-  const [uploadMode, setUploadMode] = useState<"replace" | "append">("append")
+  const [uploadMode] = useState<"replace">("replace")
   const [step, setStep] = useState<"upload" | "preview" | "uploading" | "complete">("upload")
   const [preview, setPreview] = useState<PreviewData | null>(null)
   const [parsedCountries, setParsedCountries] = useState<ParsedCountry[]>([])
@@ -163,7 +164,7 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
     setIndication("")
     setDataSource("IQVIA GrantPlan")
     setTrialPhase("All Phases")
-    setUploadMode("replace")
+    // uploadMode is always "replace"
     setStep("upload")
     setPreview(null)
     setParsedCountries([])
@@ -384,27 +385,7 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
               </Select>
             </div>
 
-            <div className="space-y-3">
-              <Label>Upload Mode</Label>
-              <RadioGroup value={uploadMode} onValueChange={(val) => setUploadMode(val as "replace" | "append")}>
-                <div className="flex items-start gap-3 p-3 rounded-lg border hover:bg-accent/50 cursor-pointer">
-                  <RadioGroupItem value="replace" id="rep" className="mt-0.5" />
-                  <div className="flex-1">
-                    <Label htmlFor="rep" className="font-medium cursor-pointer">Replace existing data</Label>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      Delete existing data for same indication/phase and insert new
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg border hover:bg-accent/50 cursor-pointer">
-                  <RadioGroupItem value="append" id="app" className="mt-0.5" />
-                  <div className="flex-1">
-                    <Label htmlFor="app" className="font-medium cursor-pointer">Append new data</Label>
-                    <p className="text-xs text-muted-foreground mt-0.5">Keep existing data and add new records</p>
-                  </div>
-                </div>
-              </RadioGroup>
-            </div>
+            
 
             <div className="flex justify-end gap-2 pt-4">
               <Button variant="outline" onClick={handleClose}>Cancel</Button>
@@ -448,7 +429,7 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Upload Mode</span>
-                <span className="font-medium">{uploadMode === "replace" ? "Replace existing" : "Append new"}</span>
+                <span className="font-medium">Replace existing</span>
               </div>
             </div>
 
