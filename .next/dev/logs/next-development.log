@@ -130,3 +130,9 @@
 [00:38:41.799] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [00:38:41.799] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [00:38:41.799] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775100123887} /_vercel/insights/view
+[00:39:00.185] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775100143243} /_vercel/insights/view
+[00:40:41.043] Server  ERROR   [v0] Error deleting benchmark procedures: "canceling statement due to statement timeout"
+[00:44:35.507] Server  LOG      ✓ Compiled in 52ms
+[00:45:00.515] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:45:00.515] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:45:00.515] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775100502480} /_vercel/insights/view

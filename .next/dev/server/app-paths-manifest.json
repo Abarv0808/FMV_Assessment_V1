@@ -1,5 +1,6 @@
 {
   "/api/assessments/run-comparison/route": "app/api/assessments/run-comparison/route.js",
+  "/api/bm/clear/route": "app/api/bm/clear/route.js",
   "/api/bm/store/route": "app/api/bm/store/route.js",
   "/assessments/[id]/page": "app/assessments/[id]/page.js",
   "/assessments/page": "app/assessments/page.js",

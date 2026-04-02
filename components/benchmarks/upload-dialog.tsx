@@ -96,7 +96,8 @@ function parseNumber(val: any): number | null {
   return isNaN(num) ? null : num
 }
 
-// Client-side Excel parser - extracts procedures with p25, p50, p75, p90 pricing
+// Client-side Excel parser for IQVIA GrantPlan format
+// Headers: Code | Procedure | Qty | OH | Total | Low | Med | High | 90th | 100th | Src
 function parseExcelFile(buffer: ArrayBuffer): ParsedCountry[] {
   const workbook = XLSX.read(buffer, { type: "array" })
   const countries: ParsedCountry[] = []
@@ -115,80 +116,72 @@ function parseExcelFile(buffer: ArrayBuffer): ParsedCountry[] {
     const procedures: ParsedProcedure[] = []
     let currentCategory = "Procedures"
     
-    // Try to detect column headers to find p25, p50, p75, p90 columns
-    let p25Col = 5, p50Col = 6, p75Col = 7, p90Col = 8, p100Col = 9
+    // Find header row with "Code", "Procedure", "Low", "Med", "High", "90th"
+    let headerRowIdx = -1
+    let codeCol = 0, procCol = 1, lowCol = -1, medCol = -1, highCol = -1, p90Col = -1, p100Col = -1
     
-    // Look for header row to identify column positions
-    for (let i = 0; i < Math.min(rows.length, 20); i++) {
+    for (let i = 0; i < Math.min(rows.length, 50); i++) {
       const row = rows[i]
       if (!row) continue
+      
+      let foundLow = false, foundMed = false, foundHigh = false, found90 = false
+      
       for (let j = 0; j < row.length; j++) {
         const cell = String(row[j] || "").toLowerCase().trim()
-        if (cell === "p25" || cell === "25th" || cell.includes("25th percentile")) p25Col = j
-        if (cell === "p50" || cell === "50th" || cell.includes("50th percentile") || cell === "median") p50Col = j
-        if (cell === "p75" || cell === "75th" || cell.includes("75th percentile")) p75Col = j
-        if (cell === "p90" || cell === "90th" || cell.includes("90th percentile")) p90Col = j
-        if (cell === "p100" || cell === "100th" || cell.includes("100th percentile") || cell === "max") p100Col = j
+        if (cell === "code") codeCol = j
+        if (cell === "procedure") procCol = j
+        if (cell === "low") { lowCol = j; foundLow = true }
+        if (cell === "med") { medCol = j; foundMed = true }
+        if (cell === "high") { highCol = j; foundHigh = true }
+        if (cell === "90th") { p90Col = j; found90 = true }
+        if (cell === "100th") p100Col = j
+      }
+      
+      // Found the header row when we see Low, Med, High, 90th
+      if (foundLow && foundMed && foundHigh && found90) {
+        headerRowIdx = i
+        break
       }
     }
     
-    for (const row of rows) {
+    if (headerRowIdx < 0) continue // No valid header found
+    
+    // Parse data rows after header
+    for (let i = headerRowIdx + 1; i < rows.length; i++) {
+      const row = rows[i]
       if (!row || row.length === 0) continue
       
-      const firstCell = String(row[0] || "").trim()
-      const secondCell = String(row[1] || "").trim()
-      if (!firstCell && !secondCell) continue
+      const codeCell = String(row[codeCol] || "").trim()
+      const procCell = String(row[procCol] || "").trim()
       
       // Detect category headers
-      const firstLower = firstCell.toLowerCase()
-      if (firstLower.match(/^procedures?\s*\(\d+\)/) || firstLower === "procedures") {
-        currentCategory = "Procedures"
-        continue
-      }
-      if (firstLower.includes("non-procedure") || firstLower.includes("non procedure")) {
-        currentCategory = "Non-Procedures"
-        continue
-      }
-      if (firstLower.includes("site cost")) {
-        currentCategory = "Site Costs"
-        continue
-      }
+      const codeLower = codeCell.toLowerCase()
+      if (codeLower.match(/^procedures?\s*\(\d+\)/)) { currentCategory = "Procedures"; continue }
+      if (codeLower.match(/^non.?procedures?\s*\(\d+\)/)) { currentCategory = "Non-Procedures"; continue }
+      if (codeLower.match(/^site\s*costs?\s*\(\d+\)/)) { currentCategory = "Site Costs"; continue }
       
-      // Skip metadata rows
-      if (isMetadataRow(firstCell) || isMetadataRow(secondCell)) continue
+      // Skip metadata, empty, or subtotal rows
+      if (!procCell || procCell.length < 3) continue
+      if (isMetadataRow(codeCell) || isMetadataRow(procCell)) continue
+      if (codeLower.includes("sub total") || codeLower.includes("subtotal")) continue
       
-      // The procedure name is typically in column 1 (after code in column 0)
-      // But some files have name in column 0
-      let code = firstCell
-      let name = secondCell || firstCell
-      
-      // If secondCell is empty but firstCell looks like a procedure name, use it
-      if (!secondCell && firstCell.length > 3 && !firstCell.match(/^[A-Z0-9]{2,10}$/)) {
-        name = firstCell
-        code = ""
-      }
-      
-      // Skip if name is too short or looks like a code
-      if (name.length < 3 || name.match(/^[A-Z0-9]{1,10}$/)) continue
-      
-      // Extract pricing columns
-      const p25 = parseNumber(row[p25Col])
-      const p50 = parseNumber(row[p50Col])
-      const p75 = parseNumber(row[p75Col])
+      // Extract pricing: Low=P25, Med=P50, High=P75, 90th=P90, 100th=P100
+      const low = parseNumber(row[lowCol])
+      const med = parseNumber(row[medCol])
+      const high = parseNumber(row[highCol])
       const p90 = parseNumber(row[p90Col])
-      const p100 = parseNumber(row[p100Col])
+      const p100 = p100Col >= 0 ? parseNumber(row[p100Col]) : null
       
-      // Only include procedures that have a valid name
-      if (name.length > 2 && name.length < 300) {
+      if (procCell.length > 2 && procCell.length < 500) {
         procedures.push({
-          code,
-          name,
+          code: codeCell,
+          name: procCell,
           category: currentCategory,
-          p25,
-          p50,
-          p75,
-          p90,
-          p100
+          p25: low,
+          p50: med,
+          p75: high,
+          p90: p90,
+          p100: p100
         })
       }
     }
