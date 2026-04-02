@@ -468,36 +468,36 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
 
       {/* Benchmark Match Selection Modal */}
       <Dialog open={matchModalOpen} onOpenChange={setMatchModalOpen}>
-        <DialogContent className="max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
+        <DialogContent className="max-w-5xl w-[95vw] max-h-[85vh] overflow-hidden flex flex-col">
           <DialogHeader>
-            <DialogTitle>Select Benchmark Match</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-lg">Select Benchmark Match</DialogTitle>
+            <DialogDescription className="text-sm">
               {selectedComparison && (
                 <span>
-                  Matching benchmarks for: <strong>{selectedComparison.lineItem.additionalInformation || selectedComparison.lineItem.description}</strong>
+                  Matching benchmarks for: <strong className="text-foreground">{selectedComparison.lineItem.additionalInformation || selectedComparison.lineItem.description}</strong>
                 </span>
               )}
             </DialogDescription>
           </DialogHeader>
           
-          <div className="flex-1 overflow-auto">
+          <div className="flex-1 overflow-auto border rounded-lg">
             <Table>
-              <TableHeader>
+              <TableHeader className="sticky top-0 bg-background z-10">
                 <TableRow>
-                  <TableHead className="w-[300px]">Procedure Name</TableHead>
-                  <TableHead className="text-right">P25 (Low)</TableHead>
-                  <TableHead className="text-right">P50 (Med)</TableHead>
-                  <TableHead className="text-right">P75 (High)</TableHead>
-                  <TableHead className="text-right">P90</TableHead>
-                  <TableHead className="w-[100px]">Action</TableHead>
+                  <TableHead className="min-w-[350px]">Procedure Name</TableHead>
+                  <TableHead className="text-right min-w-[120px]">P25 (Low)</TableHead>
+                  <TableHead className="text-right min-w-[120px]">P50 (Med)</TableHead>
+                  <TableHead className="text-right min-w-[120px]">P75 (High)</TableHead>
+                  <TableHead className="text-right min-w-[120px]">P90</TableHead>
+                  <TableHead className="w-[100px] text-center">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {selectedComparison?.possibleMatches?.map((match: any, idx: number) => (
                   <TableRow key={match.benchmarkId || idx} className="hover:bg-muted/50">
-                    <TableCell>
+                    <TableCell className="min-w-[350px]">
                       <div className="flex flex-col gap-1">
-                        <span className="font-medium text-sm">{match.procedureName}</span>
+                        <span className="font-medium">{match.procedureName}</span>
                         {match.category && (
                           <Badge variant="outline" className="w-fit text-xs">
                             {match.category}
@@ -505,23 +505,22 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         )}
                       </div>
                     </TableCell>
-                    <TableCell className="text-right font-mono text-sm">
+                    <TableCell className="text-right font-mono">
                       {match.p25 != null ? formatCurrency(match.p25, selectedComparison.lineItem.currency || "USD") : "-"}
                     </TableCell>
-                    <TableCell className="text-right font-mono text-sm">
+                    <TableCell className="text-right font-mono">
                       {match.p50 != null ? formatCurrency(match.p50, selectedComparison.lineItem.currency || "USD") : "-"}
                     </TableCell>
-                    <TableCell className="text-right font-mono text-sm">
+                    <TableCell className="text-right font-mono">
                       {match.p75 != null ? formatCurrency(match.p75, selectedComparison.lineItem.currency || "USD") : "-"}
                     </TableCell>
-                    <TableCell className="text-right font-mono text-sm font-semibold">
+                    <TableCell className="text-right font-mono font-semibold">
                       {match.p90 != null ? formatCurrency(match.p90, selectedComparison.lineItem.currency || "USD") : "-"}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="text-center">
                       <Button
                         size="sm"
                         onClick={() => handleSelectMatch(match)}
-                        className="w-full"
                       >
                         Select
                       </Button>

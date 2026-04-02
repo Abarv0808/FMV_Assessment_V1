@@ -127,6 +127,11 @@ async function POST(request) {
             // Insert procedures with correct column names for benchmark_procedures table
             // The excel-parser returns: code, name, category, p25, p50, p75, p90, p100, sourceRef
             if (country.procedures?.length && fileData?.id) {
+                // Debug: log first 3 raw procedures to see what's being passed
+                console.log("[v0] Sample raw procedures from parser (first 3):");
+                country.procedures.slice(0, 3).forEach((p, i)=>{
+                    console.log(`[v0]   ${i + 1}. name="${p.name}" code="${p.code}" p25=${p.p25} p50=${p.p50} p75=${p.p75} p90=${p.p90}`);
+                });
                 const procedures = country.procedures.map((proc)=>{
                     // Handle both number and string values for percentiles
                     const parseValue = (val)=>{

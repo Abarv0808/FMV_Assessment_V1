@@ -1189,15 +1189,55 @@ function isHeaderRow(row) {
     const secondCell = String(row[1] || "").toLowerCase().trim();
     return firstCell === "code" && (secondCell.includes("procedure") || secondCell.includes("site cost") || secondCell.includes("non procedure"));
 }
-// Check if row is a data row (has a code in first column)
+// Check if row is a data row (has a code in first column AND a proper procedure name)
 function isDataRow(row) {
     const firstCell = String(row[0] || "").trim();
-    // Data rows have a non-empty code that's not a section header
+    const secondCell = String(row[1] || "").trim();
+    // Data rows must have a code in first column
     if (!firstCell || firstCell === "") return false;
-    if (firstCell.toLowerCase().includes("sub total")) return false;
-    if (firstCell.toLowerCase().includes("procedures")) return false;
-    if (firstCell.toLowerCase().includes("site costs")) return false;
-    if (firstCell.toLowerCase().includes("country costs")) return false;
+    // Skip section headers and metadata
+    const firstCellLower = firstCell.toLowerCase();
+    if (firstCellLower.includes("sub total")) return false;
+    if (firstCellLower.includes("procedures")) return false;
+    if (firstCellLower.includes("site costs")) return false;
+    if (firstCellLower.includes("country costs")) return false;
+    if (firstCellLower.includes("country details")) return false;
+    if (firstCellLower.includes("study details")) return false;
+    if (firstCellLower === "code") return false // Skip header row
+    ;
+    // Skip metadata labels in procedure name column
+    const metadataLabels = [
+        "study code:",
+        "short name:",
+        "drug / compound:",
+        "title:",
+        "budget type:",
+        "phase:",
+        "patient type:",
+        "study type:",
+        "study population type:",
+        "icd code",
+        "indications",
+        "screened:",
+        "visits:",
+        "sites:",
+        "overhead:",
+        "lab costs:",
+        "created:",
+        "modified:",
+        "grant negotiator:",
+        "budget column",
+        "sub-studies",
+        "screened per site:",
+        "single patient duration:",
+        "countries:"
+    ];
+    const secondCellLower = secondCell.toLowerCase();
+    if (metadataLabels.some((label)=>secondCellLower.includes(label) || secondCellLower === label.replace(":", ""))) {
+        return false;
+    }
+    // Must have a non-empty procedure name
+    if (!secondCell || secondCell.length < 2) return false;
     return true;
 }
 function parseExcelFile(buffer) {
