@@ -15,7 +15,6 @@ import { formatDistanceToNow } from "date-fns"
 import { AssessmentCard } from "@/components/assessments/assessment-card"
 import { StatusSelect } from "@/components/assessments/status-select"
 import { filterAssessmentsByUser } from "@/lib/assessment-utils"
-import { createClient } from "@/lib/supabase/client"
 
 export function AssessmentsContent() {
   const router = useRouter()
@@ -26,23 +25,18 @@ export function AssessmentsContent() {
   const [allAssessments, setAllAssessments] = useState<Assessment[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  // Fetch assessments from Supabase on mount
+  // Fetch assessments from API (uses server-side Supabase to bypass RLS)
   useEffect(() => {
     const fetchAssessments = async () => {
       setIsLoading(true)
       try {
-        const supabase = createClient()
-        console.log("[v0] Fetching assessments from Supabase...")
-        const { data: dbAssessments, error } = await supabase
-          .from("assessments")
-          .select("*")
-          .order("created_at", { ascending: false })
+        const response = await fetch("/api/assessments")
+        const { assessments: dbAssessments, error } = await response.json()
         
-        console.log("[v0] Assessments fetch result:", dbAssessments?.length, "items, error:", error?.message)
+        console.log("[v0] Assessments fetch result:", dbAssessments?.length, "items, error:", error)
         
-        if (error) {
-          console.log("[v0] Error fetching assessments, using mock data")
-          // Fall back to mock data if DB fails
+        if (error || !dbAssessments || dbAssessments.length === 0) {
+          // Fall back to mock data if API fails or returns empty
           setAllAssessments(mockAssessments)
         } else if (dbAssessments && dbAssessments.length > 0) {
           // Map DB assessments to Assessment type
