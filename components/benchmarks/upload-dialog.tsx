@@ -460,32 +460,38 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
                             </>
                           )}
                         </div>
-                        <div className="flex gap-2">
-                          <Select 
-                            value={fileMeta.indication} 
-                            onValueChange={(val) => updateFileIndication(index, val as Indication)}
-                          >
-                            <SelectTrigger className="h-7 text-xs flex-1">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {INDICATIONS.map(ind => (
-                                <SelectItem key={ind} value={ind} className="text-xs">{ind}</SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <Select 
-                            value={fileMeta.trialPhase} 
-                            onValueChange={(val) => updateFilePhase(index, val as "All Phases" | "Phase 4")}
-                          >
-                            <SelectTrigger className="h-7 text-xs w-[120px]">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="All Phases" className="text-xs">All Phases</SelectItem>
-                              <SelectItem value="Phase 4" className="text-xs">Phase 4</SelectItem>
-                            </SelectContent>
-                          </Select>
+                        <div className="grid grid-cols-2 gap-2 mt-1">
+                          <div>
+                            <Label className="text-xs text-muted-foreground mb-1 block">Indication *</Label>
+                            <Select 
+                              value={fileMeta.indication} 
+                              onValueChange={(val) => updateFileIndication(index, val as Indication)}
+                            >
+                              <SelectTrigger className="h-8 text-xs">
+                                <SelectValue placeholder="Select indication" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {INDICATIONS.map(ind => (
+                                  <SelectItem key={ind} value={ind} className="text-xs">{ind}</SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div>
+                            <Label className="text-xs text-muted-foreground mb-1 block">Trial Phase *</Label>
+                            <Select 
+                              value={fileMeta.trialPhase} 
+                              onValueChange={(val) => updateFilePhase(index, val as "All Phases" | "Phase 4")}
+                            >
+                              <SelectTrigger className="h-8 text-xs">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="All Phases" className="text-xs">All Phases</SelectItem>
+                                <SelectItem value="Phase 4" className="text-xs">Phase 4</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
                         </div>
                       </div>
                     </div>

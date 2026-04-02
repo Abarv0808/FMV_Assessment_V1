@@ -159,7 +159,6 @@
 @layer theme {
   :root, :host {
     --color-red-50: #fef2f2;
-    --color-red-100: #ffe2e2;
     --color-red-200: #ffcaca;
     --color-red-300: #ffa3a3;
     --color-red-400: #ff6568;
@@ -222,7 +221,6 @@
   @supports (color: lab(0% 0 0)) {
     :root, :host {
       --color-red-50: lab(96.5005% 4.18508 1.52328);
-      --color-red-100: lab(92.243% 10.2865 3.83865);
       --color-red-200: lab(86.017% 19.8815 7.75869);
       --color-red-300: lab(76.5514% 36.422 15.5335);
       --color-red-400: lab(63.7053% 60.745 31.3109);
@@ -1102,10 +1100,6 @@
     max-height: var(--radix-select-content-available-height);
   }
 
-  .max-h-48 {
-    max-height: calc(var(--spacing) * 48);
-  }
-
   .max-h-\[80vh\] {
     max-height: 80vh;
   }
@@ -1248,10 +1242,6 @@
 
   .w-\[100px\] {
     width: 100px;
-  }
-
-  .w-\[120px\] {
-    width: 120px;
   }
 
   .w-\[140px\] {
@@ -2270,10 +2260,6 @@
     background-color: var(--color-red-50);
   }
 
-  .bg-red-100 {
-    background-color: var(--color-red-100);
-  }
-
   .bg-red-500\/10 {
     background-color: #fb2c361a;
   }
@@ -2729,10 +2715,6 @@
 
   .text-red-500 {
     color: var(--color-red-500);
-  }
-
-  .text-red-600 {
-    color: var(--color-red-600);
   }
 
   .text-red-700 {
