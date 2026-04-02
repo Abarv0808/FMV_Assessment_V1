@@ -59,3 +59,60 @@
 [00:27:07.106] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [00:27:07.106] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [00:27:07.106] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775099429144} /_vercel/insights/view
+[00:27:08.590] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775099431676} /_vercel/insights/view
+[00:27:36.316] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775099459418} /_vercel/insights/view
+[00:27:39.875] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/96dfdb8f-cbd0-4110-953f-87ba8944fd2a color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-qf71v3pejhfqcoghgd24op.vusercontent.net/assessments/96dfdb8f-cbd0-4110-953f-87ba8944fd2a","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775099462977} /_vercel/insights/view
+[00:27:42.526] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[00:27:43.176] Server  LOG     [v0] Run comparison API called
+[00:27:43.177] Server  LOG     [v0] Assessment ID: "96dfdb8f-cbd0-4110-953f-87ba8944fd2a"
+[00:27:43.184] Server  LOG     [v0] Fetching line items...
+[00:27:43.315] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[00:27:43.316] Server  LOG     [v0] Fetching benchmark procedures...
+[00:27:43.415] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[00:27:43.599] Server  LOG     [v0] Benchmark query result: 500 "raw," 462 "valid names," 0 "with pricing"
+[00:27:43.600] Server  LOG     [v0] === SAMPLE DATA COMPARISON ===
+[00:27:43.600] Server  LOG     [v0] LINE ITEMS FROM ASSESSMENT (first 3):
+[00:27:43.600] Server  LOG     [v0]   1. "The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person"
+[00:27:43.600] Server  LOG     [v0]   2. "250RMB/hour*2 hours*4 visits"
+[00:27:43.601] Server  LOG     [v0]   3. "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field."
+[00:27:43.601] Server  LOG     [v0] BENCHMARK PROCEDURES (first 10):
+[00:27:43.601] Server  LOG     [v0]   1. "ICD Code" | HasPricing: false | P90: null
+[00:27:43.602] Server  LOG     [v0]   2. "286.4 (ICD9)" | HasPricing: false | P90: null
+[00:27:43.602] Server  LOG     [v0]   3. "Sub-Studies (0)" | HasPricing: false | P90: null
+[00:27:43.602] Server  LOG     [v0]   4. "Screened Per Site:" | HasPricing: false | P90: null
+[00:27:43.602] Server  LOG     [v0]   5. "Grant Negotiator:" | HasPricing: false | P90: null
+[00:27:43.603] Server  LOG     [v0]   6. "Budget Column" | HasPricing: false | P90: null
+[00:27:43.603] Server  LOG     [v0]   7. "Code" | HasPricing: false | P90: null
+[00:27:43.603] Server  LOG     [v0]   8. "INCON" | HasPricing: false | P90: null
+[00:27:43.603] Server  LOG     [v0]   9. "T0708" | HasPricing: false | P90: null
+[00:27:43.604] Server  LOG     [v0]   10. "T9209" | HasPricing: false | P90: null
+[00:27:43.604] Server  LOG     [v0] === END SAMPLE DATA ===
+[00:27:43.604] Server  LOG     [v0] Processing line item: "\"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person\""
+[00:27:51.098] Server  LOG     [v0] AI returned 3 "matches for:" "The cost for CMV-specific T cell tests i"
+[00:27:51.099] Server  LOG     [v0]   Match 1: "Budget Column" (70% similar)
+[00:27:51.099] Server  LOG     [v0]   Match 2: "Screened Per Site:" (60% similar)
+[00:27:51.099] Server  LOG     [v0]   Match 3: "T0708" (65% similar)
+[00:27:51.100] Server  LOG     [v0] Processing line item: "\"250RMB/hour*2 hours*4 visits\""
+[00:27:52.186] Server  LOG     [v0] AI returned 0 "matches for:" "250RMB/hour*2 hours*4 visits"
+[00:27:52.186] Server  LOG     [v0] Processing line item: "\"Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field.\""
+[00:27:53.205] Server  LOG     [v0] AI returned 0 "matches for:" "Project supervision and quality control,"
+[00:27:53.206] Server  LOG     [v0] Processing line item: "\"Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field.\""
+[00:27:54.101] Server  LOG     [v0] AI returned 0 "matches for:" "Clinical research coordinator. The HCP i"
+[00:27:54.102] Server  LOG     [v0] Processing line item: "\"Local Ethics Committee fee\""
+[00:27:55.071] Server  LOG     [v0] AI returned 0 "matches for:" "Local Ethics Committee fee"
+[00:27:55.071] Server  LOG     [v0] Processing line item: "\"Hospital management fee: 3%.\""
+[00:27:55.879] Server  LOG     [v0] AI returned 0 "matches for:" "Hospital management fee: 3%."
+[00:27:55.879] Server  LOG     [v0] Processing line item: "\"Tax: 12%\""
+[00:27:56.692] Server  LOG     [v0] AI returned 0 "matches for:" "Tax: 12%"
+[00:27:56.692] Server  LOG     [v0] Updating 7 "comparison records"
+[00:27:57.096] Server  LOG     [v0] Update result for "62dadea3-9c9d-42f6-bc34-41772cb57383" ":" 1 "rows, error:" undefined
+[00:27:57.233] Server  LOG     [v0] Update result for "4e56feb4-18da-4dca-9de8-70da87884f94" ":" 1 "rows, error:" undefined
+[00:27:57.334] Server  LOG     [v0] Update result for "99195343-f4aa-4c21-933d-6637149cc296" ":" 1 "rows, error:" undefined
+[00:27:57.464] Server  LOG     [v0] Update result for "4db9c79a-abe2-4185-aa2d-98cba03f8b43" ":" 1 "rows, error:" undefined
+[00:27:57.558] Server  LOG     [v0] Update result for "a927eda8-78b3-474b-abed-e5b7be64fcd5" ":" 1 "rows, error:" undefined
+[00:27:57.657] Server  LOG     [v0] Update result for "25726375-c1e2-48f5-b33d-1fb177c6f087" ":" 1 "rows, error:" undefined
+[00:27:57.767] Server  LOG     [v0] Update result for "462c3eca-8eb5-4405-a88c-fbcde678cb6e" ":" 1 "rows, error:" undefined
+[00:27:57.918] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 462 benchmarks","results":[{"bestMatch":{"benchmarkId":"eab87177-5ecb-4bbc-bf6f-4d508eff56b5","category":"Procedures","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"Budget Column","reasoning":"This procedure relates to cost management and budgeting for medical tests, aligning with the financial aspect of CMV-specific T cell tests.","similarity":0.7},"flag":"MULTIPLE_MATCHES","lineItemId":"62dadea3-9c9d-42f6-bc34-41772cb57383","matchCount":3,"matches":[{"benchmarkId":"eab87177-5ecb-4bbc-bf6f-4d508eff56b5","category":"Procedures","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"Budget Column","reasoning":"This procedure relates to cost management and budgeting for medical tests, aligning with the financial aspect of CMV-specific T cell tests.","similarity":0.7},{"benchmarkId":"71c2ae82-44af-4b1c-8b6e-ba9ee36fc885","category":"Procedures","procedureName":"Screened Per Site:","reasoning":"This procedure involves site-level screening costs which can parallel the individual costs associated with the tests described.","similarity":0.6},{"benchmarkId":"5788f16e-b0e7-412a-be9f-b3139963d861","category":"Procedures","p100":null,"p25":null,"p50":null,"p75":null,"p90":null,"procedureName":"T0708","reasoning":"Although not directly related, this procedure touches on testing methodologies that may include similar costs or contexts.","similarity":0.65}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"4e56feb4-18da-4dca-9de8-70da87884f94","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"99195343-f4aa-4c21-933d-6637149cc296","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"4db9c79a-abe2-4185-aa2d-98cba03f8b43","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"a927eda8-78b3-474b-abed-e5b7be64fcd5","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"25726375-c1e2-48f5-b33d-1fb177c6f087","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"462c3eca-8eb5-4405-a88c-fbcde678cb6e","matchCount":0,"matches":[]}],"success":true}
+[00:27:57.918] Browser LOG     [v0] Refreshing comparisons data...
+[00:27:58.325] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[00:27:58.325] Browser LOG     [v0] Mapped comparisons: 7 First item matches: 3
