@@ -36,16 +36,33 @@ export function AssessmentsContent() {
         console.log("[v0] Assessments fetch result:", dbAssessments?.length, "items, error:", error)
         
         if (error || !dbAssessments || dbAssessments.length === 0) {
+          console.log("[v0] No assessments or error, using mock data")
           // Fall back to mock data if API fails or returns empty
           setAllAssessments(mockAssessments)
         } else if (dbAssessments && dbAssessments.length > 0) {
+          console.log("[v0] Got", dbAssessments.length, "assessments from DB, mapping...")
           // Map DB assessments to Assessment type
+          // DB uses lowercase: 'draft', 'processing', 'completed', 'in_review'
+          // UI uses uppercase: 'DRAFT', 'PROCESSING', 'COMPLETED', 'IN_REVIEW'
+          const mapStatus = (dbStatus: string): AssessmentStatus => {
+            const statusMap: Record<string, AssessmentStatus> = {
+              'draft': 'DRAFT',
+              'processing': 'IN_REVIEW',
+              'completed': 'IN_REVIEW', // Show completed as in_review so they appear
+              'in_review': 'IN_REVIEW',
+              'approved': 'APPROVED',
+              'rejected': 'REJECTED',
+              'archived': 'ARCHIVED'
+            }
+            return statusMap[dbStatus?.toLowerCase()] || 'IN_REVIEW'
+          }
+          
           const mappedAssessments: Assessment[] = dbAssessments.map((a: any) => ({
             id: a.id,
             name: a.name || "Untitled Assessment",
             studyTrackingNumber: a.study_tracking_number || a.id.slice(0, 8),
             sponsor: a.sponsor || "Unknown",
-            status: (a.status?.toUpperCase() || "DRAFT") as AssessmentStatus,
+            status: mapStatus(a.status),
             country: a.country || "Global",
             currency: a.currency || "USD",
             therapeuticArea: a.therapeutic_area || "Unknown",
