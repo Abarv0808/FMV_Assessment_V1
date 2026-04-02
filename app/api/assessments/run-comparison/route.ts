@@ -58,7 +58,15 @@ export async function POST(request: Request) {
       
       console.log("[v0] Simple benchmark check:", simpleCheck?.length, "procedures, error:", simpleError?.message)
       
+      // First get the count of all procedures
+      const { count: totalCount } = await supabase
+        .from("benchmark_procedures")
+        .select("id", { count: "exact", head: true })
+      
+      console.log("[v0] Total benchmark procedures in database:", totalCount)
+      
       // Fetch benchmark procedures with country from benchmark_files
+      // Use a higher limit to get procedures from all countries
       let benchmarkQuery = supabase
         .from("benchmark_procedures")
         .select(`
@@ -74,7 +82,7 @@ export async function POST(request: Request) {
           benchmark_file_id,
           benchmark_files(country)
         `)
-        .limit(500)
+        .limit(5000)
 
       // Filter by benchmark file IDs if specified
       if (benchmarkFileIds && benchmarkFileIds.length > 0) {
@@ -108,7 +116,7 @@ export async function POST(request: Request) {
       // Log countries found in benchmarks
       const benchmarkCountries = [...new Set(benchmarks.map((b: any) => b.benchmark_files?.country).filter(Boolean))]
       console.log("[v0] Benchmark query result:", rawBenchmarks.length, "raw,", benchmarks.length, "valid names,", withPricing.length, "with pricing")
-      console.log("[v0] Benchmark countries found:", benchmarkCountries.join(", "))
+      console.log("[v0] Benchmark countries found:", benchmarkCountries.length, "countries:", benchmarkCountries.slice(0, 10).join(", "), benchmarkCountries.length > 10 ? "..." : "")
       if (benchmarksError) {
         console.log("[v0] Benchmark query error:", benchmarksError)
       }
