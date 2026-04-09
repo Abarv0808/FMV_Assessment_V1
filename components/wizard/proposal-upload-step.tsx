@@ -120,7 +120,7 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
       groups[file.indication][file.trialPhase].push(file)
     }
     
-    const phaseOrder = ["Phase I", "Phase II", "Phase III", "Phase IV"]
+    const phaseOrder = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IV"]
     return Object.entries(groups)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([indication, phases]) => ({

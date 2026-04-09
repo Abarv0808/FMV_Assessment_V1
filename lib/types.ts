@@ -86,7 +86,7 @@ export interface AssessmentLineItem {
 // Benchmark data source types
 export type BenchmarkSource = "IQVIA_GRANTPLAN" | "IQVIA_GPI_GRANTSMANAGER"
 
-export type TrialPhase = "Phase I" | "Phase II" | "Phase III" | "Phase IV"
+export type TrialPhase = "All Phases" | "Phase I" | "Phase II" | "Phase III" | "Phase IV"
 
 export interface BenchmarkFile {
   id: string

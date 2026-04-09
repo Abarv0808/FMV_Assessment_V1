@@ -186,7 +186,7 @@ export function BenchmarksContent() {
   const filterOptions = useMemo(() => {
     const countries = [...new Set(benchmarkFiles.map((r) => r.country))].sort()
     const indications = [...new Set(benchmarkFiles.map((r) => r.indication))].sort()
-    const phases: TrialPhase[] = ["Phase I", "Phase II", "Phase III", "Phase IV"]
+    const phases: TrialPhase[] = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IV"]
     return { countries, indications, phases }
   }, [benchmarkFiles])
 
@@ -221,7 +221,7 @@ export function BenchmarksContent() {
     }
     
     // Sort indications alphabetically, then phases
-    const phaseOrder = ["Phase I", "Phase II", "Phase III", "Phase IV"]
+    const phaseOrder = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IV"]
     return Object.entries(groups)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([indication, phases]) => ({

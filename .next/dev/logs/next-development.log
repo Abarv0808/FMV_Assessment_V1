@@ -10,3 +10,6 @@
 [00:03:07.614] Server  LOG      ✓ Compiled in 68ms
 [00:03:18.868] Server  LOG        Reload env: .env.development.local
 [00:04:03.235] Server  LOG      ✓ Compiled in 50ms
+[00:04:16.501] Server  LOG        Reload env: .env.development.local
+[00:06:37.955] Server  LOG      ✓ Compiled in 55ms
+[00:06:38.269] Server  LOG      ✓ Compiled in 36ms

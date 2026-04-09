@@ -22,15 +22,15 @@ export async function POST(request: NextRequest) {
     
     // Map trial phase to valid enum
     const phaseMap: Record<string, string> = {
-      "All Phases": "Phase I",
-      "Phase 1": "Phase I",
+      "All Phases": "All Phases",
+      "Phase 1": "All Phases",
       "Phase 4": "Phase IV",
-      "Phase I": "Phase I",
+      "Phase I": "All Phases",
       "Phase II": "Phase II",
       "Phase III": "Phase III",
       "Phase IV": "Phase IV",
     }
-    const phase = phaseMap[trialPhase] || "Phase I"
+    const phase = phaseMap[trialPhase] || "All Phases"
 
     // Get currency mapping from database
     const { data: currencyData } = await db.from("country_currencies").select("country, currency_code")
