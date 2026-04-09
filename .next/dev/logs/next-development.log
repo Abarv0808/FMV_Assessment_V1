@@ -670,3 +670,177 @@
 [00:45:09.503] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
 [00:45:09.503] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches
 [00:56:36.468] Server  LOG        Reload env: .env.development.local
+[00:58:24.083] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[00:58:24.970] Server  LOG     [v0] Run comparison API called
+[00:58:24.971] Server  LOG     [v0] Assessment ID: "c17088c2-d151-45af-a6e9-dc44d254f78d"
+[00:58:24.977] Server  LOG     [v0] Fetching line items...
+[00:58:24.982] Browser LOG     [v0] Linked benchmark files for comparison: 1
+[00:58:25.380] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[00:58:25.381] Server  LOG     [v0] Fetching benchmark procedures...
+[00:58:25.739] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[00:58:26.249] Server  LOG     [v0] Total benchmark procedures in database: 255722
+[00:58:26.250] Server  LOG     [v0] Selected benchmark file IDs: 1 "files"
+[00:58:26.250] Server  LOG     [v0] Filtering to selected benchmark files only
+[00:58:26.540] Server  LOG     [v0] Benchmark query result: 206 "raw," 206 "valid names," 203 "with pricing"
+[00:58:26.541] Server  LOG     [v0] Benchmark countries found: 1 "countries:" "United States" ""
+[00:58:26.541] Server  LOG     [v0] === SAMPLE DATA COMPARISON ===
+[00:58:26.541] Server  LOG     [v0] LINE ITEMS FROM ASSESSMENT (first 3):
+[00:58:26.541] Server  LOG     [v0]   1. "250RMB/hour*2 hours*4 visits"
+[00:58:26.541] Server  LOG     [v0]   2. "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field."
+[00:58:26.542] Server  LOG     [v0]   3. "Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field."
+[00:58:26.542] Server  LOG     [v0] BENCHMARK PROCEDURES (first 10):
+[00:58:26.542] Server  LOG     [v0]   1. "Insertion of implantable intra-arterial infusion pump (eg, for chemotherapy of liver)" | HasPricing: true | P90: 6556
+[00:58:26.542] Server  LOG     [v0]   2. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional, not to be used for routine venipuncture, femoral or jugular vein" | HasPricing: true | P90: 175
+[00:58:26.542] Server  LOG     [v0]   3. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional,  (separate procedure), for diagnostic or therapeutic purposes. (Not to be used for routine venipuncture)" | HasPricing: true | P90: 143
+[00:58:26.542] Server  LOG     [v0]   4. "Collection of capillary blood specimen (eg, finger, heel, ear stick)" | HasPricing: true | P90: 147
+[00:58:26.542] Server  LOG     [v0]   5. "Transfusion; blood, serum or components" | HasPricing: true | P90: 859
+[00:58:26.543] Server  LOG     [v0]   6. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); diagnostic; with or without collection of specimen by brushing or washing; moderate sedation" | HasPricing: true | P90: 2481
+[00:58:26.543] Server  LOG     [v0]   7. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); with biopsy; single or multiple; moderate sedation" | HasPricing: true | P90: 7792
+[00:58:26.543] Server  LOG     [v0]   8. "Colonoscopy, flexible, proximal to splenic flexure; diagnostic, with or without collection of specimen(s) by brushing or washing, with or without colondecompression (separate procedure); moderate sedation" | HasPricing: true | P90: 4303
+[00:58:26.543] Server  LOG     [v0]   9. "Colonoscopy, flexible; with biopsy, single or multiple" | HasPricing: true | P90: 7100
+[00:58:26.543] Server  LOG     [v0]   10. "Colonoscopy, flexible; with directed submucosal injection(s), any substance" | HasPricing: true | P90: 2709
+[00:58:26.543] Server  LOG     [v0] === END SAMPLE DATA ===
+[00:58:26.543] Server  LOG     [v0] Processing line item: "\"250RMB/hour*2 hours*4 visits\"" "| Category:" "Patient/subjects compensation (e.g. for time to participate in the study)​"
+[00:58:26.548] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "250RMB/hour*2 hours*4 visits"
+[00:58:26.548] Server  LOG     [v0] Processing line item: "\"Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field.\"" "| Category:" "Personnel"
+[00:58:26.553] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Project supervision and quality control,"
+[00:58:26.554] Server  LOG     [v0] Processing line item: "\"Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field.\"" "| Category:" "Personnel"
+[00:58:26.566] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Clinical research coordinator. The HCP i"
+[00:58:26.566] Server  LOG     [v0] Processing line item: "\"Local Ethics Committee fee\"" "| Category:" "IRB/EC submission fee"
+[00:58:26.569] Server  LOG     [v0] Found 1 "FALLBACK matches for:" "Local Ethics Committee fee"
+[00:58:26.569] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | TextSim: 91.9% | CatSim: 0 | Confidence: MEDIUM | FALLBACK
+[00:58:26.570] Server  LOG     [v0] Processing line item: "\"Hospital management fee: 3%.\"" "| Category:" "Other (costs that do not fit in any other category)"
+[00:58:26.573] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Hospital management fee: 3%."
+[00:58:26.573] Server  LOG     [v0] Processing line item: "\"Tax: 12%\"" "| Category:" "Other (costs that do not fit in any other category)"
+[00:58:26.576] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Tax: 12%"
+[00:58:26.576] Server  LOG     [v0] Processing line item: "\"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person\"" "| Category:" "Other (costs that do not fit in any other category)"
+[00:58:26.581] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "The cost for CMV-specific T cell tests i"
+[00:58:26.581] Server  LOG     [v0] Updating 7 "comparison records"
+[00:58:26.979] Server  LOG     [v0] Update result for "c060a7f2-4807-4e85-a4df-c705a50f57cb" ":" 1 "rows, error:" undefined
+[00:58:27.318] Server  LOG     [v0] Update result for "e2ebf7a7-4218-4803-90da-a21a717d5920" ":" 1 "rows, error:" undefined
+[00:58:27.482] Server  LOG     [v0] Update result for "f6fe0510-c3c6-464c-9f63-751a44ad6e50" ":" 1 "rows, error:" undefined
+[00:58:27.838] Server  LOG     [v0] Update result for "a31621c4-26e2-4e59-b98e-4b60ac5f827e" ":" 1 "rows, error:" undefined
+[00:58:28.139] Server  LOG     [v0] Update result for "b93af524-e044-400b-aad0-804a3cfda9b7" ":" 1 "rows, error:" undefined
+[00:58:28.284] Server  LOG     [v0] Update result for "1fb1575f-f441-47a5-9506-966d4b2ac6d1" ":" 1 "rows, error:" undefined
+[00:58:28.593] Server  LOG     [v0] Update result for "afe92e2c-58e1-4d82-9093-ef783360f491" ":" 1 "rows, error:" undefined
+[00:58:28.743] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 206 benchmarks","results":[{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"c060a7f2-4807-4e85-a4df-c705a50f57cb","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"e2ebf7a7-4218-4803-90da-a21a717d5920","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"f6fe0510-c3c6-464c-9f63-751a44ad6e50","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"92ce7bae-4ede-4f6e-9bfa-83534c64ea4f","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"United States","isStrict":false,"p100":37725,"p25":2455,"p50":2946,"p75":3928,"p90":7039,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916},"flag":"GREEN","lineItemId":"a31621c4-26e2-4e59-b98e-4b60ac5f827e","matchCount":1,"matches":[{"benchmarkId":"92ce7bae-4ede-4f6e-9bfa-83534c64ea4f","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"United States","isStrict":false,"p100":37725,"p25":2455,"p50":2946,"p75":3928,"p90":7039,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"b93af524-e044-400b-aad0-804a3cfda9b7","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"1fb1575f-f441-47a5-9506-966d4b2ac6d1","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"afe92e2c-58e1-4d82-9093-ef783360f491","matchCount":0,"matches":[]}],"success":true}
+[00:58:28.743] Browser LOG     [v0] Refreshing comparisons data...
+[00:58:29.008] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[00:58:29.008] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[00:58:38.962] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[00:58:39.186] Server  LOG     [v0] Run comparison API called
+[00:58:39.187] Server  LOG     [v0] Assessment ID: "c17088c2-d151-45af-a6e9-dc44d254f78d"
+[00:58:39.189] Server  LOG     [v0] Fetching line items...
+[00:58:39.240] Browser LOG     [v0] Linked benchmark files for comparison: 1
+[00:58:39.587] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[00:58:39.588] Server  LOG     [v0] Fetching benchmark procedures...
+[00:58:39.769] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[00:58:39.945] Server  LOG     [v0] Total benchmark procedures in database: 255722
+[00:58:39.945] Server  LOG     [v0] Selected benchmark file IDs: 1 "files"
+[00:58:39.946] Server  LOG     [v0] Filtering to selected benchmark files only
+[00:58:40.334] Server  LOG     [v0] Benchmark query result: 206 "raw," 206 "valid names," 203 "with pricing"
+[00:58:40.334] Server  LOG     [v0] Benchmark countries found: 1 "countries:" "United States" ""
+[00:58:40.335] Server  LOG     [v0] === SAMPLE DATA COMPARISON ===
+[00:58:40.335] Server  LOG     [v0] LINE ITEMS FROM ASSESSMENT (first 3):
+[00:58:40.335] Server  LOG     [v0]   1. "250RMB/hour*2 hours*4 visits"
+[00:58:40.335] Server  LOG     [v0]   2. "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field."
+[00:58:40.336] Server  LOG     [v0]   3. "Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field."
+[00:58:40.336] Server  LOG     [v0] BENCHMARK PROCEDURES (first 10):
+[00:58:40.336] Server  LOG     [v0]   1. "Insertion of implantable intra-arterial infusion pump (eg, for chemotherapy of liver)" | HasPricing: true | P90: 6556
+[00:58:40.336] Server  LOG     [v0]   2. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional, not to be used for routine venipuncture, femoral or jugular vein" | HasPricing: true | P90: 175
+[00:58:40.337] Server  LOG     [v0]   3. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional,  (separate procedure), for diagnostic or therapeutic purposes. (Not to be used for routine venipuncture)" | HasPricing: true | P90: 143
+[00:58:40.337] Server  LOG     [v0]   4. "Collection of capillary blood specimen (eg, finger, heel, ear stick)" | HasPricing: true | P90: 147
+[00:58:40.337] Server  LOG     [v0]   5. "Transfusion; blood, serum or components" | HasPricing: true | P90: 859
+[00:58:40.338] Server  LOG     [v0]   6. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); diagnostic; with or without collection of specimen by brushing or washing; moderate sedation" | HasPricing: true | P90: 2481
+[00:58:40.338] Server  LOG     [v0]   7. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); with biopsy; single or multiple; moderate sedation" | HasPricing: true | P90: 7792
+[00:58:40.338] Server  LOG     [v0]   8. "Colonoscopy, flexible, proximal to splenic flexure; diagnostic, with or without collection of specimen(s) by brushing or washing, with or without colondecompression (separate procedure); moderate sedation" | HasPricing: true | P90: 4303
+[00:58:40.338] Server  LOG     [v0]   9. "Colonoscopy, flexible; with biopsy, single or multiple" | HasPricing: true | P90: 7100
+[00:58:40.339] Server  LOG     [v0]   10. "Colonoscopy, flexible; with directed submucosal injection(s), any substance" | HasPricing: true | P90: 2709
+[00:58:40.339] Server  LOG     [v0] === END SAMPLE DATA ===
+[00:58:40.339] Server  LOG     [v0] Processing line item: "\"250RMB/hour*2 hours*4 visits\"" "| Category:" "Patient/subjects compensation (e.g. for time to participate in the study)​"
+[00:58:40.342] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "250RMB/hour*2 hours*4 visits"
+[00:58:40.342] Server  LOG     [v0] Processing line item: "\"Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field.\"" "| Category:" "Personnel"
+[00:58:40.346] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Project supervision and quality control,"
+[00:58:40.346] Server  LOG     [v0] Processing line item: "\"Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field.\"" "| Category:" "Personnel"
+[00:58:40.351] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Clinical research coordinator. The HCP i"
+[00:58:40.352] Server  LOG     [v0] Processing line item: "\"Local Ethics Committee fee\"" "| Category:" "IRB/EC submission fee"
+[00:58:40.355] Server  LOG     [v0] Found 1 "FALLBACK matches for:" "Local Ethics Committee fee"
+[00:58:40.356] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | TextSim: 91.9% | CatSim: 0 | Confidence: MEDIUM | FALLBACK
+[00:58:40.356] Server  LOG     [v0] Processing line item: "\"Hospital management fee: 3%.\"" "| Category:" "Other (costs that do not fit in any other category)"
+[00:58:40.359] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Hospital management fee: 3%."
+[00:58:40.359] Server  LOG     [v0] Processing line item: "\"Tax: 12%\"" "| Category:" "Other (costs that do not fit in any other category)"
+[00:58:40.361] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Tax: 12%"
+[00:58:40.361] Server  LOG     [v0] Processing line item: "\"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person\"" "| Category:" "Other (costs that do not fit in any other category)"
+[00:58:40.365] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "The cost for CMV-specific T cell tests i"
+[00:58:40.366] Server  LOG     [v0] Updating 7 "comparison records"
+[00:58:40.720] Server  LOG     [v0] Update result for "c060a7f2-4807-4e85-a4df-c705a50f57cb" ":" 1 "rows, error:" undefined
+[00:58:41.063] Server  LOG     [v0] Update result for "e2ebf7a7-4218-4803-90da-a21a717d5920" ":" 1 "rows, error:" undefined
+[00:58:41.358] Server  LOG     [v0] Update result for "f6fe0510-c3c6-464c-9f63-751a44ad6e50" ":" 1 "rows, error:" undefined
+[00:58:41.703] Server  LOG     [v0] Update result for "a31621c4-26e2-4e59-b98e-4b60ac5f827e" ":" 1 "rows, error:" undefined
+[00:58:41.844] Server  LOG     [v0] Update result for "b93af524-e044-400b-aad0-804a3cfda9b7" ":" 1 "rows, error:" undefined
+[00:58:41.992] Server  LOG     [v0] Update result for "1fb1575f-f441-47a5-9506-966d4b2ac6d1" ":" 1 "rows, error:" undefined
+[00:58:42.143] Server  LOG     [v0] Update result for "afe92e2c-58e1-4d82-9093-ef783360f491" ":" 1 "rows, error:" undefined
+[00:58:42.282] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 206 benchmarks","results":[{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"c060a7f2-4807-4e85-a4df-c705a50f57cb","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"e2ebf7a7-4218-4803-90da-a21a717d5920","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"f6fe0510-c3c6-464c-9f63-751a44ad6e50","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"92ce7bae-4ede-4f6e-9bfa-83534c64ea4f","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"United States","isStrict":false,"p100":37725,"p25":2455,"p50":2946,"p75":3928,"p90":7039,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916},"flag":"GREEN","lineItemId":"a31621c4-26e2-4e59-b98e-4b60ac5f827e","matchCount":1,"matches":[{"benchmarkId":"92ce7bae-4ede-4f6e-9bfa-83534c64ea4f","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"United States","isStrict":false,"p100":37725,"p25":2455,"p50":2946,"p75":3928,"p90":7039,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"b93af524-e044-400b-aad0-804a3cfda9b7","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"1fb1575f-f441-47a5-9506-966d4b2ac6d1","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"afe92e2c-58e1-4d82-9093-ef783360f491","matchCount":0,"matches":[]}],"success":true}
+[00:58:42.282] Browser LOG     [v0] Refreshing comparisons data...
+[00:58:42.568] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[00:58:42.568] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[01:00:34.252] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[01:00:35.071] Browser LOG     [v0] Linked benchmark files for comparison: 1
+[01:00:36.111] Server  LOG     [v0] Run comparison API called
+[01:00:36.112] Server  LOG     [v0] Assessment ID: "c17088c2-d151-45af-a6e9-dc44d254f78d"
+[01:00:36.117] Server  LOG     [v0] Fetching line items...
+[01:00:36.507] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[01:00:36.507] Server  LOG     [v0] Fetching benchmark procedures...
+[01:00:36.852] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[01:00:37.066] Server  LOG     [v0] Total benchmark procedures in database: 255722
+[01:00:37.067] Server  LOG     [v0] Selected benchmark file IDs: 1 "files"
+[01:00:37.067] Server  LOG     [v0] Filtering to selected benchmark files only
+[01:00:37.555] Server  LOG     [v0] Benchmark query result: 206 "raw," 206 "valid names," 203 "with pricing"
+[01:00:37.556] Server  LOG     [v0] Benchmark countries found: 1 "countries:" "United States" ""
+[01:00:37.556] Server  LOG     [v0] === SAMPLE DATA COMPARISON ===
+[01:00:37.556] Server  LOG     [v0] LINE ITEMS FROM ASSESSMENT (first 3):
+[01:00:37.556] Server  LOG     [v0]   1. "250RMB/hour*2 hours*4 visits"
+[01:00:37.557] Server  LOG     [v0]   2. "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field."
+[01:00:37.557] Server  LOG     [v0]   3. "Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field."
+[01:00:37.557] Server  LOG     [v0] BENCHMARK PROCEDURES (first 10):
+[01:00:37.557] Server  LOG     [v0]   1. "Insertion of implantable intra-arterial infusion pump (eg, for chemotherapy of liver)" | HasPricing: true | P90: 6556
+[01:00:37.557] Server  LOG     [v0]   2. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional, not to be used for routine venipuncture, femoral or jugular vein" | HasPricing: true | P90: 175
+[01:00:37.557] Server  LOG     [v0]   3. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional,  (separate procedure), for diagnostic or therapeutic purposes. (Not to be used for routine venipuncture)" | HasPricing: true | P90: 143
+[01:00:37.557] Server  LOG     [v0]   4. "Collection of capillary blood specimen (eg, finger, heel, ear stick)" | HasPricing: true | P90: 147
+[01:00:37.557] Server  LOG     [v0]   5. "Transfusion; blood, serum or components" | HasPricing: true | P90: 859
+[01:00:37.558] Server  LOG     [v0]   6. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); diagnostic; with or without collection of specimen by brushing or washing; moderate sedation" | HasPricing: true | P90: 2481
+[01:00:37.558] Server  LOG     [v0]   7. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); with biopsy; single or multiple; moderate sedation" | HasPricing: true | P90: 7792
+[01:00:37.558] Server  LOG     [v0]   8. "Colonoscopy, flexible, proximal to splenic flexure; diagnostic, with or without collection of specimen(s) by brushing or washing, with or without colondecompression (separate procedure); moderate sedation" | HasPricing: true | P90: 4303
+[01:00:37.559] Server  LOG     [v0]   9. "Colonoscopy, flexible; with biopsy, single or multiple" | HasPricing: true | P90: 7100
+[01:00:37.559] Server  LOG     [v0]   10. "Colonoscopy, flexible; with directed submucosal injection(s), any substance" | HasPricing: true | P90: 2709
+[01:00:37.559] Server  LOG     [v0] === END SAMPLE DATA ===
+[01:00:37.559] Server  LOG     [v0] Processing line item: "\"250RMB/hour*2 hours*4 visits\"" "| Category:" "Patient/subjects compensation (e.g. for time to participate in the study)​"
+[01:00:37.564] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "250RMB/hour*2 hours*4 visits"
+[01:00:37.564] Server  LOG     [v0] Processing line item: "\"Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field.\"" "| Category:" "Personnel"
+[01:00:37.570] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Project supervision and quality control,"
+[01:00:37.571] Server  LOG     [v0] Processing line item: "\"Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field.\"" "| Category:" "Personnel"
+[01:00:37.574] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Clinical research coordinator. The HCP i"
+[01:00:37.575] Server  LOG     [v0] Processing line item: "\"Local Ethics Committee fee\"" "| Category:" "IRB/EC submission fee"
+[01:00:37.577] Server  LOG     [v0] Found 1 "FALLBACK matches for:" "Local Ethics Committee fee"
+[01:00:37.577] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | TextSim: 91.9% | CatSim: 0 | Confidence: HIGH | FALLBACK
+[01:00:37.578] Server  LOG     [v0] Processing line item: "\"Hospital management fee: 3%.\"" "| Category:" "Other (costs that do not fit in any other category)"
+[01:00:37.584] Server  LOG     [v0] Found 3 "FALLBACK matches for:" "Hospital management fee: 3%."
+[01:00:37.584] Server  LOG     [v0]   Match 1: "Site Management fee, per site, per month" | TextSim: 53.9% | CatSim: 0 | Confidence: MEDIUM | FALLBACK
+[01:00:37.584] Server  LOG     [v0]   Match 2: "IRB Amendment Fee" | TextSim: 37.7% | CatSim: 0 | Confidence: LOW | FALLBACK
+[01:00:37.584] Server  LOG     [v0]   Match 3: "Medical Monitoring by Physician; Medical Management" | TextSim: 37.5% | CatSim: 0 | Confidence: LOW | FALLBACK
+[01:00:37.585] Server  LOG     [v0] Processing line item: "\"Tax: 12%\"" "| Category:" "Other (costs that do not fit in any other category)"
+[01:00:37.587] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Tax: 12%"
+[01:00:37.587] Server  LOG     [v0] Processing line item: "\"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person\"" "| Category:" "Other (costs that do not fit in any other category)"
+[01:00:37.591] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "The cost for CMV-specific T cell tests i"
+[01:00:37.591] Server  LOG     [v0] Updating 7 "comparison records"
+[01:00:37.902] Server  LOG     [v0] Update result for "c060a7f2-4807-4e85-a4df-c705a50f57cb" ":" 1 "rows, error:" undefined
+[01:00:38.554] Server  LOG     [v0] Update result for "e2ebf7a7-4218-4803-90da-a21a717d5920" ":" 1 "rows, error:" undefined
+[01:00:38.695] Server  LOG     [v0] Update result for "f6fe0510-c3c6-464c-9f63-751a44ad6e50" ":" 1 "rows, error:" undefined
+[01:00:39.016] Server  LOG     [v0] Update result for "a31621c4-26e2-4e59-b98e-4b60ac5f827e" ":" 1 "rows, error:" undefined
+[01:00:39.340] Server  LOG     [v0] Update result for "b93af524-e044-400b-aad0-804a3cfda9b7" ":" 1 "rows, error:" undefined
+[01:00:39.498] Server  LOG     [v0] Update result for "1fb1575f-f441-47a5-9506-966d4b2ac6d1" ":" 1 "rows, error:" undefined
+[01:00:39.636] Server  LOG     [v0] Update result for "afe92e2c-58e1-4d82-9093-ef783360f491" ":" 1 "rows, error:" undefined
+[01:00:39.781] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 206 benchmarks","results":[{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"c060a7f2-4807-4e85-a4df-c705a50f57cb","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"e2ebf7a7-4218-4803-90da-a21a717d5920","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"f6fe0510-c3c6-464c-9f63-751a44ad6e50","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"92ce7bae-4ede-4f6e-9bfa-83534c64ea4f","category":"Site Costs","categorySimilarity":0,"confidence":"HIGH","country":"United States","isStrict":false,"p100":37725,"p25":2455,"p50":2946,"p75":3928,"p90":7039,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916},"flag":"GREEN","lineItemId":"a31621c4-26e2-4e59-b98e-4b60ac5f827e","matchCount":1,"matches":[{"benchmarkId":"92ce7bae-4ede-4f6e-9bfa-83534c64ea4f","category":"Site Costs","categorySimilarity":0,"confidence":"HIGH","country":"United States","isStrict":false,"p100":37725,"p25":2455,"p50":2946,"p75":3928,"p90":7039,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916}]},{"bestMatch":{"benchmarkId":"1c643d31-86b7-45ed-9df0-c6556824ff36","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"United States","isStrict":false,"p100":1032,"p25":426,"p50":568,"p75":718,"p90":1000,"procedureName":"Site Management fee, per site, per month","similarity":0.5388602512436507,"textSimilarity":0.5388602512436507},"flag":"YELLOW","lineItemId":"b93af524-e044-400b-aad0-804a3cfda9b7","matchCount":3,"matches":[{"benchmarkId":"1c643d31-86b7-45ed-9df0-c6556824ff36","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"United States","isStrict":false,"p100":1032,"p25":426,"p50":568,"p75":718,"p90":1000,"procedureName":"Site Management fee, per site, per month","similarity":0.5388602512436507,"textSimilarity":0.5388602512436507},{"benchmarkId":"6d2b3b0e-a22e-4bad-a0f6-1b2ab8c1a272","category":"Site Costs","categorySimilarity":0,"confidence":"LOW","country":"United States","isStrict":false,"p100":7546,"p25":505,"p50":735,"p75":982,"p90":1430,"procedureName":"IRB Amendment Fee","similarity":0.3771236166328254,"textSimilarity":0.3771236166328254},{"benchmarkId":"84cddea2-2583-4f7e-ab8d-5e4d1c67ede2","category":"Site Costs","categorySimilarity":0,"confidence":"LOW","country":"United States","isStrict":false,"p100":0,"p25":328,"p50":372,"p75":444,"p90":621,"procedureName":"Medical Monitoring by Physician; Medical Management","similarity":0.3748170285326546,"textSimilarity":0.3748170285326546}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"1fb1575f-f441-47a5-9506-966d4b2ac6d1","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"afe92e2c-58e1-4d82-9093-ef783360f491","matchCount":0,"matches":[]}],"success":true}
+[01:00:39.782] Browser LOG     [v0] Refreshing comparisons data...
+[01:00:40.058] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[01:00:40.058] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined

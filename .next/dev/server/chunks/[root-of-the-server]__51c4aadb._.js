@@ -94,23 +94,175 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/next@16.0.10_@opentelemetry+api@1.9.0_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2f$server$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/supabase/server.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$ai$40$6$2e$0$2e$138_zod$40$3$2e$25$2e$76$2f$node_modules$2f$ai$2f$dist$2f$index$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/ai@6.0.138_zod@3.25.76/node_modules/ai/dist/index.mjs [app-route] (ecmascript) <locals>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/zod@3.25.76/node_modules/zod/v3/external.js [app-route] (ecmascript) <export * as z>");
 ;
 ;
-;
-;
-// Schema for AI matching results
-const matchResultSchema = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
-    matches: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].array(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
-        benchmarkId: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string(),
-        procedureName: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string(),
-        category: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string(),
-        similarity: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].number(),
-        reasoning: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string()
-    })),
-    bestMatchId: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$zod$40$3$2e$25$2e$76$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().nullable()
-});
+// =====================================================
+// MATCHING UTILITY FUNCTIONS
+// =====================================================
+// Stopwords for text normalization
+const STOPWORDS = new Set([
+    "a",
+    "an",
+    "the",
+    "and",
+    "or",
+    "but",
+    "in",
+    "on",
+    "at",
+    "to",
+    "for",
+    "of",
+    "with",
+    "by",
+    "from",
+    "as",
+    "is",
+    "was",
+    "are",
+    "were",
+    "been",
+    "be",
+    "have",
+    "has",
+    "had",
+    "do",
+    "does",
+    "did",
+    "will",
+    "would",
+    "could",
+    "should",
+    "may",
+    "might",
+    "must",
+    "shall",
+    "can",
+    "need",
+    "per",
+    "each",
+    "all",
+    "any",
+    "both",
+    "more",
+    "most",
+    "other",
+    "some",
+    "such",
+    "no",
+    "nor",
+    "not",
+    "only",
+    "own",
+    "same",
+    "so",
+    "than",
+    "too",
+    "very",
+    "just",
+    "also",
+    "now",
+    "etc"
+]);
+// Category alias mapping for normalization
+const CATEGORY_ALIASES = {
+    // Procedures
+    "procedures": "procedures",
+    "procedure": "procedures",
+    "proc": "procedures",
+    "medical procedures": "procedures",
+    "clinical procedures": "procedures",
+    // Non-Procedures
+    "non procedures": "non_procedures",
+    "non-procedures": "non_procedures",
+    "nonprocedures": "non_procedures",
+    "non procedure": "non_procedures",
+    "non-procedure": "non_procedures",
+    "other costs": "non_procedures",
+    "other": "non_procedures",
+    // Site Costs
+    "site costs": "site_costs",
+    "site cost": "site_costs",
+    "sitecosts": "site_costs",
+    "site": "site_costs",
+    "site fees": "site_costs",
+    "site expenses": "site_costs",
+    // Country Costs
+    "country costs": "country_costs",
+    "country cost": "country_costs",
+    "countrycosts": "country_costs",
+    "country": "country_costs",
+    "regional costs": "country_costs",
+    // Conditional Procedures
+    "conditional procedures": "conditional_procedures",
+    "conditional procedure": "conditional_procedures",
+    "conditional": "conditional_procedures",
+    // Personnel/Staff
+    "personnel": "personnel",
+    "staff": "personnel",
+    "staffing": "personnel",
+    "labor": "personnel",
+    "labour": "personnel",
+    // Lab/Tests
+    "laboratory": "laboratory",
+    "lab": "laboratory",
+    "labs": "laboratory",
+    "tests": "laboratory",
+    "testing": "laboratory",
+    "diagnostics": "laboratory"
+};
+// Normalize text: lowercase, trim, replace punctuation, remove stopwords
+function normText(s) {
+    if (!s) return "";
+    let normalized = s.toLowerCase().trim();
+    // Replace punctuation with spaces
+    normalized = normalized.replace(/[^\w\s]/g, " ");
+    // Collapse multiple spaces
+    normalized = normalized.replace(/\s+/g, " ").trim();
+    // Remove stopwords
+    const words = normalized.split(" ").filter((w)=>!STOPWORDS.has(w) && w.length > 1);
+    return words.join(" ");
+}
+// Normalize category using alias map
+function normCat(s) {
+    if (!s) return "";
+    const lower = s.toLowerCase().trim();
+    return CATEGORY_ALIASES[lower] || lower.replace(/[^\w]/g, "_");
+}
+// Generate trigrams from text
+function getTrigrams(text) {
+    const trigrams = new Set();
+    const padded = `  ${text}  `;
+    for(let i = 0; i < padded.length - 2; i++){
+        trigrams.add(padded.substring(i, i + 3));
+    }
+    return trigrams;
+}
+// Calculate trigram cosine similarity
+function trigramSimilarity(a, b) {
+    if (!a || !b) return 0;
+    const trigramsA = getTrigrams(a);
+    const trigramsB = getTrigrams(b);
+    let intersection = 0;
+    for (const t of trigramsA){
+        if (trigramsB.has(t)) intersection++;
+    }
+    const denominator = Math.sqrt(trigramsA.size) * Math.sqrt(trigramsB.size);
+    if (denominator === 0) return 0;
+    return intersection / denominator;
+}
+// Calculate category similarity (1 if match, 0 if not)
+function categorySimilarity(vendorCat, benchmarkCat) {
+    const normVendor = normCat(vendorCat);
+    const normBenchmark = normCat(benchmarkCat);
+    return normVendor === normBenchmark ? 1 : 0;
+}
+// Determine confidence level
+function getConfidence(isStrict, textSim) {
+    if (isStrict && textSim >= 0.70) return "HIGH";
+    if (isStrict || textSim >= 0.88) return "MEDIUM";
+    return "LOW";
+}
 async function POST(request) {
     console.log("[v0] Run comparison API called");
     try {
@@ -278,21 +430,24 @@ async function POST(request) {
             console.log(`[v0]   ${idx + 1}. "${bm.procedure_name}" | HasPricing: ${hasPricing} | P90: ${bm.p90}`);
         });
         console.log("[v0] === END SAMPLE DATA ===");
-        // Group benchmarks by category for context
-        const benchmarksByCategory = {};
-        for (const bm of benchmarks){
-            const cat = bm.category || "Other";
-            if (!benchmarksByCategory[cat]) benchmarksByCategory[cat] = [];
-            benchmarksByCategory[cat].push(bm);
-        }
         const results = [];
-        // 3. For each line item, use AI to find matching benchmarks
+        // 3. For each line item, use trigram + category matching algorithm
         for (const lineItem of lineItems){
-            // Parse description from procedure_name (format: "description|||{json}")
+            // Parse description and extra data from procedure_name (format: "description|||{json}")
             const procedureName = lineItem.procedure_name || "";
-            const [description] = procedureName.split("|||");
+            const [description, extraDataStr] = procedureName.split("|||");
             const cleanDescription = description.trim();
-            console.log("[v0] Processing line item:", `"${cleanDescription}"`);
+            // Parse extra data to get costCategory
+            let vendorCostCategory = "";
+            try {
+                if (extraDataStr) {
+                    const extraData = JSON.parse(extraDataStr);
+                    vendorCostCategory = extraData.costCategory || "";
+                }
+            } catch (e) {
+            // Ignore JSON parse errors
+            }
+            console.log("[v0] Processing line item:", `"${cleanDescription}"`, "| Category:", vendorCostCategory || "N/A");
             if (!cleanDescription || cleanDescription === "Unknown") {
                 // No description - mark as no match
                 results.push({
@@ -303,120 +458,100 @@ async function POST(request) {
                 });
                 continue;
             }
-            // Build benchmark context for AI
-            const benchmarkContext = Object.entries(benchmarksByCategory).map(([category, items])=>{
-                const itemList = items.slice(0, 30).map((b)=>`- ID: ${b.id} | Name: ${b.procedure_name} | Code: ${b.procedure_code || "N/A"}`).join("\n");
-                return `Category: ${category}\n${itemList}`;
-            }).join("\n\n");
-            // Use AI to find matching benchmarks
-            const prompt = `You are a medical procedure matching expert. Match the following line item description to the most similar benchmark procedures.
-
-LINE ITEM DESCRIPTION:
-"${cleanDescription}"
-
-AVAILABLE BENCHMARK PROCEDURES:
-${benchmarkContext}
-
-Find up to 3 most similar benchmark procedures. Consider:
-1. Medical/procedure terminology similarity
-2. Service type (procedure vs non-procedure vs site cost)
-3. Semantic meaning, not just keyword matching
-
-Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good matches exist, return an empty array.`;
-            try {
-                const { output } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$ai$40$6$2e$0$2e$138_zod$40$3$2e$25$2e$76$2f$node_modules$2f$ai$2f$dist$2f$index$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__["generateText"])({
-                    model: "openai/gpt-4o-mini",
-                    prompt,
-                    output: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$ai$40$6$2e$0$2e$138_zod$40$3$2e$25$2e$76$2f$node_modules$2f$ai$2f$dist$2f$index$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Output"].object({
-                        schema: matchResultSchema
-                    })
-                });
-                console.log("[v0] AI returned", output?.matches?.length || 0, "matches for:", cleanDescription.substring(0, 40));
-                if (output?.matches?.length > 0) {
-                    output.matches.forEach((m, i)=>{
-                        console.log(`[v0]   Match ${i + 1}: "${m.procedureName}" (${Math.round(m.similarity * 100)}% similar)`);
-                    });
-                }
-                if (output && output.matches && output.matches.length > 0) {
-                    // For each matched procedure, fetch pricing ONLY from selected countries
-                    const matchedProcedureNames = output.matches.map((m)=>m.procedureName);
-                    // Query benchmark procedures with these names - ONLY from selected benchmark files
-                    let pricingQuery = supabase.from("benchmark_procedures").select(`
-              id,
-              procedure_name,
-              category,
-              p25,
-              p50,
-              p75,
-              p90,
-              p100,
-              benchmark_files(country)
-            `).in("procedure_name", matchedProcedureNames);
-                    // Filter to ONLY selected benchmark files (selected countries)
-                    if (benchmarkFileIds && benchmarkFileIds.length > 0) {
-                        pricingQuery = pricingQuery.in("benchmark_file_id", benchmarkFileIds);
-                    }
-                    const { data: allCountryPricing } = await pricingQuery.limit(500);
-                    // Build matches with all countries' pricing
-                    const matchedBenchmarks = [];
-                    for (const match of output.matches){
-                        // Find all country versions of this procedure
-                        const allCountryVersions = (allCountryPricing || []).filter((bp)=>bp.procedure_name === match.procedureName);
-                        if (allCountryVersions.length > 0) {
-                            // Add each country's pricing as a separate match option
-                            for (const version of allCountryVersions){
-                                matchedBenchmarks.push({
-                                    benchmarkId: version.id,
-                                    procedureName: version.procedure_name,
-                                    similarity: match.similarity,
-                                    p25: version.p25,
-                                    p50: version.p50,
-                                    p75: version.p75,
-                                    p90: version.p90,
-                                    p100: version.p100,
-                                    country: version.benchmark_files?.country || "Unknown",
-                                    category: version.category || match.category
-                                });
-                            }
-                        } else {
-                            // Fallback to original match data
-                            const fullBenchmark = benchmarks.find((b)=>b.id === match.benchmarkId);
-                            matchedBenchmarks.push({
-                                ...match,
-                                p25: fullBenchmark?.p25,
-                                p50: fullBenchmark?.p50,
-                                p75: fullBenchmark?.p75,
-                                p90: fullBenchmark?.p90,
-                                p100: fullBenchmark?.p100,
-                                country: fullBenchmark?.benchmark_files?.country || null,
-                                category: fullBenchmark?.category || match.category
-                            });
-                        }
-                    }
-                    results.push({
-                        lineItemId: lineItem.id,
-                        matches: matchedBenchmarks,
-                        bestMatch: output.bestMatchId ? matchedBenchmarks.find((m)=>m.benchmarkId === output.bestMatchId) : matchedBenchmarks[0],
-                        flag: matchedBenchmarks.length > 1 ? "MULTIPLE_MATCHES" : "GREEN"
-                    });
-                } else {
-                    results.push({
-                        lineItemId: lineItem.id,
-                        matches: [],
-                        bestMatch: null,
-                        flag: "NO_MATCH"
-                    });
-                }
-            } catch (aiError) {
-                console.error("[v0] AI matching error for line item:", lineItem.id, aiError);
-                results.push({
-                    lineItemId: lineItem.id,
-                    matches: [],
-                    bestMatch: null,
-                    flag: "NO_MATCH",
-                    error: aiError.message
+            // Normalize vendor text for matching
+            const normVendorText = normText(cleanDescription);
+            const normVendorCat = normCat(vendorCostCategory);
+            // Calculate similarity scores for all benchmarks
+            const allCandidates = [];
+            for (const bm of benchmarks){
+                const normBenchmarkText = normText(bm.procedure_name || "");
+                const normBenchmarkCat = normCat(bm.category || "");
+                const textSim = trigramSimilarity(normVendorText, normBenchmarkText);
+                const catSim = categorySimilarity(vendorCostCategory, bm.category || "");
+                // Score: 0.75 * catSim + 0.25 * textSim
+                const score = 0.75 * catSim + 0.25 * textSim;
+                allCandidates.push({
+                    benchmarkId: bm.id,
+                    procedureName: bm.procedure_name,
+                    category: bm.category || "Other",
+                    textSim,
+                    catSim,
+                    score,
+                    confidence: "LOW",
+                    isStrict: false,
+                    p25: bm.p25,
+                    p50: bm.p50,
+                    p75: bm.p75,
+                    p90: bm.p90,
+                    p100: bm.p100,
+                    country: bm.benchmark_files?.country || "Unknown"
                 });
             }
+            // STRICT MATCHING: Category must match AND textSim >= 0.45
+            const strictMatches = allCandidates.filter((c)=>c.catSim === 1 && c.textSim >= 0.45).map((c)=>({
+                    ...c,
+                    isStrict: true,
+                    confidence: getConfidence(true, c.textSim)
+                })).sort((a, b)=>b.textSim - a.textSim) // Sort by text similarity for strict
+            .slice(0, 3);
+            let finalMatches = [];
+            if (strictMatches.length > 0) {
+                // Use strict matches
+                finalMatches = strictMatches;
+                console.log("[v0] Found", strictMatches.length, "STRICT matches for:", cleanDescription.substring(0, 40));
+            } else {
+                // FALLBACK: Pure text similarity matching (categories don't align between vendor and benchmark data)
+                // Lower threshold to 0.35 to catch more semantic matches
+                const fallbackMatches = allCandidates.filter((c)=>c.textSim >= 0.35).map((c)=>({
+                        ...c,
+                        isStrict: false,
+                        confidence: c.textSim >= 0.70 ? "HIGH" : c.textSim >= 0.50 ? "MEDIUM" : "LOW"
+                    })).sort((a, b)=>b.textSim - a.textSim) // Sort by text similarity
+                .slice(0, 3);
+                finalMatches = fallbackMatches;
+                console.log("[v0] Found", fallbackMatches.length, "FALLBACK matches for:", cleanDescription.substring(0, 40));
+            }
+            // Log matches
+            if (finalMatches.length > 0) {
+                finalMatches.forEach((m, i)=>{
+                    console.log(`[v0]   Match ${i + 1}: "${m.procedureName}" | TextSim: ${(m.textSim * 100).toFixed(1)}% | CatSim: ${m.catSim} | Confidence: ${m.confidence} | ${m.isStrict ? "STRICT" : "FALLBACK"}`);
+                });
+            }
+            // Build result matches with similarity as percentage
+            const matchedBenchmarks = finalMatches.map((m)=>({
+                    benchmarkId: m.benchmarkId,
+                    procedureName: m.procedureName,
+                    similarity: m.textSim,
+                    textSimilarity: m.textSim,
+                    categorySimilarity: m.catSim,
+                    confidence: m.confidence,
+                    isStrict: m.isStrict,
+                    p25: m.p25,
+                    p50: m.p50,
+                    p75: m.p75,
+                    p90: m.p90,
+                    p100: m.p100,
+                    country: m.country,
+                    category: m.category
+                }));
+            // Determine flag based on results
+            let flag = "NO_MATCH";
+            if (matchedBenchmarks.length > 0) {
+                const bestConfidence = matchedBenchmarks[0].confidence;
+                if (bestConfidence === "HIGH") {
+                    flag = "GREEN";
+                } else if (bestConfidence === "MEDIUM") {
+                    flag = matchedBenchmarks.length > 1 ? "YELLOW" : "GREEN";
+                } else {
+                    flag = "YELLOW";
+                }
+            }
+            results.push({
+                lineItemId: lineItem.id,
+                matches: matchedBenchmarks,
+                bestMatch: matchedBenchmarks[0] || null,
+                flag
+            });
         }
         // 4. Update assessment_comparisons with flag and ai_matches
         console.log("[v0] Updating", results.length, "comparison records");

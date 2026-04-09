@@ -404,11 +404,11 @@ export async function POST(request: Request) {
         })
       }
       
-      // STRICT MATCHING: Category must match AND textSim >= 0.55
+      // STRICT MATCHING: Category must match AND textSim >= 0.45
       const strictMatches = allCandidates
-        .filter(c => c.catSim === 1 && c.textSim >= 0.55)
+        .filter(c => c.catSim === 1 && c.textSim >= 0.45)
         .map(c => ({ ...c, isStrict: true, confidence: getConfidence(true, c.textSim) }))
-        .sort((a, b) => b.score - a.score)
+        .sort((a, b) => b.textSim - a.textSim) // Sort by text similarity for strict
         .slice(0, 3)
       
       let finalMatches: MatchCandidate[] = []
@@ -418,11 +418,16 @@ export async function POST(request: Request) {
         finalMatches = strictMatches
         console.log("[v0] Found", strictMatches.length, "STRICT matches for:", cleanDescription.substring(0, 40))
       } else {
-        // FALLBACK: (catSim=1 AND textSim>=0.45) OR (textSim>=0.88)
+        // FALLBACK: Pure text similarity matching (categories don't align between vendor and benchmark data)
+        // Lower threshold to 0.35 to catch more semantic matches
         const fallbackMatches = allCandidates
-          .filter(c => (c.catSim === 1 && c.textSim >= 0.45) || c.textSim >= 0.88)
-          .map(c => ({ ...c, isStrict: false, confidence: getConfidence(false, c.textSim) }))
-          .sort((a, b) => b.score - a.score)
+          .filter(c => c.textSim >= 0.35)
+          .map(c => ({ 
+            ...c, 
+            isStrict: false, 
+            confidence: c.textSim >= 0.70 ? "HIGH" : c.textSim >= 0.50 ? "MEDIUM" : "LOW"
+          }))
+          .sort((a, b) => b.textSim - a.textSim) // Sort by text similarity
           .slice(0, 3)
         
         finalMatches = fallbackMatches
