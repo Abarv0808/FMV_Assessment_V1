@@ -881,3 +881,5 @@
 [01:09:36.766] Server  LOG      ✓ Compiled in 50ms
 [01:09:53.088] Server  LOG        Reload env: .env.development.local
 [01:13:00.495] Server  LOG      ✓ Compiled in 154ms
+[01:13:12.321] Server  LOG        Reload env: .env.development.local
+[01:17:35.674] Server  LOG        Reload env: .env.development.local
