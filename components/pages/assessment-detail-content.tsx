@@ -190,10 +190,11 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             source: `Line ${idx + 1}`,
             decision: "In-review" as ItemDecision,
             numberOfUnit: extraData.numberOfUnit || 1,
-            totalCost: comp.assessment_line_items.vendor_cost || 0,
-            currency: comp.assessment_line_items.currency || "USD",
-            country: comp.assessment_line_items.country,
-            additionalInformation: description.trim()
+  totalCost: comp.assessment_line_items.vendor_cost || 0,
+  currency: comp.assessment_line_items.currency || "USD",
+  country: comp.assessment_line_items.country,
+  additionalInformation: description.trim(),
+  negotiatedPrice: comp.assessment_line_items.negotiated_price ?? null
           },
           benchmark90th: comp.benchmark_90th || bestMatch?.p90,
           benchmarkHigh: comp.benchmark_high || bestMatch?.p75,
@@ -474,7 +475,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                   totalCost: lineItem?.vendor_cost || 0,
                   currency: lineItem?.currency || "USD",
                   country: lineItem?.country,
-                  additionalInformation: description.trim()
+                  additionalInformation: description.trim(),
+                  negotiatedPrice: lineItem?.negotiated_price ?? null
                 },
                 benchmark90th: bestMatch?.p90 || null,
                 benchmarkHigh: bestMatch?.p75 || null,
@@ -533,7 +535,12 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           }
           return comp
         }))
-        appendAudit(`Updated ${field === "additionalInformation" ? "Additional Information" : "Cost Category"} for line item`)
+        const fieldNames: Record<string, string> = {
+          additionalInformation: "Additional Information",
+          costCategory: "Cost Category",
+          negotiatedPrice: "Negotiated Price"
+        }
+        appendAudit(`Updated ${fieldNames[field] || field} for line item`)
       } else {
         console.error("[v0] Failed to update line item:", await response.text())
       }

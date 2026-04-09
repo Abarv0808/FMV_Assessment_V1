@@ -61,6 +61,7 @@ export interface AssessmentLineItem {
   unitType: string
   numberOfUnits: number
   unitPrice: number
+  negotiatedPrice?: number | null
   totalCost: number
   currency: string
   // FMV lead fields

@@ -8,9 +8,25 @@ export async function PATCH(
   try {
     const { id } = await params
     const body = await request.json()
-    const { additionalInformation, costCategory } = body
+    const { additionalInformation, costCategory, negotiatedPrice } = body
 
     const supabase = await createClient()
+
+    // If updating negotiatedPrice, do it directly on the column
+    if (negotiatedPrice !== undefined) {
+      const { error: priceError } = await supabase
+        .from("assessment_line_items")
+        .update({ negotiated_price: negotiatedPrice })
+        .eq("id", id)
+
+      if (priceError) {
+        console.error("[v0] Error updating negotiated price:", priceError)
+        return NextResponse.json({ error: priceError.message }, { status: 500 })
+      }
+
+      console.log("[v0] Updated negotiated price for line item:", id, "to:", negotiatedPrice)
+      return NextResponse.json({ success: true })
+    }
 
     // Get current line item to update procedure_name field
     const { data: lineItem, error: fetchError } = await supabase

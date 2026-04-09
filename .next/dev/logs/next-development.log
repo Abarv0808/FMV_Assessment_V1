@@ -883,3 +883,23 @@
 [01:13:00.495] Server  LOG      ✓ Compiled in 154ms
 [01:13:12.321] Server  LOG        Reload env: .env.development.local
 [01:17:35.674] Server  LOG        Reload env: .env.development.local
+[01:17:58.611] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:17:58.611] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/c17088c2-d151-45af-a6e9-dc44d254f78d","route":"/assessments/[id]"}
+[01:17:58.611] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/c17088c2-d151-45af-a6e9-dc44d254f78d color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/c17088c2-d151-45af-a6e9-dc44d254f78d","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775745739970} /_vercel/insights/view
+[01:17:59.365] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[01:17:59.707] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[01:17:59.707] Browser LOG     [v0] Has existing ai_matches: true
+[01:17:59.707] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[01:17:59.707] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[01:17:59.707] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[01:17:59.707] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[01:17:59.707] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches
+[01:17:59.707] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[01:17:59.707] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[01:18:22.884] Server  LOG      ✓ Compiled in 46ms
+[01:18:36.221] Server  LOG      ✓ Compiled in 136ms
+[01:19:41.610] Server  LOG      ✓ Compiled in 42ms
+[01:19:56.552] Server  LOG      ✓ Compiled in 58ms
+[01:20:02.460] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 1
+[01:20:02.471] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" -1
+[01:20:07.741] Server  LOG      ✓ Compiled in 49ms

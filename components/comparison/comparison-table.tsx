@@ -233,6 +233,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableHead className="min-w-[220px]">Benchmark Match</TableHead>
             <TableHead className="text-right">Number of Unit</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>
+            <TableHead className="text-right">Negotiated Price</TableHead>
             <TableHead className="text-right">Total Cost</TableHead>
             <TableHead>Currency</TableHead>
             <TableHead className="min-w-[200px]">Benchmark</TableHead>
@@ -380,6 +381,18 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   </TableCell>
                   <TableCell className="text-right font-medium font-mono">
                     {comparison.lineItem.unitPrice?.toLocaleString() ?? "-"}
+                  </TableCell>
+                  <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
+                    <Input
+                      type="number"
+                      value={comparison.lineItem.negotiatedPrice ?? ""}
+                      onChange={(e) => {
+                        const value = e.target.value === "" ? null : parseFloat(e.target.value)
+                        onLineItemUpdate?.(comparison.lineItem.id, "negotiatedPrice", value as any)
+                      }}
+                      placeholder="Enter price"
+                      className="h-8 w-[120px] text-right font-mono text-sm"
+                    />
                   </TableCell>
                   <TableCell className="text-right font-mono">
                     {comparison.lineItem.totalCost?.toLocaleString() ?? "-"}
