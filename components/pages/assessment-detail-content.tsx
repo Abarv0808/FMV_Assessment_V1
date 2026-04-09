@@ -508,6 +508,40 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     }
   }, [id, comparisons.length, appendAudit])
 
+  // Handle line item field updates (additional information, cost category)
+  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory", value: string) => {
+    try {
+      const response = await fetch(`/api/assessments/line-items/${lineItemId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ [field]: value })
+      })
+      
+      if (response.ok) {
+        // Update local state
+        setComparisons(prev => prev.map(comp => {
+          if (comp.lineItem.id === lineItemId) {
+            return {
+              ...comp,
+              lineItem: {
+                ...comp.lineItem,
+                [field]: value,
+                // Also update description if it's additionalInformation
+                ...(field === "additionalInformation" ? { description: value } : {})
+              }
+            }
+          }
+          return comp
+        }))
+        appendAudit(`Updated ${field === "additionalInformation" ? "Additional Information" : "Cost Category"} for line item`)
+      } else {
+        console.error("[v0] Failed to update line item:", await response.text())
+      }
+    } catch (error) {
+      console.error("[v0] Error updating line item:", error)
+    }
+  }, [appendAudit])
+
   // Get unique sites from line items
   const sites = useMemo(() => {
     const siteSet = new Set(
@@ -848,7 +882,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 </div>
 
                 {/* Comparison Table */}
-                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} onMatchSelect={handleMatchSelect} />
+                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} onMatchSelect={handleMatchSelect} onLineItemUpdate={handleLineItemUpdate} />
               </CardContent>
             </Card>
           </TabsContent>

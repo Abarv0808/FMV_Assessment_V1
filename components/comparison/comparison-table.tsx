@@ -36,8 +36,33 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
-import { Search } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Search, Pencil, Check, X } from "lucide-react"
 import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+
+// Cost category dropdown options - exact values from Excel template
+const COST_CATEGORIES = [
+  "Personnel",
+  "Material, supplies, consumables",
+  "Data license (specific for the study, supporting quote/offer provided)",
+  "Equipment rental, leasing, prorate (no purchase) supporting quote/offer provided)",
+  "Software rental, leasing, prorate (no purchase), supporting quote/offer provided)",
+  "Patient/subjects/caregiver reimbursement of actual costs (estimated) for e.g. travel, accommodation, meals...",
+  "Patient/subjects/caregiver stipend, a fixed fee to cover the costs to participate in the study (in lieu of direct reimbursement of receipts for these expenses).",
+  "Patient/subjects compensation (e.g. for time to participate in the study)",
+  "Study set-up fee",
+  "IRB/EC submission fee",
+  "Publication open-access and journal fees",
+  "Publication translation and editing fees",
+  "Congress registration fee",
+  "Publication and Congresses placeholder for Col Res studies only",
+  "Archive fees",
+  "Third party details - external vendor - supporting quote provided",
+  "Third party details - CRO - supporting quote provided",
+  "Third party details - consultant - supporting quote provided",
+  "Site specific overhead rate % (multi-site studies only)",
+  "Other (costs that do not fit in any other category)",
+]
 
 interface ComparisonTableProps {
   comparisons: AssessmentComparison[]
@@ -45,6 +70,7 @@ interface ComparisonTableProps {
   onBenchmarkTypeChange?: (id: string, benchmarkType: BenchmarkType) => void
   onDecisionChange?: (id: string, decision: ItemDecision) => void
   onMatchSelect?: (id: string, match: any) => void
+  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory", value: string) => void
 }
 
 const flagConfig: Record<string, { label: string; color: string }> = {
@@ -119,10 +145,14 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
 
 const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment"]
 
-export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect }: ComparisonTableProps) {
+export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect, onLineItemUpdate }: ComparisonTableProps) {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
   const [matchModalOpen, setMatchModalOpen] = useState(false)
   const [selectedComparison, setSelectedComparison] = useState<AssessmentComparison | null>(null)
+  
+  // Editing state for additional information
+  const [editingAdditionalInfo, setEditingAdditionalInfo] = useState<string | null>(null)
+  const [editAdditionalInfoValue, setEditAdditionalInfoValue] = useState("")
 
   const openMatchModal = (comparison: AssessmentComparison) => {
     setSelectedComparison(comparison)
@@ -135,6 +165,32 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
     }
     setMatchModalOpen(false)
     setSelectedComparison(null)
+  }
+  
+  // Handle additional information edit
+  const startEditingAdditionalInfo = (comparison: AssessmentComparison) => {
+    setEditingAdditionalInfo(comparison.lineItem.id)
+    setEditAdditionalInfoValue(comparison.lineItem.additionalInformation || comparison.lineItem.description || "")
+  }
+  
+  const saveAdditionalInfo = (lineItemId: string) => {
+    if (onLineItemUpdate) {
+      onLineItemUpdate(lineItemId, "additionalInformation", editAdditionalInfoValue)
+    }
+    setEditingAdditionalInfo(null)
+    setEditAdditionalInfoValue("")
+  }
+  
+  const cancelEditingAdditionalInfo = () => {
+    setEditingAdditionalInfo(null)
+    setEditAdditionalInfoValue("")
+  }
+  
+  // Handle cost category change
+  const handleCostCategoryChange = (lineItemId: string, value: string) => {
+    if (onLineItemUpdate) {
+      onLineItemUpdate(lineItemId, "costCategory", value)
+    }
   }
   
   // Calculate total cost sum
@@ -226,15 +282,70 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       {comparison.lineItem.site}
                     </Badge>
                   </TableCell>
-                  <TableCell>
-                    <span className="text-sm">
-                      {comparison.lineItem.costCategory || "-"}
-                    </span>
+                  <TableCell onClick={(e) => e.stopPropagation()}>
+                    <Select
+                      value={comparison.lineItem.costCategory || ""}
+                      onValueChange={(val) => handleCostCategoryChange(comparison.lineItem.id, val)}
+                    >
+                      <SelectTrigger className="h-8 text-xs min-w-[180px] max-w-[220px] border-border/40">
+                        <SelectValue placeholder="Select category">
+                          <span className="truncate">{comparison.lineItem.costCategory || "Select category"}</span>
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent className="max-h-[300px]">
+                        {COST_CATEGORIES.map((cat) => (
+                          <SelectItem key={cat} value={cat} className="text-xs">
+                            <span className="truncate max-w-[300px] block">{cat}</span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </TableCell>
-                  <TableCell className="min-w-[250px] max-w-[400px]">
-                    <div className="text-sm font-medium whitespace-normal break-words">
-                      {comparison.lineItem.additionalInformation || comparison.lineItem.description}
-                    </div>
+                  <TableCell className="min-w-[250px] max-w-[400px]" onClick={(e) => e.stopPropagation()}>
+                    {editingAdditionalInfo === comparison.lineItem.id ? (
+                      <div className="flex items-center gap-2">
+                        <Input
+                          value={editAdditionalInfoValue}
+                          onChange={(e) => setEditAdditionalInfoValue(e.target.value)}
+                          className="h-8 text-sm flex-1"
+                          autoFocus
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") saveAdditionalInfo(comparison.lineItem.id)
+                            if (e.key === "Escape") cancelEditingAdditionalInfo()
+                          }}
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 text-green-600"
+                          onClick={() => saveAdditionalInfo(comparison.lineItem.id)}
+                        >
+                          <Check className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 text-red-600"
+                          onClick={cancelEditingAdditionalInfo}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2 group">
+                        <div className="text-sm font-medium whitespace-normal break-words flex-1">
+                          {comparison.lineItem.additionalInformation || comparison.lineItem.description}
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={() => startEditingAdditionalInfo(comparison)}
+                        >
+                          <Pencil className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    )}
                   </TableCell>
                   <TableCell className="min-w-[220px]" onClick={(e) => e.stopPropagation()}>
                     {comparison.possibleMatches && comparison.possibleMatches.length > 0 ? (

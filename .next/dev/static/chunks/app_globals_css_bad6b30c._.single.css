@@ -1231,8 +1231,16 @@
     max-width: var(--container-4xl);
   }
 
+  .max-w-\[220px\] {
+    max-width: 220px;
+  }
+
   .max-w-\[250px\] {
     max-width: 250px;
+  }
+
+  .max-w-\[300px\] {
+    max-width: 300px;
   }
 
   .max-w-\[400px\] {
@@ -1305,6 +1313,10 @@
 
   .min-w-\[170px\] {
     min-width: 170px;
+  }
+
+  .min-w-\[180px\] {
+    min-width: 180px;
   }
 
   .min-w-\[185px\] {
@@ -2650,6 +2662,10 @@
 
   .text-red-500 {
     color: var(--color-red-500);
+  }
+
+  .text-red-600 {
+    color: var(--color-red-600);
   }
 
   .text-red-700 {
