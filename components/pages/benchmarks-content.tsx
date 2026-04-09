@@ -210,11 +210,7 @@ export function BenchmarksContent() {
   const groupedBenchmarks = useMemo(() => {
     const groups: Record<string, Record<string, BenchmarkFile[]>> = {}
     
-    // First, create an "All" indication that contains all files grouped by phase
-    const allGroup: Record<string, BenchmarkFile[]> = {}
-    
     for (const file of filteredBenchmarks) {
-      // Add to individual indication groups
       if (!groups[file.indication]) {
         groups[file.indication] = {}
       }
@@ -222,38 +218,23 @@ export function BenchmarksContent() {
         groups[file.indication][file.trialPhase] = []
       }
       groups[file.indication][file.trialPhase].push(file)
-      
-      // Also add to "All" group by phase
-      if (!allGroup[file.trialPhase]) {
-        allGroup[file.trialPhase] = []
-      }
-      allGroup[file.trialPhase].push(file)
     }
     
-    // Sort indications alphabetically, then phases
+    // Sort indications: "All" first, then alphabetically. Then phases.
     const phaseOrder = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IV"]
-    
-    const sortedIndications = Object.entries(groups)
-      .sort(([a], [b]) => a.localeCompare(b))
+    return Object.entries(groups)
+      .sort(([a], [b]) => {
+        // "All" indication should come first
+        if (a === "All") return -1
+        if (b === "All") return 1
+        return a.localeCompare(b)
+      })
       .map(([indication, phases]) => ({
         indication,
         phases: Object.entries(phases)
           .sort(([a], [b]) => phaseOrder.indexOf(a) - phaseOrder.indexOf(b))
           .map(([phase, files]) => ({ phase, files }))
       }))
-    
-    // Add "All" as the first entry if there are files
-    if (Object.keys(allGroup).length > 0) {
-      const allEntry = {
-        indication: "All",
-        phases: Object.entries(allGroup)
-          .sort(([a], [b]) => phaseOrder.indexOf(a) - phaseOrder.indexOf(b))
-          .map(([phase, files]) => ({ phase, files }))
-      }
-      return [allEntry, ...sortedIndications]
-    }
-    
-    return sortedIndications
   }, [filteredBenchmarks])
 
   const activeFilterCount = [countryFilter, indicationFilter, phaseFilter].filter(
