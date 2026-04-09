@@ -9,3 +9,4 @@
 [00:01:20.242] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775741141720} /_vercel/insights/view
 [00:03:07.614] Server  LOG      ✓ Compiled in 68ms
 [00:03:18.868] Server  LOG        Reload env: .env.development.local
+[00:04:03.235] Server  LOG      ✓ Compiled in 50ms

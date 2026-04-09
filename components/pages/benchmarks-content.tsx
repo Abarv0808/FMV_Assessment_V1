@@ -543,7 +543,7 @@ export function BenchmarksContent() {
                                       <ChevronRight className="h-4 w-4 text-muted-foreground" />
                                     )}
                                     <div>
-                                      <h4 className="font-medium text-sm">All Phases</h4>
+                                      <h4 className="font-medium text-sm">{phase}</h4>
                                       <p className="text-xs text-muted-foreground">
                                         {phaseCountries} countries | {phaseProcedures.toLocaleString()} procedures
                                       </p>
