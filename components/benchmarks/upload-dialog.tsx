@@ -26,6 +26,7 @@ import { Progress } from "@/components/ui/progress"
 import { Upload, FileSpreadsheet, X, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+// All 10 indications - v2
 const INDICATIONS = [
   "All",
   "Alpha-1 Antitrypsin",
