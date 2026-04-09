@@ -142,6 +142,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       const { comparisons: comparisonsData, error: comparisonsError } = await comparisonsResponse.json()
 
       console.log("[v0] Comparisons fetch result:", comparisonsData?.length, "items, error:", comparisonsError)
+      
+      // Check if any comparison has ai_matches (meaning comparison was already run)
+      const hasExistingMatches = comparisonsData?.some((comp: any) => comp.ai_matches && comp.ai_matches.length > 0)
+      console.log("[v0] Has existing ai_matches:", hasExistingMatches)
+      if (hasExistingMatches) {
+        setComparisonComplete(true)
+      }
 
       if (!comparisonsError && comparisonsData) {
         const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {
@@ -162,7 +169,9 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           if (comp.ai_matches) {
             try {
               matches = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
+              console.log("[v0] Loaded ai_matches for line item:", matches.length, "matches")
             } catch (e) {
+              console.log("[v0] Error parsing ai_matches:", e)
               matches = []
             }
           }
