@@ -22,3 +22,8 @@
 [00:08:38.247] Server  LOG     [v0] Fetched 37 "assessments from database"
 [00:08:38.605] Server  LOG     [v0] Fetched 37 "assessments from database"
 [00:09:45.305] Server  LOG        Reload env: .env.development.local
+[00:10:08.188] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:10:08.188] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:10:08.188] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/dashboard","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775741669671} /_vercel/insights/view
+[00:10:08.595] Server  LOG     [v0] Fetched 37 "assessments from database"
+[00:10:29.900] Server  LOG        Reload env: .env.development.local
