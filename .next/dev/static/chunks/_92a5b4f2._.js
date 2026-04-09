@@ -5787,20 +5787,10 @@ function AssessmentDetailContent({ id }) {
                     createdBy: "System",
                     auditEvents: []
                 };
-                // Fetch comparisons with line items - including extra_data for ai_matches
-                const { data: comparisonsData, error: comparisonsError } = await supabase.from("assessment_comparisons").select(`
-          *,
-          assessment_line_items!inner (
-            id,
-            procedure_name,
-            country,
-            vendor_cost,
-            currency,
-            extra_data
-          )
-        `).eq("assessment_id", id).order("created_at", {
-                    ascending: true
-                });
+                // Fetch comparisons via API (server-side to bypass RLS)
+                const comparisonsResponse = await fetch(`/api/assessments/${id}/comparisons`);
+                const { comparisons: comparisonsData, error: comparisonsError } = await comparisonsResponse.json();
+                console.log("[v0] Comparisons fetch result:", comparisonsData?.length, "items, error:", comparisonsError);
                 if (!comparisonsError && comparisonsData) {
                     const mappedComparisons = comparisonsData.map({
                         "AssessmentDetailContent.useEffect.fetchAssessment.mappedComparisons": (comp, idx)=>{
@@ -6304,7 +6294,7 @@ function AssessmentDetailContent({ id }) {
                             className: "animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"
                         }, void 0, false, {
                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                            lineNumber: 532,
+                            lineNumber: 521,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6312,23 +6302,23 @@ function AssessmentDetailContent({ id }) {
                             children: "Loading assessment..."
                         }, void 0, false, {
                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                            lineNumber: 533,
+                            lineNumber: 522,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                    lineNumber: 531,
+                    lineNumber: 520,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                lineNumber: 530,
+                lineNumber: 519,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-            lineNumber: 529,
+            lineNumber: 518,
             columnNumber: 7
         }, this);
     }
@@ -6340,17 +6330,17 @@ function AssessmentDetailContent({ id }) {
                     children: "Assessment not found"
                 }, void 0, false, {
                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                    lineNumber: 544,
+                    lineNumber: 533,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                lineNumber: 543,
+                lineNumber: 532,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-            lineNumber: 542,
+            lineNumber: 531,
             columnNumber: 7
         }, this);
     }
@@ -6381,12 +6371,12 @@ function AssessmentDetailContent({ id }) {
                                             className: "h-4 w-4"
                                         }, void 0, false, {
                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                            lineNumber: 583,
+                                            lineNumber: 572,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 578,
+                                        lineNumber: 567,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6396,7 +6386,7 @@ function AssessmentDetailContent({ id }) {
                                                 children: assessment.name
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 586,
+                                                lineNumber: 575,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6404,19 +6394,19 @@ function AssessmentDetailContent({ id }) {
                                                 children: assessment.studyTrackingNumber
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 589,
+                                                lineNumber: 578,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 585,
+                                        lineNumber: 574,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 577,
+                                lineNumber: 566,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6430,14 +6420,14 @@ function AssessmentDetailContent({ id }) {
                                                 className: "h-4 w-4 mr-2"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 595,
+                                                lineNumber: 584,
                                                 columnNumber: 17
                                             }, this),
                                             "Move to Dashboard"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 594,
+                                        lineNumber: 583,
                                         columnNumber: 15
                                     }, this),
                                     assessment.status !== "ARCHIVED" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -6448,14 +6438,14 @@ function AssessmentDetailContent({ id }) {
                                                 className: "h-4 w-4 mr-2"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 601,
+                                                lineNumber: 590,
                                                 columnNumber: 17
                                             }, this),
                                             "No Longer Required"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 600,
+                                        lineNumber: 589,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -6466,14 +6456,14 @@ function AssessmentDetailContent({ id }) {
                                                 className: "h-4 w-4 mr-2"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 606,
+                                                lineNumber: 595,
                                                 columnNumber: 15
                                             }, this),
                                             "Export Report"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 605,
+                                        lineNumber: 594,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -6483,26 +6473,26 @@ function AssessmentDetailContent({ id }) {
                                                 className: "h-4 w-4 mr-2"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 610,
+                                                lineNumber: 599,
                                                 columnNumber: 15
                                             }, this),
                                             "Download PDF"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 609,
+                                        lineNumber: 598,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 592,
+                                lineNumber: 581,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                        lineNumber: 576,
+                        lineNumber: 565,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6521,12 +6511,12 @@ function AssessmentDetailContent({ id }) {
                                                     className: "h-4 w-4 text-muted-foreground"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 622,
+                                                    lineNumber: 611,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 621,
+                                                lineNumber: 610,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6536,7 +6526,7 @@ function AssessmentDetailContent({ id }) {
                                                         children: stats.total
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 625,
+                                                        lineNumber: 614,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6544,29 +6534,29 @@ function AssessmentDetailContent({ id }) {
                                                         children: "Total Items"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 626,
+                                                        lineNumber: 615,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 624,
+                                                lineNumber: 613,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 620,
+                                        lineNumber: 609,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 619,
+                                    lineNumber: 608,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 618,
+                                lineNumber: 607,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -6582,12 +6572,12 @@ function AssessmentDetailContent({ id }) {
                                                     className: "h-4 w-4 text-green-500"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 635,
+                                                    lineNumber: 624,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 634,
+                                                lineNumber: 623,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6597,7 +6587,7 @@ function AssessmentDetailContent({ id }) {
                                                         children: stats.accepted
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 638,
+                                                        lineNumber: 627,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6605,29 +6595,29 @@ function AssessmentDetailContent({ id }) {
                                                         children: "Accepted"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 639,
+                                                        lineNumber: 628,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 637,
+                                                lineNumber: 626,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 633,
+                                        lineNumber: 622,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 632,
+                                    lineNumber: 621,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 631,
+                                lineNumber: 620,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -6643,12 +6633,12 @@ function AssessmentDetailContent({ id }) {
                                                     className: "h-4 w-4 text-yellow-500"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 648,
+                                                    lineNumber: 637,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 647,
+                                                lineNumber: 636,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6658,7 +6648,7 @@ function AssessmentDetailContent({ id }) {
                                                         children: stats.pending
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 651,
+                                                        lineNumber: 640,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6666,29 +6656,29 @@ function AssessmentDetailContent({ id }) {
                                                         children: "Pending"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 652,
+                                                        lineNumber: 641,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 650,
+                                                lineNumber: 639,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 646,
+                                        lineNumber: 635,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 645,
+                                    lineNumber: 634,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 644,
+                                lineNumber: 633,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -6704,12 +6694,12 @@ function AssessmentDetailContent({ id }) {
                                                     className: "h-4 w-4 text-blue-500"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 661,
+                                                    lineNumber: 650,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 660,
+                                                lineNumber: 649,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6719,7 +6709,7 @@ function AssessmentDetailContent({ id }) {
                                                         children: stats.notAmended
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 664,
+                                                        lineNumber: 653,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6727,29 +6717,29 @@ function AssessmentDetailContent({ id }) {
                                                         children: "Not Amended"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 665,
+                                                        lineNumber: 654,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 663,
+                                                lineNumber: 652,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 659,
+                                        lineNumber: 648,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 658,
+                                    lineNumber: 647,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 657,
+                                lineNumber: 646,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -6765,12 +6755,12 @@ function AssessmentDetailContent({ id }) {
                                                     className: "h-4 w-4 text-red-500"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 674,
+                                                    lineNumber: 663,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 673,
+                                                lineNumber: 662,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6780,7 +6770,7 @@ function AssessmentDetailContent({ id }) {
                                                         children: stats.notAccepted
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 677,
+                                                        lineNumber: 666,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6788,29 +6778,29 @@ function AssessmentDetailContent({ id }) {
                                                         children: "Not Accepted"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 678,
+                                                        lineNumber: 667,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 676,
+                                                lineNumber: 665,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 672,
+                                        lineNumber: 661,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 671,
+                                    lineNumber: 660,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 670,
+                                lineNumber: 659,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -6826,12 +6816,12 @@ function AssessmentDetailContent({ id }) {
                                                     className: "h-4 w-4 text-slate-400"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 687,
+                                                    lineNumber: 676,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 686,
+                                                lineNumber: 675,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6841,7 +6831,7 @@ function AssessmentDetailContent({ id }) {
                                                         children: stats.manualAssessment
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 690,
+                                                        lineNumber: 679,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6849,35 +6839,35 @@ function AssessmentDetailContent({ id }) {
                                                         children: "Manual Assessment"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                        lineNumber: 691,
+                                                        lineNumber: 680,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 689,
+                                                lineNumber: 678,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 685,
+                                        lineNumber: 674,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 684,
+                                    lineNumber: 673,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 683,
+                                lineNumber: 672,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                        lineNumber: 617,
+                        lineNumber: 606,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$comparison$2f$assessment$2d$overview$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AssessmentOverview"], {
@@ -6886,7 +6876,7 @@ function AssessmentDetailContent({ id }) {
                         onDataSourceChange: handleDataSourceChange
                     }, void 0, false, {
                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                        lineNumber: 699,
+                        lineNumber: 688,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Tabs"], {
@@ -6900,7 +6890,7 @@ function AssessmentDetailContent({ id }) {
                                         children: "Benchmark Comparison"
                                     }, void 0, false, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 704,
+                                        lineNumber: 693,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TabsTrigger"], {
@@ -6908,7 +6898,7 @@ function AssessmentDetailContent({ id }) {
                                         children: "Exceptions & Rationale"
                                     }, void 0, false, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 705,
+                                        lineNumber: 694,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TabsTrigger"], {
@@ -6916,13 +6906,13 @@ function AssessmentDetailContent({ id }) {
                                         children: "History"
                                     }, void 0, false, {
                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                        lineNumber: 706,
+                                        lineNumber: 695,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 703,
+                                lineNumber: 692,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TabsContent"], {
@@ -6937,20 +6927,20 @@ function AssessmentDetailContent({ id }) {
                                                     children: "Line Items vs. Benchmarks"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 712,
+                                                    lineNumber: 701,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                                     children: "Compare proposal line items against fair market value benchmarks"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 713,
+                                                    lineNumber: 702,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                            lineNumber: 711,
+                                            lineNumber: 700,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -6966,7 +6956,7 @@ function AssessmentDetailContent({ id }) {
                                                                     children: "AI Benchmark Matching"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 722,
+                                                                    lineNumber: 711,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6974,13 +6964,13 @@ function AssessmentDetailContent({ id }) {
                                                                     children: "Use AI to match line items against benchmark procedures"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 723,
+                                                                    lineNumber: 712,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 721,
+                                                            lineNumber: 710,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -6993,7 +6983,7 @@ function AssessmentDetailContent({ id }) {
                                                                         className: "h-4 w-4 mr-2 animate-spin"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                        lineNumber: 734,
+                                                                        lineNumber: 723,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     "Running Comparison..."
@@ -7004,7 +6994,7 @@ function AssessmentDetailContent({ id }) {
                                                                         className: "h-4 w-4 mr-2"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                        lineNumber: 739,
+                                                                        lineNumber: 728,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     "Re-run Comparison"
@@ -7015,7 +7005,7 @@ function AssessmentDetailContent({ id }) {
                                                                         className: "h-4 w-4 mr-2"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                        lineNumber: 744,
+                                                                        lineNumber: 733,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     "Run Benchmark Comparison"
@@ -7023,13 +7013,13 @@ function AssessmentDetailContent({ id }) {
                                                             }, void 0, true)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 727,
+                                                            lineNumber: 716,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 720,
+                                                    lineNumber: 709,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7042,7 +7032,7 @@ function AssessmentDetailContent({ id }) {
                                                                     className: "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 755,
+                                                                    lineNumber: 744,
                                                                     columnNumber: 21
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -7052,13 +7042,13 @@ function AssessmentDetailContent({ id }) {
                                                                     className: "pl-9"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 756,
+                                                                    lineNumber: 745,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 754,
+                                                            lineNumber: 743,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Select"], {
@@ -7071,12 +7061,12 @@ function AssessmentDetailContent({ id }) {
                                                                         placeholder: "Site"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                        lineNumber: 768,
+                                                                        lineNumber: 757,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 767,
+                                                                    lineNumber: 756,
                                                                     columnNumber: 21
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -7086,7 +7076,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "All Sites"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 771,
+                                                                            lineNumber: 760,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         sites.map((site)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7094,19 +7084,19 @@ function AssessmentDetailContent({ id }) {
                                                                                 children: site
                                                                             }, site, false, {
                                                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                                lineNumber: 773,
+                                                                                lineNumber: 762,
                                                                                 columnNumber: 25
                                                                             }, this))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 770,
+                                                                    lineNumber: 759,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 763,
+                                                            lineNumber: 752,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Select"], {
@@ -7119,12 +7109,12 @@ function AssessmentDetailContent({ id }) {
                                                                         placeholder: "Decision"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                        lineNumber: 784,
+                                                                        lineNumber: 773,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 783,
+                                                                    lineNumber: 772,
                                                                     columnNumber: 21
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -7134,7 +7124,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "All Decisions"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 787,
+                                                                            lineNumber: 776,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7142,7 +7132,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "Accepted"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 788,
+                                                                            lineNumber: 777,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7150,7 +7140,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "Pending"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 789,
+                                                                            lineNumber: 778,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7158,7 +7148,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "Not Amended"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 790,
+                                                                            lineNumber: 779,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7166,7 +7156,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "Not Accepted"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 791,
+                                                                            lineNumber: 780,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7174,19 +7164,19 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "Manual Assessment"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 792,
+                                                                            lineNumber: 781,
                                                                             columnNumber: 23
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 786,
+                                                                    lineNumber: 775,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 779,
+                                                            lineNumber: 768,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Select"], {
@@ -7199,12 +7189,12 @@ function AssessmentDetailContent({ id }) {
                                                                         placeholder: "Flag"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                        lineNumber: 802,
+                                                                        lineNumber: 791,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 801,
+                                                                    lineNumber: 790,
                                                                     columnNumber: 21
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -7214,7 +7204,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "All Flags"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 805,
+                                                                            lineNumber: 794,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7222,7 +7212,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "Red Only"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 806,
+                                                                            lineNumber: 795,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7230,7 +7220,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "Yellow Only"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 807,
+                                                                            lineNumber: 796,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7238,7 +7228,7 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "Green Only"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 808,
+                                                                            lineNumber: 797,
                                                                             columnNumber: 23
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -7246,25 +7236,25 @@ function AssessmentDetailContent({ id }) {
                                                                             children: "No Match"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 809,
+                                                                            lineNumber: 798,
                                                                             columnNumber: 23
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 804,
+                                                                    lineNumber: 793,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 795,
+                                                            lineNumber: 784,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 753,
+                                                    lineNumber: 742,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7282,7 +7272,7 @@ function AssessmentDetailContent({ id }) {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 816,
+                                                            lineNumber: 805,
                                                             columnNumber: 19
                                                         }, this),
                                                         (siteFilter !== "ALL" || decisionFilter !== "ALL" || flagFilter !== "ALL" || searchQuery) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -7298,13 +7288,13 @@ function AssessmentDetailContent({ id }) {
                                                             children: "Clear filters"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 827,
+                                                            lineNumber: 816,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 815,
+                                                    lineNumber: 804,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$comparison$2f$comparison$2d$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ComparisonTable"], {
@@ -7315,24 +7305,24 @@ function AssessmentDetailContent({ id }) {
                                                     onMatchSelect: handleMatchSelect
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 844,
+                                                    lineNumber: 833,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                            lineNumber: 717,
+                                            lineNumber: 706,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 710,
+                                    lineNumber: 699,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 709,
+                                lineNumber: 698,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TabsContent"], {
@@ -7346,20 +7336,20 @@ function AssessmentDetailContent({ id }) {
                                                     children: "Exceptions & Rationale"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 852,
+                                                    lineNumber: 841,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                                     children: "Manage exceptions and document rationale for flagged items"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 853,
+                                                    lineNumber: 842,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                            lineNumber: 851,
+                                            lineNumber: 840,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -7369,28 +7359,28 @@ function AssessmentDetailContent({ id }) {
                                                     children: "Exception management coming soon..."
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 859,
+                                                    lineNumber: 848,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 858,
+                                                lineNumber: 847,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                            lineNumber: 857,
+                                            lineNumber: 846,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 850,
+                                    lineNumber: 839,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 849,
+                                lineNumber: 838,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TabsContent"], {
@@ -7404,20 +7394,20 @@ function AssessmentDetailContent({ id }) {
                                                     children: "Audit Trail"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 868,
+                                                    lineNumber: 857,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                                     children: "A log of every user action on this assessment"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 869,
+                                                    lineNumber: 858,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                            lineNumber: 867,
+                                            lineNumber: 856,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -7433,14 +7423,14 @@ function AssessmentDetailContent({ id }) {
                                                                         children: "User Name"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                        lineNumber: 879,
+                                                                        lineNumber: 868,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
                                                                         children: "Action Taken"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                        lineNumber: 880,
+                                                                        lineNumber: 869,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -7448,18 +7438,18 @@ function AssessmentDetailContent({ id }) {
                                                                         children: "Date/Time"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                        lineNumber: 881,
+                                                                        lineNumber: 870,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                lineNumber: 878,
+                                                                lineNumber: 867,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 877,
+                                                            lineNumber: 866,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableBody"], {
@@ -7471,14 +7461,14 @@ function AssessmentDetailContent({ id }) {
                                                                             children: event.userName
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 887,
+                                                                            lineNumber: 876,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
                                                                             children: event.action
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 888,
+                                                                            lineNumber: 877,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -7493,29 +7483,29 @@ function AssessmentDetailContent({ id }) {
                                                                             })
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                            lineNumber: 889,
+                                                                            lineNumber: 878,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, event.id, true, {
                                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                                    lineNumber: 886,
+                                                                    lineNumber: 875,
                                                                     columnNumber: 27
                                                                 }, this))
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                            lineNumber: 884,
+                                                            lineNumber: 873,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 876,
+                                                    lineNumber: 865,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 875,
+                                                lineNumber: 864,
                                                 columnNumber: 19
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "text-center py-12 text-muted-foreground",
@@ -7523,40 +7513,40 @@ function AssessmentDetailContent({ id }) {
                                                     children: "No activity yet."
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                    lineNumber: 906,
+                                                    lineNumber: 895,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                                lineNumber: 905,
+                                                lineNumber: 894,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                            lineNumber: 873,
+                                            lineNumber: 862,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 866,
+                                    lineNumber: 855,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                lineNumber: 865,
+                                lineNumber: 854,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                        lineNumber: 702,
+                        lineNumber: 691,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                lineNumber: 574,
+                lineNumber: 563,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialog"], {
@@ -7570,7 +7560,7 @@ function AssessmentDetailContent({ id }) {
                                     children: "Archive this assessment?"
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 918,
+                                    lineNumber: 907,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogDescription"], {
@@ -7581,20 +7571,20 @@ function AssessmentDetailContent({ id }) {
                                             children: assessment.name
                                         }, void 0, false, {
                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                            lineNumber: 920,
+                                            lineNumber: 909,
                                             columnNumber: 30
                                         }, this),
                                         ' as "No Longer Required" and move it to the Archive. You can still view it from the Archive section.'
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 919,
+                                    lineNumber: 908,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                            lineNumber: 917,
+                            lineNumber: 906,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogFooter"], {
@@ -7603,7 +7593,7 @@ function AssessmentDetailContent({ id }) {
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 925,
+                                    lineNumber: 914,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogAction"], {
@@ -7612,24 +7602,24 @@ function AssessmentDetailContent({ id }) {
                                     children: "Yes, archive"
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 926,
+                                    lineNumber: 915,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                            lineNumber: 924,
+                            lineNumber: 913,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                    lineNumber: 916,
+                    lineNumber: 905,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                lineNumber: 915,
+                lineNumber: 904,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialog"], {
@@ -7643,7 +7633,7 @@ function AssessmentDetailContent({ id }) {
                                     children: "Restore this assessment?"
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 936,
+                                    lineNumber: 925,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogDescription"], {
@@ -7654,20 +7644,20 @@ function AssessmentDetailContent({ id }) {
                                             children: assessment.name
                                         }, void 0, false, {
                                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                            lineNumber: 938,
+                                            lineNumber: 927,
                                             columnNumber: 30
                                         }, this),
                                         ' back to the active assessments and set its status to "In Review".'
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 937,
+                                    lineNumber: 926,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                            lineNumber: 935,
+                            lineNumber: 924,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogFooter"], {
@@ -7676,7 +7666,7 @@ function AssessmentDetailContent({ id }) {
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 943,
+                                    lineNumber: 932,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogAction"], {
@@ -7684,30 +7674,30 @@ function AssessmentDetailContent({ id }) {
                                     children: "Yes, restore"
                                 }, void 0, false, {
                                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                                    lineNumber: 944,
+                                    lineNumber: 933,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                            lineNumber: 942,
+                            lineNumber: 931,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                    lineNumber: 934,
+                    lineNumber: 923,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/pages/assessment-detail-content.tsx",
-                lineNumber: 933,
+                lineNumber: 922,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/pages/assessment-detail-content.tsx",
-        lineNumber: 573,
+        lineNumber: 562,
         columnNumber: 5
     }, this);
 }

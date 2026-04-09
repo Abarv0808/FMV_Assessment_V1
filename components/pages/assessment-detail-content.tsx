@@ -137,22 +137,11 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         auditEvents: []
       }
 
-      // Fetch comparisons with line items - including extra_data for ai_matches
-      const { data: comparisonsData, error: comparisonsError } = await supabase
-        .from("assessment_comparisons")
-        .select(`
-          *,
-          assessment_line_items!inner (
-            id,
-            procedure_name,
-            country,
-            vendor_cost,
-            currency,
-            extra_data
-          )
-        `)
-        .eq("assessment_id", id)
-        .order("created_at", { ascending: true })
+      // Fetch comparisons via API (server-side to bypass RLS)
+      const comparisonsResponse = await fetch(`/api/assessments/${id}/comparisons`)
+      const { comparisons: comparisonsData, error: comparisonsError } = await comparisonsResponse.json()
+
+      console.log("[v0] Comparisons fetch result:", comparisonsData?.length, "items, error:", comparisonsError)
 
       if (!comparisonsError && comparisonsData) {
         const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {

@@ -2911,6 +2911,7 @@ function ProposalUploadStep({ data, onChange }) {
             groups[file.indication][file.trialPhase].push(file);
         }
         const phaseOrder = [
+            "All Phases",
             "Phase I",
             "Phase II",
             "Phase III",
