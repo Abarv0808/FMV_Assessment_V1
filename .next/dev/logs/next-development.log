@@ -331,3 +331,6 @@
 [00:50:21.440] Browser LOG     [v0] Mapped comparisons: 7 First item matches: 500
 [00:51:26.729] Server  LOG      ✓ Compiled in 63ms
 [00:51:39.066] Server  LOG      ✓ Compiled in 50ms
+[00:53:22.493] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-sg2hqvr7pjaw61u4njkkhp.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-sg2hqvr7pjaw61u4njkkhp.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775740749863} /_vercel/insights/view
+[00:55:36.493] Server  LOG      ✓ Compiled in 69ms
+[00:55:47.769] Server  LOG        Reload env: .env.development.local

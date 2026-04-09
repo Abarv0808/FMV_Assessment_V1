@@ -493,8 +493,6 @@ export function BenchmarksContent() {
                 const allFiles = phases.flatMap(p => p.files)
                 const totalProcedures = allFiles.reduce((sum, f) => sum + f.procedureCount, 0)
                 const uniqueCountries = new Set(allFiles.map(f => f.country)).size
-                const phaseNames = phases.map(p => p.phase).join(", ")
-                
                 return (
                   <Collapsible
                     key={indication}
@@ -512,7 +510,7 @@ export function BenchmarksContent() {
                           <div>
                             <h3 className="font-semibold text-base">{indication}</h3>
                             <p className="text-sm text-muted-foreground">
-                              {uniqueCountries} countries | {totalProcedures.toLocaleString()} procedures | {phaseNames}
+                              {uniqueCountries} countries | {totalProcedures.toLocaleString()} procedures | All Phases
                             </p>
                           </div>
                         </div>
