@@ -83,3 +83,57 @@
 [00:14:31.916] Browser LOG     [v0] Comparisons fetch result: undefined items, error: column assessment_line_items_1.extra_data does not exist
 [00:14:32.127] Server  LOG     [v0] Comparisons API fetch result: undefined "items, error:" "column assessment_line_items_1.extra_data does not exist"
 [00:14:32.256] Browser LOG     [v0] Comparisons fetch result: undefined items, error: column assessment_line_items_1.extra_data does not exist
+[00:15:58.409] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775742019885} /_vercel/insights/view
+[00:15:58.691] Server  LOG     [v0] Fetched 5 "assessments from database"
+[00:15:59.098] Server  LOG     [v0] Fetched 5 "assessments from database"
+[00:15:59.631] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775742021086} /_vercel/insights/view
+[00:17:05.640] Server  LOG     [v0] Store Items API called
+[00:17:05.643] Server  LOG     [v0] Storing 7 "line items for assessment" "02e78206-3708-40b6-9b49-0761fa5aceb5"
+[00:17:05.693] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[00:17:05.693] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
+[00:17:05.693] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[00:17:05.693] Browser LOG     [v0] Sheet data has 131 rows
+[00:17:05.693] Browser LOG     [v0] First 5 rows of data:
+[00:17:05.693] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
+[00:17:05.693] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
+[00:17:05.693] Browser LOG     [v0] Row 2 : [null,200,"Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
+[00:17:05.693] Browser LOG     [v0] Row 3 : [null,232,"Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
+[00:17:05.693] Browser LOG     [v0] Row 4 : [null,222,"Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
+[00:17:05.693] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
+[00:17:05.693] Browser LOG     [v0] Row 0 matched 0 columns: []
+[00:17:05.693] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
+[00:17:05.693] Browser LOG     [v0] Matched column 1 -> site via header: Site
+[00:17:05.693] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
+[00:17:05.693] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
+[00:17:05.693] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
+[00:17:05.693] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
+[00:17:05.693] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
+[00:17:05.693] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
+[00:17:05.693] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
+[00:17:05.693] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
+[00:17:05.693] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
+[00:17:05.693] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
+[00:17:05.693] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
+[00:17:05.693] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
+[00:17:05.693] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
+[00:17:05.693] Browser LOG     [v0] Stopping at row 9 - Description is empty
+[00:17:05.693] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
+[00:17:05.693] Browser LOG     [v0] Found 7 line items
+[00:17:05.693] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"02e78206-3708-40b6-9b49-0761fa5aceb5","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"Accepted","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1775742087158-tf30stps5","investigatorResponses":[],"numberOfUnits":160,"site":"200","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
+[00:17:05.693] Browser LOG     [v0] Storing 7 line items via API
+[00:17:05.693] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"200","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"232","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
+[00:17:06.347] Server  LOG     [v0] Created comparison for line item: "be549e87-0c35-474b-8233-543feed12d6d"
+[00:17:07.039] Server  LOG     [v0] Created comparison for line item: "4e3c4099-a17f-45f3-8f45-5520762ac5b9"
+[00:17:07.519] Server  LOG     [v0] Created comparison for line item: "075848e1-85ea-413f-987e-18a271e09f5f"
+[00:17:08.112] Server  LOG     [v0] Created comparison for line item: "5fa1484c-336f-4e84-a366-62f1db247518"
+[00:17:08.452] Server  LOG     [v0] Created comparison for line item: "5b0b30a9-2014-41eb-afd9-ff15dec54679"
+[00:17:08.757] Server  LOG     [v0] Created comparison for line item: "49ca8469-0366-4557-a009-74be56b6fe8e"
+[00:17:09.087] Server  LOG     [v0] Created comparison for line item: "ead5f263-c702-4c50-bf2d-f36463486f12"
+[00:17:09.088] Server  LOG     [v0] Inserted 7 "line items"
+[00:17:09.457] Browser LOG     [v0] Successfully stored 7 line items
+[00:17:09.603] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/02e78206-3708-40b6-9b49-0761fa5aceb5 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/02e78206-3708-40b6-9b49-0761fa5aceb5","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775742091073} /_vercel/insights/view
+[00:17:09.922] Server  LOG     [v0] Comparisons API fetch result: undefined "items, error:" "column assessment_line_items_1.extra_data does not exist"
+[00:17:10.050] Browser LOG     [v0] Comparisons fetch result: undefined items, error: column assessment_line_items_1.extra_data does not exist
+[00:17:10.151] Server  LOG     [v0] Comparisons API fetch result: undefined "items, error:" "column assessment_line_items_1.extra_data does not exist"
+[00:17:10.293] Browser LOG     [v0] Comparisons fetch result: undefined items, error: column assessment_line_items_1.extra_data does not exist
+[00:18:18.963] Server  LOG      ✓ Compiled in 47ms

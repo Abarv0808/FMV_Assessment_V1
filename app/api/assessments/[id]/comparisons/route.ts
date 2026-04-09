@@ -19,8 +19,7 @@ export async function GET(
           procedure_name,
           country,
           vendor_cost,
-          currency,
-          extra_data
+          currency
         )
       `)
       .eq("assessment_id", id)

@@ -157,17 +157,16 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             // Keep defaults if parsing fails
           }
           
-          // Parse ai_matches from line item's extra_data
+          // Parse ai_matches from comparison's ai_matches field (stored during run-comparison)
           let matches: any[] = []
-          const lineItemExtraData = comp.assessment_line_items.extra_data || {}
-          if (lineItemExtraData.ai_matches) {
+          if (comp.ai_matches) {
             try {
-              matches = Array.isArray(lineItemExtraData.ai_matches) ? lineItemExtraData.ai_matches : JSON.parse(lineItemExtraData.ai_matches)
+              matches = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
             } catch (e) {
               matches = []
             }
           }
-          const bestMatch = lineItemExtraData.best_match || matches[0]
+          const bestMatch = matches[0]
           
           return {
           id: comp.id,
