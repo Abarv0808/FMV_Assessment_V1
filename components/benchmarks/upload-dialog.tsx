@@ -27,6 +27,7 @@ import { Upload, FileSpreadsheet, X, CheckCircle, AlertCircle, Loader2 } from "l
 import { cn } from "@/lib/utils"
 
 const INDICATIONS = [
+  "All",
   "Alpha-1 Antitrypsin",
   "Cataplexy and Narcolepsy",
   "Fabry",
