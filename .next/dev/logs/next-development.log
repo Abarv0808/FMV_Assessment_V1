@@ -13,3 +13,12 @@
 [00:04:16.501] Server  LOG        Reload env: .env.development.local
 [00:06:37.955] Server  LOG      ✓ Compiled in 55ms
 [00:06:38.269] Server  LOG      ✓ Compiled in 36ms
+[00:07:17.458] Server  LOG        Reload env: .env.development.local
+[00:08:18.645] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775741560102} /_vercel/insights/view
+[00:08:19.006] Server  LOG     [v0] Fetched 37 "assessments from database"
+[00:08:19.364] Server  LOG     [v0] Fetched 37 "assessments from database"
+[00:08:28.291] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/1f7cb8ab-0e95-40ae-90ce-b9368fbdba45 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/1f7cb8ab-0e95-40ae-90ce-b9368fbdba45","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775741569774} /_vercel/insights/view
+[00:08:37.729] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775741579212} /_vercel/insights/view
+[00:08:38.247] Server  LOG     [v0] Fetched 37 "assessments from database"
+[00:08:38.605] Server  LOG     [v0] Fetched 37 "assessments from database"
+[00:09:45.305] Server  LOG        Reload env: .env.development.local
