@@ -137,7 +137,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         auditEvents: []
       }
 
-      // Fetch comparisons with line items - using ONLY basic columns that exist
+      // Fetch comparisons with line items - including extra_data for ai_matches
       const { data: comparisonsData, error: comparisonsError } = await supabase
         .from("assessment_comparisons")
         .select(`
@@ -147,7 +147,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             procedure_name,
             country,
             vendor_cost,
-            currency
+            currency,
+            extra_data
           )
         `)
         .eq("assessment_id", id)
@@ -167,16 +168,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             // Keep defaults if parsing fails
           }
           
-          // Parse ai_matches from database
+          // Parse ai_matches from line item's extra_data
           let matches: any[] = []
-          if (comp.ai_matches) {
+          const lineItemExtraData = comp.assessment_line_items.extra_data || {}
+          if (lineItemExtraData.ai_matches) {
             try {
-              matches = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
+              matches = Array.isArray(lineItemExtraData.ai_matches) ? lineItemExtraData.ai_matches : JSON.parse(lineItemExtraData.ai_matches)
             } catch (e) {
               matches = []
             }
           }
-          const bestMatch = matches[0]
+          const bestMatch = lineItemExtraData.best_match || matches[0]
           
           return {
           id: comp.id,

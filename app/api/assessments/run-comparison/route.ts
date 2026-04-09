@@ -369,7 +369,7 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
       }
     }
 
-    // 4. Update assessment_comparisons with results including ai_matches
+    // 4. Update results - store ai_matches in assessment_line_items.extra_data
     console.log("[v0] Updating", results.length, "comparison records")
     
     for (const result of results) {
@@ -379,12 +379,37 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
       // Get best match data for benchmark columns
       const bestMatch = result.bestMatch
 
-      // Update flag AND ai_matches for persistence
+      // First, get the current extra_data from line item
+      const { data: lineItemData } = await supabase
+        .from("assessment_line_items")
+        .select("extra_data")
+        .eq("id", result.lineItemId)
+        .single()
+      
+      // Merge ai_matches into extra_data
+      const currentExtraData = lineItemData?.extra_data || {}
+      const updatedExtraData = {
+        ...currentExtraData,
+        ai_matches: result.matches,
+        ai_match_flag: validFlag,
+        best_match: bestMatch
+      }
+      
+      // Update the line item with ai_matches in extra_data
+      const { error: lineItemError } = await supabase
+        .from("assessment_line_items")
+        .update({ extra_data: updatedExtraData })
+        .eq("id", result.lineItemId)
+      
+      if (lineItemError) {
+        console.log("[v0] Error updating line item extra_data:", lineItemError.message)
+      }
+
+      // Update assessment_comparisons with flag and benchmark values (no ai_matches column)
       const { data: updated, error: updateError } = await supabase
         .from("assessment_comparisons")
         .update({ 
           flag: validFlag,
-          ai_matches: result.matches,
           benchmark_90th: bestMatch?.p90 || null,
           benchmark_high: bestMatch?.p75 || null,
           benchmark_median: bestMatch?.p50 || null,
@@ -404,7 +429,6 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
             assessment_id: assessmentId,
             line_item_id: result.lineItemId,
             flag: validFlag,
-            ai_matches: result.matches,
             benchmark_90th: bestMatch?.p90 || null,
             benchmark_high: bestMatch?.p75 || null,
             benchmark_median: bestMatch?.p50 || null,

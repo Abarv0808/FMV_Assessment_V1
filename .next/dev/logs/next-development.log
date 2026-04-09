@@ -94,3 +94,8 @@
 [00:01:47.204] Browser LOG     [v0] Mapped comparisons: 7 First item matches: 500
 [00:13:15.528] Server  LOG      ✓ Compiled in 84ms
 [00:13:23.547] Server  LOG      ✓ Compiled in 56ms
+[00:42:29.544] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:42:29.544] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/66c1ce68-b642-4202-a12e-9f0d032fa788","route":"/assessments/[id]"}
+[00:42:29.544] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-sg2hqvr7pjaw61u4njkkhp.vusercontent.net/assessments/66c1ce68-b642-4202-a12e-9f0d032fa788 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-sg2hqvr7pjaw61u4njkkhp.vusercontent.net/assessments/66c1ce68-b642-4202-a12e-9f0d032fa788","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775740096938} /_vercel/insights/view
+[00:44:35.690] Server  LOG      ✓ Compiled in 68ms
+[00:44:51.353] Server  LOG      ✓ Compiled in 50ms
