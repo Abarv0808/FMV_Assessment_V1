@@ -5,7 +5,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 /** @type {import('next').NextConfig} */
-// Cache bust v9
+// Cache bust v10
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
@@ -17,9 +17,9 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '10mb',
     },
-    turbo: {
-      root: __dirname,
-    },
+  },
+  turbopack: {
+    root: __dirname,
   },
 }
 
