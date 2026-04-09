@@ -338,10 +338,10 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
                     });
                 }
                 if (output && output.matches && output.matches.length > 0) {
-                    // For each matched procedure, fetch pricing from ALL countries
+                    // For each matched procedure, fetch pricing ONLY from selected countries
                     const matchedProcedureNames = output.matches.map((m)=>m.procedureName);
-                    // Query all benchmark procedures with these names (from all countries)
-                    const { data: allCountryPricing } = await supabase.from("benchmark_procedures").select(`
+                    // Query benchmark procedures with these names - ONLY from selected benchmark files
+                    let pricingQuery = supabase.from("benchmark_procedures").select(`
               id,
               procedure_name,
               category,
@@ -351,7 +351,12 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
               p90,
               p100,
               benchmark_files(country)
-            `).in("procedure_name", matchedProcedureNames).limit(500);
+            `).in("procedure_name", matchedProcedureNames);
+                    // Filter to ONLY selected benchmark files (selected countries)
+                    if (benchmarkFileIds && benchmarkFileIds.length > 0) {
+                        pricingQuery = pricingQuery.in("benchmark_file_id", benchmarkFileIds);
+                    }
+                    const { data: allCountryPricing } = await pricingQuery.limit(500);
                     // Build matches with all countries' pricing
                     const matchedBenchmarks = [];
                     for (const match of output.matches){

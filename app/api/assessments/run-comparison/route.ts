@@ -365,17 +365,20 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
       }
     }
 
-    // 4. Update assessment_comparisons with flag only (other columns may not exist)
+    // 4. Update assessment_comparisons with flag and ai_matches
     console.log("[v0] Updating", results.length, "comparison records")
     
     for (const result of results) {
       // Convert MULTIPLE_MATCHES to YELLOW since DB only allows GREEN/YELLOW/RED/NO_MATCH
       const validFlag = result.flag === "MULTIPLE_MATCHES" ? "YELLOW" : result.flag
 
-      // Update assessment_comparisons with flag only
+      // Update assessment_comparisons with flag and ai_matches
       const { data: updated, error: updateError } = await supabase
         .from("assessment_comparisons")
-        .update({ flag: validFlag })
+        .update({ 
+          flag: validFlag,
+          ai_matches: result.matches || []
+        })
         .eq("line_item_id", result.lineItemId)
         .select("id")
       
@@ -389,7 +392,8 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
           .insert({
             assessment_id: assessmentId,
             line_item_id: result.lineItemId,
-            flag: validFlag
+            flag: validFlag,
+            ai_matches: result.matches || []
           })
         
         if (insertError) {
