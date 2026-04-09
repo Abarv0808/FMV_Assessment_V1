@@ -301,35 +301,40 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </SelectContent>
                     </Select>
                   </TableCell>
-                  <TableCell className="min-w-[250px] max-w-[400px]" onClick={(e) => e.stopPropagation()}>
+                  <TableCell className="min-w-[300px] max-w-[450px]" onClick={(e) => e.stopPropagation()}>
                     {editingAdditionalInfo === comparison.lineItem.id ? (
-                      <div className="flex items-center gap-2">
-                        <Input
+                      <div className="flex flex-col gap-2">
+                        <Textarea
                           value={editAdditionalInfoValue}
                           onChange={(e) => setEditAdditionalInfoValue(e.target.value)}
-                          className="h-8 text-sm flex-1"
+                          className="min-h-[100px] text-sm resize-y"
                           autoFocus
                           onKeyDown={(e) => {
-                            if (e.key === "Enter") saveAdditionalInfo(comparison.lineItem.id)
+                            if (e.key === "Enter" && e.ctrlKey) saveAdditionalInfo(comparison.lineItem.id)
                             if (e.key === "Escape") cancelEditingAdditionalInfo()
                           }}
                         />
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-6 w-6 text-green-600"
-                          onClick={() => saveAdditionalInfo(comparison.lineItem.id)}
-                        >
-                          <Check className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-6 w-6 text-red-600"
-                          onClick={cancelEditingAdditionalInfo}
-                        >
-                          <X className="h-4 w-4" />
-                        </Button>
+                        <div className="flex items-center gap-2 justify-end">
+                          <span className="text-xs text-muted-foreground">Ctrl+Enter to save</span>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-7 text-green-600 gap-1"
+                            onClick={() => saveAdditionalInfo(comparison.lineItem.id)}
+                          >
+                            <Check className="h-4 w-4" />
+                            Save
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-7 text-red-600 gap-1"
+                            onClick={cancelEditingAdditionalInfo}
+                          >
+                            <X className="h-4 w-4" />
+                            Cancel
+                          </Button>
+                        </div>
                       </div>
                     ) : (
                       <div className="flex items-center gap-2 group">

@@ -1055,6 +1055,10 @@
     min-height: calc(var(--spacing) * 16);
   }
 
+  .min-h-\[100px\] {
+    min-height: 100px;
+  }
+
   .min-h-\[400px\] {
     min-height: 400px;
   }
@@ -1247,6 +1251,10 @@
     max-width: 400px;
   }
 
+  .max-w-\[450px\] {
+    max-width: 450px;
+  }
+
   .max-w-\[calc\(100\%-2rem\)\] {
     max-width: calc(100% - 2rem);
   }
@@ -1333,6 +1341,10 @@
 
   .min-w-\[250px\] {
     min-width: 250px;
+  }
+
+  .min-w-\[300px\] {
+    min-width: 300px;
   }
 
   .min-w-\[var\(--radix-select-trigger-width\)\] {
@@ -1481,6 +1493,10 @@
 
   .resize-none {
     resize: none;
+  }
+
+  .resize-y {
+    resize: vertical;
   }
 
   .scroll-my-1 {
