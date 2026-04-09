@@ -273,11 +273,11 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
         }
         
         if (output && output.matches && output.matches.length > 0) {
-          // For each matched procedure, fetch pricing from ALL countries
+          // For each matched procedure, fetch pricing ONLY from selected countries
           const matchedProcedureNames = output.matches.map((m: any) => m.procedureName)
           
-          // Query all benchmark procedures with these names (from all countries)
-          const { data: allCountryPricing } = await supabase
+          // Query benchmark procedures with these names - ONLY from selected benchmark files
+          let pricingQuery = supabase
             .from("benchmark_procedures")
             .select(`
               id,
@@ -291,7 +291,13 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
               benchmark_files(country)
             `)
             .in("procedure_name", matchedProcedureNames)
-            .limit(500)
+          
+          // Filter to ONLY selected benchmark files (selected countries)
+          if (benchmarkFileIds && benchmarkFileIds.length > 0) {
+            pricingQuery = pricingQuery.in("benchmark_file_id", benchmarkFileIds)
+          }
+          
+          const { data: allCountryPricing } = await pricingQuery.limit(500)
           
           // Build matches with all countries' pricing
           const matchedBenchmarks: any[] = []

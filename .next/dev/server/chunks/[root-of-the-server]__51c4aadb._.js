@@ -151,30 +151,10 @@ async function POST(request) {
                 head: true
             });
             console.log("[v0] Total benchmark procedures in database:", totalCount);
-            // Strategy: Get UNIQUE procedure names first (same procedure exists in each country)
-            // We'll fetch from multiple countries to get diverse procedure names
-            // Then after AI matches, we'll fetch pricing for all countries for matched procedures
-            // Get distinct procedure names by sampling from different benchmark files
-            let benchmarkFileFilter = benchmarkFileIds;
-            if (!benchmarkFileFilter || benchmarkFileFilter.length === 0) {
-                // Get all benchmark files to sample from
-                const { data: allFiles } = await supabase.from("benchmark_files").select("id, country").limit(100);
-                if (allFiles && allFiles.length > 0) {
-                    // Take first file from each indication (they all have same procedure names, different pricing)
-                    const uniqueCountries = new Map();
-                    for (const file of allFiles){
-                        if (file.country && !uniqueCountries.has(file.country)) {
-                            uniqueCountries.set(file.country, file.id);
-                        }
-                    }
-                    // Just take ONE file - all have same procedure names
-                    benchmarkFileFilter = [
-                        allFiles[0].id
-                    ];
-                    console.log("[v0] Using benchmark file:", allFiles[0].country, "to get procedure names");
-                }
-            }
-            // Fetch benchmark procedures from ONE country (they all have same procedure names)
+            // Fetch benchmark procedures ONLY from selected countries/files
+            console.log("[v0] Selected benchmark file IDs:", benchmarkFileIds?.length || 0, "files");
+            // If user selected specific benchmark files, use ONLY those
+            // This ensures we only compare against the countries they selected
             let benchmarkQuery = supabase.from("benchmark_procedures").select(`
           id,
           procedure_name,
@@ -187,10 +167,18 @@ async function POST(request) {
           p100,
           benchmark_file_id,
           benchmark_files(country)
-        `).limit(2000);
-            // Filter to ONE benchmark file to get unique procedure names
-            if (benchmarkFileFilter && benchmarkFileFilter.length > 0) {
-                benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileFilter);
+        `).limit(5000);
+            // Filter to ONLY the selected benchmark files (selected countries)
+            if (benchmarkFileIds && benchmarkFileIds.length > 0) {
+                benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds);
+                console.log("[v0] Filtering to selected benchmark files only");
+            } else {
+                // If no files selected, limit to first file to avoid massive query
+                const { data: firstFile } = await supabase.from("benchmark_files").select("id, country").limit(1).single();
+                if (firstFile) {
+                    benchmarkQuery = benchmarkQuery.eq("benchmark_file_id", firstFile.id);
+                    console.log("[v0] No files selected, using fallback:", firstFile.country);
+                }
             }
             const result = await benchmarkQuery;
             const rawBenchmarks = result.data || [];
@@ -425,37 +413,14 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
                 });
             }
         }
-        // 4. Update results - store ai_matches in assessment_line_items.extra_data
+        // 4. Update assessment_comparisons with flag only (other columns may not exist)
         console.log("[v0] Updating", results.length, "comparison records");
         for (const result of results){
             // Convert MULTIPLE_MATCHES to YELLOW since DB only allows GREEN/YELLOW/RED/NO_MATCH
             const validFlag = result.flag === "MULTIPLE_MATCHES" ? "YELLOW" : result.flag;
-            // Get best match data for benchmark columns
-            const bestMatch = result.bestMatch;
-            // First, get the current extra_data from line item
-            const { data: lineItemData } = await supabase.from("assessment_line_items").select("extra_data").eq("id", result.lineItemId).single();
-            // Merge ai_matches into extra_data
-            const currentExtraData = lineItemData?.extra_data || {};
-            const updatedExtraData = {
-                ...currentExtraData,
-                ai_matches: result.matches,
-                ai_match_flag: validFlag,
-                best_match: bestMatch
-            };
-            // Update the line item with ai_matches in extra_data
-            const { error: lineItemError } = await supabase.from("assessment_line_items").update({
-                extra_data: updatedExtraData
-            }).eq("id", result.lineItemId);
-            if (lineItemError) {
-                console.log("[v0] Error updating line item extra_data:", lineItemError.message);
-            }
-            // Update assessment_comparisons with flag and benchmark values (no ai_matches column)
+            // Update assessment_comparisons with flag only
             const { data: updated, error: updateError } = await supabase.from("assessment_comparisons").update({
-                flag: validFlag,
-                benchmark_90th: bestMatch?.p90 || null,
-                benchmark_high: bestMatch?.p75 || null,
-                benchmark_median: bestMatch?.p50 || null,
-                benchmark_low: bestMatch?.p25 || null
+                flag: validFlag
             }).eq("line_item_id", result.lineItemId).select("id");
             console.log("[v0] Update result for", result.lineItemId, ":", updated?.length || 0, "rows, error:", updateError?.message);
             // If no rows were updated (comparison doesn't exist), insert one
@@ -464,11 +429,7 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
                 const { error: insertError } = await supabase.from("assessment_comparisons").insert({
                     assessment_id: assessmentId,
                     line_item_id: result.lineItemId,
-                    flag: validFlag,
-                    benchmark_90th: bestMatch?.p90 || null,
-                    benchmark_high: bestMatch?.p75 || null,
-                    benchmark_median: bestMatch?.p50 || null,
-                    benchmark_low: bestMatch?.p25 || null
+                    flag: validFlag
                 });
                 if (insertError) {
                     console.log("[v0] Insert error:", insertError.message);
