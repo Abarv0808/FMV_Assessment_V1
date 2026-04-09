@@ -418,14 +418,15 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
                 });
             }
         }
-        // 4. Update assessment_comparisons with flag only (other columns may not exist)
+        // 4. Update assessment_comparisons with flag and ai_matches
         console.log("[v0] Updating", results.length, "comparison records");
         for (const result of results){
             // Convert MULTIPLE_MATCHES to YELLOW since DB only allows GREEN/YELLOW/RED/NO_MATCH
             const validFlag = result.flag === "MULTIPLE_MATCHES" ? "YELLOW" : result.flag;
-            // Update assessment_comparisons with flag only
+            // Update assessment_comparisons with flag and ai_matches
             const { data: updated, error: updateError } = await supabase.from("assessment_comparisons").update({
-                flag: validFlag
+                flag: validFlag,
+                ai_matches: result.matches || []
             }).eq("line_item_id", result.lineItemId).select("id");
             console.log("[v0] Update result for", result.lineItemId, ":", updated?.length || 0, "rows, error:", updateError?.message);
             // If no rows were updated (comparison doesn't exist), insert one
@@ -434,7 +435,8 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
                 const { error: insertError } = await supabase.from("assessment_comparisons").insert({
                     assessment_id: assessmentId,
                     line_item_id: result.lineItemId,
-                    flag: validFlag
+                    flag: validFlag,
+                    ai_matches: result.matches || []
                 });
                 if (insertError) {
                     console.log("[v0] Insert error:", insertError.message);

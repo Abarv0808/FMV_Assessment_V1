@@ -567,3 +567,106 @@
 [00:39:15.564] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
 [00:40:50.798] Server  LOG      ✓ Compiled in 71ms
 [00:40:59.135] Server  LOG      ✓ Compiled in 50ms
+[00:42:15.148] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[00:42:15.872] Browser LOG     [v0] Linked benchmark files for comparison: 1
+[00:42:15.988] Server  LOG     [v0] Run comparison API called
+[00:42:15.989] Server  LOG     [v0] Assessment ID: "c17088c2-d151-45af-a6e9-dc44d254f78d"
+[00:42:15.995] Server  LOG     [v0] Fetching line items...
+[00:42:16.222] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[00:42:16.223] Server  LOG     [v0] Fetching benchmark procedures...
+[00:42:16.359] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
+[00:42:16.660] Server  LOG     [v0] Total benchmark procedures in database: 255722
+[00:42:16.660] Server  LOG     [v0] Selected benchmark file IDs: 1 "files"
+[00:42:16.661] Server  LOG     [v0] Filtering to selected benchmark files only
+[00:42:16.931] Server  LOG     [v0] Benchmark query result: 206 "raw," 206 "valid names," 203 "with pricing"
+[00:42:16.931] Server  LOG     [v0] Benchmark countries found: 1 "countries:" "United States" ""
+[00:42:16.931] Server  LOG     [v0] === SAMPLE DATA COMPARISON ===
+[00:42:16.931] Server  LOG     [v0] LINE ITEMS FROM ASSESSMENT (first 3):
+[00:42:16.931] Server  LOG     [v0]   1. "250RMB/hour*2 hours*4 visits"
+[00:42:16.932] Server  LOG     [v0]   2. "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field."
+[00:42:16.932] Server  LOG     [v0]   3. "Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field."
+[00:42:16.932] Server  LOG     [v0] BENCHMARK PROCEDURES (first 10):
+[00:42:16.932] Server  LOG     [v0]   1. "Insertion of implantable intra-arterial infusion pump (eg, for chemotherapy of liver)" | HasPricing: true | P90: 6556
+[00:42:16.932] Server  LOG     [v0]   2. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional, not to be used for routine venipuncture, femoral or jugular vein" | HasPricing: true | P90: 175
+[00:42:16.932] Server  LOG     [v0]   3. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional,  (separate procedure), for diagnostic or therapeutic purposes. (Not to be used for routine venipuncture)" | HasPricing: true | P90: 143
+[00:42:16.932] Server  LOG     [v0]   4. "Collection of capillary blood specimen (eg, finger, heel, ear stick)" | HasPricing: true | P90: 147
+[00:42:16.933] Server  LOG     [v0]   5. "Transfusion; blood, serum or components" | HasPricing: true | P90: 859
+[00:42:16.933] Server  LOG     [v0]   6. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); diagnostic; with or without collection of specimen by brushing or washing; moderate sedation" | HasPricing: true | P90: 2481
+[00:42:16.933] Server  LOG     [v0]   7. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); with biopsy; single or multiple; moderate sedation" | HasPricing: true | P90: 7792
+[00:42:16.933] Server  LOG     [v0]   8. "Colonoscopy, flexible, proximal to splenic flexure; diagnostic, with or without collection of specimen(s) by brushing or washing, with or without colondecompression (separate procedure); moderate sedation" | HasPricing: true | P90: 4303
+[00:42:16.933] Server  LOG     [v0]   9. "Colonoscopy, flexible; with biopsy, single or multiple" | HasPricing: true | P90: 7100
+[00:42:16.933] Server  LOG     [v0]   10. "Colonoscopy, flexible; with directed submucosal injection(s), any substance" | HasPricing: true | P90: 2709
+[00:42:16.934] Server  LOG     [v0] === END SAMPLE DATA ===
+[00:42:16.934] Server  LOG     [v0] Processing line item: "\"250RMB/hour*2 hours*4 visits\""
+[00:42:26.848] Server  LOG     [v0] AI returned 3 "matches for:" "250RMB/hour*2 hours*4 visits"
+[00:42:26.848] Server  LOG     [v0]   Match 1: "Physician: Obstetrics/Gynecology - Per Hour" (80% similar)
+[00:42:26.848] Server  LOG     [v0]   Match 2: "Physician - Per Hour" (80% similar)
+[00:42:26.849] Server  LOG     [v0]   Match 3: "Study Coordinator - Per Hour" (70% similar)
+[00:42:27.259] Server  LOG     [v0] Processing line item: "\"Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field.\""
+[00:42:35.989] Server  LOG     [v0] AI returned 3 "matches for:" "Project supervision and quality control,"
+[00:42:35.990] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" (90% similar)
+[00:42:35.990] Server  LOG     [v0]   Match 2: "Study Coordinator - Per Hour" (70% similar)
+[00:42:35.990] Server  LOG     [v0]   Match 3: "Physician - Per Hour" (60% similar)
+[00:42:36.208] Server  LOG     [v0] Processing line item: "\"Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field.\""
+[00:42:42.991] Server  LOG     [v0] AI returned 3 "matches for:" "Clinical research coordinator. The HCP i"
+[00:42:42.992] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" (90% similar)
+[00:42:42.992] Server  LOG     [v0]   Match 2: "Study Coordinator - Per Hour" (70% similar)
+[00:42:42.992] Server  LOG     [v0]   Match 3: "Study Coordinator, Complex (e.g. initial visit, final visit) - Per Visit" (60% similar)
+[00:42:43.309] Server  LOG     [v0] Processing line item: "\"Local Ethics Committee fee\""
+[00:42:51.162] Server  LOG     [v0] AI returned 3 "matches for:" "Local Ethics Committee fee"
+[00:42:51.163] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" (90% similar)
+[00:42:51.163] Server  LOG     [v0]   Match 2: "IRB Renewal Fee/Annual IRB Review" (70% similar)
+[00:42:51.163] Server  LOG     [v0]   Match 3: "Institutional Review Board, IRB document preparation for amendments, changes to informed consent, administrative preparation fee" (60% similar)
+[00:42:51.411] Server  LOG     [v0] Processing line item: "\"Hospital management fee: 3%.\""
+[00:42:54.244] Server  LOG     [v0] AI returned 0 "matches for:" "Hospital management fee: 3%."
+[00:42:54.244] Server  LOG     [v0] Processing line item: "\"Tax: 12%\""
+[00:43:00.328] Server  LOG     [v0] AI returned 3 "matches for:" "Tax: 12%"
+[00:43:00.328] Server  LOG     [v0]   Match 1: "Patient Reimbursement, Expenses, Patient Travel - Per Visit" (70% similar)
+[00:43:00.328] Server  LOG     [v0]   Match 2: "Daily Facility Charge - Per Day" (65% similar)
+[00:43:00.328] Server  LOG     [v0]   Match 3: "Archiving and Document Storage - Per Year; Archive" (60% similar)
+[00:43:00.463] Server  LOG     [v0] Processing line item: "\"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person\""
+[00:43:06.567] Server  LOG     [v0] AI returned 3 "matches for:" "The cost for CMV-specific T cell tests i"
+[00:43:06.567] Server  LOG     [v0]   Match 1: "Tuberculosis test, cell mediated immunity measurement of gamma interferon antigen response (e.g. QFTB: QuantiFeron-TB Gold test)" (70% similar)
+[00:43:06.567] Server  LOG     [v0]   Match 2: "Immune globulin (IgIV), human, for intravenous use (immune globulin product); (add 96365 or 96374 separately for administration)" (60% similar)
+[00:43:06.568] Server  LOG     [v0]   Match 3: "Interpretation and Report; Ultrasound, abdomen, abdominal (echography) (uls)" (55% similar)
+[00:43:06.718] Server  LOG     [v0] Updating 7 "comparison records"
+[00:43:07.127] Server  LOG     [v0] Update result for "c060a7f2-4807-4e85-a4df-c705a50f57cb" ":" 1 "rows, error:" undefined
+[00:43:08.197] Server  LOG     [v0] Update result for "e2ebf7a7-4218-4803-90da-a21a717d5920" ":" 1 "rows, error:" undefined
+[00:43:08.327] Server  LOG     [v0] Update result for "f6fe0510-c3c6-464c-9f63-751a44ad6e50" ":" 1 "rows, error:" undefined
+[00:43:09.101] Server  LOG     [v0] Update result for "a31621c4-26e2-4e59-b98e-4b60ac5f827e" ":" 1 "rows, error:" undefined
+[00:43:09.215] Server  LOG     [v0] Update result for "b93af524-e044-400b-aad0-804a3cfda9b7" ":" 1 "rows, error:" undefined
+[00:43:09.458] Server  LOG     [v0] Update result for "1fb1575f-f441-47a5-9506-966d4b2ac6d1" ":" 1 "rows, error:" undefined
+[00:43:09.577] Server  LOG     [v0] Update result for "afe92e2c-58e1-4d82-9093-ef783360f491" ":" 1 "rows, error:" undefined
+[00:43:09.729] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 206 benchmarks","results":[{"bestMatch":{"benchmarkId":"517c95a8-a44a-43c8-b4e5-36d1ef83c1db","category":"Non-Procedures","country":"United States","p100":0,"p25":155,"p50":318,"p75":517,"p90":800,"procedureName":"Physician: Obstetrics/Gynecology - Per Hour","similarity":0.8},"flag":"MULTIPLE_MATCHES","lineItemId":"c060a7f2-4807-4e85-a4df-c705a50f57cb","matchCount":3,"matches":[{"benchmarkId":"517c95a8-a44a-43c8-b4e5-36d1ef83c1db","category":"Non-Procedures","country":"United States","p100":0,"p25":155,"p50":318,"p75":517,"p90":800,"procedureName":"Physician: Obstetrics/Gynecology - Per Hour","similarity":0.8},{"benchmarkId":"1d01e393-82c0-4088-bf0e-23eab277dbf0","category":"Non-Procedures","country":"United States","p100":867,"p25":227,"p50":265,"p75":303,"p90":357,"procedureName":"Physician - Per Hour","similarity":0.8},{"benchmarkId":"b707a5c4-eebf-430f-9558-f821e9eac7ad","category":"Non-Procedures","country":"United States","p100":471,"p25":93,"p50":97,"p75":102,"p90":123,"procedureName":"Study Coordinator - Per Hour","similarity":0.7}]},{"bestMatch":{"benchmarkId":"17a7b546-c949-430c-b142-ccf058de3c7c","category":"Non-Procedures","country":"United States","p100":0,"p25":210,"p50":279,"p75":371,"p90":479,"procedureName":"Physician: Hematology - Per Hour","similarity":0.9},"flag":"MULTIPLE_MATCHES","lineItemId":"e2ebf7a7-4218-4803-90da-a21a717d5920","matchCount":3,"matches":[{"benchmarkId":"17a7b546-c949-430c-b142-ccf058de3c7c","category":"Non-Procedures","country":"United States","p100":0,"p25":210,"p50":279,"p75":371,"p90":479,"procedureName":"Physician: Hematology - Per Hour","similarity":0.9},{"benchmarkId":"b707a5c4-eebf-430f-9558-f821e9eac7ad","category":"Non-Procedures","country":"United States","p100":471,"p25":93,"p50":97,"p75":102,"p90":123,"procedureName":"Study Coordinator - Per Hour","similarity":0.7},{"benchmarkId":"1d01e393-82c0-4088-bf0e-23eab277dbf0","category":"Non-Procedures","country":"United States","p100":867,"p25":227,"p50":265,"p75":303,"p90":357,"procedureName":"Physician - Per Hour","similarity":0.6}]},{"bestMatch":{"benchmarkId":"17a7b546-c949-430c-b142-ccf058de3c7c","category":"Non-Procedures","country":"United States","p100":0,"p25":210,"p50":279,"p75":371,"p90":479,"procedureName":"Physician: Hematology - Per Hour","similarity":0.9},"flag":"MULTIPLE_MATCHES","lineItemId":"f6fe0510-c3c6-464c-9f63-751a44ad6e50","matchCount":3,"matches":[{"benchmarkId":"17a7b546-c949-430c-b142-ccf058de3c7c","category":"Non-Procedures","country":"United States","p100":0,"p25":210,"p50":279,"p75":371,"p90":479,"procedureName":"Physician: Hematology - Per Hour","similarity":0.9},{"benchmarkId":"b707a5c4-eebf-430f-9558-f821e9eac7ad","category":"Non-Procedures","country":"United States","p100":471,"p25":93,"p50":97,"p75":102,"p90":123,"procedureName":"Study Coordinator - Per Hour","similarity":0.7},{"benchmarkId":"780eaa88-f24d-4076-93ef-2f6289d37854","category":"Non-Procedures","country":"United States","p100":478,"p25":155,"p50":160,"p75":166,"p90":181,"procedureName":"Study Coordinator, Complex (e.g. initial visit, final visit) - Per Visit","similarity":0.6}]},{"bestMatch":{"benchmarkId":"92ce7bae-4ede-4f6e-9bfa-83534c64ea4f","category":"Site Costs","country":"United States","p100":37725,"p25":2455,"p50":2946,"p75":3928,"p90":7039,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9},"flag":"MULTIPLE_MATCHES","lineItemId":"a31621c4-26e2-4e59-b98e-4b60ac5f827e","matchCount":3,"matches":[{"benchmarkId":"92ce7bae-4ede-4f6e-9bfa-83534c64ea4f","category":"Site Costs","country":"United States","p100":37725,"p25":2455,"p50":2946,"p75":3928,"p90":7039,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9},{"benchmarkId":"9704c179-6987-405e-9a2e-ce27c97cca4f","category":"Site Costs","country":"United States","p100":5187,"p25":757,"p50":1005,"p75":1397,"p90":1631,"procedureName":"IRB Renewal Fee/Annual IRB Review","similarity":0.7},{"benchmarkId":"363a3c97-2384-4492-bfb1-f53d85c5b65c","category":"Site Costs","country":"United States","p100":6130,"p25":637,"p50":883,"p75":1321,"p90":1798,"procedureName":"Institutional Review Board, IRB document preparation for amendments, changes to informed consent, administrative preparation fee","similarity":0.6}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"b93af524-e044-400b-aad0-804a3cfda9b7","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"d77d7f7b-90c1-455c-94c9-1401bfb48945","category":"Non-Procedures","country":"United States","p100":235,"p25":50,"p50":51,"p75":55,"p90":62,"procedureName":"Patient Reimbursement, Expenses, Patient Travel - Per Visit","similarity":0.7},"flag":"MULTIPLE_MATCHES","lineItemId":"1fb1575f-f441-47a5-9506-966d4b2ac6d1","matchCount":4,"matches":[{"benchmarkId":"d77d7f7b-90c1-455c-94c9-1401bfb48945","category":"Non-Procedures","country":"United States","p100":235,"p25":50,"p50":51,"p75":55,"p90":62,"procedureName":"Patient Reimbursement, Expenses, Patient Travel - Per Visit","similarity":0.7},{"benchmarkId":"7232cc2d-646c-4f56-9cff-1f4383d83984","category":"Non-Procedures","country":"United States","p100":235,"p25":50,"p50":51,"p75":55,"p90":62,"procedureName":"Patient Reimbursement, Expenses, Patient Travel - Per Visit","similarity":0.7},{"benchmarkId":"0b4c8990-9293-497d-9bab-4f5d6ddf34cd","category":"Non-Procedures","country":"United States","p100":660,"p25":111,"p50":142,"p75":197,"p90":278,"procedureName":"Daily Facility Charge - Per Day","similarity":0.65},{"benchmarkId":"1b44b68e-16f8-45b4-ac1b-52b219ad081b","category":"Site Costs","country":"United States","p100":3300,"p25":570,"p50":803,"p75":1100,"p90":1971,"procedureName":"Archiving and Document Storage - Per Year; Archive","similarity":0.6}]},{"bestMatch":{"benchmarkId":"ee4b38f8-4d3c-47c0-a9ad-3f0e2878a22f","category":"Procedures","country":"United States","p100":434,"p25":83,"p50":116,"p75":151,"p90":234,"procedureName":"Tuberculosis test, cell mediated immunity measurement of gamma interferon antigen response (e.g. QFTB: QuantiFeron-TB Gold test)","similarity":0.7},"flag":"MULTIPLE_MATCHES","lineItemId":"afe92e2c-58e1-4d82-9093-ef783360f491","matchCount":3,"matches":[{"benchmarkId":"ee4b38f8-4d3c-47c0-a9ad-3f0e2878a22f","category":"Procedures","country":"United States","p100":434,"p25":83,"p50":116,"p75":151,"p90":234,"procedureName":"Tuberculosis test, cell mediated immunity measurement of gamma interferon antigen response (e.g. QFTB: QuantiFeron-TB Gold test)","similarity":0.7},{"benchmarkId":"0fbcfb0a-9964-4d34-bf58-6c76f3d61ecd","category":"Procedures","country":"United States","p100":0,"p25":295,"p50":377,"p75":481,"p90":598,"procedureName":"Immune globulin (IgIV), human, for intravenous use (immune globulin product); (add 96365 or 96374 separately for administration)","similarity":0.6},{"benchmarkId":"eea370f1-ab21-4ebf-9e49-cd2f899b4f59","category":"Procedures","country":"United States","p100":273,"p25":152,"p50":170,"p75":201,"p90":272,"procedureName":"Interpretation and Report; Ultrasound, abdomen, abdominal (echography) (uls)","similarity":0.55}]}],"success":true}
+[00:43:09.729] Browser LOG     [v0] Refreshing comparisons data...
+[00:43:10.020] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
+[00:43:10.020] Browser LOG     [v0] Mapped comparisons: 7 First item matches: 3
+[00:45:06.944] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775743768388} /_vercel/insights/view
+[00:45:07.324] Server  LOG     [v0] Fetched 8 "assessments from database"
+[00:45:07.465] Browser LOG     [v0] Assessments fetch result: 8 items, error: undefined
+[00:45:07.465] Browser LOG     [v0] Got 8 assessments from DB, mapping...
+[00:45:07.651] Server  LOG     [v0] Fetched 8 "assessments from database"
+[00:45:07.791] Browser LOG     [v0] Assessments fetch result: 8 items, error: undefined
+[00:45:07.791] Browser LOG     [v0] Got 8 assessments from DB, mapping...
+[00:45:08.594] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/c17088c2-d151-45af-a6e9-dc44d254f78d color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-n2baimwjixqpbni46rivqg.vusercontent.net/assessments/c17088c2-d151-45af-a6e9-dc44d254f78d","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1775743770036} /_vercel/insights/view
+[00:45:09.160] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:45:09.370] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:45:09.374] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:45:09.374] Browser LOG     [v0] Has existing ai_matches: true
+[00:45:09.374] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.374] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.374] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.374] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.374] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.374] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:45:09.374] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches
+[00:45:09.503] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:45:09.503] Browser LOG     [v0] Has existing ai_matches: true
+[00:45:09.503] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.503] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.503] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.503] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.503] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:45:09.503] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:45:09.503] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches
+[00:56:36.468] Server  LOG        Reload env: .env.development.local

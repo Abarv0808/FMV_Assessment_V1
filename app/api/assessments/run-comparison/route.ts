@@ -1,19 +1,155 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
-import { generateText, Output } from "ai"
-import { z } from "zod"
 
-// Schema for AI matching results
-const matchResultSchema = z.object({
-  matches: z.array(z.object({
-    benchmarkId: z.string(),
-    procedureName: z.string(),
-    category: z.string(),
-    similarity: z.number(),
-    reasoning: z.string(),
-  })),
-  bestMatchId: z.string().nullable(),
-})
+// =====================================================
+// MATCHING UTILITY FUNCTIONS
+// =====================================================
+
+// Stopwords for text normalization
+const STOPWORDS = new Set([
+  "a", "an", "the", "and", "or", "but", "in", "on", "at", "to", "for", "of", 
+  "with", "by", "from", "as", "is", "was", "are", "were", "been", "be", "have",
+  "has", "had", "do", "does", "did", "will", "would", "could", "should", "may",
+  "might", "must", "shall", "can", "need", "per", "each", "all", "any", "both",
+  "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own",
+  "same", "so", "than", "too", "very", "just", "also", "now", "etc"
+])
+
+// Category alias mapping for normalization
+const CATEGORY_ALIASES: Record<string, string> = {
+  // Procedures
+  "procedures": "procedures",
+  "procedure": "procedures",
+  "proc": "procedures",
+  "medical procedures": "procedures",
+  "clinical procedures": "procedures",
+  
+  // Non-Procedures
+  "non procedures": "non_procedures",
+  "non-procedures": "non_procedures",
+  "nonprocedures": "non_procedures",
+  "non procedure": "non_procedures",
+  "non-procedure": "non_procedures",
+  "other costs": "non_procedures",
+  "other": "non_procedures",
+  
+  // Site Costs
+  "site costs": "site_costs",
+  "site cost": "site_costs",
+  "sitecosts": "site_costs",
+  "site": "site_costs",
+  "site fees": "site_costs",
+  "site expenses": "site_costs",
+  
+  // Country Costs
+  "country costs": "country_costs",
+  "country cost": "country_costs",
+  "countrycosts": "country_costs",
+  "country": "country_costs",
+  "regional costs": "country_costs",
+  
+  // Conditional Procedures
+  "conditional procedures": "conditional_procedures",
+  "conditional procedure": "conditional_procedures",
+  "conditional": "conditional_procedures",
+  
+  // Personnel/Staff
+  "personnel": "personnel",
+  "staff": "personnel",
+  "staffing": "personnel",
+  "labor": "personnel",
+  "labour": "personnel",
+  
+  // Lab/Tests
+  "laboratory": "laboratory",
+  "lab": "laboratory",
+  "labs": "laboratory",
+  "tests": "laboratory",
+  "testing": "laboratory",
+  "diagnostics": "laboratory",
+}
+
+// Normalize text: lowercase, trim, replace punctuation, remove stopwords
+function normText(s: string): string {
+  if (!s) return ""
+  let normalized = s.toLowerCase().trim()
+  // Replace punctuation with spaces
+  normalized = normalized.replace(/[^\w\s]/g, " ")
+  // Collapse multiple spaces
+  normalized = normalized.replace(/\s+/g, " ").trim()
+  // Remove stopwords
+  const words = normalized.split(" ").filter(w => !STOPWORDS.has(w) && w.length > 1)
+  return words.join(" ")
+}
+
+// Normalize category using alias map
+function normCat(s: string): string {
+  if (!s) return ""
+  const lower = s.toLowerCase().trim()
+  return CATEGORY_ALIASES[lower] || lower.replace(/[^\w]/g, "_")
+}
+
+// Generate trigrams from text
+function getTrigrams(text: string): Set<string> {
+  const trigrams = new Set<string>()
+  const padded = `  ${text}  `
+  for (let i = 0; i < padded.length - 2; i++) {
+    trigrams.add(padded.substring(i, i + 3))
+  }
+  return trigrams
+}
+
+// Calculate trigram cosine similarity
+function trigramSimilarity(a: string, b: string): number {
+  if (!a || !b) return 0
+  const trigramsA = getTrigrams(a)
+  const trigramsB = getTrigrams(b)
+  
+  let intersection = 0
+  for (const t of trigramsA) {
+    if (trigramsB.has(t)) intersection++
+  }
+  
+  const denominator = Math.sqrt(trigramsA.size) * Math.sqrt(trigramsB.size)
+  if (denominator === 0) return 0
+  
+  return intersection / denominator
+}
+
+// Calculate category similarity (1 if match, 0 if not)
+function categorySimilarity(vendorCat: string, benchmarkCat: string): number {
+  const normVendor = normCat(vendorCat)
+  const normBenchmark = normCat(benchmarkCat)
+  return normVendor === normBenchmark ? 1 : 0
+}
+
+// Determine confidence level
+function getConfidence(isStrict: boolean, textSim: number): "HIGH" | "MEDIUM" | "LOW" {
+  if (isStrict && textSim >= 0.70) return "HIGH"
+  if (isStrict || textSim >= 0.88) return "MEDIUM"
+  return "LOW"
+}
+
+// =====================================================
+// MATCHING INTERFACE
+// =====================================================
+
+interface MatchCandidate {
+  benchmarkId: string
+  procedureName: string
+  category: string
+  textSim: number
+  catSim: number
+  score: number
+  confidence: "HIGH" | "MEDIUM" | "LOW"
+  isStrict: boolean
+  p25: number | null
+  p50: number | null
+  p75: number | null
+  p90: number | null
+  p100: number | null
+  country: string
+}
 
 export async function POST(request: Request) {
   console.log("[v0] Run comparison API called")
@@ -200,24 +336,27 @@ export async function POST(request: Request) {
     })
     console.log("[v0] === END SAMPLE DATA ===")
 
-    // Group benchmarks by category for context
-    const benchmarksByCategory: Record<string, any[]> = {}
-    for (const bm of benchmarks) {
-      const cat = bm.category || "Other"
-      if (!benchmarksByCategory[cat]) benchmarksByCategory[cat] = []
-      benchmarksByCategory[cat].push(bm)
-    }
-
     const results: any[] = []
 
-    // 3. For each line item, use AI to find matching benchmarks
+    // 3. For each line item, use trigram + category matching algorithm
     for (const lineItem of lineItems) {
-      // Parse description from procedure_name (format: "description|||{json}")
+      // Parse description and extra data from procedure_name (format: "description|||{json}")
       const procedureName = lineItem.procedure_name || ""
-      const [description] = procedureName.split("|||")
+      const [description, extraDataStr] = procedureName.split("|||")
       const cleanDescription = description.trim()
+      
+      // Parse extra data to get costCategory
+      let vendorCostCategory = ""
+      try {
+        if (extraDataStr) {
+          const extraData = JSON.parse(extraDataStr)
+          vendorCostCategory = extraData.costCategory || ""
+        }
+      } catch (e) {
+        // Ignore JSON parse errors
+      }
 
-      console.log("[v0] Processing line item:", `"${cleanDescription}"`)
+      console.log("[v0] Processing line item:", `"${cleanDescription}"`, "| Category:", vendorCostCategory || "N/A")
       
       if (!cleanDescription || cleanDescription === "Unknown") {
         // No description - mark as no match
@@ -230,139 +369,110 @@ export async function POST(request: Request) {
         continue
       }
 
-      // Build benchmark context for AI
-      const benchmarkContext = Object.entries(benchmarksByCategory)
-        .map(([category, items]) => {
-          const itemList = items.slice(0, 30).map((b: any) => 
-            `- ID: ${b.id} | Name: ${b.procedure_name} | Code: ${b.procedure_code || "N/A"}`
-          ).join("\n")
-          return `Category: ${category}\n${itemList}`
-        })
-        .join("\n\n")
-
-      // Use AI to find matching benchmarks
-      const prompt = `You are a medical procedure matching expert. Match the following line item description to the most similar benchmark procedures.
-
-LINE ITEM DESCRIPTION:
-"${cleanDescription}"
-
-AVAILABLE BENCHMARK PROCEDURES:
-${benchmarkContext}
-
-Find up to 3 most similar benchmark procedures. Consider:
-1. Medical/procedure terminology similarity
-2. Service type (procedure vs non-procedure vs site cost)
-3. Semantic meaning, not just keyword matching
-
-Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good matches exist, return an empty array.`
-
-      try {
-        const { output } = await generateText({
-          model: "openai/gpt-4o-mini",
-          prompt,
-          output: Output.object({
-            schema: matchResultSchema,
-          }),
-        })
-
-        console.log("[v0] AI returned", output?.matches?.length || 0, "matches for:", cleanDescription.substring(0, 40))
-        if (output?.matches?.length > 0) {
-          output.matches.forEach((m: any, i: number) => {
-            console.log(`[v0]   Match ${i + 1}: "${m.procedureName}" (${Math.round(m.similarity * 100)}% similar)`)
-          })
-        }
+      // Normalize vendor text for matching
+      const normVendorText = normText(cleanDescription)
+      const normVendorCat = normCat(vendorCostCategory)
+      
+      // Calculate similarity scores for all benchmarks
+      const allCandidates: MatchCandidate[] = []
+      
+      for (const bm of benchmarks) {
+        const normBenchmarkText = normText(bm.procedure_name || "")
+        const normBenchmarkCat = normCat(bm.category || "")
         
-        if (output && output.matches && output.matches.length > 0) {
-          // For each matched procedure, fetch pricing ONLY from selected countries
-          const matchedProcedureNames = output.matches.map((m: any) => m.procedureName)
-          
-          // Query benchmark procedures with these names - ONLY from selected benchmark files
-          let pricingQuery = supabase
-            .from("benchmark_procedures")
-            .select(`
-              id,
-              procedure_name,
-              category,
-              p25,
-              p50,
-              p75,
-              p90,
-              p100,
-              benchmark_files(country)
-            `)
-            .in("procedure_name", matchedProcedureNames)
-          
-          // Filter to ONLY selected benchmark files (selected countries)
-          if (benchmarkFileIds && benchmarkFileIds.length > 0) {
-            pricingQuery = pricingQuery.in("benchmark_file_id", benchmarkFileIds)
-          }
-          
-          const { data: allCountryPricing } = await pricingQuery.limit(500)
-          
-          // Build matches with all countries' pricing
-          const matchedBenchmarks: any[] = []
-          for (const match of output.matches) {
-            // Find all country versions of this procedure
-            const allCountryVersions = (allCountryPricing || []).filter(
-              (bp: any) => bp.procedure_name === match.procedureName
-            )
-            
-            if (allCountryVersions.length > 0) {
-              // Add each country's pricing as a separate match option
-              for (const version of allCountryVersions) {
-                matchedBenchmarks.push({
-                  benchmarkId: version.id,
-                  procedureName: version.procedure_name,
-                  similarity: match.similarity,
-                  p25: version.p25,
-                  p50: version.p50,
-                  p75: version.p75,
-                  p90: version.p90,
-                  p100: version.p100,
-                  country: version.benchmark_files?.country || "Unknown",
-                  category: version.category || match.category
-                })
-              }
-            } else {
-              // Fallback to original match data
-              const fullBenchmark = benchmarks.find((b: any) => b.id === match.benchmarkId)
-              matchedBenchmarks.push({
-                ...match,
-                p25: fullBenchmark?.p25,
-                p50: fullBenchmark?.p50,
-                p75: fullBenchmark?.p75,
-                p90: fullBenchmark?.p90,
-                p100: fullBenchmark?.p100,
-                country: fullBenchmark?.benchmark_files?.country || null,
-                category: fullBenchmark?.category || match.category
-              })
-            }
-          }
-
-          results.push({
-            lineItemId: lineItem.id,
-            matches: matchedBenchmarks,
-            bestMatch: output.bestMatchId ? matchedBenchmarks.find((m: any) => m.benchmarkId === output.bestMatchId) : matchedBenchmarks[0],
-            flag: matchedBenchmarks.length > 1 ? "MULTIPLE_MATCHES" : "GREEN"
-          })
-        } else {
-          results.push({
-            lineItemId: lineItem.id,
-            matches: [],
-            bestMatch: null,
-            flag: "NO_MATCH"
-          })
-        }
-      } catch (aiError: any) {
-        console.error("[v0] AI matching error for line item:", lineItem.id, aiError)
-        results.push({
-          lineItemId: lineItem.id,
-          matches: [],
-          bestMatch: null,
-          flag: "NO_MATCH",
-          error: aiError.message
+        const textSim = trigramSimilarity(normVendorText, normBenchmarkText)
+        const catSim = categorySimilarity(vendorCostCategory, bm.category || "")
+        
+        // Score: 0.75 * catSim + 0.25 * textSim
+        const score = 0.75 * catSim + 0.25 * textSim
+        
+        allCandidates.push({
+          benchmarkId: bm.id,
+          procedureName: bm.procedure_name,
+          category: bm.category || "Other",
+          textSim,
+          catSim,
+          score,
+          confidence: "LOW", // Will be updated
+          isStrict: false,   // Will be updated
+          p25: bm.p25,
+          p50: bm.p50,
+          p75: bm.p75,
+          p90: bm.p90,
+          p100: bm.p100,
+          country: bm.benchmark_files?.country || "Unknown"
         })
       }
+      
+      // STRICT MATCHING: Category must match AND textSim >= 0.55
+      const strictMatches = allCandidates
+        .filter(c => c.catSim === 1 && c.textSim >= 0.55)
+        .map(c => ({ ...c, isStrict: true, confidence: getConfidence(true, c.textSim) }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3)
+      
+      let finalMatches: MatchCandidate[] = []
+      
+      if (strictMatches.length > 0) {
+        // Use strict matches
+        finalMatches = strictMatches
+        console.log("[v0] Found", strictMatches.length, "STRICT matches for:", cleanDescription.substring(0, 40))
+      } else {
+        // FALLBACK: (catSim=1 AND textSim>=0.45) OR (textSim>=0.88)
+        const fallbackMatches = allCandidates
+          .filter(c => (c.catSim === 1 && c.textSim >= 0.45) || c.textSim >= 0.88)
+          .map(c => ({ ...c, isStrict: false, confidence: getConfidence(false, c.textSim) }))
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 3)
+        
+        finalMatches = fallbackMatches
+        console.log("[v0] Found", fallbackMatches.length, "FALLBACK matches for:", cleanDescription.substring(0, 40))
+      }
+      
+      // Log matches
+      if (finalMatches.length > 0) {
+        finalMatches.forEach((m, i) => {
+          console.log(`[v0]   Match ${i + 1}: "${m.procedureName}" | TextSim: ${(m.textSim * 100).toFixed(1)}% | CatSim: ${m.catSim} | Confidence: ${m.confidence} | ${m.isStrict ? "STRICT" : "FALLBACK"}`)
+        })
+      }
+      
+      // Build result matches with similarity as percentage
+      const matchedBenchmarks = finalMatches.map(m => ({
+        benchmarkId: m.benchmarkId,
+        procedureName: m.procedureName,
+        similarity: m.textSim,
+        textSimilarity: m.textSim,
+        categorySimilarity: m.catSim,
+        confidence: m.confidence,
+        isStrict: m.isStrict,
+        p25: m.p25,
+        p50: m.p50,
+        p75: m.p75,
+        p90: m.p90,
+        p100: m.p100,
+        country: m.country,
+        category: m.category
+      }))
+
+      // Determine flag based on results
+      let flag = "NO_MATCH"
+      if (matchedBenchmarks.length > 0) {
+        const bestConfidence = matchedBenchmarks[0].confidence
+        if (bestConfidence === "HIGH") {
+          flag = "GREEN"
+        } else if (bestConfidence === "MEDIUM") {
+          flag = matchedBenchmarks.length > 1 ? "YELLOW" : "GREEN"
+        } else {
+          flag = "YELLOW"
+        }
+      }
+
+      results.push({
+        lineItemId: lineItem.id,
+        matches: matchedBenchmarks,
+        bestMatch: matchedBenchmarks[0] || null,
+        flag
+      })
     }
 
     // 4. Update assessment_comparisons with flag and ai_matches
