@@ -369,17 +369,27 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
       }
     }
 
-    // 4. Update assessment_comparisons with results - use ONLY flag column
+    // 4. Update assessment_comparisons with results including ai_matches
     console.log("[v0] Updating", results.length, "comparison records")
     
     for (const result of results) {
       // Convert MULTIPLE_MATCHES to YELLOW since DB only allows GREEN/YELLOW/RED/NO_MATCH
       const validFlag = result.flag === "MULTIPLE_MATCHES" ? "YELLOW" : result.flag
+      
+      // Get best match data for benchmark columns
+      const bestMatch = result.bestMatch
 
-      // Update ONLY the flag column - nothing else
+      // Update flag AND ai_matches for persistence
       const { data: updated, error: updateError } = await supabase
         .from("assessment_comparisons")
-        .update({ flag: validFlag })
+        .update({ 
+          flag: validFlag,
+          ai_matches: result.matches,
+          benchmark_90th: bestMatch?.p90 || null,
+          benchmark_high: bestMatch?.p75 || null,
+          benchmark_median: bestMatch?.p50 || null,
+          benchmark_low: bestMatch?.p25 || null
+        })
         .eq("line_item_id", result.lineItemId)
         .select("id")
       
@@ -393,7 +403,12 @@ Return ONLY procedures that are genuinely similar (similarity > 0.5). If no good
           .insert({
             assessment_id: assessmentId,
             line_item_id: result.lineItemId,
-            flag: validFlag
+            flag: validFlag,
+            ai_matches: result.matches,
+            benchmark_90th: bestMatch?.p90 || null,
+            benchmark_high: bestMatch?.p75 || null,
+            benchmark_median: bestMatch?.p50 || null,
+            benchmark_low: bestMatch?.p25 || null
           })
         
         if (insertError) {
