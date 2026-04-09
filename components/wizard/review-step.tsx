@@ -114,7 +114,7 @@ export function ReviewStep({ data }: ReviewStepProps) {
           <div className="flex items-start gap-3">
             <FileSpreadsheet className="h-5 w-5 text-muted-foreground mt-0.5" />
             <div className="flex-1">
-              <p className="text-sm text-muted-foreground">Vendor Proposal</p>
+              <p className="text-sm text-muted-foreground">Site Proposal</p>
               {data.vendorProposal && (
                 <div className="flex items-center gap-2 mt-2">
                   <Badge variant="secondary">{data.vendorProposal.name}</Badge>

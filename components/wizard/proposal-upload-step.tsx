@@ -272,14 +272,14 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
 
   return (
     <div className="space-y-8">
-      {/* Vendor Proposal Upload */}
+      {/* Site Proposal Upload */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <FileSpreadsheet className="h-5 w-5 text-primary" />
-          <h3 className="text-lg font-medium">Vendor Proposal</h3>
+          <h3 className="text-lg font-medium">Site Proposal</h3>
         </div>
         <p className="text-sm text-muted-foreground">
-          Upload the vendor's proposal file containing their rate card and service fees.
+          Upload the site proposal file containing their rate card and service fees.
         </p>
 
         {!data.vendorProposal ? (
