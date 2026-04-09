@@ -386,10 +386,20 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     appendAudit("Started AI Benchmark Comparison")
     
     try {
+      // First fetch the linked benchmark file IDs for this assessment
+      const supabase = createClient()
+      const { data: benchmarkLinks } = await supabase
+        .from("assessment_benchmark_files")
+        .select("benchmark_file_id")
+        .eq("assessment_id", id)
+      
+      const benchmarkFileIds = benchmarkLinks?.map(link => link.benchmark_file_id) || []
+      console.log("[v0] Linked benchmark files for comparison:", benchmarkFileIds.length)
+      
       const response = await fetch("/api/assessments/run-comparison", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ assessmentId: id })
+        body: JSON.stringify({ assessmentId: id, benchmarkFileIds })
       })
       
       const result = await response.json()
