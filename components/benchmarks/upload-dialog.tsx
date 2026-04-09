@@ -464,7 +464,7 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
                               <SelectTrigger className="h-8 text-xs">
                                 <SelectValue placeholder="Select indication" />
                               </SelectTrigger>
-                              <SelectContent>
+                              <SelectContent className="max-h-[300px]">
                                 {INDICATIONS.map(ind => (
                                   <SelectItem key={ind} value={ind} className="text-xs">{ind}</SelectItem>
                                 ))}

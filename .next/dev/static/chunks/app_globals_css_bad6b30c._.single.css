@@ -1251,10 +1251,6 @@
     max-width: 300px;
   }
 
-  .max-w-\[400px\] {
-    max-width: 400px;
-  }
-
   .max-w-\[450px\] {
     max-width: 450px;
   }
@@ -1341,10 +1337,6 @@
 
   .min-w-\[220px\] {
     min-width: 220px;
-  }
-
-  .min-w-\[250px\] {
-    min-width: 250px;
   }
 
   .min-w-\[300px\] {
