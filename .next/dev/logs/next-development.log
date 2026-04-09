@@ -903,3 +903,20 @@
 [01:20:02.460] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 1
 [01:20:02.471] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" -1
 [01:20:07.741] Server  LOG      ✓ Compiled in 49ms
+[01:20:21.423] Server  LOG        Reload env: .env.development.local
+[01:21:18.679] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 1
+[01:21:20.571] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 2
+[01:21:20.699] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 2
+[01:21:20.933] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 2
+[01:21:20.994] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 3
+[01:21:23.494] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" null
+[01:21:26.938] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 5
+[01:21:27.015] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 5
+[01:21:27.036] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 4
+[01:21:27.219] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 4
+[01:21:27.616] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 44
+[01:21:27.820] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 45
+[01:21:31.861] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 44
+[01:21:32.078] Server  LOG     [v0] Updated negotiated price for line item: "afe92e2c-58e1-4d82-9093-ef783360f491" "to:" 44
+[01:22:23.540] Server  LOG      ✓ Compiled in 110ms
+[01:22:33.400] Server  LOG        Reload env: .env.development.local

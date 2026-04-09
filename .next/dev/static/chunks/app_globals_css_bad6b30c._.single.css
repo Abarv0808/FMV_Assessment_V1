@@ -1519,6 +1519,10 @@
     list-style-type: none;
   }
 
+  .\[appearance\:textfield\] {
+    appearance: textfield;
+  }
+
   .auto-rows-min {
     grid-auto-rows: min-content;
   }
@@ -5398,6 +5402,14 @@
 
   .\[\&\+\[data-slot\=item-content\]\]\:flex-none + [data-slot="item-content"] {
     flex: none;
+  }
+
+  .\[\&\:\:-webkit-inner-spin-button\]\:appearance-none::-webkit-inner-spin-button {
+    appearance: none;
+  }
+
+  .\[\&\:\:-webkit-outer-spin-button\]\:appearance-none::-webkit-outer-spin-button {
+    appearance: none;
   }
 
   .\[\&\:first-child\[data-selected\=true\]_button\]\:rounded-l-md:first-child[data-selected="true"] button {

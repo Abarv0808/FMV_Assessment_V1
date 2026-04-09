@@ -391,7 +391,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         onLineItemUpdate?.(comparison.lineItem.id, "negotiatedPrice", value as any)
                       }}
                       placeholder="Enter price"
-                      className="h-8 w-[120px] text-right font-mono text-sm"
+                      className="h-8 w-[120px] text-right font-mono text-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                   </TableCell>
                   <TableCell className="text-right font-mono">
