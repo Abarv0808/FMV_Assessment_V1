@@ -172,6 +172,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
           <TableRow className="hover:bg-transparent border-border/40">
             <TableHead className="w-[40px]"></TableHead>
             <TableHead>Site</TableHead>
+            <TableHead>Cost Category</TableHead>
             <TableHead>Additional Information</TableHead>
             <TableHead className="min-w-[220px]">Benchmark Match</TableHead>
             <TableHead className="text-right">Number of Unit</TableHead>
@@ -224,6 +225,11 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     <Badge variant="outline" className="font-normal">
                       {comparison.lineItem.site}
                     </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <span className="text-sm">
+                      {comparison.lineItem.costCategory || "-"}
+                    </span>
                   </TableCell>
                   <TableCell className="min-w-[250px] max-w-[400px]">
                     <div className="text-sm font-medium whitespace-normal break-words">
