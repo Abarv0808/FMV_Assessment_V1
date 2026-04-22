@@ -75,6 +75,8 @@ export function AssessmentsContent() {
             assignedTo: a.assigned_to || "",
             createdAt: a.created_at,
             updatedAt: a.updated_at || a.created_at,
+            proposalCount: a.line_items_count || 0,
+            flaggedCount: a.flagged_count || 0,
             lineItems: [],
             auditEvents: []
           }))
