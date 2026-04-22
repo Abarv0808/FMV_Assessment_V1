@@ -754,15 +754,16 @@ const SECURITY_GROUPS = [
     "GLOBAL"
 ];
 const THERAPEUTIC_AREAS = [
-    "Oncology",
-    "Immunology",
-    "Neuroscience",
     "Cardiovascular",
-    "Rare Diseases",
-    "Infectious Diseases",
-    "Respiratory",
     "Dermatology",
+    "Gastroenterology",
+    "Immunology",
+    "Infectious Diseases",
+    "Neuroscience",
+    "Oncology",
     "Ophthalmology",
+    "Rare Diseases",
+    "Respiratory",
     "Other"
 ];
 const USER_ROLES = [

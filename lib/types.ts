@@ -9,15 +9,16 @@ export const SECURITY_GROUPS = [
 export type SecurityGroup = (typeof SECURITY_GROUPS)[number]
 
 export const THERAPEUTIC_AREAS = [
-  "Oncology",
-  "Immunology",
-  "Neuroscience",
   "Cardiovascular",
-  "Rare Diseases",
-  "Infectious Diseases",
-  "Respiratory",
   "Dermatology",
+  "Gastroenterology",
+  "Immunology",
+  "Infectious Diseases",
+  "Neuroscience",
+  "Oncology",
   "Ophthalmology",
+  "Rare Diseases",
+  "Respiratory",
   "Other",
 ] as const
 

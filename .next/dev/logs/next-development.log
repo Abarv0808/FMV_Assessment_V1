@@ -177,3 +177,8 @@
 [00:21:47.711] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
 [00:21:47.711] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
 [00:29:32.195] Server  LOG      ✓ Compiled in 108ms
+[02:20:23.689] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776867594831} /_vercel/insights/view
+[02:20:24.580] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776867595698} /_vercel/insights/view
+[02:20:24.761] Server  LOG     [v0] Fetched 14 "assessments with counts"
+[02:20:25.307] Server  LOG     [v0] Fetched 14 "assessments with counts"
+[02:20:48.391] Server  LOG      ✓ Compiled in 82ms
