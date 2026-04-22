@@ -41,11 +41,26 @@ import {
   FileSpreadsheet,
   ChevronRight,
   ChevronDown,
+  Trash2,
+  AlertTriangle,
 } from "lucide-react"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { format } from "date-fns"
 import { BenchmarkUploadDialog } from "@/components/benchmarks/upload-dialog"
 
 const ALL_VALUE = "__all__"
+
+// Only allowed phases - filter out Phase I, II, III
+const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IV"]
 
 export function BenchmarksContent() {
   const router = useRouter()
@@ -55,11 +70,31 @@ export function BenchmarksContent() {
   const [indicationFilter, setIndicationFilter] = useState<string>(ALL_VALUE)
   const [phaseFilter, setPhaseFilter] = useState<string>(ALL_VALUE)
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false)
+  const [clearDialogOpen, setClearDialogOpen] = useState(false)
+  const [isClearing, setIsClearing] = useState(false)
   const [benchmarkFiles, setBenchmarkFiles] = useState<BenchmarkFile[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [expandedIndications, setExpandedIndications] = useState<Set<string>>(new Set())
 
   const isAdmin = user?.role === "ADMIN"
+
+  const handleClearAllData = async () => {
+    setIsClearing(true)
+    try {
+      const response = await fetch("/api/bm/clear", { method: "DELETE" })
+      const result = await response.json()
+      if (result.success) {
+        setBenchmarkFiles([])
+        setClearDialogOpen(false)
+      } else {
+        alert("Failed to clear data: " + result.error)
+      }
+    } catch (err: any) {
+      alert("Error clearing data: " + err.message)
+    } finally {
+      setIsClearing(false)
+    }
+  }
 
   const toggleIndication = (indication: string) => {
     setExpandedIndications(prev => {
@@ -154,13 +189,18 @@ export function BenchmarksContent() {
   const filterOptions = useMemo(() => {
     const countries = [...new Set(benchmarkFiles.map((r) => r.country))].sort()
     const indications = [...new Set(benchmarkFiles.map((r) => r.indication))].sort()
-    const phases: TrialPhase[] = ["Phase I", "Phase II", "Phase III", "Phase IV"]
+    const phases: TrialPhase[] = ALLOWED_PHASES
     return { countries, indications, phases }
   }, [benchmarkFiles])
 
-  // Filter benchmarks
+  // Filter benchmarks - only show allowed phases
   const filteredBenchmarks = useMemo(() => {
     return benchmarkFiles.filter((file) => {
+      // Only show All Phases and Phase IV
+      if (!ALLOWED_PHASES.includes(file.trialPhase)) {
+        return false
+      }
+      
       const matchesSearch =
         searchQuery === "" ||
         file.fileName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -188,10 +228,15 @@ export function BenchmarksContent() {
       groups[file.indication][file.trialPhase].push(file)
     }
     
-    // Sort indications alphabetically, then phases
-    const phaseOrder = ["Phase I", "Phase II", "Phase III", "Phase IV"]
+    // Sort indications: "All" first, then alphabetically. Then phases.
+    const phaseOrder = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IV"]
     return Object.entries(groups)
-      .sort(([a], [b]) => a.localeCompare(b))
+      .sort(([a], [b]) => {
+        // "All" indication should come first
+        if (a === "All") return -1
+        if (b === "All") return 1
+        return a.localeCompare(b)
+      })
       .map(([indication, phases]) => ({
         indication,
         phases: Object.entries(phases)
@@ -281,10 +326,16 @@ export function BenchmarksContent() {
             Export
           </Button>
           {isAdmin && (
-            <Button size="sm" onClick={() => setUploadDialogOpen(true)}>
-              <Upload className="h-4 w-4 mr-2" />
-              Upload Benchmark Data
-            </Button>
+            <>
+              <Button variant="destructive" size="sm" onClick={() => setClearDialogOpen(true)}>
+                <Trash2 className="h-4 w-4 mr-2" />
+                Clear All Data
+              </Button>
+              <Button size="sm" onClick={() => setUploadDialogOpen(true)}>
+                <Upload className="h-4 w-4 mr-2" />
+                Upload Benchmark Data
+              </Button>
+            </>
           )}
         </div>
       </div>
@@ -455,8 +506,6 @@ export function BenchmarksContent() {
                 const allFiles = phases.flatMap(p => p.files)
                 const totalProcedures = allFiles.reduce((sum, f) => sum + f.procedureCount, 0)
                 const uniqueCountries = new Set(allFiles.map(f => f.country)).size
-                const phaseNames = phases.map(p => p.phase).join(", ")
-                
                 return (
                   <Collapsible
                     key={indication}
@@ -474,7 +523,7 @@ export function BenchmarksContent() {
                           <div>
                             <h3 className="font-semibold text-base">{indication}</h3>
                             <p className="text-sm text-muted-foreground">
-                              {uniqueCountries} countries | {totalProcedures.toLocaleString()} procedures | {phaseNames}
+                              {uniqueCountries} countries | {totalProcedures.toLocaleString()} procedures | All Phases
                             </p>
                           </div>
                         </div>
@@ -570,6 +619,32 @@ export function BenchmarksContent() {
           )}
         </CardContent>
       </Card>
+
+      {/* Clear All Data Confirmation Dialog */}
+      <AlertDialog open={clearDialogOpen} onOpenChange={setClearDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Clear All Benchmark Data
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently delete ALL benchmark files and procedures from the database.
+              This action cannot be undone. You will need to re-upload your benchmark files after clearing.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isClearing}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleClearAllData}
+              disabled={isClearing}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {isClearing ? "Clearing..." : "Clear All Data"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import * as XLSX from "xlsx"
 import { AppShell } from "@/components/app-shell"
+import { parseVendorProposal } from "@/lib/excel-parser"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -135,182 +135,62 @@ export default function NewAssessmentPage() {
         }
       }
 
-      // 3. Parse vendor Excel file with correct field mapping
-      // File Header -> UI Field mapping:
-      // Site (optional) -> Site
-      // Description -> Additional Information
-      // Number of unit -> Number of Unit
-      // Unit Price -> Unit Price
-      // Total Cost -> Total Cost
-      // Currency -> Currency (from country_currencies table)
-      let vendorLineItems: any[] = []
+      // 3. Parse vendor Excel file from "Sponsor" tab
+      // Excel column mapping:
+      // - Site (optional) -> site
+      // - Description of costs -> description (Additional Information)
+      // - Number of Units -> numberOfUnits
+      // - Unit Price -> unitPrice
+      // - Total Cost -> totalCost
+      // - Currency -> currency
+      let parsedProposal = { lineItems: [] as any[], metadata: { sheetName: "", rowCount: 0, parsedAt: "" } }
       if (formData.vendorProposal) {
         const arrayBuffer = await formData.vendorProposal.arrayBuffer()
-        const workbook = XLSX.read(arrayBuffer, { type: "array" })
-        
-        // Find the Sponsor sheet (or similar) - this contains the vendor data
-        let sheetName = workbook.SheetNames[0] // default to first sheet
-        for (const name of workbook.SheetNames) {
-          const lowerName = name.toLowerCase()
-          if (lowerName.includes("sponsor") || lowerName.includes("vendor") || lowerName.includes("budget")) {
-            sheetName = name
-            break
-          }
+        parsedProposal = parseVendorProposal(arrayBuffer, assessment.id)
+        console.log("[v0] Parsed vendor proposal from sheet:", parsedProposal.metadata.sheetName)
+        console.log("[v0] Found", parsedProposal.lineItems.length, "line items")
+        if (parsedProposal.lineItems.length > 0) {
+          console.log("[v0] Sample line item:", parsedProposal.lineItems[0])
         }
-        console.log("[v0] Using sheet:", sheetName, "Available sheets:", workbook.SheetNames)
-        const sheet = workbook.Sheets[sheetName]
-        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 }) as any[][]
-
-        // Find header row (look for common column names)
-        let headerRowIndex = 0
-        for (let i = 0; i < Math.min(10, jsonData.length); i++) {
-          const row = jsonData[i]
-          if (row && row.some((cell: any) => 
-            typeof cell === "string" && 
-            (cell.toLowerCase().includes("description") || 
-             cell.toLowerCase().includes("cost") ||
-             cell.toLowerCase().includes("site") ||
-             cell.toLowerCase().includes("unit"))
-          )) {
-            headerRowIndex = i
-            break
-          }
-        }
-
-        const headers = jsonData[headerRowIndex] || []
-        const headerMap: Record<string, number> = {}
-        console.log("[v0] Found headers:", headers)
-        headers.forEach((h: any, idx: number) => {
-          if (typeof h === "string") {
-            const lower = h.toLowerCase().trim()
-            // Site (Optional) -> Site
-            if (lower.includes("site")) {
-              headerMap.site = idx
-            }
-            // Cost category (dropdown) -> Cost Category
-            if (lower.includes("cost category")) {
-              headerMap.costCategory = idx
-            }
-            // Description -> Additional Information
-            if (lower === "description" || lower.startsWith("description")) {
-              headerMap.additionalInformation = idx
-            }
-            // Unit Type (dropdown) -> Unit Type
-            if (lower.includes("unit type")) {
-              headerMap.unitType = idx
-            }
-            // Number of Units (number) -> Number of Unit
-            if (lower.includes("number of unit")) {
-              headerMap.numberOfUnit = idx
-            }
-            // Unit Price (overhead not included, number) -> Unit Price
-            if (lower.includes("unit price")) {
-              headerMap.unitPrice = idx
-            }
-            // Total Cost (automatically calculated) -> Total Cost
-            if (lower.includes("total cost")) {
-              headerMap.totalCost = idx
-            }
-            // Currency (dropdown) -> Currency
-            if (lower.includes("currency") && !lower.includes("cost")) {
-              headerMap.currency = idx
-            }
-          }
-        })
-        console.log("[v0] Header mapping:", headerMap)
-
-        // Helper to parse numeric values (may have currency prefix like "EUR 60.00")
-        const parseNumericValue = (val: any): number | null => {
-          if (val === null || val === undefined || val === "") return null
-          if (typeof val === "number") return val
-          const cleaned = String(val).replace(/[^0-9.-]/g, "")
-          const num = parseFloat(cleaned)
-          return isNaN(num) ? null : num
-        }
-
-        // Extract line items
-        for (let i = headerRowIndex + 1; i < jsonData.length; i++) {
-          const row = jsonData[i]
-          if (!row || row.length === 0) continue
-          
-          // Use description as primary identifier
-          const description = row[headerMap.additionalInformation]
-          if (!description || String(description).trim() === "") continue
-
-          // Get currency from file
-          const currency = row[headerMap.currency] ? String(row[headerMap.currency]).trim() : "EUR"
-
-          vendorLineItems.push({
-            site: row[headerMap.site] ? String(row[headerMap.site]).trim() : null,
-            costCategory: row[headerMap.costCategory] ? String(row[headerMap.costCategory]).trim() : null,
-            additionalInformation: String(description).trim(),
-            unitType: row[headerMap.unitType] ? String(row[headerMap.unitType]).trim() : null,
-            numberOfUnit: parseNumericValue(row[headerMap.numberOfUnit]),
-            unitPrice: parseNumericValue(row[headerMap.unitPrice]),
-            totalCost: parseNumericValue(row[headerMap.totalCost]),
-            currency: currency
-          })
-        }
-        console.log("[v0] Parsed line items:", vendorLineItems.length, vendorLineItems.slice(0, 2))
       }
 
-      // 4. Store line items DIRECTLY via Supabase client (bypasses broken API route)
-      console.log("[v0] Inserting", vendorLineItems.length, "line items directly via Supabase client")
+      // 4. Store line items via API route (handles inserts one-by-one for robustness)
+      const lineItems = parsedProposal.lineItems
+      console.log("[v0] Storing", lineItems.length, "line items via API")
       
-      if (vendorLineItems.length > 0) {
-        // Insert line items directly
-        const lineItemsToInsert = vendorLineItems.map((item: any, index: number) => ({
-          assessment_id: assessment.id,
-          procedure_name: item.additionalInformation || "Unknown",
-          site: item.site,
-          additional_information: item.additionalInformation,
-          category: item.costCategory,
-          unit: item.unitType,
-          number_of_unit: item.numberOfUnit,
-          unit_price: item.unitPrice,
-          total_cost: item.totalCost,
-          currency: item.currency || "EUR",
-          row_index: index
+      if (lineItems.length > 0) {
+        // Map to the format expected by the API
+        const lineItemsForApi = lineItems.map((item, index) => ({
+          description: item.description || "Unknown",
+          additionalInformation: item.description,
+          site: item.site || null,
+          costCategory: item.costCategory || null,
+          unitType: item.unitType || null,
+          numberOfUnit: item.numberOfUnits,
+          unitPrice: item.unitPrice,
+          totalCost: item.totalCost,
+          currency: item.currency || "USD",
+          rowIndex: index
         }))
 
-        console.log("[v0] Line items to insert:", lineItemsToInsert.slice(0, 2))
+        console.log("[v0] Sending to API:", lineItemsForApi.slice(0, 2))
 
-        const { data: insertedItems, error: insertError } = await supabase
-          .from("assessment_line_items")
-          .insert(lineItemsToInsert)
-          .select("id")
+        const storeResponse = await fetch("/api/assessments/store-items", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            assessmentId: assessment.id,
+            lineItems: lineItemsForApi
+          })
+        })
 
-        if (insertError) {
-          console.error("[v0] Error inserting line items:", insertError)
+        if (!storeResponse.ok) {
+          const errorData = await storeResponse.json()
+          console.error("[v0] Error storing line items:", errorData)
         } else {
-          console.log("[v0] Successfully inserted", insertedItems?.length, "line items")
-          
-          // Create comparison records
-          if (insertedItems && insertedItems.length > 0) {
-            const comparisons = insertedItems.map((item: any) => ({
-              assessment_id: assessment.id,
-              line_item_id: item.id,
-              flag: "NO_MATCH",
-              ai_description: "Pending benchmark comparison"
-            }))
-
-            const { error: compError } = await supabase
-              .from("assessment_comparisons")
-              .insert(comparisons)
-
-            if (compError) {
-              console.error("[v0] Error inserting comparisons:", compError)
-            } else {
-              console.log("[v0] Successfully inserted", comparisons.length, "comparisons")
-            }
-          }
+          const result = await storeResponse.json()
+          console.log("[v0] Successfully stored", result.insertedCount, "line items")
         }
-
-        // Update assessment status
-        await supabase
-          .from("assessments")
-          .update({ status: "completed" })
-          .eq("id", assessment.id)
       }
 
       // 5. Navigate to assessment detail page

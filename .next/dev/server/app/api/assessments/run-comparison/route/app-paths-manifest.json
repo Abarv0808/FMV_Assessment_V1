@@ -1,0 +1,3 @@
+{
+  "/api/assessments/run-comparison/route": "app/api/assessments/run-comparison/route.js"
+}

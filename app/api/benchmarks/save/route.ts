@@ -25,19 +25,13 @@ export async function POST(request: NextRequest) {
     const db = getDb()
     const source = dataSource === "IQVIA GrantPlan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER"
     
-    // Map trial phase to valid database enum values
+    // Map trial phase to valid database enum values (only All Phases and Phase IV allowed)
     const phaseMap: Record<string, string> = {
-      "All Phases": "Phase I",
-      "Phase 1": "Phase I",
-      "Phase 2": "Phase II", 
-      "Phase 3": "Phase III",
+      "All Phases": "All Phases",
       "Phase 4": "Phase IV",
-      "Phase I": "Phase I",
-      "Phase II": "Phase II",
-      "Phase III": "Phase III",
       "Phase IV": "Phase IV",
     }
-    const phase = phaseMap[trialPhase] || "Phase I"
+    const phase = phaseMap[trialPhase] || "All Phases"
     
     // Fetch currency mapping from database
     const { data: currencyData } = await db.from("country_currencies").select("country, currency_code")

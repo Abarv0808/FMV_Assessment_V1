@@ -22,15 +22,15 @@ export async function POST(request: NextRequest) {
     
     // Map trial phase to valid enum
     const phaseMap: Record<string, string> = {
-      "All Phases": "Phase I",
-      "Phase 1": "Phase I",
+      "All Phases": "All Phases",
+      "Phase 1": "All Phases",
       "Phase 4": "Phase IV",
-      "Phase I": "Phase I",
+      "Phase I": "All Phases",
       "Phase II": "Phase II",
       "Phase III": "Phase III",
       "Phase IV": "Phase IV",
     }
-    const phase = phaseMap[trialPhase] || "Phase I"
+    const phase = phaseMap[trialPhase] || "All Phases"
 
     // Get currency mapping from database
     const { data: currencyData } = await db.from("country_currencies").select("country, currency_code")
@@ -100,6 +100,11 @@ export async function POST(request: NextRequest) {
       // Insert procedures with correct column names for benchmark_procedures table
       // The excel-parser returns: code, name, category, p25, p50, p75, p90, p100, sourceRef
       if (country.procedures?.length && fileData?.id) {
+        // Debug: log first 3 raw procedures to see what's being passed
+        console.log("[v0] Sample raw procedures from parser (first 3):")
+        country.procedures.slice(0, 3).forEach((p: any, i: number) => {
+          console.log(`[v0]   ${i + 1}. name="${p.name}" code="${p.code}" p25=${p.p25} p50=${p.p50} p75=${p.p75} p90=${p.p90}`)
+        })
         const procedures = country.procedures.map((proc: any) => {
           // Handle both number and string values for percentiles
           const parseValue = (val: any): number | null => {

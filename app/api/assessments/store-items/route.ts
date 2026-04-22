@@ -20,20 +20,24 @@ export async function POST(request: Request) {
     const insertedIds: string[] = []
     
     for (const item of lineItems) {
+      // Store description in procedure_name, site in country
+      // Encode numberOfUnit and unitPrice in vendor_cost as JSON string workaround
+      // Format: "numberOfUnits|unitPrice|totalCost" in a parseable way
+      const extraData = JSON.stringify({
+        numberOfUnit: item.numberOfUnit || 1,
+        unitPrice: item.unitPrice || 0,
+        unitType: item.unitType || null,
+        costCategory: item.costCategory || null
+      })
+      
       const { data, error } = await supabase
         .from("assessment_line_items")
         .insert({
           assessment_id: assessmentId,
-          procedure_name: item.additionalInformation || item.description || "Unknown",
-          site: item.site || null,
-          additional_information: item.additionalInformation || item.description || null,
-          category: item.costCategory || item.category || null,
-          unit: item.unitType || null,
-          number_of_unit: item.numberOfUnit || null,
-          unit_price: item.unitPrice || null,
-          total_cost: item.totalCost || null,
-          currency: item.currency || "USD",
-          row_index: item.rowIndex || 0
+          procedure_name: `${item.additionalInformation || item.description || "Unknown"}|||${extraData}`,
+          country: item.site || "Unknown",
+          vendor_cost: item.totalCost || 0,
+          currency: item.currency || "USD"
         })
         .select("id")
         .single()
@@ -44,14 +48,19 @@ export async function POST(request: Request) {
         insertedIds.push(data.id)
         
         // Create comparison record
-        await supabase
+        const { error: compError } = await supabase
           .from("assessment_comparisons")
           .insert({
             assessment_id: assessmentId,
             line_item_id: data.id,
-            flag: "NO_MATCH",
-            ai_description: "Pending benchmark comparison"
+            flag: "NO_MATCH"
           })
+        
+        if (compError) {
+          console.error("[v0] Error inserting comparison:", compError.message)
+        } else {
+          console.log("[v0] Created comparison for line item:", data.id)
+        }
       }
     }
     

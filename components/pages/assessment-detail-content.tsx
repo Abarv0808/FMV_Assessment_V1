@@ -44,6 +44,8 @@ import {
   HelpCircle,
   ArchiveX,
   RotateCcw,
+  Sparkles,
+  Loader2,
 } from "lucide-react"
 import {
   mockAssessments,
@@ -85,6 +87,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   const [showRestoreConfirm, setShowRestoreConfirm] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isRealAssessment, setIsRealAssessment] = useState(false)
+  const [isRunningComparison, setIsRunningComparison] = useState(false)
+  const [comparisonComplete, setComparisonComplete] = useState(false)
 
   // Try mock data first for backward compatibility
   const mockInitial = mockAssessments.find((a) => a.id === id)
@@ -133,59 +137,77 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         auditEvents: []
       }
 
-      // Fetch comparisons with line items - using new field names
-      const { data: comparisonsData, error: comparisonsError } = await supabase
-        .from("assessment_comparisons")
-        .select(`
-          *,
-          assessment_line_items!inner (
-            id,
-            procedure_name,
-            site,
-            additional_information,
-            number_of_unit,
-            unit_price,
-            total_cost,
-            country,
-            currency,
-            row_index
-          )
-        `)
-        .eq("assessment_id", id)
-        .order("created_at", { ascending: true })
+      // Fetch comparisons via API (server-side to bypass RLS)
+      const comparisonsResponse = await fetch(`/api/assessments/${id}/comparisons`)
+      const { comparisons: comparisonsData, error: comparisonsError } = await comparisonsResponse.json()
+
+      console.log("[v0] Comparisons fetch result:", comparisonsData?.length, "items, error:", comparisonsError)
+      
+      // Check if any comparison has ai_matches (meaning comparison was already run)
+      const hasExistingMatches = comparisonsData?.some((comp: any) => comp.ai_matches && comp.ai_matches.length > 0)
+      console.log("[v0] Has existing ai_matches:", hasExistingMatches)
+      if (hasExistingMatches) {
+        setComparisonComplete(true)
+      }
 
       if (!comparisonsError && comparisonsData) {
-        const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => ({
+        const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {
+          // Parse extra data from procedure_name (format: "description|||{json}")
+          const procedureName = comp.assessment_line_items.procedure_name || ""
+          const [description, extraDataStr] = procedureName.split("|||")
+          let extraData = { numberOfUnit: 1, unitPrice: 0, unitType: null, costCategory: null }
+          try {
+            if (extraDataStr) {
+              extraData = JSON.parse(extraDataStr)
+            }
+          } catch (e) {
+            // Keep defaults if parsing fails
+          }
+          
+          // Parse ai_matches from comparison's ai_matches field (stored during run-comparison)
+          let matches: any[] = []
+          if (comp.ai_matches) {
+            try {
+              matches = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
+              console.log("[v0] Loaded ai_matches for line item:", matches.length, "matches")
+            } catch (e) {
+              console.log("[v0] Error parsing ai_matches:", e)
+              matches = []
+            }
+          }
+          const bestMatch = matches[0]
+          
+          return {
           id: comp.id,
           lineItem: {
             id: comp.assessment_line_items.id,
             assessmentId: id,
-            description: comp.assessment_line_items.additional_information || comp.assessment_line_items.procedure_name,
-            unitType: "Per Unit",
-            unitPrice: comp.assessment_line_items.unit_price || 0,
-            site: comp.assessment_line_items.site || comp.assessment_line_items.country || "Global",
-            costCategory: "Procedure",
+            description: description.trim(),
+            unitType: extraData.unitType || "Per Unit",
+            unitPrice: extraData.unitPrice || 0,
+            site: comp.assessment_line_items.country || "Global",
+            costCategory: extraData.costCategory || "Procedure",
             source: `Line ${idx + 1}`,
-            decision: "Pending" as ItemDecision,
-            // New fields
-            numberOfUnit: comp.assessment_line_items.number_of_unit,
-            totalCost: comp.assessment_line_items.total_cost,
-            currency: comp.assessment_line_items.currency,
-            country: comp.assessment_line_items.country,
-            additionalInformation: comp.assessment_line_items.additional_information
+            decision: "In-review" as ItemDecision,
+            numberOfUnit: extraData.numberOfUnit || 1,
+  totalCost: comp.assessment_line_items.vendor_cost || 0,
+  currency: comp.assessment_line_items.currency || "USD",
+  country: comp.assessment_line_items.country,
+  additionalInformation: description.trim(),
+  negotiatedPrice: comp.assessment_line_items.negotiated_price ?? null
           },
-          benchmark90th: comp.benchmark_90th,
-          benchmarkHigh: comp.benchmark_high,
-          benchmarkMed: comp.benchmark_median || comp.benchmark_90th,
-          benchmarkLow: comp.benchmark_low,
+          benchmark90th: comp.benchmark_90th || bestMatch?.p90,
+          benchmarkHigh: comp.benchmark_high || bestMatch?.p75,
+          benchmarkMed: comp.benchmark_median || comp.benchmark_90th || bestMatch?.p50,
+          benchmarkLow: comp.benchmark_low || bestMatch?.p25,
           selectedBenchmarkType: "p90" as BenchmarkType,
-          variance: comp.variance_percent ? (comp.assessment_line_items.unit_price || 0) * (comp.variance_percent / 100) : 0,
-          variancePercent: comp.variance_percent || 0,
-          flag: comp.flag as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
-          benchmarkDescription: comp.ai_description || "AI-generated comparison",
-          possibleMatches: comp.possible_matches ? JSON.parse(comp.possible_matches) : null,
-          userSelected: comp.user_selected
-        }))
+          variance: comp.variance_percent ? (comp.assessment_line_items.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
+  variancePercent: comp.variance_percent || 0,
+  flag: (comp.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")) as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
+  benchmarkDescription: bestMatch ? `${bestMatch.procedureName} (${Math.round((bestMatch.similarity || 0) * 100)}% match)` : "No match found",
+  possibleMatches: matches.length > 0 ? matches : null,
+  userSelected: comp.user_selected_benchmark_id || null
+        }})
 
         setComparisons(mappedComparisons)
         mappedAssessment.totalLineItems = mappedComparisons.length
@@ -303,6 +325,42 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     )
   }, [appendAudit])
 
+  // Handle user selecting a benchmark match from dropdown
+  const handleMatchSelect = useCallback((compId: string, match: any) => {
+    setComparisons((prev) =>
+      prev.map((c) => {
+        if (c.id !== compId) return c
+        // Update comparison with selected benchmark values
+        const benchmarkLow = match.p25 || null
+        const benchmarkMed = match.p50 || null
+        const benchmarkHigh = match.p75 || null
+        const benchmark90th = match.p90 || null
+        
+        // Calculate variance against selected benchmark type
+        const selectedVal = benchmark90th || benchmarkHigh || benchmarkMed || 0
+        const variance = selectedVal > 0 ? c.lineItem.unitPrice - selectedVal : 0
+        const variancePercent = selectedVal > 0 ? (variance / selectedVal) * 100 : 0
+        let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
+        if (variancePercent > 15) flag = "RED"
+        else if (variancePercent > 5) flag = "YELLOW"
+        
+        return {
+          ...c,
+          benchmarkLow,
+          benchmarkMed,
+          benchmarkHigh,
+          benchmark90th,
+          variance,
+          variancePercent,
+          flag,
+          benchmarkDescription: `${match.procedureName} (${Math.round(match.similarity * 100)}% match)`,
+          userSelected: match.benchmarkId
+        }
+      })
+    )
+    appendAudit(`Selected benchmark match: ${match.procedureName}`)
+  }, [appendAudit])
+
   const handleArchive = useCallback(() => {
     setAssessment((prev) =>
       prev ? { ...prev, status: "ARCHIVED" as AssessmentStatus, updatedAt: new Date().toISOString() } : prev
@@ -329,6 +387,167 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     setShowRestoreConfirm(false)
     router.push("/dashboard")
   }, [id, appendAudit, router])
+
+  // Run AI benchmark comparison
+  const handleRunComparison = useCallback(async () => {
+    console.log("[v0] handleRunComparison called, comparisons.length:", comparisons.length)
+    
+    setIsRunningComparison(true)
+    appendAudit("Started AI Benchmark Comparison")
+    
+    try {
+      // First fetch the linked benchmark file IDs for this assessment
+      const supabase = createClient()
+      const { data: benchmarkLinks } = await supabase
+        .from("assessment_benchmark_files")
+        .select("benchmark_file_id")
+        .eq("assessment_id", id)
+      
+      const benchmarkFileIds = benchmarkLinks?.map(link => link.benchmark_file_id) || []
+      console.log("[v0] Linked benchmark files for comparison:", benchmarkFileIds.length)
+      
+      const response = await fetch("/api/assessments/run-comparison", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ assessmentId: id, benchmarkFileIds })
+      })
+      
+      const result = await response.json()
+      
+      console.log("[v0] Comparison API result:", result)
+      
+      if (result.success && result.results) {
+        // Build a map of AI results by lineItemId for easy lookup
+        const aiResultsMap = new Map(result.results.map((r: any) => [r.lineItemId, r]))
+        
+        // Refresh the comparisons data - fetch comparisons and line items separately
+        console.log("[v0] Refreshing comparisons data...")
+        const supabase = createClient()
+        
+        // Fetch comparisons
+        const { data: comparisonsData, error: compError } = await supabase
+          .from("assessment_comparisons")
+          .select("*")
+          .eq("assessment_id", id)
+          .order("created_at", { ascending: true })
+        
+        // Fetch line items
+        const { data: lineItemsData, error: liError } = await supabase
+          .from("assessment_line_items")
+          .select("*")
+          .eq("assessment_id", id)
+
+        console.log("[v0] Refresh result - comparisons:", comparisonsData?.length, "lineItems:", lineItemsData?.length)
+        
+        if (comparisonsData && comparisonsData.length > 0 && lineItemsData) {
+          // Create a map of line items by ID
+          const lineItemMap = new Map(lineItemsData.map((li: any) => [li.id, li]))
+          
+          const mappedComparisons: AssessmentComparison[] = comparisonsData
+            .filter((comp: any) => lineItemMap.has(comp.line_item_id))
+            .map((comp: any, idx: number) => {
+              const lineItem = lineItemMap.get(comp.line_item_id)
+              const procedureName = lineItem?.procedure_name || ""
+              const [description, extraDataStr] = procedureName.split("|||")
+              let extraData = { numberOfUnit: 1, unitPrice: 0, unitType: null, costCategory: null }
+              try {
+                if (extraDataStr) extraData = JSON.parse(extraDataStr)
+              } catch (e) {}
+              
+              // Get AI matches for this line item
+              const aiResult = aiResultsMap.get(comp.line_item_id)
+              const matches = aiResult?.matches || []
+              const bestMatch = aiResult?.bestMatch
+              
+              return {
+                id: comp.id,
+                lineItem: {
+                  id: lineItem?.id || comp.line_item_id,
+                  assessmentId: id,
+                  description: description.trim(),
+                  unitType: extraData.unitType || "Per Unit",
+                  unitPrice: extraData.unitPrice || 0,
+                  site: lineItem?.country || "Global",
+                  costCategory: extraData.costCategory || "Procedure",
+                  source: `Line ${idx + 1}`,
+                  decision: "In-review" as ItemDecision,
+                  numberOfUnit: extraData.numberOfUnit || 1,
+                  totalCost: lineItem?.vendor_cost || 0,
+                  currency: lineItem?.currency || "USD",
+                  country: lineItem?.country,
+                  additionalInformation: description.trim(),
+                  negotiatedPrice: lineItem?.negotiated_price ?? null
+                },
+                benchmark90th: bestMatch?.p90 || null,
+                benchmarkHigh: bestMatch?.p75 || null,
+                benchmarkMed: bestMatch?.p50 || null,
+                benchmarkLow: bestMatch?.p25 || null,
+                selectedBenchmarkType: "p90" as BenchmarkType,
+                variance: 0,
+                variancePercent: 0,
+                flag: (comp.flag || "NO_MATCH") as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
+                benchmarkDescription: bestMatch 
+                  ? `${bestMatch.procedureName} (${Math.round(bestMatch.similarity * 100)}% match)`
+                  : "No match found",
+                possibleMatches: matches.length > 0 ? matches : null,
+                userSelected: null
+              }})
+          console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item matches:", mappedComparisons[0]?.possibleMatches?.length)
+          setComparisons(mappedComparisons)
+        } else {
+          console.log("[v0] No comparisons data returned from refresh query")
+        }
+        
+        setComparisonComplete(true)
+        appendAudit(`Completed AI Benchmark Comparison: ${result.message}`)
+      } else {
+        appendAudit(`Benchmark Comparison failed: ${result.error}`)
+      }
+    } catch (error: any) {
+      appendAudit(`Benchmark Comparison error: ${error.message}`)
+    } finally {
+      setIsRunningComparison(false)
+    }
+  }, [id, comparisons.length, appendAudit])
+
+  // Handle line item field updates (additional information, cost category)
+  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory", value: string) => {
+    try {
+      const response = await fetch(`/api/assessments/line-items/${lineItemId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ [field]: value })
+      })
+      
+      if (response.ok) {
+        // Update local state
+        setComparisons(prev => prev.map(comp => {
+          if (comp.lineItem.id === lineItemId) {
+            return {
+              ...comp,
+              lineItem: {
+                ...comp.lineItem,
+                [field]: value,
+                // Also update description if it's additionalInformation
+                ...(field === "additionalInformation" ? { description: value } : {})
+              }
+            }
+          }
+          return comp
+        }))
+        const fieldNames: Record<string, string> = {
+          additionalInformation: "Additional Information",
+          costCategory: "Cost Category",
+          negotiatedPrice: "Negotiated Price"
+        }
+        appendAudit(`Updated ${fieldNames[field] || field} for line item`)
+      } else {
+        console.error("[v0] Failed to update line item:", await response.text())
+      }
+    } catch (error) {
+      console.error("[v0] Error updating line item:", error)
+    }
+  }, [appendAudit])
 
   // Get unique sites from line items
   const sites = useMemo(() => {
@@ -544,6 +763,40 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                {/* Run Benchmark Comparison Button */}
+                {isRealAssessment && (
+                  <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border border-border/40">
+                    <div>
+                      <h4 className="font-medium">AI Benchmark Matching</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Use AI to match line items against benchmark procedures
+                      </p>
+                    </div>
+                    <Button
+                      onClick={handleRunComparison}
+                      disabled={isRunningComparison}
+                      className="min-w-[200px]"
+                    >
+                      {isRunningComparison ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Running Comparison...
+                        </>
+                      ) : comparisonComplete ? (
+                        <>
+                          <Sparkles className="h-4 w-4 mr-2" />
+                          Re-run Comparison
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="h-4 w-4 mr-2" />
+                          Run Benchmark Comparison
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                )}
+                
                 {/* Filters */}
                 <div className="flex flex-wrap gap-4">
                   <div className="relative flex-1 min-w-[200px]">
@@ -636,7 +889,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 </div>
 
                 {/* Comparison Table */}
-                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} />
+                <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} onMatchSelect={handleMatchSelect} onLineItemUpdate={handleLineItemUpdate} />
               </CardContent>
             </Card>
           </TabsContent>

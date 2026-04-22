@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///vercel/share/v0-project/app/page.tsx"],"sourcesContent":["\"use client\"\n\nimport { useEffect } from \"react\"\nimport { useRouter } from \"next/navigation\"\nimport { useAuth } from \"@/lib/auth-context\"\n\nexport default function HomePage() {\n  const router = useRouter()\n  const { user, isLoading } = useAuth()\n\n  useEffect(() => {\n    if (!isLoading) {\n      if (user) {\n        router.push(\"/dashboard\")\n      } else {\n        router.push(\"/login\")\n      }\n    }\n  }, [user, isLoading, router])\n\n  return (\n    <div className=\"flex h-screen items-center justify-center\">\n      <div className=\"text-muted-foreground\">Loading...</div>\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;AAEA;AACA;AACA;;;AAJA;;;;AAMe,SAAS;;IACtB,MAAM,SAAS,IAAA,0TAAS;IACxB,MAAM,EAAE,IAAI,EAAE,SAAS,EAAE,GAAG,IAAA,qIAAO;IAEnC,IAAA,kVAAS;8BAAC;YACR,IAAI,CAAC,WAAW;gBACd,IAAI,MAAM;oBACR,OAAO,IAAI,CAAC;gBACd,OAAO;oBACL,OAAO,IAAI,CAAC;gBACd;YACF;QACF;6BAAG;QAAC;QAAM;QAAW;KAAO;IAE5B,qBACE,qWAAC;QAAI,WAAU;kBACb,cAAA,qWAAC;YAAI,WAAU;sBAAwB;;;;;;;;;;;AAG7C;GAnBwB;;QACP,0TAAS;QACI,qIAAO;;;KAFb"}}]
+}

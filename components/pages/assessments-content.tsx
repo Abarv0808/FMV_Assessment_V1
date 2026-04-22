@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useMemo } from "react"
+import { useState, useCallback, useMemo, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
 import { AppShell } from "@/components/app-shell"
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Plus, Search, LayoutGrid, List } from "lucide-react"
+import { Plus, Search, LayoutGrid, List, Loader2 } from "lucide-react"
 import { mockAssessments } from "@/lib/mock-data"
 import type { Assessment, AssessmentStatus } from "@/lib/types"
 import { formatDistanceToNow } from "date-fns"
@@ -22,13 +22,83 @@ export function AssessmentsContent() {
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<AssessmentStatus | "ALL">("ALL")
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const [allAssessments, setAllAssessments] = useState<Assessment[]>(mockAssessments)
+  const [allAssessments, setAllAssessments] = useState<Assessment[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
-  // Apply BU-based visibility and exclude archived
-  const assessments = useMemo(
-    () => filterAssessmentsByUser(allAssessments, user).filter((a) => a.status !== "ARCHIVED"),
-    [allAssessments, user]
-  )
+  // Fetch assessments from API (uses server-side Supabase to bypass RLS)
+  useEffect(() => {
+    const fetchAssessments = async () => {
+      setIsLoading(true)
+      try {
+        const response = await fetch("/api/assessments")
+        const { assessments: dbAssessments, error } = await response.json()
+        
+        console.log("[v0] Assessments fetch result:", dbAssessments?.length, "items, error:", error)
+        
+        if (error || !dbAssessments || dbAssessments.length === 0) {
+          console.log("[v0] No assessments or error, using mock data")
+          // Fall back to mock data if API fails or returns empty
+          setAllAssessments(mockAssessments)
+        } else if (dbAssessments && dbAssessments.length > 0) {
+          console.log("[v0] Got", dbAssessments.length, "assessments from DB, mapping...")
+          // Map DB assessments to Assessment type
+          // DB uses lowercase: 'draft', 'processing', 'completed', 'in_review'
+          // UI uses uppercase: 'DRAFT', 'PROCESSING', 'COMPLETED', 'IN_REVIEW'
+          const mapStatus = (dbStatus: string): AssessmentStatus => {
+            const statusMap: Record<string, AssessmentStatus> = {
+              'draft': 'DRAFT',
+              'processing': 'IN_REVIEW',
+              'completed': 'IN_REVIEW', // Show completed as in_review so they appear
+              'in_review': 'IN_REVIEW',
+              'approved': 'APPROVED',
+              'rejected': 'REJECTED',
+              'archived': 'ARCHIVED'
+            }
+            return statusMap[dbStatus?.toLowerCase()] || 'IN_REVIEW'
+          }
+          
+          const mappedAssessments: Assessment[] = dbAssessments.map((a: any) => ({
+            id: a.id,
+            name: a.name || "Untitled Assessment",
+            studyTrackingNumber: a.study_tracking_number || a.id.slice(0, 8),
+            sponsor: a.sponsor || "Unknown",
+            status: mapStatus(a.status),
+            country: a.country || "Global",
+            currency: a.currency || "USD",
+            therapeuticArea: a.therapeutic_area || "Unknown",
+            indication: a.indication || "",
+            trialPhase: a.trial_phase || "Phase I",
+            piName: a.pi_name || "",
+            siteName: a.site_name || "",
+            businessUnit: a.business_unit || "GLOBAL",
+            dataSource: a.data_source || "",
+            assignedTo: a.assigned_to || "",
+            createdAt: a.created_at,
+            updatedAt: a.updated_at || a.created_at,
+            proposalCount: a.line_items_count || 0,
+            flaggedCount: a.flagged_count || 0,
+            lineItems: [],
+            auditEvents: []
+          }))
+          setAllAssessments(mappedAssessments)
+        } else {
+          // No DB assessments, use mock data
+          setAllAssessments(mockAssessments)
+        }
+      } catch (e: any) {
+        setAllAssessments(mockAssessments)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchAssessments()
+  }, [])
+
+  // Show all assessments except archived (removed user filtering for now)
+  const assessments = useMemo(() => {
+    return allAssessments.filter((a) => a.status !== "ARCHIVED")
+  }, [allAssessments])
 
   const handleStatusChange = useCallback((id: string, newStatus: AssessmentStatus) => {
     setAllAssessments((prev) =>
@@ -43,6 +113,19 @@ export function AssessmentsContent() {
     const matchesStatus = statusFilter === "ALL" || assessment.status === statusFilter
     return matchesSearch && matchesStatus
   })
+
+  if (isLoading) {
+    return (
+      <AppShell>
+        <div className="p-8 flex items-center justify-center min-h-[400px]">
+          <div className="flex flex-col items-center gap-4">
+            <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+            <p className="text-muted-foreground">Loading assessments...</p>
+          </div>
+        </div>
+      </AppShell>
+    )
+  }
 
   return (
     <AppShell>

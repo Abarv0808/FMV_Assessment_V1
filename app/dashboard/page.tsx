@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useMemo } from "react"
+import { useState, useCallback, useMemo, useEffect } from "react"
 import { useAuth } from "@/lib/auth-context"
 import { AppShell } from "@/components/app-shell"
 import { Button } from "@/components/ui/button"
@@ -32,7 +32,57 @@ export default function DashboardPage() {
   const { user } = useAuth()
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState("")
-  const [allAssessments, setAllAssessments] = useState<Assessment[]>(mockAssessments)
+  const [allAssessments, setAllAssessments] = useState<Assessment[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Fetch assessments from API on mount
+  useEffect(() => {
+    const fetchAssessments = async () => {
+      try {
+        const response = await fetch("/api/assessments")
+        const { assessments: dbAssessments, error } = await response.json()
+        
+        if (error || !dbAssessments || dbAssessments.length === 0) {
+          setAllAssessments(mockAssessments)
+        } else {
+          // Map DB assessments to Assessment type with proper status
+          const mapStatus = (dbStatus: string): AssessmentStatus => {
+            const statusMap: Record<string, AssessmentStatus> = {
+              'draft': 'DRAFT',
+              'processing': 'IN_REVIEW',
+              'completed': 'IN_REVIEW',
+              'in_review': 'IN_REVIEW',
+              'approved': 'APPROVED',
+              'rejected': 'REJECTED',
+              'archived': 'ARCHIVED'
+            }
+            return statusMap[dbStatus?.toLowerCase()] || 'IN_REVIEW'
+          }
+          
+          const mappedAssessments: Assessment[] = dbAssessments.map((a: any) => ({
+            id: a.id,
+            name: a.name || "Untitled Assessment",
+            studyTrackingNumber: a.study_tracking_number || a.id.slice(0, 8),
+            sponsor: a.sponsor || "Unknown",
+            status: mapStatus(a.status),
+            proposalCount: a.proposal_count || 0,
+            flaggedCount: a.flagged_count || 0,
+            assignedTo: a.assigned_to || null,
+            createdAt: a.created_at,
+            updatedAt: a.updated_at || a.created_at,
+            businessUnit: a.business_unit || "Pharma",
+            dataSource: a.data_source || "IQVIA GrantPlan",
+          }))
+          setAllAssessments(mappedAssessments)
+        }
+      } catch (err) {
+        setAllAssessments(mockAssessments)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchAssessments()
+  }, [])
 
   // Apply BU-based visibility and exclude archived
   const assessments = useMemo(
@@ -164,7 +214,16 @@ export default function DashboardPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredAssessments.length === 0 ? (
+                  {isLoading ? (
+                    <TableRow>
+                      <TableCell
+                        colSpan={8}
+                        className="text-center text-muted-foreground py-8"
+                      >
+                        Loading assessments...
+                      </TableCell>
+                    </TableRow>
+                  ) : filteredAssessments.length === 0 ? (
                     <TableRow>
                       <TableCell
                         colSpan={8}

@@ -25,6 +25,9 @@ import { createClient } from "@/lib/supabase/client"
 import type { BenchmarkFile, BenchmarkSource, TrialPhase } from "@/lib/types"
 import { format } from "date-fns"
 
+// Only allowed phases - filter out Phase I, II, III
+const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IV"]
+
 interface ProposalUploadStepProps {
   data: {
     vendorProposal: File | null
@@ -80,19 +83,22 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
           }
         }
         
-        const mappedFiles: BenchmarkFile[] = allFiles.map((row: Record<string, unknown>) => ({
-          id: row.id as string,
-          fileName: row.file_name as string,
-          source: row.source as BenchmarkSource,
-          country: row.country as string,
-          indication: row.indication as string,
-          indicationCode: (row.indication_code as string) || undefined,
-          trialPhase: row.trial_phase as TrialPhase,
-          procedureCount: row.procedure_count as number,
-          currency: row.currency as string,
-          uploadedAt: row.uploaded_at as string,
-          uploadedBy: (row.uploaded_by as string) || "System",
-        }))
+        const mappedFiles: BenchmarkFile[] = allFiles
+          .map((row: Record<string, unknown>) => ({
+            id: row.id as string,
+            fileName: row.file_name as string,
+            source: row.source as BenchmarkSource,
+            country: row.country as string,
+            indication: row.indication as string,
+            indicationCode: (row.indication_code as string) || undefined,
+            trialPhase: row.trial_phase as TrialPhase,
+            procedureCount: row.procedure_count as number,
+            currency: row.currency as string,
+            uploadedAt: row.uploaded_at as string,
+            uploadedBy: (row.uploaded_by as string) || "System",
+          }))
+          // Filter to only show All Phases and Phase IV
+          .filter(file => ALLOWED_PHASES.includes(file.trialPhase))
         
         setBenchmarkFiles(mappedFiles)
       } catch (err) {
@@ -120,7 +126,7 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
       groups[file.indication][file.trialPhase].push(file)
     }
     
-    const phaseOrder = ["Phase I", "Phase II", "Phase III", "Phase IV"]
+    const phaseOrder = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IV"]
     return Object.entries(groups)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([indication, phases]) => ({
@@ -272,14 +278,14 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
 
   return (
     <div className="space-y-8">
-      {/* Vendor Proposal Upload */}
+      {/* Site Proposal Upload */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <FileSpreadsheet className="h-5 w-5 text-primary" />
-          <h3 className="text-lg font-medium">Vendor Proposal</h3>
+          <h3 className="text-lg font-medium">Site Proposal</h3>
         </div>
         <p className="text-sm text-muted-foreground">
-          Upload the vendor's proposal file containing their rate card and service fees.
+          Upload the site proposal file containing their rate card and service fees.
         </p>
 
         {!data.vendorProposal ? (
