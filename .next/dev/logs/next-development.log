@@ -182,3 +182,12 @@
 [02:20:24.761] Server  LOG     [v0] Fetched 14 "assessments with counts"
 [02:20:25.307] Server  LOG     [v0] Fetched 14 "assessments with counts"
 [02:20:48.391] Server  LOG      ✓ Compiled in 82ms
+[02:22:24.836] Server  LOG      ✓ Compiled in 61ms
+[02:22:34.534] Server  LOG      ✓ Compiled in 64ms
+[02:22:34.669] Browser ERROR   uncaughtError: ReferenceError: therapeuticAreaError is not defined
+[02:22:43.736] Server  LOG      ✓ Compiled in 46ms
+[02:22:43.746] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:22:44.170] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776867734996} /_vercel/insights/view
+[02:22:45.903] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[02:22:45.903] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/new","route":"/assessments/new"}
+[02:22:45.903] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776867736414} /_vercel/insights/view

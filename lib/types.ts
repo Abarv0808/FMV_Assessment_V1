@@ -1,9 +1,10 @@
 export const SECURITY_GROUPS = [
+  "GME",
+  "PDT",
+  "VBU",
+  "OBU",
   "USBU",
-  "EMEA",
-  "APAC",
-  "LATAM",
-  "GLOBAL",
+  "R&D",
 ] as const
 
 export type SecurityGroup = (typeof SECURITY_GROUPS)[number]

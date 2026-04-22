@@ -27,7 +27,7 @@ interface AssessmentInfoStepProps {
 }
 
 export function AssessmentInfoStep({ data, onChange, showErrors }: AssessmentInfoStepProps) {
-  const therapeuticAreaError = showErrors && !data.therapeuticArea
+  // Therapeutic area is now optional, no error check needed
   const businessUnitError = showErrors && !data.businessUnit
   return (
     <div className="space-y-6">
@@ -66,7 +66,7 @@ export function AssessmentInfoStep({ data, onChange, showErrors }: AssessmentInf
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="therapeuticArea">Therapeutic Area *</Label>
+        <Label htmlFor="therapeuticArea">Therapeutic Area (Optional)</Label>
         <Select
           value={data.therapeuticArea || undefined}
           onValueChange={(val) => onChange({ therapeuticArea: val as TherapeuticArea })}
@@ -74,8 +74,7 @@ export function AssessmentInfoStep({ data, onChange, showErrors }: AssessmentInf
           <SelectTrigger
             id="therapeuticArea"
             className={cn(
-              !data.therapeuticArea && "text-muted-foreground",
-              therapeuticAreaError && "border-red-500 focus:ring-red-500"
+              !data.therapeuticArea && "text-muted-foreground"
             )}
           >
             <SelectValue placeholder="Select Therapeutic Area" />
@@ -88,11 +87,7 @@ export function AssessmentInfoStep({ data, onChange, showErrors }: AssessmentInf
             ))}
           </SelectContent>
         </Select>
-        {therapeuticAreaError ? (
-          <p className="text-xs text-red-500">Therapeutic Area is required.</p>
-        ) : (
-          <p className="text-xs text-muted-foreground">Select the therapeutic area for this study</p>
-        )}
+        <p className="text-xs text-muted-foreground">Select the therapeutic area for this study</p>
       </div>
 
       <div className="space-y-2">

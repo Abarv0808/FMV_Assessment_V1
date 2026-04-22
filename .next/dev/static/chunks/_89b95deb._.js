@@ -844,11 +844,12 @@ __turbopack_context__.s([
     ()=>USER_ROLES
 ]);
 const SECURITY_GROUPS = [
+    "GME",
+    "PDT",
+    "VBU",
+    "OBU",
     "USBU",
-    "EMEA",
-    "APAC",
-    "LATAM",
-    "GLOBAL"
+    "R&D"
 ];
 const THERAPEUTIC_AREAS = [
     "Cardiovascular",
