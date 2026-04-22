@@ -25,16 +25,10 @@ export async function POST(request: NextRequest) {
     const db = getDb()
     const source = dataSource === "IQVIA GrantPlan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER"
     
-    // Map trial phase to valid database enum values
+    // Map trial phase to valid database enum values (only All Phases and Phase IV allowed)
     const phaseMap: Record<string, string> = {
       "All Phases": "All Phases",
-      "Phase 1": "All Phases",
-      "Phase 2": "Phase II", 
-      "Phase 3": "Phase III",
       "Phase 4": "Phase IV",
-      "Phase I": "All Phases",
-      "Phase II": "Phase II",
-      "Phase III": "Phase III",
       "Phase IV": "Phase IV",
     }
     const phase = phaseMap[trialPhase] || "All Phases"

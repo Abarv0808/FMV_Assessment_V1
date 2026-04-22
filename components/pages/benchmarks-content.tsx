@@ -182,17 +182,25 @@ export function BenchmarksContent() {
     fetchBenchmarks()
   }, [])
 
+  // Only allowed phases - filter out Phase I, II, III
+  const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IV"]
+
   // Extract unique values for filters
   const filterOptions = useMemo(() => {
     const countries = [...new Set(benchmarkFiles.map((r) => r.country))].sort()
     const indications = [...new Set(benchmarkFiles.map((r) => r.indication))].sort()
-    const phases: TrialPhase[] = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IV"]
+    const phases: TrialPhase[] = ALLOWED_PHASES
     return { countries, indications, phases }
   }, [benchmarkFiles])
 
-  // Filter benchmarks
+  // Filter benchmarks - only show allowed phases
   const filteredBenchmarks = useMemo(() => {
     return benchmarkFiles.filter((file) => {
+      // Only show All Phases and Phase IV
+      if (!ALLOWED_PHASES.includes(file.trialPhase)) {
+        return false
+      }
+      
       const matchesSearch =
         searchQuery === "" ||
         file.fileName.toLowerCase().includes(searchQuery.toLowerCase()) ||
