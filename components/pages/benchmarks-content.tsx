@@ -59,6 +59,9 @@ import { BenchmarkUploadDialog } from "@/components/benchmarks/upload-dialog"
 
 const ALL_VALUE = "__all__"
 
+// Only allowed phases - filter out Phase I, II, III
+const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IV"]
+
 export function BenchmarksContent() {
   const router = useRouter()
   const { user } = useAuth()
@@ -181,9 +184,6 @@ export function BenchmarksContent() {
 
     fetchBenchmarks()
   }, [])
-
-  // Only allowed phases - filter out Phase I, II, III
-  const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IV"]
 
   // Extract unique values for filters
   const filterOptions = useMemo(() => {
