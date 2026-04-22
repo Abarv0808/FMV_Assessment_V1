@@ -25,6 +25,9 @@ import { createClient } from "@/lib/supabase/client"
 import type { BenchmarkFile, BenchmarkSource, TrialPhase } from "@/lib/types"
 import { format } from "date-fns"
 
+// Only allowed phases - filter out Phase I, II, III
+const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IV"]
+
 interface ProposalUploadStepProps {
   data: {
     vendorProposal: File | null
@@ -80,19 +83,22 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
           }
         }
         
-        const mappedFiles: BenchmarkFile[] = allFiles.map((row: Record<string, unknown>) => ({
-          id: row.id as string,
-          fileName: row.file_name as string,
-          source: row.source as BenchmarkSource,
-          country: row.country as string,
-          indication: row.indication as string,
-          indicationCode: (row.indication_code as string) || undefined,
-          trialPhase: row.trial_phase as TrialPhase,
-          procedureCount: row.procedure_count as number,
-          currency: row.currency as string,
-          uploadedAt: row.uploaded_at as string,
-          uploadedBy: (row.uploaded_by as string) || "System",
-        }))
+        const mappedFiles: BenchmarkFile[] = allFiles
+          .map((row: Record<string, unknown>) => ({
+            id: row.id as string,
+            fileName: row.file_name as string,
+            source: row.source as BenchmarkSource,
+            country: row.country as string,
+            indication: row.indication as string,
+            indicationCode: (row.indication_code as string) || undefined,
+            trialPhase: row.trial_phase as TrialPhase,
+            procedureCount: row.procedure_count as number,
+            currency: row.currency as string,
+            uploadedAt: row.uploaded_at as string,
+            uploadedBy: (row.uploaded_by as string) || "System",
+          }))
+          // Filter to only show All Phases and Phase IV
+          .filter(file => ALLOWED_PHASES.includes(file.trialPhase))
         
         setBenchmarkFiles(mappedFiles)
       } catch (err) {
