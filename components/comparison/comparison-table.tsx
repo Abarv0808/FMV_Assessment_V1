@@ -229,7 +229,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableHead className="w-[40px]"></TableHead>
             <TableHead>Site</TableHead>
             <TableHead>Cost Category</TableHead>
-            <TableHead>Additional Information</TableHead>
+            <TableHead>Cost Description</TableHead>
             <TableHead className="min-w-[220px]">Benchmark Match</TableHead>
             <TableHead className="text-right">Number of Unit</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>

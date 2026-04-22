@@ -3,6 +3,7 @@
   "/api/assessments/route": "app/api/assessments/route.js",
   "/api/assessments/run-comparison/route": "app/api/assessments/run-comparison/route.js",
   "/api/assessments/store-items/route": "app/api/assessments/store-items/route.js",
+  "/archive/page": "app/archive/page.js",
   "/assessments/[id]/page": "app/assessments/[id]/page.js",
   "/assessments/new/page": "app/assessments/new/page.js",
   "/assessments/page": "app/assessments/page.js",
