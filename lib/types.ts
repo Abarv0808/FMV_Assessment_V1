@@ -23,7 +23,9 @@ export const THERAPEUTIC_AREAS = [
 
 export type TherapeuticArea = (typeof THERAPEUTIC_AREAS)[number]
 
-export type UserRole = "VIEWER" | "ANALYST" | "APPROVER" | "ADMIN"
+export const USER_ROLES = ["VIEWER", "ANALYST", "APPROVER", "ADMIN"] as const
+
+export type UserRole = (typeof USER_ROLES)[number]
 
 export interface User {
   id: string

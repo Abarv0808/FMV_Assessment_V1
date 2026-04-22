@@ -839,7 +839,9 @@ __turbopack_context__.s([
     "SECURITY_GROUPS",
     ()=>SECURITY_GROUPS,
     "THERAPEUTIC_AREAS",
-    ()=>THERAPEUTIC_AREAS
+    ()=>THERAPEUTIC_AREAS,
+    "USER_ROLES",
+    ()=>USER_ROLES
 ]);
 const SECURITY_GROUPS = [
     "USBU",
@@ -859,6 +861,12 @@ const THERAPEUTIC_AREAS = [
     "Dermatology",
     "Ophthalmology",
     "Other"
+];
+const USER_ROLES = [
+    "VIEWER",
+    "ANALYST",
+    "APPROVER",
+    "ADMIN"
 ];
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);

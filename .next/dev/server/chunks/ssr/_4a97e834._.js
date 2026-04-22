@@ -742,7 +742,9 @@ __turbopack_context__.s([
     "SECURITY_GROUPS",
     ()=>SECURITY_GROUPS,
     "THERAPEUTIC_AREAS",
-    ()=>THERAPEUTIC_AREAS
+    ()=>THERAPEUTIC_AREAS,
+    "USER_ROLES",
+    ()=>USER_ROLES
 ]);
 const SECURITY_GROUPS = [
     "USBU",
@@ -762,6 +764,12 @@ const THERAPEUTIC_AREAS = [
     "Dermatology",
     "Ophthalmology",
     "Other"
+];
+const USER_ROLES = [
+    "VIEWER",
+    "ANALYST",
+    "APPROVER",
+    "ADMIN"
 ];
 }),
 "[project]/app/login/page.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
