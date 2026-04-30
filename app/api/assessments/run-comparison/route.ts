@@ -45,13 +45,24 @@ ${benchmarkList}
 TASK: Find the TOP 3 benchmark procedures that best match the vendor cost item semantically. Consider:
 1. Similar medical/clinical terminology
 2. Same type of procedure, test, or service
-3. Equivalent activities even if named differently (e.g., "Study Coordinator" = "Clinical Research Coordinator")
-4. Category alignment when applicable
+3. Equivalent activities even if named differently
+
+COMMON EQUIVALENT TERMS IN CLINICAL TRIALS:
+- "Ethics Committee fee" / "Local Ethics" / "EC fee" = "IRB" / "Institutional Review Board" / "IRB/EC"
+- "Study Coordinator" = "Clinical Research Coordinator" / "CRC"
+- "Principal Investigator" = "PI" / "Lead Investigator"
+- "Informed Consent" = "ICF" / "Consent Process"
+- "Site Management" = "Site Overhead" / "Facility Fee"
+- "Regulatory Affairs" = "Regulatory Submission" / "Compliance"
+- "Data Management" = "Data Entry" / "CRF Completion"
+- "Patient Stipend" = "Subject Compensation" / "Patient Reimbursement"
 
 Return matches with confidence:
-- HIGH: Clear semantic match, same procedure/service
+- HIGH: Clear semantic match, same procedure/service/fee type
 - MEDIUM: Likely match, similar but not identical
 - LOW: Possible match, requires review
+
+IMPORTANT: Search carefully for regulatory, ethics, IRB, compliance related benchmarks when the vendor item mentions ethics committee, IRB, regulatory, or compliance fees.
 
 If no reasonable matches exist, return an empty matches array.`
     })
