@@ -1,11 +1,72 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
+import { generateObject } from "ai"
+import { gateway } from "@ai-sdk/gateway"
+import { z } from "zod"
 
 // =====================================================
-// MATCHING UTILITY FUNCTIONS
+// AI-POWERED SEMANTIC MATCHING
 // =====================================================
 
-// Stopwords for text normalization
+// Schema for AI match response
+const MatchResultSchema = z.object({
+  matches: z.array(z.object({
+    benchmarkIndex: z.number().describe("Index of the matching benchmark procedure (0-based)"),
+    confidence: z.enum(["HIGH", "MEDIUM", "LOW"]).describe("Confidence level of the match"),
+    reasoning: z.string().describe("Brief explanation of why this is a match")
+  })).describe("Top matching benchmark procedures (max 3)")
+})
+
+// Use AI to find semantic matches between a vendor item and benchmark procedures
+async function findAIMatches(
+  vendorDescription: string,
+  vendorCategory: string,
+  benchmarkProcedures: { id: string; name: string; category: string; index: number }[]
+): Promise<{ benchmarkIndex: number; confidence: "HIGH" | "MEDIUM" | "LOW"; reasoning: string }[]> {
+  
+  // Prepare benchmark list for the prompt (limit to 100 to avoid token limits)
+  const benchmarkList = benchmarkProcedures.slice(0, 100).map((bp, i) => 
+    `${i}. "${bp.name}" (Category: ${bp.category || "Unknown"})`
+  ).join("\n")
+
+  try {
+    const { object } = await generateObject({
+      model: gateway("openai/gpt-4o-mini"),
+      schema: MatchResultSchema,
+      prompt: `You are an expert at matching clinical trial cost items to benchmark procedures for Fair Market Value (FMV) assessment.
+
+VENDOR COST ITEM:
+Description: "${vendorDescription}"
+Category: "${vendorCategory || "Not specified"}"
+
+BENCHMARK PROCEDURES (index. name):
+${benchmarkList}
+
+TASK: Find the TOP 3 benchmark procedures that best match the vendor cost item semantically. Consider:
+1. Similar medical/clinical terminology
+2. Same type of procedure, test, or service
+3. Equivalent activities even if named differently (e.g., "Study Coordinator" = "Clinical Research Coordinator")
+4. Category alignment when applicable
+
+Return matches with confidence:
+- HIGH: Clear semantic match, same procedure/service
+- MEDIUM: Likely match, similar but not identical
+- LOW: Possible match, requires review
+
+If no reasonable matches exist, return an empty matches array.`
+    })
+
+    return object.matches || []
+  } catch (error: any) {
+    console.log("[v0] AI matching error:", error.message)
+    return []
+  }
+}
+
+// =====================================================
+// FALLBACK: TRIGRAM-BASED MATCHING (if AI fails)
+// =====================================================
+
 const STOPWORDS = new Set([
   "a", "an", "the", "and", "or", "but", "in", "on", "at", "to", "for", "of", 
   "with", "by", "from", "as", "is", "was", "are", "were", "been", "be", "have",
@@ -15,81 +76,15 @@ const STOPWORDS = new Set([
   "same", "so", "than", "too", "very", "just", "also", "now", "etc"
 ])
 
-// Category alias mapping for normalization
-const CATEGORY_ALIASES: Record<string, string> = {
-  // Procedures
-  "procedures": "procedures",
-  "procedure": "procedures",
-  "proc": "procedures",
-  "medical procedures": "procedures",
-  "clinical procedures": "procedures",
-  
-  // Non-Procedures
-  "non procedures": "non_procedures",
-  "non-procedures": "non_procedures",
-  "nonprocedures": "non_procedures",
-  "non procedure": "non_procedures",
-  "non-procedure": "non_procedures",
-  "other costs": "non_procedures",
-  "other": "non_procedures",
-  
-  // Site Costs
-  "site costs": "site_costs",
-  "site cost": "site_costs",
-  "sitecosts": "site_costs",
-  "site": "site_costs",
-  "site fees": "site_costs",
-  "site expenses": "site_costs",
-  
-  // Country Costs
-  "country costs": "country_costs",
-  "country cost": "country_costs",
-  "countrycosts": "country_costs",
-  "country": "country_costs",
-  "regional costs": "country_costs",
-  
-  // Conditional Procedures
-  "conditional procedures": "conditional_procedures",
-  "conditional procedure": "conditional_procedures",
-  "conditional": "conditional_procedures",
-  
-  // Personnel/Staff
-  "personnel": "personnel",
-  "staff": "personnel",
-  "staffing": "personnel",
-  "labor": "personnel",
-  "labour": "personnel",
-  
-  // Lab/Tests
-  "laboratory": "laboratory",
-  "lab": "laboratory",
-  "labs": "laboratory",
-  "tests": "laboratory",
-  "testing": "laboratory",
-  "diagnostics": "laboratory",
-}
-
-// Normalize text: lowercase, trim, replace punctuation, remove stopwords
 function normText(s: string): string {
   if (!s) return ""
   let normalized = s.toLowerCase().trim()
-  // Replace punctuation with spaces
   normalized = normalized.replace(/[^\w\s]/g, " ")
-  // Collapse multiple spaces
   normalized = normalized.replace(/\s+/g, " ").trim()
-  // Remove stopwords
   const words = normalized.split(" ").filter(w => !STOPWORDS.has(w) && w.length > 1)
   return words.join(" ")
 }
 
-// Normalize category using alias map
-function normCat(s: string): string {
-  if (!s) return ""
-  const lower = s.toLowerCase().trim()
-  return CATEGORY_ALIASES[lower] || lower.replace(/[^\w]/g, "_")
-}
-
-// Generate trigrams from text
 function getTrigrams(text: string): Set<string> {
   const trigrams = new Set<string>()
   const padded = `  ${text}  `
@@ -99,7 +94,6 @@ function getTrigrams(text: string): Set<string> {
   return trigrams
 }
 
-// Calculate trigram cosine similarity
 function trigramSimilarity(a: string, b: string): number {
   if (!a || !b) return 0
   const trigramsA = getTrigrams(a)
@@ -116,43 +110,12 @@ function trigramSimilarity(a: string, b: string): number {
   return intersection / denominator
 }
 
-// Calculate category similarity (1 if match, 0 if not)
-function categorySimilarity(vendorCat: string, benchmarkCat: string): number {
-  const normVendor = normCat(vendorCat)
-  const normBenchmark = normCat(benchmarkCat)
-  return normVendor === normBenchmark ? 1 : 0
-}
-
-// Determine confidence level
-function getConfidence(isStrict: boolean, textSim: number): "HIGH" | "MEDIUM" | "LOW" {
-  if (isStrict && textSim >= 0.70) return "HIGH"
-  if (isStrict || textSim >= 0.88) return "MEDIUM"
-  return "LOW"
-}
-
 // =====================================================
-// MATCHING INTERFACE
+// MAIN API HANDLER
 // =====================================================
-
-interface MatchCandidate {
-  benchmarkId: string
-  procedureName: string
-  category: string
-  textSim: number
-  catSim: number
-  score: number
-  confidence: "HIGH" | "MEDIUM" | "LOW"
-  isStrict: boolean
-  p25: number | null
-  p50: number | null
-  p75: number | null
-  p90: number | null
-  p100: number | null
-  country: string
-}
 
 export async function POST(request: Request) {
-  console.log("[v0] Run comparison API called")
+  console.log("[v0] Run comparison API called (AI-powered)")
   
   try {
     const body = await request.json()
@@ -183,29 +146,8 @@ export async function POST(request: Request) {
     console.log("[v0] Fetching benchmark procedures...")
     
     let benchmarks: any[] = []
-    let benchmarksError: any = null
     
     try {
-      // First, try simple query without join to see if procedures exist
-      const { data: simpleCheck, error: simpleError } = await supabase
-        .from("benchmark_procedures")
-        .select("id, procedure_name")
-        .limit(5)
-      
-      console.log("[v0] Simple benchmark check:", simpleCheck?.length, "procedures, error:", simpleError?.message)
-      
-      // First get the count of all procedures
-      const { count: totalCount } = await supabase
-        .from("benchmark_procedures")
-        .select("id", { count: "exact", head: true })
-      
-      console.log("[v0] Total benchmark procedures in database:", totalCount)
-      
-      // Fetch benchmark procedures ONLY from selected countries/files
-      console.log("[v0] Selected benchmark file IDs:", benchmarkFileIds?.length || 0, "files")
-      
-      // If user selected specific benchmark files, use ONLY those
-      // This ensures we only compare against the countries they selected
       let benchmarkQuery = supabase
         .from("benchmark_procedures")
         .select(`
@@ -223,12 +165,10 @@ export async function POST(request: Request) {
         `)
         .limit(5000)
 
-      // Filter to ONLY the selected benchmark files (selected countries)
       if (benchmarkFileIds && benchmarkFileIds.length > 0) {
         benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
-        console.log("[v0] Filtering to selected benchmark files only")
+        console.log("[v0] Filtering to selected benchmark files")
       } else {
-        // If no files selected, limit to first file to avoid massive query
         const { data: firstFile } = await supabase
           .from("benchmark_files")
           .select("id, country")
@@ -237,16 +177,13 @@ export async function POST(request: Request) {
         
         if (firstFile) {
           benchmarkQuery = benchmarkQuery.eq("benchmark_file_id", firstFile.id)
-          console.log("[v0] No files selected, using fallback:", firstFile.country)
         }
       }
 
       const result = await benchmarkQuery
       const rawBenchmarks = result.data || []
-      benchmarksError = result.error
       
-      // Filter out metadata rows (headers that were incorrectly parsed as procedures)
-      // But DO NOT require pricing data - the Excel may not have been parsed correctly
+      // Filter out metadata rows
       const metadataLabels = ['study details', 'study code:', 'short name:', 'drug / compound:', 'title:', 
         'phase:', 'created:', 'modified:', 'budget type:', 'patient type:', 'indications (', 'study type',
         'visits:', 'screened:', 'sites:', 'overhead:', 'lab costs:', 'country details', 'single patient duration:',
@@ -254,40 +191,20 @@ export async function POST(request: Request) {
       
       benchmarks = rawBenchmarks.filter((bm: any) => {
         const name = (bm.procedure_name || "").toLowerCase().trim()
-        // Filter out empty names and metadata labels
         if (!name || name.length < 2) return false
         if (metadataLabels.some(label => name.includes(label))) return false
         return true
       })
       
-      // Count how many have actual pricing data
-      const withPricing = benchmarks.filter((bm: any) => 
-        bm.p25 != null || bm.p50 != null || bm.p75 != null || bm.p90 != null
-      )
-      
-      // Log countries found in benchmarks
-      const benchmarkCountries = [...new Set(benchmarks.map((b: any) => b.benchmark_files?.country).filter(Boolean))]
-      console.log("[v0] Benchmark query result:", rawBenchmarks.length, "raw,", benchmarks.length, "valid names,", withPricing.length, "with pricing")
-      console.log("[v0] Benchmark countries found:", benchmarkCountries.length, "countries:", benchmarkCountries.slice(0, 10).join(", "), benchmarkCountries.length > 10 ? "..." : "")
-      if (benchmarksError) {
-        console.log("[v0] Benchmark query error:", benchmarksError)
-      }
+      console.log("[v0] Benchmark procedures loaded:", benchmarks.length)
     } catch (e: any) {
       console.log("[v0] Benchmark query exception:", e.message)
-      benchmarksError = e
     }
 
-    if (benchmarksError) {
-      // Table might not exist - proceed without benchmarks for now
-      console.log("[v0] Continuing without benchmark data due to error")
-    }
-    
     if (!benchmarks || benchmarks.length === 0) {
-      // No benchmarks - still create comparisons but mark as NO_MATCH
       console.log("[v0] No benchmark data found, marking all as NO_MATCH")
       
       for (const lineItem of lineItems) {
-        // Check if comparison already exists
         const { data: existing } = await supabase
           .from("assessment_comparisons")
           .select("id")
@@ -295,7 +212,6 @@ export async function POST(request: Request) {
           .single()
         
         if (!existing) {
-          // Create comparison record
           await supabase
             .from("assessment_comparisons")
             .insert({
@@ -317,35 +233,29 @@ export async function POST(request: Request) {
       
       return NextResponse.json({ 
         success: true,
-        message: `No benchmark data found. ${lineItems.length} items marked as NO_MATCH. Please upload benchmark files first.`,
+        message: `No benchmark data found. ${lineItems.length} items marked as NO_MATCH.`,
         results: lineItems.map(l => ({ lineItemId: l.id, matchCount: 0, flag: "NO_MATCH" }))
       })
     }
 
-    // Log sample data for debugging
-    console.log("[v0] === SAMPLE DATA COMPARISON ===")
-    console.log("[v0] LINE ITEMS FROM ASSESSMENT (first 3):")
-    lineItems.slice(0, 3).forEach((li: any, idx: number) => {
-      const [desc] = (li.procedure_name || "").split("|||")
-      console.log(`[v0]   ${idx + 1}. "${desc.trim()}"`)
-    })
-    console.log("[v0] BENCHMARK PROCEDURES (first 10):")
-    benchmarks.slice(0, 10).forEach((bm: any, idx: number) => {
-      const hasPricing = bm.p25 != null || bm.p50 != null || bm.p75 != null || bm.p90 != null
-      console.log(`[v0]   ${idx + 1}. "${bm.procedure_name}" | HasPricing: ${hasPricing} | P90: ${bm.p90}`)
-    })
-    console.log("[v0] === END SAMPLE DATA ===")
+    // Prepare benchmark data for AI matching
+    const benchmarkForAI = benchmarks.map((bm, index) => ({
+      id: bm.id,
+      name: bm.procedure_name,
+      category: bm.category || "",
+      index
+    }))
 
     const results: any[] = []
 
-    // 3. For each line item, use trigram + category matching algorithm
+    // 3. For each line item, use AI-powered semantic matching
+    console.log("[v0] Starting AI-powered matching for", lineItems.length, "items...")
+    
     for (const lineItem of lineItems) {
-      // Parse description and extra data from procedure_name (format: "description|||{json}")
       const procedureName = lineItem.procedure_name || ""
       const [description, extraDataStr] = procedureName.split("|||")
       const cleanDescription = description.trim()
       
-      // Parse extra data to get costCategory
       let vendorCostCategory = ""
       try {
         if (extraDataStr) {
@@ -356,10 +266,9 @@ export async function POST(request: Request) {
         // Ignore JSON parse errors
       }
 
-      console.log("[v0] Processing line item:", `"${cleanDescription}"`, "| Category:", vendorCostCategory || "N/A")
+      console.log("[v0] Processing:", `"${cleanDescription.substring(0, 50)}..."`)
       
       if (!cleanDescription || cleanDescription === "Unknown") {
-        // No description - mark as no match
         results.push({
           lineItemId: lineItem.id,
           matches: [],
@@ -369,95 +278,71 @@ export async function POST(request: Request) {
         continue
       }
 
-      // Normalize vendor text for matching
-      const normVendorText = normText(cleanDescription)
-      const normVendorCat = normCat(vendorCostCategory)
+      // Try AI matching first
+      let matchedBenchmarks: any[] = []
       
-      // Calculate similarity scores for all benchmarks
-      const allCandidates: MatchCandidate[] = []
-      
-      for (const bm of benchmarks) {
-        const normBenchmarkText = normText(bm.procedure_name || "")
-        const normBenchmarkCat = normCat(bm.category || "")
+      try {
+        const aiMatches = await findAIMatches(cleanDescription, vendorCostCategory, benchmarkForAI)
         
-        const textSim = trigramSimilarity(normVendorText, normBenchmarkText)
-        const catSim = categorySimilarity(vendorCostCategory, bm.category || "")
-        
-        // Score: 0.75 * catSim + 0.25 * textSim
-        const score = 0.75 * catSim + 0.25 * textSim
-        
-        allCandidates.push({
-          benchmarkId: bm.id,
-          procedureName: bm.procedure_name,
-          category: bm.category || "Other",
-          textSim,
-          catSim,
-          score,
-          confidence: "LOW", // Will be updated
-          isStrict: false,   // Will be updated
-          p25: bm.p25,
-          p50: bm.p50,
-          p75: bm.p75,
-          p90: bm.p90,
-          p100: bm.p100,
-          country: bm.benchmark_files?.country || "Unknown"
-        })
+        if (aiMatches.length > 0) {
+          console.log("[v0] AI found", aiMatches.length, "matches")
+          
+          matchedBenchmarks = aiMatches.map(match => {
+            const bm = benchmarks[match.benchmarkIndex]
+            if (!bm) return null
+            
+            return {
+              benchmarkId: bm.id,
+              procedureName: bm.procedure_name,
+              similarity: match.confidence === "HIGH" ? 0.9 : match.confidence === "MEDIUM" ? 0.7 : 0.5,
+              confidence: match.confidence,
+              reasoning: match.reasoning,
+              isAIMatch: true,
+              p25: bm.p25,
+              p50: bm.p50,
+              p75: bm.p75,
+              p90: bm.p90,
+              p100: bm.p100,
+              country: bm.benchmark_files?.country || "Unknown",
+              category: bm.category || "Other"
+            }
+          }).filter(Boolean)
+        }
+      } catch (aiError: any) {
+        console.log("[v0] AI matching failed, falling back to trigram:", aiError.message)
       }
-      
-      // STRICT MATCHING: Category must match AND textSim >= 0.45
-      const strictMatches = allCandidates
-        .filter(c => c.catSim === 1 && c.textSim >= 0.45)
-        .map(c => ({ ...c, isStrict: true, confidence: getConfidence(true, c.textSim) }))
-        .sort((a, b) => b.textSim - a.textSim) // Sort by text similarity for strict
-        .slice(0, 3)
-      
-      let finalMatches: MatchCandidate[] = []
-      
-      if (strictMatches.length > 0) {
-        // Use strict matches
-        finalMatches = strictMatches
-        console.log("[v0] Found", strictMatches.length, "STRICT matches for:", cleanDescription.substring(0, 40))
-      } else {
-        // FALLBACK: Pure text similarity matching (categories don't align between vendor and benchmark data)
-        // Lower threshold to 0.35 to catch more semantic matches
-        const fallbackMatches = allCandidates
-          .filter(c => c.textSim >= 0.35)
-          .map(c => ({ 
-            ...c, 
-            isStrict: false, 
-            confidence: c.textSim >= 0.70 ? "HIGH" : c.textSim >= 0.50 ? "MEDIUM" : "LOW"
+
+      // Fallback to trigram matching if AI fails or returns no results
+      if (matchedBenchmarks.length === 0) {
+        console.log("[v0] Using trigram fallback for:", cleanDescription.substring(0, 30))
+        
+        const normVendorText = normText(cleanDescription)
+        
+        const trigramMatches = benchmarks
+          .map(bm => ({
+            bm,
+            similarity: trigramSimilarity(normVendorText, normText(bm.procedure_name || ""))
           }))
-          .sort((a, b) => b.textSim - a.textSim) // Sort by text similarity
+          .filter(m => m.similarity >= 0.35)
+          .sort((a, b) => b.similarity - a.similarity)
           .slice(0, 3)
         
-        finalMatches = fallbackMatches
-        console.log("[v0] Found", fallbackMatches.length, "FALLBACK matches for:", cleanDescription.substring(0, 40))
+        matchedBenchmarks = trigramMatches.map(m => ({
+          benchmarkId: m.bm.id,
+          procedureName: m.bm.procedure_name,
+          similarity: m.similarity,
+          confidence: m.similarity >= 0.7 ? "HIGH" : m.similarity >= 0.5 ? "MEDIUM" : "LOW",
+          reasoning: "Matched by text similarity",
+          isAIMatch: false,
+          p25: m.bm.p25,
+          p50: m.bm.p50,
+          p75: m.bm.p75,
+          p90: m.bm.p90,
+          p100: m.bm.p100,
+          country: m.bm.benchmark_files?.country || "Unknown",
+          category: m.bm.category || "Other"
+        }))
       }
-      
-      // Log matches
-      if (finalMatches.length > 0) {
-        finalMatches.forEach((m, i) => {
-          console.log(`[v0]   Match ${i + 1}: "${m.procedureName}" | TextSim: ${(m.textSim * 100).toFixed(1)}% | CatSim: ${m.catSim} | Confidence: ${m.confidence} | ${m.isStrict ? "STRICT" : "FALLBACK"}`)
-        })
-      }
-      
-      // Build result matches with similarity as percentage
-      const matchedBenchmarks = finalMatches.map(m => ({
-        benchmarkId: m.benchmarkId,
-        procedureName: m.procedureName,
-        similarity: m.textSim,
-        textSimilarity: m.textSim,
-        categorySimilarity: m.catSim,
-        confidence: m.confidence,
-        isStrict: m.isStrict,
-        p25: m.p25,
-        p50: m.p50,
-        p75: m.p75,
-        p90: m.p90,
-        p100: m.p100,
-        country: m.country,
-        category: m.category
-      }))
 
       // Determine flag based on results
       let flag = "NO_MATCH"
@@ -466,10 +351,17 @@ export async function POST(request: Request) {
         if (bestConfidence === "HIGH") {
           flag = "GREEN"
         } else if (bestConfidence === "MEDIUM") {
-          flag = matchedBenchmarks.length > 1 ? "YELLOW" : "GREEN"
+          flag = "YELLOW"
         } else {
           flag = "YELLOW"
         }
+      }
+
+      // Log matches
+      if (matchedBenchmarks.length > 0) {
+        matchedBenchmarks.forEach((m, i) => {
+          console.log(`[v0]   Match ${i + 1}: "${m.procedureName?.substring(0, 40)}" | Confidence: ${m.confidence} | AI: ${m.isAIMatch}`)
+        })
       }
 
       results.push({
@@ -480,48 +372,37 @@ export async function POST(request: Request) {
       })
     }
 
-    // 4. Update assessment_comparisons with flag and ai_matches
+    // 4. Update assessment_comparisons with results
     console.log("[v0] Updating", results.length, "comparison records")
     
     for (const result of results) {
-      // Convert MULTIPLE_MATCHES to YELLOW since DB only allows GREEN/YELLOW/RED/NO_MATCH
-      const validFlag = result.flag === "MULTIPLE_MATCHES" ? "YELLOW" : result.flag
-
-      // Update assessment_comparisons with flag and ai_matches
       const { data: updated, error: updateError } = await supabase
         .from("assessment_comparisons")
         .update({ 
-          flag: validFlag,
+          flag: result.flag,
           ai_matches: result.matches || []
         })
         .eq("line_item_id", result.lineItemId)
         .select("id")
       
-      console.log("[v0] Update result for", result.lineItemId, ":", updated?.length || 0, "rows, error:", updateError?.message)
-      
-      // If no rows were updated (comparison doesn't exist), insert one
       if (!updated || updated.length === 0) {
-        console.log("[v0] No existing comparison, inserting...")
-        const { error: insertError } = await supabase
+        await supabase
           .from("assessment_comparisons")
           .insert({
             assessment_id: assessmentId,
             line_item_id: result.lineItemId,
-            flag: validFlag,
+            flag: result.flag,
             ai_matches: result.matches || []
           })
-        
-        if (insertError) {
-          console.log("[v0] Insert error:", insertError.message)
-        } else {
-          console.log("[v0] Inserted new comparison for", result.lineItemId)
-        }
       }
     }
 
+    const aiMatchCount = results.filter(r => r.matches.some((m: any) => m.isAIMatch)).length
+    const fallbackCount = results.filter(r => r.matches.length > 0 && !r.matches.some((m: any) => m.isAIMatch)).length
+
     return NextResponse.json({
       success: true,
-      message: `Compared ${lineItems.length} line items against ${benchmarks.length} benchmarks`,
+      message: `Compared ${lineItems.length} items: ${aiMatchCount} AI matches, ${fallbackCount} trigram matches`,
       results: results.map(r => ({
         lineItemId: r.lineItemId,
         matchCount: r.matches.length,

@@ -1,244 +1,35 @@
-[00:00:01.103] Server  LOG      ✓ Ready in 668ms
-[00:00:08.712] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:08.712] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:00:08.712] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776859179314} /_vercel/insights/view
-[00:00:17.392] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776859188652} /_vercel/insights/view
-[00:00:20.479] Server  LOG     [v0] Fetched 9 "assessments from database"
-[00:00:20.678] Server  LOG     [v0] Fetched 9 "assessments from database"
-[00:00:29.011] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776859200266} /_vercel/insights/view
-[00:00:29.527] Server  LOG     [v0] Fetched 9 "assessments from database"
-[00:00:29.672] Browser LOG     [v0] Assessments fetch result: 9 items, error: undefined
-[00:00:29.672] Browser LOG     [v0] Got 9 assessments from DB, mapping...
-[00:00:29.896] Server  LOG     [v0] Fetched 9 "assessments from database"
-[00:00:30.048] Browser LOG     [v0] Assessments fetch result: 9 items, error: undefined
-[00:00:30.048] Browser LOG     [v0] Got 9 assessments from DB, mapping...
-[00:00:35.231] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/c17088c2-d151-45af-a6e9-dc44d254f78d color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/c17088c2-d151-45af-a6e9-dc44d254f78d","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776859206495} /_vercel/insights/view
-[00:00:37.534] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[00:00:37.912] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[00:00:37.912] Browser LOG     [v0] Has existing ai_matches: true
-[00:00:37.912] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:37.912] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:37.912] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:37.912] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:37.912] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches
-[00:00:37.913] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:00:37.913] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:37.925] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[00:00:38.078] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[00:00:38.078] Browser LOG     [v0] Has existing ai_matches: true
-[00:00:38.078] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:38.078] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:38.078] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:38.078] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:38.078] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches
-[00:00:38.078] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:00:38.078] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:00:44.862] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776859216124} /_vercel/insights/view
-[00:00:45.170] Server  LOG     [v0] Fetched 9 "assessments from database"
-[00:00:45.322] Browser LOG     [v0] Assessments fetch result: 9 items, error: undefined
-[00:00:45.322] Browser LOG     [v0] Got 9 assessments from DB, mapping...
-[00:00:45.495] Server  LOG     [v0] Fetched 9 "assessments from database"
-[00:00:45.638] Browser LOG     [v0] Assessments fetch result: 9 items, error: undefined
-[00:00:45.638] Browser LOG     [v0] Got 9 assessments from DB, mapping...
-[00:03:34.152] Server  LOG      ✓ Compiled in 90ms
-[00:08:50.846] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776859702016} /_vercel/insights/view
-[00:08:51.607] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776859702870} /_vercel/insights/view
-[00:08:51.821] Server  LOG     [v0] Fetched 9 "assessments with counts"
-[00:08:52.299] Server  LOG     [v0] Fetched 9 "assessments with counts"
-[00:08:52.919] Server  LOG     [v0] Fetched 9 "assessments with counts"
-[00:08:53.066] Browser LOG     [v0] Assessments fetch result: 9 items, error: undefined
-[00:08:53.066] Browser LOG     [v0] Got 9 assessments from DB, mapping...
-[00:08:53.223] Server  LOG     [v0] Fetched 9 "assessments with counts"
-[00:08:53.366] Browser LOG     [v0] Assessments fetch result: 9 items, error: undefined
-[00:08:53.366] Browser LOG     [v0] Got 9 assessments from DB, mapping...
-[00:09:12.094] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776859723338} /_vercel/insights/view
-[00:15:21.676] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776860092896} /_vercel/insights/view
-[00:17:53.980] Server  LOG      ✓ Compiled in 133ms
-[00:18:03.203] Server  LOG      ✓ Compiled in 59ms
-[00:20:03.316] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776860374574} /_vercel/insights/view
-[00:20:03.819] Server  LOG     [v0] Fetched 9 "assessments with counts"
-[00:20:03.968] Browser LOG     [v0] Assessments fetch result: 9 items, error: undefined
-[00:20:03.968] Browser LOG     [v0] Got 9 assessments from DB, mapping...
-[00:20:04.316] Server  LOG     [v0] Fetched 9 "assessments with counts"
-[00:20:04.768] Browser LOG     [v0] Assessments fetch result: 9 items, error: undefined
-[00:20:04.768] Browser LOG     [v0] Got 9 assessments from DB, mapping...
-[00:20:05.096] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776860376336} /_vercel/insights/view
-[00:21:31.093] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
-[00:21:31.093] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
-[00:21:31.093] Browser LOG     [v0] Found Sponsor sheet: Sponsor
-[00:21:31.093] Browser LOG     [v0] Sheet data has 131 rows
-[00:21:31.093] Browser LOG     [v0] First 5 rows of data:
-[00:21:31.093] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
-[00:21:31.093] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
-[00:21:31.093] Browser LOG     [v0] Row 2 : [null,200,"Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
-[00:21:31.093] Browser LOG     [v0] Row 3 : [null,232,"Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
-[00:21:31.093] Browser LOG     [v0] Row 4 : [null,222,"Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
-[00:21:31.093] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
-[00:21:31.093] Browser LOG     [v0] Row 0 matched 0 columns: []
-[00:21:31.093] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
-[00:21:31.093] Browser LOG     [v0] Matched column 1 -> site via header: Site
-[00:21:31.093] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
-[00:21:31.093] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
-[00:21:31.093] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
-[00:21:31.093] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
-[00:21:31.093] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
-[00:21:31.093] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
-[00:21:31.093] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
-[00:21:31.093] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
-[00:21:31.093] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
-[00:21:31.093] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
-[00:21:31.093] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
-[00:21:31.093] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
-[00:21:31.093] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
-[00:21:31.093] Browser LOG     [v0] Stopping at row 9 - Description is empty
-[00:21:31.093] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
-[00:21:31.093] Browser LOG     [v0] Found 7 line items
-[00:21:31.093] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"9a06734c-79ca-4318-b73b-869f9ed16a46","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"Accepted","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1776860462353-qle4dnw4g","investigatorResponses":[],"numberOfUnits":160,"site":"200","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
-[00:21:31.093] Browser LOG     [v0] Storing 7 line items via API
-[00:21:31.093] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"200","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"232","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
-[00:21:31.326] Server  LOG     [v0] Store Items API called
-[00:21:31.334] Server  LOG     [v0] Storing 7 "line items for assessment" "9a06734c-79ca-4318-b73b-869f9ed16a46"
-[00:21:31.843] Server  LOG     [v0] Created comparison for line item: "7f2c1891-39d8-4a9b-aa5d-a8366b762c0a"
-[00:21:32.281] Server  LOG     [v0] Created comparison for line item: "3b495d7b-d981-4638-9c96-2231765867cd"
-[00:21:32.550] Server  LOG     [v0] Created comparison for line item: "aefa376f-0292-4855-92a3-04150c3a12a3"
-[00:21:32.872] Server  LOG     [v0] Created comparison for line item: "0fbb5e1c-7210-4f4d-9956-10fa77adbf1b"
-[00:21:33.280] Server  LOG     [v0] Created comparison for line item: "6f2a441b-75c1-416f-8284-2d21c30d4372"
-[00:21:33.550] Server  LOG     [v0] Created comparison for line item: "bcc7718f-c47a-4c0d-8b2b-a77112152ffa"
-[00:21:33.854] Server  LOG     [v0] Created comparison for line item: "2986a771-da7b-470d-8c72-fccd1f2d45c3"
-[00:21:33.854] Server  LOG     [v0] Inserted 7 "line items"
-[00:21:34.123] Browser LOG     [v0] Successfully stored 7 line items
-[00:21:34.278] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/9a06734c-79ca-4318-b73b-869f9ed16a46 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/9a06734c-79ca-4318-b73b-869f9ed16a46","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776860465540} /_vercel/insights/view
-[00:21:36.628] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[00:21:36.865] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[00:21:36.916] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[00:21:36.916] Browser LOG     [v0] Has existing ai_matches: false
-[00:21:37.016] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[00:21:37.016] Browser LOG     [v0] Has existing ai_matches: false
-[00:21:43.066] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
-[00:21:43.342] Browser LOG     [v0] Linked benchmark files for comparison: 138
-[00:21:43.503] Server  LOG     [v0] Run comparison API called
-[00:21:43.504] Server  LOG     [v0] Assessment ID: "9a06734c-79ca-4318-b73b-869f9ed16a46"
-[00:21:43.523] Server  LOG     [v0] Fetching line items...
-[00:21:43.980] Server  LOG     [v0] Line items found: 7 "Error:" undefined
-[00:21:43.981] Server  LOG     [v0] Fetching benchmark procedures...
-[00:21:44.406] Server  LOG     [v0] Simple benchmark check: 5 "procedures, error:" undefined
-[00:21:44.855] Server  LOG     [v0] Total benchmark procedures in database: 412423
-[00:21:44.855] Server  LOG     [v0] Selected benchmark file IDs: 138 "files"
-[00:21:44.856] Server  LOG     [v0] Filtering to selected benchmark files only
-[00:21:45.363] Server  LOG     [v0] Benchmark query result: 1000 "raw," 1000 "valid names," 987 "with pricing"
-[00:21:45.363] Server  LOG     [v0] Benchmark countries found: 5 "countries:" "Spain, Poland, Greece, Saudi Arabia, Tunisia" ""
-[00:21:45.363] Server  LOG     [v0] === SAMPLE DATA COMPARISON ===
-[00:21:45.363] Server  LOG     [v0] LINE ITEMS FROM ASSESSMENT (first 3):
-[00:21:45.364] Server  LOG     [v0]   1. "The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person"
-[00:21:45.364] Server  LOG     [v0]   2. "250RMB/hour*2 hours*4 visits"
-[00:21:45.364] Server  LOG     [v0]   3. "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field."
-[00:21:45.364] Server  LOG     [v0] BENCHMARK PROCEDURES (first 10):
-[00:21:45.364] Server  LOG     [v0]   1. "Insertion of implantable intra-arterial infusion pump (eg, for chemotherapy of liver)" | HasPricing: true | P90: 2400
-[00:21:45.364] Server  LOG     [v0]   2. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional, not to be used for routine venipuncture, femoral or jugular vein" | HasPricing: true | P90: 76
-[00:21:45.365] Server  LOG     [v0]   3. "Venipuncture, younger than age 3 years, necessitating the skill of a physician or other qualified health care professional,  (separate procedure), for diagnostic or therapeutic purposes. (Not to be used for routine venipuncture)" | HasPricing: true | P90: 55
-[00:21:45.365] Server  LOG     [v0]   4. "Collection of capillary blood specimen (eg, finger, heel, ear stick)" | HasPricing: true | P90: 42
-[00:21:45.365] Server  LOG     [v0]   5. "Transfusion; blood, serum or components" | HasPricing: true | P90: 219
-[00:21:45.365] Server  LOG     [v0]   6. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); diagnostic; with or without collection of specimen by brushing or washing; moderate sedation" | HasPricing: true | P90: 1029
-[00:21:45.365] Server  LOG     [v0]   7. "Endoscopic evaluation of small intestinal (abdominal or pelvic) pouch (endoscopy); with biopsy; single or multiple; moderate sedation" | HasPricing: true | P90: 1565
-[00:21:45.365] Server  LOG     [v0]   8. "Colonoscopy, flexible, proximal to splenic flexure; diagnostic, with or without collection of specimen(s) by brushing or washing, with or without colondecompression (separate procedure); moderate sedation" | HasPricing: true | P90: 1092
-[00:21:45.365] Server  LOG     [v0]   9. "Colonoscopy, flexible; with biopsy, single or multiple" | HasPricing: true | P90: 2545
-[00:21:45.366] Server  LOG     [v0]   10. "Colonoscopy, flexible; with directed submucosal injection(s), any substance" | HasPricing: true | P90: 1298
-[00:21:45.366] Server  LOG     [v0] === END SAMPLE DATA ===
-[00:21:45.366] Server  LOG     [v0] Processing line item: "\"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person\"" "| Category:" "Other (costs that do not fit in any other category)"
-[00:21:45.391] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "The cost for CMV-specific T cell tests i"
-[00:21:45.392] Server  LOG     [v0] Processing line item: "\"250RMB/hour*2 hours*4 visits\"" "| Category:" "Patient/subjects compensation (e.g. for time to participate in the study)​"
-[00:21:45.405] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "250RMB/hour*2 hours*4 visits"
-[00:21:45.405] Server  LOG     [v0] Processing line item: "\"Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field.\"" "| Category:" "Personnel"
-[00:21:45.423] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Project supervision and quality control,"
-[00:21:45.424] Server  LOG     [v0] Processing line item: "\"Clinical research coordinator. The HCP is a hematologist and has over 5 years of experience in the field.\"" "| Category:" "Personnel"
-[00:21:45.440] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Clinical research coordinator. The HCP i"
-[00:21:45.441] Server  LOG     [v0] Processing line item: "\"Local Ethics Committee fee\"" "| Category:" "IRB/EC submission fee"
-[00:21:45.454] Server  LOG     [v0] Found 3 "FALLBACK matches for:" "Local Ethics Committee fee"
-[00:21:45.454] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | TextSim: 91.9% | CatSim: 0 | Confidence: HIGH | FALLBACK
-[00:21:45.455] Server  LOG     [v0]   Match 2: "Local Ethics Committee Fee, IRB Fee" | TextSim: 91.9% | CatSim: 0 | Confidence: HIGH | FALLBACK
-[00:21:45.455] Server  LOG     [v0]   Match 3: "Local Ethics Committee Fee, IRB Fee" | TextSim: 91.9% | CatSim: 0 | Confidence: HIGH | FALLBACK
-[00:21:45.455] Server  LOG     [v0] Processing line item: "\"Hospital management fee: 3%.\"" "| Category:" "Other (costs that do not fit in any other category)"
-[00:21:45.467] Server  LOG     [v0] Found 3 "FALLBACK matches for:" "Hospital management fee: 3%."
-[00:21:45.468] Server  LOG     [v0]   Match 1: "Site Management fee, per site, per month" | TextSim: 53.9% | CatSim: 0 | Confidence: MEDIUM | FALLBACK
-[00:21:45.468] Server  LOG     [v0]   Match 2: "Site Management fee, per site, per month" | TextSim: 53.9% | CatSim: 0 | Confidence: MEDIUM | FALLBACK
-[00:21:45.468] Server  LOG     [v0]   Match 3: "Site Management fee, per site, per month" | TextSim: 53.9% | CatSim: 0 | Confidence: MEDIUM | FALLBACK
-[00:21:45.468] Server  LOG     [v0] Processing line item: "\"Tax: 12%\"" "| Category:" "Other (costs that do not fit in any other category)"
-[00:21:45.478] Server  LOG     [v0] Found 0 "FALLBACK matches for:" "Tax: 12%"
-[00:21:45.479] Server  LOG     [v0] Updating 7 "comparison records"
-[00:21:45.838] Server  LOG     [v0] Update result for "7f2c1891-39d8-4a9b-aa5d-a8366b762c0a" ":" 1 "rows, error:" undefined
-[00:21:45.987] Server  LOG     [v0] Update result for "3b495d7b-d981-4638-9c96-2231765867cd" ":" 1 "rows, error:" undefined
-[00:21:46.291] Server  LOG     [v0] Update result for "aefa376f-0292-4855-92a3-04150c3a12a3" ":" 1 "rows, error:" undefined
-[00:21:46.575] Server  LOG     [v0] Update result for "0fbb5e1c-7210-4f4d-9956-10fa77adbf1b" ":" 1 "rows, error:" undefined
-[00:21:46.901] Server  LOG     [v0] Update result for "6f2a441b-75c1-416f-8284-2d21c30d4372" ":" 1 "rows, error:" undefined
-[00:21:47.028] Server  LOG     [v0] Update result for "bcc7718f-c47a-4c0d-8b2b-a77112152ffa" ":" 1 "rows, error:" undefined
-[00:21:47.172] Server  LOG     [v0] Update result for "2986a771-da7b-470d-8c72-fccd1f2d45c3" ":" 1 "rows, error:" undefined
-[00:21:47.319] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 line items against 1000 benchmarks","results":[{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"7f2c1891-39d8-4a9b-aa5d-a8366b762c0a","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"3b495d7b-d981-4638-9c96-2231765867cd","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"aefa376f-0292-4855-92a3-04150c3a12a3","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"0fbb5e1c-7210-4f4d-9956-10fa77adbf1b","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"91cc3c4c-cecd-43c5-8c9e-29d647dc5024","category":"Site Costs","categorySimilarity":0,"confidence":"HIGH","country":"Spain","isStrict":false,"p100":7370,"p25":1182,"p50":1567,"p75":2103,"p90":2761,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916},"flag":"GREEN","lineItemId":"6f2a441b-75c1-416f-8284-2d21c30d4372","matchCount":3,"matches":[{"benchmarkId":"91cc3c4c-cecd-43c5-8c9e-29d647dc5024","category":"Site Costs","categorySimilarity":0,"confidence":"HIGH","country":"Spain","isStrict":false,"p100":7370,"p25":1182,"p50":1567,"p75":2103,"p90":2761,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916},{"benchmarkId":"7a964c1a-b460-4953-b315-283c4c18199b","category":"Site Costs","categorySimilarity":0,"confidence":"HIGH","country":"Poland","isStrict":false,"p100":0,"p25":6060,"p50":10641,"p75":19177,"p90":33865,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916},{"benchmarkId":"b98a4b31-b0dc-4c52-8e09-41f5151f4176","category":"Site Costs","categorySimilarity":0,"confidence":"HIGH","country":"Greece","isStrict":false,"p100":0,"p25":1688,"p50":1985,"p75":3313,"p90":6260,"procedureName":"Local Ethics Committee Fee, IRB Fee","similarity":0.9185586535436916,"textSimilarity":0.9185586535436916}]},{"bestMatch":{"benchmarkId":"9fa42a7c-afb1-43b0-953c-120260f6369c","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"Spain","isStrict":false,"p100":0,"p25":220,"p50":300,"p75":378,"p90":544,"procedureName":"Site Management fee, per site, per month","similarity":0.5388602512436507,"textSimilarity":0.5388602512436507},"flag":"YELLOW","lineItemId":"bcc7718f-c47a-4c0d-8b2b-a77112152ffa","matchCount":3,"matches":[{"benchmarkId":"9fa42a7c-afb1-43b0-953c-120260f6369c","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"Spain","isStrict":false,"p100":0,"p25":220,"p50":300,"p75":378,"p90":544,"procedureName":"Site Management fee, per site, per month","similarity":0.5388602512436507,"textSimilarity":0.5388602512436507},{"benchmarkId":"826ce846-4cdd-494e-8d4b-9480c9fcc10d","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"Poland","isStrict":false,"p100":0,"p25":759,"p50":1011,"p75":1275,"p90":1834,"procedureName":"Site Management fee, per site, per month","similarity":0.5388602512436507,"textSimilarity":0.5388602512436507},{"benchmarkId":"a9d39640-600a-4450-9ee5-4e5fdcefa47b","category":"Site Costs","categorySimilarity":0,"confidence":"MEDIUM","country":"Greece","isStrict":false,"p100":0,"p25":165,"p50":259,"p75":328,"p90":472,"procedureName":"Site Management fee, per site, per month","similarity":0.5388602512436507,"textSimilarity":0.5388602512436507}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"2986a771-da7b-470d-8c72-fccd1f2d45c3","matchCount":0,"matches":[]}],"success":true}
-[00:21:47.319] Browser LOG     [v0] Refreshing comparisons data...
-[00:21:47.711] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
-[00:21:47.711] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
-[00:29:32.195] Server  LOG      ✓ Compiled in 108ms
-[02:20:23.689] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776867594831} /_vercel/insights/view
-[02:20:24.580] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776867595698} /_vercel/insights/view
-[02:20:24.761] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[02:20:25.307] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[02:20:48.391] Server  LOG      ✓ Compiled in 82ms
-[02:22:24.836] Server  LOG      ✓ Compiled in 61ms
-[02:22:34.534] Server  LOG      ✓ Compiled in 64ms
-[02:22:34.669] Browser ERROR   uncaughtError: ReferenceError: therapeuticAreaError is not defined
-[02:22:43.736] Server  LOG      ✓ Compiled in 46ms
-[02:22:43.746] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[02:22:44.170] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776867734996} /_vercel/insights/view
-[02:22:45.903] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[02:22:45.903] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/new","route":"/assessments/new"}
-[02:22:45.903] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776867736414} /_vercel/insights/view
-[02:32:36.313] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776868327439} /_vercel/insights/view
-[02:32:37.219] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[02:32:37.691] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[02:32:49.381] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/02cd901d-9e20-4be0-b862-a94c0125236f color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/02cd901d-9e20-4be0-b862-a94c0125236f","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776868340509} /_vercel/insights/view
-[02:32:50.644] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[02:32:50.857] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[02:32:50.951] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[02:32:50.951] Browser LOG     [v0] Has existing ai_matches: true
-[02:32:50.951] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:32:50.951] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:32:50.951] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:32:50.951] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:32:50.951] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[02:32:50.951] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[02:32:50.951] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:32:51.065] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[02:32:51.065] Browser LOG     [v0] Has existing ai_matches: true
-[02:32:51.065] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:32:51.065] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:32:51.065] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:32:51.065] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:32:51.065] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[02:32:51.065] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[02:32:51.065] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:33:10.650] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776868361766} /_vercel/insights/view
-[02:33:41.216] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/archive color: rgb(120, 120, 120) color: inherit {"dp":"/archive","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/archive","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776868392341} /_vercel/insights/view
-[02:33:42.980] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776868394106} /_vercel/insights/view
-[02:33:43.519] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[02:33:43.830] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[03:07:51.156] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/02cd901d-9e20-4be0-b862-a94c0125236f color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7rjazn789gx92kelkiv6get8.vusercontent.net/assessments/02cd901d-9e20-4be0-b862-a94c0125236f","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1776870442219} /_vercel/insights/view
-[03:07:52.470] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[03:07:52.806] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[03:07:52.806] Browser LOG     [v0] Has existing ai_matches: true
-[03:07:52.806] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:07:52.806] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:07:52.806] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:07:52.806] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:07:52.806] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[03:07:52.806] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[03:07:52.806] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:07:52.827] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[03:07:52.988] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[03:07:52.988] Browser LOG     [v0] Has existing ai_matches: true
-[03:07:52.988] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:07:52.988] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:07:52.988] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:07:52.988] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:07:52.988] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[03:07:52.988] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[03:07:52.988] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[03:15:04.204] Server  LOG      ✓ Compiled in 96ms
+[00:00:00.901] Server  LOG      ✓ Ready in 550ms
+[00:00:14.468] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:14.468] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:00:14.468] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1777552725357} /_vercel/insights/view
+[00:15:14.169] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1777553625635} /_vercel/insights/view
+[00:15:16.865] Server  LOG     [v0] Fetched 14 "assessments with counts"
+[00:15:17.538] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1777553629006} /_vercel/insights/view
+[00:15:17.545] Server  LOG     [v0] Fetched 14 "assessments with counts"
+[00:15:18.465] Server  LOG     [v0] Fetched 14 "assessments with counts"
+[00:15:18.705] Browser LOG     [v0] Assessments fetch result: 14 items, error: undefined
+[00:15:18.705] Browser LOG     [v0] Got 14 assessments from DB, mapping...
+[00:15:19.247] Server  LOG     [v0] Fetched 14 "assessments with counts"
+[00:15:19.461] Browser LOG     [v0] Assessments fetch result: 14 items, error: undefined
+[00:15:19.461] Browser LOG     [v0] Got 14 assessments from DB, mapping...
+[00:15:23.924] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/assessments/02cd901d-9e20-4be0-b862-a94c0125236f color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/assessments/02cd901d-9e20-4be0-b862-a94c0125236f","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1777553635391} /_vercel/insights/view
+[00:15:26.664] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:15:27.068] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:15:27.068] Browser LOG     [v0] Has existing ai_matches: true
+[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:15:27.104] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:15:27.321] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:15:27.321] Browser LOG     [v0] Has existing ai_matches: true
+[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
