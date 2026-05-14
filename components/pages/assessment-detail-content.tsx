@@ -122,7 +122,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         studyTrackingNumber: assessmentData.study_tracking_number || "",
         protocolNumber: assessmentData.protocol_number || "",
         therapeuticArea: assessmentData.therapeutic_area,
-        status: assessmentData.status === "completed" ? "IN_REVIEW" : "IN_REVIEW",
+        status: (assessmentData.status || "IN_REVIEW") as AssessmentStatus,
         dataSource: assessmentData.benchmark_source === "IQVIA_GRANTPLAN" ? "IQVIA GrantPlan" : "IQVIA GPI",
         vendorName: "Vendor",
         totalLineItems: 0,
