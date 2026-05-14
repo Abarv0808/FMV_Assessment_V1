@@ -320,10 +320,17 @@ export async function POST(request: Request) {
         console.log("[v0] Filtered to", countryFilteredBenchmarks.length, "benchmarks for country:", lineItemCountry)
       }
       
-      // If no country-specific benchmarks found, fall back to all benchmarks
-      if (countryFilteredBenchmarks.length === 0) {
-        console.log("[v0] No country-specific benchmarks found, using all benchmarks")
-        countryFilteredBenchmarks = benchmarks
+      // If no country-specific benchmarks found, skip matching for this item
+      if (countryFilteredBenchmarks.length === 0 && lineItemCountry) {
+        console.log("[v0] No benchmarks available for country:", lineItemCountry)
+        results.push({
+          lineItemId: lineItem.id,
+          matches: [],
+          bestMatch: null,
+          flag: "NO_BENCHMARK_DATA",
+          noDataReason: `No benchmark data available for ${lineItemCountry}`
+        })
+        continue
       }
       
       // Prepare country-filtered benchmark data for AI matching

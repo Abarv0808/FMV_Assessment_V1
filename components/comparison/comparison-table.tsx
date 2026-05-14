@@ -94,6 +94,10 @@ const flagConfig: Record<string, { label: string; color: string }> = {
     label: "Select Match",
     color: "text-blue-500 bg-blue-500/10 border-blue-500/20",
   },
+  NO_BENCHMARK_DATA: {
+    label: "No Data",
+    color: "text-orange-500 bg-orange-500/10 border-orange-500/20",
+  },
 }
 
 const decisionConfig: Record<
