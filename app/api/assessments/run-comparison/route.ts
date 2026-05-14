@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase/server"
+import { createAdminClient } from "@/lib/supabase/server"
 import { generateObject } from "ai"
 import { gateway } from "@ai-sdk/gateway"
 import { z } from "zod"
@@ -138,7 +138,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing assessmentId" }, { status: 400 })
     }
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
 
     // 1. Fetch assessment line items
     console.log("[v0] Fetching line items...")

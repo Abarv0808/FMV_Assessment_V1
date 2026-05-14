@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase/server"
+import { createAdminClient } from "@/lib/supabase/server"
 
 // Fresh API v1 - no benchmark_procedures query at all
 export async function POST(request: Request) {
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing required data" }, { status: 400 })
     }
     
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     
     // Insert line items one by one
     let insertedCount = 0

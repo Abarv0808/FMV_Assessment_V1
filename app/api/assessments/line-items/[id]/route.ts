@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase/server"
+import { createAdminClient } from "@/lib/supabase/server"
 
 export async function PATCH(
   request: Request,
@@ -10,7 +10,7 @@ export async function PATCH(
     const body = await request.json()
     const { additionalInformation, costCategory, negotiatedPrice } = body
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
 
     // If updating negotiatedPrice, do it directly on the column
     if (negotiatedPrice !== undefined) {
