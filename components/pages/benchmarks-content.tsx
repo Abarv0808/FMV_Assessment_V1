@@ -121,6 +121,7 @@ export function BenchmarksContent() {
   useEffect(() => {
     async function fetchBenchmarks() {
       setIsLoading(true)
+      console.log("[v0] Fetching benchmarks, SUPABASE_URL exists:", !!process.env.NEXT_PUBLIC_SUPABASE_URL)
       try {
         const supabase = createClient()
         
@@ -138,10 +139,12 @@ export function BenchmarksContent() {
             .range(from, from + pageSize - 1)
           
           if (error) {
-            console.error("[v0] Error fetching benchmarks:", error)
+            console.error("[v0] Error fetching benchmarks:", error.message, error.code)
             setBenchmarkFiles([])
             return
           }
+          
+          console.log("[v0] Fetched batch:", data?.length || 0, "files, from:", from)
           
           if (data && data.length > 0) {
             allFiles = [...allFiles, ...data]
