@@ -24,6 +24,7 @@ const SPONSOR_COLUMN_MAPPINGS = {
 
 export interface ParsedVendorProposal {
   lineItems: AssessmentLineItem[]
+  country: string | null
   metadata: {
     sheetName: string
     rowCount: number
@@ -157,6 +158,7 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
   
   const { headerRowIndex, columnMap } = headerInfo
   const lineItems: AssessmentLineItem[] = []
+  let extractedCountry: string | null = null
   
   // Parse data rows (skip header row)
   // STOP when "Description of costs" is empty - this marks the end of valid data
@@ -179,10 +181,19 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
       continue
     }
     
+    // Extract Site value (which now contains country)
+    const siteValue = columnMap.site !== undefined ? String(row[columnMap.site] || "").trim() : ""
+    
+    // Capture the first non-empty Site value as the country for the assessment
+    if (!extractedCountry && siteValue) {
+      extractedCountry = siteValue
+      console.log("[v0] Extracted country from Site column:", extractedCountry)
+    }
+    
     const lineItem: AssessmentLineItem = {
       id: generateId(),
       assessmentId,
-      site: columnMap.site !== undefined ? String(row[columnMap.site] || "").trim() : "",
+      site: siteValue,
       costCategory: columnMap.costCategory !== undefined ? String(row[columnMap.costCategory] || "").trim() : "",
       description: columnMap.description !== undefined ? String(row[columnMap.description] || "").trim() : "",
       unitType: columnMap.unitType !== undefined ? String(row[columnMap.unitType] || "").trim() : "",
@@ -221,6 +232,7 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
   
   return {
     lineItems,
+    country: extractedCountry,
     metadata: {
       sheetName: sponsorSheetName,
       rowCount: lineItems.length,

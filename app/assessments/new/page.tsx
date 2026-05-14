@@ -143,14 +143,29 @@ export default function NewAssessmentPage() {
       // - Unit Price -> unitPrice
       // - Total Cost -> totalCost
       // - Currency -> currency
-      let parsedProposal = { lineItems: [] as any[], metadata: { sheetName: "", rowCount: 0, parsedAt: "" } }
+      let parsedProposal = { lineItems: [] as any[], country: null as string | null, metadata: { sheetName: "", rowCount: 0, parsedAt: "" } }
       if (formData.vendorProposal) {
         const arrayBuffer = await formData.vendorProposal.arrayBuffer()
         parsedProposal = parseVendorProposal(arrayBuffer, assessment.id)
         console.log("[v0] Parsed vendor proposal from sheet:", parsedProposal.metadata.sheetName)
         console.log("[v0] Found", parsedProposal.lineItems.length, "line items")
+        console.log("[v0] Extracted country from Site column:", parsedProposal.country)
         if (parsedProposal.lineItems.length > 0) {
           console.log("[v0] Sample line item:", parsedProposal.lineItems[0])
+        }
+        
+        // Update assessment with country extracted from Site column
+        if (parsedProposal.country) {
+          const { error: updateError } = await supabase
+            .from("assessments")
+            .update({ country: parsedProposal.country })
+            .eq("id", assessment.id)
+          
+          if (updateError) {
+            console.error("[v0] Error updating assessment country:", updateError)
+          } else {
+            console.log("[v0] Updated assessment country to:", parsedProposal.country)
+          }
         }
       }
 
