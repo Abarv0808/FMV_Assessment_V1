@@ -1,30 +1,26 @@
-// Supabase server client - v3
+// Supabase server client - v4 (force reload env)
 import { createServerClient } from '@supabase/ssr'
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { readFileSync, existsSync } from 'fs'
 
-// Load env vars from v0 sandbox if not already set
-function loadEnvIfNeeded() {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    const envPath = '/vercel/share/.env.project'
-    if (existsSync(envPath)) {
-      const content = readFileSync(envPath, 'utf-8')
-      content.split('\n').forEach(line => {
-        const match = line.match(/^([^=]+)=['\"]?([^'\"]*)['\"]?$/)
-        if (match) {
-          process.env[match[1]] = match[2]
-        }
-      })
-      console.log('[v0] Loaded env vars from', envPath)
-    }
+// Always reload env vars from v0 sandbox to pick up changes
+function loadEnvVars() {
+  const envPath = '/vercel/share/.env.project'
+  if (existsSync(envPath)) {
+    const content = readFileSync(envPath, 'utf-8')
+    content.split('\n').forEach(line => {
+      const match = line.match(/^([^=]+)=['\"]?([^'\"]*)['\"]?$/)
+      if (match) {
+        process.env[match[1]] = match[2]
+      }
+    })
   }
 }
 
-// Initialize on module load
-loadEnvIfNeeded()
-
 export async function createClient() {
+  // Reload env vars on each call to pick up any updates
+  loadEnvVars()
   const cookieStore = await cookies()
 
   return createServerClient(
@@ -57,6 +53,9 @@ export async function createClient() {
  * Ensure RLS is disabled on tables if using anon key for admin operations.
  */
 export function createAdminClient() {
+  // Reload env vars on each call to pick up any updates
+  loadEnvVars()
+  
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
