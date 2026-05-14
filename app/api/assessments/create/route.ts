@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         description: description || null,
         country: country || null,
         benchmark_source: benchmarkSource || "IQVIA_GRANTPLAN",
-        status: "draft",
+        status: "IN_REVIEW",
       })
       .select()
       .single()
