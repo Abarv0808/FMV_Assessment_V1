@@ -174,7 +174,7 @@ export async function POST(request: Request) {
           benchmark_file_id,
           benchmark_files(country)
         `)
-        .limit(5000)
+        .limit(50000)
 
       // Get unique countries from line items to only fetch needed benchmark data
       const lineItemCountries = [...new Set(lineItems.map((li: any) => li.country).filter(Boolean))]
@@ -184,18 +184,27 @@ export async function POST(request: Request) {
         benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
         console.log("[v0] Filtering to selected benchmark files:", benchmarkFileIds.length)
       } else if (lineItemCountries.length > 0) {
-        // First, get benchmark_file IDs for the countries we need
-        const { data: countryFiles } = await supabase
+        // First, get benchmark_file IDs for the countries we need (case-insensitive)
+        const { data: countryFiles, error: countryError } = await supabase
           .from("benchmark_files")
           .select("id, country")
-          .in("country", lineItemCountries)
         
-        if (countryFiles && countryFiles.length > 0) {
-          const fileIds = countryFiles.map(f => f.id)
+        console.log("[v0] Total benchmark_files:", countryFiles?.length || 0, "Error:", countryError?.message || "none")
+        
+        // Filter with case-insensitive matching
+        const matchingFiles = countryFiles?.filter(f => 
+          lineItemCountries.some(c => c.toLowerCase() === f.country?.toLowerCase())
+        ) || []
+        
+        if (matchingFiles.length > 0) {
+          const fileIds = matchingFiles.map(f => f.id)
           benchmarkQuery = benchmarkQuery.in("benchmark_file_id", fileIds)
-          console.log("[v0] Filtering to", fileIds.length, "benchmark files for countries:", lineItemCountries.join(", "))
+          console.log("[v0] Filtering to", matchingFiles.length, "benchmark files for countries:", matchingFiles.map(f => f.country).join(", "))
         } else {
-          console.log("[v0] No benchmark files found for countries:", lineItemCountries.join(", "))
+          // Log available countries for debugging
+          const availableBmCountries = [...new Set(countryFiles?.map(f => f.country).filter(Boolean))]
+          console.log("[v0] No benchmark files found for:", lineItemCountries.join(", "))
+          console.log("[v0] Available benchmark countries:", availableBmCountries.slice(0, 20).join(", "))
         }
       } else {
         console.log("[v0] No countries in line items, loading sample benchmarks")
