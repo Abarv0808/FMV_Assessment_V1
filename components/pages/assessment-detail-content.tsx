@@ -357,31 +357,56 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     appendAudit(`Selected benchmark match: ${match.procedureName}`)
   }, [appendAudit])
 
-  const handleArchive = useCallback(() => {
-    setAssessment((prev) =>
-      prev ? { ...prev, status: "ARCHIVED" as AssessmentStatus, updatedAt: new Date().toISOString() } : prev
-    )
-    // Also update the global mock data so the change persists across navigation
-    const idx = mockAssessments.findIndex((a) => a.id === id)
-    if (idx !== -1) {
-      mockAssessments[idx] = { ...mockAssessments[idx], status: "ARCHIVED" as AssessmentStatus, updatedAt: new Date().toISOString() }
+  const handleArchive = useCallback(async () => {
+    try {
+      // Update status in database via API
+      const response = await fetch(`/api/assessments/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "ARCHIVED" }),
+      })
+      
+      if (!response.ok) {
+        const error = await response.json()
+        console.error("[v0] Error archiving assessment:", error)
+        return
+      }
+      
+      setAssessment((prev) =>
+        prev ? { ...prev, status: "ARCHIVED" as AssessmentStatus, updatedAt: new Date().toISOString() } : prev
+      )
+      appendAudit("Marked as No Longer Required and moved to Archive")
+      setShowArchiveConfirm(false)
+      router.push("/archive")
+    } catch (error) {
+      console.error("[v0] Error archiving assessment:", error)
     }
-    appendAudit("Marked as No Longer Required and moved to Archive")
-    setShowArchiveConfirm(false)
-    router.push("/archive")
   }, [id, appendAudit, router])
 
-  const handleRestore = useCallback(() => {
-    setAssessment((prev) =>
-      prev ? { ...prev, status: "IN_REVIEW" as AssessmentStatus, updatedAt: new Date().toISOString() } : prev
-    )
-    const idx = mockAssessments.findIndex((a) => a.id === id)
-    if (idx !== -1) {
-      mockAssessments[idx] = { ...mockAssessments[idx], status: "IN_REVIEW" as AssessmentStatus, updatedAt: new Date().toISOString() }
+  const handleRestore = useCallback(async () => {
+    try {
+      // Update status in database via API
+      const response = await fetch(`/api/assessments/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "IN_REVIEW" }),
+      })
+      
+      if (!response.ok) {
+        const error = await response.json()
+        console.error("[v0] Error restoring assessment:", error)
+        return
+      }
+      
+      setAssessment((prev) =>
+        prev ? { ...prev, status: "IN_REVIEW" as AssessmentStatus, updatedAt: new Date().toISOString() } : prev
+      )
+      appendAudit("Restored from Archive and moved back to Dashboard")
+      setShowRestoreConfirm(false)
+      router.push("/dashboard")
+    } catch (error) {
+      console.error("[v0] Error restoring assessment:", error)
     }
-    appendAudit("Restored from Archive and moved back to Dashboard")
-    setShowRestoreConfirm(false)
-    router.push("/dashboard")
   }, [id, appendAudit, router])
 
   // Run AI benchmark comparison

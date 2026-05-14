@@ -211,3 +211,122 @@
 [00:46:35.271] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
 [00:46:35.271] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
 [00:58:26.761] Server  LOG      ✓ Compiled in 101ms
+[01:25:33.929] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[01:25:34.768] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[01:25:35.361] Server  LOG     [v0] Run comparison API called (AI-powered)
+[01:25:35.363] Server  LOG     [v0] Assessment ID: "88cf1f38-620d-4227-8b95-13f00ce18deb"
+[01:25:35.365] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:25:35.369] Server  LOG     [v0] Fetching line items...
+[01:25:35.847] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[01:25:35.848] Server  LOG     [v0] Fetching benchmark procedures...
+[01:25:35.848] Server  LOG     [v0] Line item countries: "Bulgaria, Australia, Austria, Belgium, Canada, China"
+[01:25:36.165] Server  LOG     [v0] Benchmark files for requested countries: 174 "Error:" "none"
+[01:25:36.166] Server  LOG     [v0] Filtering to 174 "benchmark files for countries:" "China, Australia, Austria, Belgium, Bulgaria, Canada"
+[01:25:36.567] Server  LOG     [v0] Benchmark procedures loaded: 1000 "from" 5 "countries"
+[01:25:36.568] Server  LOG     [v0] Available countries: "Canada, Belgium, Austria, China, Australia" ""
+[01:25:36.568] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[01:25:36.569] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\"" "Country:" "Bulgaria"
+[01:25:36.569] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Bulgaria"
+[01:25:36.570] Server  LOG     [v0] No benchmarks available for country: "Bulgaria"
+[01:25:36.570] Server  LOG     [v0] Processing: "\"250RMB/hour*2 hours*4 visits...\"" "Country:" "Australia"
+[01:25:36.571] Server  LOG     [v0] Filtered to 172 "benchmarks for country:" "Australia"
+[01:25:39.775] Server  LOG     [v0] AI found 3 "matches for" "Australia"
+[01:25:39.775] Server  LOG     [v0]   Match 1: "Subject Stipend per hour" | Confidence: HIGH | AI: true
+[01:25:39.776] Server  LOG     [v0]   Match 2: "Healthy Volunteer Stipend - Per Visit, P" | Confidence: MEDIUM | AI: true
+[01:25:39.776] Server  LOG     [v0]   Match 3: "Study Coordinator, Complex (e.g. initial" | Confidence: LOW | AI: true
+[01:25:39.776] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria"
+[01:25:39.777] Server  LOG     [v0] Filtered to 207 "benchmarks for country:" "Austria"
+[01:25:43.529] Server  LOG     [v0] AI found 3 "matches for" "Austria"
+[01:25:43.529] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
+[01:25:43.530] Server  LOG     [v0]   Match 2: "Physician: Radiation Therapy - Per Hour" | Confidence: MEDIUM | AI: true
+[01:25:43.530] Server  LOG     [v0]   Match 3: "Physician, Complex (e.g. initial visit, " | Confidence: MEDIUM | AI: true
+[01:25:43.530] Server  LOG     [v0] Processing: "\"Clinical research coordinator. The HCP is a hemato...\"" "Country:" "Australia"
+[01:25:43.531] Server  LOG     [v0] Filtered to 172 "benchmarks for country:" "Australia"
+[01:25:46.771] Server  LOG     [v0] AI found 3 "matches for" "Australia"
+[01:25:46.771] Server  LOG     [v0]   Match 1: "Study Coordinator, Complex (e.g. initial" | Confidence: HIGH | AI: true
+[01:25:46.771] Server  LOG     [v0]   Match 2: "Physician: Hematology - Per Hour" | Confidence: MEDIUM | AI: true
+[01:25:46.772] Server  LOG     [v0]   Match 3: "Administrative/Personnel Costs - Per Vis" | Confidence: MEDIUM | AI: true
+[01:25:46.772] Server  LOG     [v0] Processing: "\"Local Ethics Committee fee...\"" "Country:" "Belgium"
+[01:25:46.772] Server  LOG     [v0] Filtered to 207 "benchmarks for country:" "Belgium"
+[01:25:50.387] Server  LOG     [v0] AI found 3 "matches for" "Belgium"
+[01:25:50.387] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[01:25:50.388] Server  LOG     [v0]   Match 2: "Regulatory Affairs Consultant -  Per hou" | Confidence: HIGH | AI: true
+[01:25:50.388] Server  LOG     [v0]   Match 3: "Administrative/Personnel Costs - Per Vis" | Confidence: MEDIUM | AI: true
+[01:25:50.388] Server  LOG     [v0] Processing: "\"Hospital management fee: 3%....\"" "Country:" "Canada"
+[01:25:50.389] Server  LOG     [v0] Filtered to 207 "benchmarks for country:" "Canada"
+[01:25:52.993] Server  LOG     [v0] AI found 3 "matches for" "Canada"
+[01:25:52.993] Server  LOG     [v0]   Match 1: "Diary Collection and Monitoring/Review -" | Confidence: HIGH | AI: true
+[01:25:52.994] Server  LOG     [v0]   Match 2: "Administrative/Personnel Costs - Per Vis" | Confidence: HIGH | AI: true
+[01:25:52.994] Server  LOG     [v0]   Match 3: "Physical Therapist (Rehabilitation) - Pe" | Confidence: MEDIUM | AI: true
+[01:25:52.994] Server  LOG     [v0] Processing: "\"Tax: 12%...\"" "Country:" "China"
+[01:25:52.995] Server  LOG     [v0] Filtered to 207 "benchmarks for country:" "China"
+[01:25:54.129] Server  LOG     [v0] Using trigram fallback for: "Tax: 12%" "Country:" "China"
+[01:25:54.136] Server  LOG     [v0] Updating 7 "comparison records"
+[01:25:54.136] Server  LOG     [v0] Updating line_item_id: "6f2597b2-e279-4ff0-bd57-8730e1fe8efc" "with" 0 "matches"
+[01:25:54.475] Server  LOG     [v0] Update result: 0 "rows updated, error:" "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[01:25:54.475] Server  LOG     [v0] No existing record, inserting new one
+[01:25:54.734] Server  LOG     [v0] Insert error: "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[01:25:54.735] Server  LOG     [v0] Updating line_item_id: "5fb3b116-7374-41ac-93a6-44ffc758ebe0" "with" 3 "matches"
+[01:25:55.060] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:25:55.061] Server  LOG     [v0] Updating line_item_id: "3f1c5cc2-4adb-4886-aeb1-27c2b0c4ec20" "with" 3 "matches"
+[01:25:55.334] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:25:55.334] Server  LOG     [v0] Updating line_item_id: "bb76448b-c31d-4647-b93f-0005241b7f57" "with" 3 "matches"
+[01:25:55.551] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:25:55.552] Server  LOG     [v0] Updating line_item_id: "ebce6098-f0e8-4b99-91d9-ebcaa7c568cf" "with" 3 "matches"
+[01:25:55.635] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:25:55.636] Server  LOG     [v0] Updating line_item_id: "9f08df34-5de9-4c0f-aeba-a50d6366e177" "with" 3 "matches"
+[01:25:55.913] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:25:55.914] Server  LOG     [v0] Updating line_item_id: "cacd98df-816c-4b0f-88a0-008cc550f566" "with" 0 "matches"
+[01:25:56.306] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:25:56.485] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:25:56.489] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 5 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"6f2597b2-e279-4ff0-bd57-8730e1fe8efc","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor cost item explicitly describes 'Patient/subjects compensation', which directly corresponds to 'Subject Stipend per hour', indicating a clear relationship in the context of compensating participants in clinical trials.","similarity":0.9},"flag":"GREEN","lineItemId":"5fb3b116-7374-41ac-93a6-44ffc758ebe0","matchCount":3,"matches":[{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor cost item explicitly describes 'Patient/subjects compensation', which directly corresponds to 'Subject Stipend per hour', indicating a clear relationship in the context of compensating participants in clinical trials.","similarity":0.9},{"benchmarkId":"79c3cabd-8683-4385-a565-2d834cdc74f0","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":0,"p25":192,"p50":284,"p75":361,"p90":598,"procedureName":"Healthy Volunteer Stipend - Per Visit, Phase One","reasoning":"While this is specific to Phase One studies, 'Healthy Volunteer Stipend - Per Visit' can be considered similar as it also involves compensating study participants, although it is less general compared to the subject stipend.","similarity":0.7},{"benchmarkId":"79661387-3a1d-4375-ab25-a9018adf04ee","category":"Non-Procedures","confidence":"LOW","country":"Australia","isAIMatch":true,"p100":410,"p25":170,"p50":179,"p75":205,"p90":221,"procedureName":"Study Coordinator, Complex (e.g. initial visit, final visit) - Per Visit","reasoning":"The 'Study Coordinator, Complex (e.g. initial visit, final visit) - Per Visit' hints at the operational aspect of clinical trials that may relate to patient visits, but it doesn’t specifically relate to subject compensation.","similarity":0.5}]},{"bestMatch":{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item specifies project supervision and oversight by a Principal Investigator (PI) with hematology expertise, which aligns directly with 'Physician: Hematology - Per Hour' as it reflects the same specialty and context.","similarity":0.9},"flag":"GREEN","lineItemId":"3f1c5cc2-4adb-4886-aeb1-27c2b0c4ec20","matchCount":3,"matches":[{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item specifies project supervision and oversight by a Principal Investigator (PI) with hematology expertise, which aligns directly with 'Physician: Hematology - Per Hour' as it reflects the same specialty and context.","similarity":0.9},{"benchmarkId":"14d54164-cce8-4878-99f4-2da5313a4bcc","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":0,"p25":133,"p50":187,"p75":229,"p90":278,"procedureName":"Physician: Radiation Therapy - Per Hour","reasoning":"The vendor cost item mentions a high-level project supervision which may encompass similar activities as 'Physician: Radiation Therapy - Per Hour', though not directly in hematology; both involve a specialized physician's oversight.","similarity":0.7},{"benchmarkId":"361030d8-9fde-46c2-91e9-dc7fc6596da1","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":218,"p25":143,"p50":159,"p75":165,"p90":170,"procedureName":"Physician, Complex (e.g. initial visit, final visit) - Per Visit","reasoning":"'Physician, Complex (e.g. initial visit, final visit) - Per Visit' suggests involvement of a specialized physician which could relate to the oversight aspect mentioned in the vendor cost item, but it's less specific about hematology.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"79661387-3a1d-4375-ab25-a9018adf04ee","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":410,"p25":170,"p50":179,"p75":205,"p90":221,"procedureName":"Study Coordinator, Complex (e.g. initial visit, final visit) - Per Visit","reasoning":"The vendor cost item mentions a clinical research coordinator, which directly corresponds to a 'Study Coordinator, Complex' since both refer to roles involved in managing clinical trials.","similarity":0.9},"flag":"GREEN","lineItemId":"bb76448b-c31d-4647-b93f-0005241b7f57","matchCount":3,"matches":[{"benchmarkId":"79661387-3a1d-4375-ab25-a9018adf04ee","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":410,"p25":170,"p50":179,"p75":205,"p90":221,"procedureName":"Study Coordinator, Complex (e.g. initial visit, final visit) - Per Visit","reasoning":"The vendor cost item mentions a clinical research coordinator, which directly corresponds to a 'Study Coordinator, Complex' since both refer to roles involved in managing clinical trials.","similarity":0.9},{"benchmarkId":"f1fd6622-7687-4a0d-9a51-14f10d24b4a0","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":0,"p25":213,"p50":289,"p75":393,"p90":516,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item specifies a clinical research coordinator with hematology experience, while the benchmark mentions a physician in hematology. Both involve aspects of clinical trials, though they represent different roles.","similarity":0.7},{"benchmarkId":"cb8537b0-26b0-4b1e-be07-d90b90c51f72","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":287,"p25":77,"p50":114,"p75":127,"p90":230,"procedureName":"Administrative/Personnel Costs - Per Visit","reasoning":"This benchmark item refers to administrative/personnel costs that may encompass the costs of coordinators or other personnel involved in clinical research, aligning with the vendor cost item.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"0872f55c-6fba-4dab-a726-a7b814fc75fa","category":"Non-Procedures","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":102,"p25":60,"p50":64,"p75":67,"p90":77,"procedureName":"Study Coordinator - Per Hour","reasoning":"The 'Study Coordinator - Per Hour' involves services related to coordinating clinical trials which are often overseen by the ethics committee for compliance, making it semantically related to the IRB/EC fee.","similarity":0.9},"flag":"GREEN","lineItemId":"ebce6098-f0e8-4b99-91d9-ebcaa7c568cf","matchCount":3,"matches":[{"benchmarkId":"0872f55c-6fba-4dab-a726-a7b814fc75fa","category":"Non-Procedures","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":102,"p25":60,"p50":64,"p75":67,"p90":77,"procedureName":"Study Coordinator - Per Hour","reasoning":"The 'Study Coordinator - Per Hour' involves services related to coordinating clinical trials which are often overseen by the ethics committee for compliance, making it semantically related to the IRB/EC fee.","similarity":0.9},{"benchmarkId":"078b5ac6-8fe6-47d2-805e-fda7cff1a1b0","category":"Non-Procedures","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":0,"p25":201,"p50":290,"p75":422,"p90":526,"procedureName":"Regulatory Affairs Consultant -  Per hour","reasoning":"The 'Regulatory Affairs Consultant - Per hour' deals directly with compliance and regulatory submissions which are essential functions that intersect with the responsibilities of an ethics committee.","similarity":0.9},{"benchmarkId":"968e4c42-c420-44c8-ad47-37b6df405221","category":"Non-Procedures","confidence":"MEDIUM","country":"Belgium","isAIMatch":true,"p100":0,"p25":30,"p50":62,"p75":100,"p90":153,"procedureName":"Administrative/Personnel Costs - Per Visit","reasoning":"The 'Administrative/Personnel Costs - Per Visit' could include costs related to managing submissions to the ethics committee, though it is broader in scope.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"e0041c95-010c-42fe-96e0-fda5cf0309d3","category":"Non-Procedures","confidence":"HIGH","country":"Canada","isAIMatch":true,"p100":103,"p25":41,"p50":48,"p75":63,"p90":81,"procedureName":"Diary Collection and Monitoring/Review - Per Visit","reasoning":"Administrative/Personnel Costs, Per Visit matches the nature of a hospital management fee, indicating overhead associated with managing clinical trials.","similarity":0.9},"flag":"GREEN","lineItemId":"9f08df34-5de9-4c0f-aeba-a50d6366e177","matchCount":3,"matches":[{"benchmarkId":"e0041c95-010c-42fe-96e0-fda5cf0309d3","category":"Non-Procedures","confidence":"HIGH","country":"Canada","isAIMatch":true,"p100":103,"p25":41,"p50":48,"p75":63,"p90":81,"procedureName":"Diary Collection and Monitoring/Review - Per Visit","reasoning":"Administrative/Personnel Costs, Per Visit matches the nature of a hospital management fee, indicating overhead associated with managing clinical trials.","similarity":0.9},{"benchmarkId":"6bda130e-61de-446b-b076-8dff132e2044","category":"Non-Procedures","confidence":"HIGH","country":"Canada","isAIMatch":true,"p100":199,"p25":73,"p50":85,"p75":123,"p90":198,"procedureName":"Administrative/Personnel Costs - Per Visit","reasoning":"Administrative/Personnel Costs - Per Visit aligns closely with the vendor item as it represents costs related to hospital administration for conducting the trial.","similarity":0.9},{"benchmarkId":"ccd42296-d8b3-4c06-b12b-5f4783bf2fe3","category":"Non-Procedures","confidence":"MEDIUM","country":"Canada","isAIMatch":true,"p100":0,"p25":120,"p50":209,"p75":324,"p90":482,"procedureName":"Physical Therapist (Rehabilitation) - Per hour","reasoning":"Physical Therapist (Rehabilitation) - Per hour could be considered relevant for operational costs in a clinical trial setting, though not directly related to hospital management.","similarity":0.7}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"cacd98df-816c-4b0f-88a0-008cc550f566","matchCount":0,"matches":[]}],"success":true}
+[01:25:56.489] Browser LOG     [v0] Refreshing comparisons data via API...
+[01:25:56.596] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[01:25:56.820] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[01:25:56.820] Browser LOG     [v0] Refresh - loaded 3 matches for line item
+[01:25:56.820] Browser LOG     [v0] Refresh - loaded 3 matches for line item
+[01:25:56.820] Browser LOG     [v0] Refresh - loaded 3 matches for line item
+[01:25:56.820] Browser LOG     [v0] Refresh - loaded 3 matches for line item
+[01:25:56.820] Browser LOG     [v0] Refresh - loaded 3 matches for line item
+[01:25:56.820] Browser LOG     [v0] Refresh - loaded 3 matches for line item
+[01:25:56.820] Browser LOG     [v0] Refresh - loaded 0 matches for line item
+[01:25:56.820] Browser LOG     [v0] Mapped comparisons: 7 First item matches: 3
+[02:42:38.340] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:42:38.377] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779257237} /_vercel/insights/view
+[02:42:39.135] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:42:44.512] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:42:44.519] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/assessments/9a06734c-79ca-4318-b73b-869f9ed16a46 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/assessments/9a06734c-79ca-4318-b73b-869f9ed16a46","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779263374} /_vercel/insights/view
+[02:42:44.921] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:42:44.931] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:42:45.140] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:42:45.437] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[02:42:45.437] Browser LOG     [v0] Has existing ai_matches: true
+[02:42:45.437] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:42:45.437] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:42:45.437] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:42:45.437] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:42:45.437] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[02:42:45.437] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[02:42:45.437] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:42:45.506] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:42:45.776] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:42:45.945] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[02:42:45.945] Browser LOG     [v0] Has existing ai_matches: true
+[02:42:45.945] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:42:45.945] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:42:45.945] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:42:45.945] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:42:45.945] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[02:42:45.945] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[02:42:45.945] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[02:46:03.362] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/archive color: rgb(120, 120, 120) color: inherit {"dp":"/archive","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/archive","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779462226} /_vercel/insights/view
+[02:46:05.379] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[02:46:05.379] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[02:46:05.379] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779464228} /_vercel/insights/view
+[02:46:05.823] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/archive color: rgb(120, 120, 120) color: inherit {"dp":"/archive","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/archive","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779464675} /_vercel/insights/view
+[02:46:06.840] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[02:46:07.403] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[02:46:07.403] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[02:46:08.297] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[02:46:57.395] Server  LOG      ✓ Compiled in 113ms
+[02:47:06.581] Server  LOG      ✓ Compiled in 83ms
