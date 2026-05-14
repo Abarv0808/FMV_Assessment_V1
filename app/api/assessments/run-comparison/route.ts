@@ -5,7 +5,7 @@ import { gateway } from "@ai-sdk/gateway"
 import { z } from "zod"
 
 // =====================================================
-// AI-POWERED SEMANTIC MATCHING
+// AI-POWERED SEMANTIC MATCHING v8 - Country-specific
 // =====================================================
 
 // Schema for AI match response
@@ -178,7 +178,11 @@ export async function POST(request: Request) {
 
       // Get unique countries from line items to only fetch needed benchmark data
       const lineItemCountries = [...new Set(lineItems.map((li: any) => li.country).filter(Boolean))]
-      console.log("[v0] Line item countries:", lineItemCountries.join(", ") || "NONE")
+      console.log("[v0] DEBUG - lineItems[0]:", JSON.stringify(lineItems[0]))
+      console.log("[v0] Line item countries extracted:", lineItemCountries.join(", ") || "NONE - checking why...")
+      if (lineItemCountries.length === 0) {
+        console.log("[v0] Line item country fields:", lineItems.map((li: any) => `${li.id?.substring(0,8)}: country=${li.country}, site=${li.site}`).join(" | "))
+      }
       
       if (benchmarkFileIds && benchmarkFileIds.length > 0) {
         benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
