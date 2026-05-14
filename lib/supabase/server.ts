@@ -15,12 +15,12 @@ function loadEnvVars() {
       const eqIndex = trimmed.indexOf('=')
       if (eqIndex > 0) {
         const key = trimmed.substring(0, eqIndex)
-        let value = trimmed.substring(eqIndex + 1)
-        // Remove surrounding quotes if present
-        if ((value.startsWith('"') && value.endsWith('"')) || 
-            (value.startsWith("'") && value.endsWith("'"))) {
-          value = value.slice(1, -1)
-        }
+        let value = trimmed.substring(eqIndex + 1).trim()
+        // Remove surrounding quotes (single or double)
+        if (value.startsWith("'")) value = value.slice(1)
+        if (value.endsWith("'")) value = value.slice(0, -1)
+        if (value.startsWith('"')) value = value.slice(1)
+        if (value.endsWith('"')) value = value.slice(0, -1)
         process.env[key] = value
       }
     })

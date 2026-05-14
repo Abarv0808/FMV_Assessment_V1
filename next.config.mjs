@@ -10,9 +10,18 @@ const envPath = '/vercel/share/.env.project'
 if (existsSync(envPath)) {
   const content = readFileSync(envPath, 'utf-8')
   content.split('\n').forEach(line => {
-    const match = line.match(/^([^=]+)=(.*)$/)
-    if (match && match[1].startsWith('NEXT_PUBLIC_')) {
-      process.env[match[1]] = match[2]
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith('#')) return
+    const eqIndex = trimmed.indexOf('=')
+    if (eqIndex > 0 && trimmed.substring(0, eqIndex).startsWith('NEXT_PUBLIC_')) {
+      const key = trimmed.substring(0, eqIndex)
+      let value = trimmed.substring(eqIndex + 1).trim()
+      // Remove surrounding quotes
+      if (value.startsWith("'")) value = value.slice(1)
+      if (value.endsWith("'")) value = value.slice(0, -1)
+      if (value.startsWith('"')) value = value.slice(1)
+      if (value.endsWith('"')) value = value.slice(0, -1)
+      process.env[key] = value
     }
   })
 }
