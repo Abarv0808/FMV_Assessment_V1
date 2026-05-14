@@ -13,6 +13,7 @@ export async function POST(request: Request) {
       description,
       country,
       benchmarkFileIds,
+      benchmarkSource,
     } = body
 
     const supabase = createAdminClient()
@@ -27,6 +28,7 @@ export async function POST(request: Request) {
         business_unit: businessUnit || null,
         description: description || null,
         country: country || null,
+        benchmark_source: benchmarkSource || "IQVIA_GRANTPLAN",
         status: "draft",
       })
       .select()

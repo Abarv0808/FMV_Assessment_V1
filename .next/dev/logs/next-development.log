@@ -3,3 +3,29 @@
 [00:00:06.497] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [00:00:06.497] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/new","route":"/assessments/new"}
 [00:00:06.497] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778762037882} /_vercel/insights/view
+[00:00:36.227] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:36.228] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:00:36.228] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778762067574} /_vercel/insights/view
+[00:00:36.943] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:40.594] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/2d3ef1ce-590f-41a7-8268-68bd1ea6033b color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/2d3ef1ce-590f-41a7-8268-68bd1ea6033b","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778762071940} /_vercel/insights/view
+[00:00:41.681] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:42.111] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:42.856] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:43.018] Server  LOG     [v0] Comparisons API fetch result: 0 "items, error:" undefined
+[00:00:43.149] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:43.160] Browser LOG     [v0] Comparisons fetch result: 0 items, error: undefined
+[00:00:43.161] Browser LOG     [v0] Has existing ai_matches: false
+[00:00:43.266] Server  LOG     [v0] Comparisons API fetch result: 0 "items, error:" undefined
+[00:00:43.409] Browser LOG     [v0] Comparisons fetch result: 0 items, error: undefined
+[00:00:43.409] Browser LOG     [v0] Has existing ai_matches: false
+[00:00:45.483] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:45.525] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778762076873} /_vercel/insights/view
+[00:00:45.810] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:46.432] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778762077774} /_vercel/insights/view
+[00:01:14.586] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:01:14.922] Server  ERROR   [v0] Error creating assessment: {}
+[00:01:15.062] Browser ERROR   [v0] Submit error: {}
+[00:02:45.495] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:02:45.764] Server  ERROR   [v0] Error creating assessment: {}
+[00:02:45.911] Browser ERROR   [v0] Submit error: {}
+[00:03:32.998] Server  LOG      ✓ Compiled in 98ms

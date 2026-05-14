@@ -107,6 +107,7 @@ export default function NewAssessmentPage() {
           businessUnit: formData.businessUnit || null,
           description: formData.description || null,
           benchmarkFileIds,
+          benchmarkSource: formData.benchmarkSource === "grantplan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER",
         }),
       })
 
