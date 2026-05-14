@@ -35,3 +35,14 @@
 [00:07:52.581] Server  LOG     [v0] createAdminClient using: "service_role"
 [00:07:52.840] Server  ERROR   [v0] Error creating assessment: {}
 [00:07:52.979] Browser ERROR   [v0] Submit error: {}
+[00:10:39.578] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:39.816] Server  ERROR   [v0] Error creating assessment: {}
+[00:10:39.980] Browser ERROR   [v0] Submit error: {}
+[00:10:47.372] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:47.492] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:10:47.492] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:10:47.492] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778762678827} /_vercel/insights/view
+[00:10:49.354] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778762680688} /_vercel/insights/view
+[00:11:21.530] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:11:21.820] Server  ERROR   [v0] Error creating assessment: {}
+[00:11:21.959] Browser ERROR   [v0] Submit error: {}

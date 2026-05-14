@@ -24,12 +24,12 @@ export async function POST(request: Request) {
         name,
         study_tracking_number: studyTrackingNumber || null,
         protocol_number: protocolNumber || null,
-        therapeutic_area: therapeuticArea || null,
-        business_unit: businessUnit || null,
+        therapeutic_area: therapeuticArea || "Other",
+        business_unit: businessUnit || "USBU",
         description: description || null,
         country: country || null,
         benchmark_source: benchmarkSource || "IQVIA_GRANTPLAN",
-        status: "in_review",
+        status: "completed",
       })
       .select()
       .single()
