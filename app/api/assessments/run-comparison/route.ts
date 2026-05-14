@@ -259,13 +259,16 @@ export async function POST(request: Request) {
 
     const results: any[] = []
 
-    // 3. For each line item, use AI-powered semantic matching
+    // 3. For each line item, use AI-powered semantic matching with country-specific filtering
     console.log("[v0] Starting AI-powered matching for", lineItems.length, "items...")
     
     for (const lineItem of lineItems) {
       const procedureName = lineItem.procedure_name || ""
       const [description, extraDataStr] = procedureName.split("|||")
       const cleanDescription = description.trim()
+      
+      // Get the country from the line item's site/country field
+      const lineItemCountry = lineItem.country || ""
       
       let vendorCostCategory = ""
       try {
@@ -277,7 +280,7 @@ export async function POST(request: Request) {
         // Ignore JSON parse errors
       }
 
-      console.log("[v0] Processing:", `"${cleanDescription.substring(0, 50)}..."`)
+      console.log("[v0] Processing:", `"${cleanDescription.substring(0, 50)}..."`, "Country:", lineItemCountry || "ALL")
       
       if (!cleanDescription || cleanDescription === "Unknown") {
         results.push({
@@ -289,17 +292,42 @@ export async function POST(request: Request) {
         continue
       }
 
+      // Filter benchmarks by country if the line item has a country specified
+      let countryFilteredBenchmarks = benchmarks
+      if (lineItemCountry) {
+        countryFilteredBenchmarks = benchmarks.filter(bm => {
+          const bmCountry = bm.benchmark_files?.country || ""
+          return bmCountry.toLowerCase() === lineItemCountry.toLowerCase()
+        })
+        console.log("[v0] Filtered to", countryFilteredBenchmarks.length, "benchmarks for country:", lineItemCountry)
+      }
+      
+      // If no country-specific benchmarks found, fall back to all benchmarks
+      if (countryFilteredBenchmarks.length === 0) {
+        console.log("[v0] No country-specific benchmarks found, using all benchmarks")
+        countryFilteredBenchmarks = benchmarks
+      }
+      
+      // Prepare country-filtered benchmark data for AI matching
+      const countryBenchmarkForAI = countryFilteredBenchmarks.map((bm, index) => ({
+        id: bm.id,
+        name: bm.procedure_name,
+        category: bm.category || "",
+        index,
+        originalIndex: benchmarks.indexOf(bm)
+      }))
+
       // Try AI matching first
       let matchedBenchmarks: any[] = []
       
       try {
-        const aiMatches = await findAIMatches(cleanDescription, vendorCostCategory, benchmarkForAI)
+        const aiMatches = await findAIMatches(cleanDescription, vendorCostCategory, countryBenchmarkForAI)
         
         if (aiMatches.length > 0) {
-          console.log("[v0] AI found", aiMatches.length, "matches")
+          console.log("[v0] AI found", aiMatches.length, "matches for", lineItemCountry || "ALL")
           
           matchedBenchmarks = aiMatches.map(match => {
-            const bm = benchmarks[match.benchmarkIndex]
+            const bm = countryFilteredBenchmarks[match.benchmarkIndex]
             if (!bm) return null
             
             return {
@@ -325,11 +353,12 @@ export async function POST(request: Request) {
 
       // Fallback to trigram matching if AI fails or returns no results
       if (matchedBenchmarks.length === 0) {
-        console.log("[v0] Using trigram fallback for:", cleanDescription.substring(0, 30))
+        console.log("[v0] Using trigram fallback for:", cleanDescription.substring(0, 30), "Country:", lineItemCountry || "ALL")
         
         const normVendorText = normText(cleanDescription)
         
-        const trigramMatches = benchmarks
+        // Use country-filtered benchmarks for trigram matching too
+        const trigramMatches = countryFilteredBenchmarks
           .map(bm => ({
             bm,
             similarity: trigramSimilarity(normVendorText, normText(bm.procedure_name || ""))
