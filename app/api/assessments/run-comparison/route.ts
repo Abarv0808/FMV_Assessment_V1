@@ -176,12 +176,29 @@ export async function POST(request: Request) {
         `)
         .limit(5000)
 
+      // Get unique countries from line items to only fetch needed benchmark data
+      const lineItemCountries = [...new Set(lineItems.map((li: any) => li.country).filter(Boolean))]
+      console.log("[v0] Line item countries:", lineItemCountries.join(", ") || "NONE")
+      
       if (benchmarkFileIds && benchmarkFileIds.length > 0) {
         benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
         console.log("[v0] Filtering to selected benchmark files:", benchmarkFileIds.length)
+      } else if (lineItemCountries.length > 0) {
+        // First, get benchmark_file IDs for the countries we need
+        const { data: countryFiles } = await supabase
+          .from("benchmark_files")
+          .select("id, country")
+          .in("country", lineItemCountries)
+        
+        if (countryFiles && countryFiles.length > 0) {
+          const fileIds = countryFiles.map(f => f.id)
+          benchmarkQuery = benchmarkQuery.in("benchmark_file_id", fileIds)
+          console.log("[v0] Filtering to", fileIds.length, "benchmark files for countries:", lineItemCountries.join(", "))
+        } else {
+          console.log("[v0] No benchmark files found for countries:", lineItemCountries.join(", "))
+        }
       } else {
-        // Load ALL benchmark procedures from all countries for country-specific matching
-        console.log("[v0] Loading benchmarks from all countries for country-specific matching")
+        console.log("[v0] No countries in line items, loading sample benchmarks")
       }
 
       const result = await benchmarkQuery
