@@ -10,9 +10,18 @@ function loadEnvVars() {
   if (existsSync(envPath)) {
     const content = readFileSync(envPath, 'utf-8')
     content.split('\n').forEach(line => {
-      const match = line.match(/^([^=]+)=['\"]?([^'\"]*)['\"]?$/)
-      if (match) {
-        process.env[match[1]] = match[2]
+      const trimmed = line.trim()
+      if (!trimmed || trimmed.startsWith('#')) return
+      const eqIndex = trimmed.indexOf('=')
+      if (eqIndex > 0) {
+        const key = trimmed.substring(0, eqIndex)
+        let value = trimmed.substring(eqIndex + 1)
+        // Remove surrounding quotes if present
+        if ((value.startsWith('"') && value.endsWith('"')) || 
+            (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.slice(1, -1)
+        }
+        process.env[key] = value
       }
     })
   }

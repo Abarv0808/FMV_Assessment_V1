@@ -177,3 +177,6 @@
 [00:37:23.655] Server  LOG      ✓ Compiled in 52ms
 [00:37:40.744] Server  LOG      ✓ Compiled in 140ms
 [00:37:45.056] Server  LOG      ✓ Compiled in 97ms
+[00:40:37.357] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:40:37.494] Server  ERROR   [v0] Exception creating assessment: Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+[00:40:37.636] Browser ERROR   [v0] Submit error: {}
