@@ -103,16 +103,12 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         return
       }
 
-      const supabase = createClient()
-      
-      // Fetch assessment
-      const { data: assessmentData, error: assessmentError } = await supabase
-        .from("assessments")
-        .select("*")
-        .eq("id", id)
-        .single()
+      // Fetch assessment via API (server-side to bypass RLS)
+      const assessmentResponse = await fetch(`/api/assessments/${id}`)
+      const { assessment: assessmentData, error: assessmentError } = await assessmentResponse.json()
 
       if (assessmentError || !assessmentData) {
+        console.log("[v0] Error fetching assessment:", assessmentError)
         setIsLoading(false)
         return
       }
