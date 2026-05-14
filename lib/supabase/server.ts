@@ -1,7 +1,28 @@
-// Supabase server client - v2
+// Supabase server client - v3
 import { createServerClient } from '@supabase/ssr'
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
+import { readFileSync, existsSync } from 'fs'
+
+// Load env vars from v0 sandbox if not already set
+function loadEnvIfNeeded() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    const envPath = '/vercel/share/.env.project'
+    if (existsSync(envPath)) {
+      const content = readFileSync(envPath, 'utf-8')
+      content.split('\n').forEach(line => {
+        const match = line.match(/^([^=]+)=['\"]?([^'\"]*)['\"]?$/)
+        if (match) {
+          process.env[match[1]] = match[2]
+        }
+      })
+      console.log('[v0] Loaded env vars from', envPath)
+    }
+  }
+}
+
+// Initialize on module load
+loadEnvIfNeeded()
 
 export async function createClient() {
   const cookieStore = await cookies()
