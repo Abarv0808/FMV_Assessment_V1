@@ -11,7 +11,6 @@ import { ArrowLeft, ArrowRight, Check, Loader2 } from "lucide-react"
 import { AssessmentInfoStep } from "@/components/wizard/assessment-info-step"
 import { ProposalUploadStep } from "@/components/wizard/proposal-upload-step"
 import { ReviewStep } from "@/components/wizard/review-step"
-import { createClient } from "@/lib/supabase/client"
 
 type WizardStep = "info" | "upload" | "review"
 
@@ -89,50 +88,32 @@ export default function NewAssessmentPage() {
     setSubmitError(null)
 
     try {
-      const supabase = createClient()
-
-      // 1. Create assessment in database
-      const { data: assessment, error: assessmentError } = await supabase
-        .from("assessments")
-        .insert({
-          name: formData.name,
-          study_tracking_number: formData.studyTrackingNumber || null,
-          protocol_number: formData.protocolNumber || null,
-          therapeutic_area: formData.therapeuticArea,
-          business_unit: formData.businessUnit,
-          description: formData.description || null,
-          target_date: formData.targetDate?.toISOString() || null,
-          benchmark_source: formData.benchmarkSource === "grantplan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER",
-          vendor_file_name: formData.vendorProposal?.name || null,
-          status: "processing"
-        })
-        .select("id")
-        .single()
-
-      if (assessmentError || !assessment) {
-        throw new Error(assessmentError?.message || "Failed to create assessment")
-      }
-
-      // 2. Link benchmark files to assessment
-      const benchmarkIds = formData.selectedBenchmarkFileIds.length > 0 
+      // Get benchmark file IDs
+      const benchmarkFileIds = formData.selectedBenchmarkFileIds.length > 0 
         ? formData.selectedBenchmarkFileIds 
         : formData.selectedBenchmarkFileId 
           ? [formData.selectedBenchmarkFileId] 
           : []
 
-      if (benchmarkIds.length > 0) {
-        const benchmarkLinks = benchmarkIds.map(fileId => ({
-          assessment_id: assessment.id,
-          benchmark_file_id: fileId
-        }))
+      // 1. Create assessment via API (bypasses RLS)
+      const createResponse = await fetch("/api/assessments/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          studyTrackingNumber: formData.studyTrackingNumber || null,
+          protocolNumber: formData.protocolNumber || null,
+          therapeuticArea: formData.therapeuticArea || null,
+          businessUnit: formData.businessUnit || null,
+          description: formData.description || null,
+          benchmarkFileIds,
+        }),
+      })
 
-        const { error: linkError } = await supabase
-          .from("assessment_benchmark_files")
-          .insert(benchmarkLinks)
+      const { assessment, error: assessmentError } = await createResponse.json()
 
-        if (linkError) {
-          console.error("[v0] Error linking benchmark files:", linkError)
-        }
+      if (assessmentError || !assessment) {
+        throw new Error(assessmentError || "Failed to create assessment")
       }
 
       // 3. Parse vendor Excel file from "Sponsor" tab
@@ -154,17 +135,16 @@ export default function NewAssessmentPage() {
           console.log("[v0] Sample line item:", parsedProposal.lineItems[0])
         }
         
-        // Update assessment with country extracted from Site column
+        // Update assessment with country extracted from Site column via API
         if (parsedProposal.country) {
-          const { error: updateError } = await supabase
-            .from("assessments")
-            .update({ country: parsedProposal.country })
-            .eq("id", assessment.id)
+          const updateResponse = await fetch(`/api/assessments/${assessment.id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ country: parsedProposal.country }),
+          })
           
-          if (updateError) {
-            console.error("[v0] Error updating assessment country:", updateError)
-          } else {
-            console.log("[v0] Updated assessment country to:", parsedProposal.country)
+          if (!updateResponse.ok) {
+            console.error("[v0] Error updating assessment country")
           }
         }
       }

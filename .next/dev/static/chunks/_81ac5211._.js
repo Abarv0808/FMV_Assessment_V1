@@ -990,6 +990,7 @@ function parseVendorProposal(buffer, assessmentId = "") {
     }
     const { headerRowIndex, columnMap } = headerInfo;
     const lineItems = [];
+    let extractedCountry = null;
     // Parse data rows (skip header row)
     // STOP when "Description of costs" is empty - this marks the end of valid data
     for(let rowIndex = headerRowIndex + 1; rowIndex < data.length; rowIndex++){
@@ -1007,10 +1008,17 @@ function parseVendorProposal(buffer, assessmentId = "") {
         if (firstCell.includes("total") || firstCell.includes("subtotal") || firstCell.includes("sub-total")) {
             continue;
         }
+        // Extract Site value (which now contains country)
+        const siteValue = columnMap.site !== undefined ? String(row[columnMap.site] || "").trim() : "";
+        // Capture the first non-empty Site value as the country for the assessment
+        if (!extractedCountry && siteValue) {
+            extractedCountry = siteValue;
+            console.log("[v0] Extracted country from Site column:", extractedCountry);
+        }
         const lineItem = {
             id: generateId(),
             assessmentId,
-            site: columnMap.site !== undefined ? String(row[columnMap.site] || "").trim() : "",
+            site: siteValue,
             costCategory: columnMap.costCategory !== undefined ? String(row[columnMap.costCategory] || "").trim() : "",
             description: columnMap.description !== undefined ? String(row[columnMap.description] || "").trim() : "",
             unitType: columnMap.unitType !== undefined ? String(row[columnMap.unitType] || "").trim() : "",
@@ -1046,6 +1054,7 @@ function parseVendorProposal(buffer, assessmentId = "") {
     }
     return {
         lineItems,
+        country: extractedCountry,
         metadata: {
             sheetName: sponsorSheetName,
             rowCount: lineItems.length,
@@ -3014,7 +3023,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$supabase$2b$ssr$40$0$2e$6$2e$1_$40$supabase$2b$supabase$2d$js$40$2$2e$99$2e$2$2f$node_modules$2f40$supabase$2f$ssr$2f$dist$2f$module$2f$createBrowserClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@supabase+ssr@0.6.1_@supabase+supabase-js@2.99.2/node_modules/@supabase/ssr/dist/module/createBrowserClient.js [app-client] (ecmascript)");
 ;
 function createClient() {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$supabase$2b$ssr$40$0$2e$6$2e$1_$40$supabase$2b$supabase$2d$js$40$2$2e$99$2e$2$2f$node_modules$2f40$supabase$2f$ssr$2f$dist$2f$module$2f$createBrowserClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createBrowserClient"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_SUPABASE_URL, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$supabase$2b$ssr$40$0$2e$6$2e$1_$40$supabase$2b$supabase$2d$js$40$2$2e$99$2e$2$2f$node_modules$2f40$supabase$2f$ssr$2f$dist$2f$module$2f$createBrowserClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createBrowserClient"])(("TURBOPACK compile-time value", "'https://tzhqhstbtebyiccztpsk.supabase.co'"), ("TURBOPACK compile-time value", "'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6aHFoc3RidGVieWljY3p0cHNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1NDEyOTUsImV4cCI6MjA4ODExNzI5NX0.elZXx0TlktY__46yCd0CgNvBNa3opygCqTXjbCarf6k'"));
 }
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -6902,11 +6911,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$lu
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$wizard$2f$assessment$2d$info$2d$step$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/wizard/assessment-info-step.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$wizard$2f$proposal$2d$upload$2d$step$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/wizard/proposal-upload-step.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$wizard$2f$review$2d$step$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/wizard/review-step.tsx [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/supabase/client.ts [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
-;
 ;
 ;
 ;
@@ -6984,36 +6991,29 @@ function NewAssessmentPage() {
         setIsSubmitting(true);
         setSubmitError(null);
         try {
-            const supabase = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createClient"])();
-            // 1. Create assessment in database
-            const { data: assessment, error: assessmentError } = await supabase.from("assessments").insert({
-                name: formData.name,
-                study_tracking_number: formData.studyTrackingNumber || null,
-                protocol_number: formData.protocolNumber || null,
-                therapeutic_area: formData.therapeuticArea,
-                business_unit: formData.businessUnit,
-                description: formData.description || null,
-                target_date: formData.targetDate?.toISOString() || null,
-                benchmark_source: formData.benchmarkSource === "grantplan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER",
-                vendor_file_name: formData.vendorProposal?.name || null,
-                status: "processing"
-            }).select("id").single();
-            if (assessmentError || !assessment) {
-                throw new Error(assessmentError?.message || "Failed to create assessment");
-            }
-            // 2. Link benchmark files to assessment
-            const benchmarkIds = formData.selectedBenchmarkFileIds.length > 0 ? formData.selectedBenchmarkFileIds : formData.selectedBenchmarkFileId ? [
+            // Get benchmark file IDs
+            const benchmarkFileIds = formData.selectedBenchmarkFileIds.length > 0 ? formData.selectedBenchmarkFileIds : formData.selectedBenchmarkFileId ? [
                 formData.selectedBenchmarkFileId
             ] : [];
-            if (benchmarkIds.length > 0) {
-                const benchmarkLinks = benchmarkIds.map((fileId)=>({
-                        assessment_id: assessment.id,
-                        benchmark_file_id: fileId
-                    }));
-                const { error: linkError } = await supabase.from("assessment_benchmark_files").insert(benchmarkLinks);
-                if (linkError) {
-                    console.error("[v0] Error linking benchmark files:", linkError);
-                }
+            // 1. Create assessment via API (bypasses RLS)
+            const createResponse = await fetch("/api/assessments/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    studyTrackingNumber: formData.studyTrackingNumber || null,
+                    protocolNumber: formData.protocolNumber || null,
+                    therapeuticArea: formData.therapeuticArea || null,
+                    businessUnit: formData.businessUnit || null,
+                    description: formData.description || null,
+                    benchmarkFileIds
+                })
+            });
+            const { assessment, error: assessmentError } = await createResponse.json();
+            if (assessmentError || !assessment) {
+                throw new Error(assessmentError || "Failed to create assessment");
             }
             // 3. Parse vendor Excel file from "Sponsor" tab
             // Excel column mapping:
@@ -7025,6 +7025,7 @@ function NewAssessmentPage() {
             // - Currency -> currency
             let parsedProposal = {
                 lineItems: [],
+                country: null,
                 metadata: {
                     sheetName: "",
                     rowCount: 0,
@@ -7036,8 +7037,24 @@ function NewAssessmentPage() {
                 parsedProposal = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$excel$2d$parser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["parseVendorProposal"])(arrayBuffer, assessment.id);
                 console.log("[v0] Parsed vendor proposal from sheet:", parsedProposal.metadata.sheetName);
                 console.log("[v0] Found", parsedProposal.lineItems.length, "line items");
+                console.log("[v0] Extracted country from Site column:", parsedProposal.country);
                 if (parsedProposal.lineItems.length > 0) {
                     console.log("[v0] Sample line item:", parsedProposal.lineItems[0]);
+                }
+                // Update assessment with country extracted from Site column via API
+                if (parsedProposal.country) {
+                    const updateResponse = await fetch(`/api/assessments/${assessment.id}`, {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            country: parsedProposal.country
+                        })
+                    });
+                    if (!updateResponse.ok) {
+                        console.error("[v0] Error updating assessment country");
+                    }
                 }
             }
             // 4. Store line items via API route (handles inserts one-by-one for robustness)
@@ -7109,12 +7126,12 @@ function NewAssessmentPage() {
                                 className: "h-4 w-4"
                             }, void 0, false, {
                                 fileName: "[project]/app/assessments/new/page.tsx",
-                                lineNumber: 222,
+                                lineNumber: 217,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 221,
+                            lineNumber: 216,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7124,7 +7141,7 @@ function NewAssessmentPage() {
                                     children: "New Assessment"
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 225,
+                                    lineNumber: 220,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7132,19 +7149,19 @@ function NewAssessmentPage() {
                                     children: "Create a new FMV assessment"
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 226,
+                                    lineNumber: 221,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 224,
+                            lineNumber: 219,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 220,
+                    lineNumber: 215,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7163,7 +7180,7 @@ function NewAssessmentPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 232,
+                                    lineNumber: 227,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7171,13 +7188,13 @@ function NewAssessmentPage() {
                                     children: currentStep.title
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 235,
+                                    lineNumber: 230,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 231,
+                            lineNumber: 226,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$progress$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Progress"], {
@@ -7185,13 +7202,13 @@ function NewAssessmentPage() {
                             className: "h-2"
                         }, void 0, false, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 237,
+                            lineNumber: 232,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 230,
+                    lineNumber: 225,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7211,18 +7228,18 @@ function NewAssessmentPage() {
                                                 className: "h-5 w-5"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/assessments/new/page.tsx",
-                                                lineNumber: 256,
+                                                lineNumber: 251,
                                                 columnNumber: 36
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: index + 1
                                             }, void 0, false, {
                                                 fileName: "[project]/app/assessments/new/page.tsx",
-                                                lineNumber: 256,
+                                                lineNumber: 251,
                                                 columnNumber: 68
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/assessments/new/page.tsx",
-                                            lineNumber: 247,
+                                            lineNumber: 242,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7233,7 +7250,7 @@ function NewAssessmentPage() {
                                                     children: step.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                                    lineNumber: 259,
+                                                    lineNumber: 254,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7241,38 +7258,38 @@ function NewAssessmentPage() {
                                                     children: step.description
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                                    lineNumber: 262,
+                                                    lineNumber: 257,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/assessments/new/page.tsx",
-                                            lineNumber: 258,
+                                            lineNumber: 253,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 246,
+                                    lineNumber: 241,
                                     columnNumber: 17
                                 }, this),
                                 index < steps.length - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: `h-[2px] w-full -mt-12 ${isCompleted ? "bg-primary" : "bg-border"}`
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 266,
+                                    lineNumber: 261,
                                     columnNumber: 19
                                 }, this)
                             ]
                         }, step.id, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 245,
+                            lineNumber: 240,
                             columnNumber: 15
                         }, this);
                     })
                 }, void 0, false, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 240,
+                    lineNumber: 235,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -7284,20 +7301,20 @@ function NewAssessmentPage() {
                                     children: currentStep.title
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 275,
+                                    lineNumber: 270,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                     children: currentStep.description
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 276,
+                                    lineNumber: 271,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 274,
+                            lineNumber: 269,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -7309,7 +7326,7 @@ function NewAssessmentPage() {
                                     showErrors: showErrors
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 279,
+                                    lineNumber: 274,
                                     columnNumber: 43
                                 }, this),
                                 currentStep.id === "upload" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$wizard$2f$proposal$2d$upload$2d$step$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ProposalUploadStep"], {
@@ -7317,26 +7334,26 @@ function NewAssessmentPage() {
                                     onChange: updateFormData
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 280,
+                                    lineNumber: 275,
                                     columnNumber: 45
                                 }, this),
                                 currentStep.id === "review" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$wizard$2f$review$2d$step$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ReviewStep"], {
                                     data: formData
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 281,
+                                    lineNumber: 276,
                                     columnNumber: 45
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 278,
+                            lineNumber: 273,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 273,
+                    lineNumber: 268,
                     columnNumber: 9
                 }, this),
                 submitError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7344,7 +7361,7 @@ function NewAssessmentPage() {
                     children: submitError
                 }, void 0, false, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 286,
+                    lineNumber: 281,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7359,14 +7376,14 @@ function NewAssessmentPage() {
                                     className: "h-4 w-4 mr-2"
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 293,
+                                    lineNumber: 288,
                                     columnNumber: 13
                                 }, this),
                                 "Back"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 292,
+                            lineNumber: 287,
                             columnNumber: 11
                         }, this),
                         currentStepIndex < steps.length - 1 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -7377,13 +7394,13 @@ function NewAssessmentPage() {
                                     className: "h-4 w-4 ml-2"
                                 }, void 0, false, {
                                     fileName: "[project]/app/assessments/new/page.tsx",
-                                    lineNumber: 299,
+                                    lineNumber: 294,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 297,
+                            lineNumber: 292,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_$40$opentelemetry$2b$api$40$1$2e$9$2e$0_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                             onClick: handleSubmit,
@@ -7394,7 +7411,7 @@ function NewAssessmentPage() {
                                         className: "h-4 w-4 mr-2 animate-spin"
                                     }, void 0, false, {
                                         fileName: "[project]/app/assessments/new/page.tsx",
-                                        lineNumber: 305,
+                                        lineNumber: 300,
                                         columnNumber: 19
                                     }, this),
                                     "Processing..."
@@ -7405,7 +7422,7 @@ function NewAssessmentPage() {
                                         className: "h-4 w-4 mr-2"
                                     }, void 0, false, {
                                         fileName: "[project]/app/assessments/new/page.tsx",
-                                        lineNumber: 310,
+                                        lineNumber: 305,
                                         columnNumber: 19
                                     }, this),
                                     "Create Assessment"
@@ -7413,24 +7430,24 @@ function NewAssessmentPage() {
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "[project]/app/assessments/new/page.tsx",
-                            lineNumber: 302,
+                            lineNumber: 297,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/assessments/new/page.tsx",
-                    lineNumber: 291,
+                    lineNumber: 286,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/assessments/new/page.tsx",
-            lineNumber: 219,
+            lineNumber: 214,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/assessments/new/page.tsx",
-        lineNumber: 218,
+        lineNumber: 213,
         columnNumber: 5
     }, this);
 }
