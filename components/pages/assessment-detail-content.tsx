@@ -417,32 +417,18 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         const aiResultsMap = new Map(result.results.map((r: any) => [r.lineItemId, r]))
         
         // Refresh the comparisons data - fetch comparisons and line items separately
-        console.log("[v0] Refreshing comparisons data...")
-        const supabase = createClient()
+        console.log("[v0] Refreshing comparisons data via API...")
         
-        // Fetch comparisons
-        const { data: comparisonsData, error: compError } = await supabase
-          .from("assessment_comparisons")
-          .select("*")
-          .eq("assessment_id", id)
-          .order("created_at", { ascending: true })
-        
-        // Fetch line items
-        const { data: lineItemsData, error: liError } = await supabase
-          .from("assessment_line_items")
-          .select("*")
-          .eq("assessment_id", id)
+        // Fetch comparisons via API (server-side to bypass RLS)
+        const comparisonsResponse = await fetch(`/api/assessments/${id}/comparisons`)
+        const { comparisons: comparisonsData, error: compError } = await comparisonsResponse.json()
 
-        console.log("[v0] Refresh result - comparisons:", comparisonsData?.length, "lineItems:", lineItemsData?.length)
+        console.log("[v0] Refresh result - comparisons:", comparisonsData?.length, "error:", compError)
         
-        if (comparisonsData && comparisonsData.length > 0 && lineItemsData) {
-          // Create a map of line items by ID
-          const lineItemMap = new Map(lineItemsData.map((li: any) => [li.id, li]))
-          
-          const mappedComparisons: AssessmentComparison[] = comparisonsData
-            .filter((comp: any) => lineItemMap.has(comp.line_item_id))
-            .map((comp: any, idx: number) => {
-              const lineItem = lineItemMap.get(comp.line_item_id)
+        if (comparisonsData && comparisonsData.length > 0) {
+          const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {
+              // API returns assessment_line_items joined
+              const lineItem = comp.assessment_line_items
               const procedureName = lineItem?.procedure_name || ""
               const [description, extraDataStr] = procedureName.split("|||")
               let extraData = { numberOfUnit: 1, unitPrice: 0, unitType: null, costCategory: null }
@@ -455,6 +441,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
               if (comp.ai_matches) {
                 try {
                   matches = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
+                  console.log("[v0] Refresh - loaded", matches.length, "matches for line item")
                 } catch (e) {
                   matches = []
                 }
