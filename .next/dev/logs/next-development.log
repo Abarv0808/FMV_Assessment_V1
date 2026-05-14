@@ -46,3 +46,143 @@
 [00:11:21.530] Server  LOG     [v0] createAdminClient using: "service_role"
 [00:11:21.820] Server  ERROR   [v0] Error creating assessment: {}
 [00:11:21.959] Browser ERROR   [v0] Submit error: {}
+[00:14:25.078] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:14:26.007] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:14:26.011] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[00:14:26.011] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
+[00:14:26.011] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[00:14:26.011] Browser LOG     [v0] Sheet data has 131 rows
+[00:14:26.011] Browser LOG     [v0] First 5 rows of data:
+[00:14:26.011] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
+[00:14:26.011] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
+[00:14:26.011] Browser LOG     [v0] Row 2 : [null,"Bulgaria","Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
+[00:14:26.011] Browser LOG     [v0] Row 3 : [null,"Australia","Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
+[00:14:26.011] Browser LOG     [v0] Row 4 : [null,"Austria","Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
+[00:14:26.011] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
+[00:14:26.011] Browser LOG     [v0] Row 0 matched 0 columns: []
+[00:14:26.011] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
+[00:14:26.011] Browser LOG     [v0] Matched column 1 -> site via header: Site
+[00:14:26.011] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
+[00:14:26.011] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
+[00:14:26.011] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
+[00:14:26.011] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
+[00:14:26.011] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
+[00:14:26.011] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
+[00:14:26.011] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
+[00:14:26.011] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
+[00:14:26.011] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
+[00:14:26.011] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
+[00:14:26.011] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
+[00:14:26.011] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
+[00:14:26.011] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
+[00:14:26.011] Browser LOG     [v0] Extracted country from Site column: Bulgaria
+[00:14:26.011] Browser LOG     [v0] Stopping at row 9 - Description is empty
+[00:14:26.011] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
+[00:14:26.011] Browser LOG     [v0] Found 7 line items
+[00:14:26.011] Browser LOG     [v0] Extracted country from Site column: Bulgaria
+[00:14:26.011] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"bbc4c2e7-daac-4f9e-8e60-cbe9514bcfcc","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"Accepted","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1778762897301-tu3esgnn3","investigatorResponses":[],"numberOfUnits":160,"site":"Bulgaria","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
+[00:14:26.267] Browser LOG     [v0] Storing 7 line items via API
+[00:14:26.267] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"Bulgaria","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"Australia","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
+[00:14:26.434] Server  LOG     [v0] Store Items API called
+[00:14:26.434] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:14:26.436] Server  LOG     [v0] Storing 7 "line items for assessment" "bbc4c2e7-daac-4f9e-8e60-cbe9514bcfcc"
+[00:14:26.669] Server  LOG     [v0] Created comparison for line item: "4b5ab952-9110-403c-a447-036a5fe1f12f"
+[00:14:26.978] Server  LOG     [v0] Created comparison for line item: "fa0253e2-e9c5-43a6-8f70-9cb29fda79ac"
+[00:14:27.152] Server  LOG     [v0] Created comparison for line item: "7a2f0709-affe-4577-a088-834c116a6ef8"
+[00:14:27.367] Server  LOG     [v0] Created comparison for line item: "6c333496-f6d7-41e4-85b1-0e0b449ddeea"
+[00:14:27.590] Server  LOG     [v0] Created comparison for line item: "dc72b9b8-95f4-454d-ae6d-c40edfc96371"
+[00:14:27.801] Server  LOG     [v0] Created comparison for line item: "dde0fd9f-17ba-48dd-9ce9-5581b3b0c0ce"
+[00:14:28.409] Server  LOG     [v0] Created comparison for line item: "92ffd906-d610-4c32-9576-0e5336b18b7a"
+[00:14:28.410] Server  LOG     [v0] Inserted 7 "line items"
+[00:14:28.640] Browser LOG     [v0] Successfully stored 7 line items
+[00:14:28.846] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/bbc4c2e7-daac-4f9e-8e60-cbe9514bcfcc color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/bbc4c2e7-daac-4f9e-8e60-cbe9514bcfcc","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778762900176} /_vercel/insights/view
+[00:14:29.128] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:14:29.347] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:14:29.354] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:14:29.451] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:14:29.797] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:14:29.797] Browser LOG     [v0] Has existing ai_matches: false
+[00:14:29.858] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:14:29.960] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:14:30.103] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:14:30.103] Browser LOG     [v0] Has existing ai_matches: false
+[00:15:19.383] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[00:15:19.990] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[00:15:20.850] Server  LOG     [v0] Run comparison API called (AI-powered)
+[00:15:20.851] Server  LOG     [v0] Assessment ID: "bbc4c2e7-daac-4f9e-8e60-cbe9514bcfcc"
+[00:15:20.853] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:15:20.854] Server  LOG     [v0] Fetching line items...
+[00:15:21.044] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[00:15:21.044] Server  LOG     [v0] Fetching benchmark procedures...
+[00:15:21.466] Server  LOG     [v0] Benchmark procedures loaded: 207
+[00:15:21.467] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[00:15:21.467] Server  LOG     [v0] Processing: "\"Hospital management fee: 3%....\""
+[00:15:22.223] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:15:22.223] Server  LOG     [v0] Using trigram fallback for: "Hospital management fee: 3%."
+[00:15:22.227] Server  LOG     [v0]   Match 1: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[00:15:22.227] Server  LOG     [v0]   Match 2: "IRB Amendment Fee" | Confidence: LOW | AI: false
+[00:15:22.227] Server  LOG     [v0]   Match 3: "Medical Monitoring by Physician; Medical" | Confidence: LOW | AI: false
+[00:15:22.227] Server  LOG     [v0] Processing: "\"Tax: 12%...\""
+[00:15:22.338] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:15:22.338] Server  LOG     [v0] Using trigram fallback for: "Tax: 12%"
+[00:15:22.340] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\""
+[00:15:22.464] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:15:22.464] Server  LOG     [v0] Using trigram fallback for: "The cost for CMV-specific T ce"
+[00:15:22.469] Server  LOG     [v0] Processing: "\"250RMB/hour*2 hours*4 visits...\""
+[00:15:22.650] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:15:22.650] Server  LOG     [v0] Using trigram fallback for: "250RMB/hour*2 hours*4 visits"
+[00:15:22.654] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\""
+[00:15:22.879] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:15:22.880] Server  LOG     [v0] Using trigram fallback for: "Project supervision and qualit"
+[00:15:22.885] Server  LOG     [v0] Processing: "\"Clinical research coordinator. The HCP is a hemato...\""
+[00:15:22.940] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:15:22.940] Server  LOG     [v0] Using trigram fallback for: "Clinical research coordinator."
+[00:15:22.946] Server  LOG     [v0] Processing: "\"Local Ethics Committee fee...\""
+[00:15:23.012] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:15:23.012] Server  LOG     [v0] Using trigram fallback for: "Local Ethics Committee fee"
+[00:15:23.016] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[00:15:23.022] Server  LOG     [v0] Updating 7 "comparison records"
+[00:15:23.958] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 0 AI matches, 2 trigram matches","results":[{"bestMatch":{"benchmarkId":"4d34d802-ce56-4f95-a41f-ba9d9055dee0","category":"Site Costs","confidence":"MEDIUM","country":"Chile","isAIMatch":false,"p100":0,"p25":182608,"p50":269377,"p75":340042,"p90":489226,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},"flag":"YELLOW","lineItemId":"dde0fd9f-17ba-48dd-9ce9-5581b3b0c0ce","matchCount":3,"matches":[{"benchmarkId":"4d34d802-ce56-4f95-a41f-ba9d9055dee0","category":"Site Costs","confidence":"MEDIUM","country":"Chile","isAIMatch":false,"p100":0,"p25":182608,"p50":269377,"p75":340042,"p90":489226,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"39e86317-72af-4b94-85ef-56999b7f013d","category":"Site Costs","confidence":"LOW","country":"Chile","isAIMatch":false,"p100":0,"p25":333017,"p50":491505,"p75":847235,"p90":1305904,"procedureName":"IRB Amendment Fee","reasoning":"Matched by text similarity","similarity":0.3771236166328254},{"benchmarkId":"7df15047-5fb0-45df-aab6-52a72ea94def","category":"Site Costs","confidence":"LOW","country":"Chile","isAIMatch":false,"p100":0,"p25":152549,"p50":173139,"p75":206362,"p90":288719,"procedureName":"Medical Monitoring by Physician; Medical Management","reasoning":"Matched by text similarity","similarity":0.3748170285326546}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"92ffd906-d610-4c32-9576-0e5336b18b7a","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"4b5ab952-9110-403c-a447-036a5fe1f12f","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"fa0253e2-e9c5-43a6-8f70-9cb29fda79ac","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"7a2f0709-affe-4577-a088-834c116a6ef8","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"6c333496-f6d7-41e4-85b1-0e0b449ddeea","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"06759d0e-baee-48fa-9812-d1d096d80e9c","category":"Site Costs","confidence":"HIGH","country":"Chile","isAIMatch":false,"p100":0,"p25":1054955,"p50":1686534,"p75":3249814,"p90":5836842,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},"flag":"GREEN","lineItemId":"dc72b9b8-95f4-454d-ae6d-c40edfc96371","matchCount":1,"matches":[{"benchmarkId":"06759d0e-baee-48fa-9812-d1d096d80e9c","category":"Site Costs","confidence":"HIGH","country":"Chile","isAIMatch":false,"p100":0,"p25":1054955,"p50":1686534,"p75":3249814,"p90":5836842,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916}]}],"success":true}
+[00:15:23.958] Browser LOG     [v0] Refreshing comparisons data...
+[00:15:24.265] Browser LOG     [v0] Refresh result - comparisons: 0 lineItems: 0
+[00:15:24.265] Browser LOG     [v0] No comparisons data returned from refresh query
+[00:16:05.748] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[00:16:05.975] Server  LOG     [v0] Run comparison API called (AI-powered)
+[00:16:05.976] Server  LOG     [v0] Assessment ID: "bbc4c2e7-daac-4f9e-8e60-cbe9514bcfcc"
+[00:16:05.976] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:16:05.977] Server  LOG     [v0] Fetching line items...
+[00:16:05.980] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[00:16:06.115] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[00:16:06.116] Server  LOG     [v0] Fetching benchmark procedures...
+[00:16:06.405] Server  LOG     [v0] Benchmark procedures loaded: 207
+[00:16:06.405] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[00:16:06.405] Server  LOG     [v0] Processing: "\"Hospital management fee: 3%....\""
+[00:16:06.521] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:16:06.521] Server  LOG     [v0] Using trigram fallback for: "Hospital management fee: 3%."
+[00:16:06.525] Server  LOG     [v0]   Match 1: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[00:16:06.525] Server  LOG     [v0]   Match 2: "IRB Amendment Fee" | Confidence: LOW | AI: false
+[00:16:06.525] Server  LOG     [v0]   Match 3: "Medical Monitoring by Physician; Medical" | Confidence: LOW | AI: false
+[00:16:06.526] Server  LOG     [v0] Processing: "\"Tax: 12%...\""
+[00:16:06.826] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:16:06.826] Server  LOG     [v0] Using trigram fallback for: "Tax: 12%"
+[00:16:06.829] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\""
+[00:16:07.051] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:16:07.051] Server  LOG     [v0] Using trigram fallback for: "The cost for CMV-specific T ce"
+[00:16:07.056] Server  LOG     [v0] Processing: "\"250RMB/hour*2 hours*4 visits...\""
+[00:16:07.153] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:16:07.154] Server  LOG     [v0] Using trigram fallback for: "250RMB/hour*2 hours*4 visits"
+[00:16:07.156] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\""
+[00:16:07.285] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:16:07.285] Server  LOG     [v0] Using trigram fallback for: "Project supervision and qualit"
+[00:16:07.290] Server  LOG     [v0] Processing: "\"Clinical research coordinator. The HCP is a hemato...\""
+[00:16:07.352] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:16:07.352] Server  LOG     [v0] Using trigram fallback for: "Clinical research coordinator."
+[00:16:07.356] Server  LOG     [v0] Processing: "\"Local Ethics Committee fee...\""
+[00:16:07.398] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[00:16:07.399] Server  LOG     [v0] Using trigram fallback for: "Local Ethics Committee fee"
+[00:16:07.402] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[00:16:07.402] Server  LOG     [v0] Updating 7 "comparison records"
+[00:16:08.257] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 0 AI matches, 2 trigram matches","results":[{"bestMatch":{"benchmarkId":"4d34d802-ce56-4f95-a41f-ba9d9055dee0","category":"Site Costs","confidence":"MEDIUM","country":"Chile","isAIMatch":false,"p100":0,"p25":182608,"p50":269377,"p75":340042,"p90":489226,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},"flag":"YELLOW","lineItemId":"dde0fd9f-17ba-48dd-9ce9-5581b3b0c0ce","matchCount":3,"matches":[{"benchmarkId":"4d34d802-ce56-4f95-a41f-ba9d9055dee0","category":"Site Costs","confidence":"MEDIUM","country":"Chile","isAIMatch":false,"p100":0,"p25":182608,"p50":269377,"p75":340042,"p90":489226,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"39e86317-72af-4b94-85ef-56999b7f013d","category":"Site Costs","confidence":"LOW","country":"Chile","isAIMatch":false,"p100":0,"p25":333017,"p50":491505,"p75":847235,"p90":1305904,"procedureName":"IRB Amendment Fee","reasoning":"Matched by text similarity","similarity":0.3771236166328254},{"benchmarkId":"7df15047-5fb0-45df-aab6-52a72ea94def","category":"Site Costs","confidence":"LOW","country":"Chile","isAIMatch":false,"p100":0,"p25":152549,"p50":173139,"p75":206362,"p90":288719,"procedureName":"Medical Monitoring by Physician; Medical Management","reasoning":"Matched by text similarity","similarity":0.3748170285326546}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"92ffd906-d610-4c32-9576-0e5336b18b7a","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"4b5ab952-9110-403c-a447-036a5fe1f12f","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"fa0253e2-e9c5-43a6-8f70-9cb29fda79ac","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"7a2f0709-affe-4577-a088-834c116a6ef8","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"6c333496-f6d7-41e4-85b1-0e0b449ddeea","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"06759d0e-baee-48fa-9812-d1d096d80e9c","category":"Site Costs","confidence":"HIGH","country":"Chile","isAIMatch":false,"p100":0,"p25":1054955,"p50":1686534,"p75":3249814,"p90":5836842,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},"flag":"GREEN","lineItemId":"dc72b9b8-95f4-454d-ae6d-c40edfc96371","matchCount":1,"matches":[{"benchmarkId":"06759d0e-baee-48fa-9812-d1d096d80e9c","category":"Site Costs","confidence":"HIGH","country":"Chile","isAIMatch":false,"p100":0,"p25":1054955,"p50":1686534,"p75":3249814,"p90":5836842,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916}]}],"success":true}
+[00:16:08.257] Browser LOG     [v0] Refreshing comparisons data...
+[00:16:08.536] Browser LOG     [v0] Refresh result - comparisons: 0 lineItems: 0
+[00:16:08.536] Browser LOG     [v0] No comparisons data returned from refresh query

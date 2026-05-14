@@ -387,6 +387,8 @@ export async function POST(request: Request) {
     console.log("[v0] Updating", results.length, "comparison records")
     
     for (const result of results) {
+      console.log("[v0] Updating line_item_id:", result.lineItemId, "with", result.matches?.length || 0, "matches")
+      
       const { data: updated, error: updateError } = await supabase
         .from("assessment_comparisons")
         .update({ 
@@ -396,8 +398,11 @@ export async function POST(request: Request) {
         .eq("line_item_id", result.lineItemId)
         .select("id")
       
+      console.log("[v0] Update result:", updated?.length || 0, "rows updated, error:", updateError?.message || "none")
+      
       if (!updated || updated.length === 0) {
-        await supabase
+        console.log("[v0] No existing record, inserting new one")
+        const { error: insertError } = await supabase
           .from("assessment_comparisons")
           .insert({
             assessment_id: assessmentId,
@@ -405,6 +410,7 @@ export async function POST(request: Request) {
             flag: result.flag,
             ai_matches: result.matches || []
           })
+        console.log("[v0] Insert error:", insertError?.message || "none")
       }
     }
 
