@@ -1,18 +1,27 @@
 import { NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url)
+    const statusFilter = searchParams.get("status")
+    
     const supabase = createAdminClient()
     
     // Fetch assessments with line item count
-    const { data: assessments, error } = await supabase
+    let query = supabase
       .from("assessments")
       .select(`
         *,
         assessment_line_items(count)
       `)
-      .order("created_at", { ascending: false })
+    
+    // Apply status filter if provided
+    if (statusFilter) {
+      query = query.eq("status", statusFilter)
+    }
+    
+    const { data: assessments, error } = await query.order("created_at", { ascending: false })
     
     if (error) {
       return NextResponse.json({ assessments: [], error: error.message }, { status: 200 })

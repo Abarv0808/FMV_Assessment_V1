@@ -330,3 +330,41 @@
 [02:46:08.297] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
 [02:46:57.395] Server  LOG      ✓ Compiled in 113ms
 [02:47:06.581] Server  LOG      ✓ Compiled in 83ms
+[02:53:04.557] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:53:04.562] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[02:53:04.562] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[02:53:04.562] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779883422} /_vercel/insights/view
+[02:53:05.014] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:53:07.022] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/archive color: rgb(120, 120, 120) color: inherit {"dp":"/archive","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/archive","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779885881} /_vercel/insights/view
+[02:53:08.669] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779887537} /_vercel/insights/view
+[02:53:09.003] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:53:09.436] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:53:09.550] Browser LOG     [v0] Assessments fetch result: 17 items, error: undefined
+[02:53:09.550] Browser LOG     [v0] Got 17 assessments from DB, mapping...
+[02:53:09.929] Browser LOG     [v0] Assessments fetch result: 17 items, error: undefined
+[02:53:09.929] Browser LOG     [v0] Got 17 assessments from DB, mapping...
+[02:53:12.641] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/assessments/96dfdb8f-cbd0-4110-953f-87ba8944fd2a color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/assessments/96dfdb8f-cbd0-4110-953f-87ba8944fd2a","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779891478} /_vercel/insights/view
+[02:53:13.113] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:53:13.342] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:53:13.350] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:53:13.478] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:53:13.763] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[02:53:13.763] Browser LOG     [v0] Has existing ai_matches: false
+[02:53:13.906] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:53:14.012] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:53:14.169] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[02:53:14.169] Browser LOG     [v0] Has existing ai_matches: false
+[02:53:16.411] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:53:16.813] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/archive color: rgb(120, 120, 120) color: inherit {"dp":"/archive","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/archive","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779895678} /_vercel/insights/view
+[02:53:20.395] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[02:53:20.395] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[02:53:20.395] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-79bpro68dkjvf09qvg39dhus.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778779899247} /_vercel/insights/view
+[02:53:21.129] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[02:53:21.249] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[02:53:21.655] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[02:53:21.777] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[02:53:59.487] Server  LOG      ✓ Compiled in 122ms
+[02:54:24.653] Server  LOG      ✓ Compiled in 89ms
+[02:54:33.119] Server  LOG      ✓ Compiled in 55ms
+[02:54:41.018] Server  LOG      ✓ Compiled in 59ms
+[02:54:48.655] Server  LOG      ✓ Compiled in 54ms

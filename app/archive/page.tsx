@@ -1,10 +1,9 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
 import { AppShell } from "@/components/app-shell"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -16,26 +15,36 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Search, Archive } from "lucide-react"
-import { mockAssessments } from "@/lib/mock-data"
-import { filterAssessmentsByUser } from "@/lib/assessment-utils"
+import { Search, Archive, Loader2 } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 
 export default function ArchivePage() {
   const router = useRouter()
   const { user } = useAuth()
   const [searchQuery, setSearchQuery] = useState("")
+  const [archivedAssessments, setArchivedAssessments] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
-  // Apply BU-based visibility, then filter to only ARCHIVED
-  const archivedAssessments = useMemo(() => {
-    const visible = filterAssessmentsByUser(mockAssessments, user)
-    return visible.filter((a) => a.status === "ARCHIVED")
-  }, [user])
+  // Fetch archived assessments from API
+  useEffect(() => {
+    async function fetchArchivedAssessments() {
+      try {
+        const response = await fetch("/api/assessments?status=ARCHIVED")
+        const data = await response.json()
+        setArchivedAssessments(data.assessments || [])
+      } catch (error) {
+        console.error("[v0] Error fetching archived assessments:", error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchArchivedAssessments()
+  }, [])
 
   const filteredAssessments = archivedAssessments.filter((assessment) => {
     const matchesSearch =
-      assessment.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      assessment.studyTrackingNumber.toLowerCase().includes(searchQuery.toLowerCase())
+      (assessment.name || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (assessment.study_tracking_number || "").toLowerCase().includes(searchQuery.toLowerCase())
     return matchesSearch
   })
 
@@ -69,7 +78,14 @@ export default function ArchivePage() {
         </Card>
 
         {/* Table */}
-        {filteredAssessments.length > 0 ? (
+        {isLoading ? (
+          <Card className="border-border/40">
+            <CardContent className="py-12 text-center">
+              <Loader2 className="h-8 w-8 animate-spin mx-auto text-muted-foreground" />
+              <p className="text-muted-foreground mt-2">Loading archived assessments...</p>
+            </CardContent>
+          </Card>
+        ) : filteredAssessments.length > 0 ? (
           <Card className="border-border/40">
             <CardContent className="p-0">
               <div className="border border-border/40 rounded-lg overflow-hidden">
@@ -93,17 +109,17 @@ export default function ArchivePage() {
                       >
                         <TableCell className="font-medium">{assessment.name}</TableCell>
                         <TableCell className="text-muted-foreground">
-                          {assessment.studyTrackingNumber}
+                          {assessment.study_tracking_number || "N/A"}
                         </TableCell>
-                        <TableCell>{assessment.businessUnit ?? "N/A"}</TableCell>
-                        <TableCell>{assessment.proposalCount}</TableCell>
+                        <TableCell>{assessment.business_unit ?? "N/A"}</TableCell>
+                        <TableCell>{assessment.line_items_count || 0}</TableCell>
                         <TableCell>
                           <Badge variant="outline" className="bg-muted text-muted-foreground border-border/40">
                             No Longer Required
                           </Badge>
                         </TableCell>
                         <TableCell className="text-right text-muted-foreground">
-                          {formatDistanceToNow(new Date(assessment.updatedAt), { addSuffix: true })}
+                          {formatDistanceToNow(new Date(assessment.updated_at || assessment.created_at), { addSuffix: true })}
                         </TableCell>
                       </TableRow>
                     ))}
