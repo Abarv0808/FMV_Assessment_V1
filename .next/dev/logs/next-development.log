@@ -1,85 +1,224 @@
-[00:00:00.901] Server  LOG      ✓ Ready in 550ms
-[00:00:14.468] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:14.468] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:00:14.468] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1777552725357} /_vercel/insights/view
-[00:15:14.169] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1777553625635} /_vercel/insights/view
-[00:15:16.865] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[00:15:17.538] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1777553629006} /_vercel/insights/view
-[00:15:17.545] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[00:15:18.465] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[00:15:18.705] Browser LOG     [v0] Assessments fetch result: 14 items, error: undefined
-[00:15:18.705] Browser LOG     [v0] Got 14 assessments from DB, mapping...
-[00:15:19.247] Server  LOG     [v0] Fetched 14 "assessments with counts"
-[00:15:19.461] Browser LOG     [v0] Assessments fetch result: 14 items, error: undefined
-[00:15:19.461] Browser LOG     [v0] Got 14 assessments from DB, mapping...
-[00:15:23.924] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/assessments/02cd901d-9e20-4be0-b862-a94c0125236f color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7d2230q3m1uezuhlm5yhodxt.vusercontent.net/assessments/02cd901d-9e20-4be0-b862-a94c0125236f","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1777553635391} /_vercel/insights/view
-[00:15:26.664] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[00:15:27.068] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[00:15:27.068] Browser LOG     [v0] Has existing ai_matches: true
-[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:15:27.068] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:15:27.104] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[00:15:27.321] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[00:15:27.321] Browser LOG     [v0] Has existing ai_matches: true
-[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:15:27.321] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[02:16:30.427] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
-[02:16:31.770] Browser LOG     [v0] Linked benchmark files for comparison: 69
-[02:16:33.302] Server  LOG     [v0] Run comparison API called (AI-powered)
-[02:16:33.304] Server  LOG     [v0] Assessment ID: "02cd901d-9e20-4be0-b862-a94c0125236f"
-[02:16:33.307] Server  LOG     [v0] Fetching line items...
-[02:16:33.693] Server  LOG     [v0] Line items found: 7 "Error:" undefined
-[02:16:33.694] Server  LOG     [v0] Fetching benchmark procedures...
-[02:16:33.694] Server  LOG     [v0] Filtering to selected benchmark files
-[02:16:34.350] Server  LOG     [v0] Benchmark procedures loaded: 1000
-[02:16:34.351] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
-[02:16:34.351] Server  LOG     [v0] Processing: "\"Hospital management fee: 3%....\""
-[02:16:37.284] Server  LOG     [v0] AI found 3 "matches"
-[02:16:37.285] Server  LOG     [v0]   Match 1: "Daily Facility Charge - Per Day" | Confidence: MEDIUM | AI: true
-[02:16:37.285] Server  LOG     [v0]   Match 2: "Physician: Family practice - Per Hour" | Confidence: LOW | AI: true
-[02:16:37.285] Server  LOG     [v0]   Match 3: "Study Coordinator, Simple (e.g. interim " | Confidence: LOW | AI: true
-[02:16:37.286] Server  LOG     [v0] Processing: "\"Tax: 12%...\""
-[02:16:42.794] Server  LOG     [v0] AI found 3 "matches"
-[02:16:42.795] Server  LOG     [v0]   Match 1: "Physician: Radiology - Per Hour" | Confidence: MEDIUM | AI: true
-[02:16:42.795] Server  LOG     [v0]   Match 2: "Study Coordinator, Simple (e.g. interim " | Confidence: MEDIUM | AI: true
-[02:16:42.795] Server  LOG     [v0]   Match 3: "Daily Facility Charge - Per Day" | Confidence: LOW | AI: true
-[02:16:42.795] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\""
-[02:16:45.765] Server  LOG     [v0] AI found 3 "matches"
-[02:16:45.765] Server  LOG     [v0]   Match 1: "Tuberculosis test, cell mediated immunit" | Confidence: HIGH | AI: true
-[02:16:45.765] Server  LOG     [v0]   Match 2: "Clinical pathology consultation; compreh" | Confidence: MEDIUM | AI: true
-[02:16:45.766] Server  LOG     [v0]   Match 3: "Clinical pathology consultation; limited" | Confidence: LOW | AI: true
-[02:16:45.766] Server  LOG     [v0] Processing: "\"250RMB/hour*2 hours*4 visits...\""
-[02:16:49.712] Server  LOG     [v0] AI found 3 "matches"
-[02:16:49.713] Server  LOG     [v0]   Match 1: "Patient Reimbursement, Expenses, Patient" | Confidence: HIGH | AI: true
-[02:16:49.713] Server  LOG     [v0]   Match 2: "Patient Reimbursement, Stipend - Per Vis" | Confidence: HIGH | AI: true
-[02:16:49.713] Server  LOG     [v0]   Match 3: "Study Coordinator, Simple (e.g. interim " | Confidence: MEDIUM | AI: true
-[02:16:49.713] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\""
-[02:16:53.607] Server  LOG     [v0] AI found 3 "matches"
-[02:16:53.607] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
-[02:16:53.607] Server  LOG     [v0]   Match 2: "Study Coordinator, Simple (e.g. interim " | Confidence: MEDIUM | AI: true
-[02:16:53.608] Server  LOG     [v0]   Match 3: "Study Coordinator - Per Hour" | Confidence: LOW | AI: true
-[02:16:53.612] Server  LOG     [v0] Processing: "\"Clinical research coordinator. The HCP is a hemato...\""
-[02:16:57.157] Server  LOG     [v0] AI found 3 "matches"
-[02:16:57.158] Server  LOG     [v0]   Match 1: "Study Coordinator, Simple (e.g. interim " | Confidence: HIGH | AI: true
-[02:16:57.158] Server  LOG     [v0]   Match 2: "Study Coordinator, Complex (e.g. initial" | Confidence: HIGH | AI: true
-[02:16:57.158] Server  LOG     [v0]   Match 3: "Study Coordinator - Per Hour" | Confidence: MEDIUM | AI: true
-[02:16:57.158] Server  LOG     [v0] Processing: "\"Local Ethics Committee fee...\""
-[02:17:02.577] Server  LOG     [v0] AI found 3 "matches"
-[02:17:02.578] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: MEDIUM | AI: true
-[02:17:02.578] Server  LOG     [v0]   Match 2: "Study Coordinator, Interactive Voice Res" | Confidence: MEDIUM | AI: true
-[02:17:02.578] Server  LOG     [v0]   Match 3: "Regulatory Affairs Consultant -  Per hou" | Confidence: LOW | AI: true
-[02:17:02.578] Server  LOG     [v0] Updating 7 "comparison records"
-[02:17:05.415] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 7 AI matches, 0 trigram matches","results":[{"bestMatch":{"benchmarkId":"0b6ed22b-aaf2-47ca-8337-c2794dc41233","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":0,"p25":66,"p50":91,"p75":137,"p90":191,"procedureName":"Daily Facility Charge - Per Day","reasoning":"The 'Daily Facility Charge - Per Day' aligns with the concept of a management fee as it encompasses overhead costs of facility management, although it is not exactly the same.","similarity":0.7},"flag":"YELLOW","lineItemId":"375a0da2-d339-40a8-a607-9da404cf2fc3","matchCount":3,"matches":[{"benchmarkId":"0b6ed22b-aaf2-47ca-8337-c2794dc41233","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":0,"p25":66,"p50":91,"p75":137,"p90":191,"procedureName":"Daily Facility Charge - Per Day","reasoning":"The 'Daily Facility Charge - Per Day' aligns with the concept of a management fee as it encompasses overhead costs of facility management, although it is not exactly the same.","similarity":0.7},{"benchmarkId":"c982670c-6cd8-4793-8a2f-a4f821f9ea82","category":"Non-Procedures","confidence":"LOW","country":"Argentina","isAIMatch":true,"p100":0,"p25":73,"p50":91,"p75":118,"p90":145,"procedureName":"Physician: Family practice - Per Hour","reasoning":"The 'Physician: Family practice - Per Hour' could be related to hospital management as a type of overhead in cost calculations, but it is not a direct match.","similarity":0.5},{"benchmarkId":"186bc1c1-4de1-4992-b231-3bf918d0eeda","category":"Non-Procedures","confidence":"LOW","country":"Argentina","isAIMatch":true,"p100":275,"p25":91,"p50":102,"p75":120,"p90":185,"procedureName":"Study Coordinator, Simple (e.g. interim visits) - Per Visit","reasoning":"The 'Study Coordinator, Simple (e.g. interim visits) - Per Visit' may relate to management in context, though it primarily describes a personnel role rather than a fee.","similarity":0.5}]},{"bestMatch":{"benchmarkId":"6e9dfa5f-e3d3-45b0-a27d-a4c58e326974","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":0,"p25":114,"p50":166,"p75":243,"p90":343,"procedureName":"Physician: Radiology - Per Hour","reasoning":"Tax may be considered a cost associated with service provision; aligning it with non-procedure costs such as those related to physician time.","similarity":0.7},"flag":"YELLOW","lineItemId":"d1706004-3a1d-4b69-a321-f9a194a977d1","matchCount":3,"matches":[{"benchmarkId":"6e9dfa5f-e3d3-45b0-a27d-a4c58e326974","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":0,"p25":114,"p50":166,"p75":243,"p90":343,"procedureName":"Physician: Radiology - Per Hour","reasoning":"Tax may be considered a cost associated with service provision; aligning it with non-procedure costs such as those related to physician time.","similarity":0.7},{"benchmarkId":"186bc1c1-4de1-4992-b231-3bf918d0eeda","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":275,"p25":91,"p50":102,"p75":120,"p90":185,"procedureName":"Study Coordinator, Simple (e.g. interim visits) - Per Visit","reasoning":"Administrative costs, while not a direct match, relate to non-procedure expenses that could encompass tax costs.","similarity":0.7},{"benchmarkId":"0b6ed22b-aaf2-47ca-8337-c2794dc41233","category":"Non-Procedures","confidence":"LOW","country":"Argentina","isAIMatch":true,"p100":0,"p25":66,"p50":91,"p75":137,"p90":191,"procedureName":"Daily Facility Charge - Per Day","reasoning":"Facility charges may indirectly relate to overall costs including taxes, but are not a direct correlation.","similarity":0.5}]},{"bestMatch":{"benchmarkId":"ef06e9c9-d90f-475b-b67f-f901a879138a","category":"Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":74,"p25":31,"p50":42,"p75":45,"p90":73,"procedureName":"Tuberculosis test, cell mediated immunity measurement of gamma interferon antigen response (e.g. QFTB: QuantiFeron-TB Gold test)","reasoning":"The cost item for CMV-specific T cell tests aligns with the tuberculosis test, both being specialized tests that measure immune responses.","similarity":0.9},"flag":"GREEN","lineItemId":"ef0109ec-c522-4815-ab4e-d47f29e6f4ab","matchCount":3,"matches":[{"benchmarkId":"ef06e9c9-d90f-475b-b67f-f901a879138a","category":"Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":74,"p25":31,"p50":42,"p75":45,"p90":73,"procedureName":"Tuberculosis test, cell mediated immunity measurement of gamma interferon antigen response (e.g. QFTB: QuantiFeron-TB Gold test)","reasoning":"The cost item for CMV-specific T cell tests aligns with the tuberculosis test, both being specialized tests that measure immune responses.","similarity":0.9},{"benchmarkId":"546e824d-7975-4afb-897d-5e5db268d97d","category":"Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":0,"p25":123,"p50":161,"p75":211,"p90":268,"procedureName":"Clinical pathology consultation; comprehensive, for a complex diagnostic problem, with review of patient's history and medical records","reasoning":"Clinical pathology consultation relates to the analysis of specific tests and results, similar to the CMV tests.","similarity":0.7},{"benchmarkId":"28eed320-5749-4d8a-8a82-ab8332ea7cc5","category":"Procedures","confidence":"LOW","country":"Argentina","isAIMatch":true,"p100":0,"p25":51,"p50":66,"p75":85,"p90":109,"procedureName":"Clinical pathology consultation; limited, without review of patient's history and medical records","reasoning":"Limited clinical pathology consultation might be relevant but is less directly associated with the testing aspect compared to others.","similarity":0.5}]},{"bestMatch":{"benchmarkId":"01fe129d-bd63-43ef-941b-b31be870929e","category":"Non-Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":78,"p25":50,"p50":51,"p75":55,"p90":72,"procedureName":"Patient Reimbursement, Expenses, Patient Travel - Per Visit","reasoning":"The cost item 'Patient/subjects compensation' directly aligns with 'Patient Reimbursement, Expenses, Patient Travel - Per Visit', as both involve compensating participants for their involvement in the study.","similarity":0.9},"flag":"GREEN","lineItemId":"102f6b41-544c-4686-b34a-15a6f6259ee5","matchCount":3,"matches":[{"benchmarkId":"01fe129d-bd63-43ef-941b-b31be870929e","category":"Non-Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":78,"p25":50,"p50":51,"p75":55,"p90":72,"procedureName":"Patient Reimbursement, Expenses, Patient Travel - Per Visit","reasoning":"The cost item 'Patient/subjects compensation' directly aligns with 'Patient Reimbursement, Expenses, Patient Travel - Per Visit', as both involve compensating participants for their involvement in the study.","similarity":0.9},{"benchmarkId":"90a52970-0676-4e94-aa26-935077d0062d","category":"Non-Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":116,"p25":50,"p50":51,"p75":52,"p90":54,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"'Patient Reimbursement, Stipend - Per Visit' closely matches the vendor cost item as it pertains to compensating participants for their time and participation in the study.","similarity":0.9},{"benchmarkId":"186bc1c1-4de1-4992-b231-3bf918d0eeda","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":275,"p25":91,"p50":102,"p75":120,"p90":185,"procedureName":"Study Coordinator, Simple (e.g. interim visits) - Per Visit","reasoning":"While 'Study Coordinator, Simple (e.g. interim visits) - Per Visit' does not directly relate to patient compensation, coordinating study visits often involves compensating participants, thus a related category.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"8c91ed7c-44db-4e69-bd73-b5c96f7a0722","category":"Non-Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":0,"p25":109,"p50":147,"p75":199,"p90":262,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item involves supervision and quality control in a project related to hematology, which aligns well with the expertise described in 'Physician: Hematology - Per Hour', indicating a direct correlation in service type.","similarity":0.9},"flag":"GREEN","lineItemId":"5343698d-7b07-42a2-a5b2-e2915a5647b7","matchCount":3,"matches":[{"benchmarkId":"8c91ed7c-44db-4e69-bd73-b5c96f7a0722","category":"Non-Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":0,"p25":109,"p50":147,"p75":199,"p90":262,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item involves supervision and quality control in a project related to hematology, which aligns well with the expertise described in 'Physician: Hematology - Per Hour', indicating a direct correlation in service type.","similarity":0.9},{"benchmarkId":"186bc1c1-4de1-4992-b231-3bf918d0eeda","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":275,"p25":91,"p50":102,"p75":120,"p90":185,"procedureName":"Study Coordinator, Simple (e.g. interim visits) - Per Visit","reasoning":"The role of a study coordinator (benchmark index 37) aligns with project supervision and quality control, although it is more general. The overlap in overseeing research projects gives it a relevant, albeit broader, connection to the vendor cost item.","similarity":0.7},{"benchmarkId":"183004c1-9574-432a-bc0f-76cb49802d47","category":"Non-Procedures","confidence":"LOW","country":"Argentina","isAIMatch":true,"p100":99,"p25":39,"p50":41,"p75":61,"p90":98,"procedureName":"Study Coordinator - Per Hour","reasoning":"'Study Coordinator - Per Hour' involves a similar type of personnel cost but lacks specific alignment to hematology. It could be a possible match, but it is not as closely aligned as the other two.","similarity":0.5}]},{"bestMatch":{"benchmarkId":"186bc1c1-4de1-4992-b231-3bf918d0eeda","category":"Non-Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":275,"p25":91,"p50":102,"p75":120,"p90":185,"procedureName":"Study Coordinator, Simple (e.g. interim visits) - Per Visit","reasoning":"The vendor cost item describes a 'Clinical research coordinator', which directly aligns with 'Study Coordinator, Simple (e.g., interim visits) - Per Visit' due to the similar role in coordinating clinical trials.","similarity":0.9},"flag":"GREEN","lineItemId":"fd2d5553-24ea-45fc-bb7f-09f9312e267d","matchCount":3,"matches":[{"benchmarkId":"186bc1c1-4de1-4992-b231-3bf918d0eeda","category":"Non-Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":275,"p25":91,"p50":102,"p75":120,"p90":185,"procedureName":"Study Coordinator, Simple (e.g. interim visits) - Per Visit","reasoning":"The vendor cost item describes a 'Clinical research coordinator', which directly aligns with 'Study Coordinator, Simple (e.g., interim visits) - Per Visit' due to the similar role in coordinating clinical trials.","similarity":0.9},{"benchmarkId":"f5e33b10-afd3-42ed-af25-374038e0ba9f","category":"Non-Procedures","confidence":"HIGH","country":"Argentina","isAIMatch":true,"p100":323,"p25":105,"p50":118,"p75":140,"p90":218,"procedureName":"Study Coordinator, Complex (e.g. initial visit, final visit) - Per Visit","reasoning":"The reference to personnel in the vendor cost item is matched with 'Study Coordinator, Complex (e.g., initial visit, final visit) - Per Visit', further emphasizing the clinical research coordination aspect.","similarity":0.9},{"benchmarkId":"183004c1-9574-432a-bc0f-76cb49802d47","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":99,"p25":39,"p50":41,"p75":61,"p90":98,"procedureName":"Study Coordinator - Per Hour","reasoning":"The cost item for 'Clinical research coordinator' connects to 'Study Coordinator - Per Hour', reflecting a similar managerial role in overseeing clinical trial activities, although the context is slightly broader.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"183004c1-9574-432a-bc0f-76cb49802d47","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":99,"p25":39,"p50":41,"p75":61,"p90":98,"procedureName":"Study Coordinator - Per Hour","reasoning":"The task of coordinating ethics approval involves administrative work, similar to the responsibilities of a Study Coordinator.","similarity":0.7},"flag":"YELLOW","lineItemId":"5afdbf21-9f34-4198-a216-f651fc652101","matchCount":3,"matches":[{"benchmarkId":"183004c1-9574-432a-bc0f-76cb49802d47","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":99,"p25":39,"p50":41,"p75":61,"p90":98,"procedureName":"Study Coordinator - Per Hour","reasoning":"The task of coordinating ethics approval involves administrative work, similar to the responsibilities of a Study Coordinator.","similarity":0.7},{"benchmarkId":"a3f10879-816a-41b9-94c6-d514c42fa901","category":"Non-Procedures","confidence":"MEDIUM","country":"Argentina","isAIMatch":true,"p100":0,"p25":29,"p50":33,"p75":48,"p90":72,"procedureName":"Study Coordinator, Interactive Voice Response System (IVRS) - Per Hour","reasoning":"A role involving regulatory affairs can be aligned with ethics committee submission, as both ensure compliance with ethical standards.","similarity":0.7},{"benchmarkId":"4a19dc80-6d0c-4b8c-8509-21e627878619","category":"Non-Procedures","confidence":"LOW","country":"Argentina","isAIMatch":true,"p100":0,"p25":200,"p50":254,"p75":325,"p90":404,"procedureName":"Regulatory Affairs Consultant -  Per hour","reasoning":"While this category involves consulting on regulatory affairs, it is not directly aligned with ethics committee fees.","similarity":0.5}]}],"success":true}
-[02:17:05.415] Browser LOG     [v0] Refreshing comparisons data...
-[02:17:05.642] Browser LOG     [v0] Refresh result - comparisons: 7 lineItems: 7
-[02:17:05.642] Browser LOG     [v0] Mapped comparisons: 7 First item matches: 3
+[00:00:01.068] Server  LOG      ✓ Ready in 693ms
+[00:00:10.031] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:10.031] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:00:10.031] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755340765} /_vercel/insights/view
+[00:00:31.899] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755362633} /_vercel/insights/view
+[00:00:33.114] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:00:33.302] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:12.500] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755583226} /_vercel/insights/view
+[00:04:13.003] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:13.246] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:13.249] Browser LOG     [v0] Assessments fetch result: 0 items, error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:13.249] Browser LOG     [v0] No assessments or error, using mock data
+[00:04:13.385] Browser LOG     [v0] Assessments fetch result: 0 items, error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:13.385] Browser LOG     [v0] No assessments or error, using mock data
+[00:04:15.777] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/1 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/1","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755586508} /_vercel/insights/view
+[00:04:30.315] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:30.319] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755601001} /_vercel/insights/view
+[00:04:30.480] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:32.939] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:32.942] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755603639} /_vercel/insights/view
+[00:04:33.084] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:33.139] Browser LOG     [v0] Assessments fetch result: 0 items, error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:33.139] Browser LOG     [v0] No assessments or error, using mock data
+[00:04:33.268] Browser LOG     [v0] Assessments fetch result: 0 items, error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:04:33.268] Browser LOG     [v0] No assessments or error, using mock data
+[00:04:49.410] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755620134} /_vercel/insights/view
+[00:04:52.649] Browser ERROR   [v0] Fetch error: {}
+[00:04:52.649] Browser ERROR   [v0] Fetch error: {}
+[00:04:52.649] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755623353} /_vercel/insights/view
+[00:05:01.700] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:05:01.703] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755632371} /_vercel/insights/view
+[00:05:01.875] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:05:01.882] Browser LOG     [v0] Assessments fetch result: 0 items, error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:05:01.882] Browser LOG     [v0] No assessments or error, using mock data
+[00:05:02.110] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:05:02.112] Browser LOG     [v0] Assessments fetch result: 0 items, error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:05:02.112] Browser LOG     [v0] No assessments or error, using mock data
+[00:05:02.112] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755632818} /_vercel/insights/view
+[00:05:02.263] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:05:19.709] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755650437} /_vercel/insights/view
+[00:08:26.271] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:08:26.271] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/new","route":"/assessments/new"}
+[00:08:26.271] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778755836914} /_vercel/insights/view
+[00:11:51.954] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:11:51.954] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/new","route":"/assessments/new"}
+[00:11:51.954] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756042672} /_vercel/insights/view
+[00:11:53.702] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756044419} /_vercel/insights/view
+[00:11:54.076] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:11:54.298] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:14:23.386] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:14:23.542] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:14:23.614] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:14:23.614] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:14:23.614] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756194262} /_vercel/insights/view
+[00:14:26.398] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:14:26.398] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:14:26.398] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756194426} /_vercel/insights/view
+[00:14:27.067] Browser ERROR   [v0] Fetch error: {}
+[00:14:27.067] Browser ERROR   [v0] Fetch error: {}
+[00:14:27.067] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756197758} /_vercel/insights/view
+[00:14:32.837] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756203551} /_vercel/insights/view
+[00:15:03.612] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:03.620] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756234290} /_vercel/insights/view
+[00:15:03.895] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:13.389] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756244087} /_vercel/insights/view
+[00:15:23.957] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:23.959] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756254622} /_vercel/insights/view
+[00:15:24.142] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:26.346] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756257059} /_vercel/insights/view
+[00:15:26.655] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:26.811] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:26.847] Browser LOG     [v0] Assessments fetch result: 0 items, error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:26.847] Browser LOG     [v0] No assessments or error, using mock data
+[00:15:26.977] Browser LOG     [v0] Assessments fetch result: 0 items, error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:26.977] Browser LOG     [v0] No assessments or error, using mock data
+[00:15:35.299] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/1 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/1","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756266011} /_vercel/insights/view
+[00:15:51.990] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:51.993] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756282652} /_vercel/insights/view
+[00:15:52.162] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:15:52.711] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756283422} /_vercel/insights/view
+[00:16:06.367] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:16:06.520] Server  ERROR   [v0] Exception fetching assessments: Error: Your project's URL and Key are required to create a Supabase client!
+
+Check your Supabase project's API settings to find these values
+
+https://supabase.com/dashboard/project/_/settings/api
+[00:16:07.341] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:16:07.341] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:16:07.341] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756296980} /_vercel/insights/view
+[00:16:14.860] Browser ERROR   [v0] Fetch error: {}
+[00:16:14.860] Browser ERROR   [v0] Fetch error: {}
+[00:16:14.860] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778756305527} /_vercel/insights/view
