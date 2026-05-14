@@ -1,11 +1,18 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase/server"
+import { createAdminClient } from "@/lib/supabase/server"
 
 export async function GET() {
   try {
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     
     // Fetch assessments with line item count
+    // First try a simple query to see raw count
+    const { count, error: countError } = await supabase
+      .from("assessments")
+      .select("*", { count: "exact", head: true })
+    
+    console.log("[v0] Raw assessments count:", count, "Error:", countError?.message || "none")
+    
     const { data: assessments, error } = await supabase
       .from("assessments")
       .select(`
@@ -14,8 +21,10 @@ export async function GET() {
       `)
       .order("created_at", { ascending: false })
     
+    console.log("[v0] Assessments query result - data length:", assessments?.length, "error:", error?.message || "none")
+    
     if (error) {
-      console.log("[v0] Error fetching assessments:", error.message)
+      console.log("[v0] Error fetching assessments:", error.message, error.code, error.details)
       return NextResponse.json({ assessments: [], error: error.message }, { status: 200 })
     }
     
