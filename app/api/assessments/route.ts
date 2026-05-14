@@ -6,13 +6,6 @@ export async function GET() {
     const supabase = createAdminClient()
     
     // Fetch assessments with line item count
-    // First try a simple query to see raw count
-    const { count, error: countError } = await supabase
-      .from("assessments")
-      .select("*", { count: "exact", head: true })
-    
-    console.log("[v0] Raw assessments count:", count, "Error:", countError?.message || "none")
-    
     const { data: assessments, error } = await supabase
       .from("assessments")
       .select(`
@@ -21,10 +14,7 @@ export async function GET() {
       `)
       .order("created_at", { ascending: false })
     
-    console.log("[v0] Assessments query result - data length:", assessments?.length, "error:", error?.message || "none")
-    
     if (error) {
-      console.log("[v0] Error fetching assessments:", error.message, error.code, error.details)
       return NextResponse.json({ assessments: [], error: error.message }, { status: 200 })
     }
     
@@ -52,8 +42,6 @@ export async function GET() {
       line_items_count: a.assessment_line_items?.[0]?.count || 0,
       flagged_count: flaggedCounts[a.id] || 0
     })) || []
-    
-    console.log("[v0] Fetched", mappedAssessments.length, "assessments with counts")
     
     return NextResponse.json({ assessments: mappedAssessments })
   } catch (err: any) {
