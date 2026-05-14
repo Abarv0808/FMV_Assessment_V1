@@ -32,3 +32,6 @@
 [00:06:31.899] Server  LOG     [v0] createAdminClient using: "service_role"
 [00:06:32.265] Server  ERROR   [v0] Error creating assessment: {}
 [00:06:32.539] Browser ERROR   [v0] Submit error: {}
+[00:07:52.581] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:07:52.840] Server  ERROR   [v0] Error creating assessment: {}
+[00:07:52.979] Browser ERROR   [v0] Submit error: {}
