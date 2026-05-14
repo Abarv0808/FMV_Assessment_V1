@@ -646,3 +646,148 @@
 [01:38:35.587] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [01:38:35.587] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778767946799} /_vercel/insights/view
 [01:41:12.953] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778768104162} /_vercel/insights/view
+[01:42:00.523] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:00.573] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:42:00.573] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:42:00.573] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778768151853} /_vercel/insights/view
+[01:42:02.300] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778768153508} /_vercel/insights/view
+[01:42:25.304] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:26.393] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:26.402] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[01:42:26.402] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
+[01:42:26.402] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[01:42:26.402] Browser LOG     [v0] Sheet data has 131 rows
+[01:42:26.402] Browser LOG     [v0] First 5 rows of data:
+[01:42:26.402] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
+[01:42:26.402] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
+[01:42:26.402] Browser LOG     [v0] Row 2 : [null,"Bulgaria","Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
+[01:42:26.402] Browser LOG     [v0] Row 3 : [null,"Australia","Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
+[01:42:26.402] Browser LOG     [v0] Row 4 : [null,"Austria","Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
+[01:42:26.402] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
+[01:42:26.402] Browser LOG     [v0] Row 0 matched 0 columns: []
+[01:42:26.402] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
+[01:42:26.402] Browser LOG     [v0] Matched column 1 -> site via header: Site
+[01:42:26.402] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
+[01:42:26.402] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
+[01:42:26.402] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
+[01:42:26.402] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
+[01:42:26.402] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
+[01:42:26.402] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
+[01:42:26.402] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
+[01:42:26.402] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
+[01:42:26.402] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
+[01:42:26.402] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
+[01:42:26.402] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
+[01:42:26.402] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
+[01:42:26.402] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
+[01:42:26.402] Browser LOG     [v0] Extracted country from Site column: Bulgaria
+[01:42:26.402] Browser LOG     [v0] Stopping at row 9 - Description is empty
+[01:42:26.402] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
+[01:42:26.402] Browser LOG     [v0] Found 7 line items
+[01:42:26.402] Browser LOG     [v0] Extracted country from Site column: Bulgaria
+[01:42:26.402] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"88cf1f38-620d-4227-8b95-13f00ce18deb","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"Accepted","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1778768177606-3rftn0rct","investigatorResponses":[],"numberOfUnits":160,"site":"Bulgaria","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
+[01:42:26.667] Server  LOG     [v0] Store Items API called
+[01:42:26.668] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:26.669] Server  LOG     [v0] Storing 7 "line items for assessment" "88cf1f38-620d-4227-8b95-13f00ce18deb"
+[01:42:26.685] Browser LOG     [v0] Storing 7 line items via API
+[01:42:26.685] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"Bulgaria","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"Australia","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
+[01:42:26.899] Server  LOG     [v0] Created comparison for line item: "6f2597b2-e279-4ff0-bd57-8730e1fe8efc"
+[01:42:27.271] Server  LOG     [v0] Created comparison for line item: "5fb3b116-7374-41ac-93a6-44ffc758ebe0"
+[01:42:27.448] Server  LOG     [v0] Created comparison for line item: "3f1c5cc2-4adb-4886-aeb1-27c2b0c4ec20"
+[01:42:27.756] Server  LOG     [v0] Created comparison for line item: "bb76448b-c31d-4647-b93f-0005241b7f57"
+[01:42:27.927] Server  LOG     [v0] Created comparison for line item: "ebce6098-f0e8-4b99-91d9-ebcaa7c568cf"
+[01:42:28.100] Server  LOG     [v0] Created comparison for line item: "9f08df34-5de9-4c0f-aeba-a50d6366e177"
+[01:42:28.293] Server  LOG     [v0] Created comparison for line item: "cacd98df-816c-4b0f-88a0-008cc550f566"
+[01:42:28.293] Server  LOG     [v0] Inserted 7 "line items"
+[01:42:28.763] Browser LOG     [v0] Successfully stored 7 line items
+[01:42:28.946] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/88cf1f38-620d-4227-8b95-13f00ce18deb color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-8aug5qd81lb1518b5gtwmmrd.vusercontent.net/assessments/88cf1f38-620d-4227-8b95-13f00ce18deb","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1778768180155} /_vercel/insights/view
+[01:42:29.281] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:29.581] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:29.589] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:29.723] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[01:42:29.874] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:29.989] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[01:42:30.026] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[01:42:30.026] Browser LOG     [v0] Has existing ai_matches: false
+[01:42:30.156] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[01:42:30.156] Browser LOG     [v0] Has existing ai_matches: false
+[01:42:32.332] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[01:42:32.691] Server  LOG     [v0] Run comparison API called (AI-powered)
+[01:42:32.692] Server  LOG     [v0] Assessment ID: "88cf1f38-620d-4227-8b95-13f00ce18deb"
+[01:42:32.693] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:32.694] Server  LOG     [v0] Fetching line items...
+[01:42:32.696] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[01:42:32.789] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[01:42:32.790] Server  LOG     [v0] Fetching benchmark procedures...
+[01:42:32.790] Server  LOG     [v0] DEBUG - lineItems[0]: "{\"id\":\"6f2597b2-e279-4ff0-bd57-8730e1fe8efc\",\"procedure_name\":\"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person|||{\\\"numberOfUnit\\\":160,\\\"unitPrice\\\":1000,\\\"unitType\\\":\\\"Unit cost\\\",\\\"costCategory\\\":\\\"Other (costs that do not fit in any other category)\\\"}\",\"country\":\"Bulgaria\",\"vendor_cost\":160000,\"currency\":\"CNY/RMB\"}"
+[01:42:32.791] Server  LOG     [v0] Line item countries extracted: "Bulgaria, Australia, Austria, Belgium, Canada, China"
+[01:42:32.955] Server  LOG     [v0] Total benchmark_files: 1000 "Error:" "none"
+[01:42:32.957] Server  LOG     [v0] Filtering to 88 "benchmark files for countries:" "China, Australia, Austria, Belgium, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium, Bulgaria, Canada, China, Australia, Austria, Belgium"
+[01:42:33.317] Server  LOG     [v0] Benchmark procedures loaded: 1000 "from" 3 "countries"
+[01:42:33.317] Server  LOG     [v0] Available countries: "Canada, China, Australia" ""
+[01:42:33.318] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[01:42:33.318] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\"" "Country:" "Bulgaria"
+[01:42:33.319] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Bulgaria"
+[01:42:33.319] Server  LOG     [v0] No country-specific benchmarks found, using all benchmarks
+[01:42:33.479] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[01:42:33.479] Server  LOG     [v0] Using trigram fallback for: "The cost for CMV-specific T ce" "Country:" "Bulgaria"
+[01:42:33.511] Server  LOG     [v0] Processing: "\"250RMB/hour*2 hours*4 visits...\"" "Country:" "Australia"
+[01:42:33.512] Server  LOG     [v0] Filtered to 379 "benchmarks for country:" "Australia"
+[01:42:33.665] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[01:42:33.666] Server  LOG     [v0] Using trigram fallback for: "250RMB/hour*2 hours*4 visits" "Country:" "Australia"
+[01:42:33.671] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria"
+[01:42:33.672] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Austria"
+[01:42:33.672] Server  LOG     [v0] No country-specific benchmarks found, using all benchmarks
+[01:42:33.863] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[01:42:33.864] Server  LOG     [v0] Using trigram fallback for: "Project supervision and qualit" "Country:" "Austria"
+[01:42:33.879] Server  LOG     [v0] Processing: "\"Clinical research coordinator. The HCP is a hemato...\"" "Country:" "Australia"
+[01:42:33.880] Server  LOG     [v0] Filtered to 379 "benchmarks for country:" "Australia"
+[01:42:34.049] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[01:42:34.049] Server  LOG     [v0] Using trigram fallback for: "Clinical research coordinator." "Country:" "Australia"
+[01:42:34.055] Server  LOG     [v0] Processing: "\"Local Ethics Committee fee...\"" "Country:" "Belgium"
+[01:42:34.055] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Belgium"
+[01:42:34.055] Server  LOG     [v0] No country-specific benchmarks found, using all benchmarks
+[01:42:34.222] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[01:42:34.222] Server  LOG     [v0] Using trigram fallback for: "Local Ethics Committee fee" "Country:" "Belgium"
+[01:42:34.232] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[01:42:34.232] Server  LOG     [v0]   Match 2: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[01:42:34.232] Server  LOG     [v0]   Match 3: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[01:42:34.233] Server  LOG     [v0] Processing: "\"Hospital management fee: 3%....\"" "Country:" "Canada"
+[01:42:34.233] Server  LOG     [v0] Filtered to 207 "benchmarks for country:" "Canada"
+[01:42:34.307] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[01:42:34.307] Server  LOG     [v0] Using trigram fallback for: "Hospital management fee: 3%." "Country:" "Canada"
+[01:42:34.310] Server  LOG     [v0]   Match 1: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[01:42:34.310] Server  LOG     [v0]   Match 2: "IRB Amendment Fee" | Confidence: LOW | AI: false
+[01:42:34.310] Server  LOG     [v0]   Match 3: "Medical Monitoring by Physician; Medical" | Confidence: LOW | AI: false
+[01:42:34.310] Server  LOG     [v0] Processing: "\"Tax: 12%...\"" "Country:" "China"
+[01:42:34.311] Server  LOG     [v0] Filtered to 414 "benchmarks for country:" "China"
+[01:42:34.378] Server  LOG     [v0] AI matching error: "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits."
+[01:42:34.379] Server  LOG     [v0] Using trigram fallback for: "Tax: 12%" "Country:" "China"
+[01:42:34.382] Server  LOG     [v0] Updating 7 "comparison records"
+[01:42:34.382] Server  LOG     [v0] Updating line_item_id: "6f2597b2-e279-4ff0-bd57-8730e1fe8efc" "with" 0 "matches"
+[01:42:34.491] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:42:34.492] Server  LOG     [v0] Updating line_item_id: "5fb3b116-7374-41ac-93a6-44ffc758ebe0" "with" 0 "matches"
+[01:42:34.915] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:42:34.915] Server  LOG     [v0] Updating line_item_id: "3f1c5cc2-4adb-4886-aeb1-27c2b0c4ec20" "with" 0 "matches"
+[01:42:35.010] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:42:35.010] Server  LOG     [v0] Updating line_item_id: "bb76448b-c31d-4647-b93f-0005241b7f57" "with" 0 "matches"
+[01:42:35.094] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:42:35.095] Server  LOG     [v0] Updating line_item_id: "ebce6098-f0e8-4b99-91d9-ebcaa7c568cf" "with" 3 "matches"
+[01:42:35.186] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:42:35.187] Server  LOG     [v0] Updating line_item_id: "9f08df34-5de9-4c0f-aeba-a50d6366e177" "with" 3 "matches"
+[01:42:35.268] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:42:35.269] Server  LOG     [v0] Updating line_item_id: "cacd98df-816c-4b0f-88a0-008cc550f566" "with" 0 "matches"
+[01:42:35.375] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:42:35.564] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:42:35.583] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 0 AI matches, 2 trigram matches","results":[{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"6f2597b2-e279-4ff0-bd57-8730e1fe8efc","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"5fb3b116-7374-41ac-93a6-44ffc758ebe0","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"3f1c5cc2-4adb-4886-aeb1-27c2b0c4ec20","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"bb76448b-c31d-4647-b93f-0005241b7f57","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"6f1a4d9d-dbcd-4a3a-86b7-1a0a54cecbb3","category":"Site Costs","confidence":"HIGH","country":"Canada","isAIMatch":false,"p100":9968,"p25":3596,"p50":4356,"p75":4683,"p90":5137,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},"flag":"GREEN","lineItemId":"ebce6098-f0e8-4b99-91d9-ebcaa7c568cf","matchCount":3,"matches":[{"benchmarkId":"6f1a4d9d-dbcd-4a3a-86b7-1a0a54cecbb3","category":"Site Costs","confidence":"HIGH","country":"Canada","isAIMatch":false,"p100":9968,"p25":3596,"p50":4356,"p75":4683,"p90":5137,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},{"benchmarkId":"a551dff0-11bf-4ca7-a060-eea583da5520","category":"Site Costs","confidence":"HIGH","country":"China","isAIMatch":false,"p100":44941,"p25":9799,"p50":13169,"p75":23375,"p90":39160,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},{"benchmarkId":"4487c967-1fe3-43fc-a226-da71c35e703a","category":"Site Costs","confidence":"HIGH","country":"Australia","isAIMatch":false,"p100":16539,"p25":3572,"p50":5613,"p75":6762,"p90":7863,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916}]},{"bestMatch":{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},"flag":"YELLOW","lineItemId":"9f08df34-5de9-4c0f-aeba-a50d6366e177","matchCount":3,"matches":[{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"41c54af9-23f7-4bd2-9143-f32fc2bd09aa","category":"Site Costs","confidence":"LOW","country":"Canada","isAIMatch":false,"p100":2010,"p25":513,"p50":587,"p75":668,"p90":846,"procedureName":"IRB Amendment Fee","reasoning":"Matched by text similarity","similarity":0.3771236166328254},{"benchmarkId":"3fd98f6b-2f15-4fcd-a57e-d92ef5825453","category":"Site Costs","confidence":"LOW","country":"Canada","isAIMatch":false,"p100":0,"p25":370,"p50":420,"p75":502,"p90":702,"procedureName":"Medical Monitoring by Physician; Medical Management","reasoning":"Matched by text similarity","similarity":0.3748170285326546}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"cacd98df-816c-4b0f-88a0-008cc550f566","matchCount":0,"matches":[]}],"success":true}
+[01:42:35.583] Browser LOG     [v0] Refreshing comparisons data via API...
+[01:42:35.674] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[01:42:35.890] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[01:42:35.890] Browser LOG     [v0] Refresh - loaded 0 matches for line item
+[01:42:35.890] Browser LOG     [v0] Refresh - loaded 0 matches for line item
+[01:42:35.890] Browser LOG     [v0] Refresh - loaded 0 matches for line item
+[01:42:35.890] Browser LOG     [v0] Refresh - loaded 0 matches for line item
+[01:42:35.890] Browser LOG     [v0] Refresh - loaded 3 matches for line item
+[01:42:35.890] Browser LOG     [v0] Refresh - loaded 3 matches for line item
+[01:42:35.890] Browser LOG     [v0] Refresh - loaded 0 matches for line item
+[01:42:35.890] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
