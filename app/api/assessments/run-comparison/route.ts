@@ -178,17 +178,10 @@ export async function POST(request: Request) {
 
       if (benchmarkFileIds && benchmarkFileIds.length > 0) {
         benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
-        console.log("[v0] Filtering to selected benchmark files")
+        console.log("[v0] Filtering to selected benchmark files:", benchmarkFileIds.length)
       } else {
-        const { data: firstFile } = await supabase
-          .from("benchmark_files")
-          .select("id, country")
-          .limit(1)
-          .single()
-        
-        if (firstFile) {
-          benchmarkQuery = benchmarkQuery.eq("benchmark_file_id", firstFile.id)
-        }
+        // Load ALL benchmark procedures from all countries for country-specific matching
+        console.log("[v0] Loading benchmarks from all countries for country-specific matching")
       }
 
       const result = await benchmarkQuery
@@ -207,7 +200,10 @@ export async function POST(request: Request) {
         return true
       })
       
-      console.log("[v0] Benchmark procedures loaded:", benchmarks.length)
+      // Log available countries in benchmark data
+      const availableCountries = [...new Set(benchmarks.map((bm: any) => bm.benchmark_files?.country).filter(Boolean))]
+      console.log("[v0] Benchmark procedures loaded:", benchmarks.length, "from", availableCountries.length, "countries")
+      console.log("[v0] Available countries:", availableCountries.slice(0, 10).join(", "), availableCountries.length > 10 ? "..." : "")
     } catch (e: any) {
       console.log("[v0] Benchmark query exception:", e.message)
     }
