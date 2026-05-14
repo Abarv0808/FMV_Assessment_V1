@@ -450,10 +450,16 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 if (extraDataStr) extraData = JSON.parse(extraDataStr)
               } catch (e) {}
               
-              // Get AI matches for this line item
-              const aiResult = aiResultsMap.get(comp.line_item_id)
-              const matches = aiResult?.matches || []
-              const bestMatch = aiResult?.bestMatch
+              // Get AI matches from database (stored during run-comparison)
+              let matches: any[] = []
+              if (comp.ai_matches) {
+                try {
+                  matches = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
+                } catch (e) {
+                  matches = []
+                }
+              }
+              const bestMatch = matches.length > 0 ? matches[0] : null
               
               return {
                 id: comp.id,
@@ -481,7 +487,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 selectedBenchmarkType: "p90" as BenchmarkType,
                 variance: 0,
                 variancePercent: 0,
-                flag: (comp.flag || "NO_MATCH") as "GREEN" | "YELLOW" | "RED" | "NO_MATCH",
+                flag: (comp.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")) as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
                 benchmarkDescription: bestMatch 
                   ? `${bestMatch.procedureName} (${Math.round(bestMatch.similarity * 100)}% match)`
                   : "No match found",
