@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { generateObject } from "ai"
-import { gateway } from "@ai-sdk/gateway"
 import { z } from "zod"
 
 // =====================================================
-// AI-POWERED SEMANTIC MATCHING v8 - Country-specific
+// AI-POWERED SEMANTIC MATCHING v9 - Gemini via AI Gateway
 // =====================================================
+
+// Model used via Vercel AI Gateway
+const AI_MODEL = "google/gemini-3-pro-preview"
 
 // Schema for AI match response
 const MatchResultSchema = z.object({
@@ -21,23 +23,33 @@ const MatchResultSchema = z.object({
 async function findAIMatches(
   vendorDescription: string,
   vendorCategory: string,
-  benchmarkProcedures: { id: string; name: string; category: string; index: number }[]
+  benchmarkProcedures: { id: string; name: string; category: string; index: number }[],
+  context: { country: string; lineItemId: string }
 ): Promise<{ benchmarkIndex: number; confidence: "HIGH" | "MEDIUM" | "LOW"; reasoning: string }[]> {
-  
-  // Prepare benchmark list for the prompt (limit to 100 to avoid token limits)
-  const benchmarkList = benchmarkProcedures.slice(0, 100).map((bp, i) => 
+
+  const startTime = Date.now()
+  const logPrefix = `[v0][AI-Gateway][${context.lineItemId.substring(0, 8)}]`
+
+  // Prepare benchmark list for the prompt (limit to 150 to balance accuracy vs tokens)
+  const limitedBenchmarks = benchmarkProcedures.slice(0, 150)
+  const benchmarkList = limitedBenchmarks.map((bp, i) =>
     `${i}. "${bp.name}" (Category: ${bp.category || "Unknown"})`
   ).join("\n")
 
+  console.log(`${logPrefix} Calling AI Gateway with model: ${AI_MODEL}`)
+  console.log(`${logPrefix} Vendor item: "${vendorDescription.substring(0, 80)}" | Country: ${context.country} | Benchmarks: ${limitedBenchmarks.length}/${benchmarkProcedures.length}`)
+
   try {
-    const { object } = await generateObject({
-      model: gateway("openai/gpt-4o-mini"),
+    const { object, usage } = await generateObject({
+      // AI SDK v6: pass model string directly; AI Gateway routes the request automatically
+      model: AI_MODEL,
       schema: MatchResultSchema,
       prompt: `You are an expert at matching clinical trial cost items to benchmark procedures for Fair Market Value (FMV) assessment.
 
 VENDOR COST ITEM:
 Description: "${vendorDescription}"
 Category: "${vendorCategory || "Not specified"}"
+Country: "${context.country || "Not specified"}"
 
 BENCHMARK PROCEDURES (index. name):
 ${benchmarkList}
@@ -67,9 +79,41 @@ IMPORTANT: Search carefully for regulatory, ethics, IRB, compliance related benc
 If no reasonable matches exist, return an empty matches array.`
     })
 
-    return object.matches || []
+    const elapsedMs = Date.now() - startTime
+    const matches = object.matches || []
+    console.log(`${logPrefix} ✓ AI Gateway success in ${elapsedMs}ms | Matches: ${matches.length} | Tokens: prompt=${usage?.inputTokens ?? "?"} completion=${usage?.outputTokens ?? "?"} total=${usage?.totalTokens ?? "?"}`)
+
+    return matches
   } catch (error: any) {
-    console.log("[v0] AI matching error:", error.message)
+    const elapsedMs = Date.now() - startTime
+
+    // Detailed error logging for AI Gateway debugging
+    console.error(`${logPrefix} ✗ AI Gateway FAILED after ${elapsedMs}ms`)
+    console.error(`${logPrefix}   Error name: ${error?.name || "Unknown"}`)
+    console.error(`${logPrefix}   Error message: ${error?.message || "No message"}`)
+    if (error?.statusCode) console.error(`${logPrefix}   HTTP status: ${error.statusCode}`)
+    if (error?.cause) console.error(`${logPrefix}   Cause: ${JSON.stringify(error.cause).substring(0, 500)}`)
+    if (error?.responseBody) console.error(`${logPrefix}   Response body: ${String(error.responseBody).substring(0, 500)}`)
+    if (error?.url) console.error(`${logPrefix}   Request URL: ${error.url}`)
+
+    // Categorize common AI Gateway errors
+    const msg = (error?.message || "").toLowerCase()
+    if (msg.includes("credit card") || msg.includes("payment")) {
+      console.error(`${logPrefix}   → DIAGNOSIS: AI Gateway requires payment method on file`)
+    } else if (msg.includes("api key") || msg.includes("unauthorized") || error?.statusCode === 401) {
+      console.error(`${logPrefix}   → DIAGNOSIS: AI Gateway authentication failed (check AI_GATEWAY_API_KEY)`)
+    } else if (msg.includes("rate limit") || error?.statusCode === 429) {
+      console.error(`${logPrefix}   → DIAGNOSIS: AI Gateway rate limit hit`)
+    } else if (msg.includes("model") || error?.statusCode === 404) {
+      console.error(`${logPrefix}   → DIAGNOSIS: Model "${AI_MODEL}" may not be available via AI Gateway`)
+    } else if (msg.includes("timeout") || msg.includes("etimedout")) {
+      console.error(`${logPrefix}   → DIAGNOSIS: AI Gateway request timed out`)
+    } else if (msg.includes("fetch") || msg.includes("network")) {
+      console.error(`${logPrefix}   → DIAGNOSIS: Network error reaching AI Gateway`)
+    } else {
+      console.error(`${logPrefix}   → DIAGNOSIS: Unknown error - falling back to trigram matching`)
+    }
+
     return []
   }
 }
@@ -346,7 +390,12 @@ export async function POST(request: Request) {
       let matchedBenchmarks: any[] = []
       
       try {
-        const aiMatches = await findAIMatches(cleanDescription, vendorCostCategory, countryBenchmarkForAI)
+        const aiMatches = await findAIMatches(
+          cleanDescription,
+          vendorCostCategory,
+          countryBenchmarkForAI,
+          { country: lineItemCountry, lineItemId: lineItem.id }
+        )
         
         if (aiMatches.length > 0) {
           console.log("[v0] AI found", aiMatches.length, "matches for", lineItemCountry || "ALL")
