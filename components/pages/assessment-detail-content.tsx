@@ -699,8 +699,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     } finally {
       setIsRunningComparison(false)
     }
-  }, [id, comparisons.length, appendAudit])
-
+  }, [id, comparisons, appendAudit])
+  
   // Handle line item field updates (additional information, cost category)
   const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory", value: string) => {
     try {
