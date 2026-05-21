@@ -91,6 +91,9 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   const [isRunningComparison, setIsRunningComparison] = useState(false)
   // Track in-flight decision-PATCH promises so Run Comparison can wait for them
   const pendingDecisionWritesRef = useRef<Set<Promise<any>>>(new Set())
+  // Per-line-item: last decision value we treat as authoritative (set by user OR by load).
+  // Used to reject Radix Select onValueChange echoes that fire spuriously after re-renders.
+  const lastKnownDecisionRef = useRef<Record<string, ItemDecision>>({})
   const [comparisonComplete, setComparisonComplete] = useState(false)
 
   // Try mock data first for backward compatibility
@@ -235,6 +238,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     fetchAssessment()
   }, [id, mockInitial])
 
+  // Keep lastKnownDecisionRef in sync with the in-memory decisions whenever the
+  // set of line items or their decisions legitimately change (load / refresh / handler).
+  // This is the source of truth used to reject Radix Select onValueChange echoes.
+  // NOTE: this useEffect is registered LATER in the component (after `comparisons`
+  // is declared) — see below — to avoid a "Cannot access before initialization"
+  // ReferenceError. Placeholder removed here.
+
   const appendAudit = useCallback((action: string) => {
     const event: AuditEvent = {
       id: `ae-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
@@ -298,6 +308,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     mockAssessmentComparisons.filter((c) => c.lineItem.assessmentId === id)
   )
 
+  // Keep lastKnownDecisionRef in sync with the in-memory decisions whenever the
+  // set of line items or their decisions legitimately change (load / refresh / handler).
+  // This is the source of truth used to reject Radix Select onValueChange echoes.
+  useEffect(() => {
+    const next: Record<string, ItemDecision> = { ...lastKnownDecisionRef.current }
+    comparisons.forEach((c) => {
+      if (c.lineItem?.id) next[c.lineItem.id] = c.lineItem.decision
+    })
+    lastKnownDecisionRef.current = next
+  }, [comparisons])
+
   const handleComparisonChange = useCallback((compId: string, field: "benchmarkDescription" | "comment", value: string) => {
     setComparisons((prev) =>
       prev.map((c) => (c.id === compId ? { ...c, [field]: value } : c))
@@ -309,12 +330,21 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     const target = comparisons.find((c) => c.id === compId)
     const lineItemId = target?.lineItem?.id || null
     const description = target?.lineItem?.description || ""
-    const previousDecision = target?.lineItem?.decision
+    // Use the ref as source of truth for "what the user/system last set".
+    // This survives Radix Select re-mount echoes that fire onValueChange with
+    // stale or default values during reconciliation.
+    const lastKnown = lineItemId ? lastKnownDecisionRef.current[lineItemId] : undefined
 
-    // No-op guard: ignore spurious onValueChange events that fire with the same value
-    // (e.g. when the Select component reconciles its initial controlled value on mount).
-    if (previousDecision === decision) {
+    // No-op guard: if the incoming value matches what we already consider authoritative,
+    // ignore — this catches Radix Select reconciliation echoes.
+    if (lastKnown === decision) {
+      console.log("[v0] handleDecisionChange: ignoring echo for", lineItemId, "value=", decision)
       return
+    }
+
+    // Update authoritative ref BEFORE state so subsequent echoes are correctly suppressed.
+    if (lineItemId) {
+      lastKnownDecisionRef.current[lineItemId] = decision
     }
 
     setComparisons((prev) =>
@@ -322,8 +352,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     )
 
     if (lineItemId) {
-      // Persist decision so it is honored by the next "Run Comparison".
-      console.log("[v0] Sending decision PATCH for", lineItemId, previousDecision, "->", decision)
+      console.log("[v0] Sending decision PATCH for", lineItemId, lastKnown, "->", decision)
       const writePromise = fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

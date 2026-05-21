@@ -462,7 +462,10 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   <TableCell onClick={(e) => e.stopPropagation()}>
                     <Select
                       value={comparison.lineItem.decision}
-                      onValueChange={(val) => onDecisionChange?.(comparison.id, val as ItemDecision)}
+                      onValueChange={(val) => {
+                        console.log("[v0] Select onValueChange fired:", comparison.id, "current=", comparison.lineItem.decision, "new=", val)
+                        onDecisionChange?.(comparison.id, val as ItemDecision)
+                      }}
                     >
                       <SelectTrigger className={`h-7 text-xs font-medium border rounded-full px-3 min-w-[150px] ${decisionConf.color}`}>
                         <SelectValue />
