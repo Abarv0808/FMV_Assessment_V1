@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import * as XLSX from "xlsx"
 import { createClient } from "@/lib/supabase/client"
 import { AppShell } from "@/components/app-shell"
 import { Button } from "@/components/ui/button"
@@ -357,6 +358,75 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     appendAudit(`Selected benchmark match: ${match.procedureName}`)
   }, [appendAudit])
 
+  const handleExportReport = useCallback(() => {
+    if (!assessment) return
+
+    // Build rows from current comparisons (in-memory state = current at-time version)
+    const rows = comparisons.map((comp, idx) => {
+      const li = comp.lineItem
+      const selected = comp.userSelected || (comp.possibleMatches && comp.possibleMatches[0]) || null
+      const benchmarkValue =
+        comp.selectedBenchmarkType === "p25" ? comp.benchmarkLow :
+        comp.selectedBenchmarkType === "p50" ? comp.benchmarkMed :
+        comp.selectedBenchmarkType === "p75" ? comp.benchmarkHigh :
+        comp.benchmark90th
+      const variance = comp.variance ?? 0
+      const variancePct = comp.variancePercent ?? 0
+
+      return {
+        "#": idx + 1,
+        "Description": li.description || "",
+        "Site/Country": li.country || li.site || "",
+        "Cost Category": li.costCategory || "",
+        "Unit Type": li.unitType || "",
+        "Number of Units": li.numberOfUnit ?? "",
+        "Unit Price": li.unitPrice ?? "",
+        "Total Cost": li.totalCost ?? "",
+        "Currency": li.currency || "",
+        "Negotiated Price": li.negotiatedPrice ?? "",
+        "Decision": li.decision || "",
+        "Flag": comp.flag || "",
+        "Matched Benchmark": selected?.procedureName || comp.benchmarkDescription || "",
+        "Match Confidence": selected?.confidence || "",
+        "Benchmark P25": comp.benchmarkLow ?? "",
+        "Benchmark P50": comp.benchmarkMed ?? "",
+        "Benchmark P75": comp.benchmarkHigh ?? "",
+        "Benchmark P90": comp.benchmark90th ?? "",
+        "Selected Benchmark Type": comp.selectedBenchmarkType || "",
+        "Selected Benchmark Value": benchmarkValue ?? "",
+        "Variance": variance,
+        "Variance %": variancePct,
+      }
+    })
+
+    const worksheet = XLSX.utils.json_to_sheet(rows)
+
+    // Auto-size columns
+    const colWidths = Object.keys(rows[0] || {}).map((key) => {
+      const maxLen = Math.max(
+        key.length,
+        ...rows.map((r: any) => String(r[key] ?? "").length)
+      )
+      return { wch: Math.min(Math.max(maxLen + 2, 10), 50) }
+    })
+    worksheet["!cols"] = colWidths
+
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Assessment")
+
+    // Build timestamp DDMMYYHHMMSS
+    const now = new Date()
+    const pad = (n: number) => String(n).padStart(2, "0")
+    const ts = `${pad(now.getDate())}${pad(now.getMonth() + 1)}${String(now.getFullYear()).slice(-2)}${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`
+
+    // Sanitize filename
+    const safeName = (assessment.name || "assessment").replace(/[\\/:*?"<>|]/g, "_").trim()
+    const filename = `${safeName} ${ts}.xlsx`
+
+    XLSX.writeFile(workbook, filename)
+    appendAudit(`Exported report: ${filename}`)
+  }, [assessment, comparisons, appendAudit])
+
   const handleArchive = useCallback(async () => {
     try {
       // Update status in database via API
@@ -664,7 +734,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 No Longer Required
               </Button>
             )}
-            <Button variant="outline" onClick={() => appendAudit("Export Report clicked")}>
+            <Button variant="outline" onClick={handleExportReport}>
               <FileText className="h-4 w-4 mr-2" />
               Export Report
             </Button>

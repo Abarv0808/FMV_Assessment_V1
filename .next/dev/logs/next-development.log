@@ -1,38 +1,78 @@
-[00:00:00.746] Server  LOG      ✓ Ready in 461ms
-[00:00:04.276] Server  LOG      ○ Compiling /dashboard ...
-[00:00:05.384] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:05.384] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:00:05.384] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7bgcavswa7g4bwpakiqpaltn.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7bgcavswa7g4bwpakiqpaltn.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779111205409} /_vercel/insights/view
-[00:00:06.057] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:25:06.933] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7bgcavswa7g4bwpakiqpaltn.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-7bgcavswa7g4bwpakiqpaltn.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779112706831} /_vercel/insights/view
-[00:25:07.401] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:25:08.888] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:25:09.016] Browser LOG     [v0] Assessments fetch result: 17 items, error: undefined
-[00:25:09.016] Browser LOG     [v0] Got 17 assessments from DB, mapping...
-[00:25:09.449] Browser LOG     [v0] Assessments fetch result: 17 items, error: undefined
-[00:25:09.450] Browser LOG     [v0] Got 17 assessments from DB, mapping...
-[00:25:11.687] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7bgcavswa7g4bwpakiqpaltn.vusercontent.net/assessments/88cf1f38-620d-4227-8b95-13f00ce18deb color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7bgcavswa7g4bwpakiqpaltn.vusercontent.net/assessments/88cf1f38-620d-4227-8b95-13f00ce18deb","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779112711598} /_vercel/insights/view
-[00:25:12.892] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:25:13.170] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:25:13.864] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:25:14.031] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[00:25:14.169] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:25:14.252] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
-[00:25:14.412] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[00:25:14.412] Browser LOG     [v0] Has existing ai_matches: true
-[00:25:14.412] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.412] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.412] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.412] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.412] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.412] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.412] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
-[00:25:14.518] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
-[00:25:14.518] Browser LOG     [v0] Has existing ai_matches: true
-[00:25:14.518] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.518] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.518] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.518] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.518] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.518] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
-[00:25:14.518] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:00:00.782] Server  LOG      ✓ Ready in 485ms
+[00:00:07.877] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:07.877] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:00:07.877] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779332833442} /_vercel/insights/view
+[00:00:16.640] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779332842215} /_vercel/insights/view
+[00:00:17.510] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:18.982] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:19.248] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779332844813} /_vercel/insights/view
+[00:00:19.581] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:19.989] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:20.082] Browser LOG     [v0] Assessments fetch result: 17 items, error: undefined
+[00:00:20.082] Browser LOG     [v0] Got 17 assessments from DB, mapping...
+[00:00:20.325] Browser LOG     [v0] Assessments fetch result: 17 items, error: undefined
+[00:00:20.325] Browser LOG     [v0] Got 17 assessments from DB, mapping...
+[00:00:23.602] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/assessments/88cf1f38-620d-4227-8b95-13f00ce18deb color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/assessments/88cf1f38-620d-4227-8b95-13f00ce18deb","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779332849178} /_vercel/insights/view
+[00:00:24.687] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:24.886] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:25.584] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:25.678] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:00:25.792] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:00:25.885] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:00:26.099] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:00:26.099] Browser LOG     [v0] Has existing ai_matches: true
+[00:00:26.099] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:00:26.099] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:00:26.099] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:00:26.099] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:00:26.099] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:00:26.099] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches
+[00:00:26.099] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches
+[00:00:26.200] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:00:26.200] Browser LOG     [v0] Has existing ai_matches: true
+[00:00:26.201] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:00:26.201] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:00:26.201] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:00:26.201] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:00:26.201] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:00:26.201] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches
+[00:00:26.201] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches
+[00:02:20.099] Server  LOG      ✓ Compiled in 120ms
+[00:02:42.631] Server  LOG      ✓ Compiled in 546ms
+[00:02:42.979] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:02:43.337] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:02:43.346] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:02:43.430] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:02:43.529] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:02:43.542] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:02:43.591] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:02:43.591] Browser LOG     [v0] Has existing ai_matches: true
+[00:02:43.591] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:02:43.591] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:43.591] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:43.591] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:43.591] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:43.591] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches
+[00:02:43.591] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches
+[00:02:43.630] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:02:43.736] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:02:43.819] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:02:43.928] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:02:43.928] Browser LOG     [v0] Has existing ai_matches: true
+[00:02:43.928] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:02:43.928] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:43.928] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:43.928] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:43.928] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:43.928] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches
+[00:02:43.928] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches
+[00:02:44.058] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:02:44.058] Browser LOG     [v0] Has existing ai_matches: true
+[00:02:44.058] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches
+[00:02:44.058] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:44.058] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:44.058] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:44.058] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches
+[00:02:44.058] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches
+[00:02:44.058] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches
+[00:02:47.296] Server  LOG      ✓ Compiled in 76ms
