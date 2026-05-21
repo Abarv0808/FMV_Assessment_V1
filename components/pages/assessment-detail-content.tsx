@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useCallback, useEffect } from "react"
+import { useState, useMemo, useCallback, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import * as XLSX from "xlsx"
 import { createClient } from "@/lib/supabase/client"
@@ -89,6 +89,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [isRealAssessment, setIsRealAssessment] = useState(false)
   const [isRunningComparison, setIsRunningComparison] = useState(false)
+  // Track in-flight decision-PATCH promises so Run Comparison can wait for them
+  const pendingDecisionWritesRef = useRef<Set<Promise<any>>>(new Set())
   const [comparisonComplete, setComparisonComplete] = useState(false)
 
   // Try mock data first for backward compatibility
@@ -316,11 +318,21 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     )
     if (lineItemId) {
       // Persist decision so it is honored by the next "Run Comparison".
-      fetch(`/api/assessments/line-items/${lineItemId}`, {
+      // Track the in-flight promise so handleRunComparison can wait for it.
+      const writePromise = fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ decision }),
-      }).catch((err) => console.log("[v0] Failed to persist decision change:", err))
+      })
+        .then(async (r) => {
+          if (!r.ok) console.log("[v0] Decision PATCH non-ok:", r.status, await r.text().catch(() => ""))
+          else console.log("[v0] Decision PATCH succeeded for", lineItemId, "->", decision)
+        })
+        .catch((err) => console.log("[v0] Failed to persist decision change:", err))
+        .finally(() => {
+          pendingDecisionWritesRef.current.delete(writePromise)
+        })
+      pendingDecisionWritesRef.current.add(writePromise)
     }
     if (description) {
       appendAudit(`Changed decision for "${description}" to "${decision}"`)
@@ -513,6 +525,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     appendAudit("Started AI Benchmark Comparison")
     
     try {
+      // Wait for any in-flight decision PATCHes to complete so the API reads
+      // the latest persisted decision values rather than stale ones.
+      if (pendingDecisionWritesRef.current.size > 0) {
+        console.log("[v0] Waiting for", pendingDecisionWritesRef.current.size, "pending decision writes before running comparison")
+        await Promise.allSettled(Array.from(pendingDecisionWritesRef.current))
+      }
+      
       // First fetch the linked benchmark file IDs for this assessment
       const supabase = createClient()
       const { data: benchmarkLinks } = await supabase
@@ -523,10 +542,19 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       const benchmarkFileIds = benchmarkLinks?.map(link => link.benchmark_file_id) || []
       console.log("[v0] Linked benchmark files for comparison:", benchmarkFileIds.length)
       
+      // Send the current in-memory decisions as authoritative overrides so any
+      // edits not yet persisted are still honored by the comparison engine.
+      const decisionOverrides = comparisons.reduce((acc, c) => {
+        if (c.lineItem?.id && c.lineItem?.decision) {
+          acc[c.lineItem.id] = c.lineItem.decision
+        }
+        return acc
+      }, {} as Record<string, string>)
+      
       const response = await fetch("/api/assessments/run-comparison", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ assessmentId: id, benchmarkFileIds })
+        body: JSON.stringify({ assessmentId: id, benchmarkFileIds, decisionOverrides })
       })
       
       const result = await response.json()

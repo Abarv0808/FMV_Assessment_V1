@@ -181,9 +181,16 @@ export async function POST(request: Request) {
   
   try {
     const body = await request.json()
-    const { assessmentId, benchmarkFileIds } = body
+    const { assessmentId, benchmarkFileIds, decisionOverrides } = body as {
+      assessmentId: string
+      benchmarkFileIds?: string[]
+      decisionOverrides?: Record<string, string>
+    }
     
     console.log("[v0] Assessment ID:", assessmentId)
+    if (decisionOverrides && Object.keys(decisionOverrides).length > 0) {
+      console.log("[v0] Decision overrides received from client:", Object.keys(decisionOverrides).length, "items")
+    }
 
     if (!assessmentId) {
       return NextResponse.json({ error: "Missing assessmentId" }, { status: 400 })
@@ -375,6 +382,17 @@ export async function POST(request: Request) {
         }
       } catch (e) {
         // Ignore JSON parse errors
+      }
+
+      // If the client sent a fresh decision override (e.g. user changed it
+      // and triggered Run Comparison before/while persistence was in flight),
+      // prefer it over the value parsed from the DB.
+      if (decisionOverrides && decisionOverrides[lineItem.id]) {
+        const override = decisionOverrides[lineItem.id]
+        if (override !== lineItemDecision) {
+          console.log(`[v0] Decision override for ${lineItem.id.substring(0, 8)}: DB="${lineItemDecision}" -> override="${override}"`)
+        }
+        lineItemDecision = override
       }
 
       // Only run comparison for items with eligible decision statuses (In-review or Pending)
