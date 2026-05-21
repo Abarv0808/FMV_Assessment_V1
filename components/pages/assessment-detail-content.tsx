@@ -351,25 +351,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       prev.map((c) => (c.id !== compId ? c : { ...c, lineItem: { ...c.lineItem, decision } }))
     )
 
-    if (lineItemId) {
-      console.log("[v0] Sending decision PATCH for", lineItemId, lastKnown, "->", decision)
-      const writePromise = fetch(`/api/assessments/line-items/${lineItemId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ decision }),
-      })
-        .then(async (r) => {
-          if (!r.ok) console.log("[v0] Decision PATCH non-ok:", r.status, await r.text().catch(() => ""))
-          else console.log("[v0] Decision PATCH succeeded for", lineItemId, "->", decision)
-        })
-        .catch((err) => console.log("[v0] Failed to persist decision change:", err))
-        .finally(() => {
-          pendingDecisionWritesRef.current.delete(writePromise)
-        })
-      pendingDecisionWritesRef.current.add(writePromise)
-    } else {
-      console.log("[v0] handleDecisionChange: no lineItemId resolved for compId", compId)
-    }
+    // NOTE: We intentionally do NOT PATCH the line item from this dropdown handler.
+    // Persistence happens server-side inside the run-comparison API which receives
+    // `decisionOverrides` (built from this in-memory state) and writes them atomically
+    // before running the comparison. The client-side PATCH was being triggered by
+    // Radix Select reconciliation echoes carrying stale "In-review" values, which
+    // overwrote the user's just-persisted decisions in the DB.
+
     if (description) {
       appendAudit(`Changed decision for "${description}" to "${decision}"`)
     }
