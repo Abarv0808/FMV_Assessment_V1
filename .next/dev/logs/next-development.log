@@ -134,3 +134,132 @@
 [00:30:22.420] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779334646859} /_vercel/insights/view
 [00:30:24.182] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779334649710} /_vercel/insights/view
 [00:31:35.606] Server  LOG      ✓ Compiled in 152ms
+[00:32:15.008] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:32:15.901] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:32:15.904] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[00:32:15.904] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Reconciliation","Contract","Sheet1","Drop Downs","Revision History ","Vault Data"]
+[00:32:15.904] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[00:32:15.904] Browser LOG     [v0] Sheet data has 131 rows
+[00:32:15.904] Browser LOG     [v0] First 5 rows of data:
+[00:32:15.904] Browser LOG     [v0] Row 0 : [null,null,null,null,null,null,null,null]
+[00:32:15.904] Browser LOG     [v0] Row 1 : ["Takeda supported (optional, dropdown) ","Site ","Cost category","Description of costs","Unit Type","Number of Units","Unit Price","Total Cost                        "]
+[00:32:15.904] Browser LOG     [v0] Row 2 : [null,"Bulgaria","Other (costs that do not fit in any other category)","The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","Unit cost",160,1000,160000]
+[00:32:15.904] Browser LOG     [v0] Row 3 : [null,"Australia","Patient/subjects compensation (e.g. for time to participate in the study)​","250RMB/hour*2 hours*4 visits","Hourly rate",320,250,80000]
+[00:32:15.904] Browser LOG     [v0] Row 4 : [null,"Austria","Personnel","Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty is hematology and has over 15 years of experience in the field. ","Hourly rate",40,500,20000]
+[00:32:15.904] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
+[00:32:15.904] Browser LOG     [v0] Row 0 matched 0 columns: []
+[00:32:15.904] Browser LOG     [v0] Matched column 0 -> takedaSupported via header: Takeda supported
+[00:32:15.904] Browser LOG     [v0] Matched column 1 -> site via header: Site
+[00:32:15.904] Browser LOG     [v0] Matched column 2 -> costCategory via header: Cost category
+[00:32:15.904] Browser LOG     [v0] Matched column 3 -> description via header: Description of costs
+[00:32:15.904] Browser LOG     [v0] Matched column 4 -> unitType via header: Unit Type
+[00:32:15.904] Browser LOG     [v0] Matched column 5 -> numberOfUnits via header: Number of Units
+[00:32:15.904] Browser LOG     [v0] Matched column 6 -> unitPrice via header: Unit Price
+[00:32:15.904] Browser LOG     [v0] Matched column 6 -> acceptedUnitPrice via header: Accepted Unit Price
+[00:32:15.904] Browser LOG     [v0] Matched column 7 -> totalCost via header: Total Cost
+[00:32:15.904] Browser LOG     [v0] Matched column 7 -> acceptedTotalCost via header: Accepted Total Costs
+[00:32:15.904] Browser LOG     [v0] Matched column 8 -> currency via header: Currency
+[00:32:15.904] Browser LOG     [v0] Matched column 9 -> costType via header: Type of cost
+[00:32:15.904] Browser LOG     [v0] Matched column 12 -> decision via header: Takeda Decision
+[00:32:15.904] Browser LOG     [v0] Row 1 matched 13 columns: ["takedaSupported","site","costCategory","description","unitType","numberOfUnits","unitPrice","acceptedUnitPrice","totalCost","acceptedTotalCost","currency","costType","decision"]
+[00:32:15.904] Browser LOG     [v0] Found header row at index 1 with columns: {"acceptedTotalCost":7,"acceptedUnitPrice":6,"costCategory":2,"costType":9,"currency":8,"decision":12,"description":3,"numberOfUnits":5,"site":1,"takedaSupported":0,"totalCost":7,"unitPrice":6,"unitType":4}
+[00:32:15.904] Browser LOG     [v0] Extracted country from Site column: Bulgaria
+[00:32:15.904] Browser LOG     [v0] Stopping at row 9 - Description is empty
+[00:32:15.904] Browser LOG     [v0] Parsed vendor proposal from sheet: Sponsor
+[00:32:15.904] Browser LOG     [v0] Found 7 line items
+[00:32:15.904] Browser LOG     [v0] Extracted country from Site column: Bulgaria
+[00:32:15.904] Browser LOG     [v0] Sample line item: {"acceptedTotalCost":160000,"acceptedUnitPrice":1000,"assessmentId":"43a2b62f-4473-41eb-8cd5-f7e453862fb7","costCategory":"Other (costs that do not fit in any other category)","costType":"Direct invoiceable cost (provisional)","currency":"CNY/RMB","decision":"In-review","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","flag":null,"id":"li-1779334761415-v7v84b3jx","investigatorResponses":[],"numberOfUnits":160,"site":"Bulgaria","takedaQuestions":[],"takedaSupported":"","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"}
+[00:32:16.152] Browser LOG     [v0] Storing 7 line items via API
+[00:32:16.152] Browser LOG     [v0] Sending to API: [{"additionalInformation":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","costCategory":"Other (costs that do not fit in any other category)","currency":"CNY/RMB","decision":"In-review","description":"The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are needs for each subject, which makes the total cost is 4000 CNY/person","numberOfUnit":160,"rowIndex":0,"site":"Bulgaria","totalCost":160000,"unitPrice":1000,"unitType":"Unit cost"},{"additionalInformation":"250RMB/hour*2 hours*4 visits","costCategory":"Patient/subjects compensation (e.g. for time to participate in the study)​","currency":"CNY/RMB","decision":"Accepted","description":"250RMB/hour*2 hours*4 visits","numberOfUnit":320,"rowIndex":1,"site":"Australia","totalCost":80000,"unitPrice":250,"unitType":"Hourly rate"}]
+[00:32:16.259] Server  LOG     [v0] Store Items API called
+[00:32:16.260] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:32:16.263] Server  LOG     [v0] Storing 7 "line items for assessment" "43a2b62f-4473-41eb-8cd5-f7e453862fb7"
+[00:32:16.451] Server  LOG     [v0] Created comparison for line item: "746cdf6f-7e47-41a9-b31c-fe0684402356"
+[00:32:16.605] Server  LOG     [v0] Created comparison for line item: "1e8c3edb-5658-49dc-b8cb-4a2747b89ed6"
+[00:32:16.776] Server  LOG     [v0] Created comparison for line item: "dabaa45c-0ced-48fa-98cb-3f53cc4fca2c"
+[00:32:16.925] Server  LOG     [v0] Created comparison for line item: "19fb8dda-0e3a-4f25-9fc7-d9a44fb64561"
+[00:32:17.102] Server  LOG     [v0] Created comparison for line item: "932351d7-2e79-48ea-8c7b-4595c8a4abd2"
+[00:32:17.294] Server  LOG     [v0] Created comparison for line item: "4ecc9b95-f797-4f08-9e59-5d44b4c92398"
+[00:32:17.462] Server  LOG     [v0] Created comparison for line item: "24a0b2de-dbc2-4956-90aa-6b25bdd6e483"
+[00:32:17.462] Server  LOG     [v0] Inserted 7 "line items"
+[00:32:17.802] Browser LOG     [v0] Successfully stored 7 line items
+[00:32:17.959] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/assessments/43a2b62f-4473-41eb-8cd5-f7e453862fb7 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7jz5wqxmpl9mu9r2ezuzce9z.vusercontent.net/assessments/43a2b62f-4473-41eb-8cd5-f7e453862fb7","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779334763484} /_vercel/insights/view
+[00:32:18.260] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:32:18.450] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:32:18.472] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:32:18.614] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:32:18.706] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:32:18.793] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:32:18.925] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:32:18.925] Browser LOG     [v0] Has existing ai_matches: false
+[00:32:18.989] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[00:32:18.989] Browser LOG     [v0] Has existing ai_matches: false
+[00:34:37.211] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[00:34:37.899] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[00:34:38.617] Server  LOG     [v0] Run comparison API called (AI-powered)
+[00:34:38.618] Server  LOG     [v0] Assessment ID: "43a2b62f-4473-41eb-8cd5-f7e453862fb7"
+[00:34:38.619] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:34:38.620] Server  LOG     [v0] Fetching line items...
+[00:34:38.749] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[00:34:38.750] Server  LOG     [v0] Fetching benchmark procedures...
+[00:34:38.750] Server  LOG     [v0] Line item countries: "Bulgaria, Australia, Austria, Belgium, Canada, China"
+[00:34:38.861] Server  LOG     [v0] Benchmark files for requested countries: 174 "Error:" "none"
+[00:34:38.862] Server  LOG     [v0] Filtering to 174 "benchmark files for countries:" "China, Australia, Austria, Belgium, Bulgaria, Canada"
+[00:34:39.279] Server  LOG     [v0] Benchmark procedures loaded: 1000 "from" 5 "countries"
+[00:34:39.279] Server  LOG     [v0] Available countries: "Canada, Belgium, Austria, China, Australia" ""
+[00:34:39.280] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[00:34:39.280] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\"" "Country:" "Bulgaria" "Decision:" "In-review"
+[00:34:39.280] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Bulgaria"
+[00:34:39.280] Server  LOG     [v0] No benchmarks available for country: "Bulgaria"
+[00:34:39.281] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "250RMB/hour*2 hours*4 visits"
+[00:34:39.281] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria" "Decision:" "Pending"
+[00:34:39.281] Server  LOG     [v0] Filtered to 207 "benchmarks for country:" "Austria"
+[00:34:39.282] Server  LOG     [v0][AI-Gateway][dabaa45c] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:34:39.282] Server  LOG     [v0][AI-Gateway][dabaa45c] Vendor item: "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty i" | Country: Austria | Benchmarks: 150/207
+[00:34:45.859] Server  LOG     [v0][AI-Gateway][dabaa45c] ✓ AI Gateway success in 6578ms | Matches: 3 | Tokens: prompt=4827 completion=761 total=5588
+[00:34:45.859] Server  LOG     [v0] AI found 3 "matches for" "Austria"
+[00:34:45.860] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
+[00:34:45.860] Server  LOG     [v0]   Match 2: "Physician - Per Hour" | Confidence: MEDIUM | AI: true
+[00:34:45.861] Server  LOG     [v0]   Match 3: "Consultant: Protocol review, study resul" | Confidence: LOW | AI: true
+[00:34:45.861] Server  LOG     [v0] Skipping item (decision="Not amended" not eligible): "Clinical research coordinator. The HCP is a hemato"
+[00:34:45.861] Server  LOG     [v0] Skipping item (decision="Not accepted" not eligible): "Local Ethics Committee fee"
+[00:34:45.862] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Hospital management fee: 3%."
+[00:34:45.862] Server  LOG     [v0] Processing: "\"Tax: 12%...\"" "Country:" "China" "Decision:" "In-review"
+[00:34:45.862] Server  LOG     [v0] Filtered to 207 "benchmarks for country:" "China"
+[00:34:45.863] Server  LOG     [v0][AI-Gateway][24a0b2de] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:34:45.863] Server  LOG     [v0][AI-Gateway][24a0b2de] Vendor item: "Tax: 12%" | Country: China | Benchmarks: 150/207
+[00:35:01.554] Server  LOG     [v0][AI-Gateway][24a0b2de] ✓ AI Gateway success in 15691ms | Matches: 1 | Tokens: prompt=4805 completion=1353 total=6158
+[00:35:01.555] Server  LOG     [v0] AI found 1 "matches for" "China"
+[00:35:01.555] Server  LOG     [v0]   Match 1: "Overhead (all costs)" | Confidence: LOW | AI: true
+[00:35:01.555] Server  LOG     [v0] Updating 7 "comparison records"
+[00:35:01.555] Server  LOG     [v0] Updating line_item_id: "746cdf6f-7e47-41a9-b31c-fe0684402356" "with" 0 "matches"
+[00:35:01.819] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:35:01.819] Server  LOG     [v0] Updating line_item_id: "1e8c3edb-5658-49dc-b8cb-4a2747b89ed6" "with" 0 "matches"
+[00:35:01.939] Server  LOG     [v0] Update result: 0 "rows updated, error:" "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[00:35:01.939] Server  LOG     [v0] No existing record, inserting new one
+[00:35:02.025] Server  LOG     [v0] Insert error: "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[00:35:02.026] Server  LOG     [v0] Updating line_item_id: "dabaa45c-0ced-48fa-98cb-3f53cc4fca2c" "with" 3 "matches"
+[00:35:02.105] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:35:02.105] Server  LOG     [v0] Updating line_item_id: "19fb8dda-0e3a-4f25-9fc7-d9a44fb64561" "with" 0 "matches"
+[00:35:02.182] Server  LOG     [v0] Update result: 0 "rows updated, error:" "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[00:35:02.183] Server  LOG     [v0] No existing record, inserting new one
+[00:35:02.272] Server  LOG     [v0] Insert error: "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[00:35:02.272] Server  LOG     [v0] Updating line_item_id: "932351d7-2e79-48ea-8c7b-4595c8a4abd2" "with" 0 "matches"
+[00:35:02.371] Server  LOG     [v0] Update result: 0 "rows updated, error:" "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[00:35:02.371] Server  LOG     [v0] No existing record, inserting new one
+[00:35:02.459] Server  LOG     [v0] Insert error: "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[00:35:02.460] Server  LOG     [v0] Updating line_item_id: "4ecc9b95-f797-4f08-9e59-5d44b4c92398" "with" 0 "matches"
+[00:35:02.544] Server  LOG     [v0] Update result: 0 "rows updated, error:" "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[00:35:02.544] Server  LOG     [v0] No existing record, inserting new one
+[00:35:02.619] Server  LOG     [v0] Insert error: "new row for relation \"assessment_comparisons\" violates check constraint \"assessment_comparisons_flag_check\""
+[00:35:02.619] Server  LOG     [v0] Updating line_item_id: "24a0b2de-dbc2-4956-90aa-6b25bdd6e483" "with" 1 "matches"
+[00:35:02.696] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:35:02.850] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:35:02.863] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 2 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"746cdf6f-7e47-41a9-b31c-fe0684402356","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"1e8c3edb-5658-49dc-b8cb-4a2747b89ed6","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifically mentions the PI (Principal Investigator/physician) specialty is hematology, billed per hour, which perfectly aligns with the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"dabaa45c-0ced-48fa-98cb-3f53cc4fca2c","matchCount":3,"matches":[{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifically mentions the PI (Principal Investigator/physician) specialty is hematology, billed per hour, which perfectly aligns with the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},{"benchmarkId":"4e3fde33-a9ae-4703-8118-5c72acd406c5","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":301,"p25":124,"p50":161,"p75":208,"p90":300,"procedureName":"Physician - Per Hour","reasoning":"Matches the broader category of an hourly rate for a physician (PI), but lacks the hematology-specific designation.","similarity":0.7},{"benchmarkId":"7755a1e2-5db6-48d6-9aff-735656a1952f","category":"Site Costs","confidence":"LOW","country":"Austria","isAIMatch":true,"p100":0,"p25":201,"p50":273,"p75":476,"p90":956,"procedureName":"Consultant: Protocol review, study results review, per hour","reasoning":"Project supervision and quality control may involve similar activities to reviewing study results and protocols, which are covered by this consultant hourly rate.","similarity":0.5}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"19fb8dda-0e3a-4f25-9fc7-d9a44fb64561","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"932351d7-2e79-48ea-8c7b-4595c8a4abd2","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"4ecc9b95-f797-4f08-9e59-5d44b4c92398","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"2817a1a0-c943-461d-86fa-b54650ef0ec8","category":"Non-Procedures","confidence":"LOW","country":"China","isAIMatch":true,"p100":4888,"p25":36100,"p50":45167,"p75":64422,"p90":91975,"procedureName":"Overhead (all costs)","reasoning":"There is no specific benchmark category for taxes (like VAT). 'Overhead (all costs)' is the closest match as it represents a general, often percentage-based indirect cost applied across the budget.","similarity":0.5},"flag":"YELLOW","lineItemId":"24a0b2de-dbc2-4956-90aa-6b25bdd6e483","matchCount":1,"matches":[{"benchmarkId":"2817a1a0-c943-461d-86fa-b54650ef0ec8","category":"Non-Procedures","confidence":"LOW","country":"China","isAIMatch":true,"p100":4888,"p25":36100,"p50":45167,"p75":64422,"p90":91975,"procedureName":"Overhead (all costs)","reasoning":"There is no specific benchmark category for taxes (like VAT). 'Overhead (all costs)' is the closest match as it represents a general, often percentage-based indirect cost applied across the budget.","similarity":0.5}]}],"success":true}
+[00:35:02.863] Browser LOG     [v0] Refreshing comparisons data via API...
+[00:35:02.955] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:35:03.174] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[00:35:03.174] Browser LOG     [v0] Refresh - loaded 0 matches for line item
+[00:35:03.174] Browser LOG     [v0] Refresh - loaded 3 matches for line item
+[00:35:03.174] Browser LOG     [v0] Refresh - loaded 1 matches for line item
+[00:35:03.174] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined

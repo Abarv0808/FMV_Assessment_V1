@@ -1,7 +1,10 @@
 {
   "/api/assessments/[id]/comparisons/route": "app/api/assessments/[id]/comparisons/route.js",
   "/api/assessments/[id]/route": "app/api/assessments/[id]/route.js",
+  "/api/assessments/create/route": "app/api/assessments/create/route.js",
   "/api/assessments/route": "app/api/assessments/route.js",
+  "/api/assessments/run-comparison/route": "app/api/assessments/run-comparison/route.js",
+  "/api/assessments/store-items/route": "app/api/assessments/store-items/route.js",
   "/assessments/[id]/page": "app/assessments/[id]/page.js",
   "/assessments/new/page": "app/assessments/new/page.js",
   "/assessments/page": "app/assessments/page.js",

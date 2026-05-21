@@ -54,12 +54,26 @@ Country: "${context.country || "Not specified"}"
 BENCHMARK PROCEDURES (index. name):
 ${benchmarkList}
 
-TASK: Find the TOP 3 benchmark procedures that best match the vendor cost item semantically. Consider:
-1. Similar medical/clinical terminology
-2. Same type of procedure, test, or service
-3. Equivalent activities even if named differently
+TASK: Return ONLY benchmark procedures that are a TRUE semantic match for the vendor cost item — same activity, service, fee, or procedure type.
 
-COMMON EQUIVALENT TERMS IN CLINICAL TRIALS:
+STRICT MATCHING RULES (read carefully):
+1. A match must represent the SAME underlying work/service/fee. Not "loosely related," not "in the same general area."
+2. If you are not at least 60% certain that the benchmark represents the same activity, DO NOT include it.
+3. **Return an empty matches array** when:
+   - The vendor item is a tax, VAT, sales tax, withholding tax, customs duty, or government levy.
+   - The vendor item is a discount, rebate, or financial adjustment.
+   - The vendor item is an overhead percentage, markup, management fee %, or admin %.
+   - The vendor item is a currency conversion, exchange fee, bank fee, or wire transfer fee.
+   - The vendor item is a generic line like "Miscellaneous", "Other", "Sundry", "Sub total", "Total".
+   - No benchmark in the list represents the same procedure/service.
+4. NEVER force a low-confidence match just to return something. An empty array is the correct answer when nothing fits.
+
+CONFIDENCE LEVELS (only use after passing the strictness check above):
+- HIGH: Clear, unambiguous match — same procedure or service, equivalent terminology.
+- MEDIUM: Likely match — same type of activity but different naming convention.
+- LOW: Use sparingly. Only when the activity is closely related (e.g., specialty variant of the same procedure). NEVER use LOW for taxes, overheads, discounts, fees-on-fees, or unrelated categories.
+
+COMMON EQUIVALENT TERMS IN CLINICAL TRIALS (use these to RECOGNIZE matches, not invent them):
 - "Ethics Committee fee" / "Local Ethics" / "EC fee" = "IRB" / "Institutional Review Board" / "IRB/EC"
 - "Study Coordinator" = "Clinical Research Coordinator" / "CRC"
 - "Principal Investigator" = "PI" / "Lead Investigator"
@@ -69,14 +83,7 @@ COMMON EQUIVALENT TERMS IN CLINICAL TRIALS:
 - "Data Management" = "Data Entry" / "CRF Completion"
 - "Patient Stipend" = "Subject Compensation" / "Patient Reimbursement"
 
-Return matches with confidence:
-- HIGH: Clear semantic match, same procedure/service/fee type
-- MEDIUM: Likely match, similar but not identical
-- LOW: Possible match, requires review
-
-IMPORTANT: Search carefully for regulatory, ethics, IRB, compliance related benchmarks when the vendor item mentions ethics committee, IRB, regulatory, or compliance fees.
-
-If no reasonable matches exist, return an empty matches array.`
+Return up to 3 matches, sorted best-first. If nothing genuinely matches, return { "matches": [] }.`
     })
 
     const elapsedMs = Date.now() - startTime
@@ -372,6 +379,29 @@ export async function POST(request: Request) {
         continue
       }
 
+      // Detect non-comparable items (taxes, discounts, overhead %, currency fees, etc.)
+      // These have no procedure-level benchmark and should be flagged, not force-matched.
+      const descLower = cleanDescription.toLowerCase()
+      const nonComparablePatterns = [
+        /\b(tax|vat|gst|sales\s*tax|withholding|customs|duty|levy|tariff)\b/,
+        /\b(discount|rebate|refund|adjustment|credit\s*note)\b/,
+        /\b(currency\s*conversion|exchange\s*fee|fx\s*fee|wire\s*fee|bank\s*fee)\b/,
+        /^\s*(misc|miscellaneous|other|sundry|sub\s*total|subtotal|total|grand\s*total)\s*[:.]?\s*\d*\s*%?\s*$/,
+        /^\s*[\d.,]+\s*%\s*$/, // bare percentage like "12%"
+      ]
+      const isNonComparable = nonComparablePatterns.some(rx => rx.test(descLower))
+      if (isNonComparable) {
+        console.log(`[v0] Non-comparable item detected (tax/discount/overhead/etc.), skipping match: "${cleanDescription.substring(0, 60)}"`)
+        results.push({
+          lineItemId: lineItem.id,
+          matches: [],
+          bestMatch: null,
+          flag: "NON_COMPARABLE",
+          skipReason: "Item is a tax, discount, overhead %, or other non-procedure cost with no direct benchmark"
+        })
+        continue
+      }
+
       // Filter benchmarks by country if the line item has a country specified
       let countryFilteredBenchmarks = benchmarks
       if (lineItemCountry) {
@@ -506,21 +536,33 @@ export async function POST(request: Request) {
 
     // 4. Update assessment_comparisons with results
     console.log("[v0] Updating", results.length, "comparison records")
-    
+
+    // DB has a check constraint allowing only a small set of flag values.
+    // Map any extended flags to a constraint-safe value for persistence,
+    // while preserving the original flag in ai_matches metadata for the UI.
+    const ALLOWED_DB_FLAGS = new Set(["GREEN", "YELLOW", "RED", "NO_MATCH", "MULTIPLE_MATCHES"])
+    const toDbFlag = (f: string) => (ALLOWED_DB_FLAGS.has(f) ? f : "NO_MATCH")
+
     for (const result of results) {
-      console.log("[v0] Updating line_item_id:", result.lineItemId, "with", result.matches?.length || 0, "matches")
-      
+      console.log("[v0] Updating line_item_id:", result.lineItemId, "with", result.matches?.length || 0, "matches", "flag:", result.flag)
+
+      const dbFlag = toDbFlag(result.flag)
+      // Stash the original (extended) flag inside ai_matches as a sentinel so the UI can read it.
+      const aiMatchesPayload: any = result.matches && result.matches.length > 0
+        ? result.matches
+        : [{ __meta: true, originalFlag: result.flag, skipReason: (result as any).skipReason || null }]
+
       const { data: updated, error: updateError } = await supabase
         .from("assessment_comparisons")
-        .update({ 
-          flag: result.flag,
-          ai_matches: result.matches || []
+        .update({
+          flag: dbFlag,
+          ai_matches: aiMatchesPayload
         })
         .eq("line_item_id", result.lineItemId)
         .select("id")
-      
+
       console.log("[v0] Update result:", updated?.length || 0, "rows updated, error:", updateError?.message || "none")
-      
+
       if (!updated || updated.length === 0) {
         console.log("[v0] No existing record, inserting new one")
         const { error: insertError } = await supabase
@@ -528,8 +570,8 @@ export async function POST(request: Request) {
           .insert({
             assessment_id: assessmentId,
             line_item_id: result.lineItemId,
-            flag: result.flag,
-            ai_matches: result.matches || []
+            flag: dbFlag,
+            ai_matches: aiMatchesPayload
           })
         console.log("[v0] Insert error:", insertError?.message || "none")
       }
