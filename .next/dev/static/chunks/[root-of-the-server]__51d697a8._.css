@@ -217,6 +217,7 @@
     --color-green-100: #dcfce7;
     --color-green-500: #00c758;
     --color-green-600: #00a544;
+    --color-emerald-600: #009767;
     --color-blue-500: #3080ff;
     --color-slate-400: #90a1b9;
     --color-black: #000;
@@ -278,6 +279,7 @@
       --color-green-100: lab(96.1861% -13.8464 6.52365);
       --color-green-500: lab(70.5521% -66.5147 45.8073);
       --color-green-600: lab(59.0978% -58.6621 41.2579);
+      --color-emerald-600: lab(55.0481% -49.9246 15.93);
       --color-blue-500: lab(54.1736% 13.3369 -74.6839);
       --color-slate-400: lab(65.5349% -2.25151 -14.5072);
     }
@@ -1988,6 +1990,16 @@
     border-color: var(--color-border);
   }
 
+  .border-accent\/30 {
+    border-color: var(--accent);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-accent\/30 {
+      border-color: color-mix(in oklab, var(--accent) 30%, transparent);
+    }
+  }
+
   .border-amber-500\/20 {
     border-color: #f99c0033;
   }
@@ -2078,6 +2090,16 @@
     border-color: var(--primary);
   }
 
+  .border-primary\/20 {
+    border-color: var(--primary);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-primary\/20 {
+      border-color: color-mix(in oklab, var(--primary) 20%, transparent);
+    }
+  }
+
   .border-primary\/30 {
     border-color: var(--primary);
   }
@@ -2148,6 +2170,16 @@
 
   .bg-accent {
     background-color: var(--accent);
+  }
+
+  .bg-accent\/5 {
+    background-color: var(--accent);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-accent\/5 {
+      background-color: color-mix(in oklab, var(--accent) 5%, transparent);
+    }
   }
 
   .bg-accent\/30 {
@@ -2250,6 +2282,10 @@
     }
   }
 
+  .bg-emerald-600 {
+    background-color: var(--color-emerald-600);
+  }
+
   .bg-foreground {
     background-color: var(--foreground);
   }
@@ -2278,6 +2314,10 @@
 
   .bg-muted {
     background-color: var(--muted);
+  }
+
+  .bg-muted-foreground {
+    background-color: var(--muted-foreground);
   }
 
   .bg-muted\/20 {
@@ -2729,6 +2769,10 @@
 
   .whitespace-nowrap {
     white-space: nowrap;
+  }
+
+  .text-accent {
+    color: var(--accent);
   }
 
   .text-accent-foreground {

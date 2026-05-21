@@ -3485,3 +3485,32 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [02:23:10.180] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [02:24:02.521] Server  LOG      ✓ Compiled in 154ms
+[02:25:59.000] Server  LOG      ✓ Compiled in 141ms
+[02:26:27.992] Server  LOG      ✓ Compiled in 53ms
+[02:26:39.608] Server  LOG      ✓ Compiled in 141ms
+[02:26:39.956] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:26:40.214] Server  LOG      ✓ Compiled in 57ms
+[02:26:40.720] Server  LOG      ✓ Compiled in 103ms
+[02:26:40.869] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:26:40.898] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:26:41.116] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:26:41.213] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:26:41.370] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[02:26:41.370] Browser LOG     [v0] Has existing ai_matches: true
+[02:26:41.370] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[02:26:41.370] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:26:41.370] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:26:41.370] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:26:41.370] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION
+[02:26:41.370] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:26:41.370] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION
+[02:26:41.381] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:26:41.544] Browser LOG     [v0] Comparisons fetch result: 7 items, error: undefined
+[02:26:41.544] Browser LOG     [v0] Has existing ai_matches: true
+[02:26:41.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[02:26:41.544] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:26:41.544] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:26:41.544] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:26:41.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION
+[02:26:41.544] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:26:41.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION

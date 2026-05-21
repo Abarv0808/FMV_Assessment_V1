@@ -11,9 +11,9 @@ import {
 import { cn } from "@/lib/utils"
 
 const statusOptions: { value: AssessmentStatus; label: string; dotColor: string }[] = [
-  { value: "IN_REVIEW", label: "In Review", dotColor: "bg-blue-500" },
-  { value: "APPROVED", label: "Approved", dotColor: "bg-green-500" },
-  { value: "MANUAL_ASSESSMENT", label: "Manual Assessment", dotColor: "bg-slate-400" },
+  { value: "IN_REVIEW", label: "In Review", dotColor: "bg-primary" },
+  { value: "APPROVED", label: "Approved", dotColor: "bg-emerald-600" },
+  { value: "MANUAL_ASSESSMENT", label: "Manual Assessment", dotColor: "bg-muted-foreground" },
 ]
 
 interface StatusSelectProps {

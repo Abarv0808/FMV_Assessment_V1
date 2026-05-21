@@ -92,7 +92,7 @@ const flagConfig: Record<string, { label: string; color: string }> = {
   },
   MULTIPLE_MATCHES: {
     label: "Select Match",
-    color: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+    color: "text-primary bg-primary/10 border-primary/20",
   },
   NO_BENCHMARK_DATA: {
     label: "No Data",
@@ -126,7 +126,7 @@ const decisionConfig: Record<
   },
   "Not amended": {
     label: "Not amended",
-    color: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+    color: "text-foreground bg-muted border-border",
   },
   "Not accepted": {
     label: "Not accepted",
@@ -586,12 +586,12 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
 
                         {/* AI Suggestion */}
                         {comparison.aiSuggestion && (
-                          <Card className="border-blue-500/20 bg-blue-500/5">
-                            <div className="p-4">
-                              <div className="flex items-start gap-3">
-                                <Lightbulb className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                                <div className="flex-1">
-                                  <p className="text-sm font-medium text-blue-500 mb-1">
+                  <Card className="border-accent/30 bg-accent/5">
+                    <div className="p-4">
+                      <div className="flex items-start gap-3">
+                        <Lightbulb className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                        <div className="flex-1">
+                          <p className="text-sm font-medium text-accent mb-1">
                                     AI Insight
                                   </p>
                                   <p className="text-sm text-muted-foreground">
