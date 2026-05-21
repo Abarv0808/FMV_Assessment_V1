@@ -18,6 +18,7 @@ import {
 import { LayoutDashboard, FileText, Settings, LogOut, Shield, Database, Archive } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -60,9 +61,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <aside className="w-64 border-r border-border/40 bg-card/50 flex flex-col">
-        <div className="p-6 border-b border-border/40">
-          <h1 className="text-xl font-semibold tracking-tight">FMV Platform</h1>
-          <p className="text-xs text-muted-foreground mt-1">Assessment Management</p>
+        <div className="p-6 border-b border-border/40 flex items-start justify-between gap-2">
+          <div>
+            <h1 className="text-xl font-semibold tracking-tight">FMV Platform</h1>
+            <p className="text-xs text-muted-foreground mt-1">Assessment Management</p>
+          </div>
+          <ThemeToggle className="-mr-1 -mt-1" />
         </div>
         <nav className="flex-1 p-4 space-y-1">
           {allNavigation.map((item) => {
