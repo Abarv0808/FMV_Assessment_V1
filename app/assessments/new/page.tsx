@@ -166,6 +166,7 @@ export default function NewAssessmentPage() {
           unitPrice: item.unitPrice,
           totalCost: item.totalCost,
           currency: item.currency || "USD",
+          decision: item.decision || null,
           rowIndex: index
         }))
 

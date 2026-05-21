@@ -218,13 +218,11 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
       investigatorResponses: []
     }
     
-    // Parse decision if present
+    // Parse decision if present - load values as-is from Excel (no transformation)
+    // Excel values already match the dropdown options: In-review, Accepted, Pending, Not amended, Not accepted, Manual assessment
     if (columnMap.decision !== undefined && row[columnMap.decision]) {
-      const decisionValue = String(row[columnMap.decision]).trim().toLowerCase()
-      if (decisionValue.includes("accept")) lineItem.decision = "Accepted"
-      else if (decisionValue.includes("reject")) lineItem.decision = "Rejected"
-      else if (decisionValue.includes("pending")) lineItem.decision = "Pending"
-      else if (decisionValue.includes("review")) lineItem.decision = "Needs Review"
+      const raw = String(row[columnMap.decision]).trim()
+      if (raw) lineItem.decision = raw
     }
     
     lineItems.push(lineItem)

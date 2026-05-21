@@ -333,16 +333,34 @@ export async function POST(request: Request) {
       const lineItemCountry = lineItem.country || ""
       
       let vendorCostCategory = ""
+      let lineItemDecision = ""
       try {
         if (extraDataStr) {
           const extraData = JSON.parse(extraDataStr)
           vendorCostCategory = extraData.costCategory || ""
+          lineItemDecision = extraData.decision || ""
         }
       } catch (e) {
         // Ignore JSON parse errors
       }
 
-      console.log("[v0] Processing:", `"${cleanDescription.substring(0, 50)}..."`, "Country:", lineItemCountry || "ALL")
+      // Only run comparison for items with eligible decision statuses (In-review or Pending)
+      // Skip items with statuses like Accepted, Not amended, Not accepted, Manual assessment
+      const eligibleDecisions = ["in-review", "pending"]
+      const decisionLower = lineItemDecision.toLowerCase().trim()
+      if (lineItemDecision && !eligibleDecisions.includes(decisionLower)) {
+        console.log(`[v0] Skipping item (decision="${lineItemDecision}" not eligible):`, cleanDescription.substring(0, 50))
+        results.push({
+          lineItemId: lineItem.id,
+          matches: [],
+          bestMatch: null,
+          flag: "SKIPPED_BY_DECISION",
+          skipReason: `Decision "${lineItemDecision}" is not eligible for comparison`
+        })
+        continue
+      }
+
+      console.log("[v0] Processing:", `"${cleanDescription.substring(0, 50)}..."`, "Country:", lineItemCountry || "ALL", "Decision:", lineItemDecision || "default")
       
       if (!cleanDescription || cleanDescription === "Unknown") {
         results.push({

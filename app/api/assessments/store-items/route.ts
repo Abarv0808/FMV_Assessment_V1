@@ -27,7 +27,8 @@ export async function POST(request: Request) {
         numberOfUnit: item.numberOfUnit || 1,
         unitPrice: item.unitPrice || 0,
         unitType: item.unitType || null,
-        costCategory: item.costCategory || null
+        costCategory: item.costCategory || null,
+        decision: item.decision || null
       })
       
       const { data, error } = await supabase
