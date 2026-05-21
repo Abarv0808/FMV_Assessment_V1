@@ -205,6 +205,42 @@ export async function POST(request: Request) {
       .select("id, procedure_name, country, vendor_cost, currency")
       .eq("assessment_id", assessmentId)
 
+    // 1b. Persist any decision overrides from the client BEFORE running the
+    // comparison. This is the authoritative single-step write that bypasses
+    // any client-side dropdown / persistence races: whatever the user has
+    // selected in the UI right now wins.
+    if (decisionOverrides && lineItems && lineItems.length > 0) {
+      const overrideEntries = Object.entries(decisionOverrides)
+      console.log("[v0] Persisting", overrideEntries.length, "decision overrides to DB before comparison")
+      for (const [lineItemId, newDecision] of overrideEntries) {
+        const li = lineItems.find((row: any) => row.id === lineItemId)
+        if (!li) continue
+        const procName: string = li.procedure_name || ""
+        const sepIdx = procName.indexOf("|||")
+        let desc = procName
+        let extraData: any = {}
+        if (sepIdx !== -1) {
+          desc = procName.substring(0, sepIdx)
+          try { extraData = JSON.parse(procName.substring(sepIdx + 3)) } catch { extraData = {} }
+        }
+        if (extraData.decision === newDecision) continue
+        const previous = extraData.decision
+        extraData.decision = newDecision
+        const newProcName = `${desc}|||${JSON.stringify(extraData)}`
+        const { error: persistError } = await supabase
+          .from("assessment_line_items")
+          .update({ procedure_name: newProcName })
+          .eq("id", lineItemId)
+        if (persistError) {
+          console.log("[v0] Failed to persist decision for", lineItemId, persistError.message)
+        } else {
+          console.log("[v0] Persisted decision for", lineItemId.substring(0, 8), `"${previous}" -> "${newDecision}"`)
+          // Update in-memory copy so downstream logic reads the new value
+          li.procedure_name = newProcName
+        }
+      }
+    }
+
     console.log("[v0] Line items found:", lineItems?.length, "Error:", lineItemsError?.message)
 
     if (lineItemsError || !lineItems || lineItems.length === 0) {
