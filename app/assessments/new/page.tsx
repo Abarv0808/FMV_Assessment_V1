@@ -202,7 +202,8 @@ export default function NewAssessmentPage() {
 
   const canProceed = () => {
     if (currentStep.id === "info") {
-      return formData.name.trim().length > 0 && formData.therapeuticArea !== "" && formData.businessUnit !== ""
+      // Therapeutic Area is optional per its UI label; only Name and Business Unit are required
+      return formData.name.trim().length > 0 && formData.businessUnit !== ""
     }
     if (currentStep.id === "upload") {
       const hasBenchmark = formData.selectedBenchmarkFileId || formData.benchmarkFile || formData.selectedBenchmarkFileIds.length > 0
