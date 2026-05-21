@@ -645,3 +645,120 @@
 [01:02:06.556] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION
 [01:02:06.556] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION
 [01:02:06.556] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NON_COMPARABLE
+[01:04:16.481] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:04:16.966] Server  LOG     [v0] Updated line item: "1e8c3edb-5658-49dc-b8cb-4a2747b89ed6" "additionalInfo:" undefined "costCategory:" undefined
+[01:04:17.111] Browser LOG     [v0] Decision PATCH succeeded for 1e8c3edb-5658-49dc-b8cb-4a2747b89ed6 -> Pending
+[01:04:19.243] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:04:19.468] Server  LOG     [v0] Updated line item: "19fb8dda-0e3a-4f25-9fc7-d9a44fb64561" "additionalInfo:" undefined "costCategory:" undefined
+[01:04:19.609] Browser LOG     [v0] Decision PATCH succeeded for 19fb8dda-0e3a-4f25-9fc7-d9a44fb64561 -> In-review
+[01:04:20.591] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:04:20.799] Server  LOG     [v0] Updated line item: "932351d7-2e79-48ea-8c7b-4595c8a4abd2" "additionalInfo:" undefined "costCategory:" undefined
+[01:04:20.951] Browser LOG     [v0] Decision PATCH succeeded for 932351d7-2e79-48ea-8c7b-4595c8a4abd2 -> In-review
+[01:04:22.556] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:04:22.752] Server  LOG     [v0] Updated line item: "4ecc9b95-f797-4f08-9e59-5d44b4c92398" "additionalInfo:" undefined "costCategory:" undefined
+[01:04:22.893] Browser LOG     [v0] Decision PATCH succeeded for 4ecc9b95-f797-4f08-9e59-5d44b4c92398 -> In-review
+[01:04:24.563] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[01:04:25.118] Server  LOG     [v0] Run comparison API called (AI-powered)
+[01:04:25.119] Server  LOG     [v0] Assessment ID: "43a2b62f-4473-41eb-8cd5-f7e453862fb7"
+[01:04:25.119] Server  LOG     [v0] Decision overrides received from client: 7 "items"
+[01:04:25.120] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:04:25.121] Server  LOG     [v0] Fetching line items...
+[01:04:25.126] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[01:04:25.229] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[01:04:25.230] Server  LOG     [v0] Fetching benchmark procedures...
+[01:04:25.230] Server  LOG     [v0] Line item countries: "Bulgaria, Australia, Austria, Belgium, Canada, China"
+[01:04:25.330] Server  LOG     [v0] Benchmark files for requested countries: 174 "Error:" "none"
+[01:04:25.330] Server  LOG     [v0] Filtering to 174 "benchmark files for countries:" "China, Australia, Austria, Belgium, Bulgaria, Canada"
+[01:04:25.666] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[01:04:26.356] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[01:04:26.641] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[01:04:26.931] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[01:04:27.238] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[01:04:27.511] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[01:04:27.772] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[01:04:27.897] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[01:04:28.206] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[01:04:28.484] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[01:04:28.678] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[01:04:28.970] Server  LOG     [v0] Loaded benchmark page 12 "size:" 1000 "running total:" 12000
+[01:04:29.282] Server  LOG     [v0] Loaded benchmark page 13 "size:" 1000 "running total:" 13000
+[01:04:29.565] Server  LOG     [v0] Loaded benchmark page 14 "size:" 1000 "running total:" 14000
+[01:04:29.840] Server  LOG     [v0] Loaded benchmark page 15 "size:" 1000 "running total:" 15000
+[01:04:29.975] Server  LOG     [v0] Loaded benchmark page 16 "size:" 1000 "running total:" 16000
+[01:04:30.292] Server  LOG     [v0] Loaded benchmark page 17 "size:" 1000 "running total:" 17000
+[01:04:30.581] Server  LOG     [v0] Loaded benchmark page 18 "size:" 1000 "running total:" 18000
+[01:04:30.785] Server  LOG     [v0] Loaded benchmark page 19 "size:" 1000 "running total:" 19000
+[01:04:31.088] Server  LOG     [v0] Loaded benchmark page 20 "size:" 1000 "running total:" 20000
+[01:04:31.416] Server  LOG     [v0] Loaded benchmark page 21 "size:" 1000 "running total:" 21000
+[01:04:31.709] Server  LOG     [v0] Loaded benchmark page 22 "size:" 1000 "running total:" 22000
+[01:04:31.858] Server  LOG     [v0] Loaded benchmark page 23 "size:" 1000 "running total:" 23000
+[01:04:32.141] Server  LOG     [v0] Loaded benchmark page 24 "size:" 1000 "running total:" 24000
+[01:04:32.452] Server  LOG     [v0] Loaded benchmark page 25 "size:" 1000 "running total:" 25000
+[01:04:32.787] Server  LOG     [v0] Loaded benchmark page 26 "size:" 1000 "running total:" 26000
+[01:04:33.091] Server  LOG     [v0] Loaded benchmark page 27 "size:" 1000 "running total:" 27000
+[01:04:33.249] Server  LOG     [v0] Loaded benchmark page 28 "size:" 1000 "running total:" 28000
+[01:04:33.541] Server  LOG     [v0] Loaded benchmark page 29 "size:" 1000 "running total:" 29000
+[01:04:33.861] Server  LOG     [v0] Loaded benchmark page 30 "size:" 1000 "running total:" 30000
+[01:04:34.200] Server  LOG     [v0] Loaded benchmark page 31 "size:" 1000 "running total:" 31000
+[01:04:34.510] Server  LOG     [v0] Loaded benchmark page 32 "size:" 1000 "running total:" 32000
+[01:04:34.674] Server  LOG     [v0] Loaded benchmark page 33 "size:" 1000 "running total:" 33000
+[01:04:34.970] Server  LOG     [v0] Loaded benchmark page 34 "size:" 1000 "running total:" 34000
+[01:04:35.296] Server  LOG     [v0] Loaded benchmark page 35 "size:" 1000 "running total:" 35000
+[01:04:35.641] Server  LOG     [v0] Loaded benchmark page 36 "size:" 934 "running total:" 35934
+[01:04:35.697] Server  LOG     [v0] Benchmark procedures loaded: 35934 "from" 6 "countries"
+[01:04:35.698] Server  LOG     [v0] Available countries: "Canada, Belgium, Austria, China, Australia, Bulgaria" ""
+[01:04:35.703] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[01:04:35.703] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\"" "Country:" "Bulgaria" "Decision:" "In-review"
+[01:04:35.717] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Bulgaria"
+[01:04:35.750] Server  LOG     [v0][AI-Gateway][746cdf6f] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:04:35.750] Server  LOG     [v0][AI-Gateway][746cdf6f] Vendor item: "The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are " | Country: Bulgaria | Benchmarks: 150/5989
+[01:04:51.418] Server  LOG     [v0][AI-Gateway][746cdf6f] ✓ AI Gateway success in 15669ms | Matches: 0 | Tokens: prompt=5103 completion=1407 total=6510
+[01:04:51.419] Server  LOG     [v0] Using trigram fallback for: "The cost for CMV-specific T ce" "Country:" "Bulgaria"
+[01:04:51.549] Server  LOG     [v0] Decision override for 1e8c3edb: DB="Pending" -> override="Accepted"
+[01:04:51.550] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "250RMB/hour*2 hours*4 visits"
+[01:04:51.550] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria" "Decision:" "Pending"
+[01:04:51.556] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Austria"
+[01:04:51.590] Server  LOG     [v0][AI-Gateway][dabaa45c] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:04:51.590] Server  LOG     [v0][AI-Gateway][dabaa45c] Vendor item: "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty i" | Country: Austria | Benchmarks: 150/5989
+[01:04:57.942] Server  LOG     [v0][AI-Gateway][dabaa45c] ✓ AI Gateway success in 6353ms | Matches: 2 | Tokens: prompt=5084 completion=445 total=5529
+[01:04:57.943] Server  LOG     [v0] AI found 2 "matches for" "Austria"
+[01:04:57.943] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
+[01:04:57.943] Server  LOG     [v0]   Match 2: "Physician - Per Hour" | Confidence: MEDIUM | AI: true
+[01:04:57.944] Server  LOG     [v0] Decision override for 19fb8dda: DB="In-review" -> override="Not amended"
+[01:04:57.944] Server  LOG     [v0] Skipping item (decision="Not amended" not eligible): "Clinical research coordinator. The HCP is a hemato"
+[01:04:57.944] Server  LOG     [v0] Decision override for 932351d7: DB="In-review" -> override="Not accepted"
+[01:04:57.944] Server  LOG     [v0] Skipping item (decision="Not accepted" not eligible): "Local Ethics Committee fee"
+[01:04:57.944] Server  LOG     [v0] Decision override for 4ecc9b95: DB="In-review" -> override="Manual assessment"
+[01:04:57.944] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Hospital management fee: 3%."
+[01:04:57.945] Server  LOG     [v0] Processing: "\"Tax: 12%...\"" "Country:" "China" "Decision:" "In-review"
+[01:04:57.945] Server  LOG     [v0] Non-comparable item detected (tax/discount/overhead/etc.), skipping match: "Tax: 12%"
+[01:04:57.945] Server  LOG     [v0] Updating 7 "comparison records"
+[01:04:57.945] Server  LOG     [v0] Updating line_item_id: "746cdf6f-7e47-41a9-b31c-fe0684402356" "with" 0 "matches" "flag:" "NO_MATCH"
+[01:04:58.051] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:04:58.052] Server  LOG     [v0] Updating line_item_id: "1e8c3edb-5658-49dc-b8cb-4a2747b89ed6" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[01:04:58.148] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:04:58.149] Server  LOG     [v0] Updating line_item_id: "dabaa45c-0ced-48fa-98cb-3f53cc4fca2c" "with" 2 "matches" "flag:" "GREEN"
+[01:04:58.239] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:04:58.240] Server  LOG     [v0] Updating line_item_id: "19fb8dda-0e3a-4f25-9fc7-d9a44fb64561" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[01:04:58.325] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:04:58.326] Server  LOG     [v0] Updating line_item_id: "932351d7-2e79-48ea-8c7b-4595c8a4abd2" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[01:04:58.410] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:04:58.411] Server  LOG     [v0] Updating line_item_id: "4ecc9b95-f797-4f08-9e59-5d44b4c92398" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[01:04:58.502] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:04:58.503] Server  LOG     [v0] Updating line_item_id: "24a0b2de-dbc2-4956-90aa-6b25bdd6e483" "with" 0 "matches" "flag:" "NON_COMPARABLE"
+[01:04:58.588] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:04:58.724] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:04:58.731] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 1 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"746cdf6f-7e47-41a9-b31c-fe0684402356","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"1e8c3edb-5658-49dc-b8cb-4a2747b89ed6","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item specifies an hourly rate for a Principal Investigator with a specialty in hematology, which exactly matches the benchmark for an hourly rate of a hematology physician.","similarity":0.9},"flag":"GREEN","lineItemId":"dabaa45c-0ced-48fa-98cb-3f53cc4fca2c","matchCount":2,"matches":[{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item specifies an hourly rate for a Principal Investigator with a specialty in hematology, which exactly matches the benchmark for an hourly rate of a hematology physician.","similarity":0.9},{"benchmarkId":"4e3fde33-a9ae-4703-8118-5c72acd406c5","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":301,"p25":124,"p50":161,"p75":208,"p90":300,"procedureName":"Physician - Per Hour","reasoning":"This benchmark represents a general physician hourly rate, which is a broader but accurate classification for a Principal Investigator's hourly compensation if the specific specialty rate was not considered.","similarity":0.7}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"19fb8dda-0e3a-4f25-9fc7-d9a44fb64561","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"932351d7-2e79-48ea-8c7b-4595c8a4abd2","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"4ecc9b95-f797-4f08-9e59-5d44b4c92398","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NON_COMPARABLE","lineItemId":"24a0b2de-dbc2-4956-90aa-6b25bdd6e483","matchCount":0,"matches":[]}],"success":true}
+[01:04:58.731] Browser LOG     [v0] Refreshing comparisons data via API...
+[01:04:58.811] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[01:04:59.020] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[01:04:59.020] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NO_MATCH
+[01:04:59.020] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[01:04:59.020] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[01:04:59.020] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[01:04:59.020] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[01:04:59.020] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[01:04:59.020] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NON_COMPARABLE
+[01:04:59.020] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[01:07:55.107] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:07:55.382] Server  LOG     [v0] Updated line item: "19fb8dda-0e3a-4f25-9fc7-d9a44fb64561" "additionalInfo:" undefined "costCategory:" undefined

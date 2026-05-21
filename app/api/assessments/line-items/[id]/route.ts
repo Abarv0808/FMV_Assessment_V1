@@ -76,7 +76,7 @@ export async function PATCH(
       return NextResponse.json({ error: updateError.message }, { status: 500 })
     }
 
-    console.log("[v0] Updated line item:", id, "additionalInfo:", additionalInformation?.substring(0, 30), "costCategory:", costCategory)
+    console.log("[v0] Updated line item:", id, "additionalInfo:", additionalInformation?.substring(0, 30), "costCategory:", costCategory, "decision:", decision)
 
     return NextResponse.json({ success: true })
   } catch (error: any) {
