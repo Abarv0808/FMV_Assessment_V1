@@ -351,12 +351,26 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       prev.map((c) => (c.id !== compId ? c : { ...c, lineItem: { ...c.lineItem, decision } }))
     )
 
-    // NOTE: We intentionally do NOT PATCH the line item from this dropdown handler.
-    // Persistence happens server-side inside the run-comparison API which receives
-    // `decisionOverrides` (built from this in-memory state) and writes them atomically
-    // before running the comparison. The client-side PATCH was being triggered by
-    // Radix Select reconciliation echoes carrying stale "In-review" values, which
-    // overwrote the user's just-persisted decisions in the DB.
+    // Persist single-row decision change. Safe to do here because the dropdown
+    // gates onValueChange behind a real user-open gesture, so this only fires on
+    // genuine user picks (not Radix reconciliation echoes that previously
+    // overwrote the DB with stale "In-review" values).
+    if (lineItemId) {
+      console.log("[v0] Persisting decision via PATCH:", lineItemId, "->", decision)
+      const writePromise = fetch(`/api/assessments/line-items/${lineItemId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ decision }),
+      })
+        .then(async (r) => {
+          if (!r.ok) console.log("[v0] Decision PATCH failed:", r.status, await r.text().catch(() => ""))
+        })
+        .catch((err) => console.log("[v0] Decision PATCH error:", err))
+        .finally(() => {
+          pendingDecisionWritesRef.current.delete(writePromise)
+        })
+      pendingDecisionWritesRef.current.add(writePromise)
+    }
 
     if (description) {
       appendAudit(`Changed decision for "${description}" to "${decision}"`)

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, Fragment } from "react"
+import { useState, useRef, Fragment } from "react"
 import {
   Table,
   TableBody,
@@ -165,6 +165,13 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   // Editing state for additional information
   const [editingAdditionalInfo, setEditingAdditionalInfo] = useState<string | null>(null)
   const [editAdditionalInfoValue, setEditAdditionalInfoValue] = useState("")
+
+  // Per-row "user opened the Decision dropdown" gate. Radix Select fires
+  // `onValueChange` during controlled-value reconciliation (without any user
+  // pointer/keyboard input), and those echoes were corrupting the DB. We only
+  // treat onValueChange as real if the trigger was opened by the user since
+  // the last fire.
+  const decisionUserOpenRef = useRef<Set<string>>(new Set())
 
   const openMatchModal = (comparison: AssessmentComparison) => {
     setSelectedComparison(comparison)
@@ -462,8 +469,19 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   <TableCell onClick={(e) => e.stopPropagation()}>
                     <Select
                       value={comparison.lineItem.decision}
+                      onOpenChange={(open) => {
+                        if (open) {
+                          decisionUserOpenRef.current.add(comparison.id)
+                        }
+                      }}
                       onValueChange={(val) => {
-                        console.log("[v0] Select onValueChange fired:", comparison.id, "current=", comparison.lineItem.decision, "new=", val)
+                        const wasUserOpened = decisionUserOpenRef.current.has(comparison.id)
+                        if (!wasUserOpened) {
+                          // Radix Select reconciliation echo (no user gesture). Suppress.
+                          return
+                        }
+                        decisionUserOpenRef.current.delete(comparison.id)
+                        if (val === comparison.lineItem.decision) return
                         onDecisionChange?.(comparison.id, val as ItemDecision)
                       }}
                     >
