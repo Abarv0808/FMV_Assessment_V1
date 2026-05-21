@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: "FMV Assessment Platform",
   description: "Fair Market Value Assessment Management",
   generator: "v0.app",
+  themeColor: "#e1242a",
   icons: {
     icon: [
       {
@@ -38,8 +39,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`font-sans antialiased`}>
+    <html lang="en" className="bg-background">
+      <body className={`font-sans antialiased bg-background text-foreground`}>
         <AuthProvider>{children}</AuthProvider>
         <Analytics />
       </body>

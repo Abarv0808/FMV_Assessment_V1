@@ -2930,3 +2930,557 @@ Cannot access 'comparisons' before initialization
 [02:10:11.867] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NON_COMPARABLE
 [02:10:11.867] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
 [02:11:58.895] Server  LOG      ✓ Compiled in 146ms
+[02:12:28.721] Browser LOG     [v0] Persisting decision via PATCH: c18caf5b-9ab5-4717-ad01-4d2028883964 -> Not amended
+[02:12:28.821] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"Not amended\"}"
+[02:12:28.821] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:12:29.163] Server  LOG     [v0] Updated line item: "c18caf5b-9ab5-4717-ad01-4d2028883964" "additionalInfo:" undefined "costCategory:" undefined "decision:" "Not amended"
+[02:12:31.027] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[02:12:31.560] Server  LOG     [v0] Run comparison API called (AI-powered)
+[02:12:31.561] Server  LOG     [v0] Assessment ID: "c58d032b-e941-43f1-a0f6-38d327b65216"
+[02:12:31.562] Server  LOG     [v0] Decision overrides received from client: 7 "items"
+[02:12:31.562] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:12:31.564] Server  LOG     [v0] Fetching line items...
+[02:12:31.578] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[02:12:31.664] Server  LOG     [v0] Persisting 7 "decision overrides to DB before comparison"
+[02:12:31.665] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[02:12:31.665] Server  LOG     [v0] Fetching benchmark procedures...
+[02:12:31.665] Server  LOG     [v0] Line item countries: "China, Germany, Australia, Austria, Belgium, Canada"
+[02:12:31.779] Server  LOG     [v0] Benchmark files for requested countries: 174 "Error:" "none"
+[02:12:31.779] Server  LOG     [v0] Filtering to 174 "benchmark files for countries:" "China, Germany, Australia, Austria, Belgium, Canada"
+[02:12:32.011] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[02:12:32.305] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[02:12:32.558] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[02:12:32.788] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[02:12:33.061] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[02:12:33.358] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[02:12:33.690] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[02:12:33.921] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[02:12:34.180] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[02:12:34.478] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[02:12:34.760] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[02:12:34.999] Server  LOG     [v0] Loaded benchmark page 12 "size:" 1000 "running total:" 12000
+[02:12:35.332] Server  LOG     [v0] Loaded benchmark page 13 "size:" 1000 "running total:" 13000
+[02:12:35.634] Server  LOG     [v0] Loaded benchmark page 14 "size:" 1000 "running total:" 14000
+[02:12:35.899] Server  LOG     [v0] Loaded benchmark page 15 "size:" 1000 "running total:" 15000
+[02:12:36.142] Server  LOG     [v0] Loaded benchmark page 16 "size:" 1000 "running total:" 16000
+[02:12:36.433] Server  LOG     [v0] Loaded benchmark page 17 "size:" 1000 "running total:" 17000
+[02:12:36.744] Server  LOG     [v0] Loaded benchmark page 18 "size:" 1000 "running total:" 18000
+[02:12:37.089] Server  LOG     [v0] Loaded benchmark page 19 "size:" 1000 "running total:" 19000
+[02:12:37.342] Server  LOG     [v0] Loaded benchmark page 20 "size:" 1000 "running total:" 20000
+[02:12:37.620] Server  LOG     [v0] Loaded benchmark page 21 "size:" 1000 "running total:" 21000
+[02:12:37.942] Server  LOG     [v0] Loaded benchmark page 22 "size:" 1000 "running total:" 22000
+[02:12:38.244] Server  LOG     [v0] Loaded benchmark page 23 "size:" 1000 "running total:" 23000
+[02:12:38.497] Server  LOG     [v0] Loaded benchmark page 24 "size:" 1000 "running total:" 24000
+[02:12:38.848] Server  LOG     [v0] Loaded benchmark page 25 "size:" 1000 "running total:" 25000
+[02:12:39.169] Server  LOG     [v0] Loaded benchmark page 26 "size:" 1000 "running total:" 26000
+[02:12:39.458] Server  LOG     [v0] Loaded benchmark page 27 "size:" 1000 "running total:" 27000
+[02:12:39.728] Server  LOG     [v0] Loaded benchmark page 28 "size:" 1000 "running total:" 28000
+[02:12:40.034] Server  LOG     [v0] Loaded benchmark page 29 "size:" 1000 "running total:" 29000
+[02:12:40.357] Server  LOG     [v0] Loaded benchmark page 30 "size:" 1000 "running total:" 30000
+[02:12:40.718] Server  LOG     [v0] Loaded benchmark page 31 "size:" 1000 "running total:" 31000
+[02:12:40.987] Server  LOG     [v0] Loaded benchmark page 32 "size:" 1000 "running total:" 32000
+[02:12:41.281] Server  LOG     [v0] Loaded benchmark page 33 "size:" 1000 "running total:" 33000
+[02:12:41.621] Server  LOG     [v0] Loaded benchmark page 34 "size:" 1000 "running total:" 34000
+[02:12:41.944] Server  LOG     [v0] Loaded benchmark page 35 "size:" 1000 "running total:" 35000
+[02:12:42.219] Server  LOG     [v0] Loaded benchmark page 36 "size:" 934 "running total:" 35934
+[02:12:42.284] Server  LOG     [v0] Benchmark procedures loaded: 35934 "from" 6 "countries"
+[02:12:42.284] Server  LOG     [v0] Available countries: "Canada, Belgium, Austria, China, Australia, Germany" ""
+[02:12:42.289] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[02:12:42.289] Server  LOG     [v0] Processing: "\"Tax: 12%...\"" "Country:" "China" "Decision:" "In-review"
+[02:12:42.289] Server  LOG     [v0] Non-comparable item detected (tax/discount/overhead/etc.), skipping match: "Tax: 12%"
+[02:12:42.289] Server  LOG     [v0] Skipping item (decision="Not amended" not eligible): "The cost for CMV-specific T cell tests is 1000 CNY"
+[02:12:42.289] Server  LOG     [v0] Processing: "\"250RMB/hour*2 hours*4 visits...\"" "Country:" "Australia" "Decision:" "In-review"
+[02:12:42.296] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[02:12:42.324] Server  LOG     [v0][AI-Gateway][26291106] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:12:42.325] Server  LOG     [v0][AI-Gateway][26291106] Vendor item: "250RMB/hour*2 hours*4 visits" | Country: Australia | Benchmarks: 150/5989
+[02:12:51.108] Server  LOG     [v0][AI-Gateway][26291106] ✓ AI Gateway success in 8783ms | Matches: 3 | Tokens: prompt=5065 completion=645 total=5710
+[02:12:51.108] Server  LOG     [v0] AI found 3 "matches for" "Australia"
+[02:12:51.108] Server  LOG     [v0]   Match 1: "Subject Stipend per hour" | Confidence: HIGH | AI: true
+[02:12:51.109] Server  LOG     [v0]   Match 2: "Patient Reimbursement, Stipend - Per Vis" | Confidence: HIGH | AI: true
+[02:12:51.109] Server  LOG     [v0]   Match 3: "Patient Reimbursement, Stipend - Per Vis" | Confidence: HIGH | AI: true
+[02:12:51.109] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria" "Decision:" "In-review"
+[02:12:51.116] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Austria"
+[02:12:51.148] Server  LOG     [v0][AI-Gateway][f5e74151] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:12:51.149] Server  LOG     [v0][AI-Gateway][f5e74151] Vendor item: "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty i" | Country: Austria | Benchmarks: 150/5989
+[02:12:56.744] Server  LOG     [v0][AI-Gateway][f5e74151] ✓ AI Gateway success in 5596ms | Matches: 2 | Tokens: prompt=5084 completion=532 total=5616
+[02:12:56.744] Server  LOG     [v0] AI found 2 "matches for" "Austria"
+[02:12:56.745] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
+[02:12:56.745] Server  LOG     [v0]   Match 2: "Physician - Per Hour" | Confidence: MEDIUM | AI: true
+[02:12:56.745] Server  LOG     [v0] Processing: "\"Clinical research coordinator. The HCP is a hemato...\"" "Country:" "Australia" "Decision:" "In-review"
+[02:12:56.752] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[02:12:56.780] Server  LOG     [v0][AI-Gateway][f95d800a] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:12:56.780] Server  LOG     [v0][AI-Gateway][f95d800a] Vendor item: "Clinical research coordinator. The HCP is a hematologist and has over 5 years of" | Country: Australia | Benchmarks: 150/5989
+[02:13:05.528] Server  LOG     [v0][AI-Gateway][f95d800a] ✓ AI Gateway success in 8749ms | Matches: 2 | Tokens: prompt=5215 completion=586 total=5801
+[02:13:05.529] Server  LOG     [v0] AI found 2 "matches for" "Australia"
+[02:13:05.529] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[02:13:05.529] Server  LOG     [v0]   Match 2: "Physician: Hematology - Per Hour" | Confidence: MEDIUM | AI: true
+[02:13:05.529] Server  LOG     [v0] Processing: "\"Local Ethics Committee fee...\"" "Country:" "Belgium" "Decision:" "In-review"
+[02:13:05.536] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Belgium"
+[02:13:05.573] Server  LOG     [v0][AI-Gateway][c597c90e] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:13:05.573] Server  LOG     [v0][AI-Gateway][c597c90e] Vendor item: "Local Ethics Committee fee" | Country: Belgium | Benchmarks: 150/5989
+[02:13:14.045] Server  LOG     [v0][AI-Gateway][c597c90e] ✓ AI Gateway success in 8472ms | Matches: 0 | Tokens: prompt=5258 completion=480 total=5738
+[02:13:14.045] Server  LOG     [v0] Using trigram fallback for: "Local Ethics Committee fee" "Country:" "Belgium"
+[02:13:14.114] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[02:13:14.114] Server  LOG     [v0]   Match 2: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[02:13:14.114] Server  LOG     [v0]   Match 3: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[02:13:14.115] Server  LOG     [v0] Processing: "\"Hospital management fee: 3%....\"" "Country:" "Canada" "Decision:" "In-review"
+[02:13:14.123] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Canada"
+[02:13:14.157] Server  LOG     [v0][AI-Gateway][7ce9b2e7] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:13:14.158] Server  LOG     [v0][AI-Gateway][7ce9b2e7] Vendor item: "Hospital management fee: 3%." | Country: Canada | Benchmarks: 150/5989
+[02:13:20.045] Server  LOG     [v0][AI-Gateway][7ce9b2e7] ✓ AI Gateway success in 5888ms | Matches: 0 | Tokens: prompt=5035 completion=359 total=5394
+[02:13:20.046] Server  LOG     [v0] Using trigram fallback for: "Hospital management fee: 3%." "Country:" "Canada"
+[02:13:20.106] Server  LOG     [v0]   Match 1: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:13:20.107] Server  LOG     [v0]   Match 2: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:13:20.107] Server  LOG     [v0]   Match 3: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:13:20.107] Server  LOG     [v0] Updating 7 "comparison records"
+[02:13:20.107] Server  LOG     [v0] Updating line_item_id: "592a7353-645e-4d35-bf09-c89f738ca883" "with" 0 "matches" "flag:" "NON_COMPARABLE"
+[02:13:20.234] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:13:20.234] Server  LOG     [v0] Updating line_item_id: "c18caf5b-9ab5-4717-ad01-4d2028883964" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[02:13:20.344] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:13:20.345] Server  LOG     [v0] Updating line_item_id: "26291106-377e-48ff-9a9e-b52b465dd192" "with" 3 "matches" "flag:" "GREEN"
+[02:13:20.461] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:13:20.462] Server  LOG     [v0] Updating line_item_id: "f5e74151-b906-448b-9a7e-36ce853f0385" "with" 2 "matches" "flag:" "GREEN"
+[02:13:20.549] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:13:20.549] Server  LOG     [v0] Updating line_item_id: "f95d800a-27b6-4eb2-b1fe-0c18b57efc08" "with" 2 "matches" "flag:" "GREEN"
+[02:13:20.651] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:13:20.652] Server  LOG     [v0] Updating line_item_id: "c597c90e-4130-4cb2-b339-ceb64f65592b" "with" 3 "matches" "flag:" "GREEN"
+[02:13:20.730] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:13:20.731] Server  LOG     [v0] Updating line_item_id: "7ce9b2e7-0e75-4de8-bb79-963dcf5a007d" "with" 3 "matches" "flag:" "YELLOW"
+[02:13:20.816] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:13:20.954] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:13:20.980] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 3 AI matches, 2 trigram matches","results":[{"bestMatch":null,"flag":"NON_COMPARABLE","lineItemId":"592a7353-645e-4d35-bf09-c89f738ca883","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"c18caf5b-9ab5-4717-ad01-4d2028883964","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor item specifies compensation per hour for subjects, which directly aligns with the benchmark 'Subject Stipend per hour'.","similarity":0.9},"flag":"GREEN","lineItemId":"26291106-377e-48ff-9a9e-b52b465dd192","matchCount":3,"matches":[{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor item specifies compensation per hour for subjects, which directly aligns with the benchmark 'Subject Stipend per hour'.","similarity":0.9},{"benchmarkId":"c5cf9d07-1541-4130-ad38-94ed5b870169","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":351,"p25":73,"p50":104,"p75":129,"p90":175,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"The vendor item calculates the compensation based on visits, making 'Patient Reimbursement, Stipend - Per Visit' an accurate alternative representation.","similarity":0.9},{"benchmarkId":"06721044-94bf-43c3-978c-10814a6a8366","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":351,"p25":73,"p50":104,"p75":129,"p90":175,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"This is a duplicate of the 'Patient Reimbursement, Stipend - Per Visit' benchmark and applies equally well to subject compensation calculated per visit.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifies an hourly rate for a Principal Investigator (PI) whose specialty is hematology, which perfectly matches the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"f5e74151-b906-448b-9a7e-36ce853f0385","matchCount":2,"matches":[{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifies an hourly rate for a Principal Investigator (PI) whose specialty is hematology, which perfectly matches the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},{"benchmarkId":"4e3fde33-a9ae-4703-8118-5c72acd406c5","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":301,"p25":124,"p50":161,"p75":208,"p90":300,"procedureName":"Physician - Per Hour","reasoning":"This is a broader match for the hourly rate of a physician/Principal Investigator performing supervision tasks on the project.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor cost item specifically requests a Clinical Research Coordinator, which is directly synonymous with Study Coordinator.","similarity":0.9},"flag":"GREEN","lineItemId":"f95d800a-27b6-4eb2-b1fe-0c18b57efc08","matchCount":2,"matches":[{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor cost item specifically requests a Clinical Research Coordinator, which is directly synonymous with Study Coordinator.","similarity":0.9},{"benchmarkId":"f1fd6622-7687-4a0d-9a51-14f10d24b4a0","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":0,"p25":213,"p50":289,"p75":393,"p90":516,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item specifies that the individual performing the role is a hematologist, making the physician specialty rate for Hematology relevant.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"042ceb7a-2ad4-458e-83fc-e280058a42d3","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},"flag":"GREEN","lineItemId":"c597c90e-4130-4cb2-b339-ceb64f65592b","matchCount":3,"matches":[{"benchmarkId":"042ceb7a-2ad4-458e-83fc-e280058a42d3","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},{"benchmarkId":"f1e36296-7663-40fa-ae1a-50a705c8e73d","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},{"benchmarkId":"38424aa7-be05-4fe3-a5db-407dfc2ba9cd","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916}]},{"bestMatch":{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},"flag":"YELLOW","lineItemId":"7ce9b2e7-0e75-4de8-bb79-963dcf5a007d","matchCount":3,"matches":[{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"ed843566-aa9b-420d-a3b5-bc6844a43e65","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"c4cc3732-8979-4ebe-b422-6db71297aeeb","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507}]}],"success":true}
+[02:13:20.980] Browser LOG     [v0] Refreshing comparisons data via API...
+[02:13:21.045] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:13:21.235] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[02:13:21.235] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[02:13:21.235] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:13:21.235] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[02:13:21.235] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[02:13:21.235] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:13:21.235] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:13:21.235] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NON_COMPARABLE
+[02:13:21.235] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[02:14:02.316] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"Not amended\"}"
+[02:14:02.317] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:14:02.375] Browser LOG     [v0] Persisting decision via PATCH: 592a7353-645e-4d35-bf09-c89f738ca883 -> Not amended
+[02:14:03.384] Server  LOG     [v0] Updated line item: "592a7353-645e-4d35-bf09-c89f738ca883" "additionalInfo:" undefined "costCategory:" undefined "decision:" "Not amended"
+[02:14:04.541] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"Manual assessment\"}"
+[02:14:04.542] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:14:04.596] Browser LOG     [v0] Persisting decision via PATCH: 592a7353-645e-4d35-bf09-c89f738ca883 -> Manual assessment
+[02:14:04.805] Server  LOG     [v0] Updated line item: "592a7353-645e-4d35-bf09-c89f738ca883" "additionalInfo:" undefined "costCategory:" undefined "decision:" "Manual assessment"
+[02:14:06.786] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[02:14:07.015] Server  LOG     [v0] Run comparison API called (AI-powered)
+[02:14:07.017] Server  LOG     [v0] Assessment ID: "c58d032b-e941-43f1-a0f6-38d327b65216"
+[02:14:07.017] Server  LOG     [v0] Decision overrides received from client: 7 "items"
+[02:14:07.017] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:14:07.019] Server  LOG     [v0] Fetching line items...
+[02:14:07.049] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[02:14:07.176] Server  LOG     [v0] Persisting 7 "decision overrides to DB before comparison"
+[02:14:07.176] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[02:14:07.176] Server  LOG     [v0] Fetching benchmark procedures...
+[02:14:07.177] Server  LOG     [v0] Line item countries: "China, Germany, Australia, Austria, Belgium, Canada"
+[02:14:07.378] Server  LOG     [v0] Benchmark files for requested countries: 174 "Error:" "none"
+[02:14:07.379] Server  LOG     [v0] Filtering to 174 "benchmark files for countries:" "China, Germany, Australia, Austria, Belgium, Canada"
+[02:14:08.262] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[02:14:08.652] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[02:14:08.863] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[02:14:09.166] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[02:14:09.415] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[02:14:09.627] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[02:14:09.774] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[02:14:10.125] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[02:14:10.448] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[02:14:10.731] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[02:14:11.002] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[02:14:11.212] Server  LOG     [v0] Loaded benchmark page 12 "size:" 1000 "running total:" 12000
+[02:14:11.463] Server  LOG     [v0] Loaded benchmark page 13 "size:" 1000 "running total:" 13000
+[02:14:11.675] Server  LOG     [v0] Loaded benchmark page 14 "size:" 1000 "running total:" 14000
+[02:14:11.975] Server  LOG     [v0] Loaded benchmark page 15 "size:" 1000 "running total:" 15000
+[02:14:12.183] Server  LOG     [v0] Loaded benchmark page 16 "size:" 1000 "running total:" 16000
+[02:14:12.533] Server  LOG     [v0] Loaded benchmark page 17 "size:" 1000 "running total:" 17000
+[02:14:12.854] Server  LOG     [v0] Loaded benchmark page 18 "size:" 1000 "running total:" 18000
+[02:14:13.138] Server  LOG     [v0] Loaded benchmark page 19 "size:" 1000 "running total:" 19000
+[02:14:13.287] Server  LOG     [v0] Loaded benchmark page 20 "size:" 1000 "running total:" 20000
+[02:14:13.568] Server  LOG     [v0] Loaded benchmark page 21 "size:" 1000 "running total:" 21000
+[02:14:13.827] Server  LOG     [v0] Loaded benchmark page 22 "size:" 1000 "running total:" 22000
+[02:14:14.041] Server  LOG     [v0] Loaded benchmark page 23 "size:" 1000 "running total:" 23000
+[02:14:14.354] Server  LOG     [v0] Loaded benchmark page 24 "size:" 1000 "running total:" 24000
+[02:14:14.587] Server  LOG     [v0] Loaded benchmark page 25 "size:" 1000 "running total:" 25000
+[02:14:14.916] Server  LOG     [v0] Loaded benchmark page 26 "size:" 1000 "running total:" 26000
+[02:14:15.142] Server  LOG     [v0] Loaded benchmark page 27 "size:" 1000 "running total:" 27000
+[02:14:15.507] Server  LOG     [v0] Loaded benchmark page 28 "size:" 1000 "running total:" 28000
+[02:14:15.736] Server  LOG     [v0] Loaded benchmark page 29 "size:" 1000 "running total:" 29000
+[02:14:16.009] Server  LOG     [v0] Loaded benchmark page 30 "size:" 1000 "running total:" 30000
+[02:14:16.239] Server  LOG     [v0] Loaded benchmark page 31 "size:" 1000 "running total:" 31000
+[02:14:16.541] Server  LOG     [v0] Loaded benchmark page 32 "size:" 1000 "running total:" 32000
+[02:14:16.791] Server  LOG     [v0] Loaded benchmark page 33 "size:" 1000 "running total:" 33000
+[02:14:17.130] Server  LOG     [v0] Loaded benchmark page 34 "size:" 1000 "running total:" 34000
+[02:14:17.363] Server  LOG     [v0] Loaded benchmark page 35 "size:" 1000 "running total:" 35000
+[02:14:17.691] Server  LOG     [v0] Loaded benchmark page 36 "size:" 934 "running total:" 35934
+[02:14:17.747] Server  LOG     [v0] Benchmark procedures loaded: 35934 "from" 6 "countries"
+[02:14:17.748] Server  LOG     [v0] Available countries: "Canada, Belgium, Austria, China, Australia, Germany" ""
+[02:14:17.751] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[02:14:17.752] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Tax: 12%"
+[02:14:17.752] Server  LOG     [v0] Skipping item (decision="Not amended" not eligible): "The cost for CMV-specific T cell tests is 1000 CNY"
+[02:14:17.752] Server  LOG     [v0] Processing: "\"250RMB/hour*2 hours*4 visits...\"" "Country:" "Australia" "Decision:" "In-review"
+[02:14:17.757] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[02:14:17.784] Server  LOG     [v0][AI-Gateway][26291106] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:14:17.785] Server  LOG     [v0][AI-Gateway][26291106] Vendor item: "250RMB/hour*2 hours*4 visits" | Country: Australia | Benchmarks: 150/5989
+[02:14:28.760] Server  LOG     [v0][AI-Gateway][26291106] ✓ AI Gateway success in 10976ms | Matches: 3 | Tokens: prompt=5224 completion=852 total=6076
+[02:14:28.760] Server  LOG     [v0] AI found 3 "matches for" "Australia"
+[02:14:28.761] Server  LOG     [v0]   Match 1: "Subject Stipend per hour" | Confidence: HIGH | AI: true
+[02:14:28.761] Server  LOG     [v0]   Match 2: "Patient Reimbursement, Stipend - Per Vis" | Confidence: HIGH | AI: true
+[02:14:28.761] Server  LOG     [v0]   Match 3: "Patient Reimbursement, Stipend - Per Vis" | Confidence: HIGH | AI: true
+[02:14:28.761] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria" "Decision:" "In-review"
+[02:14:28.766] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Austria"
+[02:14:28.799] Server  LOG     [v0][AI-Gateway][f5e74151] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:14:28.799] Server  LOG     [v0][AI-Gateway][f5e74151] Vendor item: "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty i" | Country: Austria | Benchmarks: 150/5989
+[02:14:36.047] Server  LOG     [v0][AI-Gateway][f5e74151] ✓ AI Gateway success in 7249ms | Matches: 2 | Tokens: prompt=5243 completion=422 total=5665
+[02:14:36.047] Server  LOG     [v0] AI found 2 "matches for" "Austria"
+[02:14:36.047] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
+[02:14:36.048] Server  LOG     [v0]   Match 2: "Physician - Per Hour" | Confidence: MEDIUM | AI: true
+[02:14:36.048] Server  LOG     [v0] Processing: "\"Clinical research coordinator. The HCP is a hemato...\"" "Country:" "Australia" "Decision:" "In-review"
+[02:14:36.053] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[02:14:36.081] Server  LOG     [v0][AI-Gateway][f95d800a] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:14:36.081] Server  LOG     [v0][AI-Gateway][f95d800a] Vendor item: "Clinical research coordinator. The HCP is a hematologist and has over 5 years of" | Country: Australia | Benchmarks: 150/5989
+[02:14:45.193] Server  LOG     [v0][AI-Gateway][f95d800a] ✓ AI Gateway success in 9112ms | Matches: 3 | Tokens: prompt=5215 completion=703 total=5918
+[02:14:45.193] Server  LOG     [v0] AI found 3 "matches for" "Australia"
+[02:14:45.193] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[02:14:45.194] Server  LOG     [v0]   Match 2: "Study Coordinator, Simple (e.g. interim " | Confidence: MEDIUM | AI: true
+[02:14:45.194] Server  LOG     [v0]   Match 3: "Study Coordinator, Complex (e.g. initial" | Confidence: MEDIUM | AI: true
+[02:14:45.194] Server  LOG     [v0] Processing: "\"Local Ethics Committee fee...\"" "Country:" "Belgium" "Decision:" "In-review"
+[02:14:45.199] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Belgium"
+[02:14:45.236] Server  LOG     [v0][AI-Gateway][c597c90e] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:14:45.236] Server  LOG     [v0][AI-Gateway][c597c90e] Vendor item: "Local Ethics Committee fee" | Country: Belgium | Benchmarks: 150/5989
+[02:14:56.504] Server  LOG     [v0][AI-Gateway][c597c90e] ✓ AI Gateway success in 11268ms | Matches: 0 | Tokens: prompt=5099 completion=669 total=5768
+[02:14:56.504] Server  LOG     [v0] Using trigram fallback for: "Local Ethics Committee fee" "Country:" "Belgium"
+[02:14:56.564] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[02:14:56.565] Server  LOG     [v0]   Match 2: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[02:14:56.565] Server  LOG     [v0]   Match 3: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[02:14:56.565] Server  LOG     [v0] Processing: "\"Hospital management fee: 3%....\"" "Country:" "Canada" "Decision:" "In-review"
+[02:14:56.571] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Canada"
+[02:14:56.622] Server  LOG     [v0][AI-Gateway][7ce9b2e7] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:14:56.622] Server  LOG     [v0][AI-Gateway][7ce9b2e7] Vendor item: "Hospital management fee: 3%." | Country: Canada | Benchmarks: 150/5989
+[02:14:59.901] Server  LOG     [v0][AI-Gateway][7ce9b2e7] ✓ AI Gateway success in 3279ms | Matches: 0 | Tokens: prompt=5035 completion=126 total=5161
+[02:14:59.901] Server  LOG     [v0] Using trigram fallback for: "Hospital management fee: 3%." "Country:" "Canada"
+[02:14:59.956] Server  LOG     [v0]   Match 1: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:14:59.956] Server  LOG     [v0]   Match 2: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:14:59.956] Server  LOG     [v0]   Match 3: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:14:59.956] Server  LOG     [v0] Updating 7 "comparison records"
+[02:14:59.957] Server  LOG     [v0] Updating line_item_id: "592a7353-645e-4d35-bf09-c89f738ca883" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[02:15:00.231] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:15:00.231] Server  LOG     [v0] Updating line_item_id: "c18caf5b-9ab5-4717-ad01-4d2028883964" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[02:15:00.348] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:15:00.349] Server  LOG     [v0] Updating line_item_id: "26291106-377e-48ff-9a9e-b52b465dd192" "with" 3 "matches" "flag:" "GREEN"
+[02:15:00.439] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:15:00.439] Server  LOG     [v0] Updating line_item_id: "f5e74151-b906-448b-9a7e-36ce853f0385" "with" 2 "matches" "flag:" "GREEN"
+[02:15:00.693] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:15:00.693] Server  LOG     [v0] Updating line_item_id: "f95d800a-27b6-4eb2-b1fe-0c18b57efc08" "with" 3 "matches" "flag:" "GREEN"
+[02:15:00.784] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:15:00.784] Server  LOG     [v0] Updating line_item_id: "c597c90e-4130-4cb2-b339-ceb64f65592b" "with" 3 "matches" "flag:" "GREEN"
+[02:15:01.004] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:15:01.004] Server  LOG     [v0] Updating line_item_id: "7ce9b2e7-0e75-4de8-bb79-963dcf5a007d" "with" 3 "matches" "flag:" "YELLOW"
+[02:15:01.086] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:15:01.233] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:15:01.237] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 3 AI matches, 2 trigram matches","results":[{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"592a7353-645e-4d35-bf09-c89f738ca883","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"c18caf5b-9ab5-4717-ad01-4d2028883964","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor item specifically calculates subject compensation based on an hourly rate (250RMB/hour), perfectly aligning with the 'Subject Stipend per hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"26291106-377e-48ff-9a9e-b52b465dd192","matchCount":3,"matches":[{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor item specifically calculates subject compensation based on an hourly rate (250RMB/hour), perfectly aligning with the 'Subject Stipend per hour' benchmark.","similarity":0.9},{"benchmarkId":"06721044-94bf-43c3-978c-10814a6a8366","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":351,"p25":73,"p50":104,"p75":129,"p90":175,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"The vendor item is categorized as patient/subject compensation for their time participating in the study (visits), which directly corresponds to a patient stipend per visit.","similarity":0.9},{"benchmarkId":"c5cf9d07-1541-4130-ad38-94ed5b870169","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":351,"p25":73,"p50":104,"p75":129,"p90":175,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"This is a duplicate benchmark for patient stipend per visit, which accurately reflects the vendor's description of subject compensation per visit.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifies an hourly rate for a Principal Investigator (PI) whose specialty is hematology, which directly matches the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"f5e74151-b906-448b-9a7e-36ce853f0385","matchCount":2,"matches":[{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifies an hourly rate for a Principal Investigator (PI) whose specialty is hematology, which directly matches the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},{"benchmarkId":"4e3fde33-a9ae-4703-8118-5c72acd406c5","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":301,"p25":124,"p50":161,"p75":208,"p90":300,"procedureName":"Physician - Per Hour","reasoning":"This benchmark provides a general hourly rate for a physician, which is appropriate for a Principal Investigator charging an hourly rate for supervision, although it lacks the specific hematology specialty.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor cost item is for a clinical research coordinator, which matches the benchmark for 'Study Coordinator'.","similarity":0.9},"flag":"GREEN","lineItemId":"f95d800a-27b6-4eb2-b1fe-0c18b57efc08","matchCount":3,"matches":[{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor cost item is for a clinical research coordinator, which matches the benchmark for 'Study Coordinator'.","similarity":0.9},{"benchmarkId":"3bbd64b1-05eb-459b-afe3-635c4bf9e777","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":349,"p25":144,"p50":152,"p75":174,"p90":188,"procedureName":"Study Coordinator, Simple (e.g. interim visits) - Per Visit","reasoning":"Matches the role of clinical research/study coordinator, although the benchmark specifies a per-visit unit for simple tasks.","similarity":0.7},{"benchmarkId":"79661387-3a1d-4375-ab25-a9018adf04ee","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":410,"p25":170,"p50":179,"p75":205,"p90":221,"procedureName":"Study Coordinator, Complex (e.g. initial visit, final visit) - Per Visit","reasoning":"Matches the role of clinical research/study coordinator, although the benchmark specifies a per-visit unit for complex tasks.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"042ceb7a-2ad4-458e-83fc-e280058a42d3","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},"flag":"GREEN","lineItemId":"c597c90e-4130-4cb2-b339-ceb64f65592b","matchCount":3,"matches":[{"benchmarkId":"042ceb7a-2ad4-458e-83fc-e280058a42d3","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},{"benchmarkId":"f1e36296-7663-40fa-ae1a-50a705c8e73d","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},{"benchmarkId":"38424aa7-be05-4fe3-a5db-407dfc2ba9cd","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916}]},{"bestMatch":{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},"flag":"YELLOW","lineItemId":"7ce9b2e7-0e75-4de8-bb79-963dcf5a007d","matchCount":3,"matches":[{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"ed843566-aa9b-420d-a3b5-bc6844a43e65","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"c4cc3732-8979-4ebe-b422-6db71297aeeb","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507}]}],"success":true}
+[02:15:01.237] Browser LOG     [v0] Refreshing comparisons data via API...
+[02:15:01.325] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:15:01.543] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[02:15:01.543] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[02:15:01.543] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:15:01.544] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[02:15:01.544] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:15:01.544] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:15:01.544] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:15:01.544] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[02:15:01.544] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[02:15:29.140] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"In-review\"}"
+[02:15:29.140] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:15:29.181] Browser LOG     [v0] Persisting decision via PATCH: c18caf5b-9ab5-4717-ad01-4d2028883964 -> In-review
+[02:15:29.342] Server  LOG     [v0] Updated line item: "c18caf5b-9ab5-4717-ad01-4d2028883964" "additionalInfo:" undefined "costCategory:" undefined "decision:" "In-review"
+[02:15:31.006] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[02:15:31.201] Server  LOG     [v0] Run comparison API called (AI-powered)
+[02:15:31.201] Server  LOG     [v0] Assessment ID: "c58d032b-e941-43f1-a0f6-38d327b65216"
+[02:15:31.202] Server  LOG     [v0] Decision overrides received from client: 7 "items"
+[02:15:31.202] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:15:31.203] Server  LOG     [v0] Fetching line items...
+[02:15:31.238] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[02:15:31.289] Server  LOG     [v0] Persisting 7 "decision overrides to DB before comparison"
+[02:15:31.290] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[02:15:31.290] Server  LOG     [v0] Fetching benchmark procedures...
+[02:15:31.290] Server  LOG     [v0] Line item countries: "China, Germany, Australia, Austria, Belgium, Canada"
+[02:15:31.390] Server  LOG     [v0] Benchmark files for requested countries: 174 "Error:" "none"
+[02:15:31.390] Server  LOG     [v0] Filtering to 174 "benchmark files for countries:" "China, Germany, Australia, Austria, Belgium, Canada"
+[02:15:31.661] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[02:15:31.980] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[02:15:32.229] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[02:15:32.456] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[02:15:32.730] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[02:15:33.021] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[02:15:33.355] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[02:15:33.612] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[02:15:33.844] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[02:15:34.126] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[02:15:34.598] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[02:15:34.930] Server  LOG     [v0] Loaded benchmark page 12 "size:" 1000 "running total:" 12000
+[02:15:35.232] Server  LOG     [v0] Loaded benchmark page 13 "size:" 1000 "running total:" 13000
+[02:15:35.495] Server  LOG     [v0] Loaded benchmark page 14 "size:" 1000 "running total:" 14000
+[02:15:35.736] Server  LOG     [v0] Loaded benchmark page 15 "size:" 1000 "running total:" 15000
+[02:15:36.024] Server  LOG     [v0] Loaded benchmark page 16 "size:" 1000 "running total:" 16000
+[02:15:36.363] Server  LOG     [v0] Loaded benchmark page 17 "size:" 1000 "running total:" 17000
+[02:15:36.672] Server  LOG     [v0] Loaded benchmark page 18 "size:" 1000 "running total:" 18000
+[02:15:37.305] Server  LOG     [v0] Loaded benchmark page 19 "size:" 1000 "running total:" 19000
+[02:15:37.607] Server  LOG     [v0] Loaded benchmark page 20 "size:" 1000 "running total:" 20000
+[02:15:37.863] Server  LOG     [v0] Loaded benchmark page 21 "size:" 1000 "running total:" 21000
+[02:15:38.211] Server  LOG     [v0] Loaded benchmark page 22 "size:" 1000 "running total:" 22000
+[02:15:38.527] Server  LOG     [v0] Loaded benchmark page 23 "size:" 1000 "running total:" 23000
+[02:15:38.806] Server  LOG     [v0] Loaded benchmark page 24 "size:" 1000 "running total:" 24000
+[02:15:39.114] Server  LOG     [v0] Loaded benchmark page 25 "size:" 1000 "running total:" 25000
+[02:15:39.371] Server  LOG     [v0] Loaded benchmark page 26 "size:" 1000 "running total:" 26000
+[02:15:39.725] Server  LOG     [v0] Loaded benchmark page 27 "size:" 1000 "running total:" 27000
+[02:15:40.053] Server  LOG     [v0] Loaded benchmark page 28 "size:" 1000 "running total:" 28000
+[02:15:40.341] Server  LOG     [v0] Loaded benchmark page 29 "size:" 1000 "running total:" 29000
+[02:15:40.667] Server  LOG     [v0] Loaded benchmark page 30 "size:" 1000 "running total:" 30000
+[02:15:40.976] Server  LOG     [v0] Loaded benchmark page 31 "size:" 1000 "running total:" 31000
+[02:15:41.242] Server  LOG     [v0] Loaded benchmark page 32 "size:" 1000 "running total:" 32000
+[02:15:41.621] Server  LOG     [v0] Loaded benchmark page 33 "size:" 1000 "running total:" 33000
+[02:15:41.915] Server  LOG     [v0] Loaded benchmark page 34 "size:" 1000 "running total:" 34000
+[02:15:42.229] Server  LOG     [v0] Loaded benchmark page 35 "size:" 1000 "running total:" 35000
+[02:15:42.563] Server  LOG     [v0] Loaded benchmark page 36 "size:" 934 "running total:" 35934
+[02:15:42.624] Server  LOG     [v0] Benchmark procedures loaded: 35934 "from" 6 "countries"
+[02:15:42.625] Server  LOG     [v0] Available countries: "Canada, Belgium, Austria, China, Australia, Germany" ""
+[02:15:42.629] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[02:15:42.629] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Tax: 12%"
+[02:15:42.629] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\"" "Country:" "Germany" "Decision:" "In-review"
+[02:15:42.635] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Germany"
+[02:15:42.668] Server  LOG     [v0][AI-Gateway][c18caf5b] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:15:42.669] Server  LOG     [v0][AI-Gateway][c18caf5b] Vendor item: "The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are " | Country: Germany | Benchmarks: 150/5989
+[02:15:51.252] Server  LOG     [v0][AI-Gateway][c18caf5b] ✓ AI Gateway success in 8583ms | Matches: 0 | Tokens: prompt=5317 completion=265 total=5582
+[02:15:51.252] Server  LOG     [v0] Using trigram fallback for: "The cost for CMV-specific T ce" "Country:" "Germany"
+[02:15:51.393] Server  LOG     [v0] Processing: "\"250RMB/hour*2 hours*4 visits...\"" "Country:" "Australia" "Decision:" "In-review"
+[02:15:51.405] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[02:15:51.434] Server  LOG     [v0][AI-Gateway][26291106] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:15:51.434] Server  LOG     [v0][AI-Gateway][26291106] Vendor item: "250RMB/hour*2 hours*4 visits" | Country: Australia | Benchmarks: 150/5989
+[02:15:59.859] Server  LOG     [v0][AI-Gateway][26291106] ✓ AI Gateway success in 8426ms | Matches: 2 | Tokens: prompt=5224 completion=607 total=5831
+[02:15:59.859] Server  LOG     [v0] AI found 2 "matches for" "Australia"
+[02:15:59.859] Server  LOG     [v0]   Match 1: "Subject Stipend per hour" | Confidence: HIGH | AI: true
+[02:15:59.860] Server  LOG     [v0]   Match 2: "Patient Reimbursement, Stipend - Per Vis" | Confidence: MEDIUM | AI: true
+[02:15:59.860] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria" "Decision:" "In-review"
+[02:15:59.865] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Austria"
+[02:15:59.904] Server  LOG     [v0][AI-Gateway][f5e74151] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:15:59.905] Server  LOG     [v0][AI-Gateway][f5e74151] Vendor item: "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty i" | Country: Austria | Benchmarks: 150/5989
+[02:16:06.358] Server  LOG     [v0][AI-Gateway][f5e74151] ✓ AI Gateway success in 6453ms | Matches: 2 | Tokens: prompt=5243 completion=611 total=5854
+[02:16:06.358] Server  LOG     [v0] AI found 2 "matches for" "Austria"
+[02:16:06.358] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
+[02:16:06.358] Server  LOG     [v0]   Match 2: "Physician - Per Hour" | Confidence: MEDIUM | AI: true
+[02:16:06.358] Server  LOG     [v0] Processing: "\"Clinical research coordinator. The HCP is a hemato...\"" "Country:" "Australia" "Decision:" "In-review"
+[02:16:06.364] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[02:16:06.392] Server  LOG     [v0][AI-Gateway][f95d800a] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:16:06.392] Server  LOG     [v0][AI-Gateway][f95d800a] Vendor item: "Clinical research coordinator. The HCP is a hematologist and has over 5 years of" | Country: Australia | Benchmarks: 150/5989
+[02:16:16.541] Server  LOG     [v0][AI-Gateway][f95d800a] ✓ AI Gateway success in 10148ms | Matches: 2 | Tokens: prompt=5215 completion=661 total=5876
+[02:16:16.541] Server  LOG     [v0] AI found 2 "matches for" "Australia"
+[02:16:16.541] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[02:16:16.541] Server  LOG     [v0]   Match 2: "Physician: Hematology - Per Hour" | Confidence: MEDIUM | AI: true
+[02:16:16.541] Server  LOG     [v0] Processing: "\"Local Ethics Committee fee...\"" "Country:" "Belgium" "Decision:" "In-review"
+[02:16:16.547] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Belgium"
+[02:16:16.583] Server  LOG     [v0][AI-Gateway][c597c90e] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:16:16.584] Server  LOG     [v0][AI-Gateway][c597c90e] Vendor item: "Local Ethics Committee fee" | Country: Belgium | Benchmarks: 150/5989
+[02:16:23.151] Server  LOG     [v0][AI-Gateway][c597c90e] ✓ AI Gateway success in 6568ms | Matches: 0 | Tokens: prompt=5258 completion=428 total=5686
+[02:16:23.151] Server  LOG     [v0] Using trigram fallback for: "Local Ethics Committee fee" "Country:" "Belgium"
+[02:16:23.211] Server  LOG     [v0]   Match 1: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[02:16:23.212] Server  LOG     [v0]   Match 2: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[02:16:23.212] Server  LOG     [v0]   Match 3: "Local Ethics Committee Fee, IRB Fee" | Confidence: HIGH | AI: false
+[02:16:23.212] Server  LOG     [v0] Processing: "\"Hospital management fee: 3%....\"" "Country:" "Canada" "Decision:" "In-review"
+[02:16:23.220] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Canada"
+[02:16:23.255] Server  LOG     [v0][AI-Gateway][7ce9b2e7] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:16:23.255] Server  LOG     [v0][AI-Gateway][7ce9b2e7] Vendor item: "Hospital management fee: 3%." | Country: Canada | Benchmarks: 150/5989
+[02:16:26.740] Server  LOG     [v0][AI-Gateway][7ce9b2e7] ✓ AI Gateway success in 3485ms | Matches: 0 | Tokens: prompt=5035 completion=115 total=5150
+[02:16:26.740] Server  LOG     [v0] Using trigram fallback for: "Hospital management fee: 3%." "Country:" "Canada"
+[02:16:26.797] Server  LOG     [v0]   Match 1: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:16:26.797] Server  LOG     [v0]   Match 2: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:16:26.797] Server  LOG     [v0]   Match 3: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:16:26.797] Server  LOG     [v0] Updating 7 "comparison records"
+[02:16:26.798] Server  LOG     [v0] Updating line_item_id: "592a7353-645e-4d35-bf09-c89f738ca883" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[02:16:27.268] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:16:27.269] Server  LOG     [v0] Updating line_item_id: "c18caf5b-9ab5-4717-ad01-4d2028883964" "with" 0 "matches" "flag:" "NO_MATCH"
+[02:16:27.450] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:16:27.450] Server  LOG     [v0] Updating line_item_id: "26291106-377e-48ff-9a9e-b52b465dd192" "with" 2 "matches" "flag:" "GREEN"
+[02:16:27.570] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:16:27.571] Server  LOG     [v0] Updating line_item_id: "f5e74151-b906-448b-9a7e-36ce853f0385" "with" 2 "matches" "flag:" "GREEN"
+[02:16:27.684] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:16:27.684] Server  LOG     [v0] Updating line_item_id: "f95d800a-27b6-4eb2-b1fe-0c18b57efc08" "with" 2 "matches" "flag:" "GREEN"
+[02:16:27.819] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:16:27.819] Server  LOG     [v0] Updating line_item_id: "c597c90e-4130-4cb2-b339-ceb64f65592b" "with" 3 "matches" "flag:" "GREEN"
+[02:16:27.963] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:16:27.963] Server  LOG     [v0] Updating line_item_id: "7ce9b2e7-0e75-4de8-bb79-963dcf5a007d" "with" 3 "matches" "flag:" "YELLOW"
+[02:16:28.083] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:16:28.281] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:16:28.283] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 3 AI matches, 2 trigram matches","results":[{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"592a7353-645e-4d35-bf09-c89f738ca883","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"c18caf5b-9ab5-4717-ad01-4d2028883964","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor item refers to patient/subject compensation calculated on an hourly basis, which directly matches 'Subject Stipend per hour'.","similarity":0.9},"flag":"GREEN","lineItemId":"26291106-377e-48ff-9a9e-b52b465dd192","matchCount":2,"matches":[{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor item refers to patient/subject compensation calculated on an hourly basis, which directly matches 'Subject Stipend per hour'.","similarity":0.9},{"benchmarkId":"c5cf9d07-1541-4130-ad38-94ed5b870169","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":351,"p25":73,"p50":104,"p75":129,"p90":175,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"The vendor item includes a per-visit calculation for patient compensation, making 'Patient Reimbursement, Stipend - Per Visit' a strong alternative match.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifies an hourly rate for a Principal Investigator (Physician) whose specialty is hematology. This exactly aligns with the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"f5e74151-b906-448b-9a7e-36ce853f0385","matchCount":2,"matches":[{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifies an hourly rate for a Principal Investigator (Physician) whose specialty is hematology. This exactly aligns with the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},{"benchmarkId":"4e3fde33-a9ae-4703-8118-5c72acd406c5","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":301,"p25":124,"p50":161,"p75":208,"p90":300,"procedureName":"Physician - Per Hour","reasoning":"This is a broader benchmark for a physician's hourly rate, which covers the PI's time for project supervision, though it lacks the specific hematology specialty.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor cost item specifically describes the role as a 'Clinical research coordinator', which directly matches the 'Study Coordinator' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"f95d800a-27b6-4eb2-b1fe-0c18b57efc08","matchCount":2,"matches":[{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor cost item specifically describes the role as a 'Clinical research coordinator', which directly matches the 'Study Coordinator' benchmark.","similarity":0.9},{"benchmarkId":"f1fd6622-7687-4a0d-9a51-14f10d24b4a0","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":0,"p25":213,"p50":289,"p75":393,"p90":516,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor specifies that the HCP filling this role is a hematologist, making the 'Physician: Hematology' benchmark a relevant secondary match depending on how the resource is billed.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"042ceb7a-2ad4-458e-83fc-e280058a42d3","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},"flag":"GREEN","lineItemId":"c597c90e-4130-4cb2-b339-ceb64f65592b","matchCount":3,"matches":[{"benchmarkId":"042ceb7a-2ad4-458e-83fc-e280058a42d3","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},{"benchmarkId":"f1e36296-7663-40fa-ae1a-50a705c8e73d","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916},{"benchmarkId":"38424aa7-be05-4fe3-a5db-407dfc2ba9cd","category":"Site Costs","confidence":"HIGH","country":"Belgium","isAIMatch":false,"p100":0,"p25":1598,"p50":1996,"p75":3790,"p90":6907,"procedureName":"Local Ethics Committee Fee, IRB Fee","reasoning":"Matched by text similarity","similarity":0.9185586535436916}]},{"bestMatch":{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},"flag":"YELLOW","lineItemId":"7ce9b2e7-0e75-4de8-bb79-963dcf5a007d","matchCount":3,"matches":[{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"ed843566-aa9b-420d-a3b5-bc6844a43e65","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"c4cc3732-8979-4ebe-b422-6db71297aeeb","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507}]}],"success":true}
+[02:16:28.284] Browser LOG     [v0] Refreshing comparisons data via API...
+[02:16:28.446] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:16:28.665] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[02:16:28.665] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NO_MATCH
+[02:16:28.665] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[02:16:28.665] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[02:16:28.665] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[02:16:28.665] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:16:28.665] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:16:28.665] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[02:16:28.665] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[02:19:11.818] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"Accepted\"}"
+[02:19:11.819] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:19:11.828] Browser LOG     [v0] Persisting decision via PATCH: c597c90e-4130-4cb2-b339-ceb64f65592b -> Accepted
+[02:19:12.196] Server  LOG     [v0] Updated line item: "c597c90e-4130-4cb2-b339-ceb64f65592b" "additionalInfo:" undefined "costCategory:" undefined "decision:" "Accepted"
+[02:19:13.189] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[02:19:13.497] Server  LOG     [v0] Run comparison API called (AI-powered)
+[02:19:13.498] Server  LOG     [v0] Assessment ID: "c58d032b-e941-43f1-a0f6-38d327b65216"
+[02:19:13.498] Server  LOG     [v0] Decision overrides received from client: 7 "items"
+[02:19:13.498] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:19:13.500] Server  LOG     [v0] Fetching line items...
+[02:19:13.514] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[02:19:13.636] Server  LOG     [v0] Persisting 7 "decision overrides to DB before comparison"
+[02:19:13.637] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[02:19:13.637] Server  LOG     [v0] Fetching benchmark procedures...
+[02:19:13.638] Server  LOG     [v0] Line item countries: "China, Germany, Australia, Austria, Belgium, Canada"
+[02:19:13.755] Server  LOG     [v0] Benchmark files for requested countries: 174 "Error:" "none"
+[02:19:13.756] Server  LOG     [v0] Filtering to 174 "benchmark files for countries:" "China, Germany, Australia, Austria, Belgium, Canada"
+[02:19:14.126] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[02:19:14.507] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[02:19:14.785] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[02:19:15.113] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[02:19:15.366] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[02:19:15.662] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[02:19:15.943] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[02:19:16.270] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[02:19:16.534] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[02:19:16.770] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[02:19:17.053] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[02:19:17.385] Server  LOG     [v0] Loaded benchmark page 12 "size:" 1000 "running total:" 12000
+[02:19:17.654] Server  LOG     [v0] Loaded benchmark page 13 "size:" 1000 "running total:" 13000
+[02:19:17.959] Server  LOG     [v0] Loaded benchmark page 14 "size:" 1000 "running total:" 14000
+[02:19:18.246] Server  LOG     [v0] Loaded benchmark page 15 "size:" 1000 "running total:" 15000
+[02:19:18.592] Server  LOG     [v0] Loaded benchmark page 16 "size:" 1000 "running total:" 16000
+[02:19:18.861] Server  LOG     [v0] Loaded benchmark page 17 "size:" 1000 "running total:" 17000
+[02:19:19.106] Server  LOG     [v0] Loaded benchmark page 18 "size:" 1000 "running total:" 18000
+[02:19:19.402] Server  LOG     [v0] Loaded benchmark page 19 "size:" 1000 "running total:" 19000
+[02:19:19.745] Server  LOG     [v0] Loaded benchmark page 20 "size:" 1000 "running total:" 20000
+[02:19:20.021] Server  LOG     [v0] Loaded benchmark page 21 "size:" 1000 "running total:" 21000
+[02:19:20.341] Server  LOG     [v0] Loaded benchmark page 22 "size:" 1000 "running total:" 22000
+[02:19:20.640] Server  LOG     [v0] Loaded benchmark page 23 "size:" 1000 "running total:" 23000
+[02:19:20.989] Server  LOG     [v0] Loaded benchmark page 24 "size:" 1000 "running total:" 24000
+[02:19:21.271] Server  LOG     [v0] Loaded benchmark page 25 "size:" 1000 "running total:" 25000
+[02:19:21.537] Server  LOG     [v0] Loaded benchmark page 26 "size:" 1000 "running total:" 26000
+[02:19:21.842] Server  LOG     [v0] Loaded benchmark page 27 "size:" 1000 "running total:" 27000
+[02:19:22.200] Server  LOG     [v0] Loaded benchmark page 28 "size:" 1000 "running total:" 28000
+[02:19:22.486] Server  LOG     [v0] Loaded benchmark page 29 "size:" 1000 "running total:" 29000
+[02:19:22.794] Server  LOG     [v0] Loaded benchmark page 30 "size:" 1000 "running total:" 30000
+[02:19:23.123] Server  LOG     [v0] Loaded benchmark page 31 "size:" 1000 "running total:" 31000
+[02:19:23.771] Server  LOG     [v0] Loaded benchmark page 32 "size:" 1000 "running total:" 32000
+[02:19:24.062] Server  LOG     [v0] Loaded benchmark page 33 "size:" 1000 "running total:" 33000
+[02:19:24.376] Server  LOG     [v0] Loaded benchmark page 34 "size:" 1000 "running total:" 34000
+[02:19:24.644] Server  LOG     [v0] Loaded benchmark page 35 "size:" 1000 "running total:" 35000
+[02:19:25.007] Server  LOG     [v0] Loaded benchmark page 36 "size:" 934 "running total:" 35934
+[02:19:25.062] Server  LOG     [v0] Benchmark procedures loaded: 35934 "from" 6 "countries"
+[02:19:25.063] Server  LOG     [v0] Available countries: "Canada, Belgium, Austria, China, Australia, Germany" ""
+[02:19:25.067] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[02:19:25.067] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Tax: 12%"
+[02:19:25.068] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\"" "Country:" "Germany" "Decision:" "In-review"
+[02:19:25.074] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Germany"
+[02:19:25.107] Server  LOG     [v0][AI-Gateway][c18caf5b] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:19:25.108] Server  LOG     [v0][AI-Gateway][c18caf5b] Vendor item: "The cost for CMV-specific T cell tests is 1000 CNY/person per test. 4 tests are " | Country: Germany | Benchmarks: 150/5989
+[02:19:29.420] Server  LOG     [v0][AI-Gateway][c18caf5b] ✓ AI Gateway success in 4312ms | Matches: 0 | Tokens: prompt=5317 completion=263 total=5580
+[02:19:29.420] Server  LOG     [v0] Using trigram fallback for: "The cost for CMV-specific T ce" "Country:" "Germany"
+[02:19:29.532] Server  LOG     [v0] Processing: "\"250RMB/hour*2 hours*4 visits...\"" "Country:" "Australia" "Decision:" "In-review"
+[02:19:29.539] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[02:19:29.568] Server  LOG     [v0][AI-Gateway][26291106] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:19:29.568] Server  LOG     [v0][AI-Gateway][26291106] Vendor item: "250RMB/hour*2 hours*4 visits" | Country: Australia | Benchmarks: 150/5989
+[02:19:37.707] Server  LOG     [v0][AI-Gateway][26291106] ✓ AI Gateway success in 8140ms | Matches: 3 | Tokens: prompt=5224 completion=661 total=5885
+[02:19:37.708] Server  LOG     [v0] AI found 3 "matches for" "Australia"
+[02:19:37.708] Server  LOG     [v0]   Match 1: "Subject Stipend per hour" | Confidence: HIGH | AI: true
+[02:19:37.708] Server  LOG     [v0]   Match 2: "Patient Reimbursement, Stipend - Per Vis" | Confidence: MEDIUM | AI: true
+[02:19:37.708] Server  LOG     [v0]   Match 3: "Patient Reimbursement, Stipend - Per Vis" | Confidence: MEDIUM | AI: true
+[02:19:37.708] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria" "Decision:" "In-review"
+[02:19:37.717] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Austria"
+[02:19:37.753] Server  LOG     [v0][AI-Gateway][f5e74151] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:19:37.753] Server  LOG     [v0][AI-Gateway][f5e74151] Vendor item: "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty i" | Country: Austria | Benchmarks: 150/5989
+[02:19:43.687] Server  LOG     [v0][AI-Gateway][f5e74151] ✓ AI Gateway success in 5934ms | Matches: 2 | Tokens: prompt=5084 completion=531 total=5615
+[02:19:43.687] Server  LOG     [v0] AI found 2 "matches for" "Austria"
+[02:19:43.688] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
+[02:19:43.688] Server  LOG     [v0]   Match 2: "Physician - Per Hour" | Confidence: MEDIUM | AI: true
+[02:19:43.688] Server  LOG     [v0] Processing: "\"Clinical research coordinator. The HCP is a hemato...\"" "Country:" "Australia" "Decision:" "In-review"
+[02:19:43.695] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[02:19:43.723] Server  LOG     [v0][AI-Gateway][f95d800a] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:19:43.724] Server  LOG     [v0][AI-Gateway][f95d800a] Vendor item: "Clinical research coordinator. The HCP is a hematologist and has over 5 years of" | Country: Australia | Benchmarks: 150/5989
+[02:19:52.158] Server  LOG     [v0][AI-Gateway][f95d800a] ✓ AI Gateway success in 8434ms | Matches: 2 | Tokens: prompt=5215 completion=756 total=5971
+[02:19:52.158] Server  LOG     [v0] AI found 2 "matches for" "Australia"
+[02:19:52.158] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[02:19:52.159] Server  LOG     [v0]   Match 2: "Physician: Hematology - Per Hour" | Confidence: MEDIUM | AI: true
+[02:19:52.159] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Local Ethics Committee fee"
+[02:19:52.159] Server  LOG     [v0] Processing: "\"Hospital management fee: 3%....\"" "Country:" "Canada" "Decision:" "In-review"
+[02:19:52.166] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Canada"
+[02:19:52.200] Server  LOG     [v0][AI-Gateway][7ce9b2e7] Calling AI Gateway with model: google/gemini-3-pro-preview
+[02:19:52.201] Server  LOG     [v0][AI-Gateway][7ce9b2e7] Vendor item: "Hospital management fee: 3%." | Country: Canada | Benchmarks: 150/5989
+[02:19:54.885] Server  LOG     [v0][AI-Gateway][7ce9b2e7] ✓ AI Gateway success in 2685ms | Matches: 0 | Tokens: prompt=5035 completion=94 total=5129
+[02:19:54.885] Server  LOG     [v0] Using trigram fallback for: "Hospital management fee: 3%." "Country:" "Canada"
+[02:19:54.939] Server  LOG     [v0]   Match 1: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:19:54.940] Server  LOG     [v0]   Match 2: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:19:54.940] Server  LOG     [v0]   Match 3: "Site Management fee, per site, per month" | Confidence: MEDIUM | AI: false
+[02:19:54.940] Server  LOG     [v0] Updating 7 "comparison records"
+[02:19:54.940] Server  LOG     [v0] Updating line_item_id: "592a7353-645e-4d35-bf09-c89f738ca883" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[02:19:55.072] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:19:55.072] Server  LOG     [v0] Updating line_item_id: "c18caf5b-9ab5-4717-ad01-4d2028883964" "with" 0 "matches" "flag:" "NO_MATCH"
+[02:19:55.197] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:19:55.197] Server  LOG     [v0] Updating line_item_id: "26291106-377e-48ff-9a9e-b52b465dd192" "with" 3 "matches" "flag:" "GREEN"
+[02:19:55.306] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:19:55.306] Server  LOG     [v0] Updating line_item_id: "f5e74151-b906-448b-9a7e-36ce853f0385" "with" 2 "matches" "flag:" "GREEN"
+[02:19:55.396] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:19:55.396] Server  LOG     [v0] Updating line_item_id: "f95d800a-27b6-4eb2-b1fe-0c18b57efc08" "with" 2 "matches" "flag:" "GREEN"
+[02:19:55.495] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:19:55.496] Server  LOG     [v0] Updating line_item_id: "c597c90e-4130-4cb2-b339-ceb64f65592b" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[02:19:55.575] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:19:55.575] Server  LOG     [v0] Updating line_item_id: "7ce9b2e7-0e75-4de8-bb79-963dcf5a007d" "with" 3 "matches" "flag:" "YELLOW"
+[02:19:55.668] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[02:19:55.828] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:19:55.831] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 3 AI matches, 1 trigram matches","results":[{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"592a7353-645e-4d35-bf09-c89f738ca883","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"c18caf5b-9ab5-4717-ad01-4d2028883964","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor item specifically describes patient/subject compensation based on an hourly rate, which perfectly aligns with 'Subject Stipend per hour'.","similarity":0.9},"flag":"GREEN","lineItemId":"26291106-377e-48ff-9a9e-b52b465dd192","matchCount":3,"matches":[{"benchmarkId":"1659eb38-38b9-4247-b895-30407c527d71","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":0,"p25":41,"p50":50,"p75":75,"p90":104,"procedureName":"Subject Stipend per hour","reasoning":"The vendor item specifically describes patient/subject compensation based on an hourly rate, which perfectly aligns with 'Subject Stipend per hour'.","similarity":0.9},{"benchmarkId":"c5cf9d07-1541-4130-ad38-94ed5b870169","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":351,"p25":73,"p50":104,"p75":129,"p90":175,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"The vendor item includes a calculation based on the number of visits, making 'Patient Reimbursement, Stipend - Per Visit' a strong alternative match.","similarity":0.7},{"benchmarkId":"06721044-94bf-43c3-978c-10814a6a8366","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":351,"p25":73,"p50":104,"p75":129,"p90":175,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"This is a duplicate of the previous benchmark for patient stipend per visit, which aligns with the visit-based calculation in the vendor description.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifies an hourly rate for a Principal Investigator whose specialty is hematology, which directly matches the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"f5e74151-b906-448b-9a7e-36ce853f0385","matchCount":2,"matches":[{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifies an hourly rate for a Principal Investigator whose specialty is hematology, which directly matches the 'Physician: Hematology - Per Hour' benchmark.","similarity":0.9},{"benchmarkId":"4e3fde33-a9ae-4703-8118-5c72acd406c5","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":301,"p25":124,"p50":161,"p75":208,"p90":300,"procedureName":"Physician - Per Hour","reasoning":"The vendor item is an hourly rate for a Principal Investigator (physician) providing project supervision, aligning with the generic 'Physician - Per Hour' benchmark.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor description explicitly lists the role as 'Clinical research coordinator', which directly matches the 'Study Coordinator' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"f95d800a-27b6-4eb2-b1fe-0c18b57efc08","matchCount":2,"matches":[{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor description explicitly lists the role as 'Clinical research coordinator', which directly matches the 'Study Coordinator' benchmark.","similarity":0.9},{"benchmarkId":"f1fd6622-7687-4a0d-9a51-14f10d24b4a0","category":"Non-Procedures","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":0,"p25":213,"p50":289,"p75":393,"p90":516,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The description notes that the healthcare professional filling this role is a hematologist, making this benchmark applicable if they are being compensated based on their medical specialty and qualifications rather than just the coordinator role.","similarity":0.7}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"c597c90e-4130-4cb2-b339-ceb64f65592b","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},"flag":"YELLOW","lineItemId":"7ce9b2e7-0e75-4de8-bb79-963dcf5a007d","matchCount":3,"matches":[{"benchmarkId":"0c5b1eed-661f-423d-bb61-e8bd751c89e1","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"ed843566-aa9b-420d-a3b5-bc6844a43e65","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507},{"benchmarkId":"c4cc3732-8979-4ebe-b422-6db71297aeeb","category":"Site Costs","confidence":"MEDIUM","country":"Canada","isAIMatch":false,"p100":0,"p25":461,"p50":655,"p75":827,"p90":1189,"procedureName":"Site Management fee, per site, per month","reasoning":"Matched by text similarity","similarity":0.5388602512436507}]}],"success":true}
+[02:19:55.831] Browser LOG     [v0] Refreshing comparisons data via API...
+[02:19:55.941] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[02:19:56.171] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[02:19:56.171] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NO_MATCH
+[02:19:56.171] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:19:56.171] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[02:19:56.171] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[02:19:56.171] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[02:19:56.171] Browser LOG     [v0] Refresh - loaded 3 matches originalFlag: null
+[02:19:56.171] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[02:19:56.171] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[02:23:01.712] Server  LOG      ✓ Compiled in 159ms
+[02:23:07.820] Server  LOG      ✓ Compiled in 53ms
+[02:23:08.075] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:08.357] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:08.624] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:08.627] Server  LOG      ✓ Compiled in 62ms
+[02:23:08.813] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:08.944] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:09.059] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:09.215] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:09.345] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:09.502] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:09.654] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:09.768] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:09.898] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:10.059] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:10.180] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
