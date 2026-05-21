@@ -305,11 +305,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   }, [])
 
   const handleDecisionChange = useCallback((compId: string, decision: ItemDecision) => {
-    // Resolve lineItemId synchronously from current state BEFORE the setState
-    // updater (which is queued, not run synchronously) so the PATCH can fire reliably.
+    // Resolve target & previous decision synchronously from current state.
     const target = comparisons.find((c) => c.id === compId)
     const lineItemId = target?.lineItem?.id || null
     const description = target?.lineItem?.description || ""
+    const previousDecision = target?.lineItem?.decision
+
+    // No-op guard: ignore spurious onValueChange events that fire with the same value
+    // (e.g. when the Select component reconciles its initial controlled value on mount).
+    if (previousDecision === decision) {
+      return
+    }
 
     setComparisons((prev) =>
       prev.map((c) => (c.id !== compId ? c : { ...c, lineItem: { ...c.lineItem, decision } }))
@@ -317,8 +323,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
     if (lineItemId) {
       // Persist decision so it is honored by the next "Run Comparison".
-      // Track the in-flight promise so handleRunComparison can wait for it.
-      console.log("[v0] Sending decision PATCH for", lineItemId, "->", decision)
+      console.log("[v0] Sending decision PATCH for", lineItemId, previousDecision, "->", decision)
       const writePromise = fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

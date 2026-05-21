@@ -8,6 +8,7 @@ export async function PATCH(
   try {
     const { id } = await params
     const body = await request.json()
+    console.log("[v0] PATCH line-item raw body:", JSON.stringify(body))
     const { additionalInformation, costCategory, negotiatedPrice, decision } = body
 
     const supabase = createAdminClient()
