@@ -388,3 +388,122 @@
 [00:46:47.858] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
 [00:49:07.911] Server  LOG      ✓ Compiled in 84ms
 [00:49:18.395] Server  LOG      ✓ Compiled in 77ms
+[00:49:26.865] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[00:49:27.620] Server  LOG     [v0] Run comparison API called (AI-powered)
+[00:49:27.622] Server  LOG     [v0] Assessment ID: "43a2b62f-4473-41eb-8cd5-f7e453862fb7"
+[00:49:27.623] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:49:27.625] Server  LOG     [v0] Fetching line items...
+[00:49:27.639] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[00:49:27.815] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[00:49:27.815] Server  LOG     [v0] Fetching benchmark procedures...
+[00:49:27.816] Server  LOG     [v0] Line item countries: "Bulgaria, Australia, Austria, Belgium, Canada, China"
+[00:49:28.003] Server  LOG     [v0] Benchmark files for requested countries: 174 "Error:" "none"
+[00:49:28.004] Server  LOG     [v0] Filtering to 174 "benchmark files for countries:" "China, Australia, Austria, Belgium, Bulgaria, Canada"
+[00:49:28.669] Server  LOG     [v0] Benchmark procedures loaded: 1000 "from" 5 "countries"
+[00:49:28.670] Server  LOG     [v0] Available countries: "Canada, Belgium, Austria, China, Australia" ""
+[00:49:28.670] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[00:49:28.670] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\"" "Country:" "Bulgaria" "Decision:" "In-review"
+[00:49:28.671] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Bulgaria"
+[00:49:28.671] Server  LOG     [v0] No benchmarks available for country: "Bulgaria"
+[00:49:28.671] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "250RMB/hour*2 hours*4 visits"
+[00:49:28.671] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria" "Decision:" "Pending"
+[00:49:28.672] Server  LOG     [v0] Filtered to 207 "benchmarks for country:" "Austria"
+[00:49:28.672] Server  LOG     [v0][AI-Gateway][dabaa45c] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:49:28.672] Server  LOG     [v0][AI-Gateway][dabaa45c] Vendor item: "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty i" | Country: Austria | Benchmarks: 150/207
+[00:49:33.880] Server  LOG     [v0][AI-Gateway][dabaa45c] ✓ AI Gateway success in 5207ms | Matches: 2 | Tokens: prompt=5243 completion=492 total=5735
+[00:49:33.880] Server  LOG     [v0] AI found 2 "matches for" "Austria"
+[00:49:33.880] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
+[00:49:33.881] Server  LOG     [v0]   Match 2: "Physician - Per Hour" | Confidence: MEDIUM | AI: true
+[00:49:33.881] Server  LOG     [v0] Skipping item (decision="Not amended" not eligible): "Clinical research coordinator. The HCP is a hemato"
+[00:49:33.881] Server  LOG     [v0] Skipping item (decision="Not accepted" not eligible): "Local Ethics Committee fee"
+[00:49:33.881] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Hospital management fee: 3%."
+[00:49:33.881] Server  LOG     [v0] Processing: "\"Tax: 12%...\"" "Country:" "China" "Decision:" "In-review"
+[00:49:33.881] Server  LOG     [v0] Non-comparable item detected (tax/discount/overhead/etc.), skipping match: "Tax: 12%"
+[00:49:33.882] Server  LOG     [v0] Updating 7 "comparison records"
+[00:49:33.882] Server  LOG     [v0] Updating line_item_id: "746cdf6f-7e47-41a9-b31c-fe0684402356" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[00:49:34.010] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:34.011] Server  LOG     [v0] Updating line_item_id: "1e8c3edb-5658-49dc-b8cb-4a2747b89ed6" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[00:49:34.102] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:34.102] Server  LOG     [v0] Updating line_item_id: "dabaa45c-0ced-48fa-98cb-3f53cc4fca2c" "with" 2 "matches" "flag:" "GREEN"
+[00:49:34.225] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:34.226] Server  LOG     [v0] Updating line_item_id: "19fb8dda-0e3a-4f25-9fc7-d9a44fb64561" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[00:49:34.324] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:34.325] Server  LOG     [v0] Updating line_item_id: "932351d7-2e79-48ea-8c7b-4595c8a4abd2" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[00:49:34.436] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:34.437] Server  LOG     [v0] Updating line_item_id: "4ecc9b95-f797-4f08-9e59-5d44b4c92398" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[00:49:34.525] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:34.525] Server  LOG     [v0] Updating line_item_id: "24a0b2de-dbc2-4956-90aa-6b25bdd6e483" "with" 0 "matches" "flag:" "NON_COMPARABLE"
+[00:49:34.635] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:34.791] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:49:34.794] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 1 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"746cdf6f-7e47-41a9-b31c-fe0684402356","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"1e8c3edb-5658-49dc-b8cb-4a2747b89ed6","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item specifies an hourly rate for project supervision by a Principal Investigator (PI) whose specialty is hematology, which exactly matches the benchmark for a hematology physician per hour.","similarity":0.9},"flag":"GREEN","lineItemId":"dabaa45c-0ced-48fa-98cb-3f53cc4fca2c","matchCount":2,"matches":[{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor cost item specifies an hourly rate for project supervision by a Principal Investigator (PI) whose specialty is hematology, which exactly matches the benchmark for a hematology physician per hour.","similarity":0.9},{"benchmarkId":"4e3fde33-a9ae-4703-8118-5c72acd406c5","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":301,"p25":124,"p50":161,"p75":208,"p90":300,"procedureName":"Physician - Per Hour","reasoning":"The cost item describes hourly work performed by a physician (Principal Investigator), matching the general physician hourly benchmark, though it lacks the specific hematology designation.","similarity":0.7}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"19fb8dda-0e3a-4f25-9fc7-d9a44fb64561","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"932351d7-2e79-48ea-8c7b-4595c8a4abd2","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"4ecc9b95-f797-4f08-9e59-5d44b4c92398","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NON_COMPARABLE","lineItemId":"24a0b2de-dbc2-4956-90aa-6b25bdd6e483","matchCount":0,"matches":[]}],"success":true}
+[00:49:34.794] Browser LOG     [v0] Refreshing comparisons data via API...
+[00:49:34.898] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:49:35.140] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[00:49:35.140] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NO_BENCHMARK_DATA
+[00:49:35.140] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:49:35.140] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[00:49:35.140] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:49:35.140] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:49:35.140] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:49:35.140] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NON_COMPARABLE
+[00:49:35.140] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[00:49:38.049] Browser LOG     [v0] handleRunComparison called, comparisons.length: 7
+[00:49:38.245] Server  LOG     [v0] Run comparison API called (AI-powered)
+[00:49:38.246] Server  LOG     [v0] Assessment ID: "43a2b62f-4473-41eb-8cd5-f7e453862fb7"
+[00:49:38.246] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:49:38.247] Server  LOG     [v0] Fetching line items...
+[00:49:38.269] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[00:49:38.328] Server  LOG     [v0] Line items found: 7 "Error:" undefined
+[00:49:38.329] Server  LOG     [v0] Fetching benchmark procedures...
+[00:49:38.329] Server  LOG     [v0] Line item countries: "Bulgaria, Australia, Austria, Belgium, Canada, China"
+[00:49:38.429] Server  LOG     [v0] Benchmark files for requested countries: 174 "Error:" "none"
+[00:49:38.429] Server  LOG     [v0] Filtering to 174 "benchmark files for countries:" "China, Australia, Austria, Belgium, Bulgaria, Canada"
+[00:49:38.846] Server  LOG     [v0] Benchmark procedures loaded: 1000 "from" 5 "countries"
+[00:49:38.847] Server  LOG     [v0] Available countries: "Canada, Belgium, Austria, China, Australia" ""
+[00:49:38.847] Server  LOG     [v0] Starting AI-powered matching for 7 "items..."
+[00:49:38.848] Server  LOG     [v0] Processing: "\"The cost for CMV-specific T cell tests is 1000 CNY...\"" "Country:" "Bulgaria" "Decision:" "In-review"
+[00:49:38.848] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Bulgaria"
+[00:49:38.848] Server  LOG     [v0] No benchmarks available for country: "Bulgaria"
+[00:49:38.848] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "250RMB/hour*2 hours*4 visits"
+[00:49:38.848] Server  LOG     [v0] Processing: "\"Project supervision and quality control, 500RMB/ho...\"" "Country:" "Austria" "Decision:" "Pending"
+[00:49:38.849] Server  LOG     [v0] Filtered to 207 "benchmarks for country:" "Austria"
+[00:49:38.850] Server  LOG     [v0][AI-Gateway][dabaa45c] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:49:38.850] Server  LOG     [v0][AI-Gateway][dabaa45c] Vendor item: "Project supervision and quality control, 500RMB/hour*40 hours，The PI specialty i" | Country: Austria | Benchmarks: 150/207
+[00:49:50.265] Server  LOG     [v0][AI-Gateway][dabaa45c] ✓ AI Gateway success in 11415ms | Matches: 2 | Tokens: prompt=5084 completion=443 total=5527
+[00:49:50.265] Server  LOG     [v0] AI found 2 "matches for" "Austria"
+[00:49:50.265] Server  LOG     [v0]   Match 1: "Physician: Hematology - Per Hour" | Confidence: HIGH | AI: true
+[00:49:50.266] Server  LOG     [v0]   Match 2: "Physician - Per Hour" | Confidence: MEDIUM | AI: true
+[00:49:50.266] Server  LOG     [v0] Skipping item (decision="Not amended" not eligible): "Clinical research coordinator. The HCP is a hemato"
+[00:49:50.266] Server  LOG     [v0] Skipping item (decision="Not accepted" not eligible): "Local Ethics Committee fee"
+[00:49:50.266] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Hospital management fee: 3%."
+[00:49:50.266] Server  LOG     [v0] Processing: "\"Tax: 12%...\"" "Country:" "China" "Decision:" "In-review"
+[00:49:50.266] Server  LOG     [v0] Non-comparable item detected (tax/discount/overhead/etc.), skipping match: "Tax: 12%"
+[00:49:50.266] Server  LOG     [v0] Updating 7 "comparison records"
+[00:49:50.267] Server  LOG     [v0] Updating line_item_id: "746cdf6f-7e47-41a9-b31c-fe0684402356" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[00:49:50.633] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:50.633] Server  LOG     [v0] Updating line_item_id: "1e8c3edb-5658-49dc-b8cb-4a2747b89ed6" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[00:49:50.731] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:50.731] Server  LOG     [v0] Updating line_item_id: "dabaa45c-0ced-48fa-98cb-3f53cc4fca2c" "with" 2 "matches" "flag:" "GREEN"
+[00:49:50.844] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:50.845] Server  LOG     [v0] Updating line_item_id: "19fb8dda-0e3a-4f25-9fc7-d9a44fb64561" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[00:49:50.925] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:50.925] Server  LOG     [v0] Updating line_item_id: "932351d7-2e79-48ea-8c7b-4595c8a4abd2" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[00:49:51.173] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:51.174] Server  LOG     [v0] Updating line_item_id: "4ecc9b95-f797-4f08-9e59-5d44b4c92398" "with" 0 "matches" "flag:" "SKIPPED_BY_DECISION"
+[00:49:51.274] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:51.274] Server  LOG     [v0] Updating line_item_id: "24a0b2de-dbc2-4956-90aa-6b25bdd6e483" "with" 0 "matches" "flag:" "NON_COMPARABLE"
+[00:49:51.373] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:49:51.514] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:49:51.526] Browser LOG     [v0] Comparison API result: {"message":"Compared 7 items: 1 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"746cdf6f-7e47-41a9-b31c-fe0684402356","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"1e8c3edb-5658-49dc-b8cb-4a2747b89ed6","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifically identifies the personnel as a Principal Investigator (Physician) with a specialty in hematology, billed on a per-hour basis, which perfectly matches this benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"dabaa45c-0ced-48fa-98cb-3f53cc4fca2c","matchCount":2,"matches":[{"benchmarkId":"f5693eb6-d465-402d-b891-c8509487c441","category":"Non-Procedures","confidence":"HIGH","country":"Austria","isAIMatch":true,"p100":0,"p25":109,"p50":148,"p75":201,"p90":265,"procedureName":"Physician: Hematology - Per Hour","reasoning":"The vendor item specifically identifies the personnel as a Principal Investigator (Physician) with a specialty in hematology, billed on a per-hour basis, which perfectly matches this benchmark.","similarity":0.9},{"benchmarkId":"4e3fde33-a9ae-4703-8118-5c72acd406c5","category":"Non-Procedures","confidence":"MEDIUM","country":"Austria","isAIMatch":true,"p100":301,"p25":124,"p50":161,"p75":208,"p90":300,"procedureName":"Physician - Per Hour","reasoning":"This benchmark covers a generic physician's hourly rate, which is the underlying role of the Principal Investigator, though it lacks the specific hematology specialty.","similarity":0.7}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"19fb8dda-0e3a-4f25-9fc7-d9a44fb64561","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"932351d7-2e79-48ea-8c7b-4595c8a4abd2","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"4ecc9b95-f797-4f08-9e59-5d44b4c92398","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NON_COMPARABLE","lineItemId":"24a0b2de-dbc2-4956-90aa-6b25bdd6e483","matchCount":0,"matches":[]}],"success":true}
+[00:49:51.526] Browser LOG     [v0] Refreshing comparisons data via API...
+[00:49:51.621] Server  LOG     [v0] Comparisons API fetch result: 7 "items, error:" undefined
+[00:49:51.838] Browser LOG     [v0] Refresh result - comparisons: 7 error: undefined
+[00:49:51.838] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NO_BENCHMARK_DATA
+[00:49:51.838] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:49:51.838] Browser LOG     [v0] Refresh - loaded 2 matches originalFlag: null
+[00:49:51.838] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:49:51.838] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:49:51.838] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:49:51.838] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: NON_COMPARABLE
+[00:49:51.838] Browser LOG     [v0] Mapped comparisons: 7 First item matches: undefined
+[00:53:02.295] Server  LOG      ✓ Compiled in 128ms

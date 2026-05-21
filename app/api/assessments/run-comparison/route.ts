@@ -210,33 +210,20 @@ export async function POST(request: Request) {
     let benchmarks: any[] = []
     
     try {
-      let benchmarkQuery = supabase
-        .from("benchmark_procedures")
-        .select(`
-          id,
-          procedure_name,
-          procedure_code,
-          category,
-          p25,
-          p50,
-          p75,
-          p90,
-          p100,
-          benchmark_file_id,
-          benchmark_files(country)
-        `)
-        .limit(50000)
+      // Determine the file-id filter to apply BEFORE querying procedures.
+      // PostgREST caps a single response at ~1000 rows, so we must paginate via .range()
+      // to reliably retrieve all procedures across multiple countries.
+      let fileIdFilter: string[] | null = null
 
       // Get unique countries from line items to only fetch needed benchmark data
       const lineItemCountries = [...new Set(lineItems.map((li: any) => li.country).filter(Boolean))]
       console.log("[v0] Line item countries:", lineItemCountries.join(", ") || "NONE")
       
       if (benchmarkFileIds && benchmarkFileIds.length > 0) {
-        benchmarkQuery = benchmarkQuery.in("benchmark_file_id", benchmarkFileIds)
+        fileIdFilter = benchmarkFileIds
         console.log("[v0] Filtering to selected benchmark files:", benchmarkFileIds.length)
       } else if (lineItemCountries.length > 0) {
-        // First, get benchmark_file IDs for the countries we need (case-insensitive)
-        // Must set high limit as Supabase defaults to 1000 rows
+        // First, get benchmark_file IDs for the countries we need
         const { data: countryFiles, error: countryError } = await supabase
           .from("benchmark_files")
           .select("id, country")
@@ -246,10 +233,9 @@ export async function POST(request: Request) {
         console.log("[v0] Benchmark files for requested countries:", countryFiles?.length || 0, "Error:", countryError?.message || "none")
         
         if (countryFiles && countryFiles.length > 0) {
-          const fileIds = countryFiles.map(f => f.id)
+          fileIdFilter = countryFiles.map(f => f.id)
           const uniqueCountries = [...new Set(countryFiles.map(f => f.country))]
-          benchmarkQuery = benchmarkQuery.in("benchmark_file_id", fileIds)
-          console.log("[v0] Filtering to", fileIds.length, "benchmark files for countries:", uniqueCountries.join(", "))
+          console.log("[v0] Filtering to", fileIdFilter.length, "benchmark files for countries:", uniqueCountries.join(", "))
         } else {
           console.log("[v0] No benchmark files found for:", lineItemCountries.join(", "))
         }
@@ -257,8 +243,48 @@ export async function POST(request: Request) {
         console.log("[v0] No countries in line items, loading sample benchmarks")
       }
 
-      const result = await benchmarkQuery
-      const rawBenchmarks = result.data || []
+      // Paginate through benchmark_procedures in 1000-row pages.
+      // PostgREST hard-caps a single response at 1000 rows regardless of .limit().
+      const PAGE_SIZE = 1000
+      const MAX_PAGES = 50 // safety: up to 50,000 rows
+      const rawBenchmarks: any[] = []
+      
+      for (let page = 0; page < MAX_PAGES; page++) {
+        let pageQuery = supabase
+          .from("benchmark_procedures")
+          .select(`
+            id,
+            procedure_name,
+            procedure_code,
+            category,
+            p25,
+            p50,
+            p75,
+            p90,
+            p100,
+            benchmark_file_id,
+            benchmark_files(country)
+          `)
+          .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
+        
+        if (fileIdFilter) {
+          pageQuery = pageQuery.in("benchmark_file_id", fileIdFilter)
+        }
+        
+        const { data: pageData, error: pageError } = await pageQuery
+        
+        if (pageError) {
+          console.log("[v0] Benchmark page", page, "error:", pageError.message)
+          break
+        }
+        
+        if (!pageData || pageData.length === 0) break
+        
+        rawBenchmarks.push(...pageData)
+        console.log("[v0] Loaded benchmark page", page + 1, "size:", pageData.length, "running total:", rawBenchmarks.length)
+        
+        if (pageData.length < PAGE_SIZE) break // last page
+      }
       
       // Filter out metadata rows
       const metadataLabels = ['study details', 'study code:', 'short name:', 'drug / compound:', 'title:', 
@@ -276,7 +302,7 @@ export async function POST(request: Request) {
       // Log available countries in benchmark data
       const availableCountries = [...new Set(benchmarks.map((bm: any) => bm.benchmark_files?.country).filter(Boolean))]
       console.log("[v0] Benchmark procedures loaded:", benchmarks.length, "from", availableCountries.length, "countries")
-      console.log("[v0] Available countries:", availableCountries.slice(0, 10).join(", "), availableCountries.length > 10 ? "..." : "")
+      console.log("[v0] Available countries:", availableCountries.slice(0, 20).join(", "), availableCountries.length > 20 ? "..." : "")
     } catch (e: any) {
       console.log("[v0] Benchmark query exception:", e.message)
     }
