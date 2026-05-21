@@ -305,20 +305,20 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   }, [])
 
   const handleDecisionChange = useCallback((compId: string, decision: ItemDecision) => {
-    let lineItemId: string | null = null
-    let description = ""
+    // Resolve lineItemId synchronously from current state BEFORE the setState
+    // updater (which is queued, not run synchronously) so the PATCH can fire reliably.
+    const target = comparisons.find((c) => c.id === compId)
+    const lineItemId = target?.lineItem?.id || null
+    const description = target?.lineItem?.description || ""
+
     setComparisons((prev) =>
-      prev.map((c) => {
-        if (c.id !== compId) return c
-        lineItemId = c.lineItem.id
-        description = c.lineItem.description
-        const updated = { ...c, lineItem: { ...c.lineItem, decision } }
-        return updated
-      })
+      prev.map((c) => (c.id !== compId ? c : { ...c, lineItem: { ...c.lineItem, decision } }))
     )
+
     if (lineItemId) {
       // Persist decision so it is honored by the next "Run Comparison".
       // Track the in-flight promise so handleRunComparison can wait for it.
+      console.log("[v0] Sending decision PATCH for", lineItemId, "->", decision)
       const writePromise = fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -333,11 +333,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           pendingDecisionWritesRef.current.delete(writePromise)
         })
       pendingDecisionWritesRef.current.add(writePromise)
+    } else {
+      console.log("[v0] handleDecisionChange: no lineItemId resolved for compId", compId)
     }
     if (description) {
       appendAudit(`Changed decision for "${description}" to "${decision}"`)
     }
-  }, [appendAudit])
+  }, [comparisons, appendAudit])
 
   const handleBenchmarkTypeChange = useCallback((compId: string, benchmarkType: BenchmarkType) => {
     setComparisons((prev) =>
