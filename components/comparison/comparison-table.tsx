@@ -103,7 +103,7 @@ const flagConfig: Record<string, { label: string; color: string }> = {
     color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
   },
   SKIPPED_BY_DECISION: {
-    label: "Skipped",
+    label: "No comparison needed",
     color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
   },
 }

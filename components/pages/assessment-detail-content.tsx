@@ -213,7 +213,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   flag: effectiveFlag as any,
   benchmarkDescription: bestMatch ? `${bestMatch.procedureName} (${Math.round((bestMatch.similarity || 0) * 100)}% match)` : (
     originalFlag === "NON_COMPARABLE" ? "Non-comparable item (tax/discount/overhead)" :
-    originalFlag === "SKIPPED_BY_DECISION" ? "Skipped — decision not eligible" :
+    originalFlag === "SKIPPED_BY_DECISION" ? "Per status, no comparison needed" :
     originalFlag === "NO_BENCHMARK_DATA" ? "No benchmark data for this country" :
     "No match found"
   ),
@@ -597,7 +597,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                   ? `${bestMatch.procedureName} (${Math.round(bestMatch.similarity * 100)}% match)`
                   : (
                       originalFlag === "NON_COMPARABLE" ? "Non-comparable item (tax/discount/overhead)" :
-                      originalFlag === "SKIPPED_BY_DECISION" ? "Skipped — decision not eligible" :
+                      originalFlag === "SKIPPED_BY_DECISION" ? "Per status, no comparison needed" :
                       originalFlag === "NO_BENCHMARK_DATA" ? "No benchmark data for this country" :
                       "No match found"
                     ),
