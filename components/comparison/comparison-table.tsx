@@ -98,6 +98,14 @@ const flagConfig: Record<string, { label: string; color: string }> = {
     label: "No Data",
     color: "text-orange-500 bg-orange-500/10 border-orange-500/20",
   },
+  NON_COMPARABLE: {
+    label: "Non-comparable",
+    color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
+  },
+  SKIPPED_BY_DECISION: {
+    label: "Skipped",
+    color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
+  },
 }
 
 const decisionConfig: Record<

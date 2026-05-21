@@ -163,16 +163,26 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           
           // Parse ai_matches from comparison's ai_matches field (stored during run-comparison)
           let matches: any[] = []
+          let originalFlag: string | null = null
           if (comp.ai_matches) {
             try {
-              matches = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
-              console.log("[v0] Loaded ai_matches for line item:", matches.length, "matches")
+              const parsed = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
+              // Detect sentinel meta entry stashed by run-comparison when an extended flag
+              // (NON_COMPARABLE / SKIPPED_BY_DECISION / NO_BENCHMARK_DATA) was mapped to NO_MATCH for DB storage.
+              if (parsed.length === 1 && parsed[0]?.__meta) {
+                originalFlag = parsed[0].originalFlag || null
+                matches = []
+              } else {
+                matches = parsed
+              }
+              console.log("[v0] Loaded ai_matches for line item:", matches.length, "matches", "originalFlag:", originalFlag)
             } catch (e) {
               console.log("[v0] Error parsing ai_matches:", e)
               matches = []
             }
           }
           const bestMatch = matches[0]
+          const effectiveFlag = originalFlag || comp.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")
           
           return {
           id: comp.id,
@@ -200,8 +210,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           selectedBenchmarkType: "p90" as BenchmarkType,
           variance: comp.variance_percent ? (comp.assessment_line_items.vendor_cost || 0) * (comp.variance_percent / 100) : 0,
   variancePercent: comp.variance_percent || 0,
-  flag: (comp.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")) as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
-  benchmarkDescription: bestMatch ? `${bestMatch.procedureName} (${Math.round((bestMatch.similarity || 0) * 100)}% match)` : "No match found",
+  flag: effectiveFlag as any,
+  benchmarkDescription: bestMatch ? `${bestMatch.procedureName} (${Math.round((bestMatch.similarity || 0) * 100)}% match)` : (
+    originalFlag === "NON_COMPARABLE" ? "Non-comparable item (tax/discount/overhead)" :
+    originalFlag === "SKIPPED_BY_DECISION" ? "Skipped — decision not eligible" :
+    originalFlag === "NO_BENCHMARK_DATA" ? "No benchmark data for this country" :
+    "No match found"
+  ),
   possibleMatches: matches.length > 0 ? matches : null,
   userSelected: comp.user_selected_benchmark_id || null
         }})
@@ -533,15 +548,23 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
               
               // Get AI matches from database (stored during run-comparison)
               let matches: any[] = []
+              let originalFlag: string | null = null
               if (comp.ai_matches) {
                 try {
-                  matches = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
-                  console.log("[v0] Refresh - loaded", matches.length, "matches for line item")
+                  const parsed = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
+                  if (parsed.length === 1 && parsed[0]?.__meta) {
+                    originalFlag = parsed[0].originalFlag || null
+                    matches = []
+                  } else {
+                    matches = parsed
+                  }
+                  console.log("[v0] Refresh - loaded", matches.length, "matches", "originalFlag:", originalFlag)
                 } catch (e) {
                   matches = []
                 }
               }
               const bestMatch = matches.length > 0 ? matches[0] : null
+              const effectiveFlag = originalFlag || comp.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")
               
               return {
                 id: comp.id,
@@ -569,10 +592,15 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 selectedBenchmarkType: "p90" as BenchmarkType,
                 variance: 0,
                 variancePercent: 0,
-                flag: (comp.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")) as "GREEN" | "YELLOW" | "RED" | "NO_MATCH" | "MULTIPLE_MATCHES",
+                flag: effectiveFlag as any,
                 benchmarkDescription: bestMatch 
                   ? `${bestMatch.procedureName} (${Math.round(bestMatch.similarity * 100)}% match)`
-                  : "No match found",
+                  : (
+                      originalFlag === "NON_COMPARABLE" ? "Non-comparable item (tax/discount/overhead)" :
+                      originalFlag === "SKIPPED_BY_DECISION" ? "Skipped — decision not eligible" :
+                      originalFlag === "NO_BENCHMARK_DATA" ? "No benchmark data for this country" :
+                      "No match found"
+                    ),
                 possibleMatches: matches.length > 0 ? matches : null,
                 userSelected: null
               }})
