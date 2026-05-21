@@ -8,7 +8,7 @@ export async function PATCH(
   try {
     const { id } = await params
     const body = await request.json()
-    const { additionalInformation, costCategory, negotiatedPrice } = body
+    const { additionalInformation, costCategory, negotiatedPrice, decision } = body
 
     const supabase = createAdminClient()
 
@@ -57,6 +57,9 @@ export async function PATCH(
     const newDescription = additionalInformation !== undefined ? additionalInformation : currentDescription
     if (costCategory !== undefined) {
       extraData.costCategory = costCategory
+    }
+    if (decision !== undefined) {
+      extraData.decision = decision
     }
 
     // Rebuild procedure_name with updated data

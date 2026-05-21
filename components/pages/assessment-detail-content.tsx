@@ -303,18 +303,29 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   }, [])
 
   const handleDecisionChange = useCallback((compId: string, decision: ItemDecision) => {
+    let lineItemId: string | null = null
+    let description = ""
     setComparisons((prev) =>
       prev.map((c) => {
         if (c.id !== compId) return c
+        lineItemId = c.lineItem.id
+        description = c.lineItem.description
         const updated = { ...c, lineItem: { ...c.lineItem, decision } }
         return updated
       })
     )
-    const comp = comparisons.find((c) => c.id === compId)
-    if (comp) {
-      appendAudit(`Changed decision for "${comp.lineItem.description}" to "${decision}"`)
+    if (lineItemId) {
+      // Persist decision so it is honored by the next "Run Comparison".
+      fetch(`/api/assessments/line-items/${lineItemId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ decision }),
+      }).catch((err) => console.log("[v0] Failed to persist decision change:", err))
     }
-  }, [comparisons, appendAudit])
+    if (description) {
+      appendAudit(`Changed decision for "${description}" to "${decision}"`)
+    }
+  }, [appendAudit])
 
   const handleBenchmarkTypeChange = useCallback((compId: string, benchmarkType: BenchmarkType) => {
     setComparisons((prev) =>
