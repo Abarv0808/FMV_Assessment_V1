@@ -618,7 +618,9 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                   site: lineItem?.country || "Global",
                   costCategory: extraData.costCategory || "Procedure",
                   source: `Line ${idx + 1}`,
-                  decision: (extraData.decision || "In-review") as ItemDecision,
+                  // Prefer the in-memory override (user's latest selection) over the DB value,
+                  // because the PATCH may not have persisted yet and the user's intent is authoritative.
+                  decision: ((decisionOverrides[lineItem?.id || comp.line_item_id] || extraData.decision || "In-review") as ItemDecision),
                   numberOfUnit: extraData.numberOfUnit || 1,
                   totalCost: lineItem?.vendor_cost || 0,
                   currency: lineItem?.currency || "USD",
