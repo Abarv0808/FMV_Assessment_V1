@@ -31,6 +31,7 @@ const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IV"]
 interface ProposalUploadStepProps {
   data: {
     vendorProposal: File | null
+    vendorProposalBuffer?: ArrayBuffer | null
     benchmarkFile: File | null
     benchmarkSource: "grantplan" | "grantsmanager" | null
     selectedBenchmarkFileId: string | null
@@ -146,18 +147,41 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
   }
 
   const handleVendorFileChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0] || null
-      onChange({ vendorProposal: file })
+      if (!file) {
+        onChange({ vendorProposal: null, vendorProposalBuffer: null })
+        return
+      }
+      // Read bytes immediately while the File reference is guaranteed to be
+      // valid. Holding the File in state and reading later can fail with
+      // "could not be read, typically due to permission problems".
+      try {
+        const buffer = await file.arrayBuffer()
+        onChange({ vendorProposal: file, vendorProposalBuffer: buffer })
+      } catch (err) {
+        console.error("[v0] Failed to read selected vendor proposal:", err)
+        onChange({ vendorProposal: file, vendorProposalBuffer: null })
+      }
     },
     [onChange],
   )
 
   const handleVendorDrop = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
+    async (e: React.DragEvent<HTMLDivElement>) => {
       e.preventDefault()
       const file = e.dataTransfer.files[0] || null
-      onChange({ vendorProposal: file })
+      if (!file) {
+        onChange({ vendorProposal: null, vendorProposalBuffer: null })
+        return
+      }
+      try {
+        const buffer = await file.arrayBuffer()
+        onChange({ vendorProposal: file, vendorProposalBuffer: buffer })
+      } catch (err) {
+        console.error("[v0] Failed to read dropped vendor proposal:", err)
+        onChange({ vendorProposal: file, vendorProposalBuffer: null })
+      }
     },
     [onChange],
   )
@@ -327,7 +351,7 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
                   <p className="text-xs text-muted-foreground">{formatFileSize(data.vendorProposal.size)}</p>
                 </div>
               </div>
-              <Button variant="ghost" size="icon" onClick={() => onChange({ vendorProposal: null })}>
+                      <Button variant="ghost" size="icon" onClick={() => onChange({ vendorProposal: null, vendorProposalBuffer: null })}>
                 <X className="h-4 w-4" />
               </Button>
             </div>

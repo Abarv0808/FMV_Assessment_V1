@@ -25,6 +25,13 @@ interface AssessmentFormData {
   description: string
   targetDate: Date | undefined
   vendorProposal: File | null
+  /**
+   * Bytes of the vendor proposal, captured at pick-time. We do NOT rely on
+   * `vendorProposal.arrayBuffer()` at submit time, because the browser can
+   * invalidate the underlying File reference between pick and submit
+   * ("could not be read, typically due to permission problems").
+   */
+  vendorProposalBuffer: ArrayBuffer | null
   benchmarkFile: File | null
   benchmarkSource: "grantplan" | "grantsmanager" | null
   selectedBenchmarkFileId: string | null
@@ -52,6 +59,7 @@ export default function NewAssessmentPage() {
     description: "",
     targetDate: undefined,
     vendorProposal: null,
+    vendorProposalBuffer: null,
     benchmarkFile: null,
     benchmarkSource: null,
     selectedBenchmarkFileId: null,
@@ -126,9 +134,21 @@ export default function NewAssessmentPage() {
       // - Total Cost -> totalCost
       // - Currency -> currency
       let parsedProposal = { lineItems: [] as any[], country: null as string | null, metadata: { sheetName: "", rowCount: 0, parsedAt: "" } }
-      if (formData.vendorProposal) {
-        const arrayBuffer = await formData.vendorProposal.arrayBuffer()
-        parsedProposal = parseVendorProposal(arrayBuffer, assessment.id)
+      // Use the buffer captured at pick-time. Falling back to reading the File
+      // here is unsafe (browsers may have invalidated the reference by now),
+      // but we still try as a last-ditch effort if the buffer is missing.
+      let buffer: ArrayBuffer | null = formData.vendorProposalBuffer
+      if (!buffer && formData.vendorProposal) {
+        try {
+          buffer = await formData.vendorProposal.arrayBuffer()
+        } catch (readErr) {
+          throw new Error(
+            "The selected vendor proposal file could not be read. Please re-select the file and try again.",
+          )
+        }
+      }
+      if (buffer) {
+        parsedProposal = parseVendorProposal(buffer, assessment.id)
         console.log("[v0] Parsed vendor proposal from sheet:", parsedProposal.metadata.sheetName)
         console.log("[v0] Found", parsedProposal.lineItems.length, "line items")
         console.log("[v0] Extracted country from Site column:", parsedProposal.country)

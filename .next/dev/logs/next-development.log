@@ -1,78 +1,48 @@
-[00:00:01.248] Server  LOG      ✓ Ready in 794ms
-[00:00:05.030] Server  LOG      ○ Compiling / ...
-[00:00:05.480] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+[00:00:00.748] Server  LOG      ✓ Ready in 443ms
+[00:00:03.611] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:08.639] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+[00:00:05.530] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:08.866] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+[00:00:05.724] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:11.045] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:11.045] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:00:11.045] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779362671855} /_vercel/insights/view
-[00:01:07.498] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+[00:00:07.118] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:07.118] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:00:07.118] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814258410} /_vercel/insights/view
+[00:00:25.829] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:01:09.048] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:01:09.049] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:01:09.049] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/login","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779362730282} /_vercel/insights/view
-[00:18:54.285] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+[00:00:26.527] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:18:54.468] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779363795859} /_vercel/insights/view
-[00:18:55.730] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:18:57.013] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:19:30.367] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
+[00:01:34.250] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:19:30.558] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779363831944} /_vercel/insights/view
-[00:19:30.949] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:19:31.284] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:19:31.421] Browser LOG     [v0] Assessments fetch result: 20 items, error: undefined
-[00:19:31.421] Browser LOG     [v0] Got 20 assessments from DB, mapping...
-[00:19:31.661] Browser LOG     [v0] Assessments fetch result: 20 items, error: undefined
-[00:19:31.661] Browser LOG     [v0] Got 20 assessments from DB, mapping...
-[00:21:50.077] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+[00:01:34.422] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814346157} /_vercel/insights/view
+[00:01:35.530] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:01:36.630] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:01:40.049] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/new. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:21:50.585] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+[00:01:40.225] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814351959} /_vercel/insights/view
+[00:06:14.542] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:15.329] Browser ERROR   [v0] Submit error: {}
+[00:08:08.410] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:21:50.890] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+[00:08:08.964] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:21:51.331] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:21:52.446] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:21:53.370] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:21:53.370] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:21:53.370] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779363972558} /_vercel/insights/view
-[00:28:13.803] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814740869} /_vercel/insights/view
+[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814740869} /_vercel/insights/view
+[00:08:09.379] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:08:10.445] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:08:53.894] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:28:14.234] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:28:14.422] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:28:14.796] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:28:15.774] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:28:15.774] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:28:15.774] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779364356052} /_vercel/insights/view
-[00:28:15.935] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:33:03.335] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:33:03.946] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:33:04.037] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:33:04.037] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:33:04.037] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779364645418} /_vercel/insights/view
-[00:34:12.868] Server  LOG      ✓ Compiled in 243ms
-[00:34:21.811] Server  LOG      ✓ Compiled in 87ms
-[00:34:22.115] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:34:22.270] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:34:22.748] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:34:22.752] Server  LOG      ✓ Compiled in 284ms
-[00:34:22.775] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:34:23.028] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:34:23.242] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:34:23.252] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:34:23.253] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:34:23.253] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-8ey2czf5k5nx47s5lgjsr5f8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779364724713} /_vercel/insights/view
-[00:34:34.693] Server  LOG      ✓ Compiled in 159ms
-[00:34:44.245] Server  LOG      ✓ Compiled in 59ms
-[00:34:44.913] Server  LOG      ✓ Compiled in 177ms
+[00:08:54.082] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/39b1000b-2aca-4165-bf82-97c63d3bdb8e color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/39b1000b-2aca-4165-bf82-97c63d3bdb8e","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814785800} /_vercel/insights/view
+[00:08:55.369] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:08:55.787] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:08:56.564] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:08:56.662] Server  LOG     [v0] Comparisons API fetch result: 0 "items, error:" undefined
+[00:08:56.790] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:08:56.818] Browser LOG     [v0] Comparisons fetch result: 0 items, error: undefined
+[00:08:56.818] Browser LOG     [v0] Has existing ai_matches: false
+[00:08:56.964] Server  LOG     [v0] Comparisons API fetch result: 0 "items, error:" undefined
+[00:08:57.108] Browser LOG     [v0] Comparisons fetch result: 0 items, error: undefined
+[00:08:57.108] Browser LOG     [v0] Has existing ai_matches: false
