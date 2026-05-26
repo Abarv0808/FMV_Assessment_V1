@@ -278,11 +278,36 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
       investigatorResponses: []
     }
     
-    // Parse decision if present - load values as-is from Excel (no transformation)
-    // Excel values already match the dropdown options: In-review, Accepted, Pending, Not amended, Not accepted, Manual assessment
+    // Parse decision if present. Excel templates aren't strict about this
+    // column — values like "to assess", "in review", "to be assessed",
+    // "accept", "reject" all show up in real files. Normalise to one of
+    // the 6 canonical dropdown values; default unknown text to "In-review".
     if (columnMap.decision !== undefined && row[columnMap.decision]) {
       const raw = String(row[columnMap.decision]).trim()
-      if (raw) lineItem.decision = raw
+      if (raw) {
+        const normalized = raw.toLowerCase().replace(/[\s_-]+/g, " ").trim()
+        const decisionMap: Record<string, string> = {
+          "in review": "In-review",
+          "in-review": "In-review",
+          "to assess": "In-review",
+          "to be assessed": "In-review",
+          "to be reviewed": "In-review",
+          "review": "In-review",
+          "accepted": "Accepted",
+          "accept": "Accepted",
+          "approved": "Accepted",
+          "pending": "Pending",
+          "not amended": "Not amended",
+          "no change": "Not amended",
+          "unchanged": "Not amended",
+          "not accepted": "Not accepted",
+          "rejected": "Not accepted",
+          "reject": "Not accepted",
+          "manual assessment": "Manual assessment",
+          "manual": "Manual assessment",
+        }
+        lineItem.decision = (decisionMap[normalized] ?? "In-review") as typeof lineItem.decision
+      }
     }
     
     lineItems.push(lineItem)

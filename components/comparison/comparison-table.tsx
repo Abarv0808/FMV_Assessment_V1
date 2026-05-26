@@ -264,7 +264,12 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
         <TableBody>
           {comparisons.map((comparison) => {
             const isExpanded = expandedRows.has(comparison.id)
-            const decisionConf = decisionConfig[comparison.lineItem.decision]
+            // Fallback to "In-review" config if the decision string from the
+            // backend isn't one of our 6 canonical values (e.g. "to assess",
+            // "n/a", or any free-text from a hand-edited Excel).
+            const decisionConf =
+              decisionConfig[comparison.lineItem.decision] ??
+              decisionConfig["In-review"]
             const selectedValue = getBenchmarkValue(comparison) ?? 0
             const dynamicVariance = selectedValue > 0 ? comparison.lineItem.unitPrice - selectedValue : 0
             const dynamicVariancePercent = selectedValue > 0 ? (dynamicVariance / selectedValue) * 100 : 0
