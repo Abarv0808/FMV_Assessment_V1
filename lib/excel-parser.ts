@@ -32,50 +32,91 @@ export interface ParsedVendorProposal {
   }
 }
 
-// Find header row and map column indices
-function findSponsorHeaders(data: (string | number | undefined)[][]): { headerRowIndex: number; columnMap: Record<string, number> } | null {
-  console.log("[v0] findSponsorHeaders: Searching through", Math.min(20, data.length), "rows")
-  
-  for (let rowIndex = 0; rowIndex < Math.min(20, data.length); rowIndex++) {
+// Find header row and map column indices.
+// More forgiving than a strict equals: we normalise whitespace/newlines (Excel
+// often wraps headers like "Accepted Unit Price\n(FMV lead)"), then match in
+// two passes — exact equality first, then containment — so short cells like
+// "i" or "1" can't accidentally match a long header via reverse-includes.
+function findSponsorHeaders(
+  data: (string | number | undefined)[][],
+): { headerRowIndex: number; columnMap: Record<string, number>; matchedColumns: number } | null {
+  const SCAN_DEPTH = Math.min(30, data.length)
+  console.log("[v0] findSponsorHeaders: scanning", SCAN_DEPTH, "rows")
+
+  let best: { headerRowIndex: number; columnMap: Record<string, number>; matchedColumns: number } | null = null
+
+  for (let rowIndex = 0; rowIndex < SCAN_DEPTH; rowIndex++) {
     const row = data[rowIndex]
     if (!row || row.length === 0) continue
-    
+
     const columnMap: Record<string, number> = {}
     let matchedColumns = 0
-    
+
     for (let colIndex = 0; colIndex < row.length; colIndex++) {
-      // Normalize cell value - remove line breaks and extra spaces
-      const rawValue = row[colIndex]
-      const cellValue = String(rawValue || "").replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim().toLowerCase()
-      if (!cellValue) continue
-      
-      // Check each mapping
+      const cellValue = String(row[colIndex] ?? "")
+        .replace(/[\r\n]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase()
+      if (!cellValue || cellValue.length < 3) continue // ignore stray short cells
+
+      // Pass 1: exact match
+      let matched = false
       for (const [fieldName, possibleHeaders] of Object.entries(SPONSOR_COLUMN_MAPPINGS)) {
+        if (columnMap[fieldName] !== undefined) continue
         for (const header of possibleHeaders) {
-          const headerLower = header.toLowerCase()
-          if (cellValue.includes(headerLower) || headerLower.includes(cellValue)) {
-            if (columnMap[fieldName] === undefined) {
-              columnMap[fieldName] = colIndex
-              matchedColumns++
-              console.log("[v0] Matched column", colIndex, "->", fieldName, "via header:", header)
-            }
+          if (cellValue === header.toLowerCase()) {
+            columnMap[fieldName] = colIndex
+            matchedColumns++
+            matched = true
+            break
+          }
+        }
+        if (matched) break
+      }
+      if (matched) continue
+
+      // Pass 2: containment (cell may carry suffixes like "(FMV lead)" or
+      // "(dropdown)"). One-directional only: cell INCLUDES known header.
+      for (const [fieldName, possibleHeaders] of Object.entries(SPONSOR_COLUMN_MAPPINGS)) {
+        if (columnMap[fieldName] !== undefined) continue
+        for (const header of possibleHeaders) {
+          if (cellValue.includes(header.toLowerCase())) {
+            columnMap[fieldName] = colIndex
+            matchedColumns++
             break
           }
         }
       }
     }
-    
-    console.log("[v0] Row", rowIndex, "matched", matchedColumns, "columns:", Object.keys(columnMap))
-    
-    // Require at least 3 key columns to be found (site, description, totalCost or similar)
-    if (matchedColumns >= 3) {
-      console.log("[v0] Found header row at index", rowIndex, "with columns:", columnMap)
-      return { headerRowIndex: rowIndex, columnMap }
+
+    console.log("[v0] row", rowIndex, "matched", matchedColumns, "→", Object.keys(columnMap).join(","))
+
+    if (matchedColumns >= 3 && (!best || matchedColumns > best.matchedColumns)) {
+      best = { headerRowIndex: rowIndex, columnMap, matchedColumns }
     }
   }
-  
-  console.log("[v0] Could not find header row with at least 3 matching columns")
+
+  if (best) {
+    console.log("[v0] best header row:", best.headerRowIndex, "with", best.matchedColumns, "columns")
+    return best
+  }
+
+  console.log("[v0] no header row reached the 3-column threshold")
   return null
+}
+
+// Build a small human-readable preview of the sheet for diagnostic errors.
+function previewSheet(data: (string | number | undefined)[][], rows = 3, cols = 8): string {
+  return data
+    .slice(0, rows)
+    .map((row, i) => {
+      const cells = (row || [])
+        .slice(0, cols)
+        .map((c) => String(c ?? "").replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 30))
+      return `row ${i}: [${cells.map((c) => `"${c}"`).join(", ")}]`
+    })
+    .join(" | ")
 }
 
 // Parse a number from Excel cell
@@ -145,15 +186,12 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
   const headerInfo = findSponsorHeaders(data)
   
   if (!headerInfo) {
-    console.warn("[v0] Could not find valid header row in Sponsor sheet")
-    return {
-      lineItems: [],
-      metadata: {
-        sheetName: sponsorSheetName,
-        rowCount: 0,
-        parsedAt: new Date().toISOString()
-      }
-    }
+    throw new Error(
+      `Could not locate the header row in the "${sponsorSheetName}" sheet. ` +
+        `Expected columns include "Site", "Cost category", "Description of costs", "Number of Units", "Unit Price", "Total Cost", "Currency". ` +
+        `Available sheets: ${workbook.SheetNames.join(", ")}. ` +
+        `First rows seen: ${previewSheet(data)}.`,
+    )
   }
   
   const { headerRowIndex, columnMap } = headerInfo
