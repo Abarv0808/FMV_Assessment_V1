@@ -96,14 +96,68 @@ export default function NewAssessmentPage() {
     setSubmitError(null)
 
     try {
-      // Get benchmark file IDs
+      // ==========================================================================
+      // PRE-FLIGHT: Validate & parse the vendor proposal BEFORE creating anything
+      // in the database. This prevents the previous failure mode where blank
+      // assessments were left orphaned in the DB after a file-read or parse error.
+      // ==========================================================================
+      if (!formData.vendorProposal && !formData.vendorProposalBuffer) {
+        throw new Error("Please upload a vendor proposal Excel file before creating the assessment.")
+      }
+
+      // Use the buffer captured at pick-time. Reading the File here is unsafe
+      // (Chrome can invalidate the reference between pick and submit), but we
+      // still attempt it as a last-ditch fallback.
+      let buffer: ArrayBuffer | null = formData.vendorProposalBuffer
+      if (!buffer && formData.vendorProposal) {
+        try {
+          buffer = await formData.vendorProposal.arrayBuffer()
+        } catch (readErr) {
+          throw new Error(
+            "The selected vendor proposal file could not be read. Please remove it and re-select the file, then try again.",
+          )
+        }
+      }
+      if (!buffer) {
+        throw new Error(
+          "The vendor proposal file is empty or unreadable. Please re-select the Excel file and try again.",
+        )
+      }
+
+      // Parse with a synthetic assessment id (rewritten to the real id below
+      // once the assessment row is created). We only care here that parsing
+      // succeeds and yields at least one usable line item.
+      let parsedProposal: ReturnType<typeof parseVendorProposal>
+      try {
+        parsedProposal = parseVendorProposal(buffer, "__pending__")
+      } catch (parseErr) {
+        const msg = parseErr instanceof Error ? parseErr.message : String(parseErr)
+        throw new Error(
+          `Could not parse the vendor proposal Excel file: ${msg}. ` +
+            `Make sure the workbook has a "Sponsor" tab with the expected columns ` +
+            `(Site, Cost category, Description of costs, Number of Units, Unit Price, Total Cost, Currency).`,
+        )
+      }
+
+      if (!parsedProposal.lineItems || parsedProposal.lineItems.length === 0) {
+        throw new Error(
+          `No line items were found in the Excel file ` +
+            `(checked sheet: "${parsedProposal.metadata.sheetName || "Sponsor"}"). ` +
+            `Please verify the file has data rows under the expected column headers and try again.`,
+        )
+      }
+
+      console.log("[v0] Pre-flight parse OK:", parsedProposal.lineItems.length, "line items, country:", parsedProposal.country)
+
+      // ==========================================================================
+      // Now that we know the file is valid, actually create the assessment.
+      // ==========================================================================
       const benchmarkFileIds = formData.selectedBenchmarkFileIds.length > 0 
         ? formData.selectedBenchmarkFileIds 
         : formData.selectedBenchmarkFileId 
           ? [formData.selectedBenchmarkFileId] 
           : []
 
-      // 1. Create assessment via API (bypasses RLS)
       const createResponse = await fetch("/api/assessments/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -125,30 +179,14 @@ export default function NewAssessmentPage() {
         throw new Error(assessmentError || "Failed to create assessment")
       }
 
-      // 3. Parse vendor Excel file from "Sponsor" tab
-      // Excel column mapping:
-      // - Site (optional) -> site
-      // - Description of costs -> description (Additional Information)
-      // - Number of Units -> numberOfUnits
-      // - Unit Price -> unitPrice
-      // - Total Cost -> totalCost
-      // - Currency -> currency
-      let parsedProposal = { lineItems: [] as any[], country: null as string | null, metadata: { sheetName: "", rowCount: 0, parsedAt: "" } }
-      // Use the buffer captured at pick-time. Falling back to reading the File
-      // here is unsafe (browsers may have invalidated the reference by now),
-      // but we still try as a last-ditch effort if the buffer is missing.
-      let buffer: ArrayBuffer | null = formData.vendorProposalBuffer
-      if (!buffer && formData.vendorProposal) {
-        try {
-          buffer = await formData.vendorProposal.arrayBuffer()
-        } catch (readErr) {
-          throw new Error(
-            "The selected vendor proposal file could not be read. Please re-select the file and try again.",
-          )
-        }
-      }
-      if (buffer) {
-        parsedProposal = parseVendorProposal(buffer, assessment.id)
+      // Re-bind the parsed line items to the real assessment id.
+      parsedProposal.lineItems = parsedProposal.lineItems.map((li: any) => ({
+        ...li,
+        assessmentId: assessment.id,
+      }))
+
+      // (Below: existing flow continues with parsedProposal already populated.)
+      {
         console.log("[v0] Parsed vendor proposal from sheet:", parsedProposal.metadata.sheetName)
         console.log("[v0] Found", parsedProposal.lineItems.length, "line items")
         console.log("[v0] Extracted country from Site column:", parsedProposal.country)
@@ -202,8 +240,20 @@ export default function NewAssessmentPage() {
         })
 
         if (!storeResponse.ok) {
-          const errorData = await storeResponse.json()
+          const errorData = await storeResponse.json().catch(() => ({}))
           console.error("[v0] Error storing line items:", errorData)
+          // Roll back the just-created assessment so we don't leave a blank shell.
+          try {
+            await fetch(`/api/assessments/${assessment.id}`, { method: "DELETE" })
+            console.log("[v0] Rolled back assessment", assessment.id, "after line-item store failure")
+          } catch (rollbackErr) {
+            console.error("[v0] Rollback failed for assessment", assessment.id, rollbackErr)
+          }
+          throw new Error(
+            `Could not save the line items parsed from the Excel file${
+              errorData?.error ? ` (${errorData.error})` : ""
+            }. The empty assessment was rolled back. Please try again.`,
+          )
         } else {
           const result = await storeResponse.json()
           console.log("[v0] Successfully stored", result.insertedCount, "line items")
