@@ -40,8 +40,11 @@ export interface ParsedVendorProposal {
 function findSponsorHeaders(
   data: (string | number | undefined)[][],
 ): { headerRowIndex: number; columnMap: Record<string, number>; matchedColumns: number } | null {
-  const SCAN_DEPTH = Math.min(30, data.length)
-  console.log("[v0] findSponsorHeaders: scanning", SCAN_DEPTH, "rows")
+  // Real Takeda templates can have a long preamble (form ID, version,
+  // effective date, instructions, section labels) before the budget table
+  // headers appear. Scan generously.
+  const SCAN_DEPTH = Math.min(80, data.length)
+  console.log("[v0] findSponsorHeaders: scanning", SCAN_DEPTH, "rows of", data.length)
 
   let best: { headerRowIndex: number; columnMap: Record<string, number>; matchedColumns: number } | null = null
 
@@ -186,11 +189,30 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
   const headerInfo = findSponsorHeaders(data)
   
   if (!headerInfo) {
+    // Find the row with the most non-empty long-text cells — likeliest header
+    // candidate — and surface it so the user can see why it failed to match.
+    let bestRow = -1
+    let bestCount = 0
+    for (let i = 0; i < Math.min(80, data.length); i++) {
+      const row = data[i] || []
+      const count = row.filter((c) => String(c ?? "").trim().length >= 4).length
+      if (count > bestCount) {
+        bestCount = count
+        bestRow = i
+      }
+    }
+    const candidatePreview =
+      bestRow >= 0
+        ? `Row ${bestRow} (most likely header row) contains: [${(data[bestRow] || [])
+            .slice(0, 14)
+            .map((c) => `"${String(c ?? "").replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 40)}"`)
+            .join(", ")}]`
+        : "No row with text content was found."
     throw new Error(
-      `Could not locate the header row in the "${sponsorSheetName}" sheet. ` +
-        `Expected columns include "Site", "Cost category", "Description of costs", "Number of Units", "Unit Price", "Total Cost", "Currency". ` +
+      `Could not locate the header row in the "${sponsorSheetName}" sheet (scanned 80 rows). ` +
+        `Expected columns: Site, Cost category, Description of costs, Number of Units, Unit Price, Total Cost, Currency. ` +
         `Available sheets: ${workbook.SheetNames.join(", ")}. ` +
-        `First rows seen: ${previewSheet(data)}.`,
+        candidatePreview,
     )
   }
   

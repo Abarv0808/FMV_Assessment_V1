@@ -1,101 +1,51 @@
-[00:00:00.748] Server  LOG      ✓ Ready in 443ms
-[00:00:03.611] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+[00:00:00.866] Server  LOG      ✓ Ready in 561ms
+[00:00:04.352] Server  LOG      ○ Compiling /assessments/new ...
+[00:00:05.650] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/new. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:05.530] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:05.724] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:07.118] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:07.118] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:00:07.118] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814258410} /_vercel/insights/view
-[00:00:25.829] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:26.527] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:01:34.250] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:01:34.422] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814346157} /_vercel/insights/view
-[00:01:35.530] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:01:36.630] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:01:40.049] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/new. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:01:40.225] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814351959} /_vercel/insights/view
-[00:06:14.542] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:15.329] Browser ERROR   [v0] Submit error: {}
-[00:08:08.410] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:08:08.964] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814740869} /_vercel/insights/view
-[00:08:09.146] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814740869} /_vercel/insights/view
-[00:08:09.379] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:08:10.445] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:08:53.894] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:08:54.082] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/39b1000b-2aca-4165-bf82-97c63d3bdb8e color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/39b1000b-2aca-4165-bf82-97c63d3bdb8e","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779814785800} /_vercel/insights/view
-[00:08:55.369] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:08:55.787] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:08:56.564] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:08:56.662] Server  LOG     [v0] Comparisons API fetch result: 0 "items, error:" undefined
-[00:08:56.790] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:08:56.818] Browser LOG     [v0] Comparisons fetch result: 0 items, error: undefined
-[00:08:56.818] Browser LOG     [v0] Has existing ai_matches: false
-[00:08:56.964] Server  LOG     [v0] Comparisons API fetch result: 0 "items, error:" undefined
-[00:08:57.108] Browser LOG     [v0] Comparisons fetch result: 0 items, error: undefined
-[00:08:57.108] Browser LOG     [v0] Has existing ai_matches: false
-[00:21:07.354] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:21:07.870] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:21:08.097] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:21:08.589] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:21:08.715] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:21:08.715] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:21:08.715] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779815520435} /_vercel/insights/view
-[00:46:30.821] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/new. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:46:30.998] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779817042689} /_vercel/insights/view
-[00:47:49.026] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
-[00:47:49.026] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Contract","Reconciliation","Drop Downs","Revision History ","Vault Data"]
-[00:47:49.026] Browser LOG     [v0] Found Sponsor sheet: Sponsor
-[00:47:49.026] Browser LOG     [v0] Sheet data has 160 rows
-[00:47:49.026] Browser LOG     [v0] First 5 rows of data:
-[00:47:49.026] Browser LOG     [v0] Row 0 : [null,"FORM-269948"]
-[00:47:49.026] Browser LOG     [v0] Row 1 : [null,"3.0"]
-[00:47:49.026] Browser LOG     [v0] Row 2 : [null,"Effective"]
-[00:47:49.026] Browser LOG     [v0] Row 3 : [null,45533]
-[00:47:49.026] Browser LOG     [v0] Row 4 : [null,45533]
-[00:47:49.026] Browser LOG     [v0] findSponsorHeaders: Searching through 20 rows
-[00:47:49.026] Browser LOG     [v0] Row 0 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 1 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 2 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 3 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 4 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 5 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 6 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 7 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 8 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 9 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 10 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 11 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 12 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 13 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Matched column 2 -> site via header: Site
-[00:47:49.026] Browser LOG     [v0] Row 14 matched 1 columns: ["site"]
-[00:47:49.026] Browser LOG     [v0] Row 15 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Row 16 matched 0 columns: []
-[00:47:49.026] Browser LOG     [v0] Matched column 2 -> currency via header: Currency
-[00:47:49.026] Browser LOG     [v0] Row 17 matched 1 columns: ["currency"]
-[00:47:49.026] Browser LOG     [v0] Matched column 2 -> totalCost via header: Total
-[00:47:49.026] Browser LOG     [v0] Row 18 matched 1 columns: ["totalCost"]
-[00:47:49.026] Browser LOG     [v0] Matched column 3 -> unitPrice via header: Unit Price (overhead not included, number)
-[00:47:49.026] Browser LOG     [v0] Row 19 matched 1 columns: ["unitPrice"]
-[00:47:49.026] Browser LOG     [v0] Could not find header row with at least 3 matching columns
-[00:47:49.026] Browser WARN    [v0] Could not find valid header row in Sponsor sheet
-[00:47:49.026] Browser ERROR   [v0] Submit error: {}
-[00:49:06.186] Server  LOG      ✓ Compiled in 86ms
-[00:49:17.122] Server  LOG      ✓ Compiled in 67ms
+[00:00:06.434] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:06.434] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/new","route":"/assessments/new"}
+[00:00:06.434] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/new color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/new","o":"https://vm-76c9u72sp3d45gc7p8spx0e8.vusercontent.net/assessments/new","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1779817237589} /_vercel/insights/view
+[00:23:27.731] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[00:23:27.732] Browser LOG     [v0] Available sheets in workbook: ["Sponsor","Instructions","Internal","Contract","Reconciliation","Drop Downs","Revision History ","Vault Data"]
+[00:23:27.732] Browser LOG     [v0] Found Sponsor sheet: Sponsor
+[00:23:27.732] Browser LOG     [v0] Sheet data has 160 rows
+[00:23:27.732] Browser LOG     [v0] First 5 rows of data:
+[00:23:27.732] Browser LOG     [v0] Row 0 : [null,"FORM-269948"]
+[00:23:27.732] Browser LOG     [v0] Row 1 : [null,"3.0"]
+[00:23:27.732] Browser LOG     [v0] Row 2 : [null,"Effective"]
+[00:23:27.732] Browser LOG     [v0] Row 3 : [null,45533]
+[00:23:27.732] Browser LOG     [v0] Row 4 : [null,45533]
+[00:23:27.732] Browser LOG     [v0] findSponsorHeaders: scanning 30 rows
+[00:23:27.732] Browser LOG     [v0] row 0 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 1 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 2 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 3 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 4 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 5 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 6 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 7 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 8 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 9 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 10 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 11 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 12 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 13 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 14 matched 1 → site
+[00:23:27.732] Browser LOG     [v0] row 15 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 16 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 17 matched 1 → currency
+[00:23:27.732] Browser LOG     [v0] row 18 matched 1 → totalCost
+[00:23:27.732] Browser LOG     [v0] row 19 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 20 matched 1 → totalCost
+[00:23:27.732] Browser LOG     [v0] row 21 matched 1 → totalCost
+[00:23:27.732] Browser LOG     [v0] row 22 matched 1 → totalCost
+[00:23:27.732] Browser LOG     [v0] row 23 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 25 matched 1 → unitPrice
+[00:23:27.732] Browser LOG     [v0] row 26 matched 1 → unitPrice
+[00:23:27.732] Browser LOG     [v0] row 27 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 28 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] row 29 matched 0 → 
+[00:23:27.732] Browser LOG     [v0] no header row reached the 3-column threshold
+[00:23:27.732] Browser ERROR   [v0] Submit error: {}
+[00:24:48.693] Server  LOG      ✓ Compiled in 115ms
+[00:24:49.380] Server  LOG      ✓ Compiled in 63ms
