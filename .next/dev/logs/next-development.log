@@ -363,3 +363,45 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:22:47.026] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
 [00:22:47.026] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
 [00:22:47.170] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[00:23:36.366] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:23:36.494] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:23:36.534] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1780333560225} /_vercel/insights/view
+[00:23:37.313] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:23:37.416] Browser LOG     [v0] Assessments fetch result: 41 items, error: undefined
+[00:23:37.416] Browser LOG     [v0] Got 41 assessments from DB, mapping...
+[00:23:37.885] Browser LOG     [v0] Assessments fetch result: 41 items, error: undefined
+[00:23:37.885] Browser LOG     [v0] Got 41 assessments from DB, mapping...
+[00:23:38.554] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:23:38.741] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/assessments/8b973597-3910-4f52-ac5e-26c9ce7e76fd color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/assessments/8b973597-3910-4f52-ac5e-26c9ce7e76fd","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1780333562439} /_vercel/insights/view
+[00:23:39.290] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:23:39.506] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:23:39.575] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:23:39.704] Server  LOG     [v0] Comparisons API fetch result: 5 "items, error:" undefined
+[00:23:39.809] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:23:39.895] Browser LOG     [v0] Comparisons fetch result: 5 items, error: undefined
+[00:23:39.896] Browser LOG     [v0] Has existing ai_matches: true
+[00:23:39.896] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:23:39.896] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:23:39.896] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:23:39.896] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:23:39.896] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:23:39.911] Server  LOG     [v0] Comparisons API fetch result: 5 "items, error:" undefined
+[00:23:40.050] Browser LOG     [v0] Comparisons fetch result: 5 items, error: undefined
+[00:23:40.050] Browser LOG     [v0] Has existing ai_matches: true
+[00:23:40.050] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:23:40.050] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:23:40.050] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:23:40.050] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:23:40.050] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:23:58.390] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:23:58.577] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:23:58.578] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:23:58.578] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1780333582260} /_vercel/insights/view
+[00:23:58.860] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:23:59.080] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[00:23:59.181] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:23:59.361] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[00:25:21.747] Server  LOG      ✓ Compiled in 137ms
