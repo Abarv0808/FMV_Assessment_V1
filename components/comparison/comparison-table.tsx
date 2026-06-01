@@ -87,7 +87,7 @@ const flagConfig: Record<string, { label: string; color: string }> = {
     color: "text-green-500 bg-green-500/10 border-green-500/20",
   },
   NO_MATCH: {
-    label: "Not Found",
+    label: "No match",
     color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
   },
   MULTIPLE_MATCHES: {
@@ -271,10 +271,21 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
               decisionConfig[comparison.lineItem.decision] ??
               decisionConfig["In-review"]
             const selectedValue = getBenchmarkValue(comparison) ?? 0
-            const dynamicVariance = selectedValue > 0 ? comparison.lineItem.unitPrice - selectedValue : 0
-            const dynamicVariancePercent = selectedValue > 0 ? (dynamicVariance / selectedValue) * 100 : 0
+            const hasBenchmarkValue = selectedValue > 0
+            const dynamicVariance = hasBenchmarkValue ? comparison.lineItem.unitPrice - selectedValue : 0
+            const dynamicVariancePercent = hasBenchmarkValue ? (dynamicVariance / selectedValue) * 100 : 0
             const dynamicFlag: "GREEN" | "YELLOW" | "RED" = dynamicVariancePercent > 15 ? "RED" : dynamicVariancePercent > 5 ? "YELLOW" : "GREEN"
-            const flagConf = flagConfig[dynamicFlag]
+            // Only compute a variance-based flag when there's an actual benchmark
+            // value to compare against. Otherwise fall back to the stored flag
+            // (NO_MATCH / NO_BENCHMARK_DATA / NON_COMPARABLE / SKIPPED_BY_DECISION)
+            // so we never falsely report "Within Range" for unmatched items.
+            const computedFlags = new Set(["GREEN", "YELLOW", "RED"])
+            const effectiveFlag = hasBenchmarkValue
+              ? dynamicFlag
+              : comparison.flag && !computedFlags.has(comparison.flag)
+                ? comparison.flag
+                : "NO_MATCH"
+            const flagConf = flagConfig[effectiveFlag] || flagConfig["NO_MATCH"]
 
             const varianceIcon =
               dynamicVariance > 0 ? (
@@ -450,21 +461,25 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     </Select>
                   </TableCell>
                   <TableCell className="text-right">
-                    <div className="flex items-center justify-end gap-1">
-                      {varianceIcon}
-                      <span
-                        className={
-                          dynamicVariance > 0
-                            ? "text-red-500"
-                            : dynamicVariance < 0
-                              ? "text-green-500"
-                              : "text-muted-foreground"
-                        }
-                      >
-                        {dynamicVariancePercent > 0 ? "+" : ""}
-                        {dynamicVariancePercent.toFixed(1)}%
-                      </span>
-                    </div>
+                    {hasBenchmarkValue ? (
+                      <div className="flex items-center justify-end gap-1">
+                        {varianceIcon}
+                        <span
+                          className={
+                            dynamicVariance > 0
+                              ? "text-red-500"
+                              : dynamicVariance < 0
+                                ? "text-green-500"
+                                : "text-muted-foreground"
+                          }
+                        >
+                          {dynamicVariancePercent > 0 ? "+" : ""}
+                          {dynamicVariancePercent.toFixed(1)}%
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-muted-foreground">—</span>
+                    )}
                   </TableCell>
                   <TableCell>
                     <Badge className={flagConf?.color || "text-slate-400 bg-slate-400/10"} variant="outline">
@@ -615,16 +630,18 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             )
           })}
           {/* Total Row */}
-          <TableRow className="border-border/40 bg-muted/50 font-semibold">
+          <TableRow className="border-border/40 bg-muted/50 font-semibold hover:bg-muted/50">
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell className="font-bold">Grand Total</TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell className="text-right font-bold">
-              Total: {formatCurrency(totalCostSum, primaryCurrency)}
+            <TableCell className="text-right font-bold font-mono">
+              {formatCurrency(totalCostSum, primaryCurrency)}
             </TableCell>
-            <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>

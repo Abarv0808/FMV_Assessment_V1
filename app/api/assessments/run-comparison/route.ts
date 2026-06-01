@@ -624,6 +624,38 @@ export async function POST(request: Request) {
     const toDbFlag = (f: string) => (ALLOWED_DB_FLAGS.has(f) ? f : "NO_MATCH")
 
     for (const result of results) {
+      // PRESERVE PRIOR BENCHMARK DATA FOR DECISION-FINALIZED ITEMS.
+      // When an item's decision was changed (e.g. to "Accepted") after a reviewer
+      // examined the matched benchmark, it is excluded from re-comparison and comes
+      // back as SKIPPED_BY_DECISION with no matches. We must NOT overwrite the
+      // existing comparison record, otherwise the benchmark data that the decision
+      // was based on would be lost on every re-run. Leave any existing record intact.
+      if (result.flag === "SKIPPED_BY_DECISION") {
+        const { data: existing } = await supabase
+          .from("assessment_comparisons")
+          .select("id")
+          .eq("line_item_id", result.lineItemId)
+          .maybeSingle()
+
+        if (existing) {
+          console.log("[v0] Preserving existing benchmark data for decision-finalized item:", result.lineItemId)
+          continue
+        }
+
+        // No prior record exists (decision was already finalized before any
+        // comparison ran). Insert a sentinel so the UI shows "no comparison needed".
+        console.log("[v0] No prior record for skipped item, inserting sentinel:", result.lineItemId)
+        await supabase
+          .from("assessment_comparisons")
+          .insert({
+            assessment_id: assessmentId,
+            line_item_id: result.lineItemId,
+            flag: "NO_MATCH",
+            ai_matches: [{ __meta: true, originalFlag: result.flag, skipReason: (result as any).skipReason || null }]
+          })
+        continue
+      }
+
       console.log("[v0] Updating line_item_id:", result.lineItemId, "with", result.matches?.length || 0, "matches", "flag:", result.flag)
 
       const dbFlag = toDbFlag(result.flag)
