@@ -136,6 +136,10 @@ const decisionConfig: Record<
     label: "Manual assessment",
     color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
   },
+  Escalate: {
+    label: "Escalate",
+    color: "text-purple-500 bg-purple-500/10 border-purple-500/20",
+  },
 }
 
 function getBenchmarkValue(comparison: AssessmentComparison): number | undefined {
@@ -155,7 +159,7 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
   low: "Low",
 }
 
-const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment"]
+const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
 
 export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect, onLineItemUpdate }: ComparisonTableProps) {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())

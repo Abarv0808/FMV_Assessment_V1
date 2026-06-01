@@ -1137,6 +1137,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                       <SelectItem value="Not amended">Not Amended</SelectItem>
                       <SelectItem value="Not accepted">Not Accepted</SelectItem>
                       <SelectItem value="Manual assessment">Manual Assessment</SelectItem>
+                      <SelectItem value="Escalate">Escalate</SelectItem>
                     </SelectContent>
                   </Select>
                   <Select

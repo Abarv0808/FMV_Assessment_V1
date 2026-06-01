@@ -275,3 +275,91 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:14:29.233] Server  LOG      ✓ Compiled in 107ms
 [00:14:53.726] Server  LOG      ✓ Compiled in 1634ms
 [00:14:57.970] Server  LOG      ✓ Compiled in 87ms
+[00:18:44.533] Browser LOG     [v0] Persisting decision via PATCH: 8e64bc93-81f2-40fa-84e6-fecddd638ece -> Accepted
+[00:18:47.951] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"Accepted\"}"
+[00:18:47.952] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:18:48.626] Browser LOG     [v0] handleRunComparison called, comparisons.length: 5
+[00:18:48.627] Browser LOG     [v0] Waiting for 1 pending decision writes before running comparison
+[00:18:49.077] Server  LOG     [v0] Updated line item: "8e64bc93-81f2-40fa-84e6-fecddd638ece" "additionalInfo:" undefined "costCategory:" undefined "decision:" "Accepted"
+[00:18:49.761] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[00:18:52.051] Server  LOG     [v0] Run comparison API called (AI-powered)
+[00:18:52.053] Server  LOG     [v0] Assessment ID: "8b973597-3910-4f52-ac5e-26c9ce7e76fd"
+[00:18:52.055] Server  LOG     [v0] Decision overrides received from client: 5 "items"
+[00:18:52.056] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:18:52.062] Server  LOG     [v0] Fetching line items...
+[00:18:52.295] Server  LOG     [v0] Persisting 5 "decision overrides to DB before comparison"
+[00:18:52.296] Server  LOG     [v0] Line items found: 5 "Error:" undefined
+[00:18:52.296] Server  LOG     [v0] Fetching benchmark procedures...
+[00:18:52.297] Server  LOG     [v0] Line item countries: "India"
+[00:18:52.570] Server  LOG     [v0] Benchmark files for requested countries: 28 "Error:" "none"
+[00:18:52.570] Server  LOG     [v0] Filtering to 28 "benchmark files for countries:" "India"
+[00:18:53.453] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[00:18:54.057] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[00:18:54.462] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[00:18:54.902] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[00:18:55.391] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[00:18:55.695] Server  LOG     [v0] Loaded benchmark page 6 "size:" 783 "running total:" 5783
+[00:18:55.709] Server  LOG     [v0] Benchmark procedures loaded: 5783 "from" 1 "countries"
+[00:18:55.710] Server  LOG     [v0] Available countries: "India" ""
+[00:18:55.712] Server  LOG     [v0] Starting AI-powered matching for 5 "items..."
+[00:18:55.712] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "One time fee"
+[00:18:55.712] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Cytokine profile for 100 patients (pre and post). "
+[00:18:55.713] Server  LOG     [v0] Processing: "\"coodinator charges per month is 20000 for 8 hours ...\"" "Country:" "India" "Decision:" "In-review"
+[00:18:55.715] Server  LOG     [v0] Filtered to 5783 "benchmarks for country:" "India"
+[00:18:55.723] Server  LOG     [v0][AI-Gateway][53899966] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:18:55.724] Server  LOG     [v0][AI-Gateway][53899966] Vendor item: "coodinator charges per month is 20000 for 8 hours work" | Country: India | Benchmarks: 150/5783
+[00:19:01.938] Server  LOG     [v0][AI-Gateway][53899966] ✓ AI Gateway success in 6214ms | Matches: 1 | Tokens: prompt=5066 completion=436 total=5502
+[00:19:01.938] Server  LOG     [v0] AI found 1 "matches for" "India"
+[00:19:01.939] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[00:19:01.939] Server  LOG     [v0] Processing: "\"Nurse charges per months 20000 for 8 hours work...\"" "Country:" "India" "Decision:" "In-review"
+[00:19:01.942] Server  LOG     [v0] Filtered to 5783 "benchmarks for country:" "India"
+[00:19:01.952] Server  LOG     [v0][AI-Gateway][200908ba] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:19:01.953] Server  LOG     [v0][AI-Gateway][200908ba] Vendor item: "Nurse charges per months 20000 for 8 hours work" | Country: India | Benchmarks: 150/5783
+[00:19:08.578] Server  LOG     [v0][AI-Gateway][200908ba] ✓ AI Gateway success in 6626ms | Matches: 1 | Tokens: prompt=5222 completion=494 total=5716
+[00:19:08.579] Server  LOG     [v0] AI found 1 "matches for" "India"
+[00:19:08.579] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
+[00:19:08.579] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Archvial fee for  5 years - supporting documentati"
+[00:19:08.579] Server  LOG     [v0] Updating 5 "comparison records"
+[00:19:08.709] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "8e64bc93-81f2-40fa-84e6-fecddd638ece"
+[00:19:08.848] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "e1ea3008-68b6-4f14-ba5a-37f607ef6c48"
+[00:19:08.848] Server  LOG     [v0] Updating line_item_id: "53899966-ff96-46d1-a4be-c52f52b73aad" "with" 1 "matches" "flag:" "GREEN"
+[00:19:09.103] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:19:09.104] Server  LOG     [v0] Updating line_item_id: "200908ba-97e7-46fc-a195-7c639d897345" "with" 1 "matches" "flag:" "GREEN"
+[00:19:09.200] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:19:09.298] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "10d8c539-d5d7-4e47-b598-0a494a25c81a"
+[00:19:09.537] Browser LOG     [v0] Comparison API result: {"message":"Compared 5 items: 2 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"8e64bc93-81f2-40fa-84e6-fecddd638ece","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"e1ea3008-68b6-4f14-ba5a-37f607ef6c48","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"f8eedf9e-4040-4a6e-9195-e3aafe512980","category":"Non-Procedures","confidence":"HIGH","country":"India","isAIMatch":true,"p100":0,"p25":1568,"p50":1862,"p75":3032,"p90":6064,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor cost item specifically lists coordinator charges for a set number of hours of work, directly matching the 'Study Coordinator - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"53899966-ff96-46d1-a4be-c52f52b73aad","matchCount":1,"matches":[{"benchmarkId":"f8eedf9e-4040-4a6e-9195-e3aafe512980","category":"Non-Procedures","confidence":"HIGH","country":"India","isAIMatch":true,"p100":0,"p25":1568,"p50":1862,"p75":3032,"p90":6064,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor cost item specifically lists coordinator charges for a set number of hours of work, directly matching the 'Study Coordinator - Per Hour' benchmark.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"64ec4793-3550-4502-999a-9bcf9c1023da","category":"Non-Procedures","confidence":"HIGH","country":"India","isAIMatch":true,"p100":0,"p25":1468,"p50":1731,"p75":2116,"p90":3195,"procedureName":"Nurse - Per Hour","reasoning":"The vendor item is a time-based charge for nursing personnel, directly matching the 'Nurse - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"200908ba-97e7-46fc-a195-7c639d897345","matchCount":1,"matches":[{"benchmarkId":"64ec4793-3550-4502-999a-9bcf9c1023da","category":"Non-Procedures","confidence":"HIGH","country":"India","isAIMatch":true,"p100":0,"p25":1468,"p50":1731,"p75":2116,"p90":3195,"procedureName":"Nurse - Per Hour","reasoning":"The vendor item is a time-based charge for nursing personnel, directly matching the 'Nurse - Per Hour' benchmark.","similarity":0.9}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"10d8c539-d5d7-4e47-b598-0a494a25c81a","matchCount":0,"matches":[]}],"success":true}
+[00:19:09.537] Browser LOG     [v0] Refreshing comparisons data via API...
+[00:19:11.009] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:19:11.124] Server  LOG     [v0] Comparisons API fetch result: 5 "items, error:" undefined
+[00:19:11.289] Browser LOG     [v0] Refresh result - comparisons: 5 error: undefined
+[00:19:11.289] Browser LOG     [v0] Refresh - loaded 1 matches originalFlag: null
+[00:19:11.289] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:19:11.289] Browser LOG     [v0] Refresh - loaded 1 matches originalFlag: null
+[00:19:11.289] Browser LOG     [v0] Refresh - loaded 1 matches originalFlag: null
+[00:19:11.289] Browser LOG     [v0] Refresh - loaded 0 matches originalFlag: SKIPPED_BY_DECISION
+[00:19:11.289] Browser LOG     [v0] Mapped comparisons: 5 First item matches: 1
+[00:21:57.111] Server  LOG      ✓ Compiled in 156ms
+[00:22:02.712] Server  LOG      ✓ Compiled in 70ms
+[00:22:21.072] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:22:21.280] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:22:21.280] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:22:21.280] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1780333484961} /_vercel/insights/view
+[00:22:22.016] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:22:22.016] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:22:22.438] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[00:22:22.540] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[00:22:32.846] Server  LOG      ✓ Compiled in 126ms
+[00:22:43.849] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:22:44.020] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/benchmarks/05b8ceb3-1e02-44c5-bc9f-db3c66c38993 color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks/[id]","o":"https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/benchmarks/05b8ceb3-1e02-44c5-bc9f-db3c66c38993","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1780333507712} /_vercel/insights/view
+[00:22:46.218] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:22:46.395] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:22:46.396] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:22:46.396] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-6rc0sqxv0w1eyamdovxlrsp9.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1780333510077} /_vercel/insights/view
+[00:22:46.774] Server  LOG      ✓ Compiled in 96ms
+[00:22:46.787] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:22:47.026] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[00:22:47.026] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:22:47.170] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
