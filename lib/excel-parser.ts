@@ -305,6 +305,9 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
           "reject": "Not accepted",
           "manual assessment": "Manual assessment",
           "manual": "Manual assessment",
+          "escalate": "Escalate",
+          "escalated": "Escalate",
+          "escalation": "Escalate",
         }
         lineItem.decision = (decisionMap[normalized] ?? "In-review") as typeof lineItem.decision
       }

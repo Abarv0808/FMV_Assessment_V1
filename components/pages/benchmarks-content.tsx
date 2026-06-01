@@ -244,7 +244,11 @@ export function BenchmarksContent() {
         indication,
         phases: Object.entries(phases)
           .sort(([a], [b]) => phaseOrder.indexOf(a) - phaseOrder.indexOf(b))
-          .map(([phase, files]) => ({ phase, files }))
+          .map(([phase, files]) => ({
+            phase,
+            // Sort the country rows alphabetically (A → Z)
+            files: [...files].sort((a, b) => a.country.localeCompare(b.country)),
+          }))
       }))
   }, [filteredBenchmarks])
 

@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import * as XLSX from "xlsx"
+import { jsPDF } from "jspdf"
+import autoTable from "jspdf-autotable"
 import { createClient } from "@/lib/supabase/client"
 import { AppShell } from "@/components/app-shell"
 import { Button } from "@/components/ui/button"
@@ -808,6 +810,112 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     return matchesSearch && matchesFlag && matchesSite && matchesDecision
   })
 
+  // Generate a PDF snapshot of the assessment table as currently filtered.
+  const handleDownloadPdf = () => {
+    if (!assessment) return
+
+    const flagLabels: Record<string, string> = {
+      RED: "High Variance",
+      YELLOW: "Moderate",
+      GREEN: "Within Range",
+      NO_MATCH: "No match",
+      NO_BENCHMARK_DATA: "No Data",
+      NON_COMPARABLE: "Non-comparable",
+      SKIPPED_BY_DECISION: "No comparison needed",
+      MULTIPLE_MATCHES: "Select Match",
+    }
+    const computedFlags = new Set(["GREEN", "YELLOW", "RED"])
+    const getBenchmarkVal = (c: AssessmentComparison): number => {
+      switch (c.selectedBenchmarkType) {
+        case "high": return c.benchmarkHigh ?? 0
+        case "med": return c.benchmarkMed ?? 0
+        case "low": return c.benchmarkLow ?? 0
+        default: return c.benchmark90th ?? 0
+      }
+    }
+    const fmt = (v?: number | null) =>
+      v == null ? "-" : v.toLocaleString("en-US", { maximumFractionDigits: 0 })
+
+    const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" })
+    const generatedAt = new Date().toLocaleString("en-US")
+
+    doc.setFontSize(14)
+    doc.text(assessment.name || "Assessment", 40, 36)
+    doc.setFontSize(9)
+    doc.setTextColor(120)
+    doc.text(
+      `${assessment.studyTrackingNumber || ""}   •   Status: ${statusLabels[assessment.status] || assessment.status}   •   Generated: ${generatedAt}`,
+      40,
+      52,
+    )
+    doc.setTextColor(0)
+
+    let totalCostSum = 0
+    const primaryCurrency = filteredComparisons[0]?.lineItem.currency || "USD"
+
+    const body = filteredComparisons.map((c, idx) => {
+      const selVal = getBenchmarkVal(c)
+      const hasVal = selVal > 0
+      const variancePct = hasVal ? ((c.lineItem.unitPrice - selVal) / selVal) * 100 : 0
+      const dynFlag = variancePct > 15 ? "RED" : variancePct > 5 ? "YELLOW" : "GREEN"
+      const effFlag = hasVal
+        ? dynFlag
+        : c.flag && !computedFlags.has(c.flag)
+          ? c.flag
+          : "NO_MATCH"
+      totalCostSum += c.lineItem.totalCost || 0
+
+      return [
+        idx + 1,
+        c.lineItem.site || "-",
+        c.lineItem.costCategory || "-",
+        c.lineItem.additionalInformation || c.lineItem.description || "-",
+        c.userSelected
+          ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)?.procedureName || c.benchmarkDescription || "-"
+          : c.benchmarkDescription || (c.possibleMatches?.length ? `${c.possibleMatches.length} matches` : "No match found"),
+        c.lineItem.numberOfUnit ?? "-",
+        fmt(c.lineItem.unitPrice),
+        fmt(c.lineItem.negotiatedPrice),
+        fmt(c.lineItem.totalCost),
+        c.lineItem.currency || "USD",
+        hasVal ? fmt(selVal) : "-",
+        hasVal ? `${variancePct > 0 ? "+" : ""}${variancePct.toFixed(1)}%` : "—",
+        flagLabels[effFlag] || effFlag,
+        c.lineItem.decision || "-",
+      ]
+    })
+
+    autoTable(doc, {
+      startY: 64,
+      head: [[
+        "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
+        "Units", "Unit Price", "Negotiated", "Total Cost", "Curr.",
+        "Benchmark", "Variance", "Flag", "Decision",
+      ]],
+      body,
+      foot: [[
+        "", "", "", "Grand Total", "", "", "", "",
+        fmt(totalCostSum), primaryCurrency, "", "", "", "",
+      ]],
+      styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak" },
+      headStyles: { fillColor: [30, 41, 59], textColor: 255, fontSize: 6.5 },
+      footStyles: { fillColor: [241, 245, 249], textColor: 0, fontStyle: "bold" },
+      columnStyles: {
+        0: { cellWidth: 18 },
+        3: { cellWidth: 130 },
+        4: { cellWidth: 110 },
+      },
+      margin: { left: 40, right: 40 },
+    })
+
+    const now = new Date()
+    const pad = (n: number) => String(n).padStart(2, "0")
+    const ts = `${pad(now.getDate())}${pad(now.getMonth() + 1)}${String(now.getFullYear()).slice(-2)}${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`
+    const safeName = (assessment.name || "assessment").replace(/[\\/:*?"<>|]/g, "_").trim()
+    doc.save(`${safeName} ${ts}.pdf`)
+    appendAudit(`Downloaded PDF snapshot of assessment table (${filteredComparisons.length} items)`)
+  }
+
   return (
     <AppShell>
       <div className="p-8 space-y-6">
@@ -845,7 +953,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
               <FileText className="h-4 w-4 mr-2" />
               Export Report
             </Button>
-            <Button onClick={() => appendAudit("Download PDF clicked")}>
+            <Button onClick={handleDownloadPdf}>
               <Download className="h-4 w-4 mr-2" />
               Download PDF
             </Button>
@@ -1029,6 +1137,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                       <SelectItem value="Not amended">Not Amended</SelectItem>
                       <SelectItem value="Not accepted">Not Accepted</SelectItem>
                       <SelectItem value="Manual assessment">Manual Assessment</SelectItem>
+                      <SelectItem value="Escalate">Escalate</SelectItem>
                     </SelectContent>
                   </Select>
                   <Select
