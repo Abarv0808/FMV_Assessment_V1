@@ -65,7 +65,7 @@ export default function DashboardPage() {
             studyTrackingNumber: a.study_tracking_number || a.id.slice(0, 8),
             sponsor: a.sponsor || "Unknown",
             status: mapStatus(a.status),
-            proposalCount: a.proposal_count || 0,
+            proposalCount: a.line_items_count ?? a.proposal_count ?? 0,
             flaggedCount: a.flagged_count || 0,
             assignedTo: a.assigned_to || null,
             createdAt: a.created_at,
