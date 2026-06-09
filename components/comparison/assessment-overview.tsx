@@ -27,7 +27,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import type { Assessment, AssessmentStatus, DataSource } from "@/lib/types"
-import { AlertCircle, Briefcase, CheckCircle2, ChevronRight, Clock, Database, Pencil } from "lucide-react"
+import { AlertCircle, Briefcase, CheckCircle2, ChevronRight, Clock, Pencil } from "lucide-react"
 import { StatusSelect } from "@/components/assessments/status-select"
 
 interface AssessmentOverviewProps {
@@ -119,7 +119,6 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
                   hierarchy={assessment.dataSourceHierarchy}
                 />
               </div>
-              <Database className="h-5 w-5 text-muted-foreground shrink-0" />
             </div>
           </CardContent>
         </Card>
