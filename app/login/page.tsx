@@ -15,7 +15,7 @@ import { SECURITY_GROUPS, type SecurityGroup } from "@/lib/types"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
-  const [role, setRole] = useState<"VIEWER" | "ANALYST" | "APPROVER" | "ADMIN">("ANALYST")
+  const [role, setRole] = useState<"VIEWER" | "ANALYST" | "APPROVER" | "ADMIN">("ADMIN")
   const [securityGroups, setSecurityGroups] = useState<SecurityGroup[]>(["USBU"])
   const { login } = useAuth()
   const router = useRouter()
