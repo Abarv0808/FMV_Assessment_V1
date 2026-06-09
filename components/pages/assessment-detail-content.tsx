@@ -123,6 +123,18 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
       setIsRealAssessment(true)
 
+      // Build the data-source hierarchy from the linked benchmark files.
+      // (Source -> Indication -> Phase -> Country). An assessment can link to
+      // multiple files, so we collect the distinct values for each segment.
+      const benchmarkFiles: any[] = Array.isArray(assessmentData.benchmark_files) ? assessmentData.benchmark_files : []
+      const distinct = (arr: (string | null | undefined)[]) =>
+        Array.from(new Set(arr.filter((v): v is string => !!v && v.trim().length > 0)))
+      const dataSourceHierarchy = {
+        indications: distinct(benchmarkFiles.map((f) => f.indication)),
+        phases: distinct(benchmarkFiles.map((f) => f.trial_phase)),
+        countries: distinct(benchmarkFiles.map((f) => f.country)),
+      }
+
       // Map to Assessment type
       const mappedAssessment: Assessment = {
         id: assessmentData.id,
@@ -132,6 +144,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         therapeuticArea: assessmentData.therapeutic_area,
         status: (assessmentData.status || "IN_REVIEW") as AssessmentStatus,
         dataSource: assessmentData.benchmark_source === "IQVIA_GRANTPLAN" ? "IQVIA GrantPlan" : "IQVIA GPI",
+        dataSourceHierarchy,
         vendorName: "Vendor",
         totalLineItems: 0,
         flaggedItems: 0,

@@ -20,8 +20,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import type { Assessment, AssessmentStatus, DataSource } from "@/lib/types"
-import { AlertCircle, Briefcase, CheckCircle2, Clock, Database, Pencil } from "lucide-react"
+import { AlertCircle, Briefcase, CheckCircle2, ChevronRight, Clock, Database, Pencil } from "lucide-react"
 import { StatusSelect } from "@/components/assessments/status-select"
 
 interface AssessmentOverviewProps {
@@ -108,6 +114,10 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
                     </Button>
                   </div>
                 )}
+                <DataSourceHierarchy
+                  source={assessment.dataSource}
+                  hierarchy={assessment.dataSourceHierarchy}
+                />
               </div>
               <Database className="h-5 w-5 text-muted-foreground shrink-0" />
             </div>
@@ -175,5 +185,85 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
         </AlertDialogContent>
       </AlertDialog>
     </>
+  )
+}
+
+interface DataSourceHierarchyData {
+  indications?: string[]
+  phases?: string[]
+  countries?: string[]
+}
+
+// Renders the benchmark data-source hierarchy as a breadcrumb:
+//   Source -> Indication -> Phase -> Country
+// When a segment has multiple values it collapses to "First +N" with the full
+// list shown in a tooltip.
+function DataSourceHierarchy({
+  source,
+  hierarchy,
+}: {
+  source?: DataSource | null
+  hierarchy?: DataSourceHierarchyData
+}) {
+  const indications = hierarchy?.indications ?? []
+  const phases = hierarchy?.phases ?? []
+  const countries = hierarchy?.countries ?? []
+
+  // Nothing to show beyond the source itself.
+  if (indications.length === 0 && phases.length === 0 && countries.length === 0) {
+    return null
+  }
+
+  const segments: { key: string; values: string[] }[] = [
+    { key: "source", values: source ? [source] : [] },
+    { key: "indication", values: indications },
+    { key: "phase", values: phases },
+    { key: "country", values: countries },
+  ].filter((s) => s.values.length > 0)
+
+  return (
+    <TooltipProvider delayDuration={150}>
+      <div className="mt-2 flex flex-wrap items-center gap-x-1 gap-y-1">
+        {segments.map((segment, idx) => (
+          <div key={segment.key} className="flex items-center gap-x-1">
+            {idx > 0 && <ChevronRight className="h-3 w-3 shrink-0 text-muted-foreground/60" />}
+            <HierarchySegment values={segment.values} />
+          </div>
+        ))}
+      </div>
+    </TooltipProvider>
+  )
+}
+
+function HierarchySegment({ values }: { values: string[] }) {
+  const first = values[0]
+  const extra = values.length - 1
+
+  const label = (
+    <span className="text-xs text-muted-foreground">
+      {first}
+      {extra > 0 && <span className="ml-1 font-medium text-foreground">{`+${extra}`}</span>}
+    </span>
+  )
+
+  if (extra <= 0) {
+    return label
+  }
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button type="button" className="cursor-default">
+          {label}
+        </button>
+      </TooltipTrigger>
+      <TooltipContent className="max-w-xs">
+        <ul className="text-xs">
+          {values.map((v) => (
+            <li key={v}>{v}</li>
+          ))}
+        </ul>
+      </TooltipContent>
+    </Tooltip>
   )
 }

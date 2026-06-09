@@ -20,7 +20,32 @@ export async function GET(
       return NextResponse.json({ assessment: null, error: error.message }, { status: 200 })
     }
 
-    return NextResponse.json({ assessment })
+    // Fetch the linked benchmark files so the UI can render the data-source
+    // hierarchy (Source -> Indication -> Phase -> Country). These live in
+    // benchmark_files, joined through the assessment_benchmark_files junction.
+    let benchmarkFiles: any[] = []
+    const { data: linkedFiles, error: linkedError } = await supabase
+      .from("assessment_benchmark_files")
+      .select(`
+        benchmark_files (
+          id,
+          source,
+          indication,
+          trial_phase,
+          country
+        )
+      `)
+      .eq("assessment_id", id)
+
+    if (linkedError) {
+      console.log("[v0] Non-fatal: could not fetch linked benchmark files:", linkedError.message)
+    } else if (linkedFiles) {
+      benchmarkFiles = linkedFiles
+        .map((row: any) => row.benchmark_files)
+        .filter(Boolean)
+    }
+
+    return NextResponse.json({ assessment: { ...assessment, benchmark_files: benchmarkFiles } })
   } catch (err: any) {
     console.error("[v0] Exception fetching assessment:", err)
     return NextResponse.json({ assessment: null, error: err.message }, { status: 200 })
