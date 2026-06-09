@@ -66,8 +66,8 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        <Card className="border-border/40">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-stretch">
+        <Card className="border-border/40 h-full">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
@@ -82,7 +82,7 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
           </CardContent>
         </Card>
 
-        <Card className="border-border/40">
+        <Card className="border-border/40 h-full">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div className="flex-1 min-w-0">
@@ -123,7 +123,7 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
           </CardContent>
         </Card>
 
-        <Card className="border-border/40">
+        <Card className="border-border/40 h-full">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
@@ -135,7 +135,7 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
           </CardContent>
         </Card>
 
-        <Card className="border-border/40">
+        <Card className="border-border/40 h-full">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
@@ -147,7 +147,7 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
           </CardContent>
         </Card>
 
-        <Card className="border-border/40">
+        <Card className="border-border/40 h-full">
           <CardContent className="pt-6">
             <div>
               <p className="text-sm text-muted-foreground">Assigned To</p>
