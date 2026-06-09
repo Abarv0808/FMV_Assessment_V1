@@ -27,7 +27,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import type { Assessment, AssessmentStatus, DataSource } from "@/lib/types"
-import { AlertCircle, Briefcase, CheckCircle2, ChevronRight, Clock, Pencil } from "lucide-react"
+import { AlertCircle, Briefcase, ChevronRight, Clock, Pencil } from "lucide-react"
 import { StatusSelect } from "@/components/assessments/status-select"
 
 interface AssessmentOverviewProps {
@@ -131,18 +131,6 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
                 <p className="font-medium text-sm">{assessment.businessUnit ?? "Not set"}</p>
               </div>
               <Briefcase className="h-5 w-5 text-muted-foreground" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-border/40">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Total Items</p>
-                <p className="text-2xl font-semibold mt-1">{assessment.totalLineItems ?? 0}</p>
-              </div>
-              <CheckCircle2 className="h-5 w-5 text-muted-foreground" />
             </div>
           </CardContent>
         </Card>

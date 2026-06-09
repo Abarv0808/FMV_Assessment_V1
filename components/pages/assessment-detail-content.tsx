@@ -984,7 +984,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         </div>
 
         {/* Decision Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card className="border-border/40">
             <CardContent className="pt-4">
               <div className="flex items-center gap-2">
@@ -998,67 +998,34 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-border/40">
+          <Card className="border-border/40 md:col-span-2">
             <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-green-500/10">
+              <p className="text-xs text-muted-foreground mb-3">Decisions</p>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span className="text-lg font-semibold">{stats.accepted}</span>
+                  <span className="text-xs text-muted-foreground">Accepted</span>
                 </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.accepted}</p>
-                  <p className="text-xs text-muted-foreground">Accepted</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-border/40">
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-yellow-500/10">
+                <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-yellow-500" />
+                  <span className="text-lg font-semibold">{stats.pending}</span>
+                  <span className="text-xs text-muted-foreground">Pending</span>
                 </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.pending}</p>
-                  <p className="text-xs text-muted-foreground">Pending</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-border/40">
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-primary/10">
+                <div className="flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-primary" />
+                  <span className="text-lg font-semibold">{stats.notAmended}</span>
+                  <span className="text-xs text-muted-foreground">Not Amended</span>
                 </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.notAmended}</p>
-                  <p className="text-xs text-muted-foreground">Not Amended</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-border/40">
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-red-500/10">
+                <div className="flex items-center gap-2">
                   <XCircle className="h-4 w-4 text-red-500" />
+                  <span className="text-lg font-semibold">{stats.notAccepted}</span>
+                  <span className="text-xs text-muted-foreground">Not Accepted</span>
                 </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.notAccepted}</p>
-                  <p className="text-xs text-muted-foreground">Not Accepted</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-border/40">
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-slate-400/10">
+                <div className="flex items-center gap-2">
                   <HelpCircle className="h-4 w-4 text-slate-400" />
-                </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.manualAssessment}</p>
-                  <p className="text-xs text-muted-foreground">Manual Assessment</p>
+                  <span className="text-lg font-semibold">{stats.manualAssessment}</span>
+                  <span className="text-xs text-muted-foreground">Manual Assessment</span>
                 </div>
               </div>
             </CardContent>
