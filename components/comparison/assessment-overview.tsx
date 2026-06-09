@@ -140,7 +140,7 @@ export function AssessmentOverview({ assessment, onStatusChange, onDataSourceCha
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Total Items</p>
-                <p className="text-2xl font-semibold mt-1">{assessment.proposalCount}</p>
+                <p className="text-2xl font-semibold mt-1">{assessment.totalLineItems ?? 0}</p>
               </div>
               <CheckCircle2 className="h-5 w-5 text-muted-foreground" />
             </div>
