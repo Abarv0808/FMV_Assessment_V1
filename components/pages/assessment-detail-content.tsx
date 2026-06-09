@@ -851,7 +851,6 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     doc.setTextColor(0)
 
     let totalCostSum = 0
-    const primaryCurrency = filteredComparisons[0]?.lineItem.currency || "USD"
 
     const body = filteredComparisons.map((c, idx) => {
       const selVal = getBenchmarkVal(c)
@@ -873,15 +872,15 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         c.userSelected
           ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)?.procedureName || c.benchmarkDescription || "-"
           : c.benchmarkDescription || (c.possibleMatches?.length ? `${c.possibleMatches.length} matches` : "No match found"),
-        c.lineItem.numberOfUnit ?? "-",
         fmt(c.lineItem.unitPrice),
         fmt(c.lineItem.negotiatedPrice),
-        fmt(c.lineItem.totalCost),
         c.lineItem.currency || "USD",
         hasVal ? fmt(selVal) : "-",
-        hasVal ? `${variancePct > 0 ? "+" : ""}${variancePct.toFixed(1)}%` : "—",
         flagLabels[effFlag] || effFlag,
         c.lineItem.decision || "-",
+        hasVal ? `${variancePct > 0 ? "+" : ""}${variancePct.toFixed(1)}%` : "—",
+        c.lineItem.numberOfUnit ?? "-",
+        fmt(c.lineItem.totalCost),
       ]
     })
 
@@ -889,13 +888,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       startY: 64,
       head: [[
         "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
-        "Units", "Unit Price", "Negotiated", "Total Cost", "Curr.",
-        "Benchmark", "Variance", "Flag", "Decision",
+        "Unit Price", "Negotiated", "Curr.", "Benchmark", "Flag",
+        "Decision", "Variance", "Units", "Total Cost",
       ]],
       body,
       foot: [[
-        "", "", "", "Grand Total", "", "", "", "",
-        fmt(totalCostSum), primaryCurrency, "", "", "", "",
+        "", "", "", "Grand Total", "", "", "", "", "", "", "", "", "",
+        fmt(totalCostSum),
       ]],
       styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak" },
       headStyles: { fillColor: [30, 41, 59], textColor: 255, fontSize: 6.5 },

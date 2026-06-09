@@ -254,15 +254,15 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableHead>Cost Category</TableHead>
             <TableHead>Cost Description</TableHead>
             <TableHead className="min-w-[220px]">Benchmark Match</TableHead>
-            <TableHead className="text-right">Number of Unit</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>
             <TableHead className="text-right">Negotiated Price</TableHead>
-            <TableHead className="text-right">Total Cost</TableHead>
             <TableHead>Currency</TableHead>
             <TableHead className="min-w-[200px]">Benchmark</TableHead>
-            <TableHead className="text-right">Variance</TableHead>
             <TableHead>Flag</TableHead>
             <TableHead>Decision</TableHead>
+            <TableHead className="text-right">Variance</TableHead>
+            <TableHead className="text-right">Number of Unit</TableHead>
+            <TableHead className="text-right">Total Cost</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -415,9 +415,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </span>
                     )}
                   </TableCell>
-                  <TableCell className="text-right">
-                    {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
-                  </TableCell>
                   <TableCell className="text-right font-medium font-mono">
                     {comparison.lineItem.unitPrice?.toLocaleString() ?? "-"}
                   </TableCell>
@@ -432,9 +429,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       placeholder="Enter price"
                       className="h-8 w-[120px] text-right font-mono text-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
-                  </TableCell>
-                  <TableCell className="text-right font-mono">
-                    {comparison.lineItem.totalCost?.toLocaleString() ?? "-"}
                   </TableCell>
                   <TableCell>
                     <Badge variant="outline" className="font-normal">
@@ -463,27 +457,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         })}
                       </SelectContent>
                     </Select>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {hasBenchmarkValue ? (
-                      <div className="flex items-center justify-end gap-1">
-                        {varianceIcon}
-                        <span
-                          className={
-                            dynamicVariance > 0
-                              ? "text-red-500"
-                              : dynamicVariance < 0
-                                ? "text-green-500"
-                                : "text-muted-foreground"
-                          }
-                        >
-                          {dynamicVariancePercent > 0 ? "+" : ""}
-                          {dynamicVariancePercent.toFixed(1)}%
-                        </span>
-                      </div>
-                    ) : (
-                      <span className="text-muted-foreground">—</span>
-                    )}
                   </TableCell>
                   <TableCell>
                     <Badge className={flagConf?.color || "text-slate-400 bg-slate-400/10"} variant="outline">
@@ -520,6 +493,33 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         ))}
                       </SelectContent>
                     </Select>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {hasBenchmarkValue ? (
+                      <div className="flex items-center justify-end gap-1">
+                        {varianceIcon}
+                        <span
+                          className={
+                            dynamicVariance > 0
+                              ? "text-red-500"
+                              : dynamicVariance < 0
+                                ? "text-green-500"
+                                : "text-muted-foreground"
+                          }
+                        >
+                          {dynamicVariancePercent > 0 ? "+" : ""}
+                          {dynamicVariancePercent.toFixed(1)}%
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-muted-foreground">—</span>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
+                  </TableCell>
+                  <TableCell className="text-right font-mono">
+                    {comparison.lineItem.totalCost?.toLocaleString() ?? "-"}
                   </TableCell>
                 </TableRow>
 
@@ -643,14 +643,14 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
             <TableCell className="text-right font-bold font-mono">
               {formatCurrency(totalCostSum, primaryCurrency)}
             </TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
           </TableRow>
         </TableBody>
       </Table>
