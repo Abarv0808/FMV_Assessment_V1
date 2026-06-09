@@ -55,7 +55,7 @@ import {
   mockAssessmentComparisons,
   mockAssessmentLineItems,
 } from "@/lib/mock-data"
-import { ComparisonTable } from "@/components/comparison/comparison-table"
+import { ComparisonTable, getEffectiveTotalCost } from "@/components/comparison/comparison-table"
 import { AssessmentOverview } from "@/components/comparison/assessment-overview"
 import type { Assessment, AssessmentComparison, AssessmentStatus, AuditEvent, BenchmarkType, DataSource, ItemDecision } from "@/lib/types"
 import { useAuth } from "@/lib/auth-context"
@@ -462,7 +462,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         "Unit Type": li.unitType || "",
         "Number of Units": li.numberOfUnit ?? "",
         "Unit Price": li.unitPrice ?? "",
-        "Total Cost": li.totalCost ?? "",
+        "Total Cost": getEffectiveTotalCost(li),
         "Currency": li.currency || "",
         "Negotiated Price": li.negotiatedPrice ?? "",
         "Decision": li.decision || "",
@@ -866,7 +866,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         : c.flag && !computedFlags.has(c.flag)
           ? c.flag
           : "NO_MATCH"
-      totalCostSum += c.lineItem.totalCost || 0
+      totalCostSum += getEffectiveTotalCost(c.lineItem)
 
       const selMatch =
         (c.userSelected
@@ -890,7 +890,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         c.lineItem.decision || "-",
         hasVal ? `${variancePct > 0 ? "+" : ""}${variancePct.toFixed(1)}%` : "—",
         c.lineItem.numberOfUnit ?? "-",
-        fmt(c.lineItem.totalCost),
+        fmt(getEffectiveTotalCost(c.lineItem)),
         code,
       ]
     })

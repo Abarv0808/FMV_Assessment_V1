@@ -161,6 +161,23 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
 
 const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
 
+// Compute the effective Total Cost for a line item.
+// If a negotiated price has been entered, it takes precedence over unit price:
+// Total = negotiated price * number of units. Otherwise fall back to the
+// stored total cost (which is based on unit price).
+export function getEffectiveTotalCost(lineItem: {
+  negotiatedPrice?: number | null
+  numberOfUnit?: number
+  numberOfUnits?: number
+  totalCost?: number | null
+}): number {
+  const units = lineItem.numberOfUnit ?? lineItem.numberOfUnits ?? 1
+  if (lineItem.negotiatedPrice != null && lineItem.negotiatedPrice > 0) {
+    return lineItem.negotiatedPrice * units
+  }
+  return lineItem.totalCost ?? 0
+}
+
 export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect, onLineItemUpdate }: ComparisonTableProps) {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
   const [matchModalOpen, setMatchModalOpen] = useState(false)
@@ -216,8 +233,8 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
     }
   }
   
-  // Calculate total cost sum
-  const totalCostSum = comparisons.reduce((sum, comp) => sum + (comp.lineItem.totalCost || 0), 0)
+  // Calculate total cost sum (uses negotiated price over unit price when available)
+  const totalCostSum = comparisons.reduce((sum, comp) => sum + getEffectiveTotalCost(comp.lineItem), 0)
   const primaryCurrency = comparisons[0]?.lineItem.currency || "USD"
 
   const toggleRow = (id: string) => {
@@ -528,7 +545,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
                   </TableCell>
                   <TableCell className="text-right font-mono">
-                    {comparison.lineItem.totalCost?.toLocaleString() ?? "-"}
+                    {getEffectiveTotalCost(comparison.lineItem).toLocaleString()}
                   </TableCell>
                   <TableCell className="font-mono text-sm">
                     {selectedCode ? (
