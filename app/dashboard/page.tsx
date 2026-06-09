@@ -104,7 +104,8 @@ export default function DashboardPage() {
   const filteredAssessments = inReviewAssessments.filter((assessment) => {
     const matchesSearch =
       assessment.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      assessment.studyTrackingNumber.toLowerCase().includes(searchQuery.toLowerCase())
+      assessment.studyTrackingNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (assessment.assignedTo?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false)
     return matchesSearch
   })
 
@@ -191,7 +192,7 @@ export default function DashboardPage() {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search by trial name or Study tracking#..."
+                placeholder="Search by trial name, Study tracking#, or creator..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9 max-w-md"
