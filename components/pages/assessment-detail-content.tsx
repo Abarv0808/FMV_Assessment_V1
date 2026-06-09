@@ -442,7 +442,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     // Build rows from current comparisons (in-memory state = current at-time version)
     const rows = comparisons.map((comp, idx) => {
       const li = comp.lineItem
-      const selected = comp.userSelected || (comp.possibleMatches && comp.possibleMatches[0]) || null
+      const selected =
+        (comp.userSelected
+          ? comp.possibleMatches?.find((m: any) => m.benchmarkId === comp.userSelected)
+          : null) || (comp.possibleMatches && comp.possibleMatches[0]) || null
       const benchmarkValue =
         comp.selectedBenchmarkType === "p25" ? comp.benchmarkLow :
         comp.selectedBenchmarkType === "p50" ? comp.benchmarkMed :
@@ -465,6 +468,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         "Decision": li.decision || "",
         "Flag": comp.flag || "",
         "Matched Benchmark": selected?.procedureName || comp.benchmarkDescription || "",
+        "Code": (selected as any)?.code || "",
         "Match Confidence": selected?.confidence || "",
         "Benchmark P25": comp.benchmarkLow ?? "",
         "Benchmark P50": comp.benchmarkMed ?? "",
@@ -864,6 +868,12 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           : "NO_MATCH"
       totalCostSum += c.lineItem.totalCost || 0
 
+      const selMatch =
+        (c.userSelected
+          ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)
+          : null) || c.possibleMatches?.[0]
+      const code = (selMatch as any)?.code || "-"
+
       return [
         idx + 1,
         c.lineItem.site || "-",
@@ -881,6 +891,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         hasVal ? `${variancePct > 0 ? "+" : ""}${variancePct.toFixed(1)}%` : "—",
         c.lineItem.numberOfUnit ?? "-",
         fmt(c.lineItem.totalCost),
+        code,
       ]
     })
 
@@ -889,12 +900,12 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       head: [[
         "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
         "Unit Price", "Negotiated", "Curr.", "Benchmark", "Flag",
-        "Decision", "Variance", "Units", "Total Cost",
+        "Decision", "Variance", "Units", "Total Cost", "Code",
       ]],
       body,
       foot: [[
         "", "", "", "Grand Total", "", "", "", "", "", "", "", "", "",
-        fmt(totalCostSum),
+        fmt(totalCostSum), "",
       ]],
       styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak" },
       headStyles: { fillColor: [30, 41, 59], textColor: 255, fontSize: 6.5 },

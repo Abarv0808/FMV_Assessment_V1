@@ -536,6 +536,7 @@ export async function POST(request: Request) {
             return {
               benchmarkId: bm.id,
               procedureName: bm.procedure_name,
+              code: bm.procedure_code || null,
               similarity: match.confidence === "HIGH" ? 0.9 : match.confidence === "MEDIUM" ? 0.7 : 0.5,
               confidence: match.confidence,
               reasoning: match.reasoning,
@@ -573,6 +574,7 @@ export async function POST(request: Request) {
         matchedBenchmarks = trigramMatches.map(m => ({
           benchmarkId: m.bm.id,
           procedureName: m.bm.procedure_name,
+          code: m.bm.procedure_code || null,
           similarity: m.similarity,
           confidence: m.similarity >= 0.7 ? "HIGH" : m.similarity >= 0.5 ? "MEDIUM" : "LOW",
           reasoning: "Matched by text similarity",

@@ -127,6 +127,7 @@ export interface LineItemWithComparison extends AssessmentLineItem {
 export interface PossibleMatch {
   benchmarkId: string
   procedureName: string
+  code?: string
   category: string
   similarity: number
   reasoning?: string
