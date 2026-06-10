@@ -62,3 +62,79 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:45:53.099] Server  LOG      ✓ Compiled in 47ms
 [00:45:58.920] Server  LOG      ✓ Compiled in 89ms
 [00:46:04.023] Server  LOG      ✓ Compiled in 55ms
+[00:47:48.245] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:47:49.005] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:47:49.005] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:47:49.005] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7m9zk3be53cx4dfn7p6rf9dn.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-7m9zk3be53cx4dfn7p6rf9dn.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1781052032834} /_vercel/insights/view
+[00:47:50.060] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:47:50.234] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:47:50.618] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[00:47:50.786] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[00:47:54.772] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:47:54.936] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7m9zk3be53cx4dfn7p6rf9dn.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-7m9zk3be53cx4dfn7p6rf9dn.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1781052038785} /_vercel/insights/view
+[00:47:55.325] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:47:55.690] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:47:55.850] Browser LOG     [v0] Assessments fetch result: 45 items, error: undefined
+[00:47:55.850] Browser LOG     [v0] Got 45 assessments from DB, mapping...
+[00:47:56.112] Browser LOG     [v0] Assessments fetch result: 45 items, error: undefined
+[00:47:56.112] Browser LOG     [v0] Got 45 assessments from DB, mapping...
+[00:47:57.340] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:47:57.495] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:47:57.516] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-7m9zk3be53cx4dfn7p6rf9dn.vusercontent.net/assessments/7eb12b89-5039-404f-9c3f-979c48c3b9d5 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-7m9zk3be53cx4dfn7p6rf9dn.vusercontent.net/assessments/7eb12b89-5039-404f-9c3f-979c48c3b9d5","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1781052041367} /_vercel/insights/view
+[00:47:57.782] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:47:57.832] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:47:57.938] Server  LOG     [v0] Comparisons API fetch result: 18 "items, error:" undefined
+[00:47:58.374] Browser LOG     [v0] Comparisons fetch result: 18 items, error: undefined
+[00:47:58.375] Browser LOG     [v0] Has existing ai_matches: true
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.375] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.447] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:47:58.674] Server  LOG     [v0] Comparisons API fetch result: 18 "items, error:" undefined
+[00:47:58.882] Browser LOG     [v0] Comparisons fetch result: 18 items, error: undefined
+[00:47:58.882] Browser LOG     [v0] Has existing ai_matches: true
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:47:58.882] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:16:11.539] Server  LOG      ✓ Compiled in 74ms
+[01:16:20.063] Server  LOG      ✓ Compiled in 58ms
+[01:16:27.979] Server  LOG      ✓ Compiled in 58ms
+[01:16:43.542] Server  LOG      ✓ Compiled in 52ms
+[01:16:56.132] Server  LOG      ✓ Compiled in 42ms
+[01:17:03.147] Server  LOG      ✓ Compiled in 54ms
+[01:17:09.391] Server  LOG      ✓ Compiled in 73ms
+[01:17:15.302] Server  LOG      ✓ Compiled in 51ms
+[01:17:31.534] Server  LOG      ✓ Compiled in 172ms
+[01:17:54.208] Server  LOG      ✓ Compiled in 53ms
+[01:17:59.526] Server  LOG      ✓ Compiled in 65ms

@@ -9,6 +9,12 @@ import { createClient } from "@/lib/supabase/client"
 import { AppShell } from "@/components/app-shell"
 import { Button } from "@/components/ui/button"
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
   Card,
   CardContent,
   CardDescription,
@@ -49,6 +55,7 @@ import {
   RotateCcw,
   Sparkles,
   Loader2,
+  ChevronDown,
 } from "lucide-react"
 import {
   mockAssessments,
@@ -449,8 +456,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     appendAudit(`Selected benchmark match: ${match.procedureName}`)
   }, [appendAudit])
 
-  const handleExportReport = useCallback(() => {
+  const handleExportReport = useCallback((variant: "internal" | "external" = "internal") => {
     if (!assessment) return
+
+    const isExternal = variant === "external"
 
     // Build rows from current comparisons (in-memory state = current at-time version)
     const rows = comparisons.map((comp, idx) => {
@@ -467,7 +476,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       const variance = comp.variance ?? 0
       const variancePct = comp.variancePercent ?? 0
 
-      return {
+      const base: Record<string, any> = {
         "#": idx + 1,
         "Description": li.description || "",
         "Site/Country": li.country || li.site || "",
@@ -479,6 +488,15 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         "Currency": li.currency || "",
         "Negotiated Price": li.negotiatedPrice ?? "",
         "Decision": li.decision || "",
+      }
+
+      // External reports hide benchmark-related and internal-only columns.
+      if (isExternal) {
+        return base
+      }
+
+      return {
+        ...base,
         "Flag": comp.flag || "",
         "Matched Benchmark": selected?.procedureName || comp.benchmarkDescription || "",
         "Code": (selected as any)?.code || "",
@@ -516,10 +534,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
     // Sanitize filename
     const safeName = (assessment.name || "assessment").replace(/[\\/:*?"<>|]/g, "_").trim()
-    const filename = `${safeName} ${ts}.xlsx`
+    const filename = `${safeName} ${isExternal ? "External " : ""}${ts}.xlsx`
 
     XLSX.writeFile(workbook, filename)
-    appendAudit(`Exported report: ${filename}`)
+    appendAudit(`Exported ${isExternal ? "external" : "internal"} report: ${filename}`)
   }, [assessment, comparisons, appendAudit])
 
   const handleArchive = useCallback(async () => {
@@ -540,7 +558,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       setAssessment((prev) =>
         prev ? { ...prev, status: "ARCHIVED" as AssessmentStatus, updatedAt: new Date().toISOString() } : prev
       )
-      appendAudit("Marked as No Longer Required and moved to Archive")
+      appendAudit("Archived and moved to Archive")
       setShowArchiveConfirm(false)
       router.push("/archive")
     } catch (error) {
@@ -828,8 +846,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   })
 
   // Generate a PDF snapshot of the assessment table as currently filtered.
-  const handleDownloadPdf = () => {
+  const handleDownloadPdf = (variant: "internal" | "external" = "internal") => {
     if (!assessment) return
+
+    const isExternal = variant === "external"
 
     const flagLabels: Record<string, string> = {
       RED: "High Variance",
@@ -887,14 +907,32 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           : null) || c.possibleMatches?.[0]
       const code = (selMatch as any)?.code || "-"
 
+      const benchmarkMatch = c.userSelected
+        ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)?.procedureName || c.benchmarkDescription || "-"
+        : c.benchmarkDescription || (c.possibleMatches?.length ? `${c.possibleMatches.length} matches` : "No match found")
+
+      if (isExternal) {
+        // External report omits Benchmark Match, Benchmark, Flag, Variance, Code.
+        return [
+          idx + 1,
+          c.lineItem.site || "-",
+          c.lineItem.costCategory || "-",
+          c.lineItem.additionalInformation || c.lineItem.description || "-",
+          fmt(c.lineItem.unitPrice),
+          fmt(c.lineItem.negotiatedPrice),
+          c.lineItem.currency || "USD",
+          c.lineItem.decision || "-",
+          c.lineItem.numberOfUnit ?? "-",
+          fmt(getEffectiveTotalCost(c.lineItem)),
+        ]
+      }
+
       return [
         idx + 1,
         c.lineItem.site || "-",
         c.lineItem.costCategory || "-",
         c.lineItem.additionalInformation || c.lineItem.description || "-",
-        c.userSelected
-          ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)?.procedureName || c.benchmarkDescription || "-"
-          : c.benchmarkDescription || (c.possibleMatches?.length ? `${c.possibleMatches.length} matches` : "No match found"),
+        benchmarkMatch,
         fmt(c.lineItem.unitPrice),
         fmt(c.lineItem.negotiatedPrice),
         c.lineItem.currency || "USD",
@@ -910,24 +948,37 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
     autoTable(doc, {
       startY: 64,
-      head: [[
-        "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
-        "Unit Price", "Negotiated", "Curr.", "Benchmark", "Flag",
-        "Decision", "Variance", "Units", "Total Cost", "Code",
-      ]],
+      head: [
+        isExternal
+          ? [
+              "#", "Site", "Cost Category", "Cost Description",
+              "Unit Price", "Negotiated", "Curr.", "Decision", "Units", "Total Cost",
+            ]
+          : [
+              "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
+              "Unit Price", "Negotiated", "Curr.", "Benchmark", "Flag",
+              "Decision", "Variance", "Units", "Total Cost", "Code",
+            ],
+      ],
       body,
-      foot: [[
-        "", "", "", "Grand Total", "", "", "", "", "", "", "", "", "",
-        fmt(totalCostSum), "",
-      ]],
+      foot: [
+        isExternal
+          ? ["", "", "", "Grand Total", "", "", "", "", "", fmt(totalCostSum)]
+          : ["", "", "", "Grand Total", "", "", "", "", "", "", "", "", "", fmt(totalCostSum), ""],
+      ],
       styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak" },
       headStyles: { fillColor: [30, 41, 59], textColor: 255, fontSize: 6.5 },
       footStyles: { fillColor: [241, 245, 249], textColor: 0, fontStyle: "bold" },
-      columnStyles: {
-        0: { cellWidth: 18 },
-        3: { cellWidth: 130 },
-        4: { cellWidth: 110 },
-      },
+      columnStyles: isExternal
+        ? {
+            0: { cellWidth: 18 },
+            3: { cellWidth: 200 },
+          }
+        : {
+            0: { cellWidth: 18 },
+            3: { cellWidth: 130 },
+            4: { cellWidth: 110 },
+          },
       margin: { left: 40, right: 40 },
     })
 
@@ -935,8 +986,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     const pad = (n: number) => String(n).padStart(2, "0")
     const ts = `${pad(now.getDate())}${pad(now.getMonth() + 1)}${String(now.getFullYear()).slice(-2)}${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`
     const safeName = (assessment.name || "assessment").replace(/[\\/:*?"<>|]/g, "_").trim()
-    doc.save(`${safeName} ${ts}.pdf`)
-    appendAudit(`Downloaded PDF snapshot of assessment table (${filteredComparisons.length} items)`)
+    doc.save(`${safeName} ${isExternal ? "External " : ""}${ts}.pdf`)
+    appendAudit(`Downloaded ${isExternal ? "external" : "internal"} PDF snapshot of assessment table (${filteredComparisons.length} items)`)
   }
 
   return (
@@ -969,17 +1020,43 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             {assessment.status !== "ARCHIVED" && (
               <Button className="bg-red-600 text-white hover:bg-red-700" onClick={() => setShowArchiveConfirm(true)}>
                 <ArchiveX className="h-4 w-4 mr-2" />
-                No Longer Required
+                Archive
               </Button>
             )}
-            <Button variant="outline" onClick={handleExportReport}>
-              <FileText className="h-4 w-4 mr-2" />
-              Export Report
-            </Button>
-            <Button onClick={handleDownloadPdf}>
-              <Download className="h-4 w-4 mr-2" />
-              Download PDF
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  <FileText className="h-4 w-4 mr-2" />
+                  Export Report
+                  <ChevronDown className="h-4 w-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => handleExportReport("internal")}>
+                  Internal
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExportReport("external")}>
+                  External
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button>
+                  <Download className="h-4 w-4 mr-2" />
+                  Download PDF
+                  <ChevronDown className="h-4 w-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => handleDownloadPdf("internal")}>
+                  Internal
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleDownloadPdf("external")}>
+                  External
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
 
@@ -1256,7 +1333,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             <AlertDialogTitle>Archive this assessment?</AlertDialogTitle>
             <AlertDialogDescription>
               This will mark <span className="font-medium text-foreground">{assessment.name}</span> as
-              "No Longer Required" and move it to the Archive. You can still view it from the Archive section.
+              "Archived" and move it to the Archive. You can still view it from the Archive section.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

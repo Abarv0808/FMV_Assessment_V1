@@ -115,7 +115,7 @@ export default function ArchivePage() {
                         <TableCell>{assessment.line_items_count || 0}</TableCell>
                         <TableCell>
                           <Badge variant="outline" className="bg-muted text-muted-foreground border-border/40">
-                            No Longer Required
+                            Archived
                           </Badge>
                         </TableCell>
                         <TableCell className="text-right text-muted-foreground">
