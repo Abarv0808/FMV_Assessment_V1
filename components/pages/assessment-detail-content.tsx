@@ -1116,7 +1116,6 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         <Tabs defaultValue="comparison" className="space-y-4">
           <TabsList>
             <TabsTrigger value="comparison">Benchmark Comparison</TabsTrigger>
-            <TabsTrigger value="exceptions">Exceptions & Rationale</TabsTrigger>
             <TabsTrigger value="history">History</TabsTrigger>
           </TabsList>
 
@@ -1257,22 +1256,6 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
                 {/* Comparison Table */}
                 <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} onMatchSelect={handleMatchSelect} onLineItemUpdate={handleLineItemUpdate} />
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="exceptions">
-            <Card className="border-border/40">
-              <CardHeader>
-                <CardTitle>Exceptions & Rationale</CardTitle>
-                <CardDescription>
-                  Manage exceptions and document rationale for flagged items
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-12 text-muted-foreground">
-                  <p>Exception management coming soon...</p>
-                </div>
               </CardContent>
             </Card>
           </TabsContent>
