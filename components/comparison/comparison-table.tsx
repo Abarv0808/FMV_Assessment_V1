@@ -161,6 +161,23 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
 
 const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
 
+// Compute the effective Total Cost for a line item.
+// If a negotiated price has been entered, it takes precedence over unit price:
+// Total = negotiated price * number of units. Otherwise fall back to the
+// stored total cost (which is based on unit price).
+export function getEffectiveTotalCost(lineItem: {
+  negotiatedPrice?: number | null
+  numberOfUnit?: number
+  numberOfUnits?: number
+  totalCost?: number | null
+}): number {
+  const units = lineItem.numberOfUnit ?? lineItem.numberOfUnits ?? 1
+  if (lineItem.negotiatedPrice != null && lineItem.negotiatedPrice > 0) {
+    return lineItem.negotiatedPrice * units
+  }
+  return lineItem.totalCost ?? 0
+}
+
 export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect, onLineItemUpdate }: ComparisonTableProps) {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
   const [matchModalOpen, setMatchModalOpen] = useState(false)
@@ -216,8 +233,8 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
     }
   }
   
-  // Calculate total cost sum
-  const totalCostSum = comparisons.reduce((sum, comp) => sum + (comp.lineItem.totalCost || 0), 0)
+  // Calculate total cost sum (uses negotiated price over unit price when available)
+  const totalCostSum = comparisons.reduce((sum, comp) => sum + getEffectiveTotalCost(comp.lineItem), 0)
   const primaryCurrency = comparisons[0]?.lineItem.currency || "USD"
 
   const toggleRow = (id: string) => {
@@ -245,24 +262,25 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   }
 
   return (
-    <div className="border border-border/40 rounded-lg overflow-hidden">
-      <Table>
+    <div className="border border-border/40 rounded-lg overflow-x-auto">
+      <Table className="text-[11px] [&_th]:h-7 [&_th]:px-1.5 [&_th]:text-[11px] [&_td]:px-1.5 [&_td]:py-1">
         <TableHeader>
           <TableRow className="hover:bg-transparent border-border/40">
             <TableHead className="w-[40px]"></TableHead>
             <TableHead>Site</TableHead>
             <TableHead>Cost Category</TableHead>
             <TableHead>Cost Description</TableHead>
-            <TableHead className="min-w-[220px]">Benchmark Match</TableHead>
-            <TableHead className="text-right">Number of Unit</TableHead>
+            <TableHead className="min-w-[180px]">Benchmark Match</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>
             <TableHead className="text-right">Negotiated Price</TableHead>
-            <TableHead className="text-right">Total Cost</TableHead>
             <TableHead>Currency</TableHead>
-            <TableHead className="min-w-[200px]">Benchmark</TableHead>
-            <TableHead className="text-right">Variance</TableHead>
+            <TableHead className="min-w-[160px]">Benchmark</TableHead>
             <TableHead>Flag</TableHead>
             <TableHead>Decision</TableHead>
+            <TableHead className="text-right">Variance</TableHead>
+            <TableHead className="text-right">Number of Unit</TableHead>
+            <TableHead className="text-right">Total Cost</TableHead>
+            <TableHead>Code</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -300,6 +318,14 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                 <Minus className="h-3 w-3" />
               )
 
+            // Resolve the Code from the benchmark match the user selected,
+            // falling back to the top suggested match when none is explicitly chosen.
+            const selectedMatch =
+              (comparison.userSelected
+                ? comparison.possibleMatches?.find((m: any) => m.benchmarkId === comparison.userSelected)
+                : null) || comparison.possibleMatches?.[0]
+            const selectedCode = (selectedMatch as any)?.code || null
+
             return (
               <Fragment key={comparison.id}>
                 <TableRow className="border-border/40">
@@ -307,13 +333,13 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-6 w-6"
+                      className="h-5 w-5"
                       onClick={() => toggleRow(comparison.id)}
                     >
                       {isExpanded ? (
-                        <ChevronDown className="h-4 w-4" />
+                        <ChevronDown className="h-3.5 w-3.5" />
                       ) : (
-                        <ChevronRight className="h-4 w-4" />
+                        <ChevronRight className="h-3.5 w-3.5" />
                       )}
                     </Button>
                   </TableCell>
@@ -327,7 +353,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       value={comparison.lineItem.costCategory || ""}
                       onValueChange={(val) => handleCostCategoryChange(comparison.lineItem.id, val)}
                     >
-                      <SelectTrigger className="h-8 text-xs min-w-[180px] max-w-[220px] border-border/40">
+                      <SelectTrigger className="h-7 text-[11px] min-w-[140px] max-w-[180px] border-border/40">
                         <SelectValue placeholder="Select category">
                           <span className="truncate">{comparison.lineItem.costCategory || "Select category"}</span>
                         </SelectValue>
@@ -341,7 +367,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </SelectContent>
                     </Select>
                   </TableCell>
-                  <TableCell className="min-w-[300px] max-w-[450px]" onClick={(e) => e.stopPropagation()}>
+                  <TableCell className="min-w-[220px] max-w-[320px]" onClick={(e) => e.stopPropagation()}>
                     {editingAdditionalInfo === comparison.lineItem.id ? (
                       <div className="flex flex-col gap-2">
                         <Textarea
@@ -378,7 +404,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </div>
                     ) : (
                       <div className="flex items-center gap-2 group">
-                        <div className="text-sm font-medium whitespace-normal break-words flex-1">
+                      <div className="text-[11px] font-medium whitespace-normal break-words flex-1">
                           {comparison.lineItem.additionalInformation || comparison.lineItem.description}
                         </div>
                         <Button
@@ -392,12 +418,12 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </div>
                     )}
                   </TableCell>
-                  <TableCell className="min-w-[220px]" onClick={(e) => e.stopPropagation()}>
+                  <TableCell className="min-w-[180px]" onClick={(e) => e.stopPropagation()}>
                     {comparison.possibleMatches && comparison.possibleMatches.length > 0 ? (
                       <Button
                         variant="outline"
                         size="sm"
-                        className="h-8 text-xs w-full justify-start gap-2"
+                        className="h-7 text-[11px] w-full justify-start gap-2"
                         onClick={() => openMatchModal(comparison)}
                       >
                         <Search className="h-3 w-3" />
@@ -415,9 +441,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </span>
                     )}
                   </TableCell>
-                  <TableCell className="text-right">
-                    {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
-                  </TableCell>
                   <TableCell className="text-right font-medium font-mono">
                     {comparison.lineItem.unitPrice?.toLocaleString() ?? "-"}
                   </TableCell>
@@ -430,11 +453,8 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         onLineItemUpdate?.(comparison.lineItem.id, "negotiatedPrice", value as any)
                       }}
                       placeholder="Enter price"
-                      className="h-8 w-[120px] text-right font-mono text-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="h-7 w-[110px] text-right font-mono text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
-                  </TableCell>
-                  <TableCell className="text-right font-mono">
-                    {comparison.lineItem.totalCost?.toLocaleString() ?? "-"}
                   </TableCell>
                   <TableCell>
                     <Badge variant="outline" className="font-normal">
@@ -446,7 +466,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       value={comparison.selectedBenchmarkType}
                       onValueChange={(val) => onBenchmarkTypeChange?.(comparison.id, val as BenchmarkType)}
                     >
-                      <SelectTrigger className="h-8 text-xs min-w-[185px] border-border/40">
+                      <SelectTrigger className="h-7 text-[11px] min-w-[160px] border-border/40">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -463,27 +483,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         })}
                       </SelectContent>
                     </Select>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {hasBenchmarkValue ? (
-                      <div className="flex items-center justify-end gap-1">
-                        {varianceIcon}
-                        <span
-                          className={
-                            dynamicVariance > 0
-                              ? "text-red-500"
-                              : dynamicVariance < 0
-                                ? "text-green-500"
-                                : "text-muted-foreground"
-                          }
-                        >
-                          {dynamicVariancePercent > 0 ? "+" : ""}
-                          {dynamicVariancePercent.toFixed(1)}%
-                        </span>
-                      </div>
-                    ) : (
-                      <span className="text-muted-foreground">—</span>
-                    )}
                   </TableCell>
                   <TableCell>
                     <Badge className={flagConf?.color || "text-slate-400 bg-slate-400/10"} variant="outline">
@@ -509,7 +508,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         onDecisionChange?.(comparison.id, val as ItemDecision)
                       }}
                     >
-                      <SelectTrigger className={`h-7 text-xs font-medium border rounded-full px-3 min-w-[150px] ${decisionConf.color}`}>
+                      <SelectTrigger className={`h-6 text-[11px] font-medium border rounded-full px-2.5 min-w-[130px] ${decisionConf.color}`}>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -521,11 +520,47 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </SelectContent>
                     </Select>
                   </TableCell>
+                  <TableCell className="text-right">
+                    {hasBenchmarkValue ? (
+                      <div className="flex items-center justify-end gap-1">
+                        {varianceIcon}
+                        <span
+                          className={
+                            dynamicVariance > 0
+                              ? "text-red-500"
+                              : dynamicVariance < 0
+                                ? "text-green-500"
+                                : "text-muted-foreground"
+                          }
+                        >
+                          {dynamicVariancePercent > 0 ? "+" : ""}
+                          {dynamicVariancePercent.toFixed(1)}%
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-muted-foreground">—</span>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
+                  </TableCell>
+                  <TableCell className="text-right font-mono">
+                    {getEffectiveTotalCost(comparison.lineItem).toLocaleString()}
+                  </TableCell>
+                  <TableCell className="font-mono text-[11px]">
+                    {selectedCode ? (
+                      <Badge variant="outline" className="font-normal">
+                        {selectedCode}
+                      </Badge>
+                    ) : (
+                      <span className="text-muted-foreground">-</span>
+                    )}
+                  </TableCell>
                 </TableRow>
 
                 {isExpanded && (
                   <TableRow className="border-border/40 bg-accent/30">
-                    <TableCell colSpan={13}>
+                    <TableCell colSpan={14}>
                       <div className="py-4 px-2 space-y-4">
                         {/* Item Details */}
                         <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-sm">
@@ -643,13 +678,14 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
             <TableCell className="text-right font-bold font-mono">
               {formatCurrency(totalCostSum, primaryCurrency)}
             </TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
             <TableCell></TableCell>
           </TableRow>
         </TableBody>
@@ -673,13 +709,14 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <Table>
               <TableHeader className="sticky top-0 bg-background z-10 border-b">
                 <TableRow>
-                  <TableHead className="w-[40%]">Procedure Name</TableHead>
+                  <TableHead className="w-[35%]">Procedure Name</TableHead>
+                  <TableHead className="w-[10%]">Code</TableHead>
                   <TableHead className="w-[12%]">Country</TableHead>
                   <TableHead className="text-right w-[10%]">P25 (Low)</TableHead>
                   <TableHead className="text-right w-[10%]">P50 (Med)</TableHead>
                   <TableHead className="text-right w-[10%]">P75 (High)</TableHead>
-                  <TableHead className="text-right w-[10%]">P90</TableHead>
-                  <TableHead className="w-[8%] text-center">Action</TableHead>
+                  <TableHead className="text-right w-[8%]">P90</TableHead>
+                  <TableHead className="w-[5%] text-center">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -694,6 +731,11 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                           </Badge>
                         )}
                       </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary" className="text-xs font-mono">
+                        {match.code || "-"}
+                      </Badge>
                     </TableCell>
                     <TableCell>
                       <Badge variant="secondary" className="text-xs">
@@ -724,7 +766,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                 ))}
                 {(!selectedComparison?.possibleMatches || selectedComparison.possibleMatches.length === 0) && (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={8} className="text-center text-muted-foreground py-8">
                       No matching benchmarks found
                     </TableCell>
                   </TableRow>

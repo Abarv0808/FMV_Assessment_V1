@@ -9,6 +9,12 @@ import { createClient } from "@/lib/supabase/client"
 import { AppShell } from "@/components/app-shell"
 import { Button } from "@/components/ui/button"
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
   Card,
   CardContent,
   CardDescription,
@@ -49,13 +55,14 @@ import {
   RotateCcw,
   Sparkles,
   Loader2,
+  ChevronDown,
 } from "lucide-react"
 import {
   mockAssessments,
   mockAssessmentComparisons,
   mockAssessmentLineItems,
 } from "@/lib/mock-data"
-import { ComparisonTable } from "@/components/comparison/comparison-table"
+import { ComparisonTable, getEffectiveTotalCost } from "@/components/comparison/comparison-table"
 import { AssessmentOverview } from "@/components/comparison/assessment-overview"
 import type { Assessment, AssessmentComparison, AssessmentStatus, AuditEvent, BenchmarkType, DataSource, ItemDecision } from "@/lib/types"
 import { useAuth } from "@/lib/auth-context"
@@ -123,6 +130,18 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
       setIsRealAssessment(true)
 
+      // Build the data-source hierarchy from the linked benchmark files.
+      // (Source -> Indication -> Phase -> Country). An assessment can link to
+      // multiple files, so we collect the distinct values for each segment.
+      const benchmarkFiles: any[] = Array.isArray(assessmentData.benchmark_files) ? assessmentData.benchmark_files : []
+      const distinct = (arr: (string | null | undefined)[]) =>
+        Array.from(new Set(arr.filter((v): v is string => !!v && v.trim().length > 0)))
+      const dataSourceHierarchy = {
+        indications: distinct(benchmarkFiles.map((f) => f.indication)),
+        phases: distinct(benchmarkFiles.map((f) => f.trial_phase)),
+        countries: distinct(benchmarkFiles.map((f) => f.country)),
+      }
+
       // Map to Assessment type
       const mappedAssessment: Assessment = {
         id: assessmentData.id,
@@ -132,6 +151,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         therapeuticArea: assessmentData.therapeutic_area,
         status: (assessmentData.status || "IN_REVIEW") as AssessmentStatus,
         dataSource: assessmentData.benchmark_source === "IQVIA_GRANTPLAN" ? "IQVIA GrantPlan" : "IQVIA GPI",
+        dataSourceHierarchy,
         vendorName: "Vendor",
         totalLineItems: 0,
         flaggedItems: 0,
@@ -436,13 +456,18 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     appendAudit(`Selected benchmark match: ${match.procedureName}`)
   }, [appendAudit])
 
-  const handleExportReport = useCallback(() => {
+  const handleExportReport = useCallback((variant: "internal" | "external" = "internal") => {
     if (!assessment) return
+
+    const isExternal = variant === "external"
 
     // Build rows from current comparisons (in-memory state = current at-time version)
     const rows = comparisons.map((comp, idx) => {
       const li = comp.lineItem
-      const selected = comp.userSelected || (comp.possibleMatches && comp.possibleMatches[0]) || null
+      const selected =
+        (comp.userSelected
+          ? comp.possibleMatches?.find((m: any) => m.benchmarkId === comp.userSelected)
+          : null) || (comp.possibleMatches && comp.possibleMatches[0]) || null
       const benchmarkValue =
         comp.selectedBenchmarkType === "p25" ? comp.benchmarkLow :
         comp.selectedBenchmarkType === "p50" ? comp.benchmarkMed :
@@ -451,7 +476,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       const variance = comp.variance ?? 0
       const variancePct = comp.variancePercent ?? 0
 
-      return {
+      const base: Record<string, any> = {
         "#": idx + 1,
         "Description": li.description || "",
         "Site/Country": li.country || li.site || "",
@@ -459,12 +484,22 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         "Unit Type": li.unitType || "",
         "Number of Units": li.numberOfUnit ?? "",
         "Unit Price": li.unitPrice ?? "",
-        "Total Cost": li.totalCost ?? "",
+        "Total Cost": getEffectiveTotalCost(li),
         "Currency": li.currency || "",
         "Negotiated Price": li.negotiatedPrice ?? "",
         "Decision": li.decision || "",
+      }
+
+      // External reports hide benchmark-related and internal-only columns.
+      if (isExternal) {
+        return base
+      }
+
+      return {
+        ...base,
         "Flag": comp.flag || "",
         "Matched Benchmark": selected?.procedureName || comp.benchmarkDescription || "",
+        "Code": (selected as any)?.code || "",
         "Match Confidence": selected?.confidence || "",
         "Benchmark P25": comp.benchmarkLow ?? "",
         "Benchmark P50": comp.benchmarkMed ?? "",
@@ -499,10 +534,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
     // Sanitize filename
     const safeName = (assessment.name || "assessment").replace(/[\\/:*?"<>|]/g, "_").trim()
-    const filename = `${safeName} ${ts}.xlsx`
+    const filename = `${safeName} ${isExternal ? "External " : ""}${ts}.xlsx`
 
     XLSX.writeFile(workbook, filename)
-    appendAudit(`Exported report: ${filename}`)
+    appendAudit(`Exported ${isExternal ? "external" : "internal"} report: ${filename}`)
   }, [assessment, comparisons, appendAudit])
 
   const handleArchive = useCallback(async () => {
@@ -523,7 +558,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       setAssessment((prev) =>
         prev ? { ...prev, status: "ARCHIVED" as AssessmentStatus, updatedAt: new Date().toISOString() } : prev
       )
-      appendAudit("Marked as No Longer Required and moved to Archive")
+      appendAudit("Archived and moved to Archive")
       setShowArchiveConfirm(false)
       router.push("/archive")
     } catch (error) {
@@ -811,8 +846,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   })
 
   // Generate a PDF snapshot of the assessment table as currently filtered.
-  const handleDownloadPdf = () => {
+  const handleDownloadPdf = (variant: "internal" | "external" = "internal") => {
     if (!assessment) return
+
+    const isExternal = variant === "external"
 
     const flagLabels: Record<string, string> = {
       RED: "High Variance",
@@ -851,7 +888,6 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     doc.setTextColor(0)
 
     let totalCostSum = 0
-    const primaryCurrency = filteredComparisons[0]?.lineItem.currency || "USD"
 
     const body = filteredComparisons.map((c, idx) => {
       const selVal = getBenchmarkVal(c)
@@ -863,48 +899,86 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         : c.flag && !computedFlags.has(c.flag)
           ? c.flag
           : "NO_MATCH"
-      totalCostSum += c.lineItem.totalCost || 0
+      totalCostSum += getEffectiveTotalCost(c.lineItem)
+
+      const selMatch =
+        (c.userSelected
+          ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)
+          : null) || c.possibleMatches?.[0]
+      const code = (selMatch as any)?.code || "-"
+
+      const benchmarkMatch = c.userSelected
+        ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)?.procedureName || c.benchmarkDescription || "-"
+        : c.benchmarkDescription || (c.possibleMatches?.length ? `${c.possibleMatches.length} matches` : "No match found")
+
+      if (isExternal) {
+        // External report omits Benchmark Match, Benchmark, Flag, Variance, Code.
+        return [
+          idx + 1,
+          c.lineItem.site || "-",
+          c.lineItem.costCategory || "-",
+          c.lineItem.additionalInformation || c.lineItem.description || "-",
+          fmt(c.lineItem.unitPrice),
+          fmt(c.lineItem.negotiatedPrice),
+          c.lineItem.currency || "USD",
+          c.lineItem.decision || "-",
+          c.lineItem.numberOfUnit ?? "-",
+          fmt(getEffectiveTotalCost(c.lineItem)),
+        ]
+      }
 
       return [
         idx + 1,
         c.lineItem.site || "-",
         c.lineItem.costCategory || "-",
         c.lineItem.additionalInformation || c.lineItem.description || "-",
-        c.userSelected
-          ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)?.procedureName || c.benchmarkDescription || "-"
-          : c.benchmarkDescription || (c.possibleMatches?.length ? `${c.possibleMatches.length} matches` : "No match found"),
-        c.lineItem.numberOfUnit ?? "-",
+        benchmarkMatch,
         fmt(c.lineItem.unitPrice),
         fmt(c.lineItem.negotiatedPrice),
-        fmt(c.lineItem.totalCost),
         c.lineItem.currency || "USD",
         hasVal ? fmt(selVal) : "-",
-        hasVal ? `${variancePct > 0 ? "+" : ""}${variancePct.toFixed(1)}%` : "—",
         flagLabels[effFlag] || effFlag,
         c.lineItem.decision || "-",
+        hasVal ? `${variancePct > 0 ? "+" : ""}${variancePct.toFixed(1)}%` : "—",
+        c.lineItem.numberOfUnit ?? "-",
+        fmt(getEffectiveTotalCost(c.lineItem)),
+        code,
       ]
     })
 
     autoTable(doc, {
       startY: 64,
-      head: [[
-        "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
-        "Units", "Unit Price", "Negotiated", "Total Cost", "Curr.",
-        "Benchmark", "Variance", "Flag", "Decision",
-      ]],
+      head: [
+        isExternal
+          ? [
+              "#", "Site", "Cost Category", "Cost Description",
+              "Unit Price", "Negotiated", "Curr.", "Decision", "Units", "Total Cost",
+            ]
+          : [
+              "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
+              "Unit Price", "Negotiated", "Curr.", "Benchmark", "Flag",
+              "Decision", "Variance", "Units", "Total Cost", "Code",
+            ],
+      ],
       body,
-      foot: [[
-        "", "", "", "Grand Total", "", "", "", "",
-        fmt(totalCostSum), primaryCurrency, "", "", "", "",
-      ]],
+      foot: [
+        isExternal
+          ? ["", "", "", "Grand Total", "", "", "", "", "", fmt(totalCostSum)]
+          : ["", "", "", "Grand Total", "", "", "", "", "", "", "", "", "", fmt(totalCostSum), ""],
+      ],
       styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak" },
       headStyles: { fillColor: [30, 41, 59], textColor: 255, fontSize: 6.5 },
       footStyles: { fillColor: [241, 245, 249], textColor: 0, fontStyle: "bold" },
-      columnStyles: {
-        0: { cellWidth: 18 },
-        3: { cellWidth: 130 },
-        4: { cellWidth: 110 },
-      },
+      columnStyles: isExternal
+        ? {
+            0: { cellWidth: 18 },
+            3: { cellWidth: 200 },
+          }
+        : {
+            0: { cellWidth: 18 },
+            3: { cellWidth: 130 },
+            4: { cellWidth: 110 },
+          },
       margin: { left: 40, right: 40 },
     })
 
@@ -912,8 +986,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     const pad = (n: number) => String(n).padStart(2, "0")
     const ts = `${pad(now.getDate())}${pad(now.getMonth() + 1)}${String(now.getFullYear()).slice(-2)}${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`
     const safeName = (assessment.name || "assessment").replace(/[\\/:*?"<>|]/g, "_").trim()
-    doc.save(`${safeName} ${ts}.pdf`)
-    appendAudit(`Downloaded PDF snapshot of assessment table (${filteredComparisons.length} items)`)
+    doc.save(`${safeName} ${isExternal ? "External " : ""}${ts}.pdf`)
+    appendAudit(`Downloaded ${isExternal ? "external" : "internal"} PDF snapshot of assessment table (${filteredComparisons.length} items)`)
   }
 
   return (
@@ -946,22 +1020,48 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             {assessment.status !== "ARCHIVED" && (
               <Button className="bg-red-600 text-white hover:bg-red-700" onClick={() => setShowArchiveConfirm(true)}>
                 <ArchiveX className="h-4 w-4 mr-2" />
-                No Longer Required
+                Archive
               </Button>
             )}
-            <Button variant="outline" onClick={handleExportReport}>
-              <FileText className="h-4 w-4 mr-2" />
-              Export Report
-            </Button>
-            <Button onClick={handleDownloadPdf}>
-              <Download className="h-4 w-4 mr-2" />
-              Download PDF
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  <FileText className="h-4 w-4 mr-2" />
+                  Export Report
+                  <ChevronDown className="h-4 w-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => handleExportReport("internal")}>
+                  Internal
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExportReport("external")}>
+                  External
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button>
+                  <Download className="h-4 w-4 mr-2" />
+                  Download PDF
+                  <ChevronDown className="h-4 w-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => handleDownloadPdf("internal")}>
+                  Internal
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleDownloadPdf("external")}>
+                  External
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
 
         {/* Decision Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card className="border-border/40">
             <CardContent className="pt-4">
               <div className="flex items-center gap-2">
@@ -975,67 +1075,34 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-border/40">
+          <Card className="border-border/40 md:col-span-2">
             <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-green-500/10">
+              <p className="text-xs text-muted-foreground mb-3">Decisions</p>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span className="text-lg font-semibold">{stats.accepted}</span>
+                  <span className="text-xs text-muted-foreground">Accepted</span>
                 </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.accepted}</p>
-                  <p className="text-xs text-muted-foreground">Accepted</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-border/40">
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-yellow-500/10">
+                <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-yellow-500" />
+                  <span className="text-lg font-semibold">{stats.pending}</span>
+                  <span className="text-xs text-muted-foreground">Pending</span>
                 </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.pending}</p>
-                  <p className="text-xs text-muted-foreground">Pending</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-border/40">
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-primary/10">
+                <div className="flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-primary" />
+                  <span className="text-lg font-semibold">{stats.notAmended}</span>
+                  <span className="text-xs text-muted-foreground">Not Amended</span>
                 </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.notAmended}</p>
-                  <p className="text-xs text-muted-foreground">Not Amended</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-border/40">
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-red-500/10">
+                <div className="flex items-center gap-2">
                   <XCircle className="h-4 w-4 text-red-500" />
+                  <span className="text-lg font-semibold">{stats.notAccepted}</span>
+                  <span className="text-xs text-muted-foreground">Not Accepted</span>
                 </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.notAccepted}</p>
-                  <p className="text-xs text-muted-foreground">Not Accepted</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-border/40">
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-slate-400/10">
+                <div className="flex items-center gap-2">
                   <HelpCircle className="h-4 w-4 text-slate-400" />
-                </div>
-                <div>
-                  <p className="text-2xl font-semibold">{stats.manualAssessment}</p>
-                  <p className="text-xs text-muted-foreground">Manual Assessment</p>
+                  <span className="text-lg font-semibold">{stats.manualAssessment}</span>
+                  <span className="text-xs text-muted-foreground">Manual Assessment</span>
                 </div>
               </div>
             </CardContent>
@@ -1266,7 +1333,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             <AlertDialogTitle>Archive this assessment?</AlertDialogTitle>
             <AlertDialogDescription>
               This will mark <span className="font-medium text-foreground">{assessment.name}</span> as
-              "No Longer Required" and move it to the Archive. You can still view it from the Archive section.
+              "Archived" and move it to the Archive. You can still view it from the Archive section.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
