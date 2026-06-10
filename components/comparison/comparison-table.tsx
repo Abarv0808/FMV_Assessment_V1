@@ -262,19 +262,19 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   }
 
   return (
-    <div className="border border-border/40 rounded-lg overflow-hidden">
-      <Table>
+    <div className="border border-border/40 rounded-lg overflow-x-auto">
+      <Table className="text-xs [&_th]:h-9 [&_th]:px-2 [&_th]:text-xs [&_td]:px-2 [&_td]:py-2">
         <TableHeader>
           <TableRow className="hover:bg-transparent border-border/40">
             <TableHead className="w-[40px]"></TableHead>
             <TableHead>Site</TableHead>
             <TableHead>Cost Category</TableHead>
             <TableHead>Cost Description</TableHead>
-            <TableHead className="min-w-[220px]">Benchmark Match</TableHead>
+            <TableHead className="min-w-[180px]">Benchmark Match</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>
             <TableHead className="text-right">Negotiated Price</TableHead>
             <TableHead>Currency</TableHead>
-            <TableHead className="min-w-[200px]">Benchmark</TableHead>
+            <TableHead className="min-w-[160px]">Benchmark</TableHead>
             <TableHead>Flag</TableHead>
             <TableHead>Decision</TableHead>
             <TableHead className="text-right">Variance</TableHead>
@@ -353,7 +353,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       value={comparison.lineItem.costCategory || ""}
                       onValueChange={(val) => handleCostCategoryChange(comparison.lineItem.id, val)}
                     >
-                      <SelectTrigger className="h-8 text-xs min-w-[180px] max-w-[220px] border-border/40">
+                      <SelectTrigger className="h-8 text-xs min-w-[140px] max-w-[180px] border-border/40">
                         <SelectValue placeholder="Select category">
                           <span className="truncate">{comparison.lineItem.costCategory || "Select category"}</span>
                         </SelectValue>
@@ -367,7 +367,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </SelectContent>
                     </Select>
                   </TableCell>
-                  <TableCell className="min-w-[300px] max-w-[450px]" onClick={(e) => e.stopPropagation()}>
+                  <TableCell className="min-w-[220px] max-w-[320px]" onClick={(e) => e.stopPropagation()}>
                     {editingAdditionalInfo === comparison.lineItem.id ? (
                       <div className="flex flex-col gap-2">
                         <Textarea
@@ -418,7 +418,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </div>
                     )}
                   </TableCell>
-                  <TableCell className="min-w-[220px]" onClick={(e) => e.stopPropagation()}>
+                  <TableCell className="min-w-[180px]" onClick={(e) => e.stopPropagation()}>
                     {comparison.possibleMatches && comparison.possibleMatches.length > 0 ? (
                       <Button
                         variant="outline"

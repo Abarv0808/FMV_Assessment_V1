@@ -1261,6 +1261,10 @@
     max-width: var(--container-4xl);
   }
 
+  .max-w-\[180px\] {
+    max-width: 180px;
+  }
+
   .max-w-\[220px\] {
     max-width: 220px;
   }
@@ -1271,6 +1275,10 @@
 
   .max-w-\[300px\] {
     max-width: 300px;
+  }
+
+  .max-w-\[320px\] {
+    max-width: 320px;
   }
 
   .max-w-\[450px\] {
@@ -5135,12 +5143,6 @@
     }
   }
 
-  @media (min-width: 64rem) {
-    .lg\:grid-cols-6 {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-    }
-  }
-
   @container field-group (min-width: 28rem) {
     .\@md\/field-group\:flex-row {
       flex-direction: row;
@@ -5518,6 +5520,27 @@
 
   .\[\&_svg\:not\(\[class\*\=\'text-\'\]\)\]\:text-muted-foreground svg:not([class*="text-"]) {
     color: var(--muted-foreground);
+  }
+
+  .\[\&_td\]\:px-2 td {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+
+  .\[\&_td\]\:py-2 td {
+    padding-block: calc(var(--spacing) * 2);
+  }
+
+  .\[\&_th\]\:h-9 th {
+    height: calc(var(--spacing) * 9);
+  }
+
+  .\[\&_th\]\:px-2 th {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+
+  .\[\&_th\]\:text-xs th {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
   }
 
   .\[\&_tr\]\:border-b tr {
