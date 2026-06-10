@@ -1062,6 +1062,10 @@
     height: calc(var(--spacing) * 3);
   }
 
+  .h-3\.5 {
+    height: calc(var(--spacing) * 3.5);
+  }
+
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
@@ -1246,6 +1250,10 @@
     width: calc(var(--spacing) * 3);
   }
 
+  .w-3\.5 {
+    width: calc(var(--spacing) * 3.5);
+  }
+
   .w-3\/4 {
     width: 75%;
   }
@@ -1336,6 +1344,10 @@
 
   .w-\[100px\] {
     width: 100px;
+  }
+
+  .w-\[110px\] {
+    width: 110px;
   }
 
   .w-\[120px\] {
@@ -1468,6 +1480,10 @@
 
   .min-w-\[120px\] {
     min-width: 120px;
+  }
+
+  .min-w-\[130px\] {
+    min-width: 130px;
   }
 
   .min-w-\[140px\] {
@@ -2756,6 +2772,10 @@
 
   .text-\[0\.8rem\] {
     font-size: .8rem;
+  }
+
+  .text-\[11px\] {
+    font-size: 11px;
   }
 
   .leading-none {
@@ -5651,16 +5671,32 @@
     color: var(--muted-foreground);
   }
 
+  .\[\&_td\]\:px-1\.5 td {
+    padding-inline: calc(var(--spacing) * 1.5);
+  }
+
   .\[\&_td\]\:px-2 td {
     padding-inline: calc(var(--spacing) * 2);
+  }
+
+  .\[\&_td\]\:py-1 td {
+    padding-block: calc(var(--spacing) * 1);
   }
 
   .\[\&_td\]\:py-2 td {
     padding-block: calc(var(--spacing) * 2);
   }
 
+  .\[\&_th\]\:h-7 th {
+    height: calc(var(--spacing) * 7);
+  }
+
   .\[\&_th\]\:h-9 th {
     height: calc(var(--spacing) * 9);
+  }
+
+  .\[\&_th\]\:px-1\.5 th {
+    padding-inline: calc(var(--spacing) * 1.5);
   }
 
   .\[\&_th\]\:px-2 th {
@@ -5670,6 +5706,10 @@
   .\[\&_th\]\:text-xs th {
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+
+  .\[\&_th\]\:text-\[11px\] th {
+    font-size: 11px;
   }
 
   .\[\&_tr\]\:border-b tr {

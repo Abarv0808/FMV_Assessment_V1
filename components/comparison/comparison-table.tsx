@@ -263,7 +263,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
 
   return (
     <div className="border border-border/40 rounded-lg overflow-x-auto">
-      <Table className="text-xs [&_th]:h-9 [&_th]:px-2 [&_th]:text-xs [&_td]:px-2 [&_td]:py-2">
+      <Table className="text-[11px] [&_th]:h-7 [&_th]:px-1.5 [&_th]:text-[11px] [&_td]:px-1.5 [&_td]:py-1">
         <TableHeader>
           <TableRow className="hover:bg-transparent border-border/40">
             <TableHead className="w-[40px]"></TableHead>
@@ -333,13 +333,13 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-6 w-6"
+                      className="h-5 w-5"
                       onClick={() => toggleRow(comparison.id)}
                     >
                       {isExpanded ? (
-                        <ChevronDown className="h-4 w-4" />
+                        <ChevronDown className="h-3.5 w-3.5" />
                       ) : (
-                        <ChevronRight className="h-4 w-4" />
+                        <ChevronRight className="h-3.5 w-3.5" />
                       )}
                     </Button>
                   </TableCell>
@@ -353,7 +353,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       value={comparison.lineItem.costCategory || ""}
                       onValueChange={(val) => handleCostCategoryChange(comparison.lineItem.id, val)}
                     >
-                      <SelectTrigger className="h-8 text-xs min-w-[140px] max-w-[180px] border-border/40">
+                      <SelectTrigger className="h-7 text-[11px] min-w-[140px] max-w-[180px] border-border/40">
                         <SelectValue placeholder="Select category">
                           <span className="truncate">{comparison.lineItem.costCategory || "Select category"}</span>
                         </SelectValue>
@@ -404,7 +404,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </div>
                     ) : (
                       <div className="flex items-center gap-2 group">
-                        <div className="text-sm font-medium whitespace-normal break-words flex-1">
+                      <div className="text-[11px] font-medium whitespace-normal break-words flex-1">
                           {comparison.lineItem.additionalInformation || comparison.lineItem.description}
                         </div>
                         <Button
@@ -423,7 +423,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       <Button
                         variant="outline"
                         size="sm"
-                        className="h-8 text-xs w-full justify-start gap-2"
+                        className="h-7 text-[11px] w-full justify-start gap-2"
                         onClick={() => openMatchModal(comparison)}
                       >
                         <Search className="h-3 w-3" />
@@ -453,7 +453,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         onLineItemUpdate?.(comparison.lineItem.id, "negotiatedPrice", value as any)
                       }}
                       placeholder="Enter price"
-                      className="h-8 w-[120px] text-right font-mono text-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="h-7 w-[110px] text-right font-mono text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                   </TableCell>
                   <TableCell>
@@ -466,7 +466,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       value={comparison.selectedBenchmarkType}
                       onValueChange={(val) => onBenchmarkTypeChange?.(comparison.id, val as BenchmarkType)}
                     >
-                      <SelectTrigger className="h-8 text-xs min-w-[185px] border-border/40">
+                      <SelectTrigger className="h-7 text-[11px] min-w-[160px] border-border/40">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -508,7 +508,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         onDecisionChange?.(comparison.id, val as ItemDecision)
                       }}
                     >
-                      <SelectTrigger className={`h-7 text-xs font-medium border rounded-full px-3 min-w-[150px] ${decisionConf.color}`}>
+                      <SelectTrigger className={`h-6 text-[11px] font-medium border rounded-full px-2.5 min-w-[130px] ${decisionConf.color}`}>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -547,7 +547,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   <TableCell className="text-right font-mono">
                     {getEffectiveTotalCost(comparison.lineItem).toLocaleString()}
                   </TableCell>
-                  <TableCell className="font-mono text-sm">
+                  <TableCell className="font-mono text-[11px]">
                     {selectedCode ? (
                       <Badge variant="outline" className="font-normal">
                         {selectedCode}
