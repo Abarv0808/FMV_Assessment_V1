@@ -327,3 +327,60 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:10:57.587] Server  LOG        Reload env: .env.development.local
 [00:10:57.955] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:13:23.196] Server  LOG      ✓ Compiled in 144ms
+[00:13:23.852] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:13:24.294] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:13:24.398] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:13:24.526] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[00:13:24.688] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:13:24.791] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[00:13:25.350] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[00:13:25.350] Browser LOG     [v0] Has existing ai_matches: true
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.350] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:13:25.651] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[00:13:25.651] Browser LOG     [v0] Has existing ai_matches: true
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:13:25.651] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH

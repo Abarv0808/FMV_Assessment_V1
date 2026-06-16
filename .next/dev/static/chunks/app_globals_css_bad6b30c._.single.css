@@ -1041,6 +1041,10 @@
     max-height: var(--radix-select-content-available-height);
   }
 
+  .max-h-\[75vh\] {
+    max-height: 75vh;
+  }
+
   .max-h-\[250px\] {
     max-height: 250px;
   }
