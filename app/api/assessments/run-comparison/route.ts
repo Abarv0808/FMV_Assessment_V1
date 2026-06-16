@@ -462,15 +462,44 @@ export async function POST(request: Request) {
 
       // Detect non-comparable items (taxes, discounts, overhead %, currency fees, etc.)
       // These have no procedure-level benchmark and should be flagged, not force-matched.
+      //
+      // IMPORTANT: a keyword like "vat"/"tax" should only mark an item as
+      // non-comparable when it is essentially the WHOLE line (e.g. "VAT 21%",
+      // "Tax", "12% discount") — NOT when it appears as a fragment inside a real
+      // procedure description (e.g. "Site monitoring visit incl. 21% VAT").
+      // Previously these patterns were unanchored, so any row that merely
+      // mentioned VAT/tax got flagged NON_COMPARABLE.
       const descLower = cleanDescription.toLowerCase()
-      const nonComparablePatterns = [
-        /\b(tax|vat|gst|sales\s*tax|withholding|customs|duty|levy|tariff)\b/,
-        /\b(discount|rebate|refund|adjustment|credit\s*note)\b/,
-        /\b(currency\s*conversion|exchange\s*fee|fx\s*fee|wire\s*fee|bank\s*fee)\b/,
+
+      // Patterns that flag immediately when they match the whole (trimmed) line.
+      const wholeLineNonComparablePatterns = [
         /^\s*(misc|miscellaneous|other|sundry|sub\s*total|subtotal|total|grand\s*total)\s*[:.]?\s*\d*\s*%?\s*$/,
         /^\s*[\d.,]+\s*%\s*$/, // bare percentage like "12%"
       ]
-      const isNonComparable = nonComparablePatterns.some(rx => rx.test(descLower))
+
+      // Keyword groups that only count when they dominate the line. We strip
+      // out numbers, percentages, currency symbols and common filler words,
+      // then check whether what remains is basically just the keyword.
+      const nonComparableKeywords =
+        /\b(tax|vat|gst|sales\s*tax|withholding|customs|duty|levy|tariff|discount|rebate|refund|adjustment|credit\s*note|currency\s*conversion|exchange\s*fee|fx\s*fee|wire\s*fee|bank\s*fee)\b/
+
+      const hasKeyword = nonComparableKeywords.test(descLower)
+      let keywordDominatesLine = false
+      if (hasKeyword) {
+        // Remove the keyword(s), then strip numbers/%/symbols and filler words.
+        const residual = descLower
+          .replace(new RegExp(nonComparableKeywords.source, "g"), " ")
+          .replace(/[\d.,%$€£¥]/g, " ")
+          .replace(/\b(of|the|a|an|and|incl|including|inclusive|charge|charges|fee|fees|amount|total|local|rate|at|per)\b/g, " ")
+          .replace(/[^a-z]+/g, " ")
+          .trim()
+        // If almost nothing meaningful is left, the line is really just a tax/
+        // discount/fee. Otherwise it's a real procedure that mentions one.
+        keywordDominatesLine = residual.length <= 3
+      }
+
+      const isNonComparable =
+        wholeLineNonComparablePatterns.some(rx => rx.test(descLower)) || keywordDominatesLine
       if (isNonComparable) {
         console.log(`[v0] Non-comparable item detected (tax/discount/overhead/etc.), skipping match: "${cleanDescription.substring(0, 60)}"`)
         results.push({

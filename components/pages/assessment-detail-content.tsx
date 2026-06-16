@@ -640,92 +640,43 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         // Build a map of AI results by lineItemId for easy lookup
         const aiResultsMap = new Map(result.results.map((r: any) => [r.lineItemId, r]))
         
-        // Refresh the comparisons data - fetch comparisons and line items separately
-        console.log("[v0] Refreshing comparisons data via API...")
-        
-        // Fetch comparisons via API (server-side to bypass RLS)
-        const comparisonsResponse = await fetch(`/api/assessments/${id}/comparisons`)
-        const { comparisons: comparisonsData, error: compError } = await comparisonsResponse.json()
+        // The run-comparison API already returns the full match data for every
+        // line item, so merge it directly into the in-memory comparisons. This
+        // avoids a redundant second round-trip to /comparisons (plus a full
+        // re-map of line-item data we already have), so matches appear as soon
+        // as the run finishes instead of after an extra fetch.
+        setComparisons(prev => prev.map(comp => {
+          const aiResult: any = aiResultsMap.get(comp.lineItem.id)
+          if (!aiResult) return comp
 
-        console.log("[v0] Refresh result - comparisons:", comparisonsData?.length, "error:", compError)
-        
-        if (comparisonsData && comparisonsData.length > 0) {
-          const mappedComparisons: AssessmentComparison[] = comparisonsData.map((comp: any, idx: number) => {
-              // API returns assessment_line_items joined
-              const lineItem = comp.assessment_line_items
-              const procedureName = lineItem?.procedure_name || ""
-              const [description, extraDataStr] = procedureName.split("|||")
-              let extraData = { numberOfUnit: 1, unitPrice: 0, unitType: null, costCategory: null }
-              try {
-                if (extraDataStr) extraData = JSON.parse(extraDataStr)
-              } catch (e) {}
-              
-              // Get AI matches from database (stored during run-comparison)
-              let matches: any[] = []
-              let originalFlag: string | null = null
-              if (comp.ai_matches) {
-                try {
-                  const parsed = Array.isArray(comp.ai_matches) ? comp.ai_matches : JSON.parse(comp.ai_matches)
-                  if (parsed.length === 1 && parsed[0]?.__meta) {
-                    originalFlag = parsed[0].originalFlag || null
-                    matches = []
-                  } else {
-                    matches = parsed
-                  }
-                  console.log("[v0] Refresh - loaded", matches.length, "matches", "originalFlag:", originalFlag)
-                } catch (e) {
-                  matches = []
-                }
-              }
-              const bestMatch = matches.length > 0 ? matches[0] : null
-              const effectiveFlag = originalFlag || comp.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")
-              
-              return {
-                id: comp.id,
-                lineItem: {
-                  id: lineItem?.id || comp.line_item_id,
-                  assessmentId: id,
-                  description: description.trim(),
-                  unitType: extraData.unitType || "Per Unit",
-                  unitPrice: extraData.unitPrice || 0,
-                  site: lineItem?.country || "Global",
-                  costCategory: extraData.costCategory || "Procedure",
-                  source: `Line ${idx + 1}`,
-                  // Prefer the in-memory override (user's latest selection) over the DB value,
-                  // because the PATCH may not have persisted yet and the user's intent is authoritative.
-                  decision: ((decisionOverrides[lineItem?.id || comp.line_item_id] || extraData.decision || "In-review") as ItemDecision),
-                  numberOfUnit: extraData.numberOfUnit || 1,
-                  totalCost: lineItem?.vendor_cost || 0,
-                  currency: lineItem?.currency || "USD",
-                  country: lineItem?.country,
-                  additionalInformation: description.trim(),
-                  negotiatedPrice: lineItem?.negotiated_price ?? null
-                },
-                benchmark90th: bestMatch?.p90 || null,
-                benchmarkHigh: bestMatch?.p75 || null,
-                benchmarkMed: bestMatch?.p50 || null,
-                benchmarkLow: bestMatch?.p25 || null,
-                selectedBenchmarkType: "p90" as BenchmarkType,
-                variance: 0,
-                variancePercent: 0,
-                flag: effectiveFlag as any,
-                benchmarkDescription: bestMatch 
-                  ? `${bestMatch.procedureName} (${Math.round(bestMatch.similarity * 100)}% match)`
-                  : (
-                      originalFlag === "NON_COMPARABLE" ? "Non-comparable item (tax/discount/overhead)" :
-                      originalFlag === "SKIPPED_BY_DECISION" ? "Per status, no comparison needed" :
-                      originalFlag === "NO_BENCHMARK_DATA" ? "No benchmark data for this country" :
-                      "No match found"
-                    ),
-                possibleMatches: matches.length > 0 ? matches : null,
-                userSelected: null
-              }})
-          console.log("[v0] Mapped comparisons:", mappedComparisons.length, "First item matches:", mappedComparisons[0]?.possibleMatches?.length)
-          setComparisons(mappedComparisons)
-        } else {
-          console.log("[v0] No comparisons data returned from refresh query")
-        }
-        
+          const matches: any[] = Array.isArray(aiResult.matches) ? aiResult.matches : []
+          const bestMatch = aiResult.bestMatch || (matches.length > 0 ? matches[0] : null)
+          const flag = aiResult.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")
+
+          return {
+            ...comp,
+            benchmark90th: bestMatch?.p90 ?? null,
+            benchmarkHigh: bestMatch?.p75 ?? null,
+            benchmarkMed: bestMatch?.p50 ?? null,
+            benchmarkLow: bestMatch?.p25 ?? null,
+            selectedBenchmarkType: "p90" as BenchmarkType,
+            variance: 0,
+            variancePercent: 0,
+            flag: flag as any,
+            benchmarkDescription: bestMatch
+              ? `${bestMatch.procedureName} (${Math.round(bestMatch.similarity * 100)}% match)`
+              : (
+                  flag === "NON_COMPARABLE" ? "Non-comparable item (tax/discount/overhead)" :
+                  flag === "SKIPPED_BY_DECISION" ? "Per status, no comparison needed" :
+                  flag === "NO_BENCHMARK_DATA" ? "No benchmark data for this country" :
+                  "No match found"
+                ),
+            possibleMatches: matches.length > 0 ? matches : null,
+            userSelected: null,
+          }
+        }))
+        console.log("[v0] Merged", aiResultsMap.size, "AI results into comparisons in-memory (no refetch)")
+
         setComparisonComplete(true)
         appendAudit(`Completed AI Benchmark Comparison: ${result.message}`)
       } else {
@@ -1116,7 +1067,6 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         <Tabs defaultValue="comparison" className="space-y-4">
           <TabsList>
             <TabsTrigger value="comparison">Benchmark Comparison</TabsTrigger>
-            <TabsTrigger value="exceptions">Exceptions & Rationale</TabsTrigger>
             <TabsTrigger value="history">History</TabsTrigger>
           </TabsList>
 
@@ -1257,22 +1207,6 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
                 {/* Comparison Table */}
                 <ComparisonTable comparisons={filteredComparisons} onComparisonChange={handleComparisonChange} onBenchmarkTypeChange={handleBenchmarkTypeChange} onDecisionChange={handleDecisionChange} onMatchSelect={handleMatchSelect} onLineItemUpdate={handleLineItemUpdate} />
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="exceptions">
-            <Card className="border-border/40">
-              <CardHeader>
-                <CardTitle>Exceptions & Rationale</CardTitle>
-                <CardDescription>
-                  Manage exceptions and document rationale for flagged items
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-12 text-muted-foreground">
-                  <p>Exception management coming soon...</p>
-                </div>
               </CardContent>
             </Card>
           </TabsContent>

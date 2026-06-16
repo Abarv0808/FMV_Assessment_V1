@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, Fragment } from "react"
+import { useState, useRef, useEffect, Fragment } from "react"
 import {
   Table,
   TableBody,
@@ -261,8 +261,62 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
     }
   }
 
+  // --- Sticky horizontal scrollbar ---------------------------------------
+  // The table is taller than the viewport, so its native horizontal scrollbar
+  // sits far below the fold and is hard to reach. We render a thin proxy
+  // scrollbar that is pinned to the bottom of the viewport (position: sticky)
+  // and keep its scroll position in sync with the real table scroller, so the
+  // user can scroll left/right from any vertical position.
+  const tableScrollRef = useRef<HTMLDivElement>(null)
+  const stickyBarRef = useRef<HTMLDivElement>(null)
+  const [scrollWidth, setScrollWidth] = useState(0)
+  const [clientWidth, setClientWidth] = useState(0)
+  const syncingRef = useRef<"table" | "bar" | null>(null)
+
+  useEffect(() => {
+    const el = tableScrollRef.current
+    if (!el) return
+    const measure = () => {
+      setScrollWidth(el.scrollWidth)
+      setClientWidth(el.clientWidth)
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [comparisons, expandedRows])
+
+  const handleTableScroll = () => {
+    if (syncingRef.current === "bar") {
+      syncingRef.current = null
+      return
+    }
+    if (tableScrollRef.current && stickyBarRef.current) {
+      syncingRef.current = "table"
+      stickyBarRef.current.scrollLeft = tableScrollRef.current.scrollLeft
+    }
+  }
+
+  const handleBarScroll = () => {
+    if (syncingRef.current === "table") {
+      syncingRef.current = null
+      return
+    }
+    if (tableScrollRef.current && stickyBarRef.current) {
+      syncingRef.current = "bar"
+      tableScrollRef.current.scrollLeft = stickyBarRef.current.scrollLeft
+    }
+  }
+
+  const needsHScroll = scrollWidth > clientWidth + 1
+
   return (
-    <div className="border border-border/40 rounded-lg overflow-x-auto">
+    <div className="border border-border/40 rounded-lg relative">
+      <div
+        ref={tableScrollRef}
+        onScroll={handleTableScroll}
+        className="overflow-x-auto [&_[data-slot=table-container]]:overflow-visible"
+      >
       <Table className="text-[11px] [&_th]:h-7 [&_th]:px-1.5 [&_th]:text-[11px] [&_td]:px-1.5 [&_td]:py-1">
         <TableHeader>
           <TableRow className="hover:bg-transparent border-border/40">
@@ -690,6 +744,20 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
           </TableRow>
         </TableBody>
       </Table>
+      </div>
+
+      {/* Sticky horizontal scrollbar pinned to the bottom of the viewport so
+          left/right scrolling is reachable at any vertical scroll position. */}
+      {needsHScroll && (
+        <div
+          ref={stickyBarRef}
+          onScroll={handleBarScroll}
+          className="sticky bottom-0 z-20 overflow-x-auto rounded-b-lg border-t border-border/40 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80"
+          aria-hidden="true"
+        >
+          <div style={{ width: scrollWidth }} className="h-3" />
+        </div>
+      )}
 
       {/* Benchmark Match Selection Modal - Full Width */}
       <Dialog open={matchModalOpen} onOpenChange={setMatchModalOpen}>
