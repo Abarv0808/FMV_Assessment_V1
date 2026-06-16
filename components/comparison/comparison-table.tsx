@@ -262,7 +262,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   }
 
   return (
-    <div className="border border-border/40 rounded-lg overflow-auto max-h-[75vh] relative">
+    <div className="border border-border/40 rounded-lg overflow-auto max-h-[75vh] relative [&_[data-slot=table-container]]:overflow-visible">
       <Table className="text-[11px] [&_th]:h-7 [&_th]:px-1.5 [&_th]:text-[11px] [&_td]:px-1.5 [&_td]:py-1">
         <TableHeader className="sticky top-0 z-10 bg-card">
           <TableRow className="hover:bg-transparent border-border/40">
