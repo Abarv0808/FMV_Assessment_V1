@@ -91,7 +91,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   const { user } = useAuth()
   const [searchQuery, setSearchQuery] = useState("")
   const [flagFilter, setFlagFilter] = useState<"ALL" | "RED" | "YELLOW" | "GREEN" | "NO_MATCH">("ALL")
-  const [siteFilter, setSiteFilter] = useState<string>("ALL")
+  const [countryFilter, setCountryFilter] = useState<string>("ALL")
   const [decisionFilter, setDecisionFilter] = useState<string>("ALL")
   const [showArchiveConfirm, setShowArchiveConfirm] = useState(false)
   const [showRestoreConfirm, setShowRestoreConfirm] = useState(false)
@@ -219,16 +219,16 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             description: description.trim(),
             unitType: extraData.unitType || "Per Unit",
             unitPrice: extraData.unitPrice || 0,
-            site: comp.assessment_line_items.country || "Global",
+            country: comp.assessment_line_items.country || "Global",
             costCategory: extraData.costCategory || "Procedure",
             source: `Line ${idx + 1}`,
-            decision: (extraData.decision || "In-review") as ItemDecision,
+            decision: (extraData.decision || "To Assess") as ItemDecision,
             numberOfUnit: extraData.numberOfUnit || 1,
   totalCost: comp.assessment_line_items.vendor_cost || 0,
   currency: comp.assessment_line_items.currency || "USD",
-  country: comp.assessment_line_items.country,
   additionalInformation: description.trim(),
-  negotiatedPrice: comp.assessment_line_items.negotiated_price ?? null
+  negotiatedPrice: comp.assessment_line_items.negotiated_price ?? null,
+  comment: (extraData as any).comment || ""
           },
           benchmark90th: comp.benchmark_90th || bestMatch?.p90,
           benchmarkHigh: comp.benchmark_high || bestMatch?.p75,
@@ -479,7 +479,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       const base: Record<string, any> = {
         "#": idx + 1,
         "Description": li.description || "",
-        "Site/Country": li.country || li.site || "",
+        "Country": li.country || "",
         "Cost Category": li.costCategory || "",
         "Unit Type": li.unitType || "",
         "Number of Units": li.numberOfUnit ?? "",
@@ -492,7 +492,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
       // External reports hide benchmark-related and internal-only columns.
       if (isExternal) {
-        return base
+        return { ...base, "Comment": li.comment || "" }
       }
 
       return {
@@ -509,6 +509,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         "Selected Benchmark Value": benchmarkValue ?? "",
         "Variance": variance,
         "Variance %": variancePct,
+        "Comment": li.comment || "",
       }
     })
 
@@ -653,6 +654,14 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           const bestMatch = aiResult.bestMatch || (matches.length > 0 ? matches[0] : null)
           const flag = aiResult.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")
 
+          // If this run produced no matches but the item already has benchmark
+          // matches from a prior comparison (e.g. it was skipped because its
+          // decision is now "Accepted"), keep the existing data so the accepted
+          // benchmark doesn't disappear on re-run.
+          if (matches.length === 0 && comp.possibleMatches && comp.possibleMatches.length > 0) {
+            return comp
+          }
+
           return {
             ...comp,
             benchmark90th: bestMatch?.p90 ?? null,
@@ -672,7 +681,12 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                   "No match found"
                 ),
             possibleMatches: matches.length > 0 ? matches : null,
-            userSelected: null,
+            // Preserve the user's previously accepted selection if it still
+            // points at one of the returned matches; otherwise reset it.
+            userSelected:
+              comp.userSelected && matches.some((m: any) => m.benchmarkId === comp.userSelected)
+                ? comp.userSelected
+                : null,
           }
         }))
         console.log("[v0] Merged", aiResultsMap.size, "AI results into comparisons in-memory (no refetch)")
@@ -690,7 +704,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   }, [id, comparisons, appendAudit])
   
   // Handle line item field updates (additional information, cost category)
-  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory", value: string) => {
+  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment", value: string) => {
     try {
       const response = await fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
@@ -717,7 +731,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         const fieldNames: Record<string, string> = {
           additionalInformation: "Additional Information",
           costCategory: "Cost Category",
-          negotiatedPrice: "Negotiated Price"
+          negotiatedPrice: "Negotiated Price",
+          comment: "Comment"
         }
         appendAudit(`Updated ${fieldNames[field] || field} for line item`)
       } else {
@@ -728,14 +743,14 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     }
   }, [appendAudit])
 
-  // Get unique sites from line items
-  const sites = useMemo(() => {
-    const siteSet = new Set(
+  // Get unique countries from line items
+  const countries = useMemo(() => {
+    const countrySet = new Set(
       mockAssessmentLineItems
         .filter((item) => item.assessmentId === id)
-        .map((item) => item.site)
+        .map((item) => item.country)
     )
-    return Array.from(siteSet)
+    return Array.from(countrySet)
   }, [id])
 
   // Calculate summary stats from stateful comparisons so they update when decisions change
@@ -789,7 +804,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       )
     const matchesFlag = flagFilter === "ALL" || comparison.flag === flagFilter
     const matchesSite =
-      siteFilter === "ALL" || comparison.lineItem.site === siteFilter
+      countryFilter === "ALL" || comparison.lineItem.country === countryFilter
     const matchesDecision =
       decisionFilter === "ALL" || comparison.lineItem.decision === decisionFilter
 
@@ -866,7 +881,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         // External report omits Benchmark Match, Benchmark, Flag, Variance, Code.
         return [
           idx + 1,
-          c.lineItem.site || "-",
+          c.lineItem.country || "-",
           c.lineItem.costCategory || "-",
           c.lineItem.additionalInformation || c.lineItem.description || "-",
           fmt(c.lineItem.unitPrice),
@@ -875,12 +890,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           c.lineItem.decision || "-",
           c.lineItem.numberOfUnit ?? "-",
           fmt(getEffectiveTotalCost(c.lineItem)),
+          c.lineItem.comment || "",
         ]
       }
 
       return [
         idx + 1,
-        c.lineItem.site || "-",
+        c.lineItem.country || "-",
         c.lineItem.costCategory || "-",
         c.lineItem.additionalInformation || c.lineItem.description || "-",
         benchmarkMatch,
@@ -894,6 +910,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         c.lineItem.numberOfUnit ?? "-",
         fmt(getEffectiveTotalCost(c.lineItem)),
         code,
+        c.lineItem.comment || "",
       ]
     })
 
@@ -902,20 +919,20 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       head: [
         isExternal
           ? [
-              "#", "Site", "Cost Category", "Cost Description",
-              "Unit Price", "Negotiated", "Curr.", "Decision", "Units", "Total Cost",
+              "#", "Country", "Cost Category", "Cost Description",
+              "Unit Price", "Negotiated", "Curr.", "Decision", "Units", "Total Cost", "Comments",
             ]
           : [
-              "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
+              "#", "Country", "Cost Category", "Cost Description", "Benchmark Match",
               "Unit Price", "Negotiated", "Curr.", "Benchmark", "Flag",
-              "Decision", "Variance", "Units", "Total Cost", "Code",
+              "Decision", "Variance", "Units", "Total Cost", "Code", "Comments",
             ],
       ],
       body,
       foot: [
         isExternal
-          ? ["", "", "", "Grand Total", "", "", "", "", "", fmt(totalCostSum)]
-          : ["", "", "", "Grand Total", "", "", "", "", "", "", "", "", "", fmt(totalCostSum), ""],
+          ? ["", "", "", "Grand Total", "", "", "", "", "", fmt(totalCostSum), ""]
+          : ["", "", "", "Grand Total", "", "", "", "", "", "", "", "", "", fmt(totalCostSum), "", ""],
       ],
       styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak" },
       headStyles: { fillColor: [30, 41, 59], textColor: 255, fontSize: 6.5 },
@@ -923,12 +940,16 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       columnStyles: isExternal
         ? {
             0: { cellWidth: 18 },
-            3: { cellWidth: 200 },
+            2: { cellWidth: 80 },  // Cost Category narrowed to make room for Comments
+            3: { cellWidth: 150 },
+            10: { cellWidth: 110 }, // Comments
           }
         : {
             0: { cellWidth: 18 },
-            3: { cellWidth: 130 },
-            4: { cellWidth: 110 },
+            2: { cellWidth: 70 },  // Cost Category narrowed to make room for Comments
+            3: { cellWidth: 120 },
+            4: { cellWidth: 100 },
+            15: { cellWidth: 90 }, // Comments
           },
       margin: { left: 40, right: 40 },
     })
@@ -1125,17 +1146,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                     />
                   </div>
                   <Select
-                    value={siteFilter}
-                    onValueChange={(value) => setSiteFilter(value)}
+                    value={countryFilter}
+                    onValueChange={(value) => setCountryFilter(value)}
                   >
                     <SelectTrigger className="w-[150px]">
-                      <SelectValue placeholder="Site" />
+                      <SelectValue placeholder="Country" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="ALL">All Sites</SelectItem>
-                      {sites.map((site) => (
-                        <SelectItem key={site} value={site}>
-                          {site}
+                      <SelectItem value="ALL">All Countries</SelectItem>
+                      {countries.map((country) => (
+                        <SelectItem key={country} value={country}>
+                          {country}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -1185,7 +1206,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                     ).length}{" "}
                     items with benchmarks
                   </span>
-                  {(siteFilter !== "ALL" ||
+                  {(countryFilter !== "ALL" ||
                     decisionFilter !== "ALL" ||
                     flagFilter !== "ALL" ||
                     searchQuery) && (
@@ -1194,7 +1215,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                       size="sm"
                       className="h-6 text-xs"
                       onClick={() => {
-                        setSiteFilter("ALL")
+                        setCountryFilter("ALL")
                         setDecisionFilter("ALL")
                         setFlagFilter("ALL")
                         setSearchQuery("")

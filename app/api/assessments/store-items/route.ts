@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const insertedIds: string[] = []
     
     for (const item of lineItems) {
-      // Store description in procedure_name, site in country
+      // Store description in procedure_name, country in country
       // Encode numberOfUnit and unitPrice in vendor_cost as JSON string workaround
       // Format: "numberOfUnits|unitPrice|totalCost" in a parseable way
       const extraData = JSON.stringify({
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
         .insert({
           assessment_id: assessmentId,
           procedure_name: `${item.additionalInformation || item.description || "Unknown"}|||${extraData}`,
-          country: item.site || "Unknown",
+          country: item.country || "Unknown",
           vendor_cost: item.totalCost || 0,
           currency: item.currency || "USD"
         })

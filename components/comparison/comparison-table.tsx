@@ -39,30 +39,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Search, Pencil, Check, X } from "lucide-react"
 import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
-
-// Cost category dropdown options - exact values from Excel template
-const COST_CATEGORIES = [
-  "Personnel",
-  "Material, supplies, consumables",
-  "Data license (specific for the study, supporting quote/offer provided)",
-  "Equipment rental, leasing, prorate (no purchase) supporting quote/offer provided)",
-  "Software rental, leasing, prorate (no purchase), supporting quote/offer provided)",
-  "Patient/subjects/caregiver reimbursement of actual costs (estimated) for e.g. travel, accommodation, meals...",
-  "Patient/subjects/caregiver stipend, a fixed fee to cover the costs to participate in the study (in lieu of direct reimbursement of receipts for these expenses).",
-  "Patient/subjects compensation (e.g. for time to participate in the study)",
-  "Study set-up fee",
-  "IRB/EC submission fee",
-  "Publication open-access and journal fees",
-  "Publication translation and editing fees",
-  "Congress registration fee",
-  "Publication and Congresses placeholder for Col Res studies only",
-  "Archive fees",
-  "Third party details - external vendor - supporting quote provided",
-  "Third party details - CRO - supporting quote provided",
-  "Third party details - consultant - supporting quote provided",
-  "Site specific overhead rate % (multi-site studies only)",
-  "Other (costs that do not fit in any other category)",
-]
+import { COST_CATEGORIES } from "@/lib/cost-categories"
 
 interface ComparisonTableProps {
   comparisons: AssessmentComparison[]
@@ -70,7 +47,7 @@ interface ComparisonTableProps {
   onBenchmarkTypeChange?: (id: string, benchmarkType: BenchmarkType) => void
   onDecisionChange?: (id: string, decision: ItemDecision) => void
   onMatchSelect?: (id: string, match: any) => void
-  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory", value: string) => void
+  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment", value: string) => void
 }
 
 const flagConfig: Record<string, { label: string; color: string }> = {
@@ -112,6 +89,10 @@ const decisionConfig: Record<
   ItemDecision,
   { label: string; color: string }
 > = {
+  "To Assess": {
+    label: "To Assess",
+    color: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+  },
   "In-review": {
     label: "In-review",
     color: "text-orange-500 bg-orange-500/10 border-orange-500/20",
@@ -159,7 +140,7 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
   low: "Low",
 }
 
-const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
+const DECISION_OPTIONS: ItemDecision[] = ["To Assess", "In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
 
 // Compute the effective Total Cost for a line item.
 // If a negotiated price has been entered, it takes precedence over unit price:
@@ -186,6 +167,11 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   // Editing state for additional information
   const [editingAdditionalInfo, setEditingAdditionalInfo] = useState<string | null>(null)
   const [editAdditionalInfoValue, setEditAdditionalInfoValue] = useState("")
+
+  // Local draft state for the free-text comment column, keyed by line item id.
+  // We keep the typed value local for responsiveness and only persist on blur
+  // (via onLineItemUpdate) so we don't fire a PATCH on every keystroke.
+  const [commentDrafts, setCommentDrafts] = useState<Record<string, string>>({})
 
   // Per-row "user opened the Decision dropdown" gate. Radix Select fires
   // `onValueChange` during controlled-value reconciliation (without any user
@@ -315,37 +301,39 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
       <div
         ref={tableScrollRef}
         onScroll={handleTableScroll}
-        className="overflow-x-auto [&_[data-slot=table-container]]:overflow-visible"
+        className="overflow-x-auto [&_[data-slot=table-container]]:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
       <Table className="text-[11px] [&_th]:h-7 [&_th]:px-1.5 [&_th]:text-[11px] [&_td]:px-1.5 [&_td]:py-1">
         <TableHeader>
           <TableRow className="hover:bg-transparent border-border/40">
             <TableHead className="w-[40px]"></TableHead>
-            <TableHead>Site</TableHead>
+            <TableHead>Country</TableHead>
             <TableHead>Cost Category</TableHead>
             <TableHead>Cost Description</TableHead>
-            <TableHead className="min-w-[180px]">Benchmark Match</TableHead>
+            <TableHead className="min-w-[110px] max-w-[140px]">Benchmark Match</TableHead>
+            <TableHead>Unit Type</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>
             <TableHead className="text-right">Negotiated Price</TableHead>
-            <TableHead>Currency</TableHead>
             <TableHead className="min-w-[160px]">Benchmark</TableHead>
-            <TableHead>Flag</TableHead>
             <TableHead>Decision</TableHead>
+            <TableHead>Currency</TableHead>
+            <TableHead>Flag</TableHead>
             <TableHead className="text-right">Variance</TableHead>
             <TableHead className="text-right">Number of Unit</TableHead>
             <TableHead className="text-right">Total Cost</TableHead>
             <TableHead>Code</TableHead>
+            <TableHead className="min-w-[180px]">Comments</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {comparisons.map((comparison) => {
             const isExpanded = expandedRows.has(comparison.id)
-            // Fallback to "In-review" config if the decision string from the
-            // backend isn't one of our 6 canonical values (e.g. "to assess",
-            // "n/a", or any free-text from a hand-edited Excel).
+            // Fallback to "To Assess" config if the decision string from the
+            // backend isn't one of our canonical values (e.g. "n/a", or any
+            // free-text from a hand-edited Excel). "To Assess" is the default.
             const decisionConf =
               decisionConfig[comparison.lineItem.decision] ??
-              decisionConfig["In-review"]
+              decisionConfig["To Assess"]
             const selectedValue = getBenchmarkValue(comparison) ?? 0
             const hasBenchmarkValue = selectedValue > 0
             const dynamicVariance = hasBenchmarkValue ? comparison.lineItem.unitPrice - selectedValue : 0
@@ -399,7 +387,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   </TableCell>
                   <TableCell>
                     <Badge variant="outline" className="font-normal">
-                      {comparison.lineItem.site}
+                      {comparison.lineItem.country}
                     </Badge>
                   </TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
@@ -472,7 +460,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </div>
                     )}
                   </TableCell>
-                  <TableCell className="min-w-[180px]" onClick={(e) => e.stopPropagation()}>
+                  <TableCell className="min-w-[110px] max-w-[140px]" onClick={(e) => e.stopPropagation()}>
                     {comparison.possibleMatches && comparison.possibleMatches.length > 0 ? (
                       <Button
                         variant="outline"
@@ -488,12 +476,17 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         </span>
                       </Button>
                     ) : comparison.flag === "NO_MATCH" ? (
-                      <span className="text-xs text-muted-foreground italic">No match found</span>
+                      <span className="text-[11px] text-muted-foreground italic whitespace-normal break-words leading-tight block">
+                        No match found
+                      </span>
                     ) : (
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-[11px] text-muted-foreground whitespace-normal break-words leading-tight block">
                         {comparison.benchmarkDescription || "Pending comparison"}
                       </span>
                     )}
+                  </TableCell>
+                  <TableCell className="text-[11px] text-muted-foreground">
+                    {comparison.lineItem.unitType || "-"}
                   </TableCell>
                   <TableCell className="text-right font-medium font-mono">
                     {comparison.lineItem.unitPrice?.toLocaleString() ?? "-"}
@@ -509,11 +502,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       placeholder="Enter price"
                       className="h-7 w-[110px] text-right font-mono text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="outline" className="font-normal">
-                      {comparison.lineItem.currency || "USD"}
-                    </Badge>
                   </TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
                     <Select
@@ -537,11 +525,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         })}
                       </SelectContent>
                     </Select>
-                  </TableCell>
-                  <TableCell>
-                    <Badge className={flagConf?.color || "text-slate-400 bg-slate-400/10"} variant="outline">
-                      {flagConf?.label || comparison.flag}
-                    </Badge>
                   </TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
                     <Select
@@ -573,6 +556,16 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         ))}
                       </SelectContent>
                     </Select>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="outline" className="font-normal">
+                      {comparison.lineItem.currency || "USD"}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge className={flagConf?.color || "text-slate-400 bg-slate-400/10"} variant="outline">
+                      {flagConf?.label || comparison.flag}
+                    </Badge>
                   </TableCell>
                   <TableCell className="text-right">
                     {hasBenchmarkValue ? (
@@ -610,11 +603,28 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       <span className="text-muted-foreground">-</span>
                     )}
                   </TableCell>
+                  <TableCell className="min-w-[180px] align-top" onClick={(e) => e.stopPropagation()}>
+                    <Textarea
+                      value={commentDrafts[comparison.lineItem.id] ?? comparison.lineItem.comment ?? ""}
+                      onChange={(e) =>
+                        setCommentDrafts((prev) => ({ ...prev, [comparison.lineItem.id]: e.target.value }))
+                      }
+                      onBlur={(e) => {
+                        const value = e.target.value
+                        if (value !== (comparison.lineItem.comment ?? "")) {
+                          onLineItemUpdate?.(comparison.lineItem.id, "comment", value)
+                        }
+                      }}
+                      placeholder="Add comment..."
+                      rows={2}
+                      className="min-h-[2.25rem] w-[180px] resize-y text-[11px] leading-tight"
+                    />
+                  </TableCell>
                 </TableRow>
 
                 {isExpanded && (
                   <TableRow className="border-border/40 bg-accent/30">
-                    <TableCell colSpan={14}>
+                    <TableCell colSpan={17}>
                       <div className="py-4 px-2 space-y-4">
                         {/* Item Details */}
                         <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-sm">

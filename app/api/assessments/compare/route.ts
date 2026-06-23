@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         .insert({
           assessment_id: assessmentId,
           procedure_name: item.additionalInformation || item.description || "Unknown",
-          site: item.site || null,
+          site: item.country || null,
           additional_information: item.additionalInformation || item.description || null,
           category: item.costCategory || null,
           unit: item.unitType || null,

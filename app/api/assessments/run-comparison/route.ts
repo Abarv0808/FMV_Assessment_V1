@@ -431,10 +431,11 @@ export async function POST(request: Request) {
         lineItemDecision = override
       }
 
-      // Only run comparison for items with eligible decision statuses (In-review, Pending, or Escalate)
+      // Only run comparison for items with eligible decision statuses (To Assess, In-review, Pending, or Escalate)
       // Skip items with statuses like Accepted, Not amended, Not accepted, Manual assessment.
       // "Escalate" stays eligible so escalated items are re-compared on every run.
-      const eligibleDecisions = ["in-review", "pending", "escalate"]
+      // "To Assess" is the default for items with no Takeda Decision in the Excel and must be compared.
+      const eligibleDecisions = ["to assess", "in-review", "pending", "escalate"]
       const decisionLower = lineItemDecision.toLowerCase().trim()
       if (lineItemDecision && !eligibleDecisions.includes(decisionLower)) {
         console.log(`[v0] Skipping item (decision="${lineItemDecision}" not eligible):`, cleanDescription.substring(0, 50))
@@ -665,12 +666,30 @@ export async function POST(request: Request) {
       if (result.flag === "SKIPPED_BY_DECISION") {
         const { data: existing } = await supabase
           .from("assessment_comparisons")
-          .select("id")
+          .select("id, flag, ai_matches")
           .eq("line_item_id", result.lineItemId)
           .maybeSingle()
 
         if (existing) {
           console.log("[v0] Preserving existing benchmark data for decision-finalized item:", result.lineItemId)
+          // Surface the previously-stored matches in the API response so the
+          // client merge keeps showing the benchmark the decision was based on,
+          // instead of overwriting it with "Per status, no comparison needed".
+          try {
+            const stored = Array.isArray(existing.ai_matches)
+              ? existing.ai_matches
+              : JSON.parse(existing.ai_matches || "[]")
+            const isMetaOnly = stored.length === 1 && stored[0]?.__meta
+            if (!isMetaOnly && stored.length > 0) {
+              result.matches = stored
+              result.bestMatch = stored[0]
+              // Keep the persisted (constraint-safe) flag so the row renders as a
+              // real match rather than a skipped/no-match item.
+              result.flag = existing.flag || "MULTIPLE_MATCHES"
+            }
+          } catch (e) {
+            console.log("[v0] Could not parse preserved ai_matches for", result.lineItemId)
+          }
           continue
         }
 

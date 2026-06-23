@@ -2,16 +2,18 @@ import * as XLSX from "xlsx"
 import type { AssessmentLineItem } from "./types"
 
 // ============================================
-// VENDOR PROPOSAL PARSING (Sponsor Tab)
+// BUDGET TEMPLATE PARSING (FMV Template Tab)
 // ============================================
 
-// Column header mappings for the Sponsor tab
-const SPONSOR_COLUMN_MAPPINGS = {
-  site: ["Site", "Site (Optional)", "Site Name"],
-  costCategory: ["Cost category", "Cost Category", "Cost category (dropdown)"],
-  description: ["Description of costs", "Description", "Additional Information"],
+// Column header mappings for the "FMV Template" tab.
+// The exact header strings expected in the budget template are listed first;
+// a few legacy aliases are kept so older files still parse.
+const FMV_COLUMN_MAPPINGS = {
+  country: ["Country", "Site", "Site (Optional)", "Site Name"],
+  costCategory: ["Cost Category", "Cost category", "Cost category (dropdown)"],
+  description: ["Description", "Description of costs", "Additional Information"],
   unitType: ["Unit Type", "Unit Type (dropdown)"],
-  numberOfUnits: ["Number of Units", "Number of units", "Number of Units (number)", "Qty", "Quantity"],
+  numberOfUnits: ["Number of units", "Number of Units", "Number of Units (number)", "Qty", "Quantity"],
   unitPrice: ["Unit Price", "Unit Price (overhead not included, number)", "Rate", "Price"],
   totalCost: ["Total Cost", "Total cost", "Total Cost (automatically calculated)", "Total"],
   currency: ["Currency", "Currency (dropdown)"],
@@ -65,7 +67,7 @@ function findSponsorHeaders(
 
       // Pass 1: exact match
       let matched = false
-      for (const [fieldName, possibleHeaders] of Object.entries(SPONSOR_COLUMN_MAPPINGS)) {
+      for (const [fieldName, possibleHeaders] of Object.entries(FMV_COLUMN_MAPPINGS)) {
         if (columnMap[fieldName] !== undefined) continue
         for (const header of possibleHeaders) {
           if (cellValue === header.toLowerCase()) {
@@ -81,7 +83,7 @@ function findSponsorHeaders(
 
       // Pass 2: containment (cell may carry suffixes like "(FMV lead)" or
       // "(dropdown)"). One-directional only: cell INCLUDES known header.
-      for (const [fieldName, possibleHeaders] of Object.entries(SPONSOR_COLUMN_MAPPINGS)) {
+      for (const [fieldName, possibleHeaders] of Object.entries(FMV_COLUMN_MAPPINGS)) {
         if (columnMap[fieldName] !== undefined) continue
         for (const header of possibleHeaders) {
           if (cellValue.includes(header.toLowerCase())) {
@@ -138,14 +140,17 @@ function generateId(): string {
 }
 
 /**
- * Parse vendor proposal Excel file from the "Sponsor" tab
+ * Parse budget Excel file from the "FMV Template" tab.
  * Maps Excel columns to AssessmentLineItem fields based on the mapping:
- * - Excel "Site" → site
- * - Excel "Description of costs" → description (Additional Information)
- * - Excel "Number of Units" → numberOfUnits
+ * - Excel "Country" → country
+ * - Excel "Cost Category" → costCategory
+ * - Excel "Description" → description (Cost Description)
+ * - Excel "Unit Type" → unitType
+ * - Excel "Number of units" → numberOfUnits
  * - Excel "Unit Price" → unitPrice
- * - Excel "Total Cost" → totalCost
+ * - Excel "Total Cost" → totalCost (fetched directly from the workbook)
  * - Excel "Currency" → currency
+ * - Excel "Takeda Decision" → decision
  */
 export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = ""): ParsedVendorProposal {
   console.log("[v0] parseVendorProposal: Starting to parse Excel file")
@@ -153,24 +158,27 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
   
   console.log("[v0] Available sheets in workbook:", workbook.SheetNames)
   
-  // Find the "Sponsor" sheet (case-insensitive)
+  // Find the "FMV Template" sheet (case-insensitive). This tab is required.
   let sponsorSheet: XLSX.WorkSheet | null = null
   let sponsorSheetName = ""
   
   for (const sheetName of workbook.SheetNames) {
-    if (sheetName.toLowerCase().includes("sponsor")) {
+    const normalized = sheetName.toLowerCase().replace(/\s+/g, " ").trim()
+    if (normalized.includes("fmv template") || normalized === "fmv") {
       sponsorSheet = workbook.Sheets[sheetName]
       sponsorSheetName = sheetName
-      console.log("[v0] Found Sponsor sheet:", sheetName)
+      console.log("[v0] Found FMV Template sheet:", sheetName)
       break
     }
   }
   
-  // If no Sponsor sheet found, use the first sheet
+  // The "FMV Template" tab is mandatory — fail clearly if it's missing.
   if (!sponsorSheet) {
-    sponsorSheetName = workbook.SheetNames[0]
-    sponsorSheet = workbook.Sheets[sponsorSheetName]
-    console.log("[v0] No Sponsor sheet found, using first sheet:", sponsorSheetName)
+    throw new Error(
+      `Could not find an "FMV Template" tab in the workbook. ` +
+        `Available sheets: ${workbook.SheetNames.join(", ")}. ` +
+        `Please upload a budget file that contains the "FMV Template" tab.`,
+    )
   }
   
   // Convert sheet to array of arrays
@@ -210,7 +218,7 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
         : "No row with text content was found."
     throw new Error(
       `Could not locate the header row in the "${sponsorSheetName}" sheet (scanned 80 rows). ` +
-        `Expected columns: Site, Cost category, Description of costs, Number of Units, Unit Price, Total Cost, Currency. ` +
+        `Expected columns: Country, Cost Category, Description, Unit Type, Number of units, Unit Price, Total Cost, Currency, Takeda Decision. ` +
         `Available sheets: ${workbook.SheetNames.join(", ")}. ` +
         candidatePreview,
     )
@@ -241,19 +249,19 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
       continue
     }
     
-    // Extract Site value (which now contains country)
-    const siteValue = columnMap.site !== undefined ? String(row[columnMap.site] || "").trim() : ""
+    // Extract Country value
+    const countryValue = columnMap.country !== undefined ? String(row[columnMap.country] || "").trim() : ""
     
-    // Capture the first non-empty Site value as the country for the assessment
-    if (!extractedCountry && siteValue) {
-      extractedCountry = siteValue
-      console.log("[v0] Extracted country from Site column:", extractedCountry)
+    // Capture the first non-empty Country value as the country for the assessment
+    if (!extractedCountry && countryValue) {
+      extractedCountry = countryValue
+      console.log("[v0] Extracted country from Country column:", extractedCountry)
     }
     
     const lineItem: AssessmentLineItem = {
       id: generateId(),
       assessmentId,
-      site: siteValue,
+      country: countryValue,
       costCategory: columnMap.costCategory !== undefined ? String(row[columnMap.costCategory] || "").trim() : "",
       description: columnMap.description !== undefined ? String(row[columnMap.description] || "").trim() : "",
       unitType: columnMap.unitType !== undefined ? String(row[columnMap.unitType] || "").trim() : "",
@@ -265,7 +273,9 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
       costType: columnMap.costType !== undefined ? String(row[columnMap.costType] || "").trim() : undefined,
       acceptedUnitPrice: columnMap.acceptedUnitPrice !== undefined ? parseNumber(row[columnMap.acceptedUnitPrice]) : undefined,
       acceptedTotalCost: columnMap.acceptedTotalCost !== undefined ? parseNumber(row[columnMap.acceptedTotalCost]) : undefined,
-      decision: null,
+      // Default to "To Assess" when the Excel template has no Takeda Decision.
+      // Items in this state are still eligible for benchmark comparison.
+      decision: "To Assess",
       // Initialize benchmark fields
       benchmarkLow: undefined,
       benchmarkMed: undefined,
@@ -281,16 +291,16 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
     // Parse decision if present. Excel templates aren't strict about this
     // column — values like "to assess", "in review", "to be assessed",
     // "accept", "reject" all show up in real files. Normalise to one of
-    // the 6 canonical dropdown values; default unknown text to "In-review".
+    // the canonical dropdown values; default unknown/empty text to "To Assess".
     if (columnMap.decision !== undefined && row[columnMap.decision]) {
       const raw = String(row[columnMap.decision]).trim()
       if (raw) {
         const normalized = raw.toLowerCase().replace(/[\s_-]+/g, " ").trim()
         const decisionMap: Record<string, string> = {
+          "to assess": "To Assess",
+          "to be assessed": "To Assess",
           "in review": "In-review",
           "in-review": "In-review",
-          "to assess": "In-review",
-          "to be assessed": "In-review",
           "to be reviewed": "In-review",
           "review": "In-review",
           "accepted": "Accepted",
@@ -309,7 +319,7 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
           "escalated": "Escalate",
           "escalation": "Escalate",
         }
-        lineItem.decision = (decisionMap[normalized] ?? "In-review") as typeof lineItem.decision
+        lineItem.decision = (decisionMap[normalized] ?? "To Assess") as typeof lineItem.decision
       }
     }
     
