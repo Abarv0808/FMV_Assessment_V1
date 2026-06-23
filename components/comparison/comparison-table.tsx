@@ -327,10 +327,10 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableHead className="min-w-[110px] max-w-[140px]">Benchmark Match</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>
             <TableHead className="text-right">Negotiated Price</TableHead>
-            <TableHead>Currency</TableHead>
             <TableHead className="min-w-[160px]">Benchmark</TableHead>
-            <TableHead>Flag</TableHead>
             <TableHead>Decision</TableHead>
+            <TableHead>Currency</TableHead>
+            <TableHead>Flag</TableHead>
             <TableHead className="text-right">Variance</TableHead>
             <TableHead className="text-right">Number of Unit</TableHead>
             <TableHead className="text-right">Total Cost</TableHead>
@@ -512,11 +512,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       className="h-7 w-[110px] text-right font-mono text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                   </TableCell>
-                  <TableCell>
-                    <Badge variant="outline" className="font-normal">
-                      {comparison.lineItem.currency || "USD"}
-                    </Badge>
-                  </TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
                     <Select
                       value={comparison.selectedBenchmarkType}
@@ -539,11 +534,6 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         })}
                       </SelectContent>
                     </Select>
-                  </TableCell>
-                  <TableCell>
-                    <Badge className={flagConf?.color || "text-slate-400 bg-slate-400/10"} variant="outline">
-                      {flagConf?.label || comparison.flag}
-                    </Badge>
                   </TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
                     <Select
@@ -575,6 +565,16 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         ))}
                       </SelectContent>
                     </Select>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="outline" className="font-normal">
+                      {comparison.lineItem.currency || "USD"}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge className={flagConf?.color || "text-slate-400 bg-slate-400/10"} variant="outline">
+                      {flagConf?.label || comparison.flag}
+                    </Badge>
                   </TableCell>
                   <TableCell className="text-right">
                     {hasBenchmarkValue ? (
