@@ -342,7 +342,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li1",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Personnel",
     description: "Principal Investigator",
     unitType: "Hourly rate",
@@ -361,7 +361,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li2",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Personnel",
     description: "Sub-Investigator",
     unitType: "Hourly rate",
@@ -380,7 +380,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li3",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Personnel",
     description: "Study Coordinator",
     unitType: "Hourly rate",
@@ -399,7 +399,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li4",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Personnel",
     description: "Research Nurse",
     unitType: "Hourly rate",
@@ -418,7 +418,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li5",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Personnel",
     description: "Lab Technician",
     unitType: "Hourly rate",
@@ -436,7 +436,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li6",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Material/supplies",
     description: "EDTA Tubes (pack of 100)",
     unitType: "Unit cost",
@@ -452,7 +452,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li7",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Material/supplies",
     description: "Specimen Collection Kits",
     unitType: "Unit cost",
@@ -469,7 +469,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li8",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Software",
     description: "EDC System Access License",
     unitType: "Fee",
@@ -486,7 +486,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li9",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Software",
     description: "Data Analytics Platform License",
     unitType: "Fee",
@@ -502,7 +502,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li10",
     assessmentId: "1",
-    site: "PI US",
+    country: "PI US",
     costCategory: "Fees",
     description: "IRB/Ethics Committee Fee",
     unitType: "Fee",
@@ -521,7 +521,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li11",
     assessmentId: "1",
-    site: "Brazil",
+    country: "Brazil",
     costCategory: "Personnel",
     description: "Principal Investigator",
     unitType: "Hourly rate",
@@ -540,7 +540,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li12",
     assessmentId: "1",
-    site: "Brazil",
+    country: "Brazil",
     costCategory: "Personnel",
     description: "Study Coordinator",
     unitType: "Hourly rate",
@@ -559,7 +559,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li13",
     assessmentId: "1",
-    site: "Brazil",
+    country: "Brazil",
     costCategory: "Fees",
     description: "Local Ethics Committee Fee",
     unitType: "Fee",
@@ -577,7 +577,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li14",
     assessmentId: "1",
-    site: "Brazil",
+    country: "Brazil",
     costCategory: "Material/supplies",
     description: "Laboratory Consumables",
     unitType: "Unit cost",
@@ -596,7 +596,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li15",
     assessmentId: "2",
-    site: "Site US-01",
+    country: "Site US-01",
     costCategory: "Personnel",
     description: "Principal Investigator",
     unitType: "Hourly rate",
@@ -615,7 +615,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li16",
     assessmentId: "2",
-    site: "Site US-01",
+    country: "Site US-01",
     costCategory: "Personnel",
     description: "Oncology Nurse",
     unitType: "Hourly rate",
@@ -634,7 +634,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li17",
     assessmentId: "2",
-    site: "Site US-01",
+    country: "Site US-01",
     costCategory: "Personnel",
     description: "Data Manager",
     unitType: "Hourly rate",
@@ -653,7 +653,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li18",
     assessmentId: "2",
-    site: "Site US-01",
+    country: "Site US-01",
     costCategory: "Fees",
     description: "Institutional Overhead",
     unitType: "Fee",
@@ -671,7 +671,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li19",
     assessmentId: "2",
-    site: "Site US-02",
+    country: "Site US-02",
     costCategory: "Personnel",
     description: "Sub-Investigator",
     unitType: "Hourly rate",
@@ -692,7 +692,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li20",
     assessmentId: "3",
-    site: "Site DE-01",
+    country: "Site DE-01",
     costCategory: "Personnel",
     description: "Principal Investigator",
     unitType: "Hourly rate",
@@ -711,7 +711,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li21",
     assessmentId: "3",
-    site: "Site DE-01",
+    country: "Site DE-01",
     costCategory: "Personnel",
     description: "Neuropsychologist",
     unitType: "Hourly rate",
@@ -730,7 +730,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li22",
     assessmentId: "3",
-    site: "Site DE-01",
+    country: "Site DE-01",
     costCategory: "Personnel",
     description: "Study Coordinator",
     unitType: "Hourly rate",
@@ -749,7 +749,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li23",
     assessmentId: "3",
-    site: "Site DE-01",
+    country: "Site DE-01",
     costCategory: "Fees",
     description: "MRI Brain Scan",
     unitType: "Fee",
@@ -769,7 +769,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li24",
     assessmentId: "4",
-    site: "Site JP-01",
+    country: "Site JP-01",
     costCategory: "Personnel",
     description: "Principal Investigator",
     unitType: "Hourly rate",
@@ -788,7 +788,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li25",
     assessmentId: "4",
-    site: "Site JP-01",
+    country: "Site JP-01",
     costCategory: "Personnel",
     description: "Cardiologist",
     unitType: "Hourly rate",
@@ -807,7 +807,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li26",
     assessmentId: "4",
-    site: "Site JP-01",
+    country: "Site JP-01",
     costCategory: "Personnel",
     description: "Study Coordinator",
     unitType: "Hourly rate",
@@ -826,7 +826,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li27",
     assessmentId: "4",
-    site: "Site JP-02",
+    country: "Site JP-02",
     costCategory: "Personnel",
     description: "Research Nurse",
     unitType: "Hourly rate",
@@ -845,7 +845,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li28",
     assessmentId: "4",
-    site: "Site JP-02",
+    country: "Site JP-02",
     costCategory: "Fees",
     description: "Echocardiogram",
     unitType: "Fee",
@@ -866,7 +866,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li29",
     assessmentId: "5",
-    site: "Site UK-01",
+    country: "Site UK-01",
     costCategory: "Personnel",
     description: "Principal Investigator",
     unitType: "Hourly rate",
@@ -883,7 +883,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li30",
     assessmentId: "5",
-    site: "Site UK-01",
+    country: "Site UK-01",
     costCategory: "Personnel",
     description: "Rheumatology Nurse",
     unitType: "Hourly rate",
@@ -900,7 +900,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li31",
     assessmentId: "5",
-    site: "Site UK-01",
+    country: "Site UK-01",
     costCategory: "Personnel",
     description: "Pharmacist",
     unitType: "Hourly rate",
@@ -918,7 +918,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li32",
     assessmentId: "5",
-    site: "Site UK-01",
+    country: "Site UK-01",
     costCategory: "Fees",
     description: "X-Ray Hands/Wrists",
     unitType: "Fee",
@@ -937,7 +937,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li33",
     assessmentId: "6",
-    site: "Site FR-01",
+    country: "Site FR-01",
     costCategory: "Personnel",
     description: "Principal Investigator",
     unitType: "Hourly rate",
@@ -956,7 +956,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li34",
     assessmentId: "6",
-    site: "Site FR-01",
+    country: "Site FR-01",
     costCategory: "Personnel",
     description: "Endocrinologist",
     unitType: "Hourly rate",
@@ -975,7 +975,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li35",
     assessmentId: "6",
-    site: "Site FR-01",
+    country: "Site FR-01",
     costCategory: "Personnel",
     description: "Study Coordinator",
     unitType: "Hourly rate",
@@ -994,7 +994,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li36",
     assessmentId: "6",
-    site: "Site FR-01",
+    country: "Site FR-01",
     costCategory: "Fees",
     description: "HbA1c Lab Test",
     unitType: "Fee",
@@ -1013,7 +1013,7 @@ export const mockAssessmentLineItems: AssessmentLineItem[] = [
   {
     id: "li37",
     assessmentId: "6",
-    site: "Site FR-02",
+    country: "Site FR-02",
     costCategory: "Personnel",
     description: "Research Nurse",
     unitType: "Hourly rate",
