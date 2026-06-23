@@ -324,7 +324,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableHead>Site</TableHead>
             <TableHead>Cost Category</TableHead>
             <TableHead>Cost Description</TableHead>
-            <TableHead className="min-w-[180px]">Benchmark Match</TableHead>
+            <TableHead className="min-w-[110px] max-w-[140px]">Benchmark Match</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>
             <TableHead className="text-right">Negotiated Price</TableHead>
             <TableHead>Currency</TableHead>
@@ -472,7 +472,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       </div>
                     )}
                   </TableCell>
-                  <TableCell className="min-w-[180px]" onClick={(e) => e.stopPropagation()}>
+                  <TableCell className="min-w-[110px] max-w-[140px]" onClick={(e) => e.stopPropagation()}>
                     {comparison.possibleMatches && comparison.possibleMatches.length > 0 ? (
                       <Button
                         variant="outline"
@@ -488,9 +488,11 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         </span>
                       </Button>
                     ) : comparison.flag === "NO_MATCH" ? (
-                      <span className="text-xs text-muted-foreground italic">No match found</span>
+                      <span className="text-[11px] text-muted-foreground italic whitespace-normal break-words leading-tight block">
+                        No match found
+                      </span>
                     ) : (
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-[11px] text-muted-foreground whitespace-normal break-words leading-tight block">
                         {comparison.benchmarkDescription || "Pending comparison"}
                       </span>
                     )}
