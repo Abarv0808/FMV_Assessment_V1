@@ -39,30 +39,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Search, Pencil, Check, X } from "lucide-react"
 import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
-
-// Cost category dropdown options - exact values from Excel template
-const COST_CATEGORIES = [
-  "Personnel",
-  "Material, supplies, consumables",
-  "Data license (specific for the study, supporting quote/offer provided)",
-  "Equipment rental, leasing, prorate (no purchase) supporting quote/offer provided)",
-  "Software rental, leasing, prorate (no purchase), supporting quote/offer provided)",
-  "Patient/subjects/caregiver reimbursement of actual costs (estimated) for e.g. travel, accommodation, meals...",
-  "Patient/subjects/caregiver stipend, a fixed fee to cover the costs to participate in the study (in lieu of direct reimbursement of receipts for these expenses).",
-  "Patient/subjects compensation (e.g. for time to participate in the study)",
-  "Study set-up fee",
-  "IRB/EC submission fee",
-  "Publication open-access and journal fees",
-  "Publication translation and editing fees",
-  "Congress registration fee",
-  "Publication and Congresses placeholder for Col Res studies only",
-  "Archive fees",
-  "Third party details - external vendor - supporting quote provided",
-  "Third party details - CRO - supporting quote provided",
-  "Third party details - consultant - supporting quote provided",
-  "Site specific overhead rate % (multi-site studies only)",
-  "Other (costs that do not fit in any other category)",
-]
+import { COST_CATEGORIES } from "@/lib/cost-categories"
 
 interface ComparisonTableProps {
   comparisons: AssessmentComparison[]
