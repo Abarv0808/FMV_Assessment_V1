@@ -228,7 +228,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   currency: comp.assessment_line_items.currency || "USD",
   country: comp.assessment_line_items.country,
   additionalInformation: description.trim(),
-  negotiatedPrice: comp.assessment_line_items.negotiated_price ?? null
+  negotiatedPrice: comp.assessment_line_items.negotiated_price ?? null,
+  comment: (extraData as any).comment || ""
           },
           benchmark90th: comp.benchmark_90th || bestMatch?.p90,
           benchmarkHigh: comp.benchmark_high || bestMatch?.p75,
@@ -492,7 +493,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
       // External reports hide benchmark-related and internal-only columns.
       if (isExternal) {
-        return base
+        return { ...base, "Comment": li.comment || "" }
       }
 
       return {
@@ -509,6 +510,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         "Selected Benchmark Value": benchmarkValue ?? "",
         "Variance": variance,
         "Variance %": variancePct,
+        "Comment": li.comment || "",
       }
     })
 
@@ -703,7 +705,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   }, [id, comparisons, appendAudit])
   
   // Handle line item field updates (additional information, cost category)
-  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory", value: string) => {
+  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment", value: string) => {
     try {
       const response = await fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
@@ -730,7 +732,8 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         const fieldNames: Record<string, string> = {
           additionalInformation: "Additional Information",
           costCategory: "Cost Category",
-          negotiatedPrice: "Negotiated Price"
+          negotiatedPrice: "Negotiated Price",
+          comment: "Comment"
         }
         appendAudit(`Updated ${fieldNames[field] || field} for line item`)
       } else {
@@ -888,6 +891,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           c.lineItem.decision || "-",
           c.lineItem.numberOfUnit ?? "-",
           fmt(getEffectiveTotalCost(c.lineItem)),
+          c.lineItem.comment || "",
         ]
       }
 
@@ -907,6 +911,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         c.lineItem.numberOfUnit ?? "-",
         fmt(getEffectiveTotalCost(c.lineItem)),
         code,
+        c.lineItem.comment || "",
       ]
     })
 
@@ -916,19 +921,19 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         isExternal
           ? [
               "#", "Site", "Cost Category", "Cost Description",
-              "Unit Price", "Negotiated", "Curr.", "Decision", "Units", "Total Cost",
+              "Unit Price", "Negotiated", "Curr.", "Decision", "Units", "Total Cost", "Comments",
             ]
           : [
               "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
               "Unit Price", "Negotiated", "Curr.", "Benchmark", "Flag",
-              "Decision", "Variance", "Units", "Total Cost", "Code",
+              "Decision", "Variance", "Units", "Total Cost", "Code", "Comments",
             ],
       ],
       body,
       foot: [
         isExternal
-          ? ["", "", "", "Grand Total", "", "", "", "", "", fmt(totalCostSum)]
-          : ["", "", "", "Grand Total", "", "", "", "", "", "", "", "", "", fmt(totalCostSum), ""],
+          ? ["", "", "", "Grand Total", "", "", "", "", "", fmt(totalCostSum), ""]
+          : ["", "", "", "Grand Total", "", "", "", "", "", "", "", "", "", fmt(totalCostSum), "", ""],
       ],
       styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak" },
       headStyles: { fillColor: [30, 41, 59], textColor: 255, fontSize: 6.5 },
@@ -936,12 +941,16 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       columnStyles: isExternal
         ? {
             0: { cellWidth: 18 },
-            3: { cellWidth: 200 },
+            2: { cellWidth: 80 },  // Cost Category narrowed to make room for Comments
+            3: { cellWidth: 150 },
+            10: { cellWidth: 110 }, // Comments
           }
         : {
             0: { cellWidth: 18 },
-            3: { cellWidth: 130 },
-            4: { cellWidth: 110 },
+            2: { cellWidth: 70 },  // Cost Category narrowed to make room for Comments
+            3: { cellWidth: 120 },
+            4: { cellWidth: 100 },
+            15: { cellWidth: 90 }, // Comments
           },
       margin: { left: 40, right: 40 },
     })

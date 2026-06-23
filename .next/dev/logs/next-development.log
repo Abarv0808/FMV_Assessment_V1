@@ -522,3 +522,1511 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:59:21.836] Browser LOG     [v0] Comparison API result: {"message":"Compared 38 items: 1 AI matches, 2 trigram matches","results":[{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"c6b93f17-2b40-44d7-91fc-599aadf5f46d","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"5db5f243-0530-4ce2-851c-a2b0bff29fbb","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222},"flag":"YELLOW","lineItemId":"0184b958-d1f9-4fe2-a11a-de8a1b4af63e","matchCount":3,"matches":[{"benchmarkId":"5db5f243-0530-4ce2-851c-a2b0bff29fbb","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222},{"benchmarkId":"b54a5c0b-1aae-4d35-9f07-dbe4b84733e7","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222},{"benchmarkId":"bd80e962-b8b9-4fab-8f9f-2d1af3f235aa","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"4eddb4cb-94cc-4817-b1d8-673c15be036a","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"f7df5a6e-1f8c-4b85-b29d-71d2325c43d3","category":"Non-Procedures","code":"NP033","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":183,"p25":54,"p50":94,"p75":150,"p90":182,"procedureName":"Administrative/Personnel Costs - Per Visit","reasoning":"The vendor item specifies administrative personnel (Project Manager). While the benchmark list does not have a dedicated 'Project Manager' hourly rate, it includes a generic 'Administrative/Personnel Costs' category that aligns with the nature of this administrative role.","similarity":0.7},"flag":"YELLOW","lineItemId":"9c22cc21-1407-41bb-9482-27e44efe0af6","matchCount":1,"matches":[{"benchmarkId":"f7df5a6e-1f8c-4b85-b29d-71d2325c43d3","category":"Non-Procedures","code":"NP033","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":183,"p25":54,"p50":94,"p75":150,"p90":182,"procedureName":"Administrative/Personnel Costs - Per Visit","reasoning":"The vendor item specifies administrative personnel (Project Manager). While the benchmark list does not have a dedicated 'Project Manager' hourly rate, it includes a generic 'Administrative/Personnel Costs' category that aligns with the nature of this administrative role.","similarity":0.7}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"5ca2125e-c08d-4619-93aa-f71055b30c29","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"fbb65ea1-526e-47b7-9c81-706fbe2c9143","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"ec7257f6-00e2-40a5-87df-8524c794cc23","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"ca337423-e8ec-46f0-abe0-d45d76e30afe","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"0e920cb2-6dda-4952-9184-3d2a1a271838","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"7924de84-a0b0-4502-ad3f-92f6caf2b913","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"bab0b43a-9bf8-4b47-b915-5c5ae008030e","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"23d95c1b-06d1-41f8-95da-a6b8501a3aec","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"1b1b1ca3-afb3-4da5-9eb3-03141eb480c7","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"021a4aa3-3550-4efd-b0dd-89051ff64938","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"7851d3fd-9638-461f-8d55-b0f6fb3277f3","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"56aa566f-caf0-4c0c-96df-c11682185a07","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"16c9216e-7a9b-471f-8c0a-b546b9e4b7cb","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"9f545ec2-41d1-41b6-971d-042bceea9427","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"670cdea4-1f15-47b5-be5d-57a7d661efaa","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"386ddb3a-9e7f-4a24-91c0-e523248a1c16","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"2a917415-955c-417f-9585-fe27637aa8f5","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"d15795a5-0266-4bb0-9633-7ddc28f5381b","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"d1e2413b-e8e2-485a-8b2d-aa4f7f91e84a","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"ead2bd68-fc0b-4f92-877b-cd384f71d3a6","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"6722c11c-dc94-4d4e-a3df-be17e5110f0f","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"81385e13-23e0-4998-a430-25b05258e695","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"e2c17d5e-7350-457b-b88a-54386e84fa11","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"fd625eb7-8f9c-40ff-a76c-0749e3db5155","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"f15d3dac-2aa8-4ff6-9422-a11685af2ffa","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"59e69ab5-a6ef-47a1-86a4-51fb7b8551a2","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"9d5149bb-e298-467b-a5f1-7b44fd7aad06","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"23e469f3-ff81-48ae-abf8-188f073668c4","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"790488ee-6868-4dd3-9cdf-c9fe23ff9101","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"23b8b8a0-8080-45a0-9bbb-80b41401a7cf","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"dcdfcccb-8c39-417f-a821-d035f54763bc","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"0d80042a-66fe-42b6-8154-81d69e270cf7","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333},"flag":"YELLOW","lineItemId":"99d56dc4-e81c-4616-99e3-e0ba6405ce22","matchCount":3,"matches":[{"benchmarkId":"0d80042a-66fe-42b6-8154-81d69e270cf7","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333},{"benchmarkId":"65623c8d-a797-4e0d-8d33-5c6db5db93be","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333},{"benchmarkId":"2afd73e1-c45a-4897-b703-40c6f1499dc1","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"2a08e98d-d44a-41cf-8193-c2d6428d115f","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"9f6235e4-6675-4a4b-9b60-df0b5b95901d","matchCount":0,"matches":[]}],"success":true}
 [00:59:21.836] Browser LOG     [v0] Merged 38 AI results into comparisons in-memory (no refetch)
 [01:04:43.881] Server  LOG      ✓ Compiled in 95ms
+[01:06:05.213] Browser LOG     [v0] handleRunComparison called, comparisons.length: 38
+[01:06:05.933] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[01:06:06.237] Server  LOG     [v0] Run comparison API called (AI-powered)
+[01:06:06.238] Server  LOG     [v0] Assessment ID: "32479f20-732a-4143-bf2c-642bf2008557"
+[01:06:06.240] Server  LOG     [v0] Decision overrides received from client: 38 "items"
+[01:06:06.240] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:06:06.243] Server  LOG     [v0] Fetching line items...
+[01:06:06.408] Server  LOG     [v0] Persisting 38 "decision overrides to DB before comparison"
+[01:06:06.408] Server  LOG     [v0] Line items found: 38 "Error:" undefined
+[01:06:06.409] Server  LOG     [v0] Fetching benchmark procedures...
+[01:06:06.409] Server  LOG     [v0] Line item countries: "France, Belgium"
+[01:06:06.515] Server  LOG     [v0] Benchmark files for requested countries: 58 "Error:" "none"
+[01:06:06.516] Server  LOG     [v0] Filtering to 58 "benchmark files for countries:" "France, Belgium"
+[01:06:06.836] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[01:06:07.149] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[01:06:07.450] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[01:06:07.843] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[01:06:08.056] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[01:06:08.297] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[01:06:08.478] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[01:06:08.705] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[01:06:08.881] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[01:06:09.103] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[01:06:09.401] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[01:06:09.700] Server  LOG     [v0] Loaded benchmark page 12 "size:" 978 "running total:" 11978
+[01:06:09.719] Server  LOG     [v0] Benchmark procedures loaded: 11978 "from" 2 "countries"
+[01:06:09.719] Server  LOG     [v0] Available countries: "Belgium, France" ""
+[01:06:09.725] Server  LOG     [v0] Starting AI-powered matching for 38 "items..."
+[01:06:09.725] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study coordination by CHU Clermont-Ferrand clinica"
+[01:06:09.725] Server  LOG     [v0] Processing: "\"Monitoring travel costs : hotel and travel expense...\"" "Country:" "France" "Decision:" "Escalate"
+[01:06:09.727] Server  LOG     [v0] Filtered to 5947 "benchmarks for country:" "France"
+[01:06:09.738] Server  LOG     [v0][AI-Gateway][0184b958] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:06:09.738] Server  LOG     [v0][AI-Gateway][0184b958] Vendor item: "Monitoring travel costs : hotel and travel expenses" | Country: France | Benchmarks: 150/5947
+[01:06:18.264] Server  LOG     [v0][AI-Gateway][0184b958] ✓ AI Gateway success in 8525ms | Matches: 0 | Tokens: prompt=5224 completion=777 total=6001
+[01:06:18.264] Server  LOG     [v0] Using trigram fallback for: "Monitoring travel costs : hote" "Country:" "France"
+[01:06:18.342] Server  LOG     [v0]   Match 1: "Monitoring - Per Hour" | Confidence: LOW | AI: false
+[01:06:18.342] Server  LOG     [v0]   Match 2: "Monitoring - Per Hour" | Confidence: LOW | AI: false
+[01:06:18.342] Server  LOG     [v0]   Match 3: "Monitoring - Per Hour" | Confidence: LOW | AI: false
+[01:06:18.343] Server  LOG     [v0] Processing: "\"Monitoring costs : CRA, with clinical research exp...\"" "Country:" "France" "Decision:" "Pending"
+[01:06:18.345] Server  LOG     [v0] Filtered to 5947 "benchmarks for country:" "France"
+[01:06:18.357] Server  LOG     [v0][AI-Gateway][4eddb4cb] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:06:18.357] Server  LOG     [v0][AI-Gateway][4eddb4cb] Vendor item: "Monitoring costs : CRA, with clinical research experience, monitoring of all asp" | Country: France | Benchmarks: 150/5947
+[01:06:24.206] Server  LOG     [v0][AI-Gateway][4eddb4cb] ✓ AI Gateway success in 5849ms | Matches: 0 | Tokens: prompt=5308 completion=441 total=5749
+[01:06:24.207] Server  LOG     [v0] Using trigram fallback for: "Monitoring costs : CRA, with c" "Country:" "France"
+[01:06:24.362] Server  LOG     [v0] Processing: "\"Project manager, administrative...\"" "Country:" "France" "Decision:" "Pending"
+[01:06:24.365] Server  LOG     [v0] Filtered to 5947 "benchmarks for country:" "France"
+[01:06:24.376] Server  LOG     [v0][AI-Gateway][9c22cc21] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:06:24.377] Server  LOG     [v0][AI-Gateway][9c22cc21] Vendor item: "Project manager, administrative" | Country: France | Benchmarks: 150/5947
+[01:06:32.063] Server  LOG     [v0][AI-Gateway][9c22cc21] ✓ AI Gateway success in 7687ms | Matches: 1 | Tokens: prompt=5210 completion=677 total=5887
+[01:06:32.064] Server  LOG     [v0] AI found 1 "matches for" "France"
+[01:06:32.064] Server  LOG     [v0]   Match 1: "Administrative/Personnel Costs - Per Vis" | Confidence: LOW | AI: true
+[01:06:32.064] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Implementation (coordinating CRA, regulatory CRA)"
+[01:06:32.064] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Closure (coordinating CRA, regulatory CRA)"
+[01:06:32.065] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Start-up Center opening costs"
+[01:06:32.065] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Insurance France"
+[01:06:32.065] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Insurance  Belgium"
+[01:06:32.065] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating study coordinators administrative ta"
+[01:06:32.065] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating study coordinators administrative ta"
+[01:06:32.065] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating nurse : with clinical research exper"
+[01:06:32.065] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating nurse : with clinical research exper"
+[01:06:32.066] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating physician: fee for all physician for"
+[01:06:32.066] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating study technicians : fee for all stud"
+[01:06:32.066] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating study technicians : fee for all stud"
+[01:06:32.066] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study procedures (Colonoscopy) : 1 per patient"
+[01:06:32.066] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study procedures (medical stay) : 1 per patient"
+[01:06:32.067] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Monetary payment to clinical study participants to"
+[01:06:32.067] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Samples transport\r\n112,63 € x 5 (round-trips) x 24"
+[01:06:32.067] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Samples transport\r\nCHU Liège : 947,88 x 5 (round-t"
+[01:06:32.067] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Data management: senior data manager mandated by t"
+[01:06:32.067] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Statistical analysis: senior biostatistician manda"
+[01:06:32.067] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:06:32.067] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:06:32.067] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:06:32.068] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:06:32.068] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:06:32.068] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:06:32.068] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:06:32.068] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Patient financial compensation to undergo 1 colono"
+[01:06:32.068] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage at CRB of CHU Clermont-"
+[01:06:32.069] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage  (2€ per sample) : \r\n4 "
+[01:06:32.069] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage  (2€ per sample) : \r\n4 "
+[01:06:32.069] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Archiving \r\n80 € / center : 80*6 = 480 €"
+[01:06:32.069] Server  LOG     [v0] Processing: "\"Archiving\n80 € / center : 80*2 = 160€...\"" "Country:" "Belgium" "Decision:" "Pending"
+[01:06:32.072] Server  LOG     [v0] Filtered to 6031 "benchmarks for country:" "Belgium"
+[01:06:32.086] Server  LOG     [v0][AI-Gateway][99d56dc4] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:06:32.086] Server  LOG     [v0][AI-Gateway][99d56dc4] Vendor item: "Archiving
+80 € / center : 80*2 = 160€" | Country: Belgium | Benchmarks: 150/6031
+[01:06:39.446] Server  LOG     [v0][AI-Gateway][99d56dc4] ✓ AI Gateway success in 7362ms | Matches: 0 | Tokens: prompt=5270 completion=581 total=5851
+[01:06:39.447] Server  LOG     [v0] Using trigram fallback for: "Archiving\n80 € / center : 80*2" "Country:" "Belgium"
+[01:06:39.507] Server  LOG     [v0]   Match 1: "Archiving - Per Box" | Confidence: MEDIUM | AI: false
+[01:06:39.508] Server  LOG     [v0]   Match 2: "Archiving - Per Box" | Confidence: MEDIUM | AI: false
+[01:06:39.508] Server  LOG     [v0]   Match 3: "Archiving - Per Box" | Confidence: MEDIUM | AI: false
+[01:06:39.508] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study coordination by CHU Clermont-Ferrand Physici"
+[01:06:39.508] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating physician : fee for all physician fo"
+[01:06:39.508] Server  LOG     [v0] Updating 38 "comparison records"
+[01:06:39.657] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "c6b93f17-2b40-44d7-91fc-599aadf5f46d"
+[01:06:39.658] Server  LOG     [v0] Updating line_item_id: "0184b958-d1f9-4fe2-a11a-de8a1b4af63e" "with" 3 "matches" "flag:" "YELLOW"
+[01:06:39.783] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:06:39.783] Server  LOG     [v0] Updating line_item_id: "4eddb4cb-94cc-4817-b1d8-673c15be036a" "with" 0 "matches" "flag:" "NO_MATCH"
+[01:06:39.892] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:06:39.892] Server  LOG     [v0] Updating line_item_id: "9c22cc21-1407-41bb-9482-27e44efe0af6" "with" 1 "matches" "flag:" "YELLOW"
+[01:06:39.990] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:06:40.074] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "5ca2125e-c08d-4619-93aa-f71055b30c29"
+[01:06:40.179] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "fbb65ea1-526e-47b7-9c81-706fbe2c9143"
+[01:06:40.268] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "ec7257f6-00e2-40a5-87df-8524c794cc23"
+[01:06:40.386] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "ca337423-e8ec-46f0-abe0-d45d76e30afe"
+[01:06:40.486] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "0e920cb2-6dda-4952-9184-3d2a1a271838"
+[01:06:40.568] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "7924de84-a0b0-4502-ad3f-92f6caf2b913"
+[01:06:40.668] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "bab0b43a-9bf8-4b47-b915-5c5ae008030e"
+[01:06:40.772] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "23d95c1b-06d1-41f8-95da-a6b8501a3aec"
+[01:06:40.887] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "1b1b1ca3-afb3-4da5-9eb3-03141eb480c7"
+[01:06:40.991] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "021a4aa3-3550-4efd-b0dd-89051ff64938"
+[01:06:41.091] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "7851d3fd-9638-461f-8d55-b0f6fb3277f3"
+[01:06:41.172] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "56aa566f-caf0-4c0c-96df-c11682185a07"
+[01:06:41.277] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "16c9216e-7a9b-471f-8c0a-b546b9e4b7cb"
+[01:06:41.376] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "9f545ec2-41d1-41b6-971d-042bceea9427"
+[01:06:41.482] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "670cdea4-1f15-47b5-be5d-57a7d661efaa"
+[01:06:41.582] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "386ddb3a-9e7f-4a24-91c0-e523248a1c16"
+[01:06:41.664] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "2a917415-955c-417f-9585-fe27637aa8f5"
+[01:06:41.764] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "d15795a5-0266-4bb0-9633-7ddc28f5381b"
+[01:06:41.876] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "d1e2413b-e8e2-485a-8b2d-aa4f7f91e84a"
+[01:06:41.986] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "ead2bd68-fc0b-4f92-877b-cd384f71d3a6"
+[01:06:42.090] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "6722c11c-dc94-4d4e-a3df-be17e5110f0f"
+[01:06:42.196] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "81385e13-23e0-4998-a430-25b05258e695"
+[01:06:42.279] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "e2c17d5e-7350-457b-b88a-54386e84fa11"
+[01:06:42.381] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "fd625eb7-8f9c-40ff-a76c-0749e3db5155"
+[01:06:42.467] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "f15d3dac-2aa8-4ff6-9422-a11685af2ffa"
+[01:06:42.577] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "59e69ab5-a6ef-47a1-86a4-51fb7b8551a2"
+[01:06:42.677] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "9d5149bb-e298-467b-a5f1-7b44fd7aad06"
+[01:06:42.761] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "23e469f3-ff81-48ae-abf8-188f073668c4"
+[01:06:42.862] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "790488ee-6868-4dd3-9cdf-c9fe23ff9101"
+[01:06:42.966] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "23b8b8a0-8080-45a0-9bbb-80b41401a7cf"
+[01:06:43.065] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "dcdfcccb-8c39-417f-a821-d035f54763bc"
+[01:06:43.066] Server  LOG     [v0] Updating line_item_id: "99d56dc4-e81c-4616-99e3-e0ba6405ce22" "with" 3 "matches" "flag:" "YELLOW"
+[01:06:43.172] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:06:43.264] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "2a08e98d-d44a-41cf-8193-c2d6428d115f"
+[01:06:43.368] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "9f6235e4-6675-4a4b-9b60-df0b5b95901d"
+[01:06:44.306] Browser LOG     [v0] Comparison API result: {"message":"Compared 38 items: 21 AI matches, 2 trigram matches","results":[{"bestMatch":{"benchmarkId":"2059ca47-ce93-403a-a3bb-cfc19df6845e","category":"Non-Procedures","code":"NP001","confidence":"HIGH","country":"France","isAIMatch":true,"p100":190,"p25":50,"p50":54,"p75":57,"p90":112,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor item describes study coordination services provided by a clinical research associate, which directly matches the role and function of the Study Coordinator benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"c6b93f17-2b40-44d7-91fc-599aadf5f46d","matchCount":1,"matches":[{"benchmarkId":"2059ca47-ce93-403a-a3bb-cfc19df6845e","category":"Non-Procedures","code":"NP001","confidence":"HIGH","country":"France","isAIMatch":true,"p100":190,"p25":50,"p50":54,"p75":57,"p90":112,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor item describes study coordination services provided by a clinical research associate, which directly matches the role and function of the Study Coordinator benchmark.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"5db5f243-0530-4ce2-851c-a2b0bff29fbb","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222},"flag":"YELLOW","lineItemId":"0184b958-d1f9-4fe2-a11a-de8a1b4af63e","matchCount":3,"matches":[{"benchmarkId":"5db5f243-0530-4ce2-851c-a2b0bff29fbb","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222},{"benchmarkId":"b54a5c0b-1aae-4d35-9f07-dbe4b84733e7","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222},{"benchmarkId":"bd80e962-b8b9-4fab-8f9f-2d1af3f235aa","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"4eddb4cb-94cc-4817-b1d8-673c15be036a","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"f7df5a6e-1f8c-4b85-b29d-71d2325c43d3","category":"Non-Procedures","code":"NP033","confidence":"LOW","country":"France","isAIMatch":true,"p100":183,"p25":54,"p50":94,"p75":150,"p90":182,"procedureName":"Administrative/Personnel Costs - Per Visit","reasoning":"The benchmark for generic administrative/personnel costs is the closest available match for a project manager acting in an administrative capacity, though the unit or exact title may differ.","similarity":0.5},"flag":"YELLOW","lineItemId":"9c22cc21-1407-41bb-9482-27e44efe0af6","matchCount":1,"matches":[{"benchmarkId":"f7df5a6e-1f8c-4b85-b29d-71d2325c43d3","category":"Non-Procedures","code":"NP033","confidence":"LOW","country":"France","isAIMatch":true,"p100":183,"p25":54,"p50":94,"p75":150,"p90":182,"procedureName":"Administrative/Personnel Costs - Per Visit","reasoning":"The benchmark for generic administrative/personnel costs is the closest available match for a project manager acting in an administrative capacity, though the unit or exact title may differ.","similarity":0.5}]},{"bestMatch":{"benchmarkId":"e94421ce-1663-420a-a7d1-af8e76f5c6b6","category":"Non-Procedures","code":"NP035","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":0,"p25":244,"p50":313,"p75":399,"p90":643,"procedureName":"Regulatory Affairs Consultant -  Per hour","reasoning":"The vendor item refers to a regulatory Clinical Research Associate (CRA), which aligns closely with the role of a Regulatory Affairs Consultant.","similarity":0.7},"flag":"YELLOW","lineItemId":"5ca2125e-c08d-4619-93aa-f71055b30c29","matchCount":2,"matches":[{"benchmarkId":"e94421ce-1663-420a-a7d1-af8e76f5c6b6","category":"Non-Procedures","code":"NP035","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":0,"p25":244,"p50":313,"p75":399,"p90":643,"procedureName":"Regulatory Affairs Consultant -  Per hour","reasoning":"The vendor item refers to a regulatory Clinical Research Associate (CRA), which aligns closely with the role of a Regulatory Affairs Consultant.","similarity":0.7},{"benchmarkId":"9f39840e-ecd6-4410-8c29-f031a4edb613","category":"Site Costs","code":"SC022","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":0,"p25":254,"p50":324,"p75":543,"p90":861,"procedureName":"Consultant: Services for regulatory related expertise; per hour","reasoning":"The vendor item involves a regulatory CRA role, which matches providing services for regulatory-related expertise.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"e5b3a6d6-0abb-4bca-82c4-01a04e7e22bd","category":"Site Costs","code":"SC023","confidence":"HIGH","country":"France","isAIMatch":true,"p100":1340,"p25":210,"p50":233,"p75":270,"p90":370,"procedureName":"Study Close out: including all activities related to closing out the site","reasoning":"The vendor item relates to closure activities, which aligns precisely with 'Study Close out: including all activities related to closing out the site'.","similarity":0.9},"flag":"GREEN","lineItemId":"fbb65ea1-526e-47b7-9c81-706fbe2c9143","matchCount":1,"matches":[{"benchmarkId":"e5b3a6d6-0abb-4bca-82c4-01a04e7e22bd","category":"Site Costs","code":"SC023","confidence":"HIGH","country":"France","isAIMatch":true,"p100":1340,"p25":210,"p50":233,"p75":270,"p90":370,"procedureName":"Study Close out: including all activities related to closing out the site","reasoning":"The vendor item relates to closure activities, which aligns precisely with 'Study Close out: including all activities related to closing out the site'.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"be4e5370-85a6-4412-a002-f967e73f3c07","category":"Site Costs","code":"SC003","confidence":"HIGH","country":"France","isAIMatch":true,"p100":8260,"p25":1170,"p50":1665,"p75":2022,"p90":2776,"procedureName":"Study Start-Up Fee/Site Set-Up Fee","reasoning":"The vendor cost item refers to 'Start-up Center opening costs' and 'Study set-up fee', which is an exact semantic match to the benchmark 'Study Start-Up Fee/Site Set-Up Fee'.","similarity":0.9},"flag":"GREEN","lineItemId":"ec7257f6-00e2-40a5-87df-8524c794cc23","matchCount":1,"matches":[{"benchmarkId":"be4e5370-85a6-4412-a002-f967e73f3c07","category":"Site Costs","code":"SC003","confidence":"HIGH","country":"France","isAIMatch":true,"p100":8260,"p25":1170,"p50":1665,"p75":2022,"p90":2776,"procedureName":"Study Start-Up Fee/Site Set-Up Fee","reasoning":"The vendor cost item refers to 'Start-up Center opening costs' and 'Study set-up fee', which is an exact semantic match to the benchmark 'Study Start-Up Fee/Site Set-Up Fee'.","similarity":0.9}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"ca337423-e8ec-46f0-abe0-d45d76e30afe","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"0e920cb2-6dda-4952-9184-3d2a1a271838","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"7d1c4a25-d045-4232-ad80-eeb5836c3253","category":"Non-Procedures","code":"NP012","confidence":"HIGH","country":"France","isAIMatch":true,"p100":155,"p25":52,"p50":67,"p75":104,"p90":154,"procedureName":"Study Coordinator, Electronic Data Capture (EDC) - Per Hour","reasoning":"The vendor item specifically describes a study coordinator's administrative tasks including data collection, entry into the eCRF (Electronic Data Capture), and answering queries, which aligns perfectly with the study coordinator EDC benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"7924de84-a0b0-4502-ad3f-92f6caf2b913","matchCount":3,"matches":[{"benchmarkId":"7d1c4a25-d045-4232-ad80-eeb5836c3253","category":"Non-Procedures","code":"NP012","confidence":"HIGH","country":"France","isAIMatch":true,"p100":155,"p25":52,"p50":67,"p75":104,"p90":154,"procedureName":"Study Coordinator, Electronic Data Capture (EDC) - Per Hour","reasoning":"The vendor item specifically describes a study coordinator's administrative tasks including data collection, entry into the eCRF (Electronic Data Capture), and answering queries, which aligns perfectly with the study coordinator EDC benchmark.","similarity":0.9},{"benchmarkId":"2059ca47-ce93-403a-a3bb-cfc19df6845e","category":"Non-Procedures","code":"NP001","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":190,"p25":50,"p50":54,"p75":57,"p90":112,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor item encompasses general study coordinator administrative tasks (site management, meetings), making the standard hourly study coordinator rate a strong secondary match.","similarity":0.7},{"benchmarkId":"a695eb8b-f831-46da-8611-1be8e7f29ee4","category":"Non-Procedures","code":"NP005","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":115,"p25":29,"p50":52,"p75":53,"p90":57,"procedureName":"Data Entry - Per Hour","reasoning":"The cost item heavily references data entry into the eCRF and query management, which overlaps with general data entry duties.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"669dd4a5-e7ec-4a1f-a1cb-9303abbfb35a","category":"Non-Procedures","code":"NP012","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":94,"p25":36,"p50":46,"p75":67,"p90":93,"procedureName":"Study Coordinator, Electronic Data Capture (EDC) - Per Hour","reasoning":"The vendor item specifically describes a study coordinator's administrative tasks including data entry into the eCRF and answering queries, which directly corresponds to 'Electronic Data Capture (EDC)' activities.","similarity":0.9},"flag":"GREEN","lineItemId":"bab0b43a-9bf8-4b47-b915-5c5ae008030e","matchCount":3,"matches":[{"benchmarkId":"669dd4a5-e7ec-4a1f-a1cb-9303abbfb35a","category":"Non-Procedures","code":"NP012","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":94,"p25":36,"p50":46,"p75":67,"p90":93,"procedureName":"Study Coordinator, Electronic Data Capture (EDC) - Per Hour","reasoning":"The vendor item specifically describes a study coordinator's administrative tasks including data entry into the eCRF and answering queries, which directly corresponds to 'Electronic Data Capture (EDC)' activities.","similarity":0.9},{"benchmarkId":"0872f55c-6fba-4dab-a726-a7b814fc75fa","category":"Non-Procedures","code":"NP001","confidence":"MEDIUM","country":"Belgium","isAIMatch":true,"p100":102,"p25":60,"p50":64,"p75":67,"p90":77,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor item covers general administrative tasks, site management, and meetings performed by a study coordinator, which aligns with a standard study coordinator hourly rate.","similarity":0.7},{"benchmarkId":"de29ce4d-e78b-4702-bc47-45e6247d45d6","category":"Site Costs","code":"SC081","confidence":"MEDIUM","country":"Belgium","isAIMatch":true,"p100":102,"p25":60,"p50":64,"p75":67,"p90":77,"procedureName":"Study Coordinator –Per Hour","reasoning":"Similar to index 57, this benchmark represents the time and effort of a study coordinator, capturing the overall administrative workload described.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"704e1687-aad9-4e70-9b9f-9126eb3a2380","category":"Non-Procedures","code":"NP002","confidence":"HIGH","country":"France","isAIMatch":true,"p100":90,"p25":46,"p50":48,"p75":49,"p90":50,"procedureName":"Nurse - Per Hour","reasoning":"The vendor cost item explicitly provides an hourly rate for an investigating nurse performing clinical tasks, which perfectly matches the 'Nurse - Per Hour' personnel benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"23d95c1b-06d1-41f8-95da-a6b8501a3aec","matchCount":1,"matches":[{"benchmarkId":"704e1687-aad9-4e70-9b9f-9126eb3a2380","category":"Non-Procedures","code":"NP002","confidence":"HIGH","country":"France","isAIMatch":true,"p100":90,"p25":46,"p50":48,"p75":49,"p90":50,"procedureName":"Nurse - Per Hour","reasoning":"The vendor cost item explicitly provides an hourly rate for an investigating nurse performing clinical tasks, which perfectly matches the 'Nurse - Per Hour' personnel benchmark.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"1fb13710-fb00-4f36-b53e-18f7f15383aa","category":"Non-Procedures","code":"NP002","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":113,"p25":65,"p50":66,"p75":74,"p90":112,"procedureName":"Nurse - Per Hour","reasoning":"The vendor cost item specifically lists an hourly rate for an investigating nurse, which perfectly matches the 'Nurse - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"1b1b1ca3-afb3-4da5-9eb3-03141eb480c7","matchCount":2,"matches":[{"benchmarkId":"1fb13710-fb00-4f36-b53e-18f7f15383aa","category":"Non-Procedures","code":"NP002","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":113,"p25":65,"p50":66,"p75":74,"p90":112,"procedureName":"Nurse - Per Hour","reasoning":"The vendor cost item specifically lists an hourly rate for an investigating nurse, which perfectly matches the 'Nurse - Per Hour' benchmark.","similarity":0.9},{"benchmarkId":"5e83dbbf-9544-470e-980f-a4096f5d0cde","category":"Site Costs","code":"SC082","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":113,"p25":65,"p50":66,"p75":74,"p90":112,"procedureName":"Nurse –Per Hour","reasoning":"This benchmark is also an exact match for the hourly rate of a nurse.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"8172386a-eb30-48e0-8c4d-5250d1972d12","category":"Non-Procedures","code":"NP004","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":336,"p25":142,"p50":157,"p75":176,"p90":186,"procedureName":"Physician - Per Hour","reasoning":"The vendor item is explicitly calculated as an hourly rate for the investigating physician, which is a perfect match for the general 'Physician - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"021a4aa3-3550-4efd-b0dd-89051ff64938","matchCount":3,"matches":[{"benchmarkId":"8172386a-eb30-48e0-8c4d-5250d1972d12","category":"Non-Procedures","code":"NP004","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":336,"p25":142,"p50":157,"p75":176,"p90":186,"procedureName":"Physician - Per Hour","reasoning":"The vendor item is explicitly calculated as an hourly rate for the investigating physician, which is a perfect match for the general 'Physician - Per Hour' benchmark.","similarity":0.9},{"benchmarkId":"978e261a-320a-4b2a-8c16-1719e6980c66","category":"Site Costs","code":"SC080","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":336,"p25":142,"p50":157,"p75":176,"p90":186,"procedureName":"Physician –Per Hour","reasoning":"This is also an exact match for a standard physician hourly rate, categorized under site personnel costs.","similarity":0.9},{"benchmarkId":"1f8f1570-7929-49cb-8375-eafacfb77511","category":"Non-Procedures","code":"NP080","confidence":"MEDIUM","country":"Belgium","isAIMatch":true,"p100":0,"p25":99,"p50":123,"p75":150,"p90":195,"procedureName":"Physician: Gastroenterology - Per Hour","reasoning":"The vendor item specifically notes that the physician's tasks include performing colonoscopies, making the gastroenterology specialist hourly rate a relevant alternative benchmark.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"ca1eccad-7976-4e9d-8cb9-c92eec9874d6","category":"Non-Procedures","code":"NP019","confidence":"HIGH","country":"France","isAIMatch":true,"p100":144,"p25":45,"p50":50,"p75":58,"p90":85,"procedureName":"Laboratory Technician - Per Hour","reasoning":"The vendor item specifies an hourly fee for a study technician performing laboratory-related tasks (aliquoting of samples, package preparation), which perfectly matches the 'Laboratory Technician - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"7851d3fd-9638-461f-8d55-b0f6fb3277f3","matchCount":1,"matches":[{"benchmarkId":"ca1eccad-7976-4e9d-8cb9-c92eec9874d6","category":"Non-Procedures","code":"NP019","confidence":"HIGH","country":"France","isAIMatch":true,"p100":144,"p25":45,"p50":50,"p75":58,"p90":85,"procedureName":"Laboratory Technician - Per Hour","reasoning":"The vendor item specifies an hourly fee for a study technician performing laboratory-related tasks (aliquoting of samples, package preparation), which perfectly matches the 'Laboratory Technician - Per Hour' benchmark.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"7eef519d-3fbf-4cab-87b0-55eccbdd0387","category":"Non-Procedures","code":"NP019","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":151,"p25":49,"p50":59,"p75":82,"p90":116,"procedureName":"Laboratory Technician - Per Hour","reasoning":"The vendor item specifies time-based fees for study technicians performing sample aliquoting and package preparation, which directly corresponds to the duties and hourly rate of a Laboratory Technician.","similarity":0.9},"flag":"GREEN","lineItemId":"56aa566f-caf0-4c0c-96df-c11682185a07","matchCount":1,"matches":[{"benchmarkId":"7eef519d-3fbf-4cab-87b0-55eccbdd0387","category":"Non-Procedures","code":"NP019","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":151,"p25":49,"p50":59,"p75":82,"p90":116,"procedureName":"Laboratory Technician - Per Hour","reasoning":"The vendor item specifies time-based fees for study technicians performing sample aliquoting and package preparation, which directly corresponds to the duties and hourly rate of a Laboratory Technician.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"b1a33e06-db7d-4a1e-9e97-a1f2102bb63b","category":"Procedures","code":"45378","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":0,"p25":494,"p50":799,"p75":1291,"p90":1986,"procedureName":"Colonoscopy, flexible, proximal to splenic flexure; diagnostic, with or without collection of specimen(s) by brushing or washing, with or without colondecompression (separate procedure); moderate sedation","reasoning":"The vendor cost item refers to a colonoscopy, which aligns best with the generic diagnostic flexible colonoscopy benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"16c9216e-7a9b-471f-8c0a-b546b9e4b7cb","matchCount":2,"matches":[{"benchmarkId":"b1a33e06-db7d-4a1e-9e97-a1f2102bb63b","category":"Procedures","code":"45378","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":0,"p25":494,"p50":799,"p75":1291,"p90":1986,"procedureName":"Colonoscopy, flexible, proximal to splenic flexure; diagnostic, with or without collection of specimen(s) by brushing or washing, with or without colondecompression (separate procedure); moderate sedation","reasoning":"The vendor cost item refers to a colonoscopy, which aligns best with the generic diagnostic flexible colonoscopy benchmark.","similarity":0.9},{"benchmarkId":"7592a83d-354f-4c15-ba71-c262043aa928","category":"Procedures","code":"45380","confidence":"MEDIUM","country":"Belgium","isAIMatch":true,"p100":0,"p25":692,"p50":1113,"p75":1788,"p90":2741,"procedureName":"Colonoscopy, flexible; with biopsy, single or multiple","reasoning":"Another common type of colonoscopy in clinical trials includes a biopsy, which is a plausible match if a tissue sample is taken during the procedure.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"6199b2a9-0e27-4c13-b46e-29df899112be","category":"Non-Procedures","code":"NP010","confidence":"MEDIUM","country":"Belgium","isAIMatch":true,"p100":1819,"p25":867,"p50":1058,"p75":1369,"p90":1472,"procedureName":"Overnight Facility Charge, Simple (e.g. regular ward room) - Per Night","reasoning":"The vendor cost item refers to a 'medical stay', which aligns with an overnight facility charge for a regular ward room.","similarity":0.7},"flag":"YELLOW","lineItemId":"9f545ec2-41d1-41b6-971d-042bceea9427","matchCount":3,"matches":[{"benchmarkId":"6199b2a9-0e27-4c13-b46e-29df899112be","category":"Non-Procedures","code":"NP010","confidence":"MEDIUM","country":"Belgium","isAIMatch":true,"p100":1819,"p25":867,"p50":1058,"p75":1369,"p90":1472,"procedureName":"Overnight Facility Charge, Simple (e.g. regular ward room) - Per Night","reasoning":"The vendor cost item refers to a 'medical stay', which aligns with an overnight facility charge for a regular ward room.","similarity":0.7},{"benchmarkId":"c59b6f8b-b9e5-4f83-8006-f76676b031b8","category":"Non-Procedures","code":"NP009","confidence":"MEDIUM","country":"Belgium","isAIMatch":true,"p100":687,"p25":274,"p50":334,"p75":406,"p90":546,"procedureName":"Daily Facility Charge - Per Day","reasoning":"A 'medical stay' can also be represented as a daily facility charge, depending on the length and nature of the admission.","similarity":0.7},{"benchmarkId":"66db959e-9b11-4312-aded-9f0db81e509e","category":"Non-Procedures","code":"NP042","confidence":"LOW","country":"Belgium","isAIMatch":true,"p100":967,"p25":380,"p50":435,"p75":543,"p90":818,"procedureName":"Daily Facility Charge Complex - Per day","reasoning":"Depending on the complexity of the stay, this could refer to a complex daily facility charge.","similarity":0.5}]},{"bestMatch":{"benchmarkId":"3b39428c-09cf-4e87-a3cb-e91d6df78f1f","category":"Non-Procedures","code":"NP007","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":73,"p25":25,"p50":32,"p75":38,"p90":41,"procedureName":"Patient Reimbursement, Expenses, Patient Travel - Per Visit","reasoning":"The vendor item specifically describes reimbursement of actual costs for patient travel and related expenses, which aligns perfectly with this benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"670cdea4-1f15-47b5-be5d-57a7d661efaa","matchCount":3,"matches":[{"benchmarkId":"3b39428c-09cf-4e87-a3cb-e91d6df78f1f","category":"Non-Procedures","code":"NP007","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":73,"p25":25,"p50":32,"p75":38,"p90":41,"procedureName":"Patient Reimbursement, Expenses, Patient Travel - Per Visit","reasoning":"The vendor item specifically describes reimbursement of actual costs for patient travel and related expenses, which aligns perfectly with this benchmark.","similarity":0.9},{"benchmarkId":"eb4ec308-5c74-4bf5-802e-e735c35b9f94","category":"Non-Procedures","code":"NP007","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":73,"p25":25,"p50":32,"p75":38,"p90":41,"procedureName":"Patient Reimbursement, Expenses, Patient Travel - Per Visit","reasoning":"This benchmark is identical to index 62 and represents an exact match for patient travel expense reimbursement.","similarity":0.9},{"benchmarkId":"fa69aadf-033b-4efe-9171-a6f0b6aa370e","category":"Non-Procedures","code":"NP032","confidence":"MEDIUM","country":"Belgium","isAIMatch":true,"p100":0,"p25":195,"p50":234,"p75":287,"p90":368,"procedureName":"Patient Reimbursement, Overnight - Per Visit","reasoning":"The vendor item includes reimbursement for accommodation (overnight stays) as part of actual costs, making this overnight reimbursement benchmark highly relevant.","similarity":0.7}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"386ddb3a-9e7f-4a24-91c0-e523248a1c16","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"2a917415-955c-417f-9585-fe27637aa8f5","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"a695eb8b-f831-46da-8611-1be8e7f29ee4","category":"Non-Procedures","code":"NP005","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":115,"p25":29,"p50":52,"p75":53,"p90":57,"procedureName":"Data Entry - Per Hour","reasoning":"Although the vendor specifies a 'senior data manager' performing data quality monitoring and eCRF creation, 'Data Entry - Per Hour' is the closest benchmark category for personnel dedicated to data management tasks.","similarity":0.7},"flag":"YELLOW","lineItemId":"d15795a5-0266-4bb0-9633-7ddc28f5381b","matchCount":2,"matches":[{"benchmarkId":"a695eb8b-f831-46da-8611-1be8e7f29ee4","category":"Non-Procedures","code":"NP005","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":115,"p25":29,"p50":52,"p75":53,"p90":57,"procedureName":"Data Entry - Per Hour","reasoning":"Although the vendor specifies a 'senior data manager' performing data quality monitoring and eCRF creation, 'Data Entry - Per Hour' is the closest benchmark category for personnel dedicated to data management tasks.","similarity":0.7},{"benchmarkId":"7d1c4a25-d045-4232-ad80-eeb5836c3253","category":"Non-Procedures","code":"NP012","confidence":"LOW","country":"France","isAIMatch":true,"p100":155,"p25":52,"p50":67,"p75":104,"p90":154,"procedureName":"Study Coordinator, Electronic Data Capture (EDC) - Per Hour","reasoning":"The vendor item includes eCRF creation and data querying, which aligns with the Electronic Data Capture (EDC) responsibilities often handled by specialized study coordinators.","similarity":0.5}]},{"bestMatch":{"benchmarkId":"46817866-09f4-4b5d-9e6a-011cd8cfac98","category":"Non-Procedures","code":"NP109","confidence":"HIGH","country":"France","isAIMatch":true,"p100":0,"p25":62,"p50":70,"p75":83,"p90":96,"procedureName":"Biostatistician II Sr - Per Hour","reasoning":"Direct match for the exact personnel role requested: 'Biostatistician II Sr' corresponds directly to a 'senior biostatistician'.","similarity":0.9},"flag":"GREEN","lineItemId":"d1e2413b-e8e2-485a-8b2d-aa4f7f91e84a","matchCount":2,"matches":[{"benchmarkId":"46817866-09f4-4b5d-9e6a-011cd8cfac98","category":"Non-Procedures","code":"NP109","confidence":"HIGH","country":"France","isAIMatch":true,"p100":0,"p25":62,"p50":70,"p75":83,"p90":96,"procedureName":"Biostatistician II Sr - Per Hour","reasoning":"Direct match for the exact personnel role requested: 'Biostatistician II Sr' corresponds directly to a 'senior biostatistician'.","similarity":0.9},{"benchmarkId":"25812af7-a820-4162-8356-fc46f6b42365","category":"Non-Procedures","code":"NP041","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":0,"p25":134,"p50":171,"p75":219,"p90":309,"procedureName":"Medical Affairs Consultant - Per hour; including medical writing, biostatistics, health economics and outcomes, protocol writing","reasoning":"Includes biostatistics within the Medical Affairs Consultant role, which could encompass statistical analysis tasks if a specialized biostatistician rate is unavailable.","similarity":0.7}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"ead2bd68-fc0b-4f92-877b-cd384f71d3a6","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"6722c11c-dc94-4d4e-a3df-be17e5110f0f","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"81385e13-23e0-4998-a430-25b05258e695","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"e2c17d5e-7350-457b-b88a-54386e84fa11","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"fd625eb7-8f9c-40ff-a76c-0749e3db5155","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"f15d3dac-2aa8-4ff6-9422-a11685af2ffa","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"59e69ab5-a6ef-47a1-86a4-51fb7b8551a2","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"0661d474-5943-4d40-976d-0e9cb273f617","category":"Non-Procedures","code":"NP008","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":167,"p25":52,"p50":54,"p75":71,"p90":105,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"The vendor item describes financial compensation given to a patient for participating/undergoing a procedure, which directly corresponds to a patient stipend per visit.","similarity":0.9},"flag":"GREEN","lineItemId":"9d5149bb-e298-467b-a5f1-7b44fd7aad06","matchCount":2,"matches":[{"benchmarkId":"0661d474-5943-4d40-976d-0e9cb273f617","category":"Non-Procedures","code":"NP008","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":167,"p25":52,"p50":54,"p75":71,"p90":105,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"The vendor item describes financial compensation given to a patient for participating/undergoing a procedure, which directly corresponds to a patient stipend per visit.","similarity":0.9},{"benchmarkId":"5e3bcf79-b731-4f42-8ba6-74a1a2501cbd","category":"Non-Procedures","code":"NP008","confidence":"HIGH","country":"Belgium","isAIMatch":true,"p100":167,"p25":52,"p50":54,"p75":71,"p90":105,"procedureName":"Patient Reimbursement, Stipend - Per Visit","reasoning":"The vendor item describes financial compensation given to a patient for participating/undergoing a procedure, which directly corresponds to a patient stipend per visit.","similarity":0.9}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"23e469f3-ff81-48ae-abf8-188f073668c4","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"790488ee-6868-4dd3-9cdf-c9fe23ff9101","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"23b8b8a0-8080-45a0-9bbb-80b41401a7cf","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"587751f5-baf0-4978-b09f-8abd1fe0c1e1","category":"Site Costs","code":"SC012","confidence":"HIGH","country":"France","isAIMatch":true,"p100":485,"p25":205,"p50":268,"p75":350,"p90":445,"procedureName":"Archiving and Document Storage - Per Year; Archive","reasoning":"The vendor cost item for archiving fees directly matches the benchmark procedure for 'Archiving and Document Storage'.","similarity":0.9},"flag":"GREEN","lineItemId":"dcdfcccb-8c39-417f-a821-d035f54763bc","matchCount":1,"matches":[{"benchmarkId":"587751f5-baf0-4978-b09f-8abd1fe0c1e1","category":"Site Costs","code":"SC012","confidence":"HIGH","country":"France","isAIMatch":true,"p100":485,"p25":205,"p50":268,"p75":350,"p90":445,"procedureName":"Archiving and Document Storage - Per Year; Archive","reasoning":"The vendor cost item for archiving fees directly matches the benchmark procedure for 'Archiving and Document Storage'.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"0d80042a-66fe-42b6-8154-81d69e270cf7","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333},"flag":"YELLOW","lineItemId":"99d56dc4-e81c-4616-99e3-e0ba6405ce22","matchCount":3,"matches":[{"benchmarkId":"0d80042a-66fe-42b6-8154-81d69e270cf7","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333},{"benchmarkId":"65623c8d-a797-4e0d-8d33-5c6db5db93be","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333},{"benchmarkId":"2afd73e1-c45a-4897-b703-40c6f1499dc1","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333}]},{"bestMatch":{"benchmarkId":"1fe06d6a-4646-4059-9281-6289fa9c5d2a","category":"Non-Procedures","code":"NP080","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":0,"p25":96,"p50":118,"p75":154,"p90":194,"procedureName":"Physician: Gastroenterology - Per Hour","reasoning":"The vendor item specifies personnel costs for a physician specializing in gastroenterology performing study coordination tasks.","similarity":0.7},"flag":"YELLOW","lineItemId":"2a08e98d-d44a-41cf-8193-c2d6428d115f","matchCount":3,"matches":[{"benchmarkId":"1fe06d6a-4646-4059-9281-6289fa9c5d2a","category":"Non-Procedures","code":"NP080","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":0,"p25":96,"p50":118,"p75":154,"p90":194,"procedureName":"Physician: Gastroenterology - Per Hour","reasoning":"The vendor item specifies personnel costs for a physician specializing in gastroenterology performing study coordination tasks.","similarity":0.7},{"benchmarkId":"b08efc06-9ca5-4089-a364-0e3d83db7403","category":"Non-Procedures","code":"NP004","confidence":"LOW","country":"France","isAIMatch":true,"p100":157,"p25":94,"p50":104,"p75":108,"p90":113,"procedureName":"Physician - Per Hour","reasoning":"Matches the base personnel type (Physician) without the specific medical specialty.","similarity":0.5},{"benchmarkId":"2059ca47-ce93-403a-a3bb-cfc19df6845e","category":"Non-Procedures","code":"NP001","confidence":"LOW","country":"France","isAIMatch":true,"p100":190,"p25":50,"p50":54,"p75":57,"p90":112,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor item describes 'study coordination' tasks, which aligns with the functional role of a study coordinator, though it is being performed by a physician.","similarity":0.5}]},{"bestMatch":{"benchmarkId":"b08efc06-9ca5-4089-a364-0e3d83db7403","category":"Non-Procedures","code":"NP004","confidence":"HIGH","country":"France","isAIMatch":true,"p100":157,"p25":94,"p50":104,"p75":108,"p90":113,"procedureName":"Physician - Per Hour","reasoning":"The vendor item represents a generic hourly fee for an investigating physician's time spent on patient screening and visits.","similarity":0.9},"flag":"GREEN","lineItemId":"9f6235e4-6675-4a4b-9b60-df0b5b95901d","matchCount":2,"matches":[{"benchmarkId":"b08efc06-9ca5-4089-a364-0e3d83db7403","category":"Non-Procedures","code":"NP004","confidence":"HIGH","country":"France","isAIMatch":true,"p100":157,"p25":94,"p50":104,"p75":108,"p90":113,"procedureName":"Physician - Per Hour","reasoning":"The vendor item represents a generic hourly fee for an investigating physician's time spent on patient screening and visits.","similarity":0.9},{"benchmarkId":"1fe06d6a-4646-4059-9281-6289fa9c5d2a","category":"Non-Procedures","code":"NP080","confidence":"HIGH","country":"France","isAIMatch":true,"p100":0,"p25":96,"p50":118,"p75":154,"p90":194,"procedureName":"Physician: Gastroenterology - Per Hour","reasoning":"Because the vendor item specifically mentions the physician performs colonoscopies, the hourly rate for a Gastroenterology physician is a highly relevant specialty match.","similarity":0.9}]}],"success":true}
+[01:06:44.306] Browser LOG     [v0] Merged 38 AI results into comparisons in-memory (no refetch)
+[01:08:07.470] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:08:07.654] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:08:07.684] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-assessment-table-improvements.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782224048324} /_vercel/insights/view
+[01:08:09.093] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:08:10.998] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:08:11.190] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/assessments/42a0c05f-8f38-4426-bd57-4cea35b84663 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements.vusercontent.net/assessments/42a0c05f-8f38-4426-bd57-4cea35b84663","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782224051830} /_vercel/insights/view
+[01:08:11.216] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:08:11.609] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:08:11.634] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:08:11.838] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[01:08:12.862] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[01:08:12.862] Browser LOG     [v0] Has existing ai_matches: false
+[01:08:12.952] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:08:13.141] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[01:08:13.557] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[01:08:13.557] Browser LOG     [v0] Has existing ai_matches: false
+[01:08:19.619] Browser LOG     [v0] handleRunComparison called, comparisons.length: 38
+[01:08:19.917] Server  LOG     [v0] Run comparison API called (AI-powered)
+[01:08:19.918] Server  LOG     [v0] Assessment ID: "42a0c05f-8f38-4426-bd57-4cea35b84663"
+[01:08:19.919] Server  LOG     [v0] Decision overrides received from client: 38 "items"
+[01:08:19.919] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:08:19.922] Server  LOG     [v0] Fetching line items...
+[01:08:19.960] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[01:08:20.106] Server  LOG     [v0] Persisting 38 "decision overrides to DB before comparison"
+[01:08:20.107] Server  LOG     [v0] Line items found: 38 "Error:" undefined
+[01:08:20.107] Server  LOG     [v0] Fetching benchmark procedures...
+[01:08:20.107] Server  LOG     [v0] Line item countries: "France PI, France PI applicable also to centers abroad, France, Belgium, France site, Belgium site, multiple France, Belgium, France Site"
+[01:08:20.240] Server  LOG     [v0] Benchmark files for requested countries: 58 "Error:" "none"
+[01:08:20.241] Server  LOG     [v0] Filtering to 58 "benchmark files for countries:" "France, Belgium"
+[01:08:20.658] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[01:08:20.974] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[01:08:21.367] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[01:08:21.724] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[01:08:21.992] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[01:08:22.236] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[01:08:22.564] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[01:08:22.852] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[01:08:23.146] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[01:08:23.418] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[01:08:23.538] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[01:08:23.844] Server  LOG     [v0] Loaded benchmark page 12 "size:" 978 "running total:" 11978
+[01:08:23.874] Server  LOG     [v0] Benchmark procedures loaded: 11978 "from" 2 "countries"
+[01:08:23.874] Server  LOG     [v0] Available countries: "Belgium, France" ""
+[01:08:23.876] Server  LOG     [v0] Starting AI-powered matching for 38 "items..."
+[01:08:23.876] Server  LOG     [v0] Processing: "\"Study coordination by CHU Clermont-Ferrand Physici...\"" "Country:" "France PI" "Decision:" "In-review"
+[01:08:23.879] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France PI"
+[01:08:23.879] Server  LOG     [v0] No benchmarks available for country: "France PI"
+[01:08:23.879] Server  LOG     [v0] Processing: "\"Study coordination by CHU Clermont-Ferrand clinica...\"" "Country:" "France PI" "Decision:" "In-review"
+[01:08:23.881] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France PI"
+[01:08:23.882] Server  LOG     [v0] No benchmarks available for country: "France PI"
+[01:08:23.882] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Monitoring travel costs : hotel and travel expense"
+[01:08:23.882] Server  LOG     [v0] Processing: "\"Monitoring costs : CRA, with clinical research exp...\"" "Country:" "France PI" "Decision:" "In-review"
+[01:08:23.884] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France PI"
+[01:08:23.884] Server  LOG     [v0] No benchmarks available for country: "France PI"
+[01:08:23.885] Server  LOG     [v0] Processing: "\"Project manager...\"" "Country:" "France PI" "Decision:" "In-review"
+[01:08:23.886] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France PI"
+[01:08:23.886] Server  LOG     [v0] No benchmarks available for country: "France PI"
+[01:08:23.887] Server  LOG     [v0] Processing: "\"Implementation (coordinating CRA, regulatory CRA)...\"" "Country:" "France PI" "Decision:" "In-review"
+[01:08:23.888] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France PI"
+[01:08:23.889] Server  LOG     [v0] No benchmarks available for country: "France PI"
+[01:08:23.889] Server  LOG     [v0] Processing: "\"Closure (coordinating CRA, regulatory CRA)...\"" "Country:" "France PI" "Decision:" "In-review"
+[01:08:23.890] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France PI"
+[01:08:23.891] Server  LOG     [v0] No benchmarks available for country: "France PI"
+[01:08:23.891] Server  LOG     [v0] Processing: "\"Start-up Center opening costs...\"" "Country:" "France PI applicable also to centers abroad" "Decision:" "In-review"
+[01:08:23.893] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France PI applicable also to centers abroad"
+[01:08:23.893] Server  LOG     [v0] No benchmarks available for country: "France PI applicable also to centers abroad"
+[01:08:23.894] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Insurance France"
+[01:08:23.894] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Insurance  Belgium"
+[01:08:23.894] Server  LOG     [v0] Processing: "\"Investigating study coordinators administrative ta...\"" "Country:" "France site" "Decision:" "In-review"
+[01:08:23.896] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France site"
+[01:08:23.896] Server  LOG     [v0] No benchmarks available for country: "France site"
+[01:08:23.896] Server  LOG     [v0] Processing: "\"Investigating study coordinators administrative ta...\"" "Country:" "Belgium site" "Decision:" "In-review"
+[01:08:23.898] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Belgium site"
+[01:08:23.898] Server  LOG     [v0] No benchmarks available for country: "Belgium site"
+[01:08:23.898] Server  LOG     [v0] Processing: "\"Investigating nurse : with clinical research exper...\"" "Country:" "France site" "Decision:" "In-review"
+[01:08:23.900] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France site"
+[01:08:23.900] Server  LOG     [v0] No benchmarks available for country: "France site"
+[01:08:23.901] Server  LOG     [v0] Processing: "\"Investigating nurse : with clinical research exper...\"" "Country:" "Belgium site" "Decision:" "In-review"
+[01:08:23.902] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Belgium site"
+[01:08:23.902] Server  LOG     [v0] No benchmarks available for country: "Belgium site"
+[01:08:23.903] Server  LOG     [v0] Processing: "\"Investigating physician (study coordinator?): fee ...\"" "Country:" "France site" "Decision:" "In-review"
+[01:08:23.904] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France site"
+[01:08:23.904] Server  LOG     [v0] No benchmarks available for country: "France site"
+[01:08:23.905] Server  LOG     [v0] Processing: "\"Investigating physician: fee for all physician for...\"" "Country:" "Belgium site" "Decision:" "In-review"
+[01:08:23.906] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Belgium site"
+[01:08:23.906] Server  LOG     [v0] No benchmarks available for country: "Belgium site"
+[01:08:23.907] Server  LOG     [v0] Processing: "\"Investigating study technicians : fee for all stud...\"" "Country:" "France site" "Decision:" "In-review"
+[01:08:23.908] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France site"
+[01:08:23.909] Server  LOG     [v0] No benchmarks available for country: "France site"
+[01:08:23.909] Server  LOG     [v0] Processing: "\"Investigating study technicians : fee for all stud...\"" "Country:" "Belgium site" "Decision:" "In-review"
+[01:08:23.910] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Belgium site"
+[01:08:23.911] Server  LOG     [v0] No benchmarks available for country: "Belgium site"
+[01:08:23.911] Server  LOG     [v0] Processing: "\"Study procedures (Colonoscopy) : 1 per patient...\"" "Country:" "multiple France, Belgium" "Decision:" "In-review"
+[01:08:23.913] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "multiple France, Belgium"
+[01:08:23.913] Server  LOG     [v0] No benchmarks available for country: "multiple France, Belgium"
+[01:08:23.913] Server  LOG     [v0] Processing: "\"Study procedures (medical stay) : 1 per patient...\"" "Country:" "multiple France, Belgium" "Decision:" "In-review"
+[01:08:23.915] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "multiple France, Belgium"
+[01:08:23.915] Server  LOG     [v0] No benchmarks available for country: "multiple France, Belgium"
+[01:08:23.916] Server  LOG     [v0] Processing: "\"Monetary payment to clinical study participants to...\"" "Country:" "multiple France, Belgium" "Decision:" "In-review"
+[01:08:23.921] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "multiple France, Belgium"
+[01:08:23.922] Server  LOG     [v0] No benchmarks available for country: "multiple France, Belgium"
+[01:08:23.922] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Samples transport\r\n112,63 € x 5 (round-trips) x 24"
+[01:08:23.922] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Samples transport\r\nCHU Liège : 947,88 x 5 (round-t"
+[01:08:23.922] Server  LOG     [v0] Processing: "\"Data management: senior data manager mandated by t...\"" "Country:" "France PI" "Decision:" "In-review"
+[01:08:23.923] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France PI"
+[01:08:23.924] Server  LOG     [v0] No benchmarks available for country: "France PI"
+[01:08:23.924] Server  LOG     [v0] Processing: "\"Statistical analysis: senior biostatistician manda...\"" "Country:" "France PI" "Decision:" "In-review"
+[01:08:23.925] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France PI"
+[01:08:23.925] Server  LOG     [v0] No benchmarks available for country: "France PI"
+[01:08:23.925] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:08:23.926] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:08:23.926] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:08:23.926] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:08:23.926] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:08:23.926] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:08:23.926] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:08:23.927] Server  LOG     [v0] Processing: "\"Patient financial compensation to undergo 1 colono...\"" "Country:" "multiple France, Belgium" "Decision:" "In-review"
+[01:08:23.928] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "multiple France, Belgium"
+[01:08:23.928] Server  LOG     [v0] No benchmarks available for country: "multiple France, Belgium"
+[01:08:23.928] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage at CRB of CHU Clermont-"
+[01:08:23.928] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage  (2€ per sample) : \r\n4 "
+[01:08:23.928] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage  (2€ per sample) : \r\n4 "
+[01:08:23.928] Server  LOG     [v0] Processing: "\"Archiving \r\n80 € / center : 80*6 = 480 €...\"" "Country:" "France Site" "Decision:" "In-review"
+[01:08:23.929] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "France Site"
+[01:08:23.929] Server  LOG     [v0] No benchmarks available for country: "France Site"
+[01:08:23.930] Server  LOG     [v0] Processing: "\"Archiving \r\n80 € / center : 80*2 = 160€...\"" "Country:" "Belgium site" "Decision:" "In-review"
+[01:08:23.931] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Belgium site"
+[01:08:23.931] Server  LOG     [v0] No benchmarks available for country: "Belgium site"
+[01:08:23.931] Server  LOG     [v0] Updating 38 "comparison records"
+[01:08:23.931] Server  LOG     [v0] Updating line_item_id: "4509b117-fe74-462d-a2b2-14b542f15ac4" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:24.036] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:24.036] Server  LOG     [v0] Updating line_item_id: "4e7fd1ed-70c7-4cca-a7fc-5fa2e7ded1c3" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:24.168] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:24.270] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "60eb9a72-4bf7-41c1-ad97-1c29817b8405"
+[01:08:24.270] Server  LOG     [v0] Updating line_item_id: "955b9ba4-84f8-47f3-8728-81fb0b3d329c" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:24.369] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:24.369] Server  LOG     [v0] Updating line_item_id: "76471241-4d76-45b4-86fe-5054a9ac467b" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:24.481] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:24.482] Server  LOG     [v0] Updating line_item_id: "1bec67fe-d3a5-4b7f-a434-17d33904a0df" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:24.579] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:24.579] Server  LOG     [v0] Updating line_item_id: "2c01140e-efb8-44cb-8275-35d8a8b985a9" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:24.665] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:24.665] Server  LOG     [v0] Updating line_item_id: "150207f7-8687-47d1-b6a8-57c8437f4567" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:24.748] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:24.833] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "81239228-d822-4e87-92f9-223ec88dc71e"
+[01:08:24.920] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "2f4a5b7d-c245-4dbf-b528-6b4e8a8e4866"
+[01:08:24.920] Server  LOG     [v0] Updating line_item_id: "f665795e-9471-47ca-85b1-f6b68e1e3ef5" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.021] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.022] Server  LOG     [v0] Updating line_item_id: "f90e9cad-8026-471f-bfbd-49bad80d31b9" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.100] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.101] Server  LOG     [v0] Updating line_item_id: "44ef81ea-ac72-48d9-8795-262d67f28946" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.200] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.201] Server  LOG     [v0] Updating line_item_id: "be4a7d3d-f230-43b6-8cd9-da7400d23572" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.317] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.317] Server  LOG     [v0] Updating line_item_id: "b32a2416-506f-4e73-8dff-563367134c23" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.415] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.415] Server  LOG     [v0] Updating line_item_id: "ba66aca9-4231-4aa6-9071-e87c0e8ab3d8" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.499] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.499] Server  LOG     [v0] Updating line_item_id: "e7d4b513-1bc4-4b98-9e03-622e09aa45bd" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.580] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.580] Server  LOG     [v0] Updating line_item_id: "681f82ac-f864-4813-a8e6-50e3caf64c04" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.684] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.684] Server  LOG     [v0] Updating line_item_id: "b07bda47-3c3d-42a8-82a4-7fbd1cedd74f" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.763] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.764] Server  LOG     [v0] Updating line_item_id: "c71cb636-8688-4b20-9ad2-4dc7da50562e" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.849] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:25.850] Server  LOG     [v0] Updating line_item_id: "2fadf65d-5c8e-4a93-8fad-807ab50dd792" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:25.950] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:26.062] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "e4532dd1-8d6a-4f5c-ba7e-e7d48c86f224"
+[01:08:26.159] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "1198f29b-9545-4ab1-844a-33899b6ecef7"
+[01:08:26.160] Server  LOG     [v0] Updating line_item_id: "78ec595c-6d2e-4867-a0cc-57f43fe9c6de" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:26.254] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:26.255] Server  LOG     [v0] Updating line_item_id: "6e6633f9-b089-4a8b-942b-21cae29c10d3" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:26.364] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:26.443] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "cba50552-1789-41a1-8342-fd47df779681"
+[01:08:26.525] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "2de24da2-f405-4561-a468-be30a9df1b76"
+[01:08:26.628] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "19178e2f-85cd-42c3-bbb8-8cb8fa1c969f"
+[01:08:26.725] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "d036ec5d-f8cd-418b-8186-0aa431b6a814"
+[01:08:26.819] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "67578255-444a-4ebf-98ce-813b5ec9c255"
+[01:08:26.897] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "95a685ee-fd78-4086-89a3-66d2432acae9"
+[01:08:26.977] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "b8d4fa1f-2d8d-485d-9877-dc52b37d2fd4"
+[01:08:26.977] Server  LOG     [v0] Updating line_item_id: "16087330-6f76-4428-bd43-8e8a2e80270a" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:27.078] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:27.170] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "eb09cd71-e830-4e00-907a-8dd664066043"
+[01:08:27.268] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "16c1a78d-eda0-4fb3-9bd3-4188cc09d495"
+[01:08:27.363] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "b11aca13-2208-4ec2-b95e-24bb4c62cae2"
+[01:08:27.364] Server  LOG     [v0] Updating line_item_id: "92e826e5-34d9-4d24-9694-fea8672934fa" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:27.443] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:27.444] Server  LOG     [v0] Updating line_item_id: "3224f5cc-02ab-4536-9c4e-faa6e8621907" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:08:27.524] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:08:28.150] Browser LOG     [v0] Comparison API result: {"message":"Compared 38 items: 0 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"4509b117-fe74-462d-a2b2-14b542f15ac4","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"4e7fd1ed-70c7-4cca-a7fc-5fa2e7ded1c3","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"60eb9a72-4bf7-41c1-ad97-1c29817b8405","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"955b9ba4-84f8-47f3-8728-81fb0b3d329c","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"76471241-4d76-45b4-86fe-5054a9ac467b","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"1bec67fe-d3a5-4b7f-a434-17d33904a0df","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"2c01140e-efb8-44cb-8275-35d8a8b985a9","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"150207f7-8687-47d1-b6a8-57c8437f4567","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"81239228-d822-4e87-92f9-223ec88dc71e","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"2f4a5b7d-c245-4dbf-b528-6b4e8a8e4866","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"f665795e-9471-47ca-85b1-f6b68e1e3ef5","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"f90e9cad-8026-471f-bfbd-49bad80d31b9","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"44ef81ea-ac72-48d9-8795-262d67f28946","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"be4a7d3d-f230-43b6-8cd9-da7400d23572","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"b32a2416-506f-4e73-8dff-563367134c23","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"ba66aca9-4231-4aa6-9071-e87c0e8ab3d8","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"e7d4b513-1bc4-4b98-9e03-622e09aa45bd","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"681f82ac-f864-4813-a8e6-50e3caf64c04","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"b07bda47-3c3d-42a8-82a4-7fbd1cedd74f","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"c71cb636-8688-4b20-9ad2-4dc7da50562e","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"2fadf65d-5c8e-4a93-8fad-807ab50dd792","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"e4532dd1-8d6a-4f5c-ba7e-e7d48c86f224","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"1198f29b-9545-4ab1-844a-33899b6ecef7","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"78ec595c-6d2e-4867-a0cc-57f43fe9c6de","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"6e6633f9-b089-4a8b-942b-21cae29c10d3","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"cba50552-1789-41a1-8342-fd47df779681","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"2de24da2-f405-4561-a468-be30a9df1b76","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"19178e2f-85cd-42c3-bbb8-8cb8fa1c969f","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"d036ec5d-f8cd-418b-8186-0aa431b6a814","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"67578255-444a-4ebf-98ce-813b5ec9c255","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"95a685ee-fd78-4086-89a3-66d2432acae9","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"b8d4fa1f-2d8d-485d-9877-dc52b37d2fd4","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"16087330-6f76-4428-bd43-8e8a2e80270a","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"eb09cd71-e830-4e00-907a-8dd664066043","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"16c1a78d-eda0-4fb3-9bd3-4188cc09d495","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"b11aca13-2208-4ec2-b95e-24bb4c62cae2","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"92e826e5-34d9-4d24-9694-fea8672934fa","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"3224f5cc-02ab-4536-9c4e-faa6e8621907","matchCount":0,"matches":[]}],"success":true}
+[01:08:28.150] Browser LOG     [v0] Merged 38 AI results into comparisons in-memory (no refetch)
+[01:09:07.272] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:09:07.433] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:09:07.478] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-assessment-table-improvements.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782224108112} /_vercel/insights/view
+[01:09:07.785] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:09:10.150] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:09:10.451] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:09:10.453] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/assessments/c4cf2dcc-d926-476b-bd48-2b11c86da17b color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements.vusercontent.net/assessments/c4cf2dcc-d926-476b-bd48-2b11c86da17b","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782224111072} /_vercel/insights/view
+[01:09:10.995] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:09:11.102] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:09:11.232] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[01:09:11.719] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:09:11.802] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[01:09:12.614] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[01:09:12.614] Browser LOG     [v0] Has existing ai_matches: true
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.614] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[01:09:12.952] Browser LOG     [v0] Has existing ai_matches: true
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:09:12.952] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:09:26.570] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"Accepted\"}"
+[01:09:26.571] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:09:26.785] Server  LOG     [v0] Updated line item: "aaeed515-c53c-4867-97b3-c74730833626" "additionalInfo:" undefined "costCategory:" undefined "decision:" "Accepted"
+[01:09:26.802] Browser LOG     [v0] Persisting decision via PATCH: aaeed515-c53c-4867-97b3-c74730833626 -> Accepted
+[01:09:29.086] Browser LOG     [v0] handleRunComparison called, comparisons.length: 38
+[01:09:29.385] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[01:09:29.396] Server  LOG     [v0] Run comparison API called (AI-powered)
+[01:09:29.397] Server  LOG     [v0] Assessment ID: "c4cf2dcc-d926-476b-bd48-2b11c86da17b"
+[01:09:29.398] Server  LOG     [v0] Decision overrides received from client: 38 "items"
+[01:09:29.398] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:09:29.399] Server  LOG     [v0] Fetching line items...
+[01:09:29.482] Server  LOG     [v0] Persisting 38 "decision overrides to DB before comparison"
+[01:09:29.482] Server  LOG     [v0] Line items found: 38 "Error:" undefined
+[01:09:29.482] Server  LOG     [v0] Fetching benchmark procedures...
+[01:09:29.483] Server  LOG     [v0] Line item countries: "France, Belgium"
+[01:09:29.594] Server  LOG     [v0] Benchmark files for requested countries: 58 "Error:" "none"
+[01:09:29.595] Server  LOG     [v0] Filtering to 58 "benchmark files for countries:" "France, Belgium"
+[01:09:29.869] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[01:09:30.170] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[01:09:30.408] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[01:09:30.732] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[01:09:30.963] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[01:09:31.196] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[01:09:31.316] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[01:09:31.638] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[01:09:31.892] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[01:09:32.191] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[01:09:32.431] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[01:09:32.767] Server  LOG     [v0] Loaded benchmark page 12 "size:" 978 "running total:" 11978
+[01:09:32.786] Server  LOG     [v0] Benchmark procedures loaded: 11978 "from" 2 "countries"
+[01:09:32.786] Server  LOG     [v0] Available countries: "Belgium, France" ""
+[01:09:32.787] Server  LOG     [v0] Starting AI-powered matching for 38 "items..."
+[01:09:32.788] Server  LOG     [v0] Processing: "\"Study coordination by CHU Clermont-Ferrand clinica...\"" "Country:" "France" "Decision:" "In-review"
+[01:09:32.789] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:09:32.799] Server  LOG     [v0][AI-Gateway][29673acd] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:09:32.799] Server  LOG     [v0][AI-Gateway][29673acd] Vendor item: "Study coordination by CHU Clermont-Ferrand clinical research associate (Team Pr " | Country: France | Benchmarks: 150/5784
+[01:09:43.116] Server  LOG     [v0][AI-Gateway][29673acd] ✓ AI Gateway success in 10316ms | Matches: 3 | Tokens: prompt=5243 completion=814 total=6057
+[01:09:43.116] Server  LOG     [v0] AI found 3 "matches for" "France"
+[01:09:43.116] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[01:09:43.117] Server  LOG     [v0]   Match 2: "Study Coordinator, Simple (e.g. interim " | Confidence: MEDIUM | AI: true
+[01:09:43.117] Server  LOG     [v0]   Match 3: "Study Coordinator, Complex (e.g. initial" | Confidence: MEDIUM | AI: true
+[01:09:43.117] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Monitoring travel costs : hotel and travel expense"
+[01:09:43.117] Server  LOG     [v0] Processing: "\"Monitoring costs : CRA, with clinical research exp...\"" "Country:" "France" "Decision:" "In-review"
+[01:09:43.119] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:09:43.129] Server  LOG     [v0][AI-Gateway][3d255101] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:09:43.129] Server  LOG     [v0][AI-Gateway][3d255101] Vendor item: "Monitoring costs : CRA, with clinical research experience, monitoring of all asp" | Country: France | Benchmarks: 150/5784
+[01:09:47.844] Server  LOG     [v0][AI-Gateway][3d255101] ✓ AI Gateway success in 4715ms | Matches: 0 | Tokens: prompt=5308 completion=363 total=5671
+[01:09:47.844] Server  LOG     [v0] Using trigram fallback for: "Monitoring costs : CRA, with c" "Country:" "France"
+[01:09:47.994] Server  LOG     [v0] Processing: "\"Project manager...\"" "Country:" "France" "Decision:" "In-review"
+[01:09:47.997] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:09:48.008] Server  LOG     [v0][AI-Gateway][d5d1e90d] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:09:48.008] Server  LOG     [v0][AI-Gateway][d5d1e90d] Vendor item: "Project manager" | Country: France | Benchmarks: 150/5784
+[01:09:55.318] Server  LOG     [v0][AI-Gateway][d5d1e90d] ✓ AI Gateway success in 7311ms | Matches: 0 | Tokens: prompt=5208 completion=632 total=5840
+[01:09:55.318] Server  LOG     [v0] Using trigram fallback for: "Project manager" "Country:" "France"
+[01:09:55.373] Server  LOG     [v0] Processing: "\"Implementation (coordinating CRA, regulatory CRA)...\"" "Country:" "France" "Decision:" "In-review"
+[01:09:55.376] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:09:55.386] Server  LOG     [v0][AI-Gateway][0895ac0f] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:09:55.387] Server  LOG     [v0][AI-Gateway][0895ac0f] Vendor item: "Implementation (coordinating CRA, regulatory CRA)" | Country: France | Benchmarks: 150/5784
+[01:10:03.233] Server  LOG     [v0][AI-Gateway][0895ac0f] ✓ AI Gateway success in 7847ms | Matches: 0 | Tokens: prompt=5214 completion=583 total=5797
+[01:10:03.233] Server  LOG     [v0] Using trigram fallback for: "Implementation (coordinating C" "Country:" "France"
+[01:10:03.299] Server  LOG     [v0] Processing: "\"Closure (coordinating CRA, regulatory CRA)...\"" "Country:" "France" "Decision:" "In-review"
+[01:10:03.302] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:10:03.312] Server  LOG     [v0][AI-Gateway][2147efa3] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:10:03.313] Server  LOG     [v0][AI-Gateway][2147efa3] Vendor item: "Closure (coordinating CRA, regulatory CRA)" | Country: France | Benchmarks: 150/5784
+[01:10:07.953] Server  LOG     [v0][AI-Gateway][2147efa3] ✓ AI Gateway success in 4641ms | Matches: 1 | Tokens: prompt=5214 completion=357 total=5571
+[01:10:07.953] Server  LOG     [v0] AI found 1 "matches for" "France"
+[01:10:07.954] Server  LOG     [v0]   Match 1: "Study Close out: including all activitie" | Confidence: HIGH | AI: true
+[01:10:07.954] Server  LOG     [v0] Processing: "\"Start-up Center opening costs...\"" "Country:" "France" "Decision:" "In-review"
+[01:10:07.956] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:10:07.967] Server  LOG     [v0][AI-Gateway][e7cfff6b] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:10:07.967] Server  LOG     [v0][AI-Gateway][e7cfff6b] Vendor item: "Start-up Center opening costs" | Country: France | Benchmarks: 150/5784
+[01:10:11.631] Server  LOG     [v0][AI-Gateway][e7cfff6b] ✓ AI Gateway success in 3664ms | Matches: 1 | Tokens: prompt=5216 completion=212 total=5428
+[01:10:11.632] Server  LOG     [v0] AI found 1 "matches for" "France"
+[01:10:11.632] Server  LOG     [v0]   Match 1: "Study Start-Up Fee/Site Set-Up Fee" | Confidence: HIGH | AI: true
+[01:10:11.632] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Insurance France"
+[01:10:11.632] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Insurance  Belgium"
+[01:10:11.632] Server  LOG     [v0] Processing: "\"Investigating study coordinators administrative ta...\"" "Country:" "France" "Decision:" "In-review"
+[01:10:11.635] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:10:11.646] Server  LOG     [v0][AI-Gateway][eb3039a0] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:10:11.646] Server  LOG     [v0][AI-Gateway][eb3039a0] Vendor item: "Investigating study coordinators administrative task for associate sites : for 1" | Country: France | Benchmarks: 150/5784
+[01:10:19.595] Server  LOG     [v0][AI-Gateway][eb3039a0] ✓ AI Gateway success in 7950ms | Matches: 3 | Tokens: prompt=5252 completion=792 total=6044
+[01:10:19.595] Server  LOG     [v0] AI found 3 "matches for" "France"
+[01:10:19.596] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[01:10:19.596] Server  LOG     [v0]   Match 2: "Study Coordinator, Electronic Data Captu" | Confidence: HIGH | AI: true
+[01:10:19.596] Server  LOG     [v0]   Match 3: "Data Entry - Per Hour" | Confidence: MEDIUM | AI: true
+[01:10:19.596] Server  LOG     [v0] Processing: "\"Investigating study coordinators administrative ta...\"" "Country:" "Belgium" "Decision:" "In-review"
+[01:10:19.599] Server  LOG     [v0] Filtered to 6194 "benchmarks for country:" "Belgium"
+[01:10:19.612] Server  LOG     [v0][AI-Gateway][3067cfeb] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:10:19.612] Server  LOG     [v0][AI-Gateway][3067cfeb] Vendor item: "Investigating study coordinators administrative task for associate sites : for 1" | Country: Belgium | Benchmarks: 150/6194
+[01:10:30.170] Server  LOG     [v0][AI-Gateway][3067cfeb] ✓ AI Gateway success in 10559ms | Matches: 3 | Tokens: prompt=5295 completion=1175 total=6470
+[01:10:30.171] Server  LOG     [v0] AI found 3 "matches for" "Belgium"
+[01:10:30.171] Server  LOG     [v0]   Match 1: "Study Coordinator, Electronic Data Captu" | Confidence: HIGH | AI: true
+[01:10:30.171] Server  LOG     [v0]   Match 2: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[01:10:30.171] Server  LOG     [v0]   Match 3: "Data Entry - Per Hour" | Confidence: MEDIUM | AI: true
+[01:10:30.171] Server  LOG     [v0] Processing: "\"Investigating nurse : with clinical research exper...\"" "Country:" "France" "Decision:" "In-review"
+[01:10:30.174] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:10:30.184] Server  LOG     [v0][AI-Gateway][135d5a2e] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:10:30.185] Server  LOG     [v0][AI-Gateway][135d5a2e] Vendor item: "Investigating nurse : with clinical research experience for blood samples and tr" | Country: France | Benchmarks: 150/5784
+[01:10:39.432] Server  LOG     [v0][AI-Gateway][135d5a2e] ✓ AI Gateway success in 9248ms | Matches: 1 | Tokens: prompt=5265 completion=861 total=6126
+[01:10:39.432] Server  LOG     [v0] AI found 1 "matches for" "France"
+[01:10:39.433] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
+[01:10:39.433] Server  LOG     [v0] Processing: "\"Investigating nurse : with clinical research exper...\"" "Country:" "Belgium" "Decision:" "In-review"
+[01:10:39.436] Server  LOG     [v0] Filtered to 6194 "benchmarks for country:" "Belgium"
+[01:10:39.449] Server  LOG     [v0][AI-Gateway][59f094a3] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:10:39.449] Server  LOG     [v0][AI-Gateway][59f094a3] Vendor item: "Investigating nurse : with clinical research experience for blood samples and tr" | Country: Belgium | Benchmarks: 150/6194
+[01:10:43.859] Server  LOG     [v0][AI-Gateway][59f094a3] ✓ AI Gateway success in 4410ms | Matches: 2 | Tokens: prompt=5292 completion=290 total=5582
+[01:10:43.860] Server  LOG     [v0] AI found 2 "matches for" "Belgium"
+[01:10:43.860] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
+[01:10:43.860] Server  LOG     [v0]   Match 2: "Nurse –Per Hour" | Confidence: HIGH | AI: true
+[01:10:43.861] Server  LOG     [v0] Processing: "\"Investigating physician (study coordinator?): fee ...\"" "Country:" "France" "Decision:" "In-review"
+[01:10:43.864] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:10:43.874] Server  LOG     [v0][AI-Gateway][2c340485] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:10:43.874] Server  LOG     [v0][AI-Gateway][2c340485] Vendor item: "Investigating physician (study coordinator?): fee for all physician for all cent" | Country: France | Benchmarks: 150/5784
+[01:10:51.660] Server  LOG     [v0][AI-Gateway][2c340485] ✓ AI Gateway success in 7786ms | Matches: 3 | Tokens: prompt=5265 completion=713 total=5978
+[01:10:51.661] Server  LOG     [v0] AI found 3 "matches for" "France"
+[01:10:51.661] Server  LOG     [v0]   Match 1: "Physician - Per Hour" | Confidence: HIGH | AI: true
+[01:10:51.661] Server  LOG     [v0]   Match 2: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
+[01:10:51.661] Server  LOG     [v0]   Match 3: "Physician: Gastroenterology - Per Hour" | Confidence: MEDIUM | AI: true
+[01:10:51.661] Server  LOG     [v0] Processing: "\"Investigating physician: fee for all physician for...\"" "Country:" "Belgium" "Decision:" "In-review"
+[01:10:51.664] Server  LOG     [v0] Filtered to 6194 "benchmarks for country:" "Belgium"
+[01:10:51.677] Server  LOG     [v0][AI-Gateway][2663dce6] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:10:51.677] Server  LOG     [v0][AI-Gateway][2663dce6] Vendor item: "Investigating physician: fee for all physician for all center (screening patient" | Country: Belgium | Benchmarks: 150/6194
+[01:11:01.560] Server  LOG     [v0][AI-Gateway][2663dce6] ✓ AI Gateway success in 9883ms | Matches: 3 | Tokens: prompt=5303 completion=755 total=6058
+[01:11:01.560] Server  LOG     [v0] AI found 3 "matches for" "Belgium"
+[01:11:01.561] Server  LOG     [v0]   Match 1: "Physician - Per Hour" | Confidence: HIGH | AI: true
+[01:11:01.561] Server  LOG     [v0]   Match 2: "Physician: Gastroenterology - Per Hour" | Confidence: MEDIUM | AI: true
+[01:11:01.561] Server  LOG     [v0]   Match 3: "Physician –Per Hour" | Confidence: HIGH | AI: true
+[01:11:01.561] Server  LOG     [v0] Processing: "\"Investigating study technicians : fee for all stud...\"" "Country:" "France" "Decision:" "In-review"
+[01:11:01.564] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:11:01.575] Server  LOG     [v0][AI-Gateway][52fe00bc] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:11:01.575] Server  LOG     [v0][AI-Gateway][52fe00bc] Vendor item: "Investigating study technicians : fee for all study technician for all center (a" | Country: France | Benchmarks: 150/5784
+[01:11:06.503] Server  LOG     [v0][AI-Gateway][52fe00bc] ✓ AI Gateway success in 4929ms | Matches: 1 | Tokens: prompt=5266 completion=350 total=5616
+[01:11:06.504] Server  LOG     [v0] AI found 1 "matches for" "France"
+[01:11:06.504] Server  LOG     [v0]   Match 1: "Laboratory Technician - Per Hour" | Confidence: HIGH | AI: true
+[01:11:06.504] Server  LOG     [v0] Processing: "\"Investigating study technicians : fee for all stud...\"" "Country:" "Belgium" "Decision:" "In-review"
+[01:11:06.507] Server  LOG     [v0] Filtered to 6194 "benchmarks for country:" "Belgium"
+[01:11:06.520] Server  LOG     [v0][AI-Gateway][65bc779f] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:11:06.520] Server  LOG     [v0][AI-Gateway][65bc779f] Vendor item: "Investigating study technicians : fee for all study technician for all center (a" | Country: Belgium | Benchmarks: 150/6194
+[01:11:13.852] Server  LOG     [v0][AI-Gateway][65bc779f] ✓ AI Gateway success in 7331ms | Matches: 1 | Tokens: prompt=5307 completion=667 total=5974
+[01:11:13.852] Server  LOG     [v0] AI found 1 "matches for" "Belgium"
+[01:11:13.852] Server  LOG     [v0]   Match 1: "Laboratory Technician - Per Hour" | Confidence: HIGH | AI: true
+[01:11:13.852] Server  LOG     [v0] Processing: "\"Study procedures (Colonoscopy) : 1 per patient...\"" "Country:" "Belgium" "Decision:" "In-review"
+[01:11:13.856] Server  LOG     [v0] Filtered to 6194 "benchmarks for country:" "Belgium"
+[01:11:13.869] Server  LOG     [v0][AI-Gateway][84ff56ec] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:11:13.869] Server  LOG     [v0][AI-Gateway][84ff56ec] Vendor item: "Study procedures (Colonoscopy) : 1 per patient" | Country: Belgium | Benchmarks: 150/6194
+[01:11:19.576] Server  LOG     [v0][AI-Gateway][84ff56ec] ✓ AI Gateway success in 5706ms | Matches: 2 | Tokens: prompt=5270 completion=488 total=5758
+[01:11:19.576] Server  LOG     [v0] AI found 2 "matches for" "Belgium"
+[01:11:19.576] Server  LOG     [v0]   Match 1: "Colonoscopy, flexible, proximal to splen" | Confidence: HIGH | AI: true
+[01:11:19.577] Server  LOG     [v0]   Match 2: "Colonoscopy, flexible; with biopsy, sing" | Confidence: MEDIUM | AI: true
+[01:11:19.577] Server  LOG     [v0] Processing: "\"Study procedures (medical stay) : 1 per patient...\"" "Country:" "Belgium" "Decision:" "In-review"
+[01:11:19.581] Server  LOG     [v0] Filtered to 6194 "benchmarks for country:" "Belgium"
+[01:11:19.595] Server  LOG     [v0][AI-Gateway][e34611fc] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:11:19.595] Server  LOG     [v0][AI-Gateway][e34611fc] Vendor item: "Study procedures (medical stay) : 1 per patient" | Country: Belgium | Benchmarks: 150/6194
+[01:11:25.425] Server  LOG     [v0][AI-Gateway][e34611fc] ✓ AI Gateway success in 5830ms | Matches: 3 | Tokens: prompt=5270 completion=525 total=5795
+[01:11:25.425] Server  LOG     [v0] AI found 3 "matches for" "Belgium"
+[01:11:25.425] Server  LOG     [v0]   Match 1: "Daily Facility Charge - Per Day" | Confidence: MEDIUM | AI: true
+[01:11:25.426] Server  LOG     [v0]   Match 2: "Overnight Facility Charge, Simple (e.g. " | Confidence: MEDIUM | AI: true
+[01:11:25.426] Server  LOG     [v0]   Match 3: "Daily Facility Charge Complex - Per day" | Confidence: LOW | AI: true
+[01:11:25.426] Server  LOG     [v0] Processing: "\"Monetary payment to clinical study participants to...\"" "Country:" "Belgium" "Decision:" "In-review"
+[01:11:25.429] Server  LOG     [v0] Filtered to 6194 "benchmarks for country:" "Belgium"
+[01:11:25.441] Server  LOG     [v0][AI-Gateway][d307a7e2] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:11:25.442] Server  LOG     [v0][AI-Gateway][d307a7e2] Vendor item: "Monetary payment to clinical study participants to cover actual expenses incurre" | Country: Belgium | Benchmarks: 150/6194
+[01:11:31.155] Server  LOG     [v0][AI-Gateway][d307a7e2] ✓ AI Gateway success in 5714ms | Matches: 3 | Tokens: prompt=5302 completion=534 total=5836
+[01:11:31.156] Server  LOG     [v0] AI found 3 "matches for" "Belgium"
+[01:11:31.156] Server  LOG     [v0]   Match 1: "Patient Reimbursement, Expenses, Patient" | Confidence: HIGH | AI: true
+[01:11:31.156] Server  LOG     [v0]   Match 2: "Patient Reimbursement, Expenses, Patient" | Confidence: HIGH | AI: true
+[01:11:31.156] Server  LOG     [v0]   Match 3: "Patient Reimbursement, Overnight - Per V" | Confidence: MEDIUM | AI: true
+[01:11:31.156] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Samples transport\r\n112,63 € x 5 (round-trips) x 24"
+[01:11:31.157] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Samples transport\r\nCHU Liège : 947,88 x 5 (round-t"
+[01:11:31.158] Server  LOG     [v0] Processing: "\"Data management: senior data manager mandated by t...\"" "Country:" "France" "Decision:" "In-review"
+[01:11:31.162] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:11:31.174] Server  LOG     [v0][AI-Gateway][10cb2ec7] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:11:31.174] Server  LOG     [v0][AI-Gateway][10cb2ec7] Vendor item: "Data management: senior data manager mandated by the Clinical Research Departmen" | Country: France | Benchmarks: 150/5784
+[01:11:53.252] Server  LOG     [v0][AI-Gateway][10cb2ec7] ✓ AI Gateway success in 22078ms | Matches: 0 | Tokens: prompt=5239 completion=2217 total=7456
+[01:11:53.253] Server  LOG     [v0] Using trigram fallback for: "Data management: senior data m" "Country:" "France"
+[01:11:53.387] Server  LOG     [v0] Processing: "\"Statistical analysis: senior biostatistician manda...\"" "Country:" "France" "Decision:" "In-review"
+[01:11:53.391] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:11:53.402] Server  LOG     [v0][AI-Gateway][8f9d02c7] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:11:53.403] Server  LOG     [v0][AI-Gateway][8f9d02c7] Vendor item: "Statistical analysis: senior biostatistician mandated by the Clinical Research D" | Country: France | Benchmarks: 150/5784
+[01:11:58.766] Server  LOG     [v0][AI-Gateway][8f9d02c7] ✓ AI Gateway success in 5364ms | Matches: 2 | Tokens: prompt=5224 completion=414 total=5638
+[01:11:58.766] Server  LOG     [v0] AI found 2 "matches for" "France"
+[01:11:58.766] Server  LOG     [v0]   Match 1: "Biostatistician II Sr - Per Hour" | Confidence: HIGH | AI: true
+[01:11:58.767] Server  LOG     [v0]   Match 2: "Medical Affairs Consultant - Per hour; i" | Confidence: MEDIUM | AI: true
+[01:11:58.767] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:11:58.767] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:11:58.767] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:11:58.767] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:11:58.768] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:11:58.768] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:11:58.768] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[01:11:58.768] Server  LOG     [v0] Processing: "\"Patient financial compensation to undergo 1 colono...\"" "Country:" "Belgium" "Decision:" "In-review"
+[01:11:58.771] Server  LOG     [v0] Filtered to 6194 "benchmarks for country:" "Belgium"
+[01:11:58.784] Server  LOG     [v0][AI-Gateway][fffa7878] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:11:58.784] Server  LOG     [v0][AI-Gateway][fffa7878] Vendor item: "Patient financial compensation to undergo 1 colonoscopy in 6 months" | Country: Belgium | Benchmarks: 150/6194
+[01:12:13.761] Server  LOG     [v0][AI-Gateway][fffa7878] ✓ AI Gateway success in 14977ms | Matches: 3 | Tokens: prompt=5279 completion=1251 total=6530
+[01:12:13.761] Server  LOG     [v0] AI found 3 "matches for" "Belgium"
+[01:12:13.761] Server  LOG     [v0]   Match 1: "Patient Reimbursement, Stipend - Per Vis" | Confidence: HIGH | AI: true
+[01:12:13.762] Server  LOG     [v0]   Match 2: "Patient Reimbursement, Stipend - Per Vis" | Confidence: HIGH | AI: true
+[01:12:13.762] Server  LOG     [v0]   Match 3: "Subject Stipend per hour" | Confidence: MEDIUM | AI: true
+[01:12:13.762] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage at CRB of CHU Clermont-"
+[01:12:13.763] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage  (2€ per sample) : \r\n4 "
+[01:12:13.763] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage  (2€ per sample) : \r\n4 "
+[01:12:13.763] Server  LOG     [v0] Processing: "\"Archiving \r\n80 € / center : 80*6 = 480 €...\"" "Country:" "France" "Decision:" "In-review"
+[01:12:13.766] Server  LOG     [v0] Filtered to 5784 "benchmarks for country:" "France"
+[01:12:13.777] Server  LOG     [v0][AI-Gateway][94cf8b9a] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:12:13.778] Server  LOG     [v0][AI-Gateway][94cf8b9a] Vendor item: "Archiving 
+80 € / center : 80*6 = 480 €" | Country: France | Benchmarks: 150/5784
+[01:12:16.821] Server  LOG     [v0][AI-Gateway][94cf8b9a] ✓ AI Gateway success in 3044ms | Matches: 1 | Tokens: prompt=5228 completion=142 total=5370
+[01:12:16.821] Server  LOG     [v0] AI found 1 "matches for" "France"
+[01:12:16.822] Server  LOG     [v0]   Match 1: "Archiving and Document Storage - Per Yea" | Confidence: HIGH | AI: true
+[01:12:16.822] Server  LOG     [v0] Processing: "\"Archiving \r\n80 € / center : 80*2 = 160€...\"" "Country:" "Belgium" "Decision:" "In-review"
+[01:12:16.825] Server  LOG     [v0] Filtered to 6194 "benchmarks for country:" "Belgium"
+[01:12:16.838] Server  LOG     [v0][AI-Gateway][8ade443e] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:12:16.838] Server  LOG     [v0][AI-Gateway][8ade443e] Vendor item: "Archiving 
+80 € / center : 80*2 = 160€" | Country: Belgium | Benchmarks: 150/6194
+[01:12:21.087] Server  LOG     [v0][AI-Gateway][8ade443e] ✓ AI Gateway success in 4249ms | Matches: 0 | Tokens: prompt=5271 completion=347 total=5618
+[01:12:21.087] Server  LOG     [v0] Using trigram fallback for: "Archiving \r\n80 € / center : 80" "Country:" "Belgium"
+[01:12:21.148] Server  LOG     [v0]   Match 1: "Archiving - Per Box" | Confidence: MEDIUM | AI: false
+[01:12:21.148] Server  LOG     [v0]   Match 2: "Archiving - Per Box" | Confidence: MEDIUM | AI: false
+[01:12:21.148] Server  LOG     [v0]   Match 3: "Archiving - Per Box" | Confidence: MEDIUM | AI: false
+[01:12:21.148] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study coordination by CHU Clermont-Ferrand Physici"
+[01:12:21.148] Server  LOG     [v0] Updating 38 "comparison records"
+[01:12:21.149] Server  LOG     [v0] Updating line_item_id: "29673acd-269e-435c-bdff-69db21e75b4e" "with" 3 "matches" "flag:" "GREEN"
+[01:12:21.474] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:21.601] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "8ea47ba1-7941-4027-9f6d-0d9578262c43"
+[01:12:21.601] Server  LOG     [v0] Updating line_item_id: "3d255101-9114-49e6-bc01-f562724c8981" "with" 0 "matches" "flag:" "NO_MATCH"
+[01:12:21.685] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:21.685] Server  LOG     [v0] Updating line_item_id: "d5d1e90d-0108-4a25-a9bc-1c02b7c1c349" "with" 0 "matches" "flag:" "NO_MATCH"
+[01:12:21.802] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:21.802] Server  LOG     [v0] Updating line_item_id: "0895ac0f-4c05-47aa-b37e-af02e15ec5bb" "with" 0 "matches" "flag:" "NO_MATCH"
+[01:12:21.906] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:21.906] Server  LOG     [v0] Updating line_item_id: "2147efa3-fa25-4efd-8474-2eea35631351" "with" 1 "matches" "flag:" "GREEN"
+[01:12:21.990] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:21.990] Server  LOG     [v0] Updating line_item_id: "e7cfff6b-f09c-4d68-b701-4ff046f12d78" "with" 1 "matches" "flag:" "GREEN"
+[01:12:22.090] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:22.169] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "17b3c122-52e1-49ee-b4d5-9ebd7ba191b6"
+[01:12:22.250] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "4b25f45c-1708-4ce7-a6db-617beddb32a3"
+[01:12:22.251] Server  LOG     [v0] Updating line_item_id: "eb3039a0-60a8-4751-ac65-d8008355e4ba" "with" 3 "matches" "flag:" "GREEN"
+[01:12:22.347] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:22.347] Server  LOG     [v0] Updating line_item_id: "3067cfeb-bab9-417d-b997-7d55e4afc2d3" "with" 3 "matches" "flag:" "GREEN"
+[01:12:22.428] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:22.428] Server  LOG     [v0] Updating line_item_id: "135d5a2e-7468-4664-ad26-8fe4dbabe64e" "with" 1 "matches" "flag:" "GREEN"
+[01:12:22.516] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:22.516] Server  LOG     [v0] Updating line_item_id: "59f094a3-622b-4f23-94b7-dafa12253d39" "with" 2 "matches" "flag:" "GREEN"
+[01:12:22.627] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:22.627] Server  LOG     [v0] Updating line_item_id: "2c340485-87a1-4c43-8576-78bc5d339758" "with" 3 "matches" "flag:" "GREEN"
+[01:12:22.715] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:22.716] Server  LOG     [v0] Updating line_item_id: "2663dce6-d0ed-4463-b63e-88f637580d93" "with" 3 "matches" "flag:" "GREEN"
+[01:12:22.813] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:22.813] Server  LOG     [v0] Updating line_item_id: "52fe00bc-5c9d-4cc7-8567-f66c19648205" "with" 1 "matches" "flag:" "GREEN"
+[01:12:22.893] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:22.893] Server  LOG     [v0] Updating line_item_id: "65bc779f-71cb-4578-b957-b31cd93a2727" "with" 1 "matches" "flag:" "GREEN"
+[01:12:22.986] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:22.986] Server  LOG     [v0] Updating line_item_id: "84ff56ec-76ae-4582-ae2b-c3fa594c747f" "with" 2 "matches" "flag:" "GREEN"
+[01:12:23.066] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:23.066] Server  LOG     [v0] Updating line_item_id: "e34611fc-5395-4cf5-a888-93f46de962ce" "with" 3 "matches" "flag:" "YELLOW"
+[01:12:23.147] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:23.148] Server  LOG     [v0] Updating line_item_id: "d307a7e2-c489-4c6b-90bf-25acd2d875b8" "with" 3 "matches" "flag:" "GREEN"
+[01:12:23.243] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:23.386] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "87d5302c-d4bb-4133-90de-0003f87a9f10"
+[01:12:23.463] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "238cdf5d-bc9e-45a3-b8df-b4ae7c7cec88"
+[01:12:23.463] Server  LOG     [v0] Updating line_item_id: "10cb2ec7-4bb8-4e1b-a873-34448368d7fb" "with" 0 "matches" "flag:" "NO_MATCH"
+[01:12:23.540] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:23.540] Server  LOG     [v0] Updating line_item_id: "8f9d02c7-b993-4833-b83e-56fc45a6e103" "with" 2 "matches" "flag:" "GREEN"
+[01:12:23.622] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:23.744] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "27644d86-e7fb-434f-a1f9-64c7b61ddf03"
+[01:12:23.840] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "83edb5f2-486d-490c-b392-f5969cae07d3"
+[01:12:23.935] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "309eed86-cf68-489b-bc90-c2383cb9439f"
+[01:12:24.012] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "75658ae3-d2f3-4c01-84e9-27c8e6f4e1e9"
+[01:12:24.113] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "06bcefe0-2cf6-4bac-9cc7-a0610eed4083"
+[01:12:24.213] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "ba3ecfb5-c100-4440-b987-b641229f655e"
+[01:12:24.297] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "a69331e3-8b96-4adc-af44-d06be512ee5c"
+[01:12:24.297] Server  LOG     [v0] Updating line_item_id: "fffa7878-056c-4dee-a346-05e67eb6c407" "with" 3 "matches" "flag:" "GREEN"
+[01:12:24.392] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:24.472] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "16cd1f6a-5259-43de-b764-3f77df345743"
+[01:12:24.551] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "f7c2f2ea-0600-4f89-ac4f-835976b89ac4"
+[01:12:24.650] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "60ba1c17-ae2e-4fa0-920a-b45e7a5b5010"
+[01:12:24.651] Server  LOG     [v0] Updating line_item_id: "94cf8b9a-53ee-4304-b61f-b848ecedf3d3" "with" 1 "matches" "flag:" "GREEN"
+[01:12:24.747] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:24.747] Server  LOG     [v0] Updating line_item_id: "8ade443e-b62e-4245-af86-947472ff9a82" "with" 3 "matches" "flag:" "YELLOW"
+[01:12:24.830] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:12:24.914] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "aaeed515-c53c-4867-97b3-c74730833626"
+[01:16:42.601] Server  LOG      ✓ Compiled in 77ms
+[01:16:59.332] Server  LOG      ✓ Compiled in 55ms
+[01:17:21.844] Server  LOG      ✓ Compiled in 124ms
+[01:17:30.506] Server  LOG      ✓ Compiled in 60ms
+[01:17:51.664] Server  LOG      ✓ Compiled in 120ms
+[01:17:51.781] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:17:51.797] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:18:03.482] Server  LOG      ✓ Compiled in 119ms
+[01:18:03.583] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:18:03.623] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:18:13.147] Server  LOG      ✓ Compiled in 51ms
+[01:18:13.249] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:18:13.280] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:18:53.459] Server  LOG      ✓ Compiled in 50ms
+[01:18:53.560] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:18:53.638] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:19:15.334] Server  LOG      ✓ Compiled in 56ms
+[01:19:15.436] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:19:15.470] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:19:44.567] Server  LOG      ✓ Compiled in 72ms
+[01:19:44.669] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:19:44.706] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:07.196] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:07.227] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:07.811] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:07.863] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:07.971] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:08.003] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:08.380] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:08.490] Browser ERROR   uncaughtError: Error: ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+
+[01:20:08.677] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:08.677] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:08.704] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:57.547] Browser ERROR   uncaughtError: Error: ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+
+[01:20:57.589] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:57.687] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:57.687] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:20:57.753] Browser ERROR   ./components/comparison/comparison-table.tsx:40:10
+Ecmascript file had an error
+  38 | import { Textarea } from "@/components/ui/textarea"
+  39 | import { Input } from "@/components/ui/input"
+> 40 | import { Textarea } from "@/components/ui/textarea"
+     |          ^^^^^^^^
+  41 | import { Search, Pencil, Check, X } from "lucide-react"
+  42 | import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+  43 |
+
+the name `Textarea` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./components/comparison/comparison-table.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Client Component Browser]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/comparison/comparison-table.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Client Component SSR]
+    ./components/pages/assessment-detail-content.tsx [Server Component]
+    ./app/assessments/[id]/page.tsx [Server Component]
+[01:22:01.992] Server  LOG      ✓ Compiled in 98ms
+[01:22:01.993] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:02.019] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:22:02.115] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:22:02.352] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:22:02.694] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:02.951] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:22:02.951] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[01:22:02.951] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782224883721} /_vercel/insights/view
+[01:22:03.499] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:04.673] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:04.711] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:04.946] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[01:22:05.129] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:05.348] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[01:22:06.131] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[01:22:06.131] Browser LOG     [v0] Has existing ai_matches: true
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.131] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[01:22:06.453] Browser LOG     [v0] Has existing ai_matches: true
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:06.453] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:12.362] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:22:12.511] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:12.702] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:22:12.702] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[01:22:12.702] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782224893459} /_vercel/insights/view
+[01:22:27.446] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:22:27.569] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782224908339} /_vercel/insights/view
+[01:22:27.789] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:28.125] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:42.886] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:22:43.077] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/assessments/32479f20-732a-4143-bf2c-642bf2008557 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"http://localhost:3000/assessments/32479f20-732a-4143-bf2c-642bf2008557","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782224923838} /_vercel/insights/view
+[01:22:43.266] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:43.498] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:43.524] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:43.656] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[01:22:45.651] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[01:22:45.651] Browser LOG     [v0] Has existing ai_matches: true
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:45.651] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:45.685] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:45.864] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[01:22:46.581] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[01:22:46.581] Browser LOG     [v0] Has existing ai_matches: true
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:22:46.581] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:22:57.215] Server  LOG     [v0] PATCH line-item raw body: "{\"comment\":\"Reviewed - approved by FMV team\"}"
+[01:22:57.216] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:22:57.474] Server  LOG     [v0] Updated line item: "2a08e98d-d44a-41cf-8193-c2d6428d115f" "additionalInfo:" undefined "costCategory:" undefined "decision:" undefined

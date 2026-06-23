@@ -70,7 +70,7 @@ interface ComparisonTableProps {
   onBenchmarkTypeChange?: (id: string, benchmarkType: BenchmarkType) => void
   onDecisionChange?: (id: string, decision: ItemDecision) => void
   onMatchSelect?: (id: string, match: any) => void
-  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory", value: string) => void
+  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment", value: string) => void
 }
 
 const flagConfig: Record<string, { label: string; color: string }> = {
@@ -186,6 +186,11 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   // Editing state for additional information
   const [editingAdditionalInfo, setEditingAdditionalInfo] = useState<string | null>(null)
   const [editAdditionalInfoValue, setEditAdditionalInfoValue] = useState("")
+
+  // Local draft state for the free-text comment column, keyed by line item id.
+  // We keep the typed value local for responsiveness and only persist on blur
+  // (via onLineItemUpdate) so we don't fire a PATCH on every keystroke.
+  const [commentDrafts, setCommentDrafts] = useState<Record<string, string>>({})
 
   // Per-row "user opened the Decision dropdown" gate. Radix Select fires
   // `onValueChange` during controlled-value reconciliation (without any user
@@ -335,6 +340,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             <TableHead className="text-right">Number of Unit</TableHead>
             <TableHead className="text-right">Total Cost</TableHead>
             <TableHead>Code</TableHead>
+            <TableHead className="min-w-[180px]">Comments</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -612,11 +618,28 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       <span className="text-muted-foreground">-</span>
                     )}
                   </TableCell>
+                  <TableCell className="min-w-[180px] align-top" onClick={(e) => e.stopPropagation()}>
+                    <Textarea
+                      value={commentDrafts[comparison.lineItem.id] ?? comparison.lineItem.comment ?? ""}
+                      onChange={(e) =>
+                        setCommentDrafts((prev) => ({ ...prev, [comparison.lineItem.id]: e.target.value }))
+                      }
+                      onBlur={(e) => {
+                        const value = e.target.value
+                        if (value !== (comparison.lineItem.comment ?? "")) {
+                          onLineItemUpdate?.(comparison.lineItem.id, "comment", value)
+                        }
+                      }}
+                      placeholder="Add comment..."
+                      rows={2}
+                      className="min-h-[2.25rem] w-[180px] resize-y text-[11px] leading-tight"
+                    />
+                  </TableCell>
                 </TableRow>
 
                 {isExpanded && (
                   <TableRow className="border-border/40 bg-accent/30">
-                    <TableCell colSpan={14}>
+                    <TableCell colSpan={16}>
                       <div className="py-4 px-2 space-y-4">
                         {/* Item Details */}
                         <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-sm">

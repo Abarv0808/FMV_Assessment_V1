@@ -1212,6 +1212,10 @@
     min-height: calc(var(--spacing) * 16);
   }
 
+  .min-h-\[2\.25rem\] {
+    min-height: 2.25rem;
+  }
+
   .min-h-\[100px\] {
     min-height: 100px;
   }
@@ -2735,6 +2739,10 @@
     vertical-align: middle;
   }
 
+  .align-top {
+    vertical-align: top;
+  }
+
   .font-mono {
     font-family: Geist Mono, Geist Mono Fallback;
   }
@@ -3120,6 +3128,11 @@
   .outline {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
+  }
+
+  .blur {
+    --tw-blur: blur(8px);
+    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
   }
 
   .filter {

@@ -120,6 +120,8 @@ export interface LineItemWithComparison extends AssessmentLineItem {
   additionalInformation?: string
   noteLogic?: string
   questionComment?: string
+  // Free-text comment entered by the reviewer for this line item.
+  comment?: string
   source?: string
 }
 
