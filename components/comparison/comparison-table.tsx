@@ -143,20 +143,22 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
 const DECISION_OPTIONS: ItemDecision[] = ["To Assess", "In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
 
 // Compute the effective Total Cost for a line item.
-// If a negotiated price has been entered, it takes precedence over unit price:
-// Total = negotiated price * number of units. Otherwise fall back to the
-// stored total cost (which is based on unit price).
+// Total Cost is always calculated as price * number of units.
+// If a negotiated price has been entered, it supersedes the unit price;
+// otherwise the unit price is used.
 export function getEffectiveTotalCost(lineItem: {
   negotiatedPrice?: number | null
+  unitPrice?: number | null
   numberOfUnit?: number
   numberOfUnits?: number
   totalCost?: number | null
 }): number {
   const units = lineItem.numberOfUnit ?? lineItem.numberOfUnits ?? 1
-  if (lineItem.negotiatedPrice != null && lineItem.negotiatedPrice > 0) {
-    return lineItem.negotiatedPrice * units
-  }
-  return lineItem.totalCost ?? 0
+  const effectivePrice =
+    lineItem.negotiatedPrice != null && lineItem.negotiatedPrice > 0
+      ? lineItem.negotiatedPrice
+      : lineItem.unitPrice ?? 0
+  return effectivePrice * units
 }
 
 export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect, onLineItemUpdate }: ComparisonTableProps) {
