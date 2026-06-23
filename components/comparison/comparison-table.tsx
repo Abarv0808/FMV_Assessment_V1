@@ -175,6 +175,12 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   // (via onLineItemUpdate) so we don't fire a PATCH on every keystroke.
   const [commentDrafts, setCommentDrafts] = useState<Record<string, string>>({})
 
+  // Local draft state for the negotiated price input, keyed by line item id.
+  // Typing updates this immediately so the input stays responsive; we only
+  // persist (via onLineItemUpdate) on blur instead of awaiting a PATCH on every
+  // keystroke, which previously caused dropped characters / input lag.
+  const [negotiatedPriceDrafts, setNegotiatedPriceDrafts] = useState<Record<string, string>>({})
+
   // Per-row "user opened the Decision dropdown" gate. Radix Select fires
   // `onValueChange` during controlled-value reconciliation (without any user
   // pointer/keyboard input), and those echoes were corrupting the DB. We only
@@ -496,10 +502,31 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
                     <Input
                       type="number"
-                      value={comparison.lineItem.negotiatedPrice ?? ""}
+                      value={
+                        negotiatedPriceDrafts[comparison.lineItem.id] ??
+                        (comparison.lineItem.negotiatedPrice ?? "").toString()
+                      }
                       onChange={(e) => {
-                        const value = e.target.value === "" ? null : parseFloat(e.target.value)
-                        onLineItemUpdate?.(comparison.lineItem.id, "negotiatedPrice", value as any)
+                        setNegotiatedPriceDrafts((prev) => ({
+                          ...prev,
+                          [comparison.lineItem.id]: e.target.value,
+                        }))
+                      }}
+                      onBlur={(e) => {
+                        const raw = e.target.value
+                        const value = raw === "" ? null : parseFloat(raw)
+                        const current = comparison.lineItem.negotiatedPrice ?? null
+                        // Only persist when the value actually changed.
+                        if (value !== current && !(value === null && current === null)) {
+                          onLineItemUpdate?.(comparison.lineItem.id, "negotiatedPrice", value as any)
+                        }
+                        // Drop the local draft so the input reflects canonical
+                        // state again (e.g. after a re-run updates the value).
+                        setNegotiatedPriceDrafts((prev) => {
+                          const next = { ...prev }
+                          delete next[comparison.lineItem.id]
+                          return next
+                        })
                       }}
                       placeholder="Enter price"
                       className="h-7 w-[110px] text-right font-mono text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -594,7 +621,17 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
                   </TableCell>
                   <TableCell className="text-right font-mono">
-                    {getEffectiveTotalCost(comparison.lineItem).toLocaleString()}
+                    {getEffectiveTotalCost(
+                      negotiatedPriceDrafts[comparison.lineItem.id] !== undefined
+                        ? {
+                            ...comparison.lineItem,
+                            negotiatedPrice:
+                              negotiatedPriceDrafts[comparison.lineItem.id] === ""
+                                ? null
+                                : parseFloat(negotiatedPriceDrafts[comparison.lineItem.id]),
+                          }
+                        : comparison.lineItem,
+                    ).toLocaleString()}
                   </TableCell>
                   <TableCell className="font-mono text-[11px]">
                     {selectedCode ? (
