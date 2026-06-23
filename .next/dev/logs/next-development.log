@@ -2558,3 +2558,182 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [02:46:04.061] Server  LOG      ✓ Compiled in 56ms
 [02:46:11.475] Server  LOG      ✓ Compiled in 73ms
 [02:50:36.949] Server  LOG      ✓ Compiled in 84ms
+[02:52:32.338] Browser LOG     [v0] parseVendorProposal: Starting to parse Excel file
+[02:52:32.338] Browser LOG     [v0] Available sheets in workbook: ["site","FMV template","dropdown"]
+[02:52:32.338] Browser LOG     [v0] Found FMV Template sheet: FMV template
+[02:52:32.338] Browser LOG     [v0] Sheet data has 47 rows
+[02:52:32.338] Browser LOG     [v0] First 5 rows of data:
+[02:52:32.338] Browser LOG     [v0] Row 0 : ["Country","Cost category","Description ","Unit Type","Number of Units","Unit Price","Total Cost","Currency"]
+[02:52:32.338] Browser LOG     [v0] Row 1 : ["Australia",null,"Informed consent","FEE",1,115,0,"AUD ($)"]
+[02:52:32.338] Browser LOG     [v0] Row 2 : ["Australia",null,"Assess inclusion/exclusion","FEE",1,80,0,"AUD ($)"]
+[02:52:32.338] Browser LOG     [v0] Row 3 : ["Australia",null,"Confirm inclusion/exclusion","FEE",1,80,0,"AUD ($)"]
+[02:52:32.338] Browser LOG     [v0] Row 4 : ["Australia",null,"Demographics","FEE",1,40,0,"AUD ($)"]
+[02:52:32.338] Browser LOG     [v0] findSponsorHeaders: scanning 47 rows of 47
+[02:52:32.338] Browser LOG     [v0] row 0 matched 9 → country,costCategory,description,unitType,numberOfUnits,unitPrice,totalCost,currency,decision
+[02:52:32.338] Browser LOG     [v0] row 1 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 2 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 3 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 4 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 5 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 6 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 7 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 8 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 9 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 10 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 11 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 12 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 13 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 14 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 15 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 16 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 17 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 18 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 19 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 20 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 21 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 22 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 23 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 24 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 25 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 26 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 27 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 28 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 29 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 30 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 31 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 32 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 33 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 34 matched 1 → totalCost
+[02:52:32.338] Browser LOG     [v0] row 35 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 36 matched 1 → totalCost
+[02:52:32.338] Browser LOG     [v0] row 37 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 38 matched 1 → totalCost
+[02:52:32.338] Browser LOG     [v0] row 39 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 40 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 41 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 42 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 43 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 44 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] row 45 matched 1 → totalCost
+[02:52:32.338] Browser LOG     [v0] row 46 matched 0 → 
+[02:52:32.338] Browser LOG     [v0] best header row: 0 with 9 columns
+[02:52:32.338] Browser LOG     [v0] Extracted country from Country column: Australia
+[02:52:32.338] Browser LOG     [v0] Stopping at row 37 - Description is empty
+[02:52:32.338] Browser LOG     [v0] Pre-flight parse OK: 36 line items, country: Australia
+[02:52:32.710] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:52:33.319] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:52:33.323] Browser LOG     [v0] Parsed vendor proposal from sheet: FMV template
+[02:52:33.323] Browser LOG     [v0] Found 36 line items
+[02:52:33.323] Browser LOG     [v0] Extracted country from Site column: Australia
+[02:52:33.323] Browser LOG     [v0] Sample line item: {"assessmentId":"832524ac-6ba8-4132-8efe-49a770e0ccf1","costCategory":"","country":"Australia","currency":"AUD ($)","decision":null,"description":"Informed consent","flag":null,"id":"li-1782230312948-xc7rl1se4","investigatorResponses":[],"numberOfUnits":1,"takedaQuestions":[],"totalCost":0,"unitPrice":115,"unitType":"FEE"}
+[02:52:33.551] Browser LOG     [v0] Storing 36 line items via API
+[02:52:33.551] Browser LOG     [v0] Sending to API: [{"additionalInformation":"Informed consent","costCategory":null,"country":"Australia","currency":"AUD ($)","decision":null,"description":"Informed consent","numberOfUnit":1,"rowIndex":0,"totalCost":0,"unitPrice":115,"unitType":"FEE"},{"additionalInformation":"Assess inclusion/exclusion","costCategory":null,"country":"Australia","currency":"AUD ($)","decision":null,"description":"Assess inclusion/exclusion","numberOfUnit":1,"rowIndex":1,"totalCost":0,"unitPrice":80,"unitType":"FEE"}]
+[02:52:33.726] Server  LOG     [v0] Store Items API called
+[02:52:33.726] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:52:33.728] Server  LOG     [v0] Storing 36 "line items for assessment" "832524ac-6ba8-4132-8efe-49a770e0ccf1"
+[02:52:33.965] Server  LOG     [v0] Created comparison for line item: "18d0ea3b-1845-4309-887d-8d8015de4d37"
+[02:52:34.159] Server  LOG     [v0] Created comparison for line item: "3ea96a6c-34f3-4c26-9d41-8e2aa4800be5"
+[02:52:34.335] Server  LOG     [v0] Created comparison for line item: "5d2ca1ce-f234-4912-a066-397b026cadb6"
+[02:52:34.525] Server  LOG     [v0] Created comparison for line item: "1f65a9de-dc8f-4922-bdaa-c2c1793adfad"
+[02:52:34.892] Server  LOG     [v0] Created comparison for line item: "d449d386-2ab6-4774-bbba-0e901178016d"
+[02:52:35.096] Server  LOG     [v0] Created comparison for line item: "9c422faf-5207-4b9a-8606-c7bf57c41025"
+[02:52:35.248] Server  LOG     [v0] Created comparison for line item: "db7cc4ff-e2d5-40db-b07d-630a7c43ec0b"
+[02:52:35.446] Server  LOG     [v0] Created comparison for line item: "1bddb41b-8892-4c0c-9e29-03346ca2faa8"
+[02:52:35.634] Server  LOG     [v0] Created comparison for line item: "adeb7105-b745-4c42-9312-bf74a3ecd4fd"
+[02:52:35.823] Server  LOG     [v0] Created comparison for line item: "dc6f2df4-20d5-416c-a063-61ac8213a150"
+[02:52:36.025] Server  LOG     [v0] Created comparison for line item: "99483530-26ca-4790-844d-08423f026ebb"
+[02:52:36.178] Server  LOG     [v0] Created comparison for line item: "afc16295-f103-4f48-b1d2-c9680797f0c0"
+[02:52:36.403] Server  LOG     [v0] Created comparison for line item: "7c8295e6-7531-484a-b388-b6b1db53b39f"
+[02:52:36.592] Server  LOG     [v0] Created comparison for line item: "34675845-29a0-463f-8969-0c39ff7c811f"
+[02:52:36.781] Server  LOG     [v0] Created comparison for line item: "e2cba00d-93b3-4d8d-bd93-458c13040a22"
+[02:52:36.967] Server  LOG     [v0] Created comparison for line item: "fa543e37-b65c-4770-93ed-75711dc4d255"
+[02:52:37.159] Server  LOG     [v0] Created comparison for line item: "27cdfb60-59f4-49b8-b87a-09d032a026d5"
+[02:52:37.333] Server  LOG     [v0] Created comparison for line item: "2c8d5c22-bce8-4f21-acb0-856b6aa35f38"
+[02:52:37.544] Server  LOG     [v0] Created comparison for line item: "da3ae999-9905-4441-b4de-565ec6c4d7f7"
+[02:52:37.746] Server  LOG     [v0] Created comparison for line item: "3c6a368b-bb1a-48ac-8be7-c5a7a6de4528"
+[02:52:37.959] Server  LOG     [v0] Created comparison for line item: "e9f3e1a9-c792-4777-b495-fb62d73ede67"
+[02:52:38.150] Server  LOG     [v0] Created comparison for line item: "bcf01bce-5ed2-4cc5-ab6c-3ceb660a9bd3"
+[02:52:38.339] Server  LOG     [v0] Created comparison for line item: "668f5038-1f93-49e0-9e89-1388f5e45bcd"
+[02:52:38.527] Server  LOG     [v0] Created comparison for line item: "4644c975-1628-49eb-9759-8331b6dbfb6f"
+[02:52:38.712] Server  LOG     [v0] Created comparison for line item: "50c54914-1f2d-434c-be57-274568ceca8b"
+[02:52:38.902] Server  LOG     [v0] Created comparison for line item: "83de1dbf-7b1d-4e89-a628-645991b9bfcc"
+[02:52:39.091] Server  LOG     [v0] Created comparison for line item: "bfb0374c-3b1d-4c4a-8001-bd14e0834b72"
+[02:52:39.296] Server  LOG     [v0] Created comparison for line item: "3079370a-80a9-4c9f-980c-2f10343b82cd"
+[02:52:39.481] Server  LOG     [v0] Created comparison for line item: "de53ae02-7b5e-480c-bcbe-1515b4b23fb4"
+[02:52:39.651] Server  LOG     [v0] Created comparison for line item: "5aaedd85-7d3f-4817-b96c-fb4c4c2ae11d"
+[02:52:39.879] Server  LOG     [v0] Created comparison for line item: "9d38b1d3-cd8b-4730-b111-98d12731393b"
+[02:52:40.031] Server  LOG     [v0] Created comparison for line item: "5a11e813-8265-41d1-9d94-f3c03945006e"
+[02:52:40.241] Server  LOG     [v0] Created comparison for line item: "06c3f19b-6c79-4f37-9b99-e360640ec2d4"
+[02:52:40.396] Server  LOG     [v0] Created comparison for line item: "4615ee3d-1b90-47fe-a118-52c6b411e0cf"
+[02:52:40.609] Server  LOG     [v0] Created comparison for line item: "4808b050-96a3-497d-887a-8e25a269940c"
+[02:52:40.762] Server  LOG     [v0] Created comparison for line item: "02361fb0-f6d2-4bde-bcfb-79ef33b08a18"
+[02:52:40.762] Server  LOG     [v0] Inserted 36 "line items"
+[02:52:41.278] Browser LOG     [v0] Successfully stored 36 line items
+[02:52:41.500] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:52:41.682] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/assessments/832524ac-6ba8-4132-8efe-49a770e0ccf1 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements.vusercontent.net/assessments/832524ac-6ba8-4132-8efe-49a770e0ccf1","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782230322294} /_vercel/insights/view
+[02:52:42.044] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:52:42.382] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:52:42.445] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:52:42.567] Server  LOG     [v0] Comparisons API fetch result: 36 "items, error:" undefined
+[02:52:43.189] Browser LOG     [v0] Comparisons fetch result: 36 items, error: undefined
+[02:52:43.189] Browser LOG     [v0] Has existing ai_matches: false
+[02:52:43.300] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:52:43.435] Server  LOG     [v0] Comparisons API fetch result: 36 "items, error:" undefined
+[02:52:43.745] Browser LOG     [v0] Comparisons fetch result: 36 items, error: undefined
+[02:52:43.745] Browser LOG     [v0] Has existing ai_matches: false
+[02:54:36.577] Server  LOG      ✓ Compiled in 176ms
+[02:54:50.657] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:54:51.457] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[02:54:51.457] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/832524ac-6ba8-4132-8efe-49a770e0ccf1","route":"/assessments/[id]"}
+[02:54:51.457] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/assessments/832524ac-6ba8-4132-8efe-49a770e0ccf1 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements.vusercontent.net/assessments/832524ac-6ba8-4132-8efe-49a770e0ccf1","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782230451996} /_vercel/insights/view
+[02:54:51.536] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:54:52.817] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:54:52.877] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:54:53.112] Server  LOG     [v0] Comparisons API fetch result: 36 "items, error:" undefined
+[02:54:53.242] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:54:53.423] Server  LOG     [v0] Comparisons API fetch result: 36 "items, error:" undefined
+[02:54:53.799] Browser LOG     [v0] Comparisons fetch result: 36 items, error: undefined
+[02:54:53.799] Browser LOG     [v0] Has existing ai_matches: false
+[02:54:54.068] Browser LOG     [v0] Comparisons fetch result: 36 items, error: undefined
+[02:54:54.068] Browser LOG     [v0] Has existing ai_matches: false
+[02:57:10.290] Server  LOG      ✓ Compiled in 82ms
+[02:57:22.782] Server  LOG      ✓ Compiled in 141ms
+[02:57:29.589] Server  LOG      ✓ Compiled in 53ms
+[02:57:58.408] Server  LOG      ✓ Compiled in 53ms
+[02:58:13.120] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:58:13.689] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:58:13.805] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:58:13.947] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[02:58:13.947] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/32479f20-732a-4143-bf2c-642bf2008557","route":"/assessments/[id]"}
+[02:58:13.947] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/assessments/32479f20-732a-4143-bf2c-642bf2008557 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"http://localhost:3000/assessments/32479f20-732a-4143-bf2c-642bf2008557","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782230654715} /_vercel/insights/view
+[02:58:14.403] Server  LOG     [v0] createAdminClient using: "service_role"
+[02:58:14.768] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[02:58:16.986] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[02:58:16.986] Browser LOG     [v0] Has existing ai_matches: true
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[02:58:16.986] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null

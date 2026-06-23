@@ -222,7 +222,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             country: comp.assessment_line_items.country || "Global",
             costCategory: extraData.costCategory || "Procedure",
             source: `Line ${idx + 1}`,
-            decision: (extraData.decision || "In-review") as ItemDecision,
+            decision: (extraData.decision || "To Assess") as ItemDecision,
             numberOfUnit: extraData.numberOfUnit || 1,
   totalCost: comp.assessment_line_items.vendor_cost || 0,
   currency: comp.assessment_line_items.currency || "USD",

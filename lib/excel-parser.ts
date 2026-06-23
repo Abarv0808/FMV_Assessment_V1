@@ -273,7 +273,9 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
       costType: columnMap.costType !== undefined ? String(row[columnMap.costType] || "").trim() : undefined,
       acceptedUnitPrice: columnMap.acceptedUnitPrice !== undefined ? parseNumber(row[columnMap.acceptedUnitPrice]) : undefined,
       acceptedTotalCost: columnMap.acceptedTotalCost !== undefined ? parseNumber(row[columnMap.acceptedTotalCost]) : undefined,
-      decision: null,
+      // Default to "To Assess" when the Excel template has no Takeda Decision.
+      // Items in this state are still eligible for benchmark comparison.
+      decision: "To Assess",
       // Initialize benchmark fields
       benchmarkLow: undefined,
       benchmarkMed: undefined,
@@ -289,16 +291,16 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
     // Parse decision if present. Excel templates aren't strict about this
     // column — values like "to assess", "in review", "to be assessed",
     // "accept", "reject" all show up in real files. Normalise to one of
-    // the 6 canonical dropdown values; default unknown text to "In-review".
+    // the canonical dropdown values; default unknown/empty text to "To Assess".
     if (columnMap.decision !== undefined && row[columnMap.decision]) {
       const raw = String(row[columnMap.decision]).trim()
       if (raw) {
         const normalized = raw.toLowerCase().replace(/[\s_-]+/g, " ").trim()
         const decisionMap: Record<string, string> = {
+          "to assess": "To Assess",
+          "to be assessed": "To Assess",
           "in review": "In-review",
           "in-review": "In-review",
-          "to assess": "In-review",
-          "to be assessed": "In-review",
           "to be reviewed": "In-review",
           "review": "In-review",
           "accepted": "Accepted",
@@ -317,7 +319,7 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
           "escalated": "Escalate",
           "escalation": "Escalate",
         }
-        lineItem.decision = (decisionMap[normalized] ?? "In-review") as typeof lineItem.decision
+        lineItem.decision = (decisionMap[normalized] ?? "To Assess") as typeof lineItem.decision
       }
     }
     

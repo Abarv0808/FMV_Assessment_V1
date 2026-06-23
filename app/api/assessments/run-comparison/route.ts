@@ -431,10 +431,11 @@ export async function POST(request: Request) {
         lineItemDecision = override
       }
 
-      // Only run comparison for items with eligible decision statuses (In-review, Pending, or Escalate)
+      // Only run comparison for items with eligible decision statuses (To Assess, In-review, Pending, or Escalate)
       // Skip items with statuses like Accepted, Not amended, Not accepted, Manual assessment.
       // "Escalate" stays eligible so escalated items are re-compared on every run.
-      const eligibleDecisions = ["in-review", "pending", "escalate"]
+      // "To Assess" is the default for items with no Takeda Decision in the Excel and must be compared.
+      const eligibleDecisions = ["to assess", "in-review", "pending", "escalate"]
       const decisionLower = lineItemDecision.toLowerCase().trim()
       if (lineItemDecision && !eligibleDecisions.includes(decisionLower)) {
         console.log(`[v0] Skipping item (decision="${lineItemDecision}" not eligible):`, cleanDescription.substring(0, 50))

@@ -89,6 +89,10 @@ const decisionConfig: Record<
   ItemDecision,
   { label: string; color: string }
 > = {
+  "To Assess": {
+    label: "To Assess",
+    color: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+  },
   "In-review": {
     label: "In-review",
     color: "text-orange-500 bg-orange-500/10 border-orange-500/20",
@@ -136,7 +140,7 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
   low: "Low",
 }
 
-const DECISION_OPTIONS: ItemDecision[] = ["In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
+const DECISION_OPTIONS: ItemDecision[] = ["To Assess", "In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
 
 // Compute the effective Total Cost for a line item.
 // If a negotiated price has been entered, it takes precedence over unit price:
@@ -297,7 +301,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
       <div
         ref={tableScrollRef}
         onScroll={handleTableScroll}
-        className="overflow-x-auto [&_[data-slot=table-container]]:overflow-visible"
+        className="overflow-x-auto [&_[data-slot=table-container]]:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
       <Table className="text-[11px] [&_th]:h-7 [&_th]:px-1.5 [&_th]:text-[11px] [&_td]:px-1.5 [&_td]:py-1">
         <TableHeader>
@@ -324,12 +328,12 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
         <TableBody>
           {comparisons.map((comparison) => {
             const isExpanded = expandedRows.has(comparison.id)
-            // Fallback to "In-review" config if the decision string from the
-            // backend isn't one of our 6 canonical values (e.g. "to assess",
-            // "n/a", or any free-text from a hand-edited Excel).
+            // Fallback to "To Assess" config if the decision string from the
+            // backend isn't one of our canonical values (e.g. "n/a", or any
+            // free-text from a hand-edited Excel). "To Assess" is the default.
             const decisionConf =
               decisionConfig[comparison.lineItem.decision] ??
-              decisionConfig["In-review"]
+              decisionConfig["To Assess"]
             const selectedValue = getBenchmarkValue(comparison) ?? 0
             const hasBenchmarkValue = selectedValue > 0
             const dynamicVariance = hasBenchmarkValue ? comparison.lineItem.unitPrice - selectedValue : 0
