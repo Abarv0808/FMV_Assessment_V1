@@ -91,7 +91,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   const { user } = useAuth()
   const [searchQuery, setSearchQuery] = useState("")
   const [flagFilter, setFlagFilter] = useState<"ALL" | "RED" | "YELLOW" | "GREEN" | "NO_MATCH">("ALL")
-  const [siteFilter, setSiteFilter] = useState<string>("ALL")
+  const [countryFilter, setCountryFilter] = useState<string>("ALL")
   const [decisionFilter, setDecisionFilter] = useState<string>("ALL")
   const [showArchiveConfirm, setShowArchiveConfirm] = useState(false)
   const [showRestoreConfirm, setShowRestoreConfirm] = useState(false)
@@ -219,14 +219,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             description: description.trim(),
             unitType: extraData.unitType || "Per Unit",
             unitPrice: extraData.unitPrice || 0,
-            site: comp.assessment_line_items.country || "Global",
+            country: comp.assessment_line_items.country || "Global",
             costCategory: extraData.costCategory || "Procedure",
             source: `Line ${idx + 1}`,
             decision: (extraData.decision || "In-review") as ItemDecision,
             numberOfUnit: extraData.numberOfUnit || 1,
   totalCost: comp.assessment_line_items.vendor_cost || 0,
   currency: comp.assessment_line_items.currency || "USD",
-  country: comp.assessment_line_items.country,
   additionalInformation: description.trim(),
   negotiatedPrice: comp.assessment_line_items.negotiated_price ?? null,
   comment: (extraData as any).comment || ""
@@ -480,7 +479,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       const base: Record<string, any> = {
         "#": idx + 1,
         "Description": li.description || "",
-        "Site/Country": li.country || li.site || "",
+        "Country": li.country || "",
         "Cost Category": li.costCategory || "",
         "Unit Type": li.unitType || "",
         "Number of Units": li.numberOfUnit ?? "",
@@ -744,14 +743,14 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     }
   }, [appendAudit])
 
-  // Get unique sites from line items
-  const sites = useMemo(() => {
-    const siteSet = new Set(
+  // Get unique countries from line items
+  const countries = useMemo(() => {
+    const countrySet = new Set(
       mockAssessmentLineItems
         .filter((item) => item.assessmentId === id)
-        .map((item) => item.site)
+        .map((item) => item.country)
     )
-    return Array.from(siteSet)
+    return Array.from(countrySet)
   }, [id])
 
   // Calculate summary stats from stateful comparisons so they update when decisions change
@@ -805,7 +804,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       )
     const matchesFlag = flagFilter === "ALL" || comparison.flag === flagFilter
     const matchesSite =
-      siteFilter === "ALL" || comparison.lineItem.site === siteFilter
+      countryFilter === "ALL" || comparison.lineItem.country === countryFilter
     const matchesDecision =
       decisionFilter === "ALL" || comparison.lineItem.decision === decisionFilter
 
@@ -882,7 +881,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         // External report omits Benchmark Match, Benchmark, Flag, Variance, Code.
         return [
           idx + 1,
-          c.lineItem.site || "-",
+          c.lineItem.country || "-",
           c.lineItem.costCategory || "-",
           c.lineItem.additionalInformation || c.lineItem.description || "-",
           fmt(c.lineItem.unitPrice),
@@ -897,7 +896,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
       return [
         idx + 1,
-        c.lineItem.site || "-",
+        c.lineItem.country || "-",
         c.lineItem.costCategory || "-",
         c.lineItem.additionalInformation || c.lineItem.description || "-",
         benchmarkMatch,
@@ -920,11 +919,11 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       head: [
         isExternal
           ? [
-              "#", "Site", "Cost Category", "Cost Description",
+              "#", "Country", "Cost Category", "Cost Description",
               "Unit Price", "Negotiated", "Curr.", "Decision", "Units", "Total Cost", "Comments",
             ]
           : [
-              "#", "Site", "Cost Category", "Cost Description", "Benchmark Match",
+              "#", "Country", "Cost Category", "Cost Description", "Benchmark Match",
               "Unit Price", "Negotiated", "Curr.", "Benchmark", "Flag",
               "Decision", "Variance", "Units", "Total Cost", "Code", "Comments",
             ],
@@ -1147,17 +1146,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                     />
                   </div>
                   <Select
-                    value={siteFilter}
-                    onValueChange={(value) => setSiteFilter(value)}
+                    value={countryFilter}
+                    onValueChange={(value) => setCountryFilter(value)}
                   >
                     <SelectTrigger className="w-[150px]">
-                      <SelectValue placeholder="Site" />
+                      <SelectValue placeholder="Country" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="ALL">All Sites</SelectItem>
-                      {sites.map((site) => (
-                        <SelectItem key={site} value={site}>
-                          {site}
+                      <SelectItem value="ALL">All Countries</SelectItem>
+                      {countries.map((country) => (
+                        <SelectItem key={country} value={country}>
+                          {country}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -1207,7 +1206,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                     ).length}{" "}
                     items with benchmarks
                   </span>
-                  {(siteFilter !== "ALL" ||
+                  {(countryFilter !== "ALL" ||
                     decisionFilter !== "ALL" ||
                     flagFilter !== "ALL" ||
                     searchQuery) && (
@@ -1216,7 +1215,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                       size="sm"
                       className="h-6 text-xs"
                       onClick={() => {
-                        setSiteFilter("ALL")
+                        setCountryFilter("ALL")
                         setDecisionFilter("ALL")
                         setFlagFilter("ALL")
                         setSearchQuery("")

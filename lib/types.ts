@@ -55,11 +55,11 @@ export interface Benchmark {
   updatedAt: string
 }
 
-// Assessment Line Item - parsed from vendor proposal Excel "Sponsor" tab
+// Assessment Line Item - parsed from budget Excel "FMV Template" tab
 export interface AssessmentLineItem {
   id: string
   assessmentId: string
-  site: string
+  country: string
   costCategory: string
   description: string // "Additional Information" from "Description of costs"
   unitType: string
@@ -116,7 +116,6 @@ export type ItemDecision = "In-review" | "Accepted" | "Pending" | "Not amended" 
 // Extended line item with additional comparison fields
 export interface LineItemWithComparison extends AssessmentLineItem {
   numberOfUnit?: number
-  country?: string
   additionalInformation?: string
   noteLogic?: string
   questionComment?: string

@@ -133,16 +133,16 @@ export default function NewAssessmentPage() {
       } catch (parseErr) {
         const msg = parseErr instanceof Error ? parseErr.message : String(parseErr)
         throw new Error(
-          `Could not parse the vendor proposal Excel file: ${msg}. ` +
-            `Make sure the workbook has a "Sponsor" tab with the expected columns ` +
-            `(Site, Cost category, Description of costs, Number of Units, Unit Price, Total Cost, Currency).`,
+          `Could not parse the budget Excel file: ${msg}. ` +
+            `Make sure the workbook has an "FMV Template" tab with the expected columns ` +
+            `(Country, Cost Category, Description, Unit Type, Number of units, Unit Price, Total Cost, Currency, Takeda Decision).`,
         )
       }
 
       if (!parsedProposal.lineItems || parsedProposal.lineItems.length === 0) {
         throw new Error(
           `No line items were found in the Excel file ` +
-            `(checked sheet: "${parsedProposal.metadata.sheetName || "Sponsor"}"). ` +
+            `(checked sheet: "${parsedProposal.metadata.sheetName || "FMV Template"}"). ` +
             `Please verify the file has data rows under the expected column headers and try again.`,
         )
       }
@@ -217,7 +217,7 @@ export default function NewAssessmentPage() {
         const lineItemsForApi = lineItems.map((item, index) => ({
           description: item.description || "Unknown",
           additionalInformation: item.description,
-          site: item.site || null,
+          country: item.country || null,
           costCategory: item.costCategory || null,
           unitType: item.unitType || null,
           numberOfUnit: item.numberOfUnits,

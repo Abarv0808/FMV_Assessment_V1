@@ -303,10 +303,11 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
         <TableHeader>
           <TableRow className="hover:bg-transparent border-border/40">
             <TableHead className="w-[40px]"></TableHead>
-            <TableHead>Site</TableHead>
+            <TableHead>Country</TableHead>
             <TableHead>Cost Category</TableHead>
             <TableHead>Cost Description</TableHead>
             <TableHead className="min-w-[110px] max-w-[140px]">Benchmark Match</TableHead>
+            <TableHead>Unit Type</TableHead>
             <TableHead className="text-right">Unit Price</TableHead>
             <TableHead className="text-right">Negotiated Price</TableHead>
             <TableHead className="min-w-[160px]">Benchmark</TableHead>
@@ -382,7 +383,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   </TableCell>
                   <TableCell>
                     <Badge variant="outline" className="font-normal">
-                      {comparison.lineItem.site}
+                      {comparison.lineItem.country}
                     </Badge>
                   </TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
@@ -479,6 +480,9 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         {comparison.benchmarkDescription || "Pending comparison"}
                       </span>
                     )}
+                  </TableCell>
+                  <TableCell className="text-[11px] text-muted-foreground">
+                    {comparison.lineItem.unitType || "-"}
                   </TableCell>
                   <TableCell className="text-right font-medium font-mono">
                     {comparison.lineItem.unitPrice?.toLocaleString() ?? "-"}
@@ -616,7 +620,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
 
                 {isExpanded && (
                   <TableRow className="border-border/40 bg-accent/30">
-                    <TableCell colSpan={16}>
+                    <TableCell colSpan={17}>
                       <div className="py-4 px-2 space-y-4">
                         {/* Item Details */}
                         <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-sm">
