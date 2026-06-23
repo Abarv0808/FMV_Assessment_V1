@@ -313,3 +313,212 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:56:15.005] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://vm-assessment-table-improvements.vusercontent.net/","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782223335654} /_vercel/insights/view
 [00:56:15.063] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-assessment-table-improvements.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782223335671} /_vercel/insights/view
 [00:56:15.947] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:58:11.388] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:58:11.590] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/assessments/32479f20-732a-4143-bf2c-642bf2008557 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements.vusercontent.net/assessments/32479f20-732a-4143-bf2c-642bf2008557","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782223452229} /_vercel/insights/view
+[00:58:11.926] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:58:13.153] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:58:13.183] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:58:13.461] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[00:58:13.634] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:58:13.739] Server  LOG     [v0] Comparisons API fetch result: 38 "items, error:" undefined
+[00:58:14.810] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[00:58:14.810] Browser LOG     [v0] Has existing ai_matches: true
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:14.810] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:15.272] Browser LOG     [v0] Comparisons fetch result: 38 items, error: undefined
+[00:58:15.272] Browser LOG     [v0] Has existing ai_matches: true
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:58:15.273] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:58:33.644] Browser LOG     [v0] Persisting decision via PATCH: 2a08e98d-d44a-41cf-8193-c2d6428d115f -> Pending
+[00:58:33.992] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"Pending\"}"
+[00:58:33.992] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:58:34.226] Server  LOG     [v0] Updated line item: "2a08e98d-d44a-41cf-8193-c2d6428d115f" "additionalInfo:" undefined "costCategory:" undefined "decision:" "Pending"
+[00:58:35.815] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"Accepted\"}"
+[00:58:35.815] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:58:36.010] Server  LOG     [v0] Updated line item: "2a08e98d-d44a-41cf-8193-c2d6428d115f" "additionalInfo:" undefined "costCategory:" undefined "decision:" "Accepted"
+[00:58:36.122] Browser LOG     [v0] Persisting decision via PATCH: 2a08e98d-d44a-41cf-8193-c2d6428d115f -> Accepted
+[00:58:38.065] Browser LOG     [v0] handleRunComparison called, comparisons.length: 38
+[00:58:38.706] Server  LOG     [v0] Run comparison API called (AI-powered)
+[00:58:38.707] Server  LOG     [v0] Assessment ID: "32479f20-732a-4143-bf2c-642bf2008557"
+[00:58:38.707] Server  LOG     [v0] Decision overrides received from client: 38 "items"
+[00:58:38.708] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:58:38.708] Server  LOG     [v0] Fetching line items...
+[00:58:38.731] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[00:58:38.810] Server  LOG     [v0] Persisting 38 "decision overrides to DB before comparison"
+[00:58:38.811] Server  LOG     [v0] Line items found: 38 "Error:" undefined
+[00:58:38.811] Server  LOG     [v0] Fetching benchmark procedures...
+[00:58:38.811] Server  LOG     [v0] Line item countries: "France, Belgium"
+[00:58:38.935] Server  LOG     [v0] Benchmark files for requested countries: 58 "Error:" "none"
+[00:58:38.935] Server  LOG     [v0] Filtering to 58 "benchmark files for countries:" "France, Belgium"
+[00:58:39.267] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[00:58:39.624] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[00:58:39.935] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[00:58:40.533] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[00:58:40.918] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[00:58:41.206] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[00:58:41.449] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[00:58:41.684] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[00:58:42.341] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[00:58:42.642] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[00:58:42.982] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[00:58:43.247] Server  LOG     [v0] Loaded benchmark page 12 "size:" 978 "running total:" 11978
+[00:58:43.267] Server  LOG     [v0] Benchmark procedures loaded: 11978 "from" 2 "countries"
+[00:58:43.267] Server  LOG     [v0] Available countries: "Belgium, France" ""
+[00:58:43.269] Server  LOG     [v0] Starting AI-powered matching for 38 "items..."
+[00:58:43.269] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study coordination by CHU Clermont-Ferrand clinica"
+[00:58:43.269] Server  LOG     [v0] Processing: "\"Monitoring travel costs : hotel and travel expense...\"" "Country:" "France" "Decision:" "Escalate"
+[00:58:43.271] Server  LOG     [v0] Filtered to 5947 "benchmarks for country:" "France"
+[00:58:43.283] Server  LOG     [v0][AI-Gateway][0184b958] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:58:43.283] Server  LOG     [v0][AI-Gateway][0184b958] Vendor item: "Monitoring travel costs : hotel and travel expenses" | Country: France | Benchmarks: 150/5947
+[00:58:51.166] Server  LOG     [v0][AI-Gateway][0184b958] ✓ AI Gateway success in 7884ms | Matches: 0 | Tokens: prompt=5224 completion=568 total=5792
+[00:58:51.167] Server  LOG     [v0] Using trigram fallback for: "Monitoring travel costs : hote" "Country:" "France"
+[00:58:51.247] Server  LOG     [v0]   Match 1: "Monitoring - Per Hour" | Confidence: LOW | AI: false
+[00:58:51.248] Server  LOG     [v0]   Match 2: "Monitoring - Per Hour" | Confidence: LOW | AI: false
+[00:58:51.248] Server  LOG     [v0]   Match 3: "Monitoring - Per Hour" | Confidence: LOW | AI: false
+[00:58:51.248] Server  LOG     [v0] Processing: "\"Monitoring costs : CRA, with clinical research exp...\"" "Country:" "France" "Decision:" "Pending"
+[00:58:51.250] Server  LOG     [v0] Filtered to 5947 "benchmarks for country:" "France"
+[00:58:51.262] Server  LOG     [v0][AI-Gateway][4eddb4cb] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:58:51.262] Server  LOG     [v0][AI-Gateway][4eddb4cb] Vendor item: "Monitoring costs : CRA, with clinical research experience, monitoring of all asp" | Country: France | Benchmarks: 150/5947
+[00:58:59.863] Server  LOG     [v0][AI-Gateway][4eddb4cb] ✓ AI Gateway success in 8601ms | Matches: 0 | Tokens: prompt=5308 completion=782 total=6090
+[00:58:59.863] Server  LOG     [v0] Using trigram fallback for: "Monitoring costs : CRA, with c" "Country:" "France"
+[00:59:00.011] Server  LOG     [v0] Processing: "\"Project manager, administrative...\"" "Country:" "France" "Decision:" "Pending"
+[00:59:00.014] Server  LOG     [v0] Filtered to 5947 "benchmarks for country:" "France"
+[00:59:00.026] Server  LOG     [v0][AI-Gateway][9c22cc21] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:59:00.026] Server  LOG     [v0][AI-Gateway][9c22cc21] Vendor item: "Project manager, administrative" | Country: France | Benchmarks: 150/5947
+[00:59:10.362] Server  LOG     [v0][AI-Gateway][9c22cc21] ✓ AI Gateway success in 10337ms | Matches: 1 | Tokens: prompt=5210 completion=937 total=6147
+[00:59:10.362] Server  LOG     [v0] AI found 1 "matches for" "France"
+[00:59:10.363] Server  LOG     [v0]   Match 1: "Administrative/Personnel Costs - Per Vis" | Confidence: MEDIUM | AI: true
+[00:59:10.363] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Implementation (coordinating CRA, regulatory CRA)"
+[00:59:10.363] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Closure (coordinating CRA, regulatory CRA)"
+[00:59:10.363] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Start-up Center opening costs"
+[00:59:10.364] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Insurance France"
+[00:59:10.364] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Insurance  Belgium"
+[00:59:10.364] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating study coordinators administrative ta"
+[00:59:10.364] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating study coordinators administrative ta"
+[00:59:10.364] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating nurse : with clinical research exper"
+[00:59:10.364] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating nurse : with clinical research exper"
+[00:59:10.365] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating physician: fee for all physician for"
+[00:59:10.365] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating study technicians : fee for all stud"
+[00:59:10.365] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating study technicians : fee for all stud"
+[00:59:10.365] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study procedures (Colonoscopy) : 1 per patient"
+[00:59:10.365] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study procedures (medical stay) : 1 per patient"
+[00:59:10.365] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Monetary payment to clinical study participants to"
+[00:59:10.365] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Samples transport\r\n112,63 € x 5 (round-trips) x 24"
+[00:59:10.366] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Samples transport\r\nCHU Liège : 947,88 x 5 (round-t"
+[00:59:10.366] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Data management: senior data manager mandated by t"
+[00:59:10.366] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Statistical analysis: senior biostatistician manda"
+[00:59:10.366] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[00:59:10.366] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[00:59:10.366] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[00:59:10.366] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[00:59:10.367] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[00:59:10.367] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[00:59:10.367] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Study procedure (biological and/or anatomo-cytopat"
+[00:59:10.367] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Patient financial compensation to undergo 1 colono"
+[00:59:10.367] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage at CRB of CHU Clermont-"
+[00:59:10.367] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage  (2€ per sample) : \r\n4 "
+[00:59:10.367] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Biological sample stockage  (2€ per sample) : \r\n4 "
+[00:59:10.368] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Archiving \r\n80 € / center : 80*6 = 480 €"
+[00:59:10.368] Server  LOG     [v0] Processing: "\"Archiving\n80 € / center : 80*2 = 160€...\"" "Country:" "Belgium" "Decision:" "Pending"
+[00:59:10.370] Server  LOG     [v0] Filtered to 6031 "benchmarks for country:" "Belgium"
+[00:59:10.386] Server  LOG     [v0][AI-Gateway][99d56dc4] Calling AI Gateway with model: google/gemini-3-pro-preview
+[00:59:10.387] Server  LOG     [v0][AI-Gateway][99d56dc4] Vendor item: "Archiving
+80 € / center : 80*2 = 160€" | Country: Belgium | Benchmarks: 150/6031
+[00:59:17.307] Server  LOG     [v0][AI-Gateway][99d56dc4] ✓ AI Gateway success in 6920ms | Matches: 0 | Tokens: prompt=5270 completion=558 total=5828
+[00:59:17.307] Server  LOG     [v0] Using trigram fallback for: "Archiving\n80 € / center : 80*2" "Country:" "Belgium"
+[00:59:17.364] Server  LOG     [v0]   Match 1: "Archiving - Per Box" | Confidence: MEDIUM | AI: false
+[00:59:17.364] Server  LOG     [v0]   Match 2: "Archiving - Per Box" | Confidence: MEDIUM | AI: false
+[00:59:17.365] Server  LOG     [v0]   Match 3: "Archiving - Per Box" | Confidence: MEDIUM | AI: false
+[00:59:17.365] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study coordination by CHU Clermont-Ferrand Physici"
+[00:59:17.365] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Investigating physician : fee for all physician fo"
+[00:59:17.366] Server  LOG     [v0] Updating 38 "comparison records"
+[00:59:17.490] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "c6b93f17-2b40-44d7-91fc-599aadf5f46d"
+[00:59:17.490] Server  LOG     [v0] Updating line_item_id: "0184b958-d1f9-4fe2-a11a-de8a1b4af63e" "with" 3 "matches" "flag:" "YELLOW"
+[00:59:17.613] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:59:17.614] Server  LOG     [v0] Updating line_item_id: "4eddb4cb-94cc-4817-b1d8-673c15be036a" "with" 0 "matches" "flag:" "NO_MATCH"
+[00:59:17.715] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:59:17.715] Server  LOG     [v0] Updating line_item_id: "9c22cc21-1407-41bb-9482-27e44efe0af6" "with" 1 "matches" "flag:" "YELLOW"
+[00:59:17.815] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:59:18.073] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "5ca2125e-c08d-4619-93aa-f71055b30c29"
+[00:59:18.171] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "fbb65ea1-526e-47b7-9c81-706fbe2c9143"
+[00:59:18.251] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "ec7257f6-00e2-40a5-87df-8524c794cc23"
+[00:59:18.327] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "ca337423-e8ec-46f0-abe0-d45d76e30afe"
+[00:59:18.414] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "0e920cb2-6dda-4952-9184-3d2a1a271838"
+[00:59:18.497] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "7924de84-a0b0-4502-ad3f-92f6caf2b913"
+[00:59:18.595] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "bab0b43a-9bf8-4b47-b915-5c5ae008030e"
+[00:59:18.686] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "23d95c1b-06d1-41f8-95da-a6b8501a3aec"
+[00:59:18.767] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "1b1b1ca3-afb3-4da5-9eb3-03141eb480c7"
+[00:59:18.846] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "021a4aa3-3550-4efd-b0dd-89051ff64938"
+[00:59:19.059] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "7851d3fd-9638-461f-8d55-b0f6fb3277f3"
+[00:59:19.136] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "56aa566f-caf0-4c0c-96df-c11682185a07"
+[00:59:19.239] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "16c9216e-7a9b-471f-8c0a-b546b9e4b7cb"
+[00:59:19.335] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "9f545ec2-41d1-41b6-971d-042bceea9427"
+[00:59:19.426] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "670cdea4-1f15-47b5-be5d-57a7d661efaa"
+[00:59:19.519] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "386ddb3a-9e7f-4a24-91c0-e523248a1c16"
+[00:59:19.606] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "2a917415-955c-417f-9585-fe27637aa8f5"
+[00:59:19.685] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "d15795a5-0266-4bb0-9633-7ddc28f5381b"
+[00:59:19.769] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "d1e2413b-e8e2-485a-8b2d-aa4f7f91e84a"
+[00:59:19.846] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "ead2bd68-fc0b-4f92-877b-cd384f71d3a6"
+[00:59:19.945] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "6722c11c-dc94-4d4e-a3df-be17e5110f0f"
+[00:59:20.044] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "81385e13-23e0-4998-a430-25b05258e695"
+[00:59:20.124] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "e2c17d5e-7350-457b-b88a-54386e84fa11"
+[00:59:20.204] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "fd625eb7-8f9c-40ff-a76c-0749e3db5155"
+[00:59:20.295] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "f15d3dac-2aa8-4ff6-9422-a11685af2ffa"
+[00:59:20.385] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "59e69ab5-a6ef-47a1-86a4-51fb7b8551a2"
+[00:59:20.498] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "9d5149bb-e298-467b-a5f1-7b44fd7aad06"
+[00:59:20.606] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "23e469f3-ff81-48ae-abf8-188f073668c4"
+[00:59:20.686] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "790488ee-6868-4dd3-9cdf-c9fe23ff9101"
+[00:59:20.766] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "23b8b8a0-8080-45a0-9bbb-80b41401a7cf"
+[00:59:20.857] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "dcdfcccb-8c39-417f-a821-d035f54763bc"
+[00:59:20.857] Server  LOG     [v0] Updating line_item_id: "99d56dc4-e81c-4616-99e3-e0ba6405ce22" "with" 3 "matches" "flag:" "YELLOW"
+[00:59:20.950] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[00:59:21.030] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "2a08e98d-d44a-41cf-8193-c2d6428d115f"
+[00:59:21.109] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "9f6235e4-6675-4a4b-9b60-df0b5b95901d"
+[00:59:21.836] Browser LOG     [v0] Comparison API result: {"message":"Compared 38 items: 1 AI matches, 2 trigram matches","results":[{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"c6b93f17-2b40-44d7-91fc-599aadf5f46d","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"5db5f243-0530-4ce2-851c-a2b0bff29fbb","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222},"flag":"YELLOW","lineItemId":"0184b958-d1f9-4fe2-a11a-de8a1b4af63e","matchCount":3,"matches":[{"benchmarkId":"5db5f243-0530-4ce2-851c-a2b0bff29fbb","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222},{"benchmarkId":"b54a5c0b-1aae-4d35-9f07-dbe4b84733e7","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222},{"benchmarkId":"bd80e962-b8b9-4fab-8f9f-2d1af3f235aa","category":"Site Costs","code":"SC155","confidence":"LOW","country":"France","isAIMatch":false,"p100":83,"p25":66,"p50":72,"p75":82,"p90":82,"procedureName":"Monitoring - Per Hour","reasoning":"Matched by text similarity","similarity":0.4601789933084222}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"4eddb4cb-94cc-4817-b1d8-673c15be036a","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"f7df5a6e-1f8c-4b85-b29d-71d2325c43d3","category":"Non-Procedures","code":"NP033","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":183,"p25":54,"p50":94,"p75":150,"p90":182,"procedureName":"Administrative/Personnel Costs - Per Visit","reasoning":"The vendor item specifies administrative personnel (Project Manager). While the benchmark list does not have a dedicated 'Project Manager' hourly rate, it includes a generic 'Administrative/Personnel Costs' category that aligns with the nature of this administrative role.","similarity":0.7},"flag":"YELLOW","lineItemId":"9c22cc21-1407-41bb-9482-27e44efe0af6","matchCount":1,"matches":[{"benchmarkId":"f7df5a6e-1f8c-4b85-b29d-71d2325c43d3","category":"Non-Procedures","code":"NP033","confidence":"MEDIUM","country":"France","isAIMatch":true,"p100":183,"p25":54,"p50":94,"p75":150,"p90":182,"procedureName":"Administrative/Personnel Costs - Per Visit","reasoning":"The vendor item specifies administrative personnel (Project Manager). While the benchmark list does not have a dedicated 'Project Manager' hourly rate, it includes a generic 'Administrative/Personnel Costs' category that aligns with the nature of this administrative role.","similarity":0.7}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"5ca2125e-c08d-4619-93aa-f71055b30c29","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"fbb65ea1-526e-47b7-9c81-706fbe2c9143","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"ec7257f6-00e2-40a5-87df-8524c794cc23","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"ca337423-e8ec-46f0-abe0-d45d76e30afe","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"0e920cb2-6dda-4952-9184-3d2a1a271838","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"7924de84-a0b0-4502-ad3f-92f6caf2b913","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"bab0b43a-9bf8-4b47-b915-5c5ae008030e","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"23d95c1b-06d1-41f8-95da-a6b8501a3aec","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"1b1b1ca3-afb3-4da5-9eb3-03141eb480c7","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"021a4aa3-3550-4efd-b0dd-89051ff64938","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"7851d3fd-9638-461f-8d55-b0f6fb3277f3","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"56aa566f-caf0-4c0c-96df-c11682185a07","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"16c9216e-7a9b-471f-8c0a-b546b9e4b7cb","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"9f545ec2-41d1-41b6-971d-042bceea9427","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"670cdea4-1f15-47b5-be5d-57a7d661efaa","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"386ddb3a-9e7f-4a24-91c0-e523248a1c16","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"2a917415-955c-417f-9585-fe27637aa8f5","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"d15795a5-0266-4bb0-9633-7ddc28f5381b","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"d1e2413b-e8e2-485a-8b2d-aa4f7f91e84a","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"ead2bd68-fc0b-4f92-877b-cd384f71d3a6","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"6722c11c-dc94-4d4e-a3df-be17e5110f0f","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"81385e13-23e0-4998-a430-25b05258e695","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"e2c17d5e-7350-457b-b88a-54386e84fa11","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"fd625eb7-8f9c-40ff-a76c-0749e3db5155","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"f15d3dac-2aa8-4ff6-9422-a11685af2ffa","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"59e69ab5-a6ef-47a1-86a4-51fb7b8551a2","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"9d5149bb-e298-467b-a5f1-7b44fd7aad06","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"23e469f3-ff81-48ae-abf8-188f073668c4","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"790488ee-6868-4dd3-9cdf-c9fe23ff9101","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"23b8b8a0-8080-45a0-9bbb-80b41401a7cf","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"dcdfcccb-8c39-417f-a821-d035f54763bc","matchCount":0,"matches":[]},{"bestMatch":{"benchmarkId":"0d80042a-66fe-42b6-8154-81d69e270cf7","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333},"flag":"YELLOW","lineItemId":"99d56dc4-e81c-4616-99e3-e0ba6405ce22","matchCount":3,"matches":[{"benchmarkId":"0d80042a-66fe-42b6-8154-81d69e270cf7","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333},{"benchmarkId":"65623c8d-a797-4e0d-8d33-5c6db5db93be","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333},{"benchmarkId":"2afd73e1-c45a-4897-b703-40c6f1499dc1","category":"Site Costs","code":"SC148","confidence":"MEDIUM","country":"Belgium","isAIMatch":false,"p100":433,"p25":202,"p50":280,"p75":314,"p90":374,"procedureName":"Archiving - Per Box","reasoning":"Matched by text similarity","similarity":0.5063696835418333}]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"2a08e98d-d44a-41cf-8193-c2d6428d115f","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"9f6235e4-6675-4a4b-9b60-df0b5b95901d","matchCount":0,"matches":[]}],"success":true}
+[00:59:21.836] Browser LOG     [v0] Merged 38 AI results into comparisons in-memory (no refetch)
+[01:04:43.881] Server  LOG      ✓ Compiled in 95ms

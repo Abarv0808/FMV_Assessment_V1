@@ -653,6 +653,14 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           const bestMatch = aiResult.bestMatch || (matches.length > 0 ? matches[0] : null)
           const flag = aiResult.flag || (matches.length > 0 ? "MULTIPLE_MATCHES" : "NO_MATCH")
 
+          // If this run produced no matches but the item already has benchmark
+          // matches from a prior comparison (e.g. it was skipped because its
+          // decision is now "Accepted"), keep the existing data so the accepted
+          // benchmark doesn't disappear on re-run.
+          if (matches.length === 0 && comp.possibleMatches && comp.possibleMatches.length > 0) {
+            return comp
+          }
+
           return {
             ...comp,
             benchmark90th: bestMatch?.p90 ?? null,
@@ -672,7 +680,12 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                   "No match found"
                 ),
             possibleMatches: matches.length > 0 ? matches : null,
-            userSelected: null,
+            // Preserve the user's previously accepted selection if it still
+            // points at one of the returned matches; otherwise reset it.
+            userSelected:
+              comp.userSelected && matches.some((m: any) => m.benchmarkId === comp.userSelected)
+                ? comp.userSelected
+                : null,
           }
         }))
         console.log("[v0] Merged", aiResultsMap.size, "AI results into comparisons in-memory (no refetch)")
