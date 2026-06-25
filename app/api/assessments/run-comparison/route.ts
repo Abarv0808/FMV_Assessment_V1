@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { generateObject } from "ai"
 import { z } from "zod"
+import { countriesMatch, countryQueryVariants } from "@/lib/country-utils"
 
 // =====================================================
 // AI-POWERED SEMANTIC MATCHING v9 - Gemini via AI Gateway
@@ -266,11 +267,20 @@ export async function POST(request: Request) {
         fileIdFilter = benchmarkFileIds
         console.log("[v0] Filtering to selected benchmark files:", benchmarkFileIds.length)
       } else if (lineItemCountries.length > 0) {
+        // Expand each line-item country to all known spelling variants so an
+        // abbreviation like "US" matches a benchmark file stored as
+        // "United States". Without this, the exact-match IN() returns 0 rows
+        // and every item gets flagged NO_BENCHMARK_DATA.
+        const countryVariants = [
+          ...new Set(lineItemCountries.flatMap((c: string) => countryQueryVariants(c))),
+        ]
+        console.log("[v0] Country variants for benchmark lookup:", countryVariants.join(", "))
+
         // First, get benchmark_file IDs for the countries we need
         const { data: countryFiles, error: countryError } = await supabase
           .from("benchmark_files")
           .select("id, country")
-          .in("country", lineItemCountries)
+          .in("country", countryVariants)
           .limit(5000)
         
         console.log("[v0] Benchmark files for requested countries:", countryFiles?.length || 0, "Error:", countryError?.message || "none")
@@ -516,10 +526,10 @@ export async function POST(request: Request) {
       // Filter benchmarks by country if the line item has a country specified
       let countryFilteredBenchmarks = benchmarks
       if (lineItemCountry) {
-        countryFilteredBenchmarks = benchmarks.filter(bm => {
-          const bmCountry = bm.benchmark_files?.country || ""
-          return bmCountry.toLowerCase() === lineItemCountry.toLowerCase()
-        })
+        // Use alias-aware matching so "US" matches "United States", etc.
+        countryFilteredBenchmarks = benchmarks.filter(bm =>
+          countriesMatch(bm.benchmark_files?.country, lineItemCountry)
+        )
         console.log("[v0] Filtered to", countryFilteredBenchmarks.length, "benchmarks for country:", lineItemCountry)
       }
       
