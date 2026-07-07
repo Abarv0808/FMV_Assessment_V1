@@ -190,3 +190,38 @@ export function scoreToConfidence(score: number): "HIGH" | "MEDIUM" | "LOW" {
   if (score >= 0.6) return "MEDIUM"
   return "LOW"
 }
+
+type BenchmarkMatchLike = {
+  code?: string | null
+  procedureName?: string | null
+  country?: string | null
+  p25?: number | null
+  p50?: number | null
+  p75?: number | null
+  p90?: number | null
+  p100?: number | null
+}
+
+/**
+ * Collapse benchmark matches that refer to the SAME underlying benchmark.
+ * The benchmark_procedures table contains many duplicate rows for the same
+ * procedure (identical code/country/values imported across multiple benchmark
+ * files with different ids), so one logical match can appear several times.
+ * We key by a value-based identity (procedure code + country + percentile
+ * values, falling back to the normalized name) and keep the FIRST occurrence,
+ * so callers should pass matches already ordered best-first.
+ */
+export function dedupeBenchmarkMatches<T extends BenchmarkMatchLike>(matches: T[]): T[] {
+  if (!Array.isArray(matches) || matches.length <= 1) return matches
+  const seen = new Set<string>()
+  return matches.filter(m => {
+    const code = (m.code || "").toString().trim().toLowerCase()
+    const name = (m.procedureName || "").toString().trim().toLowerCase().replace(/\s+/g, " ")
+    const country = (m.country || "").toString().trim().toLowerCase()
+    const values = [m.p25, m.p50, m.p75, m.p90, m.p100].map(v => v ?? "").join("|")
+    const key = `${code || name}::${country}::${values}`
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}

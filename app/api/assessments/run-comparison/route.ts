@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { generateObject } from "ai"
 import { z } from "zod"
-import { fuzzyMatchScore, scoreToConfidence } from "@/lib/fuzzy-match"
+import { fuzzyMatchScore, scoreToConfidence, dedupeBenchmarkMatches } from "@/lib/fuzzy-match"
 
 // =====================================================
 // AI-POWERED SEMANTIC MATCHING v9 - Gemini via AI Gateway
@@ -617,6 +617,11 @@ export async function POST(request: Request) {
           matchedBenchmarks = [...matchedBenchmarks, ...supplemental].slice(0, 5)
         }
       }
+
+      // Collapse duplicate rows that point to the SAME underlying benchmark
+      // (the benchmark_procedures table has many identical rows imported across
+      // multiple files). Matches are already ordered best-first.
+      matchedBenchmarks = dedupeBenchmarkMatches(matchedBenchmarks)
 
       // Determine flag based on results
       let flag = "NO_MATCH"

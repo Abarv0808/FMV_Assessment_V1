@@ -76,6 +76,7 @@ import { ComparisonTable, getEffectiveTotalCost, getEffectiveUnitPrice } from "@
 import { AssessmentOverview } from "@/components/comparison/assessment-overview"
 import type { Assessment, AssessmentComparison, AssessmentStatus, AuditEvent, BenchmarkType, DataSource, ItemDecision } from "@/lib/types"
 import { useAuth } from "@/lib/auth-context"
+import { dedupeBenchmarkMatches } from "@/lib/fuzzy-match"
 import {
   Table,
   TableBody,
@@ -231,7 +232,9 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 originalFlag = parsed[0].originalFlag || null
                 matches = []
               } else {
-                matches = parsed
+                // Collapse duplicate benchmark rows so previously-stored
+                // comparisons don't show the same match multiple times.
+                matches = dedupeBenchmarkMatches(parsed)
               }
               console.log("[v0] Loaded ai_matches for line item:", matches.length, "matches", "originalFlag:", originalFlag)
             } catch (e) {
