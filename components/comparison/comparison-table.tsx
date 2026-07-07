@@ -47,7 +47,7 @@ interface ComparisonTableProps {
   onBenchmarkTypeChange?: (id: string, benchmarkType: BenchmarkType) => void
   onDecisionChange?: (id: string, decision: ItemDecision) => void
   onMatchSelect?: (id: string, match: any) => void
-  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment", value: string) => void
+  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice", value: string | number | null) => void
 }
 
 const flagConfig: Record<string, { label: string; color: string }> = {
@@ -142,21 +142,33 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
 
 const DECISION_OPTIONS: ItemDecision[] = ["To Assess", "In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
 
+// Resolve the effective per-unit price for a line item: the negotiated price
+// supersedes the unit price when it has been entered (> 0), otherwise the unit
+// price is used. This is the single source of truth for both Total Cost and
+// the FMV benchmark variance, so entering a negotiated price consistently
+// updates both.
+export function getEffectiveUnitPrice(lineItem: {
+  negotiatedPrice?: number | null
+  unitPrice?: number | null
+}): number {
+  return lineItem.negotiatedPrice != null && lineItem.negotiatedPrice > 0
+    ? lineItem.negotiatedPrice
+    : lineItem.unitPrice ?? 0
+}
+
 // Compute the effective Total Cost for a line item.
-// If a negotiated price has been entered, it takes precedence over unit price:
-// Total = negotiated price * number of units. Otherwise fall back to the
-// stored total cost (which is based on unit price).
+// Total Cost is always calculated as price * number of units.
+// If a negotiated price has been entered, it supersedes the unit price;
+// otherwise the unit price is used.
 export function getEffectiveTotalCost(lineItem: {
   negotiatedPrice?: number | null
+  unitPrice?: number | null
   numberOfUnit?: number
   numberOfUnits?: number
   totalCost?: number | null
 }): number {
   const units = lineItem.numberOfUnit ?? lineItem.numberOfUnits ?? 1
-  if (lineItem.negotiatedPrice != null && lineItem.negotiatedPrice > 0) {
-    return lineItem.negotiatedPrice * units
-  }
-  return lineItem.totalCost ?? 0
+  return getEffectiveUnitPrice(lineItem) * units
 }
 
 export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect, onLineItemUpdate }: ComparisonTableProps) {
@@ -172,6 +184,12 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   // We keep the typed value local for responsiveness and only persist on blur
   // (via onLineItemUpdate) so we don't fire a PATCH on every keystroke.
   const [commentDrafts, setCommentDrafts] = useState<Record<string, string>>({})
+
+  // Local draft state for the negotiated price input, keyed by line item id.
+  // Typing updates this immediately so the input stays responsive; we only
+  // persist (via onLineItemUpdate) on blur instead of awaiting a PATCH on every
+  // keystroke, which previously caused dropped characters / input lag.
+  const [negotiatedPriceDrafts, setNegotiatedPriceDrafts] = useState<Record<string, string>>({})
 
   // Per-row "user opened the Decision dropdown" gate. Radix Select fires
   // `onValueChange` during controlled-value reconciliation (without any user
@@ -336,7 +354,22 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
               decisionConfig["To Assess"]
             const selectedValue = getBenchmarkValue(comparison) ?? 0
             const hasBenchmarkValue = selectedValue > 0
-            const dynamicVariance = hasBenchmarkValue ? comparison.lineItem.unitPrice - selectedValue : 0
+            // Variance is measured against the price the site will actually be
+            // paid: the negotiated price supersedes the unit price when present
+            // (matching the Total Cost logic). Use the live draft value so the
+            // variance updates immediately as the user edits the negotiated price.
+            const draftNegotiated = negotiatedPriceDrafts[comparison.lineItem.id]
+            const effectiveNegotiated =
+              draftNegotiated !== undefined
+                ? draftNegotiated === ""
+                  ? null
+                  : parseFloat(draftNegotiated)
+                : comparison.lineItem.negotiatedPrice ?? null
+            const effectivePrice =
+              effectiveNegotiated != null && effectiveNegotiated > 0
+                ? effectiveNegotiated
+                : comparison.lineItem.unitPrice
+            const dynamicVariance = hasBenchmarkValue ? effectivePrice - selectedValue : 0
             const dynamicVariancePercent = hasBenchmarkValue ? (dynamicVariance / selectedValue) * 100 : 0
             const dynamicFlag: "GREEN" | "YELLOW" | "RED" = dynamicVariancePercent > 15 ? "RED" : dynamicVariancePercent > 5 ? "YELLOW" : "GREEN"
             // Only compute a variance-based flag when there's an actual benchmark
@@ -494,10 +527,31 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
                     <Input
                       type="number"
-                      value={comparison.lineItem.negotiatedPrice ?? ""}
+                      value={
+                        negotiatedPriceDrafts[comparison.lineItem.id] ??
+                        (comparison.lineItem.negotiatedPrice ?? "").toString()
+                      }
                       onChange={(e) => {
-                        const value = e.target.value === "" ? null : parseFloat(e.target.value)
-                        onLineItemUpdate?.(comparison.lineItem.id, "negotiatedPrice", value as any)
+                        setNegotiatedPriceDrafts((prev) => ({
+                          ...prev,
+                          [comparison.lineItem.id]: e.target.value,
+                        }))
+                      }}
+                      onBlur={(e) => {
+                        const raw = e.target.value
+                        const value = raw === "" ? null : parseFloat(raw)
+                        const current = comparison.lineItem.negotiatedPrice ?? null
+                        // Only persist when the value actually changed.
+                        if (value !== current && !(value === null && current === null)) {
+                          onLineItemUpdate?.(comparison.lineItem.id, "negotiatedPrice", value as any)
+                        }
+                        // Drop the local draft so the input reflects canonical
+                        // state again (e.g. after a re-run updates the value).
+                        setNegotiatedPriceDrafts((prev) => {
+                          const next = { ...prev }
+                          delete next[comparison.lineItem.id]
+                          return next
+                        })
                       }}
                       placeholder="Enter price"
                       className="h-7 w-[110px] text-right font-mono text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -592,7 +646,17 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
                   </TableCell>
                   <TableCell className="text-right font-mono">
-                    {getEffectiveTotalCost(comparison.lineItem).toLocaleString()}
+                    {getEffectiveTotalCost(
+                      negotiatedPriceDrafts[comparison.lineItem.id] !== undefined
+                        ? {
+                            ...comparison.lineItem,
+                            negotiatedPrice:
+                              negotiatedPriceDrafts[comparison.lineItem.id] === ""
+                                ? null
+                                : parseFloat(negotiatedPriceDrafts[comparison.lineItem.id]),
+                          }
+                        : comparison.lineItem,
+                    ).toLocaleString()}
                   </TableCell>
                   <TableCell className="font-mono text-[11px]">
                     {selectedCode ? (

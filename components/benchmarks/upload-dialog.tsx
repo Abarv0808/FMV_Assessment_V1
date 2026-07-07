@@ -87,9 +87,19 @@ const METADATA_LABELS = [
   'countries:', 'code', 'procedure name', 'name', 'sub total', 'total'
 ]
 
+// Generic single words that legitimately appear INSIDE real procedure names
+// (e.g. "Document Storage, Archiving Total Cost"). These must only match when
+// the whole cell equals them — never as a substring — otherwise valid
+// procedures get dropped as if they were metadata/subtotal rows.
+const EXACT_ONLY_LABELS = new Set(["code", "name", "total"])
+
 function isMetadataRow(name: string): boolean {
   const lower = name.toLowerCase().trim()
-  return METADATA_LABELS.some(label => lower === label || lower.includes(label))
+  if (!lower) return true
+  return METADATA_LABELS.some(label => {
+    if (EXACT_ONLY_LABELS.has(label)) return lower === label
+    return lower === label || lower.includes(label)
+  })
 }
 
 function parseNumber(val: any): number | null {
@@ -131,12 +141,14 @@ function parseExcelFile(buffer: ArrayBuffer): ParsedCountry[] {
       for (let j = 0; j < row.length; j++) {
         const cell = String(row[j] || "").toLowerCase().trim()
         if (cell === "code") codeCol = j
-        if (cell === "procedure") procCol = j
-        if (cell === "low") { lowCol = j; foundLow = true }
-        if (cell === "med") { medCol = j; foundMed = true }
-        if (cell === "high") { highCol = j; foundHigh = true }
-        if (cell === "90th") { p90Col = j; found90 = true }
-        if (cell === "100th") p100Col = j
+        if (cell === "procedure" || cell === "procedure name") procCol = j
+        // Accept common synonyms so a slightly different header layout does not
+        // cause the ENTIRE country sheet to be silently skipped.
+        if (["low", "p25", "25th", "q1"].includes(cell)) { lowCol = j; foundLow = true }
+        if (["med", "median", "p50", "50th", "mid"].includes(cell)) { medCol = j; foundMed = true }
+        if (["high", "p75", "75th", "q3"].includes(cell)) { highCol = j; foundHigh = true }
+        if (["90th", "p90", "90"].includes(cell)) { p90Col = j; found90 = true }
+        if (["100th", "p100", "100", "max"].includes(cell)) p100Col = j
       }
       
       // Found the header row when we see Low, Med, High, 90th
@@ -146,7 +158,14 @@ function parseExcelFile(buffer: ArrayBuffer): ParsedCountry[] {
       }
     }
     
-    if (headerRowIdx < 0) continue // No valid header found
+    if (headerRowIdx < 0) {
+      // Never fail silently: make it obvious that a whole country was skipped.
+      console.warn(
+        `[v0] Benchmark upload: no recognizable header row found in sheet "${sheetName}" — ` +
+          `this country was SKIPPED. Expected price columns like Low/Med/High/90th (or P25/P50/P75/P90).`,
+      )
+      continue
+    }
     
     // Parse data rows after header
     for (let i = headerRowIdx + 1; i < rows.length; i++) {
@@ -162,8 +181,8 @@ function parseExcelFile(buffer: ArrayBuffer): ParsedCountry[] {
       if (codeLower.match(/^non.?procedures?\s*\(\d+\)/)) { currentCategory = "Non-Procedures"; continue }
       if (codeLower.match(/^site\s*costs?\s*\(\d+\)/)) { currentCategory = "Site Costs"; continue }
       
-      // Skip metadata, empty, or subtotal rows
-      if (!procCell || procCell.length < 3) continue
+      // Skip only truly-empty, metadata, or subtotal rows.
+      if (!procCell) continue
       if (isMetadataRow(codeCell) || isMetadataRow(procCell)) continue
       if (codeLower.includes("sub total") || codeLower.includes("subtotal")) continue
       
@@ -173,11 +192,17 @@ function parseExcelFile(buffer: ArrayBuffer): ParsedCountry[] {
       const high = parseNumber(row[highCol])
       const p90 = parseNumber(row[p90Col])
       const p100 = p100Col >= 0 ? parseNumber(row[p100Col]) : null
-      
-      if (procCell.length > 2 && procCell.length < 500) {
+
+      // Keep the procedure if it has a code OR any price value. This preserves
+      // valid rows with very short names (e.g. "CT") or unusually long names,
+      // which the previous length gates (< 3 and >= 500 chars) silently dropped.
+      const hasCode = codeCell.length > 0
+      const hasPrice = [low, med, high, p90, p100].some(v => v !== null)
+      if (hasCode || hasPrice) {
         procedures.push({
           code: codeCell,
-          name: procCell,
+          // Guard against pathological cell sizes without dropping the row.
+          name: procCell.length > 500 ? procCell.slice(0, 500) : procCell,
           category: currentCategory,
           p25: low,
           p50: med,
@@ -185,6 +210,8 @@ function parseExcelFile(buffer: ArrayBuffer): ParsedCountry[] {
           p90: p90,
           p100: p100
         })
+      } else {
+        console.warn(`[v0] Benchmark upload: skipped row in "${sheetName}" (no code and no price):`, procCell.slice(0, 60))
       }
     }
     

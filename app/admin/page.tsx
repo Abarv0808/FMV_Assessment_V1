@@ -199,8 +199,8 @@ export default function AdminPage() {
                       <CardTitle className="text-base">Mapping Dictionary</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground mb-4">Configure code mappings between systems</p>
-                      <Button variant="outline" size="sm">
+                      <p className="text-sm text-muted-foreground mb-4">Configure matching rules: role synonyms, therapeutic areas, and disambiguation</p>
+                      <Button variant="outline" size="sm" onClick={() => router.push("/admin/matching-rules")}>
                         Manage Mappings
                       </Button>
                     </CardContent>

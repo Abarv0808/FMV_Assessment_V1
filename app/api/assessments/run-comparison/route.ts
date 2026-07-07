@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { generateObject } from "ai"
 import { z } from "zod"
+import { fuzzyMatchScore, scoreToConfidence, dedupeBenchmarkMatches } from "@/lib/fuzzy-match"
+import { loadMatchingRules, applyMatchingRules } from "@/lib/fmv-rules"
 import { countriesMatch, countryQueryVariants } from "@/lib/country-utils"
 
 // =====================================================
@@ -25,7 +27,7 @@ async function findAIMatches(
   vendorDescription: string,
   vendorCategory: string,
   benchmarkProcedures: { id: string; name: string; category: string; index: number }[],
-  context: { country: string; lineItemId: string }
+  context: { country: string; lineItemId: string; domainHints?: string }
 ): Promise<{ benchmarkIndex: number; confidence: "HIGH" | "MEDIUM" | "LOW"; reasoning: string }[]> {
 
   const startTime = Date.now()
@@ -69,8 +71,14 @@ STRICT MATCHING RULES (read carefully):
    - No benchmark in the list represents the same procedure/service.
 4. NEVER force a low-confidence match just to return something. An empty array is the correct answer when nothing fits.
 
+WORD-FORM, PARTIAL & TYPO TOLERANCE:
+- Treat different grammatical forms of the same root word as the SAME term: e.g. "Archive" = "Archival" = "Archiving" = "Arch." (abbreviation); "Monitor" = "Monitoring"; "Ship" = "Shipping" = "Shipment".
+- Treat obvious partial words / abbreviations as their full term when the intent is clear (e.g. "Arch" -> Archive/Archival, "Admin" -> Administrative, "Path" -> Pathology).
+- Tolerate minor misspellings and typos (e.g. "arciv" -> Archive, "pharmacy" -> Pharmacy).
+- This tolerance only helps you RECOGNIZE the same underlying activity — it does NOT relax the strictness rules above for taxes, discounts, overheads or unrelated services.
+
 CONFIDENCE LEVELS (only use after passing the strictness check above):
-- HIGH: Clear, unambiguous match — same procedure or service, equivalent terminology.
+- HIGH: Clear, unambiguous match — same procedure or service, equivalent terminology (including word-form/partial/typo variants of the same root).
 - MEDIUM: Likely match — same type of activity but different naming convention.
 - LOW: Use sparingly. Only when the activity is closely related (e.g., specialty variant of the same procedure). NEVER use LOW for taxes, overheads, discounts, fees-on-fees, or unrelated categories.
 
@@ -83,7 +91,7 @@ COMMON EQUIVALENT TERMS IN CLINICAL TRIALS (use these to RECOGNIZE matches, not 
 - "Regulatory Affairs" = "Regulatory Submission" / "Compliance"
 - "Data Management" = "Data Entry" / "CRF Completion"
 - "Patient Stipend" = "Subject Compensation" / "Patient Reimbursement"
-
+${context.domainHints ? `\nFMV DOMAIN RULES IN EFFECT (prefer these role/term equivalences when applicable):\n${context.domainHints}\n` : ""}
 Return up to 3 matches, sorted best-first. If nothing genuinely matches, return { "matches": [] }.`
     })
 
@@ -127,51 +135,9 @@ Return up to 3 matches, sorted best-first. If nothing genuinely matches, return 
 }
 
 // =====================================================
-// FALLBACK: TRIGRAM-BASED MATCHING (if AI fails)
+// FALLBACK MATCHING (if AI fails) is handled by the shared, stem/prefix/typo
+// aware fuzzy matcher in "@/lib/fuzzy-match" (fuzzyMatchScore / scoreToConfidence).
 // =====================================================
-
-const STOPWORDS = new Set([
-  "a", "an", "the", "and", "or", "but", "in", "on", "at", "to", "for", "of", 
-  "with", "by", "from", "as", "is", "was", "are", "were", "been", "be", "have",
-  "has", "had", "do", "does", "did", "will", "would", "could", "should", "may",
-  "might", "must", "shall", "can", "need", "per", "each", "all", "any", "both",
-  "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own",
-  "same", "so", "than", "too", "very", "just", "also", "now", "etc"
-])
-
-function normText(s: string): string {
-  if (!s) return ""
-  let normalized = s.toLowerCase().trim()
-  normalized = normalized.replace(/[^\w\s]/g, " ")
-  normalized = normalized.replace(/\s+/g, " ").trim()
-  const words = normalized.split(" ").filter(w => !STOPWORDS.has(w) && w.length > 1)
-  return words.join(" ")
-}
-
-function getTrigrams(text: string): Set<string> {
-  const trigrams = new Set<string>()
-  const padded = `  ${text}  `
-  for (let i = 0; i < padded.length - 2; i++) {
-    trigrams.add(padded.substring(i, i + 3))
-  }
-  return trigrams
-}
-
-function trigramSimilarity(a: string, b: string): number {
-  if (!a || !b) return 0
-  const trigramsA = getTrigrams(a)
-  const trigramsB = getTrigrams(b)
-  
-  let intersection = 0
-  for (const t of trigramsA) {
-    if (trigramsB.has(t)) intersection++
-  }
-  
-  const denominator = Math.sqrt(trigramsA.size) * Math.sqrt(trigramsB.size)
-  if (denominator === 0) return 0
-  
-  return intersection / denominator
-}
 
 // =====================================================
 // MAIN API HANDLER
@@ -407,6 +373,21 @@ export async function POST(request: Request) {
 
     const results: any[] = []
 
+    // Load the editable FMV domain-knowledge rules once for this run. Degrades
+    // to empty (no-op) if the rule tables don't exist yet.
+    const matchingRules = await loadMatchingRules(supabase)
+    console.log(
+      "[v0] Matching rules loaded:",
+      matchingRules.synonymRules.length, "synonym,",
+      matchingRules.disambiguationRules.length, "disambiguation,",
+      matchingRules.therapeuticAreas.length, "therapeutic areas",
+    )
+
+    // Compact, soft guidance for the AI so it aligns with the hard-enforced rules.
+    const domainHints = matchingRules.synonymRules
+      .map(r => `- ${r.triggers.slice(0, 4).join(" / ")} -> ${r.label}`)
+      .join("\n")
+
     // 3. For each line item, use AI-powered semantic matching with country-specific filtering
     console.log("[v0] Starting AI-powered matching for", lineItems.length, "items...")
     
@@ -563,7 +544,7 @@ export async function POST(request: Request) {
           cleanDescription,
           vendorCostCategory,
           countryBenchmarkForAI,
-          { country: lineItemCountry, lineItemId: lineItem.id }
+          { country: lineItemCountry, lineItemId: lineItem.id, domainHints }
         )
         
         if (aiMatches.length > 0) {
@@ -595,29 +576,29 @@ export async function POST(request: Request) {
         console.log("[v0] AI matching failed, falling back to trigram:", aiError.message)
       }
 
-      // Fallback to trigram matching if AI fails or returns no results
+      // Fallback to fuzzy matching if AI fails or returns no results.
+      // The fuzzy matcher is stem/prefix/typo aware, so short or partial vendor
+      // terms still find the right benchmark (e.g. "Arch" -> Archive/Archival/
+      // Archiving, "arciv" -> Archive).
       if (matchedBenchmarks.length === 0) {
-        console.log("[v0] Using trigram fallback for:", cleanDescription.substring(0, 30), "Country:", lineItemCountry || "ALL")
-        
-        const normVendorText = normText(cleanDescription)
-        
-        // Use country-filtered benchmarks for trigram matching too
-        const trigramMatches = countryFilteredBenchmarks
+        console.log("[v0] Using fuzzy fallback for:", cleanDescription.substring(0, 30), "Country:", lineItemCountry || "ALL")
+
+        const fuzzyMatches = countryFilteredBenchmarks
           .map(bm => ({
             bm,
-            similarity: trigramSimilarity(normVendorText, normText(bm.procedure_name || ""))
+            similarity: fuzzyMatchScore(cleanDescription, bm.procedure_name || "")
           }))
-          .filter(m => m.similarity >= 0.35)
+          .filter(m => m.similarity >= 0.4)
           .sort((a, b) => b.similarity - a.similarity)
           .slice(0, 3)
-        
-        matchedBenchmarks = trigramMatches.map(m => ({
+
+        matchedBenchmarks = fuzzyMatches.map(m => ({
           benchmarkId: m.bm.id,
           procedureName: m.bm.procedure_name,
           code: m.bm.procedure_code || null,
           similarity: m.similarity,
-          confidence: m.similarity >= 0.7 ? "HIGH" : m.similarity >= 0.5 ? "MEDIUM" : "LOW",
-          reasoning: "Matched by text similarity",
+          confidence: scoreToConfidence(m.similarity),
+          reasoning: "Matched by fuzzy text similarity (stem/partial/typo aware)",
           isAIMatch: false,
           p25: m.bm.p25,
           p50: m.bm.p50,
@@ -627,6 +608,59 @@ export async function POST(request: Request) {
           country: m.bm.benchmark_files?.country || "Unknown",
           category: m.bm.category || "Other"
         }))
+      } else {
+        // AI returned matches. Supplement them with any STRONG fuzzy matches
+        // (stem/partial/typo) that the AI may not have surfaced, so partial
+        // vendor terms like "Arch" still expose Archive/Archival/Archiving as
+        // selectable options. AI matches keep priority as the best match; we
+        // only append additional candidates and cap the total at 5.
+        const existingIds = new Set(matchedBenchmarks.map(m => m.benchmarkId))
+        const supplemental = countryFilteredBenchmarks
+          .filter(bm => !existingIds.has(bm.id))
+          .map(bm => ({ bm, similarity: fuzzyMatchScore(cleanDescription, bm.procedure_name || "") }))
+          .filter(m => m.similarity >= 0.6) // only high-quality extras
+          .sort((a, b) => b.similarity - a.similarity)
+          .slice(0, 3)
+          .map(m => ({
+            benchmarkId: m.bm.id,
+            procedureName: m.bm.procedure_name,
+            code: m.bm.procedure_code || null,
+            similarity: m.similarity,
+            confidence: scoreToConfidence(m.similarity),
+            reasoning: "Additional fuzzy match (stem/partial/typo aware)",
+            isAIMatch: false,
+            p25: m.bm.p25,
+            p50: m.bm.p50,
+            p75: m.bm.p75,
+            p90: m.bm.p90,
+            p100: m.bm.p100,
+            country: m.bm.benchmark_files?.country || "Unknown",
+            category: m.bm.category || "Other"
+          }))
+
+        if (supplemental.length > 0) {
+          console.log("[v0] Added", supplemental.length, "supplemental fuzzy matches")
+          matchedBenchmarks = [...matchedBenchmarks, ...supplemental].slice(0, 5)
+        }
+      }
+
+      // Collapse duplicate rows that point to the SAME underlying benchmark
+      // (the benchmark_procedures table has many identical rows imported across
+      // multiple files). Matches are already ordered best-first.
+      matchedBenchmarks = dedupeBenchmarkMatches(matchedBenchmarks)
+
+      // Hard-enforce editable FMV domain rules (role synonyms, mandatory links,
+      // TA-specific physician, IRB/archive disambiguation). Rule-injected matches
+      // take precedence and mandatory links are always ensured present.
+      const ruled = applyMatchingRules({
+        description: cleanDescription,
+        countryBenchmarks: countryFilteredBenchmarks as any,
+        currentMatches: matchedBenchmarks as any,
+        rules: matchingRules,
+      })
+      matchedBenchmarks = ruled.matches
+      if (ruled.appliedRules.length > 0) {
+        console.log(`[v0] Domain rules applied to "${cleanDescription.substring(0, 40)}":`, ruled.appliedRules.join(" | "))
       }
 
       // Determine flag based on results

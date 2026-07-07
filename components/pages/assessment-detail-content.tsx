@@ -23,6 +23,15 @@ import {
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import {
   Select,
   SelectContent,
@@ -56,16 +65,18 @@ import {
   Sparkles,
   Loader2,
   ChevronDown,
+  Pencil,
 } from "lucide-react"
 import {
   mockAssessments,
   mockAssessmentComparisons,
   mockAssessmentLineItems,
 } from "@/lib/mock-data"
-import { ComparisonTable, getEffectiveTotalCost } from "@/components/comparison/comparison-table"
+import { ComparisonTable, getEffectiveTotalCost, getEffectiveUnitPrice } from "@/components/comparison/comparison-table"
 import { AssessmentOverview } from "@/components/comparison/assessment-overview"
 import type { Assessment, AssessmentComparison, AssessmentStatus, AuditEvent, BenchmarkType, DataSource, ItemDecision } from "@/lib/types"
 import { useAuth } from "@/lib/auth-context"
+import { dedupeBenchmarkMatches } from "@/lib/fuzzy-match"
 import {
   Table,
   TableBody,
@@ -95,6 +106,16 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   const [decisionFilter, setDecisionFilter] = useState<string>("ALL")
   const [showArchiveConfirm, setShowArchiveConfirm] = useState(false)
   const [showRestoreConfirm, setShowRestoreConfirm] = useState(false)
+  // Edit-details dialog state. editForm holds the amendable metadata fields
+  // (name, study tracking #, protocol #, therapeutic area).
+  const [showEditDialog, setShowEditDialog] = useState(false)
+  const [isSavingEdit, setIsSavingEdit] = useState(false)
+  const [editForm, setEditForm] = useState({
+    name: "",
+    studyTrackingNumber: "",
+    protocolNumber: "",
+    therapeuticArea: "",
+  })
   const [isLoading, setIsLoading] = useState(true)
   const [isRealAssessment, setIsRealAssessment] = useState(false)
   const [isRunningComparison, setIsRunningComparison] = useState(false)
@@ -162,6 +183,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         auditEvents: []
       }
 
+      // Load the persisted audit trail so the History tab survives reloads.
+      try {
+        const auditRes = await fetch(`/api/assessments/${id}/audit`)
+        const { events } = await auditRes.json()
+        if (Array.isArray(events)) {
+          mappedAssessment.auditEvents = events
+        }
+      } catch (e) {
+        console.log("[v0] Could not load audit log:", e)
+      }
+
       // Fetch comparisons via API (server-side to bypass RLS)
       const comparisonsResponse = await fetch(`/api/assessments/${id}/comparisons`)
       const { comparisons: comparisonsData, error: comparisonsError } = await comparisonsResponse.json()
@@ -201,7 +233,9 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 originalFlag = parsed[0].originalFlag || null
                 matches = []
               } else {
-                matches = parsed
+                // Collapse duplicate benchmark rows so previously-stored
+                // comparisons don't show the same match multiple times.
+                matches = dedupeBenchmarkMatches(parsed)
               }
               console.log("[v0] Loaded ai_matches for line item:", matches.length, "matches", "originalFlag:", originalFlag)
             } catch (e) {
@@ -269,16 +303,48 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   // ReferenceError. Placeholder removed here.
 
   const appendAudit = useCallback((action: string) => {
+    const tempId = `ae-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+    const userName = user?.name ?? "Unknown User"
     const event: AuditEvent = {
-      id: `ae-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-      userName: user?.name ?? "Unknown User",
+      id: tempId,
+      userName,
       action,
       timestamp: new Date().toISOString(),
     }
+    // Optimistically show the event immediately.
     setAssessment((prev) =>
       prev ? { ...prev, auditEvents: [event, ...(prev.auditEvents ?? [])] } : prev
     )
-  }, [user?.name])
+
+    // Persist to the database so the History tab survives reloads. Only real
+    // (DB-backed) assessments are persisted; mock/demo assessments stay local.
+    if (!isRealAssessment) return
+    void (async () => {
+      try {
+        const res = await fetch(`/api/assessments/${id}/audit`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action, userName }),
+        })
+        const { event: saved } = await res.json()
+        // Reconcile the optimistic entry with the server-assigned id/timestamp.
+        if (saved?.id) {
+          setAssessment((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  auditEvents: (prev.auditEvents ?? []).map((e) =>
+                    e.id === tempId ? saved : e
+                  ),
+                }
+              : prev
+          )
+        }
+      } catch (e) {
+        console.log("[v0] Could not persist audit event:", e)
+      }
+    })()
+  }, [user?.name, id, isRealAssessment])
 
   const handleStatusChange = useCallback((_id: string, newStatus: AssessmentStatus) => {
     setAssessment((prev) => prev ? { ...prev, status: newStatus, updatedAt: new Date().toISOString() } : prev)
@@ -303,7 +369,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           low: newBenchmarkLow,
         }
         const selectedVal = valMap[c.selectedBenchmarkType] ?? 0
-        const variance = selectedVal > 0 ? c.lineItem.unitPrice - selectedVal : 0
+        const variance = selectedVal > 0 ? getEffectiveUnitPrice(c.lineItem) - selectedVal : 0
         const variancePercent = selectedVal > 0 ? (variance / selectedVal) * 100 : 0
         let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
         if (variancePercent > 15) flag = "RED"
@@ -411,7 +477,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           low: c.benchmarkLow,
         }
         const selectedVal = valMap[benchmarkType] ?? 0
-        const variance = selectedVal > 0 ? c.lineItem.unitPrice - selectedVal : 0
+        const variance = selectedVal > 0 ? getEffectiveUnitPrice(c.lineItem) - selectedVal : 0
         const variancePercent = selectedVal > 0 ? (variance / selectedVal) * 100 : 0
         let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
         if (variancePercent > 15) flag = "RED"
@@ -434,7 +500,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         
         // Calculate variance against selected benchmark type
         const selectedVal = benchmark90th || benchmarkHigh || benchmarkMed || 0
-        const variance = selectedVal > 0 ? c.lineItem.unitPrice - selectedVal : 0
+        const variance = selectedVal > 0 ? getEffectiveUnitPrice(c.lineItem) - selectedVal : 0
         const variancePercent = selectedVal > 0 ? (variance / selectedVal) * 100 : 0
         let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
         if (variancePercent > 15) flag = "RED"
@@ -594,6 +660,67 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     }
   }, [id, appendAudit, router])
 
+  // Open the edit dialog, seeding the form with the current assessment values.
+  const openEditDialog = useCallback(() => {
+    if (!assessment) return
+    setEditForm({
+      name: assessment.name || "",
+      studyTrackingNumber: assessment.studyTrackingNumber || "",
+      protocolNumber: assessment.protocolNumber || "",
+      therapeuticArea: assessment.therapeuticArea || "",
+    })
+    setShowEditDialog(true)
+  }, [assessment])
+
+  // Persist amended metadata fields to the assessment row via the PATCH route.
+  const handleSaveEdit = useCallback(async () => {
+    const trimmedName = editForm.name.trim()
+    if (!trimmedName) {
+      alert("Assessment name is required.")
+      return
+    }
+    setIsSavingEdit(true)
+    try {
+      const response = await fetch(`/api/assessments/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: trimmedName,
+          study_tracking_number: editForm.studyTrackingNumber.trim() || null,
+          protocol_number: editForm.protocolNumber.trim() || null,
+          therapeutic_area: editForm.therapeuticArea.trim() || null,
+        }),
+      })
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ error: "Update failed" }))
+        console.error("[v0] Error updating assessment:", error)
+        alert("Failed to save changes: " + (error.error || response.statusText))
+        return
+      }
+
+      setAssessment((prev) =>
+        prev
+          ? {
+              ...prev,
+              name: trimmedName,
+              studyTrackingNumber: editForm.studyTrackingNumber.trim(),
+              protocolNumber: editForm.protocolNumber.trim(),
+              therapeuticArea: editForm.therapeuticArea.trim(),
+              updatedAt: new Date().toISOString(),
+            }
+          : prev
+      )
+      appendAudit("Amended assessment details")
+      setShowEditDialog(false)
+    } catch (error: any) {
+      console.error("[v0] Exception updating assessment:", error)
+      alert("Error saving changes: " + error.message)
+    } finally {
+      setIsSavingEdit(false)
+    }
+  }, [id, editForm, appendAudit])
+
   // Run AI benchmark comparison
   const handleRunComparison = useCallback(async () => {
     console.log("[v0] handleRunComparison called, comparisons.length:", comparisons.length)
@@ -705,7 +832,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   }, [id, comparisons, appendAudit])
   
   // Handle line item field updates (additional information, cost category)
-  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment", value: string) => {
+  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice", value: string | number | null) => {
     try {
       const response = await fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
@@ -717,15 +844,34 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         // Update local state
         setComparisons(prev => prev.map(comp => {
           if (comp.lineItem.id === lineItemId) {
-            return {
-              ...comp,
-              lineItem: {
-                ...comp.lineItem,
-                [field]: value,
-                // Also update description if it's additionalInformation
-                ...(field === "additionalInformation" ? { description: value } : {})
+            const updatedLineItem = {
+              ...comp.lineItem,
+              [field]: value,
+              // Also update description if it's additionalInformation
+              ...(field === "additionalInformation" ? { description: value } : {})
+            }
+            // When the negotiated price changes it supersedes the unit price, so
+            // recompute the stored FMV variance/flag against the selected
+            // benchmark. This keeps the Excel export and any consumers of the
+            // stored variance in sync with the on-screen (dynamic) variance.
+            if (field === "negotiatedPrice") {
+              const valMap: Record<BenchmarkType, number | undefined> = {
+                p90: comp.benchmark90th,
+                high: comp.benchmarkHigh,
+                med: comp.benchmarkMed,
+                low: comp.benchmarkLow,
+              }
+              const selectedVal = valMap[comp.selectedBenchmarkType] ?? 0
+              if (selectedVal > 0) {
+                const variance = getEffectiveUnitPrice(updatedLineItem) - selectedVal
+                const variancePercent = (variance / selectedVal) * 100
+                let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
+                if (variancePercent > 15) flag = "RED"
+                else if (variancePercent > 5) flag = "YELLOW"
+                return { ...comp, lineItem: updatedLineItem, variance, variancePercent, flag }
               }
             }
+            return { ...comp, lineItem: updatedLineItem }
           }
           return comp
         }))
@@ -840,6 +986,28 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     const fmt = (v?: number | null) =>
       v == null ? "-" : v.toLocaleString("en-US", { maximumFractionDigits: 0 })
 
+    // Normalize free-text comments for the PDF. jsPDF's standard Helvetica font
+    // can only encode WinAnsi characters, so exotic Unicode spaces (e.g. the
+    // narrow no-break space U+202F that Word/Excel insert) get rendered as
+    // stray "/" glyphs AND make autotable justify the line, spreading the
+    // characters out ("b u d g e t . / / /"). We map every Unicode space
+    // separator to a normal space, drop zero-width/format characters, and
+    // transliterate common typographic punctuation to ASCII so the Comments
+    // column wraps cleanly and shows the full value.
+    const cleanComment = (v?: string | null) =>
+      (v || "")
+        // All Unicode whitespace / line/paragraph separators -> normal space.
+        .replace(/[\r\n\t\f\v\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+/g, " ")
+        // Zero-width and BOM/format characters -> remove.
+        .replace(/[\u200b-\u200d\u2060\ufeff]/g, "")
+        // Common smart punctuation -> ASCII so nothing renders as a stray glyph.
+        .replace(/[\u2018\u2019\u201a\u201b]/g, "'")
+        .replace(/[\u201c\u201d\u201e\u201f]/g, '"')
+        .replace(/[\u2013\u2014\u2015]/g, "-")
+        .replace(/\u2026/g, "...")
+        .replace(/\s{2,}/g, " ")
+        .trim()
+
     const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" })
     const generatedAt = new Date().toLocaleString("en-US")
 
@@ -859,7 +1027,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     const body = filteredComparisons.map((c, idx) => {
       const selVal = getBenchmarkVal(c)
       const hasVal = selVal > 0
-      const variancePct = hasVal ? ((c.lineItem.unitPrice - selVal) / selVal) * 100 : 0
+      const variancePct = hasVal ? ((getEffectiveUnitPrice(c.lineItem) - selVal) / selVal) * 100 : 0
       const dynFlag = variancePct > 15 ? "RED" : variancePct > 5 ? "YELLOW" : "GREEN"
       const effFlag = hasVal
         ? dynFlag
@@ -891,7 +1059,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           c.lineItem.decision || "-",
           c.lineItem.numberOfUnit ?? "-",
           fmt(getEffectiveTotalCost(c.lineItem)),
-          c.lineItem.comment || "",
+          cleanComment(c.lineItem.comment),
         ]
       }
 
@@ -911,7 +1079,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         c.lineItem.numberOfUnit ?? "-",
         fmt(getEffectiveTotalCost(c.lineItem)),
         code,
-        c.lineItem.comment || "",
+        cleanComment(c.lineItem.comment),
       ]
     })
 
@@ -935,22 +1103,25 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           ? ["", "", "", "Grand Total", "", "", "", "", "", fmt(totalCostSum), ""]
           : ["", "", "", "Grand Total", "", "", "", "", "", "", "", "", "", fmt(totalCostSum), "", ""],
       ],
-      styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak" },
+      styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak", valign: "top" },
       headStyles: { fillColor: [30, 41, 59], textColor: 255, fontSize: 6.5 },
       footStyles: { fillColor: [241, 245, 249], textColor: 0, fontStyle: "bold" },
+      // Keep each row (including tall wrapped comments) intact on a single page
+      // so long comments never split mid-cell into garbled continuation lines.
+      rowPageBreak: "avoid",
       columnStyles: isExternal
         ? {
             0: { cellWidth: 18 },
-            2: { cellWidth: 80 },  // Cost Category narrowed to make room for Comments
-            3: { cellWidth: 150 },
-            10: { cellWidth: 110 }, // Comments
+            2: { cellWidth: 70 },  // Cost Category narrowed to make room for Comments
+            3: { cellWidth: 130 },
+            10: { cellWidth: 150 }, // Comments widened for full wrapping
           }
         : {
             0: { cellWidth: 18 },
-            2: { cellWidth: 70 },  // Cost Category narrowed to make room for Comments
-            3: { cellWidth: 120 },
-            4: { cellWidth: 100 },
-            15: { cellWidth: 90 }, // Comments
+            2: { cellWidth: 62 },  // Cost Category narrowed to make room for Comments
+            3: { cellWidth: 105 },
+            4: { cellWidth: 90 },
+            15: { cellWidth: 130 }, // Comments widened for full wrapping
           },
       margin: { left: 40, right: 40 },
     })
@@ -984,6 +1155,12 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {isRealAssessment && (
+              <Button variant="outline" onClick={openEditDialog}>
+                <Pencil className="h-4 w-4 mr-2" />
+                Edit Details
+              </Button>
+            )}
             {assessment.status === "ARCHIVED" && (
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90" onClick={() => setShowRestoreConfirm(true)}>
                 <RotateCcw className="h-4 w-4 mr-2" />
@@ -1282,6 +1459,70 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           </TabsContent>
         </Tabs>
       </div>
+
+      <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
+        <DialogContent className="sm:max-w-[480px]">
+          <DialogHeader>
+            <DialogTitle>Edit assessment details</DialogTitle>
+            <DialogDescription>
+              Amend the metadata for this assessment. These changes do not affect the uploaded line items or benchmark comparison.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-2">
+            <div className="grid gap-2">
+              <Label htmlFor="edit-name">Assessment Name</Label>
+              <Input
+                id="edit-name"
+                value={editForm.name}
+                onChange={(e) => setEditForm((prev) => ({ ...prev, name: e.target.value }))}
+                placeholder="Enter assessment name"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="edit-tracking">{"Study tracking#"}</Label>
+              <Input
+                id="edit-tracking"
+                value={editForm.studyTrackingNumber}
+                onChange={(e) => setEditForm((prev) => ({ ...prev, studyTrackingNumber: e.target.value }))}
+                placeholder="e.g. IISR-2026-200833"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="edit-protocol">Protocol Number</Label>
+              <Input
+                id="edit-protocol"
+                value={editForm.protocolNumber}
+                onChange={(e) => setEditForm((prev) => ({ ...prev, protocolNumber: e.target.value }))}
+                placeholder="Enter protocol number"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="edit-ta">Therapeutic Area</Label>
+              <Input
+                id="edit-ta"
+                value={editForm.therapeuticArea}
+                onChange={(e) => setEditForm((prev) => ({ ...prev, therapeuticArea: e.target.value }))}
+                placeholder="Enter therapeutic area"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowEditDialog(false)} disabled={isSavingEdit}>
+              Cancel
+            </Button>
+            <Button onClick={handleSaveEdit} disabled={isSavingEdit}>
+              {isSavingEdit ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Save Changes"
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <AlertDialog open={showArchiveConfirm} onOpenChange={setShowArchiveConfirm}>
         <AlertDialogContent>
