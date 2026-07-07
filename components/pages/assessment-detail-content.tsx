@@ -920,14 +920,25 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     const fmt = (v?: number | null) =>
       v == null ? "-" : v.toLocaleString("en-US", { maximumFractionDigits: 0 })
 
-    // Normalize free-text comments for the PDF. Embedded newlines, carriage
-    // returns, tabs and non-breaking spaces make jsPDF's splitTextToSize
-    // mis-measure the text, producing garbled inter-character spacing on
-    // wrapped/continuation lines. Collapse all whitespace to single spaces so
-    // the Comments column wraps cleanly and shows the full value.
+    // Normalize free-text comments for the PDF. jsPDF's standard Helvetica font
+    // can only encode WinAnsi characters, so exotic Unicode spaces (e.g. the
+    // narrow no-break space U+202F that Word/Excel insert) get rendered as
+    // stray "/" glyphs AND make autotable justify the line, spreading the
+    // characters out ("b u d g e t . / / /"). We map every Unicode space
+    // separator to a normal space, drop zero-width/format characters, and
+    // transliterate common typographic punctuation to ASCII so the Comments
+    // column wraps cleanly and shows the full value.
     const cleanComment = (v?: string | null) =>
       (v || "")
-        .replace(/[\r\n\t\u00a0\u2028\u2029]+/g, " ")
+        // All Unicode whitespace / line/paragraph separators -> normal space.
+        .replace(/[\r\n\t\f\v\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+/g, " ")
+        // Zero-width and BOM/format characters -> remove.
+        .replace(/[\u200b-\u200d\u2060\ufeff]/g, "")
+        // Common smart punctuation -> ASCII so nothing renders as a stray glyph.
+        .replace(/[\u2018\u2019\u201a\u201b]/g, "'")
+        .replace(/[\u201c\u201d\u201e\u201f]/g, '"')
+        .replace(/[\u2013\u2014\u2015]/g, "-")
+        .replace(/\u2026/g, "...")
         .replace(/\s{2,}/g, " ")
         .trim()
 
