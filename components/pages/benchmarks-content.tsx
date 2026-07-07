@@ -43,6 +43,7 @@ import {
   ChevronDown,
   Trash2,
   AlertTriangle,
+  Loader2,
 } from "lucide-react"
 import {
   AlertDialog,
@@ -93,6 +94,39 @@ export function BenchmarksContent() {
       alert("Error clearing data: " + err.message)
     } finally {
       setIsClearing(false)
+    }
+  }
+
+  // Tracks which indication/phase download is in progress so we can show a
+  // spinner and prevent duplicate clicks. Key is `${indication}` or `${indication}-${phase}`.
+  const [downloadingKey, setDownloadingKey] = useState<string | null>(null)
+
+  const handleDownload = async (indication: string, phase?: string) => {
+    const key = phase ? `${indication}-${phase}` : indication
+    setDownloadingKey(key)
+    try {
+      const params = new URLSearchParams({ indication })
+      if (phase) params.set("phase", phase)
+      const response = await fetch(`/api/bm/download?${params.toString()}`)
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({ error: "Download failed" }))
+        alert("Failed to download benchmark file: " + (err.error || response.statusText))
+        return
+      }
+      const blob = await response.blob()
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement("a")
+      link.href = url
+      const safe = (s: string) => s.replace(/[^a-z0-9]+/gi, "_").replace(/^_+|_+$/g, "")
+      link.download = `benchmarks_${safe(indication)}_${safe(phase || "All_Phases")}.xlsx`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    } catch (err: any) {
+      alert("Error downloading benchmark file: " + err.message)
+    } finally {
+      setDownloadingKey(null)
     }
   }
 
@@ -537,6 +571,24 @@ export function BenchmarksContent() {
                         <div className="flex items-center gap-2">
                           <Badge variant="outline">{phases.length} phase{phases.length !== 1 ? "s" : ""}</Badge>
                           <Badge variant="secondary">{allFiles.length} files</Badge>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 gap-1.5"
+                            disabled={downloadingKey === indication}
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              handleDownload(indication)
+                            }}
+                            aria-label={`Download all benchmark files for ${indication}`}
+                          >
+                            {downloadingKey === indication ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Download className="h-4 w-4" />
+                            )}
+                            <span className="hidden sm:inline">Download</span>
+                          </Button>
                         </div>
                       </div>
                     </CollapsibleTrigger>
@@ -569,7 +621,27 @@ export function BenchmarksContent() {
                                       </p>
                                     </div>
                                   </div>
-                                  <Badge variant="secondary" className="text-xs">{files.length} files</Badge>
+                                  <div className="flex items-center gap-2">
+                                    <Badge variant="secondary" className="text-xs">{files.length} files</Badge>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      className="h-7 gap-1.5"
+                                      disabled={downloadingKey === phaseKey}
+                                      onClick={(e) => {
+                                        e.stopPropagation()
+                                        handleDownload(indication, phase)
+                                      }}
+                                      aria-label={`Download ${phase} benchmark files for ${indication}`}
+                                    >
+                                      {downloadingKey === phaseKey ? (
+                                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                                      ) : (
+                                        <Download className="h-3.5 w-3.5" />
+                                      )}
+                                      <span className="hidden sm:inline">Download</span>
+                                    </Button>
+                                  </div>
                                 </div>
                               </CollapsibleTrigger>
                               <CollapsibleContent>
