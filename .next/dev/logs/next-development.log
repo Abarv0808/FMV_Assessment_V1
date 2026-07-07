@@ -1312,3 +1312,7 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [01:48:07.478] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
 [02:03:32.618] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:10:45.682] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/new. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:10:45.925] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport

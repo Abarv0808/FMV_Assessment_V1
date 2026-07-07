@@ -8,6 +8,7 @@
   "/api/bm/download/route": "app/api/bm/download/route.js",
   "/archive/page": "app/archive/page.js",
   "/assessments/[id]/page": "app/assessments/[id]/page.js",
+  "/assessments/new/page": "app/assessments/new/page.js",
   "/assessments/page": "app/assessments/page.js",
   "/benchmarks/[id]/page": "app/benchmarks/[id]/page.js",
   "/benchmarks/page": "app/benchmarks/page.js",

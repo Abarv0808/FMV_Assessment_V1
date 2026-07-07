@@ -31,6 +31,8 @@ export interface ParsedVendorProposal {
     sheetName: string
     rowCount: number
     parsedAt: string
+    skippedSummaryRows?: number
+    includedWithoutDescription?: number
   }
 }
 
@@ -227,28 +229,78 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
   const { headerRowIndex, columnMap } = headerInfo
   const lineItems: AssessmentLineItem[] = []
   let extractedCountry: string | null = null
-  
-  // Parse data rows (skip header row)
-  // STOP when "Description of costs" is empty - this marks the end of valid data
+
+  // Column indices that carry real line-item data. Used to decide whether a row
+  // is a genuine spacer (truly blank) vs. a data row that just happens to be
+  // missing a description.
+  const dataCols = [
+    columnMap.description, columnMap.country, columnMap.costCategory,
+    columnMap.unitType, columnMap.numberOfUnits, columnMap.unitPrice, columnMap.totalCost,
+  ].filter((c): c is number => c !== undefined)
+
+  const isBlankRow = (row: (string | number | undefined)[]): boolean => {
+    if (dataCols.length === 0) return (row || []).every((c) => String(c ?? "").trim() === "")
+    return dataCols.every((c) => String(row[c] ?? "").trim() === "")
+  }
+
+  // Detect a subtotal/total SUMMARY row by EXACT label match (never substring),
+  // so legitimate descriptions like "Document Storage, Archiving Total Cost" are
+  // NOT dropped.
+  const SUMMARY_LABELS = new Set([
+    "total", "subtotal", "sub-total", "sub total", "grand total",
+    "total cost", "total costs", "grand total cost", "grand total costs",
+  ])
+  const isSummaryRow = (row: (string | number | undefined)[], desc: string): boolean => {
+    const d = desc.toLowerCase().trim()
+    if (SUMMARY_LABELS.has(d)) return true
+    if (!d && SUMMARY_LABELS.has(String(row[0] ?? "").toLowerCase().trim())) return true
+    return false
+  }
+
+  // Diagnostics so nothing is ever dropped silently. We tolerate spacer rows
+  // inside the table and only stop after a real run of blank rows.
+  const MAX_CONSECUTIVE_BLANK = 8
+  let consecutiveBlank = 0
+  let skippedSummaryRows = 0
+  let includedWithoutDescription = 0
+
+  // Parse data rows (skip header row).
   for (let rowIndex = headerRowIndex + 1; rowIndex < data.length; rowIndex++) {
     const row = data[rowIndex]
-    if (!row || row.length === 0) continue
-    
-    // Check if Description of costs has data - this is the PRIMARY condition
-    const description = columnMap.description !== undefined ? String(row[columnMap.description] || "").trim() : ""
-    
-    // STOP parsing when Description is empty - we've reached the end of valid data
-    if (!description) {
-      console.log("[v0] Stopping at row", rowIndex, "- Description is empty")
-      break
-    }
-    
-    // Skip subtotal/total rows
-    const firstCell = String(row[0] || "").toLowerCase()
-    if (firstCell.includes("total") || firstCell.includes("subtotal") || firstCell.includes("sub-total")) {
+
+    // Blank / spacer row: skip it but KEEP scanning. Only stop after a long run
+    // of consecutive blank rows (reliable end-of-table signal) so a single
+    // spacer row can never truncate the rest of the proposal.
+    if (!row || row.length === 0 || isBlankRow(row)) {
+      consecutiveBlank++
+      if (consecutiveBlank >= MAX_CONSECUTIVE_BLANK) {
+        console.log("[v0] Reached", MAX_CONSECUTIVE_BLANK, "consecutive blank rows at", rowIndex, "- end of table")
+        break
+      }
       continue
     }
-    
+    consecutiveBlank = 0
+
+    const description = columnMap.description !== undefined ? String(row[columnMap.description] || "").trim() : ""
+
+    // Skip genuine subtotal/total summary rows (exact match only).
+    if (isSummaryRow(row, description)) {
+      skippedSummaryRows++
+      console.log("[v0] Skipping summary/subtotal row", rowIndex)
+      continue
+    }
+
+    // A row with data but no description is NOT dropped — we fall back to the
+    // cost category (or a placeholder) so the line item survives and stays
+    // visible/editable instead of vanishing.
+    let effectiveDescription = description
+    if (!effectiveDescription) {
+      const catFallback = columnMap.costCategory !== undefined ? String(row[columnMap.costCategory] || "").trim() : ""
+      effectiveDescription = catFallback || "(no description provided)"
+      includedWithoutDescription++
+      console.log("[v0] Row", rowIndex, "has no description; keeping with fallback:", effectiveDescription)
+    }
+
     // Extract Country value
     const countryValue = columnMap.country !== undefined ? String(row[columnMap.country] || "").trim() : ""
     
@@ -263,7 +315,7 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
       assessmentId,
       country: countryValue,
       costCategory: columnMap.costCategory !== undefined ? String(row[columnMap.costCategory] || "").trim() : "",
-      description: columnMap.description !== undefined ? String(row[columnMap.description] || "").trim() : "",
+      description: effectiveDescription,
       unitType: columnMap.unitType !== undefined ? String(row[columnMap.unitType] || "").trim() : "",
       numberOfUnits: columnMap.numberOfUnits !== undefined ? parseNumber(row[columnMap.numberOfUnits]) : 0,
       unitPrice: columnMap.unitPrice !== undefined ? parseNumber(row[columnMap.unitPrice]) : 0,
@@ -325,14 +377,22 @@ export function parseVendorProposal(buffer: ArrayBuffer, assessmentId: string = 
     
     lineItems.push(lineItem)
   }
-  
+
+  console.log(
+    "[v0] parseVendorProposal done:", lineItems.length, "line items;",
+    skippedSummaryRows, "summary rows skipped;",
+    includedWithoutDescription, "kept without a description",
+  )
+
   return {
     lineItems,
     country: extractedCountry,
     metadata: {
       sheetName: sponsorSheetName,
       rowCount: lineItems.length,
-      parsedAt: new Date().toISOString()
+      parsedAt: new Date().toISOString(),
+      skippedSummaryRows,
+      includedWithoutDescription,
     }
   }
 }
