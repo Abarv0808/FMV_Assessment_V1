@@ -5145,6 +5145,12 @@
   }
 
   @media (min-width: 40rem) {
+    .sm\:max-w-\[480px\] {
+      max-width: 480px;
+    }
+  }
+
+  @media (min-width: 40rem) {
     .sm\:max-w-lg {
       max-width: var(--container-lg);
     }

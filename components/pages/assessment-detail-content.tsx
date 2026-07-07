@@ -23,6 +23,15 @@ import {
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import {
   Select,
   SelectContent,
@@ -56,6 +65,7 @@ import {
   Sparkles,
   Loader2,
   ChevronDown,
+  Pencil,
 } from "lucide-react"
 import {
   mockAssessments,
@@ -95,6 +105,16 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   const [decisionFilter, setDecisionFilter] = useState<string>("ALL")
   const [showArchiveConfirm, setShowArchiveConfirm] = useState(false)
   const [showRestoreConfirm, setShowRestoreConfirm] = useState(false)
+  // Edit-details dialog state. editForm holds the amendable metadata fields
+  // (name, study tracking #, protocol #, therapeutic area).
+  const [showEditDialog, setShowEditDialog] = useState(false)
+  const [isSavingEdit, setIsSavingEdit] = useState(false)
+  const [editForm, setEditForm] = useState({
+    name: "",
+    studyTrackingNumber: "",
+    protocolNumber: "",
+    therapeuticArea: "",
+  })
   const [isLoading, setIsLoading] = useState(true)
   const [isRealAssessment, setIsRealAssessment] = useState(false)
   const [isRunningComparison, setIsRunningComparison] = useState(false)
@@ -593,6 +613,67 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     }
   }, [id, appendAudit, router])
 
+  // Open the edit dialog, seeding the form with the current assessment values.
+  const openEditDialog = useCallback(() => {
+    if (!assessment) return
+    setEditForm({
+      name: assessment.name || "",
+      studyTrackingNumber: assessment.studyTrackingNumber || "",
+      protocolNumber: assessment.protocolNumber || "",
+      therapeuticArea: assessment.therapeuticArea || "",
+    })
+    setShowEditDialog(true)
+  }, [assessment])
+
+  // Persist amended metadata fields to the assessment row via the PATCH route.
+  const handleSaveEdit = useCallback(async () => {
+    const trimmedName = editForm.name.trim()
+    if (!trimmedName) {
+      alert("Assessment name is required.")
+      return
+    }
+    setIsSavingEdit(true)
+    try {
+      const response = await fetch(`/api/assessments/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: trimmedName,
+          study_tracking_number: editForm.studyTrackingNumber.trim() || null,
+          protocol_number: editForm.protocolNumber.trim() || null,
+          therapeutic_area: editForm.therapeuticArea.trim() || null,
+        }),
+      })
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ error: "Update failed" }))
+        console.error("[v0] Error updating assessment:", error)
+        alert("Failed to save changes: " + (error.error || response.statusText))
+        return
+      }
+
+      setAssessment((prev) =>
+        prev
+          ? {
+              ...prev,
+              name: trimmedName,
+              studyTrackingNumber: editForm.studyTrackingNumber.trim(),
+              protocolNumber: editForm.protocolNumber.trim(),
+              therapeuticArea: editForm.therapeuticArea.trim(),
+              updatedAt: new Date().toISOString(),
+            }
+          : prev
+      )
+      appendAudit("Amended assessment details")
+      setShowEditDialog(false)
+    } catch (error: any) {
+      console.error("[v0] Exception updating assessment:", error)
+      alert("Error saving changes: " + error.message)
+    } finally {
+      setIsSavingEdit(false)
+    }
+  }, [id, editForm, appendAudit])
+
   // Run AI benchmark comparison
   const handleRunComparison = useCallback(async () => {
     console.log("[v0] handleRunComparison called, comparisons.length:", comparisons.length)
@@ -983,6 +1064,12 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {isRealAssessment && (
+              <Button variant="outline" onClick={openEditDialog}>
+                <Pencil className="h-4 w-4 mr-2" />
+                Edit Details
+              </Button>
+            )}
             {assessment.status === "ARCHIVED" && (
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90" onClick={() => setShowRestoreConfirm(true)}>
                 <RotateCcw className="h-4 w-4 mr-2" />
@@ -1281,6 +1368,70 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           </TabsContent>
         </Tabs>
       </div>
+
+      <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
+        <DialogContent className="sm:max-w-[480px]">
+          <DialogHeader>
+            <DialogTitle>Edit assessment details</DialogTitle>
+            <DialogDescription>
+              Amend the metadata for this assessment. These changes do not affect the uploaded line items or benchmark comparison.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-2">
+            <div className="grid gap-2">
+              <Label htmlFor="edit-name">Assessment Name</Label>
+              <Input
+                id="edit-name"
+                value={editForm.name}
+                onChange={(e) => setEditForm((prev) => ({ ...prev, name: e.target.value }))}
+                placeholder="Enter assessment name"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="edit-tracking">{"Study tracking#"}</Label>
+              <Input
+                id="edit-tracking"
+                value={editForm.studyTrackingNumber}
+                onChange={(e) => setEditForm((prev) => ({ ...prev, studyTrackingNumber: e.target.value }))}
+                placeholder="e.g. IISR-2026-200833"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="edit-protocol">Protocol Number</Label>
+              <Input
+                id="edit-protocol"
+                value={editForm.protocolNumber}
+                onChange={(e) => setEditForm((prev) => ({ ...prev, protocolNumber: e.target.value }))}
+                placeholder="Enter protocol number"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="edit-ta">Therapeutic Area</Label>
+              <Input
+                id="edit-ta"
+                value={editForm.therapeuticArea}
+                onChange={(e) => setEditForm((prev) => ({ ...prev, therapeuticArea: e.target.value }))}
+                placeholder="Enter therapeutic area"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowEditDialog(false)} disabled={isSavingEdit}>
+              Cancel
+            </Button>
+            <Button onClick={handleSaveEdit} disabled={isSavingEdit}>
+              {isSavingEdit ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Save Changes"
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <AlertDialog open={showArchiveConfirm} onOpenChange={setShowArchiveConfirm}>
         <AlertDialogContent>
