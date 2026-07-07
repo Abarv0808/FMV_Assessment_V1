@@ -503,3 +503,12 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:52:25.085] Server  LOG      ✓ Compiled in 86ms
 [00:52:31.847] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:57:06.373] Server  LOG      ✓ Compiled in 88ms
+[00:57:43.436] Server  LOG      ✓ Compiled in 86ms
+[00:58:16.484] Server  LOG      ✓ Compiled in 239ms
+[00:58:32.825] Server  LOG      ✓ Compiled in 75ms
+[00:58:40.946] Server  LOG      ✓ Compiled in 87ms
+[00:58:52.606] Server  LOG      ✓ Compiled in 56ms
+[00:59:35.528] Server  LOG      ✓ Compiled in 71ms
+[00:59:59.087] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport

@@ -47,7 +47,7 @@ interface ComparisonTableProps {
   onBenchmarkTypeChange?: (id: string, benchmarkType: BenchmarkType) => void
   onDecisionChange?: (id: string, decision: ItemDecision) => void
   onMatchSelect?: (id: string, match: any) => void
-  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment", value: string) => void
+  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice", value: string | number | null) => void
 }
 
 const flagConfig: Record<string, { label: string; color: string }> = {
@@ -142,6 +142,20 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
 
 const DECISION_OPTIONS: ItemDecision[] = ["To Assess", "In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
 
+// Resolve the effective per-unit price for a line item: the negotiated price
+// supersedes the unit price when it has been entered (> 0), otherwise the unit
+// price is used. This is the single source of truth for both Total Cost and
+// the FMV benchmark variance, so entering a negotiated price consistently
+// updates both.
+export function getEffectiveUnitPrice(lineItem: {
+  negotiatedPrice?: number | null
+  unitPrice?: number | null
+}): number {
+  return lineItem.negotiatedPrice != null && lineItem.negotiatedPrice > 0
+    ? lineItem.negotiatedPrice
+    : lineItem.unitPrice ?? 0
+}
+
 // Compute the effective Total Cost for a line item.
 // Total Cost is always calculated as price * number of units.
 // If a negotiated price has been entered, it supersedes the unit price;
@@ -154,11 +168,7 @@ export function getEffectiveTotalCost(lineItem: {
   totalCost?: number | null
 }): number {
   const units = lineItem.numberOfUnit ?? lineItem.numberOfUnits ?? 1
-  const effectivePrice =
-    lineItem.negotiatedPrice != null && lineItem.negotiatedPrice > 0
-      ? lineItem.negotiatedPrice
-      : lineItem.unitPrice ?? 0
-  return effectivePrice * units
+  return getEffectiveUnitPrice(lineItem) * units
 }
 
 export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTypeChange, onDecisionChange, onMatchSelect, onLineItemUpdate }: ComparisonTableProps) {
@@ -344,7 +354,22 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
               decisionConfig["To Assess"]
             const selectedValue = getBenchmarkValue(comparison) ?? 0
             const hasBenchmarkValue = selectedValue > 0
-            const dynamicVariance = hasBenchmarkValue ? comparison.lineItem.unitPrice - selectedValue : 0
+            // Variance is measured against the price the site will actually be
+            // paid: the negotiated price supersedes the unit price when present
+            // (matching the Total Cost logic). Use the live draft value so the
+            // variance updates immediately as the user edits the negotiated price.
+            const draftNegotiated = negotiatedPriceDrafts[comparison.lineItem.id]
+            const effectiveNegotiated =
+              draftNegotiated !== undefined
+                ? draftNegotiated === ""
+                  ? null
+                  : parseFloat(draftNegotiated)
+                : comparison.lineItem.negotiatedPrice ?? null
+            const effectivePrice =
+              effectiveNegotiated != null && effectiveNegotiated > 0
+                ? effectiveNegotiated
+                : comparison.lineItem.unitPrice
+            const dynamicVariance = hasBenchmarkValue ? effectivePrice - selectedValue : 0
             const dynamicVariancePercent = hasBenchmarkValue ? (dynamicVariance / selectedValue) * 100 : 0
             const dynamicFlag: "GREEN" | "YELLOW" | "RED" = dynamicVariancePercent > 15 ? "RED" : dynamicVariancePercent > 5 ? "YELLOW" : "GREEN"
             // Only compute a variance-based flag when there's an actual benchmark

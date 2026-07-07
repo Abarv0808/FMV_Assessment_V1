@@ -72,7 +72,7 @@ import {
   mockAssessmentComparisons,
   mockAssessmentLineItems,
 } from "@/lib/mock-data"
-import { ComparisonTable, getEffectiveTotalCost } from "@/components/comparison/comparison-table"
+import { ComparisonTable, getEffectiveTotalCost, getEffectiveUnitPrice } from "@/components/comparison/comparison-table"
 import { AssessmentOverview } from "@/components/comparison/assessment-overview"
 import type { Assessment, AssessmentComparison, AssessmentStatus, AuditEvent, BenchmarkType, DataSource, ItemDecision } from "@/lib/types"
 import { useAuth } from "@/lib/auth-context"
@@ -322,7 +322,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           low: newBenchmarkLow,
         }
         const selectedVal = valMap[c.selectedBenchmarkType] ?? 0
-        const variance = selectedVal > 0 ? c.lineItem.unitPrice - selectedVal : 0
+        const variance = selectedVal > 0 ? getEffectiveUnitPrice(c.lineItem) - selectedVal : 0
         const variancePercent = selectedVal > 0 ? (variance / selectedVal) * 100 : 0
         let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
         if (variancePercent > 15) flag = "RED"
@@ -430,7 +430,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           low: c.benchmarkLow,
         }
         const selectedVal = valMap[benchmarkType] ?? 0
-        const variance = selectedVal > 0 ? c.lineItem.unitPrice - selectedVal : 0
+        const variance = selectedVal > 0 ? getEffectiveUnitPrice(c.lineItem) - selectedVal : 0
         const variancePercent = selectedVal > 0 ? (variance / selectedVal) * 100 : 0
         let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
         if (variancePercent > 15) flag = "RED"
@@ -453,7 +453,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         
         // Calculate variance against selected benchmark type
         const selectedVal = benchmark90th || benchmarkHigh || benchmarkMed || 0
-        const variance = selectedVal > 0 ? c.lineItem.unitPrice - selectedVal : 0
+        const variance = selectedVal > 0 ? getEffectiveUnitPrice(c.lineItem) - selectedVal : 0
         const variancePercent = selectedVal > 0 ? (variance / selectedVal) * 100 : 0
         let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
         if (variancePercent > 15) flag = "RED"
@@ -785,7 +785,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   }, [id, comparisons, appendAudit])
   
   // Handle line item field updates (additional information, cost category)
-  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment", value: string) => {
+  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice", value: string | number | null) => {
     try {
       const response = await fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
@@ -797,15 +797,34 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         // Update local state
         setComparisons(prev => prev.map(comp => {
           if (comp.lineItem.id === lineItemId) {
-            return {
-              ...comp,
-              lineItem: {
-                ...comp.lineItem,
-                [field]: value,
-                // Also update description if it's additionalInformation
-                ...(field === "additionalInformation" ? { description: value } : {})
+            const updatedLineItem = {
+              ...comp.lineItem,
+              [field]: value,
+              // Also update description if it's additionalInformation
+              ...(field === "additionalInformation" ? { description: value } : {})
+            }
+            // When the negotiated price changes it supersedes the unit price, so
+            // recompute the stored FMV variance/flag against the selected
+            // benchmark. This keeps the Excel export and any consumers of the
+            // stored variance in sync with the on-screen (dynamic) variance.
+            if (field === "negotiatedPrice") {
+              const valMap: Record<BenchmarkType, number | undefined> = {
+                p90: comp.benchmark90th,
+                high: comp.benchmarkHigh,
+                med: comp.benchmarkMed,
+                low: comp.benchmarkLow,
+              }
+              const selectedVal = valMap[comp.selectedBenchmarkType] ?? 0
+              if (selectedVal > 0) {
+                const variance = getEffectiveUnitPrice(updatedLineItem) - selectedVal
+                const variancePercent = (variance / selectedVal) * 100
+                let flag: "GREEN" | "YELLOW" | "RED" = "GREEN"
+                if (variancePercent > 15) flag = "RED"
+                else if (variancePercent > 5) flag = "YELLOW"
+                return { ...comp, lineItem: updatedLineItem, variance, variancePercent, flag }
               }
             }
+            return { ...comp, lineItem: updatedLineItem }
           }
           return comp
         }))
@@ -961,7 +980,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     const body = filteredComparisons.map((c, idx) => {
       const selVal = getBenchmarkVal(c)
       const hasVal = selVal > 0
-      const variancePct = hasVal ? ((c.lineItem.unitPrice - selVal) / selVal) * 100 : 0
+      const variancePct = hasVal ? ((getEffectiveUnitPrice(c.lineItem) - selVal) / selVal) * 100 : 0
       const dynFlag = variancePct > 15 ? "RED" : variancePct > 5 ? "YELLOW" : "GREEN"
       const effFlag = hasVal
         ? dynFlag
