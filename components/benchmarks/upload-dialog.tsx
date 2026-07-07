@@ -87,9 +87,19 @@ const METADATA_LABELS = [
   'countries:', 'code', 'procedure name', 'name', 'sub total', 'total'
 ]
 
+// Generic single words that legitimately appear INSIDE real procedure names
+// (e.g. "Document Storage, Archiving Total Cost"). These must only match when
+// the whole cell equals them — never as a substring — otherwise valid
+// procedures get dropped as if they were metadata/subtotal rows.
+const EXACT_ONLY_LABELS = new Set(["code", "name", "total"])
+
 function isMetadataRow(name: string): boolean {
   const lower = name.toLowerCase().trim()
-  return METADATA_LABELS.some(label => lower === label || lower.includes(label))
+  if (!lower) return true
+  return METADATA_LABELS.some(label => {
+    if (EXACT_ONLY_LABELS.has(label)) return lower === label
+    return lower === label || lower.includes(label)
+  })
 }
 
 function parseNumber(val: any): number | null {
