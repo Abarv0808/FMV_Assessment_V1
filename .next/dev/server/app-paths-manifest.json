@@ -1,4 +1,5 @@
 {
+  "/api/admin/matching-rules/route": "app/api/admin/matching-rules/route.js",
   "/api/assessments/[id]/audit/route": "app/api/assessments/[id]/audit/route.js",
   "/api/assessments/[id]/comparisons/route": "app/api/assessments/[id]/comparisons/route.js",
   "/api/assessments/[id]/route": "app/api/assessments/[id]/route.js",

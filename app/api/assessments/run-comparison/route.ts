@@ -3,6 +3,7 @@ import { createAdminClient } from "@/lib/supabase/server"
 import { generateObject } from "ai"
 import { z } from "zod"
 import { fuzzyMatchScore, scoreToConfidence, dedupeBenchmarkMatches } from "@/lib/fuzzy-match"
+import { loadMatchingRules, applyMatchingRules } from "@/lib/fmv-rules"
 
 // =====================================================
 // AI-POWERED SEMANTIC MATCHING v9 - Gemini via AI Gateway
@@ -25,7 +26,7 @@ async function findAIMatches(
   vendorDescription: string,
   vendorCategory: string,
   benchmarkProcedures: { id: string; name: string; category: string; index: number }[],
-  context: { country: string; lineItemId: string }
+  context: { country: string; lineItemId: string; domainHints?: string }
 ): Promise<{ benchmarkIndex: number; confidence: "HIGH" | "MEDIUM" | "LOW"; reasoning: string }[]> {
 
   const startTime = Date.now()
@@ -89,7 +90,7 @@ COMMON EQUIVALENT TERMS IN CLINICAL TRIALS (use these to RECOGNIZE matches, not 
 - "Regulatory Affairs" = "Regulatory Submission" / "Compliance"
 - "Data Management" = "Data Entry" / "CRF Completion"
 - "Patient Stipend" = "Subject Compensation" / "Patient Reimbursement"
-
+${context.domainHints ? `\nFMV DOMAIN RULES IN EFFECT (prefer these role/term equivalences when applicable):\n${context.domainHints}\n` : ""}
 Return up to 3 matches, sorted best-first. If nothing genuinely matches, return { "matches": [] }.`
     })
 
@@ -362,6 +363,21 @@ export async function POST(request: Request) {
 
     const results: any[] = []
 
+    // Load the editable FMV domain-knowledge rules once for this run. Degrades
+    // to empty (no-op) if the rule tables don't exist yet.
+    const matchingRules = await loadMatchingRules(supabase)
+    console.log(
+      "[v0] Matching rules loaded:",
+      matchingRules.synonymRules.length, "synonym,",
+      matchingRules.disambiguationRules.length, "disambiguation,",
+      matchingRules.therapeuticAreas.length, "therapeutic areas",
+    )
+
+    // Compact, soft guidance for the AI so it aligns with the hard-enforced rules.
+    const domainHints = matchingRules.synonymRules
+      .map(r => `- ${r.triggers.slice(0, 4).join(" / ")} -> ${r.label}`)
+      .join("\n")
+
     // 3. For each line item, use AI-powered semantic matching with country-specific filtering
     console.log("[v0] Starting AI-powered matching for", lineItems.length, "items...")
     
@@ -518,7 +534,7 @@ export async function POST(request: Request) {
           cleanDescription,
           vendorCostCategory,
           countryBenchmarkForAI,
-          { country: lineItemCountry, lineItemId: lineItem.id }
+          { country: lineItemCountry, lineItemId: lineItem.id, domainHints }
         )
         
         if (aiMatches.length > 0) {
@@ -622,6 +638,20 @@ export async function POST(request: Request) {
       // (the benchmark_procedures table has many identical rows imported across
       // multiple files). Matches are already ordered best-first.
       matchedBenchmarks = dedupeBenchmarkMatches(matchedBenchmarks)
+
+      // Hard-enforce editable FMV domain rules (role synonyms, mandatory links,
+      // TA-specific physician, IRB/archive disambiguation). Rule-injected matches
+      // take precedence and mandatory links are always ensured present.
+      const ruled = applyMatchingRules({
+        description: cleanDescription,
+        countryBenchmarks: countryFilteredBenchmarks as any,
+        currentMatches: matchedBenchmarks as any,
+        rules: matchingRules,
+      })
+      matchedBenchmarks = ruled.matches
+      if (ruled.appliedRules.length > 0) {
+        console.log(`[v0] Domain rules applied to "${cleanDescription.substring(0, 40)}":`, ruled.appliedRules.join(" | "))
+      }
 
       // Determine flag based on results
       let flag = "NO_MATCH"
