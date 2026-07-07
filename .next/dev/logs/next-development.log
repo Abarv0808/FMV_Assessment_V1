@@ -731,3 +731,349 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [01:11:15.694] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
 [01:11:15.707] Server  LOG     [v0] createAdminClient using: "service_role"
 [01:11:15.801] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:29:05.048] Browser LOG     [v0] handleRunComparison called, comparisons.length: 8
+[01:29:06.095] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[01:29:06.475] Server  LOG     [v0] Run comparison API called (AI-powered)
+[01:29:06.477] Server  LOG     [v0] Assessment ID: "200bff8c-cdc1-4c8b-afda-3809009e6443"
+[01:29:06.478] Server  LOG     [v0] Decision overrides received from client: 8 "items"
+[01:29:06.478] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:29:06.480] Server  LOG     [v0] Fetching line items...
+[01:29:06.551] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:29:06.889] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:29:06.935] Server  LOG     [v0] Persisting 8 "decision overrides to DB before comparison"
+[01:29:06.935] Server  LOG     [v0] Line items found: 8 "Error:" undefined
+[01:29:06.936] Server  LOG     [v0] Fetching benchmark procedures...
+[01:29:06.936] Server  LOG     [v0] Line item countries: "IQVIA, Sponsor, Sites"
+[01:29:07.223] Server  LOG     [v0] Benchmark files for requested countries: 0 "Error:" "none"
+[01:29:07.223] Server  LOG     [v0] No benchmark files found for: "IQVIA, Sponsor, Sites"
+[01:29:07.749] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[01:29:08.327] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[01:29:08.712] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[01:29:09.007] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[01:29:09.253] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[01:29:09.659] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[01:29:10.081] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[01:29:10.489] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[01:29:10.989] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[01:29:11.315] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[01:29:11.908] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[01:29:12.457] Server  LOG     [v0] Loaded benchmark page 12 "size:" 1000 "running total:" 12000
+[01:29:13.077] Server  LOG     [v0] Loaded benchmark page 13 "size:" 1000 "running total:" 13000
+[01:29:13.500] Server  LOG     [v0] Loaded benchmark page 14 "size:" 1000 "running total:" 14000
+[01:29:14.123] Server  LOG     [v0] Loaded benchmark page 15 "size:" 1000 "running total:" 15000
+[01:29:14.552] Server  LOG     [v0] Loaded benchmark page 16 "size:" 1000 "running total:" 16000
+[01:29:14.982] Server  LOG     [v0] Loaded benchmark page 17 "size:" 1000 "running total:" 17000
+[01:29:15.424] Server  LOG     [v0] Loaded benchmark page 18 "size:" 1000 "running total:" 18000
+[01:29:15.935] Server  LOG     [v0] Loaded benchmark page 19 "size:" 1000 "running total:" 19000
+[01:29:16.414] Server  LOG     [v0] Loaded benchmark page 20 "size:" 1000 "running total:" 20000
+[01:29:16.911] Server  LOG     [v0] Loaded benchmark page 21 "size:" 1000 "running total:" 21000
+[01:29:17.493] Server  LOG     [v0] Loaded benchmark page 22 "size:" 1000 "running total:" 22000
+[01:29:18.034] Server  LOG     [v0] Loaded benchmark page 23 "size:" 1000 "running total:" 23000
+[01:29:18.716] Server  LOG     [v0] Loaded benchmark page 24 "size:" 1000 "running total:" 24000
+[01:29:19.263] Server  LOG     [v0] Loaded benchmark page 25 "size:" 1000 "running total:" 25000
+[01:29:19.664] Server  LOG     [v0] Loaded benchmark page 26 "size:" 1000 "running total:" 26000
+[01:29:20.182] Server  LOG     [v0] Loaded benchmark page 27 "size:" 1000 "running total:" 27000
+[01:29:20.853] Server  LOG     [v0] Loaded benchmark page 28 "size:" 1000 "running total:" 28000
+[01:29:21.234] Server  LOG     [v0] Loaded benchmark page 29 "size:" 1000 "running total:" 29000
+[01:29:21.705] Server  LOG     [v0] Loaded benchmark page 30 "size:" 1000 "running total:" 30000
+[01:29:22.158] Server  LOG     [v0] Loaded benchmark page 31 "size:" 1000 "running total:" 31000
+[01:29:22.445] Server  LOG     [v0] Loaded benchmark page 32 "size:" 1000 "running total:" 32000
+[01:29:22.749] Server  LOG     [v0] Loaded benchmark page 33 "size:" 1000 "running total:" 33000
+[01:29:23.060] Server  LOG     [v0] Loaded benchmark page 34 "size:" 1000 "running total:" 34000
+[01:29:23.366] Server  LOG     [v0] Loaded benchmark page 35 "size:" 1000 "running total:" 35000
+[01:29:23.685] Server  LOG     [v0] Loaded benchmark page 36 "size:" 1000 "running total:" 36000
+[01:29:23.972] Server  LOG     [v0] Loaded benchmark page 37 "size:" 1000 "running total:" 37000
+[01:29:24.128] Server  LOG     [v0] Loaded benchmark page 38 "size:" 1000 "running total:" 38000
+[01:29:24.447] Server  LOG     [v0] Loaded benchmark page 39 "size:" 1000 "running total:" 39000
+[01:29:24.767] Server  LOG     [v0] Loaded benchmark page 40 "size:" 1000 "running total:" 40000
+[01:29:25.074] Server  LOG     [v0] Loaded benchmark page 41 "size:" 1000 "running total:" 41000
+[01:29:25.486] Server  LOG     [v0] Loaded benchmark page 42 "size:" 1000 "running total:" 42000
+[01:29:25.796] Server  LOG     [v0] Loaded benchmark page 43 "size:" 1000 "running total:" 43000
+[01:29:26.223] Server  LOG     [v0] Loaded benchmark page 44 "size:" 1000 "running total:" 44000
+[01:29:26.636] Server  LOG     [v0] Loaded benchmark page 45 "size:" 1000 "running total:" 45000
+[01:29:26.933] Server  LOG     [v0] Loaded benchmark page 46 "size:" 1000 "running total:" 46000
+[01:29:27.356] Server  LOG     [v0] Loaded benchmark page 47 "size:" 1000 "running total:" 47000
+[01:29:27.673] Server  LOG     [v0] Loaded benchmark page 48 "size:" 1000 "running total:" 48000
+[01:29:27.976] Server  LOG     [v0] Loaded benchmark page 49 "size:" 1000 "running total:" 49000
+[01:29:28.308] Server  LOG     [v0] Loaded benchmark page 50 "size:" 1000 "running total:" 50000
+[01:29:28.386] Server  LOG     [v0] Benchmark procedures loaded: 50000 "from" 69 "countries"
+[01:29:28.386] Server  LOG     [v0] Available countries: "Romania, Russia, Serbia, Saudi Arabia, Singapore, Slovak Republic, South Korea, Spain, Sweden, Switzerland, Taiwan, Tanzania, Argentina, Australia, Austria, Belgium, Bosnia-Hercegovina, Finland, France, Germany" "..."
+[01:29:28.392] Server  LOG     [v0] Starting AI-powered matching for 8 "items..."
+[01:29:28.392] Server  LOG     [v0] Processing: "\"Ethical committee, paid by the vendor  including d...\"" "Country:" "IQVIA" "Decision:" "To Assess"
+[01:29:28.400] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "IQVIA"
+[01:29:28.400] Server  LOG     [v0] No benchmarks available for country: "IQVIA"
+[01:29:28.401] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Kick-off"
+[01:29:28.401] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Design of the Database and Electronic Data Capture"
+[01:29:28.401] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Design of the Database and Electronic Data Capture"
+[01:29:28.402] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Database Curation, Exploratory Analysis, Data Visu"
+[01:29:28.402] Server  LOG     [v0] Skipping item (decision="Manual assessment" not eligible): "Final Report, Table and Figure Design, and Manuscr"
+[01:29:28.402] Server  LOG     [v0] Processing: "\"Clinical Research coordinator, Allergist, 10 y exp...\"" "Country:" "Sponsor" "Decision:" "To Assess"
+[01:29:28.411] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Sponsor"
+[01:29:28.412] Server  LOG     [v0] No benchmarks available for country: "Sponsor"
+[01:29:28.412] Server  LOG     [v0] Processing: "\"Clinical research, allergist, site investigator, p...\"" "Country:" "Sites" "Decision:" "To Assess"
+[01:29:28.420] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Sites"
+[01:29:28.421] Server  LOG     [v0] No benchmarks available for country: "Sites"
+[01:29:28.421] Server  LOG     [v0] Updating 8 "comparison records"
+[01:29:28.421] Server  LOG     [v0] Updating line_item_id: "a705d0d2-625f-495c-b5c2-990b34b572b6" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:29:28.569] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:29:28.677] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "996437b4-49aa-4889-9bc2-6985a88cbdfa"
+[01:29:28.766] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "0670c549-5432-4432-be02-dc778a6cdb63"
+[01:29:28.851] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "1fb962d8-c5d3-46b1-99fb-7602099d6b21"
+[01:29:28.943] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "338b6194-ca0d-48f1-b38f-a72a94e29c13"
+[01:29:29.038] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "75734164-58e7-4f8e-8fe1-d032dcbd2226"
+[01:29:29.038] Server  LOG     [v0] Updating line_item_id: "ae21f26b-d1bc-4fbe-8c88-b1decbec74ee" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:29:29.123] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:29:29.123] Server  LOG     [v0] Updating line_item_id: "6c886c14-32b8-48d9-993b-df457a825376" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:29:29.212] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:29:29.382] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:29:29.406] Browser LOG     [v0] Comparison API result: {"message":"Compared 8 items: 0 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a705d0d2-625f-495c-b5c2-990b34b572b6","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"996437b4-49aa-4889-9bc2-6985a88cbdfa","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"0670c549-5432-4432-be02-dc778a6cdb63","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"1fb962d8-c5d3-46b1-99fb-7602099d6b21","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"338b6194-ca0d-48f1-b38f-a72a94e29c13","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"SKIPPED_BY_DECISION","lineItemId":"75734164-58e7-4f8e-8fe1-d032dcbd2226","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"ae21f26b-d1bc-4fbe-8c88-b1decbec74ee","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"6c886c14-32b8-48d9-993b-df457a825376","matchCount":0,"matches":[]}],"success":true}
+[01:29:29.406] Browser LOG     [v0] Merged 8 AI results into comparisons in-memory (no refetch)
+[01:29:29.474] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:30:30.901] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:30.904] Browser LOG     [v0] Persisting decision via PATCH: 996437b4-49aa-4889-9bc2-6985a88cbdfa -> To Assess
+[01:30:31.108] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:30:31.761] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"To Assess\"}"
+[01:30:31.762] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:32.038] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:32.044] Browser LOG     [v0] Persisting decision via PATCH: 0670c549-5432-4432-be02-dc778a6cdb63 -> To Assess
+[01:30:32.081] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"To Assess\"}"
+[01:30:32.082] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:32.198] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:30:32.317] Server  LOG     [v0] Updated line item: "996437b4-49aa-4889-9bc2-6985a88cbdfa" "additionalInfo:" undefined "costCategory:" undefined "decision:" "To Assess"
+[01:30:32.415] Server  LOG     [v0] Updated line item: "0670c549-5432-4432-be02-dc778a6cdb63" "additionalInfo:" undefined "costCategory:" undefined "decision:" "To Assess"
+[01:30:33.040] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"To Assess\"}"
+[01:30:33.040] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:33.051] Browser LOG     [v0] Persisting decision via PATCH: 1fb962d8-c5d3-46b1-99fb-7602099d6b21 -> To Assess
+[01:30:33.124] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:33.216] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:30:33.263] Server  LOG     [v0] Updated line item: "1fb962d8-c5d3-46b1-99fb-7602099d6b21" "additionalInfo:" undefined "costCategory:" undefined "decision:" "To Assess"
+[01:30:34.850] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"To Assess\"}"
+[01:30:34.850] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:34.892] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:34.897] Browser LOG     [v0] Persisting decision via PATCH: 338b6194-ca0d-48f1-b38f-a72a94e29c13 -> To Assess
+[01:30:35.003] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:30:35.057] Server  LOG     [v0] Updated line item: "338b6194-ca0d-48f1-b38f-a72a94e29c13" "additionalInfo:" undefined "costCategory:" undefined "decision:" "To Assess"
+[01:30:36.620] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:36.664] Server  LOG     [v0] PATCH line-item raw body: "{\"decision\":\"To Assess\"}"
+[01:30:36.665] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:36.666] Browser LOG     [v0] Persisting decision via PATCH: 75734164-58e7-4f8e-8fe1-d032dcbd2226 -> To Assess
+[01:30:36.736] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:30:36.881] Server  LOG     [v0] Updated line item: "75734164-58e7-4f8e-8fe1-d032dcbd2226" "additionalInfo:" undefined "costCategory:" undefined "decision:" "To Assess"
+[01:30:41.430] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:41.434] Browser LOG     [v0] handleRunComparison called, comparisons.length: 8
+[01:30:41.557] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:30:41.589] Server  LOG     [v0] Run comparison API called (AI-powered)
+[01:30:41.590] Server  LOG     [v0] Assessment ID: "200bff8c-cdc1-4c8b-afda-3809009e6443"
+[01:30:41.590] Server  LOG     [v0] Decision overrides received from client: 8 "items"
+[01:30:41.591] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:41.591] Server  LOG     [v0] Fetching line items...
+[01:30:41.631] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[01:30:41.700] Server  LOG     [v0] Persisting 8 "decision overrides to DB before comparison"
+[01:30:41.700] Server  LOG     [v0] Line items found: 8 "Error:" undefined
+[01:30:41.700] Server  LOG     [v0] Fetching benchmark procedures...
+[01:30:41.700] Server  LOG     [v0] Line item countries: "IQVIA, Sponsor, Sites"
+[01:30:41.866] Server  LOG     [v0] Benchmark files for requested countries: 0 "Error:" "none"
+[01:30:41.867] Server  LOG     [v0] No benchmark files found for: "IQVIA, Sponsor, Sites"
+[01:30:42.238] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[01:30:42.460] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[01:30:42.757] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[01:30:42.912] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[01:30:43.199] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[01:30:43.480] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
+[01:30:43.994] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
+[01:30:44.288] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
+[01:30:44.602] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
+[01:30:44.996] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
+[01:30:45.375] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
+[01:30:45.723] Server  LOG     [v0] Loaded benchmark page 12 "size:" 1000 "running total:" 12000
+[01:30:46.093] Server  LOG     [v0] Loaded benchmark page 13 "size:" 1000 "running total:" 13000
+[01:30:46.463] Server  LOG     [v0] Loaded benchmark page 14 "size:" 1000 "running total:" 14000
+[01:30:46.844] Server  LOG     [v0] Loaded benchmark page 15 "size:" 1000 "running total:" 15000
+[01:30:47.245] Server  LOG     [v0] Loaded benchmark page 16 "size:" 1000 "running total:" 16000
+[01:30:47.640] Server  LOG     [v0] Loaded benchmark page 17 "size:" 1000 "running total:" 17000
+[01:30:48.009] Server  LOG     [v0] Loaded benchmark page 18 "size:" 1000 "running total:" 18000
+[01:30:48.326] Server  LOG     [v0] Loaded benchmark page 19 "size:" 1000 "running total:" 19000
+[01:30:48.555] Server  LOG     [v0] Loaded benchmark page 20 "size:" 1000 "running total:" 20000
+[01:30:49.023] Server  LOG     [v0] Loaded benchmark page 21 "size:" 1000 "running total:" 21000
+[01:30:49.383] Server  LOG     [v0] Loaded benchmark page 22 "size:" 1000 "running total:" 22000
+[01:30:49.603] Server  LOG     [v0] Loaded benchmark page 23 "size:" 1000 "running total:" 23000
+[01:30:49.926] Server  LOG     [v0] Loaded benchmark page 24 "size:" 1000 "running total:" 24000
+[01:30:50.169] Server  LOG     [v0] Loaded benchmark page 25 "size:" 1000 "running total:" 25000
+[01:30:50.505] Server  LOG     [v0] Loaded benchmark page 26 "size:" 1000 "running total:" 26000
+[01:30:50.786] Server  LOG     [v0] Loaded benchmark page 27 "size:" 1000 "running total:" 27000
+[01:30:51.235] Server  LOG     [v0] Loaded benchmark page 28 "size:" 1000 "running total:" 28000
+[01:30:51.526] Server  LOG     [v0] Loaded benchmark page 29 "size:" 1000 "running total:" 29000
+[01:30:51.944] Server  LOG     [v0] Loaded benchmark page 30 "size:" 1000 "running total:" 30000
+[01:30:52.249] Server  LOG     [v0] Loaded benchmark page 31 "size:" 1000 "running total:" 31000
+[01:30:52.561] Server  LOG     [v0] Loaded benchmark page 32 "size:" 1000 "running total:" 32000
+[01:30:52.849] Server  LOG     [v0] Loaded benchmark page 33 "size:" 1000 "running total:" 33000
+[01:30:53.115] Server  LOG     [v0] Loaded benchmark page 34 "size:" 1000 "running total:" 34000
+[01:30:53.431] Server  LOG     [v0] Loaded benchmark page 35 "size:" 1000 "running total:" 35000
+[01:30:53.743] Server  LOG     [v0] Loaded benchmark page 36 "size:" 1000 "running total:" 36000
+[01:30:54.012] Server  LOG     [v0] Loaded benchmark page 37 "size:" 1000 "running total:" 37000
+[01:30:54.161] Server  LOG     [v0] Loaded benchmark page 38 "size:" 1000 "running total:" 38000
+[01:30:54.451] Server  LOG     [v0] Loaded benchmark page 39 "size:" 1000 "running total:" 39000
+[01:30:54.768] Server  LOG     [v0] Loaded benchmark page 40 "size:" 1000 "running total:" 40000
+[01:30:55.092] Server  LOG     [v0] Loaded benchmark page 41 "size:" 1000 "running total:" 41000
+[01:30:55.410] Server  LOG     [v0] Loaded benchmark page 42 "size:" 1000 "running total:" 42000
+[01:30:55.692] Server  LOG     [v0] Loaded benchmark page 43 "size:" 1000 "running total:" 43000
+[01:30:55.991] Server  LOG     [v0] Loaded benchmark page 44 "size:" 1000 "running total:" 44000
+[01:30:56.305] Server  LOG     [v0] Loaded benchmark page 45 "size:" 1000 "running total:" 45000
+[01:30:56.603] Server  LOG     [v0] Loaded benchmark page 46 "size:" 1000 "running total:" 46000
+[01:30:56.878] Server  LOG     [v0] Loaded benchmark page 47 "size:" 1000 "running total:" 47000
+[01:30:57.160] Server  LOG     [v0] Loaded benchmark page 48 "size:" 1000 "running total:" 48000
+[01:30:57.469] Server  LOG     [v0] Loaded benchmark page 49 "size:" 1000 "running total:" 49000
+[01:30:57.767] Server  LOG     [v0] Loaded benchmark page 50 "size:" 1000 "running total:" 50000
+[01:30:57.840] Server  LOG     [v0] Benchmark procedures loaded: 50000 "from" 68 "countries"
+[01:30:57.840] Server  LOG     [v0] Available countries: "Hungary, Iceland, India, Ireland, Israel, Italy, Kuwait, Latvia, Lebanon, Lithuania, Macedonia, Malta, Romania, Russia, Saudi Arabia, Serbia, Singapore, Slovak Republic, United Kingdom, United States" "..."
+[01:30:57.848] Server  LOG     [v0] Starting AI-powered matching for 8 "items..."
+[01:30:57.848] Server  LOG     [v0] Processing: "\"Ethical committee, paid by the vendor  including d...\"" "Country:" "IQVIA" "Decision:" "To Assess"
+[01:30:57.855] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "IQVIA"
+[01:30:57.855] Server  LOG     [v0] No benchmarks available for country: "IQVIA"
+[01:30:57.856] Server  LOG     [v0] Processing: "\"Design of the Database and Electronic Data Capture...\"" "Country:" "IQVIA" "Decision:" "To Assess"
+[01:30:57.862] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "IQVIA"
+[01:30:57.862] Server  LOG     [v0] No benchmarks available for country: "IQVIA"
+[01:30:57.863] Server  LOG     [v0] Processing: "\"Design of the Database and Electronic Data Capture...\"" "Country:" "IQVIA" "Decision:" "To Assess"
+[01:30:57.869] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "IQVIA"
+[01:30:57.869] Server  LOG     [v0] No benchmarks available for country: "IQVIA"
+[01:30:57.869] Server  LOG     [v0] Processing: "\"Database Curation, Exploratory Analysis, Data Visu...\"" "Country:" "IQVIA" "Decision:" "To Assess"
+[01:30:57.875] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "IQVIA"
+[01:30:57.876] Server  LOG     [v0] No benchmarks available for country: "IQVIA"
+[01:30:57.876] Server  LOG     [v0] Processing: "\"Final Report, Table and Figure Design, and Manuscr...\"" "Country:" "IQVIA" "Decision:" "To Assess"
+[01:30:57.882] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "IQVIA"
+[01:30:57.882] Server  LOG     [v0] No benchmarks available for country: "IQVIA"
+[01:30:57.882] Server  LOG     [v0] Processing: "\"Clinical Research coordinator, Allergist, 10 y exp...\"" "Country:" "Sponsor" "Decision:" "To Assess"
+[01:30:57.889] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Sponsor"
+[01:30:57.889] Server  LOG     [v0] No benchmarks available for country: "Sponsor"
+[01:30:57.889] Server  LOG     [v0] Processing: "\"Clinical research, allergist, site investigator, p...\"" "Country:" "Sites" "Decision:" "To Assess"
+[01:30:57.897] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "Sites"
+[01:30:57.897] Server  LOG     [v0] No benchmarks available for country: "Sites"
+[01:30:57.897] Server  LOG     [v0] Processing: "\"Kick-off...\"" "Country:" "IQVIA" "Decision:" "To Assess"
+[01:30:57.906] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "IQVIA"
+[01:30:57.906] Server  LOG     [v0] No benchmarks available for country: "IQVIA"
+[01:30:57.906] Server  LOG     [v0] Updating 8 "comparison records"
+[01:30:57.906] Server  LOG     [v0] Updating line_item_id: "a705d0d2-625f-495c-b5c2-990b34b572b6" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:30:57.998] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:30:57.998] Server  LOG     [v0] Updating line_item_id: "0670c549-5432-4432-be02-dc778a6cdb63" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:30:58.095] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:30:58.096] Server  LOG     [v0] Updating line_item_id: "1fb962d8-c5d3-46b1-99fb-7602099d6b21" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:30:58.181] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:30:58.181] Server  LOG     [v0] Updating line_item_id: "338b6194-ca0d-48f1-b38f-a72a94e29c13" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:30:58.281] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:30:58.281] Server  LOG     [v0] Updating line_item_id: "75734164-58e7-4f8e-8fe1-d032dcbd2226" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:30:58.377] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:30:58.378] Server  LOG     [v0] Updating line_item_id: "ae21f26b-d1bc-4fbe-8c88-b1decbec74ee" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:30:58.478] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:30:58.478] Server  LOG     [v0] Updating line_item_id: "6c886c14-32b8-48d9-993b-df457a825376" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:30:58.577] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:30:58.577] Server  LOG     [v0] Updating line_item_id: "996437b4-49aa-4889-9bc2-6985a88cbdfa" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
+[01:30:58.672] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:30:58.877] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:30:58.895] Browser LOG     [v0] Comparison API result: {"message":"Compared 8 items: 0 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a705d0d2-625f-495c-b5c2-990b34b572b6","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"0670c549-5432-4432-be02-dc778a6cdb63","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"1fb962d8-c5d3-46b1-99fb-7602099d6b21","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"338b6194-ca0d-48f1-b38f-a72a94e29c13","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"75734164-58e7-4f8e-8fe1-d032dcbd2226","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"ae21f26b-d1bc-4fbe-8c88-b1decbec74ee","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"6c886c14-32b8-48d9-993b-df457a825376","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"996437b4-49aa-4889-9bc2-6985a88cbdfa","matchCount":0,"matches":[]}],"success":true}
+[01:30:58.895] Browser LOG     [v0] Merged 8 AI results into comparisons in-memory (no refetch)
+[01:30:58.958] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:31:03.929] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:31:04.087] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:04.090] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-6p.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-assessment-table-improvements-6p.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1783424551042} /_vercel/insights/view
+[01:31:04.469] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:04.676] Browser LOG     [v0] Assessments fetch result: 63 items, error: undefined
+[01:31:04.676] Browser LOG     [v0] Got 63 assessments from DB, mapping...
+[01:31:04.832] Browser LOG     [v0] Assessments fetch result: 63 items, error: undefined
+[01:31:04.832] Browser LOG     [v0] Got 63 assessments from DB, mapping...
+[01:31:09.792] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[01:31:09.955] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:09.974] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-6p.vusercontent.net/assessments/40f8c2ed-d970-40af-a252-8328781c9b1d color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements-6p.vusercontent.net/assessments/40f8c2ed-d970-40af-a252-8328781c9b1d","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1783424556928} /_vercel/insights/view
+[01:31:10.252] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:10.298] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:10.405] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:31:10.548] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:10.565] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:10.638] Server  LOG     [v0] Comparisons API fetch result: 6 "items, error:" undefined
+[01:31:10.644] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:31:10.858] Browser LOG     [v0] Comparisons fetch result: 6 items, error: undefined
+[01:31:10.858] Browser LOG     [v0] Has existing ai_matches: true
+[01:31:10.858] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:31:10.858] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:31:10.858] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:31:10.858] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:31:10.858] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:31:10.858] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:31:10.924] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:11.013] Server  LOG     [v0] Comparisons API fetch result: 6 "items, error:" undefined
+[01:31:11.158] Browser LOG     [v0] Comparisons fetch result: 6 items, error: undefined
+[01:31:11.158] Browser LOG     [v0] Has existing ai_matches: true
+[01:31:11.158] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:31:11.158] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[01:31:11.158] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[01:31:11.158] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:31:11.158] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[01:31:11.158] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
+[01:31:24.463] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:24.468] Browser LOG     [v0] handleRunComparison called, comparisons.length: 6
+[01:31:24.584] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:31:24.728] Server  LOG     [v0] Run comparison API called (AI-powered)
+[01:31:24.729] Server  LOG     [v0] Assessment ID: "40f8c2ed-d970-40af-a252-8328781c9b1d"
+[01:31:24.729] Server  LOG     [v0] Decision overrides received from client: 6 "items"
+[01:31:24.730] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:24.731] Server  LOG     [v0] Fetching line items...
+[01:31:24.829] Server  LOG     [v0] Persisting 6 "decision overrides to DB before comparison"
+[01:31:24.830] Server  LOG     [v0] Line items found: 6 "Error:" undefined
+[01:31:24.830] Server  LOG     [v0] Fetching benchmark procedures...
+[01:31:24.830] Server  LOG     [v0] Line item countries: "Australia"
+[01:31:24.916] Server  LOG     [v0] Benchmark files for requested countries: 29 "Error:" "none"
+[01:31:24.917] Server  LOG     [v0] Filtering to 29 "benchmark files for countries:" "Australia"
+[01:31:24.948] Browser LOG     [v0] Linked benchmark files for comparison: 0
+[01:31:25.193] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
+[01:31:25.469] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
+[01:31:25.768] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
+[01:31:26.006] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
+[01:31:26.268] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
+[01:31:26.513] Server  LOG     [v0] Loaded benchmark page 6 "size:" 989 "running total:" 5989
+[01:31:26.527] Server  LOG     [v0] Benchmark procedures loaded: 5989 "from" 1 "countries"
+[01:31:26.528] Server  LOG     [v0] Available countries: "Australia" ""
+[01:31:26.529] Server  LOG     [v0] Starting AI-powered matching for 6 "items..."
+[01:31:26.529] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "to cover the administrative costs for the contract"
+[01:31:26.530] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Physician fee estimated by n. of hours, cost per h"
+[01:31:26.530] Server  LOG     [v0] Skipping item (decision="Accepted" not eligible): "Study coordinator/administrative fee to cover the "
+[01:31:26.530] Server  LOG     [v0] Processing: "\"IRB/EC submission Fee (optional)...\"" "Country:" "Australia" "Decision:" "To Assess"
+[01:31:26.531] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[01:31:26.539] Server  LOG     [v0][AI-Gateway][a9eee23e] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:31:26.539] Server  LOG     [v0][AI-Gateway][a9eee23e] Vendor item: "IRB/EC submission Fee (optional)" | Country: Australia | Benchmarks: 150/5989
+[01:31:33.496] Server  LOG     [v0][AI-Gateway][a9eee23e] ✓ AI Gateway success in 6958ms | Matches: 0 | Tokens: prompt=5403 completion=561 total=5964
+[01:31:33.496] Server  LOG     [v0] Using fuzzy fallback for: "IRB/EC submission Fee (optiona" "Country:" "Australia"
+[01:31:33.819] Server  LOG     [v0]   Match 1: "Document preparation fee for INITIAL sub" | Confidence: MEDIUM | AI: false
+[01:31:33.820] Server  LOG     [v0]   Match 2: "Document preparation fee for INITIAL sub" | Confidence: MEDIUM | AI: false
+[01:31:33.820] Server  LOG     [v0]   Match 3: "Document preparation fee for INITIAL sub" | Confidence: MEDIUM | AI: false
+[01:31:33.820] Server  LOG     [v0] Processing: "\"Archive Documents retention at the site...\"" "Country:" "Australia" "Decision:" "To Assess"
+[01:31:33.822] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[01:31:33.828] Server  LOG     [v0][AI-Gateway][e0c407c5] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:31:33.829] Server  LOG     [v0][AI-Gateway][e0c407c5] Vendor item: "Archive Documents retention at the site" | Country: Australia | Benchmarks: 150/5989
+[01:31:38.949] Server  LOG     [v0][AI-Gateway][e0c407c5] ✓ AI Gateway success in 5121ms | Matches: 0 | Tokens: prompt=5397 completion=353 total=5750
+[01:31:38.950] Server  LOG     [v0] Using fuzzy fallback for: "Archive Documents retention at" "Country:" "Australia"
+[01:31:39.296] Server  LOG     [v0]   Match 1: "Archiving and Document Storage - Per Yea" | Confidence: LOW | AI: false
+[01:31:39.297] Server  LOG     [v0]   Match 2: "Archiving and Document Storage - Per Yea" | Confidence: LOW | AI: false
+[01:31:39.297] Server  LOG     [v0]   Match 3: "Archiving and Document Storage - Per Yea" | Confidence: LOW | AI: false
+[01:31:39.297] Server  LOG     [v0] Processing: "\"Close-out To cover administrative tasks required f...\"" "Country:" "Australia" "Decision:" "To Assess"
+[01:31:39.299] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "Australia"
+[01:31:39.306] Server  LOG     [v0][AI-Gateway][024d2741] Calling AI Gateway with model: google/gemini-3-pro-preview
+[01:31:39.307] Server  LOG     [v0][AI-Gateway][024d2741] Vendor item: "Close-out To cover administrative tasks required for site close-out, including f" | Country: Australia | Benchmarks: 150/5989
+[01:31:54.064] Server  LOG     [v0][AI-Gateway][024d2741] ✓ AI Gateway success in 14758ms | Matches: 0 | Tokens: prompt=5435 completion=1510 total=6945
+[01:31:54.065] Server  LOG     [v0] Using fuzzy fallback for: "Close-out To cover administrat" "Country:" "Australia"
+[01:31:55.834] Server  LOG     [v0] Updating 6 "comparison records"
+[01:31:56.133] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "1501af14-dfd9-4cd3-8f15-c2d727358935"
+[01:31:56.243] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "fec43a78-7344-41f2-9e59-39c215a405e0"
+[01:31:56.325] Server  LOG     [v0] Preserving existing benchmark data for decision-finalized item: "1bb648e1-f7b6-4cbe-80c6-7716b4467a24"
+[01:31:56.326] Server  LOG     [v0] Updating line_item_id: "a9eee23e-e39d-47c9-8bbc-b027bdf2f567" "with" 3 "matches" "flag:" "YELLOW"
+[01:31:56.462] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:31:56.463] Server  LOG     [v0] Updating line_item_id: "e0c407c5-d613-410d-8f12-481361c820b5" "with" 3 "matches" "flag:" "YELLOW"
+[01:31:56.585] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:31:56.586] Server  LOG     [v0] Updating line_item_id: "024d2741-d628-47ef-8ab4-e9ffce521dfa" "with" 0 "matches" "flag:" "NO_MATCH"
+[01:31:56.667] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
+[01:31:56.867] Server  LOG     [v0] createAdminClient using: "service_role"
+[01:31:56.870] Browser LOG     [v0] Comparison API result: {"message":"Compared 6 items: 3 AI matches, 2 trigram matches","results":[{"bestMatch":{"benchmarkId":"02d10071-0aac-431d-b3bb-5ed5f45af9de","category":"Site Costs","code":"SC189","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":0,"p25":500,"p50":595,"p75":702,"p90":852,"procedureName":"Budget Negotiation","reasoning":"In clinical trial start-up, budget negotiation typically encompasses the broader administrative and contractual activities, including correspondence with the CRO, required to finalize trial agreements.","similarity":0.7},"flag":"YELLOW","lineItemId":"1501af14-dfd9-4cd3-8f15-c2d727358935","matchCount":1,"matches":[{"benchmarkId":"02d10071-0aac-431d-b3bb-5ed5f45af9de","category":"Site Costs","code":"SC189","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":0,"p25":500,"p50":595,"p75":702,"p90":852,"procedureName":"Budget Negotiation","reasoning":"In clinical trial start-up, budget negotiation typically encompasses the broader administrative and contractual activities, including correspondence with the CRO, required to finalize trial agreements.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"a0eed2b6-0932-4aa0-911d-41ea2c65213b","category":"Non-Procedures","code":"NP004","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":511,"p25":300,"p50":315,"p75":346,"p90":394,"procedureName":"Physician - Per Hour","reasoning":"The vendor item specifically describes a physician fee calculated per hour, which is an exact match for the generic 'Physician - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"fec43a78-7344-41f2-9e59-39c215a405e0","matchCount":1,"matches":[{"benchmarkId":"a0eed2b6-0932-4aa0-911d-41ea2c65213b","category":"Non-Procedures","code":"NP004","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":511,"p25":300,"p50":315,"p75":346,"p90":394,"procedureName":"Physician - Per Hour","reasoning":"The vendor item specifically describes a physician fee calculated per hour, which is an exact match for the generic 'Physician - Per Hour' benchmark.","similarity":0.9}]},{"bestMatch":{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","code":"NP001","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor item specifies a 'Study coordinator' fee based on the 'cost per hour', which aligns exactly with the 'Study Coordinator - Per Hour' benchmark.","similarity":0.9},"flag":"GREEN","lineItemId":"1bb648e1-f7b6-4cbe-80c6-7716b4467a24","matchCount":2,"matches":[{"benchmarkId":"ef74b964-832a-46f0-a786-1b7c9be353ac","category":"Non-Procedures","code":"NP001","confidence":"HIGH","country":"Australia","isAIMatch":true,"p100":312,"p25":88,"p50":97,"p75":107,"p90":122,"procedureName":"Study Coordinator - Per Hour","reasoning":"The vendor item specifies a 'Study coordinator' fee based on the 'cost per hour', which aligns exactly with the 'Study Coordinator - Per Hour' benchmark.","similarity":0.9},{"benchmarkId":"dab73c88-9754-474a-be6d-9cb3d526247b","category":"Non-Procedures","code":"NP035","confidence":"MEDIUM","country":"Australia","isAIMatch":true,"p100":0,"p25":540,"p50":689,"p75":1011,"p90":1410,"procedureName":"Regulatory Affairs Consultant -  Per hour","reasoning":"The vendor item involves preparing the EC (Ethics Committee) submission package, which is a regulatory activity. The 'Regulatory Affairs Consultant - Per hour' benchmark is a strong alternative for regulatory preparation tasks billed hourly.","similarity":0.7}]},{"bestMatch":{"benchmarkId":"9f470571-252e-4e62-beaa-3060376075ff","category":"Site Costs","code":"SC019","confidence":"MEDIUM","country":"Australia","isAIMatch":false,"p100":10956,"p25":2013,"p50":2503,"p75":3374,"p90":4083,"procedureName":"Document preparation fee for INITIAL submission of Institutional Review Board, IRB documents; administrative preparation fee","reasoning":"Matched by fuzzy text similarity (stem/partial/typo aware)","similarity":0.6153846153846154},"flag":"YELLOW","lineItemId":"a9eee23e-e39d-47c9-8bbc-b027bdf2f567","matchCount":3,"matches":[{"benchmarkId":"9f470571-252e-4e62-beaa-3060376075ff","category":"Site Costs","code":"SC019","confidence":"MEDIUM","country":"Australia","isAIMatch":false,"p100":10956,"p25":2013,"p50":2503,"p75":3374,"p90":4083,"procedureName":"Document preparation fee for INITIAL submission of Institutional Review Board, IRB documents; administrative preparation fee","reasoning":"Matched by fuzzy text similarity (stem/partial/typo aware)","similarity":0.6153846153846154},{"benchmarkId":"287ac816-1bd3-46f3-b1fa-05764b0362aa","category":"Site Costs","code":"SC019","confidence":"MEDIUM","country":"Australia","isAIMatch":false,"p100":10956,"p25":2013,"p50":2503,"p75":3374,"p90":4083,"procedureName":"Document preparation fee for INITIAL submission of Institutional Review Board, IRB documents; administrative preparation fee","reasoning":"Matched by fuzzy text similarity (stem/partial/typo aware)","similarity":0.6153846153846154},{"benchmarkId":"65b0f81b-e116-407e-af20-a033725cebf9","category":"Site Costs","code":"SC019","confidence":"MEDIUM","country":"Australia","isAIMatch":false,"p100":10956,"p25":2013,"p50":2503,"p75":3374,"p90":4083,"procedureName":"Document preparation fee for INITIAL submission of Institutional Review Board, IRB documents; administrative preparation fee","reasoning":"Matched by fuzzy text similarity (stem/partial/typo aware)","similarity":0.6153846153846154}]},{"bestMatch":{"benchmarkId":"0cf02ad3-1404-45aa-b651-fef1df5f0897","category":"Site Costs","code":"SC012","confidence":"LOW","country":"Australia","isAIMatch":false,"p100":959,"p25":514,"p50":540,"p75":576,"p90":712,"procedureName":"Archiving and Document Storage - Per Year; Archive","reasoning":"Matched by fuzzy text similarity (stem/partial/typo aware)","similarity":0.526896551724138},"flag":"YELLOW","lineItemId":"e0c407c5-d613-410d-8f12-481361c820b5","matchCount":3,"matches":[{"benchmarkId":"0cf02ad3-1404-45aa-b651-fef1df5f0897","category":"Site Costs","code":"SC012","confidence":"LOW","country":"Australia","isAIMatch":false,"p100":959,"p25":514,"p50":540,"p75":576,"p90":712,"procedureName":"Archiving and Document Storage - Per Year; Archive","reasoning":"Matched by fuzzy text similarity (stem/partial/typo aware)","similarity":0.526896551724138},{"benchmarkId":"25403fa9-9e82-42cb-8e57-7872181a84b7","category":"Site Costs","code":"SC012","confidence":"LOW","country":"Australia","isAIMatch":false,"p100":959,"p25":514,"p50":540,"p75":576,"p90":712,"procedureName":"Archiving and Document Storage - Per Year; Archive","reasoning":"Matched by fuzzy text similarity (stem/partial/typo aware)","similarity":0.526896551724138},{"benchmarkId":"f2bae623-e679-4a0a-a874-80b6527b28ef","category":"Site Costs","code":"SC012","confidence":"LOW","country":"Australia","isAIMatch":false,"p100":959,"p25":514,"p50":540,"p75":576,"p90":712,"procedureName":"Archiving and Document Storage - Per Year; Archive","reasoning":"Matched by fuzzy text similarity (stem/partial/typo aware)","similarity":0.526896551724138}]},{"bestMatch":null,"flag":"NO_MATCH","lineItemId":"024d2741-d628-47ef-8ab4-e9ffce521dfa","matchCount":0,"matches":[]}],"success":true}
+[01:31:56.870] Browser LOG     [v0] Merged 6 AI results into comparisons in-memory (no refetch)
+[01:31:56.958] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[01:35:04.824] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport

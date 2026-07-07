@@ -137,27 +137,39 @@ export function trigramSimilarity(a: string, b: string): number {
   return denominator === 0 ? 0 : intersection / denominator
 }
 
-// Length-weighted token coverage of the vendor text against the benchmark text.
-function tokenCoverage(vendorText: string, benchmarkText: string): number {
-  const vTokens = tokenize(vendorText)
-  const bTokens = tokenize(benchmarkText)
-  if (vTokens.length === 0 || bTokens.length === 0) return 0
+// Length-weighted, directional token coverage: for every token in `queryTokens`
+// find its best match among `targetTokens`, then average (weighted by token
+// length so meaningful long words dominate over filler).
+function directionalCoverage(queryTokens: string[], targetTokens: string[]): number {
+  if (queryTokens.length === 0 || targetTokens.length === 0) return 0
 
   let weightedSum = 0
   let weightTotal = 0
-  for (const v of vTokens) {
+  for (const q of queryTokens) {
     let best = 0
-    for (const b of bTokens) {
-      const s = tokenScore(v, b)
+    for (const t of targetTokens) {
+      const s = tokenScore(q, t)
       if (s > best) best = s
       if (best === 1) break
     }
-    // Weight longer words more heavily so filler words don't dominate.
-    const weight = v.length
+    const weight = q.length
     weightedSum += best * weight
     weightTotal += weight
   }
   return weightTotal === 0 ? 0 : weightedSum / weightTotal
+}
+
+// Bidirectional token coverage between vendor text and benchmark text.
+// - vendor -> benchmark: good when the vendor term is short/partial ("Arch").
+// - benchmark -> vendor: good when the vendor text is a long description that
+//   happens to CONTAIN the benchmark's terms ("...archiving study records...").
+// We take the max so neither long descriptions nor short terms get penalised.
+function tokenCoverage(vendorText: string, benchmarkText: string): number {
+  const vTokens = tokenize(vendorText)
+  const bTokens = tokenize(benchmarkText)
+  const vendorToBenchmark = directionalCoverage(vTokens, bTokens)
+  const benchmarkToVendor = directionalCoverage(bTokens, vTokens)
+  return Math.max(vendorToBenchmark, benchmarkToVendor)
 }
 
 /**
