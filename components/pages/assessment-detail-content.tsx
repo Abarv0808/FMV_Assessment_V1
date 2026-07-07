@@ -181,6 +181,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         auditEvents: []
       }
 
+      // Load the persisted audit trail so the History tab survives reloads.
+      try {
+        const auditRes = await fetch(`/api/assessments/${id}/audit`)
+        const { events } = await auditRes.json()
+        if (Array.isArray(events)) {
+          mappedAssessment.auditEvents = events
+        }
+      } catch (e) {
+        console.log("[v0] Could not load audit log:", e)
+      }
+
       // Fetch comparisons via API (server-side to bypass RLS)
       const comparisonsResponse = await fetch(`/api/assessments/${id}/comparisons`)
       const { comparisons: comparisonsData, error: comparisonsError } = await comparisonsResponse.json()
@@ -288,16 +299,48 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   // ReferenceError. Placeholder removed here.
 
   const appendAudit = useCallback((action: string) => {
+    const tempId = `ae-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+    const userName = user?.name ?? "Unknown User"
     const event: AuditEvent = {
-      id: `ae-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-      userName: user?.name ?? "Unknown User",
+      id: tempId,
+      userName,
       action,
       timestamp: new Date().toISOString(),
     }
+    // Optimistically show the event immediately.
     setAssessment((prev) =>
       prev ? { ...prev, auditEvents: [event, ...(prev.auditEvents ?? [])] } : prev
     )
-  }, [user?.name])
+
+    // Persist to the database so the History tab survives reloads. Only real
+    // (DB-backed) assessments are persisted; mock/demo assessments stay local.
+    if (!isRealAssessment) return
+    void (async () => {
+      try {
+        const res = await fetch(`/api/assessments/${id}/audit`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action, userName }),
+        })
+        const { event: saved } = await res.json()
+        // Reconcile the optimistic entry with the server-assigned id/timestamp.
+        if (saved?.id) {
+          setAssessment((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  auditEvents: (prev.auditEvents ?? []).map((e) =>
+                    e.id === tempId ? saved : e
+                  ),
+                }
+              : prev
+          )
+        }
+      } catch (e) {
+        console.log("[v0] Could not persist audit event:", e)
+      }
+    })()
+  }, [user?.name, id, isRealAssessment])
 
   const handleStatusChange = useCallback((_id: string, newStatus: AssessmentStatus) => {
     setAssessment((prev) => prev ? { ...prev, status: newStatus, updatedAt: new Date().toISOString() } : prev)
