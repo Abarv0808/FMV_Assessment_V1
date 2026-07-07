@@ -920,6 +920,17 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     const fmt = (v?: number | null) =>
       v == null ? "-" : v.toLocaleString("en-US", { maximumFractionDigits: 0 })
 
+    // Normalize free-text comments for the PDF. Embedded newlines, carriage
+    // returns, tabs and non-breaking spaces make jsPDF's splitTextToSize
+    // mis-measure the text, producing garbled inter-character spacing on
+    // wrapped/continuation lines. Collapse all whitespace to single spaces so
+    // the Comments column wraps cleanly and shows the full value.
+    const cleanComment = (v?: string | null) =>
+      (v || "")
+        .replace(/[\r\n\t\u00a0\u2028\u2029]+/g, " ")
+        .replace(/\s{2,}/g, " ")
+        .trim()
+
     const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" })
     const generatedAt = new Date().toLocaleString("en-US")
 
@@ -971,7 +982,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           c.lineItem.decision || "-",
           c.lineItem.numberOfUnit ?? "-",
           fmt(getEffectiveTotalCost(c.lineItem)),
-          c.lineItem.comment || "",
+          cleanComment(c.lineItem.comment),
         ]
       }
 
@@ -991,7 +1002,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
         c.lineItem.numberOfUnit ?? "-",
         fmt(getEffectiveTotalCost(c.lineItem)),
         code,
-        c.lineItem.comment || "",
+        cleanComment(c.lineItem.comment),
       ]
     })
 
@@ -1015,22 +1026,25 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           ? ["", "", "", "Grand Total", "", "", "", "", "", fmt(totalCostSum), ""]
           : ["", "", "", "Grand Total", "", "", "", "", "", "", "", "", "", fmt(totalCostSum), "", ""],
       ],
-      styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak" },
+      styles: { fontSize: 6.5, cellPadding: 3, overflow: "linebreak", valign: "top" },
       headStyles: { fillColor: [30, 41, 59], textColor: 255, fontSize: 6.5 },
       footStyles: { fillColor: [241, 245, 249], textColor: 0, fontStyle: "bold" },
+      // Keep each row (including tall wrapped comments) intact on a single page
+      // so long comments never split mid-cell into garbled continuation lines.
+      rowPageBreak: "avoid",
       columnStyles: isExternal
         ? {
             0: { cellWidth: 18 },
-            2: { cellWidth: 80 },  // Cost Category narrowed to make room for Comments
-            3: { cellWidth: 150 },
-            10: { cellWidth: 110 }, // Comments
+            2: { cellWidth: 70 },  // Cost Category narrowed to make room for Comments
+            3: { cellWidth: 130 },
+            10: { cellWidth: 150 }, // Comments widened for full wrapping
           }
         : {
             0: { cellWidth: 18 },
-            2: { cellWidth: 70 },  // Cost Category narrowed to make room for Comments
-            3: { cellWidth: 120 },
-            4: { cellWidth: 100 },
-            15: { cellWidth: 90 }, // Comments
+            2: { cellWidth: 62 },  // Cost Category narrowed to make room for Comments
+            3: { cellWidth: 105 },
+            4: { cellWidth: 90 },
+            15: { cellWidth: 130 }, // Comments widened for full wrapping
           },
       margin: { left: 40, right: 40 },
     })
