@@ -1680,3 +1680,25 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [02:56:44.399] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
 [02:56:44.500] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
 [02:56:44.890] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[03:00:11.270] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[03:00:12.457] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[03:00:12.457] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[03:00:12.962] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[03:00:12.962] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/benchmarks","route":"/benchmarks"}
+[03:00:12.962] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-fmv-assessment-v1.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-fmv-assessment-v1.vusercontent.net/benchmarks","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1783429899635} /_vercel/insights/view
+[03:00:13.184] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[03:00:13.430] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[03:00:13.519] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[03:00:14.008] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[03:00:52.880] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[03:00:54.021] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[03:00:54.021] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[03:00:54.021] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[03:00:54.021] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/benchmarks","route":"/benchmarks"}
+[03:00:54.021] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-assessment-table-improvements.vusercontent.net/benchmarks","r":"https://v0.app/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1783429940879} /_vercel/insights/view
+[03:00:54.414] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[03:00:54.870] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[03:00:54.870] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
+[03:00:55.226] Browser LOG     [v0] Fetched batch: 997 files, from: 1000
