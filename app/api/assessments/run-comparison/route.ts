@@ -7,11 +7,44 @@ import { loadMatchingRules, applyMatchingRules } from "@/lib/fmv-rules"
 import { countriesMatch, countryQueryVariants } from "@/lib/country-utils"
 
 // =====================================================
-// AI-POWERED SEMANTIC MATCHING v9 - Gemini via AI Gateway
+// AI-POWERED SEMANTIC MATCHING v10 - Gemini via AI Gateway
 // =====================================================
 
-// Model used via Vercel AI Gateway
-const AI_MODEL = "google/gemini-3-pro-preview"
+// Allow the route to run long enough for large assessments (in seconds).
+export const maxDuration = 300
+
+// How many line items to match against the AI Gateway at once. Matching used to
+// run strictly sequentially (one awaited AI call per item), which made large
+// assessments take 10+ minutes and time out. Running a bounded number of calls
+// in parallel keeps us well under provider rate limits while cutting total time
+// dramatically.
+const MATCH_CONCURRENCY = 6
+const DB_WRITE_CONCURRENCY = 8
+
+// Model used via Vercel AI Gateway. Flash is far faster than the Pro preview and
+// is well-suited to this constrained classification task.
+const AI_MODEL = "google/gemini-3-flash"
+
+// Run an async mapper over items with a bounded number of concurrent workers,
+// preserving input order in the returned array.
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  limit: number,
+  fn: (item: T, index: number) => Promise<R>,
+): Promise<R[]> {
+  const results: R[] = new Array(items.length)
+  let cursor = 0
+  const workerCount = Math.max(1, Math.min(limit, items.length))
+  const worker = async () => {
+    while (true) {
+      const i = cursor++
+      if (i >= items.length) break
+      results[i] = await fn(items[i], i)
+    }
+  }
+  await Promise.all(Array.from({ length: workerCount }, () => worker()))
+  return results
+}
 
 // Schema for AI match response
 const MatchResultSchema = z.object({
@@ -371,8 +404,6 @@ export async function POST(request: Request) {
       index
     }))
 
-    const results: any[] = []
-
     // Load the editable FMV domain-knowledge rules once for this run. Degrades
     // to empty (no-op) if the rule tables don't exist yet.
     const matchingRules = await loadMatchingRules(supabase)
@@ -388,10 +419,12 @@ export async function POST(request: Request) {
       .map(r => `- ${r.triggers.slice(0, 4).join(" / ")} -> ${r.label}`)
       .join("\n")
 
-    // 3. For each line item, use AI-powered semantic matching with country-specific filtering
+    // 3. For each line item, use AI-powered semantic matching with country-specific filtering.
+    // Runs with bounded concurrency so large assessments finish quickly instead of
+    // awaiting one AI call at a time.
     console.log("[v0] Starting AI-powered matching for", lineItems.length, "items...")
-    
-    for (const lineItem of lineItems) {
+
+    const results: any[] = await mapWithConcurrency(lineItems, MATCH_CONCURRENCY, async (lineItem) => {
       const procedureName = lineItem.procedure_name || ""
       const [description, extraDataStr] = procedureName.split("|||")
       const cleanDescription = description.trim()
@@ -430,26 +463,24 @@ export async function POST(request: Request) {
       const decisionLower = lineItemDecision.toLowerCase().trim()
       if (lineItemDecision && !eligibleDecisions.includes(decisionLower)) {
         console.log(`[v0] Skipping item (decision="${lineItemDecision}" not eligible):`, cleanDescription.substring(0, 50))
-        results.push({
+        return {
           lineItemId: lineItem.id,
           matches: [],
           bestMatch: null,
           flag: "SKIPPED_BY_DECISION",
           skipReason: `Decision "${lineItemDecision}" is not eligible for comparison`
-        })
-        continue
+        }
       }
 
       console.log("[v0] Processing:", `"${cleanDescription.substring(0, 50)}..."`, "Country:", lineItemCountry || "ALL", "Decision:", lineItemDecision || "default")
       
       if (!cleanDescription || cleanDescription === "Unknown") {
-        results.push({
+        return {
           lineItemId: lineItem.id,
           matches: [],
           bestMatch: null,
           flag: "NO_MATCH"
-        })
-        continue
+        }
       }
 
       // Detect non-comparable items (taxes, discounts, overhead %, currency fees, etc.)
@@ -494,14 +525,13 @@ export async function POST(request: Request) {
         wholeLineNonComparablePatterns.some(rx => rx.test(descLower)) || keywordDominatesLine
       if (isNonComparable) {
         console.log(`[v0] Non-comparable item detected (tax/discount/overhead/etc.), skipping match: "${cleanDescription.substring(0, 60)}"`)
-        results.push({
+        return {
           lineItemId: lineItem.id,
           matches: [],
           bestMatch: null,
           flag: "NON_COMPARABLE",
           skipReason: "Item is a tax, discount, overhead %, or other non-procedure cost with no direct benchmark"
-        })
-        continue
+        }
       }
 
       // Filter benchmarks by country if the line item has a country specified
@@ -517,14 +547,13 @@ export async function POST(request: Request) {
       // If no country-specific benchmarks found, skip matching for this item
       if (countryFilteredBenchmarks.length === 0 && lineItemCountry) {
         console.log("[v0] No benchmarks available for country:", lineItemCountry)
-        results.push({
+        return {
           lineItemId: lineItem.id,
           matches: [],
           bestMatch: null,
           flag: "NO_BENCHMARK_DATA",
           noDataReason: `No benchmark data available for ${lineItemCountry}`
-        })
-        continue
+        }
       }
       
       // Prepare country-filtered benchmark data for AI matching
@@ -683,13 +712,13 @@ export async function POST(request: Request) {
         })
       }
 
-      results.push({
+      return {
         lineItemId: lineItem.id,
         matches: matchedBenchmarks,
         bestMatch: matchedBenchmarks[0] || null,
         flag
-      })
-    }
+      }
+    })
 
     // 4. Update assessment_comparisons with results
     console.log("[v0] Updating", results.length, "comparison records")
@@ -700,7 +729,7 @@ export async function POST(request: Request) {
     const ALLOWED_DB_FLAGS = new Set(["GREEN", "YELLOW", "RED", "NO_MATCH", "MULTIPLE_MATCHES"])
     const toDbFlag = (f: string) => (ALLOWED_DB_FLAGS.has(f) ? f : "NO_MATCH")
 
-    for (const result of results) {
+    await mapWithConcurrency(results, DB_WRITE_CONCURRENCY, async (result) => {
       // PRESERVE PRIOR BENCHMARK DATA FOR DECISION-FINALIZED ITEMS.
       // When an item's decision was changed (e.g. to "Accepted") after a reviewer
       // examined the matched benchmark, it is excluded from re-comparison and comes
@@ -734,7 +763,7 @@ export async function POST(request: Request) {
           } catch (e) {
             console.log("[v0] Could not parse preserved ai_matches for", result.lineItemId)
           }
-          continue
+          return
         }
 
         // No prior record exists (decision was already finalized before any
@@ -748,7 +777,7 @@ export async function POST(request: Request) {
             flag: "NO_MATCH",
             ai_matches: [{ __meta: true, originalFlag: result.flag, skipReason: (result as any).skipReason || null }]
           })
-        continue
+        return
       }
 
       console.log("[v0] Updating line_item_id:", result.lineItemId, "with", result.matches?.length || 0, "matches", "flag:", result.flag)
@@ -782,7 +811,7 @@ export async function POST(request: Request) {
           })
         console.log("[v0] Insert error:", insertError?.message || "none")
       }
-    }
+    })
 
     const aiMatchCount = results.filter(r => r.matches.some((m: any) => m.isAIMatch)).length
     const fallbackCount = results.filter(r => r.matches.length > 0 && !r.matches.some((m: any) => m.isAIMatch)).length
