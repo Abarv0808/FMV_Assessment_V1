@@ -1,946 +1,138 @@
-[00:00:01.315] Server  LOG      ✓ Ready in 876ms
-[00:00:06.714] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+[00:00:00.839] Server  LOG      ✓ Ready in 516ms
+[00:00:03.232] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:08.614] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+[00:00:06.436] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:08.846] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+[00:00:06.669] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:10.207] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:10.207] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:00:10.207] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-fmv-assessment-v1.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-fmv-assessment-v1.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782387609801} /_vercel/insights/view
-[00:00:14.567] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+[00:00:08.873] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:08.873] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:00:08.873] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-assessment-table-improvements-1.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117012039} /_vercel/insights/view
+[00:05:59.094] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:14.725] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-fmv-assessment-v1.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-fmv-assessment-v1.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782387614616} /_vercel/insights/view
-[00:00:15.932] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:00:17.559] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:02:00.600] Server  LOG      ○ Compiling /assessments/[id] ...
-[00:02:01.378] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+[00:05:59.262] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-assessment-table-improvements-1.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117362651} /_vercel/insights/view
+[00:06:00.404] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:02.915] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:26.162] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /admin. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:02:01.576] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-fmv-assessment-v1.vusercontent.net/assessments/2f19d661-9603-46d8-8d02-4126d34a5630 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-fmv-assessment-v1.vusercontent.net/assessments/2f19d661-9603-46d8-8d02-4126d34a5630","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782387721471} /_vercel/insights/view
-[00:02:03.031] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:02:03.963] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:02:04.977] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:02:05.116] Server  LOG     [v0] Comparisons API fetch result: 10 "items, error:" undefined
-[00:02:05.265] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:02:05.377] Server  LOG     [v0] Comparisons API fetch result: 10 "items, error:" undefined
-[00:02:05.608] Browser LOG     [v0] Comparisons fetch result: 10 items, error: undefined
-[00:02:05.608] Browser LOG     [v0] Has existing ai_matches: true
-[00:02:05.608] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:02:05.608] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:02:05.608] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.608] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.608] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.608] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.609] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:02:05.609] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.609] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:02:05.609] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.715] Browser LOG     [v0] Comparisons fetch result: 10 items, error: undefined
-[00:02:05.715] Browser LOG     [v0] Has existing ai_matches: true
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:02:05.715] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:06:19.148] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
+[00:06:26.336] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"https://vm-assessment-table-improvements-1.vusercontent.net/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117389723} /_vercel/insights/view
+[00:06:28.694] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:06:19.371] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-fmv-assessment-v1.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-fmv-assessment-v1.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782387979215} /_vercel/insights/view
-[00:06:19.688] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:21.211] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:21.373] Browser LOG     [v0] Assessments fetch result: 54 items, error: undefined
-[00:06:21.373] Browser LOG     [v0] Got 54 assessments from DB, mapping...
-[00:06:21.820] Browser LOG     [v0] Assessments fetch result: 54 items, error: undefined
-[00:06:21.820] Browser LOG     [v0] Got 54 assessments from DB, mapping...
-[00:07:08.396] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+[00:06:28.848] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-assessment-table-improvements-1.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117392236} /_vercel/insights/view
+[00:06:29.298] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:29.934] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:30.144] Browser LOG     [v0] Assessments fetch result: 69 items, error: undefined
+[00:06:30.145] Browser LOG     [v0] Got 69 assessments from DB, mapping...
+[00:06:30.687] Browser LOG     [v0] Assessments fetch result: 69 items, error: undefined
+[00:06:30.687] Browser LOG     [v0] Got 69 assessments from DB, mapping...
+[00:06:34.118] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:07:08.566] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:07:08.575] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-fmv-assessment-v1.vusercontent.net/assessments/56639302-fefe-48a5-9315-18ca0daf5015 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-fmv-assessment-v1.vusercontent.net/assessments/56639302-fefe-48a5-9315-18ca0daf5015","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782388028460} /_vercel/insights/view
-[00:07:09.286] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:07:09.401] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:07:09.574] Server  LOG     [v0] Comparisons API fetch result: 24 "items, error:" undefined
-[00:07:10.069] Browser LOG     [v0] Comparisons fetch result: 24 items, error: undefined
-[00:07:10.069] Browser LOG     [v0] Has existing ai_matches: true
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.069] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.176] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:07:10.305] Server  LOG     [v0] Comparisons API fetch result: 24 "items, error:" undefined
-[00:07:10.544] Browser LOG     [v0] Comparisons fetch result: 24 items, error: undefined
-[00:07:10.544] Browser LOG     [v0] Has existing ai_matches: true
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:10.544] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:07:29.917] Browser LOG     [v0] handleRunComparison called, comparisons.length: 24
-[00:07:30.947] Browser LOG     [v0] Linked benchmark files for comparison: 0
-[00:07:32.070] Server  LOG     [v0] Run comparison API called (AI-powered)
-[00:07:32.072] Server  LOG     [v0] Assessment ID: "56639302-fefe-48a5-9315-18ca0daf5015"
-[00:07:32.074] Server  LOG     [v0] Decision overrides received from client: 24 "items"
-[00:07:32.075] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:07:32.076] Server  LOG     [v0] Fetching line items...
-[00:07:32.234] Server  LOG     [v0] Persisting 24 "decision overrides to DB before comparison"
-[00:07:32.235] Server  LOG     [v0] Line items found: 24 "Error:" undefined
-[00:07:32.235] Server  LOG     [v0] Fetching benchmark procedures...
-[00:07:32.235] Server  LOG     [v0] Line item countries: "US"
-[00:07:32.390] Server  LOG     [v0] Benchmark files for requested countries: 0 "Error:" "none"
-[00:07:32.390] Server  LOG     [v0] No benchmark files found for: "US"
-[00:07:32.747] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
-[00:07:33.111] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
-[00:07:33.432] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
-[00:07:33.724] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
-[00:07:34.045] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
-[00:07:34.486] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
-[00:07:34.821] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
-[00:07:35.162] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
-[00:07:35.514] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
-[00:07:35.831] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
-[00:07:36.258] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
-[00:07:36.673] Server  LOG     [v0] Loaded benchmark page 12 "size:" 1000 "running total:" 12000
-[00:07:37.082] Server  LOG     [v0] Loaded benchmark page 13 "size:" 1000 "running total:" 13000
-[00:07:37.418] Server  LOG     [v0] Loaded benchmark page 14 "size:" 1000 "running total:" 14000
-[00:07:37.860] Server  LOG     [v0] Loaded benchmark page 15 "size:" 1000 "running total:" 15000
-[00:07:38.293] Server  LOG     [v0] Loaded benchmark page 16 "size:" 1000 "running total:" 16000
-[00:07:38.736] Server  LOG     [v0] Loaded benchmark page 17 "size:" 1000 "running total:" 17000
-[00:07:39.164] Server  LOG     [v0] Loaded benchmark page 18 "size:" 1000 "running total:" 18000
-[00:07:39.496] Server  LOG     [v0] Loaded benchmark page 19 "size:" 1000 "running total:" 19000
-[00:07:39.856] Server  LOG     [v0] Loaded benchmark page 20 "size:" 1000 "running total:" 20000
-[00:07:40.328] Server  LOG     [v0] Loaded benchmark page 21 "size:" 1000 "running total:" 21000
-[00:07:40.749] Server  LOG     [v0] Loaded benchmark page 22 "size:" 1000 "running total:" 22000
-[00:07:41.118] Server  LOG     [v0] Loaded benchmark page 23 "size:" 1000 "running total:" 23000
-[00:07:41.522] Server  LOG     [v0] Loaded benchmark page 24 "size:" 1000 "running total:" 24000
-[00:07:41.983] Server  LOG     [v0] Loaded benchmark page 25 "size:" 1000 "running total:" 25000
-[00:07:42.371] Server  LOG     [v0] Loaded benchmark page 26 "size:" 1000 "running total:" 26000
-[00:07:42.435] Server  LOG      ✓ Compiled in 125ms
-[00:07:42.832] Server  LOG     [v0] Loaded benchmark page 27 "size:" 1000 "running total:" 27000
-[00:07:43.298] Server  LOG     [v0] Loaded benchmark page 28 "size:" 1000 "running total:" 28000
-[00:07:43.592] Server  LOG     [v0] Loaded benchmark page 29 "size:" 1000 "running total:" 29000
-[00:07:43.956] Server  LOG     [v0] Loaded benchmark page 30 "size:" 1000 "running total:" 30000
-[00:07:44.316] Server  LOG     [v0] Loaded benchmark page 31 "size:" 1000 "running total:" 31000
-[00:07:44.611] Server  LOG     [v0] Loaded benchmark page 32 "size:" 1000 "running total:" 32000
-[00:07:44.914] Server  LOG     [v0] Loaded benchmark page 33 "size:" 1000 "running total:" 33000
-[00:07:45.317] Server  LOG     [v0] Loaded benchmark page 34 "size:" 1000 "running total:" 34000
-[00:07:45.665] Server  LOG     [v0] Loaded benchmark page 35 "size:" 1000 "running total:" 35000
-[00:07:45.965] Server  LOG     [v0] Loaded benchmark page 36 "size:" 1000 "running total:" 36000
-[00:07:46.252] Server  LOG     [v0] Loaded benchmark page 37 "size:" 1000 "running total:" 37000
-[00:07:46.627] Server  LOG     [v0] Loaded benchmark page 38 "size:" 1000 "running total:" 38000
-[00:07:46.969] Server  LOG     [v0] Loaded benchmark page 39 "size:" 1000 "running total:" 39000
-[00:07:47.250] Server  LOG     [v0] Loaded benchmark page 40 "size:" 1000 "running total:" 40000
-[00:07:47.512] Server  LOG     [v0] Loaded benchmark page 41 "size:" 1000 "running total:" 41000
-[00:07:47.833] Server  LOG     [v0] Loaded benchmark page 42 "size:" 1000 "running total:" 42000
-[00:07:48.143] Server  LOG     [v0] Loaded benchmark page 43 "size:" 1000 "running total:" 43000
-[00:07:48.545] Server  LOG     [v0] Loaded benchmark page 44 "size:" 1000 "running total:" 44000
-[00:07:48.901] Server  LOG     [v0] Loaded benchmark page 45 "size:" 1000 "running total:" 45000
-[00:07:49.211] Server  LOG     [v0] Loaded benchmark page 46 "size:" 1000 "running total:" 46000
-[00:07:49.514] Server  LOG     [v0] Loaded benchmark page 47 "size:" 1000 "running total:" 47000
-[00:07:49.901] Server  LOG     [v0] Loaded benchmark page 48 "size:" 1000 "running total:" 48000
-[00:07:50.255] Server  LOG     [v0] Loaded benchmark page 49 "size:" 1000 "running total:" 49000
-[00:07:50.553] Server  LOG     [v0] Loaded benchmark page 50 "size:" 1000 "running total:" 50000
-[00:07:50.695] Server  LOG     [v0] Benchmark procedures loaded: 50000 "from" 68 "countries"
-[00:07:50.695] Server  LOG     [v0] Available countries: "Russia, Saudi Arabia, Serbia, Singapore, Slovak Republic, Slovenia, Taiwan, Tanzania, Thailand, Tunisia, Turkey, United Arab Emirates, Oman, Peru, Poland, Malta, Portugal, Qatar, Romania, United Kingdom" "..."
-[00:07:50.703] Server  LOG     [v0] Starting AI-powered matching for 24 "items..."
-[00:07:50.703] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.713] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.713] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.714] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.724] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.724] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.725] Server  LOG     [v0] Processing: "\"IRB submission communications, curriculum vitae, e...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.743] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.743] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.744] Server  LOG     [v0] Processing: "\"IRB submission communications, curriculum vitae, e...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.753] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.754] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.754] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.764] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.764] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.765] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.775] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.776] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.776] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.785] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.786] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.786] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.803] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.803] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.803] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.812] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.812] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.812] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.820] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.821] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.821] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.829] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.829] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.830] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.838] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.838] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.838] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.846] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.847] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.847] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.855] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.856] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.856] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.865] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.865] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.866] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.874] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.875] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.875] Server  LOG     [v0] Processing: "\"Maintaining study logs and providing enrollment re...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.883] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.884] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.884] Server  LOG     [v0] Processing: "\"Coordinate patient enrollment activities (e.g., re...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.892] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.893] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.893] Server  LOG     [v0] Processing: "\"Follow-up patient activities (e.g., DCF completion...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.901] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.902] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.902] Server  LOG     [v0] Processing: "\"Complete pharmacy/field nurse survey at the end of...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.910] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.911] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.911] Server  LOG     [v0] Processing: "\"Complete pharmacy/field nurse survey at the end of...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.919] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.920] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.920] Server  LOG     [v0] Processing: "\"Legal review - Conducted in-house by VP/Senior Cou...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.928] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.928] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.928] Server  LOG     [v0] Processing: "\"Nursing visit notes - 60 patients x 1 hour per pat...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.936] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.936] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.937] Server  LOG     [v0] Processing: "\"Patient compensation for survey completion (ca. 30...\"" "Country:" "US" "Decision:" "To Assess"
-[00:07:50.944] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:07:50.945] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:07:50.945] Server  LOG     [v0] Updating 24 "comparison records"
-[00:07:50.945] Server  LOG     [v0] Updating line_item_id: "a70818f2-67f7-4b4a-b3b5-ebfc26613afb" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:51.059] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:51.059] Server  LOG     [v0] Updating line_item_id: "065dc73b-cda2-4c1c-9f3e-51bf56d0fcb0" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:51.194] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:51.195] Server  LOG     [v0] Updating line_item_id: "72aca811-dd9a-4b6c-92ed-942d32c07940" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:51.304] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:51.305] Server  LOG     [v0] Updating line_item_id: "1b05bb11-f1ba-4def-854d-1a0c7fb7763c" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:51.414] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:51.414] Server  LOG     [v0] Updating line_item_id: "dc1574e2-9d16-4c7b-bb16-df961c8cc1bf" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:51.526] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:51.527] Server  LOG     [v0] Updating line_item_id: "a3770e5e-d954-4f58-8267-61fe127ebe48" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:51.798] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:51.798] Server  LOG     [v0] Updating line_item_id: "3c33ab53-4325-4f7b-848f-d554183d5eef" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:51.908] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:51.908] Server  LOG     [v0] Updating line_item_id: "83d35e16-eec7-4b0c-9507-7cf96aae99e3" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:52.050] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:52.051] Server  LOG     [v0] Updating line_item_id: "dde48325-4f65-409a-86a0-77a7f754d231" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:52.160] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:52.160] Server  LOG     [v0] Updating line_item_id: "d4025679-e97a-48df-b3b0-57b21f5c4b8c" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:52.268] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:52.269] Server  LOG     [v0] Updating line_item_id: "d38a98f9-1673-48f2-894c-8e29929f6259" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:52.369] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:52.369] Server  LOG     [v0] Updating line_item_id: "65a147a0-1a3b-425a-b55e-5a765fe6a062" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:52.637] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:52.637] Server  LOG     [v0] Updating line_item_id: "774ce9d0-1d86-4732-b85a-36900b789b6e" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:52.721] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:52.721] Server  LOG     [v0] Updating line_item_id: "6498779d-ba27-45e8-87bb-290fee86104b" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:52.829] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:52.830] Server  LOG     [v0] Updating line_item_id: "e799201c-3ef3-41d6-8e14-00e10694b484" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:52.912] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:52.912] Server  LOG     [v0] Updating line_item_id: "aa131aa5-e0d9-4d65-baf0-c20e377d49fd" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:53.019] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:53.020] Server  LOG     [v0] Updating line_item_id: "0d0b982a-c83c-47da-9e63-2b45408da5fe" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:53.128] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:53.128] Server  LOG     [v0] Updating line_item_id: "b6e55068-5c8b-4aff-9b65-6c2b38174a1b" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:53.237] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:53.237] Server  LOG     [v0] Updating line_item_id: "88e2ffd9-9843-477c-bcd7-df5e76e2ec8a" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:53.350] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:53.350] Server  LOG     [v0] Updating line_item_id: "a1fc47cf-cf01-49d7-a6d0-54cafc76eeb1" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:53.462] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:53.462] Server  LOG     [v0] Updating line_item_id: "3b62fa77-c9ed-44d5-b92a-ba29ad3baa4b" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:53.544] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:53.544] Server  LOG     [v0] Updating line_item_id: "0c247484-744a-459f-9855-6e9787000932" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:53.651] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:53.652] Server  LOG     [v0] Updating line_item_id: "e4c00b3c-07d1-4c52-b623-9382742224c5" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:53.734] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:53.735] Server  LOG     [v0] Updating line_item_id: "a80cf252-1117-4d40-b57d-c6f85443798d" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:07:53.832] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:07:54.584] Browser LOG     [v0] Comparison API result: {"message":"Compared 24 items: 0 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a70818f2-67f7-4b4a-b3b5-ebfc26613afb","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"065dc73b-cda2-4c1c-9f3e-51bf56d0fcb0","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"72aca811-dd9a-4b6c-92ed-942d32c07940","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"1b05bb11-f1ba-4def-854d-1a0c7fb7763c","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"dc1574e2-9d16-4c7b-bb16-df961c8cc1bf","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a3770e5e-d954-4f58-8267-61fe127ebe48","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"3c33ab53-4325-4f7b-848f-d554183d5eef","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"83d35e16-eec7-4b0c-9507-7cf96aae99e3","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"dde48325-4f65-409a-86a0-77a7f754d231","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"d4025679-e97a-48df-b3b0-57b21f5c4b8c","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"d38a98f9-1673-48f2-894c-8e29929f6259","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"65a147a0-1a3b-425a-b55e-5a765fe6a062","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"774ce9d0-1d86-4732-b85a-36900b789b6e","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"6498779d-ba27-45e8-87bb-290fee86104b","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"e799201c-3ef3-41d6-8e14-00e10694b484","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"aa131aa5-e0d9-4d65-baf0-c20e377d49fd","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"0d0b982a-c83c-47da-9e63-2b45408da5fe","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"b6e55068-5c8b-4aff-9b65-6c2b38174a1b","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"88e2ffd9-9843-477c-bcd7-df5e76e2ec8a","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a1fc47cf-cf01-49d7-a6d0-54cafc76eeb1","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"3b62fa77-c9ed-44d5-b92a-ba29ad3baa4b","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"0c247484-744a-459f-9855-6e9787000932","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"e4c00b3c-07d1-4c52-b623-9382742224c5","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a80cf252-1117-4d40-b57d-c6f85443798d","matchCount":0,"matches":[]}],"success":true}
-[00:07:54.584] Browser LOG     [v0] Merged 24 AI results into comparisons in-memory (no refetch)
-[00:15:46.105] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+[00:06:34.297] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/assessments/8826151d-f6b0-44c8-bdcf-daba9e712ef5 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements-1.vusercontent.net/assessments/8826151d-f6b0-44c8-bdcf-daba9e712ef5","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117397684} /_vercel/insights/view
+[00:06:35.613] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:36.206] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:36.930] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:37.216] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[00:06:37.340] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:37.427] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
+[00:06:38.049] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:38.183] Server  LOG     [v0] Comparisons API fetch result: 17 "items, error:" undefined
+[00:06:38.384] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:06:38.494] Server  LOG     [v0] Comparisons API fetch result: 17 "items, error:" undefined
+[00:06:38.789] Browser LOG     [v0] Comparisons fetch result: 17 items, error: undefined
+[00:06:38.789] Browser LOG     [v0] Has existing ai_matches: true
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Comparisons fetch result: 17 items, error: undefined
+[00:06:38.920] Browser LOG     [v0] Has existing ai_matches: true
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
+[00:10:45.478] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:15:46.617] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:15:46.968] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:15:46.968] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:15:46.968] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782388546877} /_vercel/insights/view
-[00:15:57.639] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+[00:10:45.606] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:45.642] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-assessment-table-improvements-1.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117649025} /_vercel/insights/view
+[00:10:46.125] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:15:57.781] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782388557689} /_vercel/insights/view
-[00:15:58.025] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:15:58.995] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:16:22.883] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
+[00:10:46.267] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:46.284] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-assessment-table-improvements-1.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117649669} /_vercel/insights/view
+[00:10:46.602] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:47.078] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:47.455] Browser LOG     [v0] Assessments fetch result: 69 items, error: undefined
+[00:10:47.455] Browser LOG     [v0] Got 69 assessments from DB, mapping...
+[00:10:47.455] Browser LOG     [v0] Assessments fetch result: 69 items, error: undefined
+[00:10:47.455] Browser LOG     [v0] Got 69 assessments from DB, mapping...
+[00:10:50.448] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:16:23.144] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/assessments/56639302-fefe-48a5-9315-18ca0daf5015 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"http://localhost:3000/assessments/56639302-fefe-48a5-9315-18ca0daf5015","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782388583052} /_vercel/insights/view
-[00:16:23.351] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:16:23.667] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:16:23.703] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:16:23.893] Server  LOG     [v0] Comparisons API fetch result: 24 "items, error:" undefined
-[00:16:25.499] Browser LOG     [v0] Comparisons fetch result: 24 items, error: undefined
-[00:16:25.499] Browser LOG     [v0] Has existing ai_matches: true
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.499] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:25.551] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:16:25.653] Server  LOG     [v0] Comparisons API fetch result: 24 "items, error:" undefined
-[00:16:26.125] Browser LOG     [v0] Comparisons fetch result: 24 items, error: undefined
-[00:16:26.125] Browser LOG     [v0] Has existing ai_matches: true
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:26.125] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:16:39.673] Browser LOG     [v0] handleRunComparison called, comparisons.length: 24
-[00:16:39.835] Server  LOG     [v0] Run comparison API called (AI-powered)
-[00:16:39.838] Server  LOG     [v0] Assessment ID: "56639302-fefe-48a5-9315-18ca0daf5015"
-[00:16:39.839] Server  LOG     [v0] Decision overrides received from client: 24 "items"
-[00:16:39.839] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:16:39.840] Server  LOG     [v0] Fetching line items...
-[00:16:39.916] Browser LOG     [v0] Linked benchmark files for comparison: 0
-[00:16:39.975] Server  LOG     [v0] Persisting 24 "decision overrides to DB before comparison"
-[00:16:39.975] Server  LOG     [v0] Line items found: 24 "Error:" undefined
-[00:16:39.976] Server  LOG     [v0] Fetching benchmark procedures...
-[00:16:39.976] Server  LOG     [v0] Line item countries: "US"
-[00:16:40.121] Server  LOG     [v0] Benchmark files for requested countries: 0 "Error:" "none"
-[00:16:40.122] Server  LOG     [v0] No benchmark files found for: "US"
-[00:16:40.512] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
-[00:16:40.712] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
-[00:16:41.072] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
-[00:16:41.271] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
-[00:16:41.626] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
-[00:16:41.945] Server  LOG     [v0] Loaded benchmark page 6 "size:" 1000 "running total:" 6000
-[00:16:42.301] Server  LOG     [v0] Loaded benchmark page 7 "size:" 1000 "running total:" 7000
-[00:16:42.627] Server  LOG     [v0] Loaded benchmark page 8 "size:" 1000 "running total:" 8000
-[00:16:42.906] Server  LOG     [v0] Loaded benchmark page 9 "size:" 1000 "running total:" 9000
-[00:16:43.292] Server  LOG     [v0] Loaded benchmark page 10 "size:" 1000 "running total:" 10000
-[00:16:43.609] Server  LOG     [v0] Loaded benchmark page 11 "size:" 1000 "running total:" 11000
-[00:16:44.022] Server  LOG     [v0] Loaded benchmark page 12 "size:" 1000 "running total:" 12000
-[00:16:44.378] Server  LOG     [v0] Loaded benchmark page 13 "size:" 1000 "running total:" 13000
-[00:16:44.661] Server  LOG     [v0] Loaded benchmark page 14 "size:" 1000 "running total:" 14000
-[00:16:45.456] Server  LOG     [v0] Loaded benchmark page 15 "size:" 1000 "running total:" 15000
-[00:16:45.913] Server  LOG     [v0] Loaded benchmark page 16 "size:" 1000 "running total:" 16000
-[00:16:46.324] Server  LOG     [v0] Loaded benchmark page 17 "size:" 1000 "running total:" 17000
-[00:16:46.750] Server  LOG     [v0] Loaded benchmark page 18 "size:" 1000 "running total:" 18000
-[00:16:47.038] Server  LOG     [v0] Loaded benchmark page 19 "size:" 1000 "running total:" 19000
-[00:16:47.435] Server  LOG     [v0] Loaded benchmark page 20 "size:" 1000 "running total:" 20000
-[00:16:47.848] Server  LOG     [v0] Loaded benchmark page 21 "size:" 1000 "running total:" 21000
-[00:16:48.297] Server  LOG     [v0] Loaded benchmark page 22 "size:" 1000 "running total:" 22000
-[00:16:48.739] Server  LOG     [v0] Loaded benchmark page 23 "size:" 1000 "running total:" 23000
-[00:16:49.185] Server  LOG     [v0] Loaded benchmark page 24 "size:" 1000 "running total:" 24000
-[00:16:49.636] Server  LOG     [v0] Loaded benchmark page 25 "size:" 1000 "running total:" 25000
-[00:16:50.061] Server  LOG     [v0] Loaded benchmark page 26 "size:" 1000 "running total:" 26000
-[00:16:50.525] Server  LOG     [v0] Loaded benchmark page 27 "size:" 1000 "running total:" 27000
-[00:16:51.019] Server  LOG     [v0] Loaded benchmark page 28 "size:" 1000 "running total:" 28000
-[00:16:51.369] Server  LOG     [v0] Loaded benchmark page 29 "size:" 1000 "running total:" 29000
-[00:16:51.744] Server  LOG     [v0] Loaded benchmark page 30 "size:" 1000 "running total:" 30000
-[00:16:51.940] Server  LOG     [v0] Loaded benchmark page 31 "size:" 1000 "running total:" 31000
-[00:16:52.130] Server  LOG     [v0] Loaded benchmark page 32 "size:" 1000 "running total:" 32000
-[00:16:52.448] Server  LOG     [v0] Loaded benchmark page 33 "size:" 1000 "running total:" 33000
-[00:16:52.789] Server  LOG     [v0] Loaded benchmark page 34 "size:" 1000 "running total:" 34000
-[00:16:53.068] Server  LOG     [v0] Loaded benchmark page 35 "size:" 1000 "running total:" 35000
-[00:16:53.391] Server  LOG     [v0] Loaded benchmark page 36 "size:" 1000 "running total:" 36000
-[00:16:53.669] Server  LOG     [v0] Loaded benchmark page 37 "size:" 1000 "running total:" 37000
-[00:16:53.857] Server  LOG     [v0] Loaded benchmark page 38 "size:" 1000 "running total:" 38000
-[00:16:54.043] Server  LOG     [v0] Loaded benchmark page 39 "size:" 1000 "running total:" 39000
-[00:16:54.228] Server  LOG     [v0] Loaded benchmark page 40 "size:" 1000 "running total:" 40000
-[00:16:54.584] Server  LOG     [v0] Loaded benchmark page 41 "size:" 1000 "running total:" 41000
-[00:16:54.794] Server  LOG     [v0] Loaded benchmark page 42 "size:" 1000 "running total:" 42000
-[00:16:55.004] Server  LOG     [v0] Loaded benchmark page 43 "size:" 1000 "running total:" 43000
-[00:16:55.359] Server  LOG     [v0] Loaded benchmark page 44 "size:" 1000 "running total:" 44000
-[00:16:55.567] Server  LOG     [v0] Loaded benchmark page 45 "size:" 1000 "running total:" 45000
-[00:16:55.911] Server  LOG     [v0] Loaded benchmark page 46 "size:" 1000 "running total:" 46000
-[00:16:56.109] Server  LOG     [v0] Loaded benchmark page 47 "size:" 1000 "running total:" 47000
-[00:16:56.309] Server  LOG     [v0] Loaded benchmark page 48 "size:" 1000 "running total:" 48000
-[00:16:56.508] Server  LOG     [v0] Loaded benchmark page 49 "size:" 1000 "running total:" 49000
-[00:16:56.865] Server  LOG     [v0] Loaded benchmark page 50 "size:" 1000 "running total:" 50000
-[00:16:56.969] Server  LOG     [v0] Benchmark procedures loaded: 50000 "from" 69 "countries"
-[00:16:56.970] Server  LOG     [v0] Available countries: "Cyprus, Germany, Poland, Czech Republic, Denmark, Egypt, Estonia, Venezuela, Greece, Hong Kong, Hungary, Iceland, South Korea, India, Canada, United Arab Emirates, Macedonia, Malta, Spain, Mexico" "..."
-[00:16:56.980] Server  LOG     [v0] Starting AI-powered matching for 24 "items..."
-[00:16:56.980] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:56.991] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:56.992] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:56.992] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.002] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.003] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.003] Server  LOG     [v0] Processing: "\"IRB submission communications, curriculum vitae, e...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.036] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.037] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.037] Server  LOG     [v0] Processing: "\"IRB submission communications, curriculum vitae, e...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.047] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.047] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.047] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.056] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.056] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.056] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.064] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.065] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.065] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.072] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.073] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.073] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.080] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.080] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.081] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.088] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.088] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.089] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.096] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.097] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.097] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.102] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.102] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.103] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.108] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.108] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.109] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.117] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.117] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.117] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.124] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.124] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.124] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.131] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.131] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.131] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.138] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.138] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.139] Server  LOG     [v0] Processing: "\"Maintaining study logs and providing enrollment re...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.146] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.146] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.146] Server  LOG     [v0] Processing: "\"Coordinate patient enrollment activities (e.g., re...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.153] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.153] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.154] Server  LOG     [v0] Processing: "\"Follow-up patient activities (e.g., DCF completion...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.160] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.160] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.160] Server  LOG     [v0] Processing: "\"Complete pharmacy/field nurse survey at the end of...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.167] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.167] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.167] Server  LOG     [v0] Processing: "\"Complete pharmacy/field nurse survey at the end of...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.174] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.175] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.175] Server  LOG     [v0] Processing: "\"Legal review - Conducted in-house by VP/Senior Cou...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.181] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.181] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.182] Server  LOG     [v0] Processing: "\"Nursing visit notes - 60 patients x 1 hour per pat...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.210] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.211] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.211] Server  LOG     [v0] Processing: "\"Patient compensation for survey completion (ca. 30...\"" "Country:" "US" "Decision:" "To Assess"
-[00:16:57.216] Server  LOG     [v0] Filtered to 0 "benchmarks for country:" "US"
-[00:16:57.217] Server  LOG     [v0] No benchmarks available for country: "US"
-[00:16:57.217] Server  LOG     [v0] Updating 24 "comparison records"
-[00:16:57.218] Server  LOG     [v0] Updating line_item_id: "a70818f2-67f7-4b4a-b3b5-ebfc26613afb" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:57.343] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:57.343] Server  LOG     [v0] Updating line_item_id: "065dc73b-cda2-4c1c-9f3e-51bf56d0fcb0" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:57.471] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:57.471] Server  LOG     [v0] Updating line_item_id: "72aca811-dd9a-4b6c-92ed-942d32c07940" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:57.600] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:57.600] Server  LOG     [v0] Updating line_item_id: "1b05bb11-f1ba-4def-854d-1a0c7fb7763c" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:57.703] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:57.703] Server  LOG     [v0] Updating line_item_id: "dc1574e2-9d16-4c7b-bb16-df961c8cc1bf" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:57.799] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:57.799] Server  LOG     [v0] Updating line_item_id: "a3770e5e-d954-4f58-8267-61fe127ebe48" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:57.881] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:57.881] Server  LOG     [v0] Updating line_item_id: "3c33ab53-4325-4f7b-848f-d554183d5eef" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:57.990] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:57.990] Server  LOG     [v0] Updating line_item_id: "83d35e16-eec7-4b0c-9507-7cf96aae99e3" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.076] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.076] Server  LOG     [v0] Updating line_item_id: "dde48325-4f65-409a-86a0-77a7f754d231" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.191] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.191] Server  LOG     [v0] Updating line_item_id: "d4025679-e97a-48df-b3b0-57b21f5c4b8c" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.299] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.299] Server  LOG     [v0] Updating line_item_id: "d38a98f9-1673-48f2-894c-8e29929f6259" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.401] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.401] Server  LOG     [v0] Updating line_item_id: "65a147a0-1a3b-425a-b55e-5a765fe6a062" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.499] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.499] Server  LOG     [v0] Updating line_item_id: "774ce9d0-1d86-4732-b85a-36900b789b6e" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.608] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.608] Server  LOG     [v0] Updating line_item_id: "6498779d-ba27-45e8-87bb-290fee86104b" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.691] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.692] Server  LOG     [v0] Updating line_item_id: "e799201c-3ef3-41d6-8e14-00e10694b484" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.789] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.789] Server  LOG     [v0] Updating line_item_id: "aa131aa5-e0d9-4d65-baf0-c20e377d49fd" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.874] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.874] Server  LOG     [v0] Updating line_item_id: "0d0b982a-c83c-47da-9e63-2b45408da5fe" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:58.983] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:58.984] Server  LOG     [v0] Updating line_item_id: "b6e55068-5c8b-4aff-9b65-6c2b38174a1b" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:59.092] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:59.093] Server  LOG     [v0] Updating line_item_id: "88e2ffd9-9843-477c-bcd7-df5e76e2ec8a" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:59.211] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:59.211] Server  LOG     [v0] Updating line_item_id: "a1fc47cf-cf01-49d7-a6d0-54cafc76eeb1" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:59.311] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:59.311] Server  LOG     [v0] Updating line_item_id: "3b62fa77-c9ed-44d5-b92a-ba29ad3baa4b" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:59.409] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:59.410] Server  LOG     [v0] Updating line_item_id: "0c247484-744a-459f-9855-6e9787000932" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:59.491] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:59.491] Server  LOG     [v0] Updating line_item_id: "e4c00b3c-07d1-4c52-b623-9382742224c5" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:59.600] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:16:59.601] Server  LOG     [v0] Updating line_item_id: "a80cf252-1117-4d40-b57d-c6f85443798d" "with" 0 "matches" "flag:" "NO_BENCHMARK_DATA"
-[00:16:59.683] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:17:00.276] Browser LOG     [v0] Comparison API result: {"message":"Compared 24 items: 0 AI matches, 0 trigram matches","results":[{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a70818f2-67f7-4b4a-b3b5-ebfc26613afb","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"065dc73b-cda2-4c1c-9f3e-51bf56d0fcb0","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"72aca811-dd9a-4b6c-92ed-942d32c07940","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"1b05bb11-f1ba-4def-854d-1a0c7fb7763c","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"dc1574e2-9d16-4c7b-bb16-df961c8cc1bf","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a3770e5e-d954-4f58-8267-61fe127ebe48","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"3c33ab53-4325-4f7b-848f-d554183d5eef","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"83d35e16-eec7-4b0c-9507-7cf96aae99e3","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"dde48325-4f65-409a-86a0-77a7f754d231","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"d4025679-e97a-48df-b3b0-57b21f5c4b8c","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"d38a98f9-1673-48f2-894c-8e29929f6259","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"65a147a0-1a3b-425a-b55e-5a765fe6a062","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"774ce9d0-1d86-4732-b85a-36900b789b6e","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"6498779d-ba27-45e8-87bb-290fee86104b","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"e799201c-3ef3-41d6-8e14-00e10694b484","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"aa131aa5-e0d9-4d65-baf0-c20e377d49fd","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"0d0b982a-c83c-47da-9e63-2b45408da5fe","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"b6e55068-5c8b-4aff-9b65-6c2b38174a1b","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"88e2ffd9-9843-477c-bcd7-df5e76e2ec8a","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a1fc47cf-cf01-49d7-a6d0-54cafc76eeb1","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"3b62fa77-c9ed-44d5-b92a-ba29ad3baa4b","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"0c247484-744a-459f-9855-6e9787000932","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"e4c00b3c-07d1-4c52-b623-9382742224c5","matchCount":0,"matches":[]},{"bestMatch":null,"flag":"NO_BENCHMARK_DATA","lineItemId":"a80cf252-1117-4d40-b57d-c6f85443798d","matchCount":0,"matches":[]}],"success":true}
-[00:17:00.276] Browser LOG     [v0] Merged 24 AI results into comparisons in-memory (no refetch)
-[00:19:15.879] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:19:16.569] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:19:16.694] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:19:16.877] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:19:16.877] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/56639302-fefe-48a5-9315-18ca0daf5015","route":"/assessments/[id]"}
-[00:19:16.877] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/assessments/56639302-fefe-48a5-9315-18ca0daf5015 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"http://localhost:3000/assessments/56639302-fefe-48a5-9315-18ca0daf5015","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782388756786} /_vercel/insights/view
-[00:19:17.540] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:19:17.696] Server  LOG     [v0] Comparisons API fetch result: 24 "items, error:" undefined
-[00:19:19.251] Browser LOG     [v0] Comparisons fetch result: 24 items, error: undefined
-[00:19:19.251] Browser LOG     [v0] Has existing ai_matches: true
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:19.251] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:19:28.633] Browser LOG     [v0] handleRunComparison called, comparisons.length: 24
-[00:19:28.890] Browser LOG     [v0] Linked benchmark files for comparison: 0
-[00:19:29.143] Server  LOG     [v0] Run comparison API called (AI-powered)
-[00:19:29.147] Server  LOG     [v0] Assessment ID: "56639302-fefe-48a5-9315-18ca0daf5015"
-[00:19:29.148] Server  LOG     [v0] Decision overrides received from client: 24 "items"
-[00:19:29.149] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:19:29.153] Server  LOG     [v0] Fetching line items...
-[00:19:29.307] Server  LOG     [v0] Persisting 24 "decision overrides to DB before comparison"
-[00:19:29.308] Server  LOG     [v0] Line items found: 24 "Error:" undefined
-[00:19:29.308] Server  LOG     [v0] Fetching benchmark procedures...
-[00:19:29.308] Server  LOG     [v0] Line item countries: "US"
-[00:19:29.309] Server  LOG     [v0] Country variants for benchmark lookup: "US, United States, United States of America, USA, U.S., U.S.A., America"
-[00:19:29.451] Server  LOG     [v0] Benchmark files for requested countries: 29 "Error:" "none"
-[00:19:29.451] Server  LOG     [v0] Filtering to 29 "benchmark files for countries:" "United States"
-[00:19:29.793] Server  LOG     [v0] Loaded benchmark page 1 "size:" 1000 "running total:" 1000
-[00:19:30.153] Server  LOG     [v0] Loaded benchmark page 2 "size:" 1000 "running total:" 2000
-[00:19:30.369] Server  LOG     [v0] Loaded benchmark page 3 "size:" 1000 "running total:" 3000
-[00:19:30.524] Server  LOG     [v0] Loaded benchmark page 4 "size:" 1000 "running total:" 4000
-[00:19:30.838] Server  LOG     [v0] Loaded benchmark page 5 "size:" 1000 "running total:" 5000
-[00:19:31.016] Server  LOG     [v0] Loaded benchmark page 6 "size:" 989 "running total:" 5989
-[00:19:31.030] Server  LOG     [v0] Benchmark procedures loaded: 5989 "from" 1 "countries"
-[00:19:31.031] Server  LOG     [v0] Available countries: "United States" ""
-[00:19:31.032] Server  LOG     [v0] Starting AI-powered matching for 24 "items..."
-[00:19:31.033] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:19:31.044] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:19:31.053] Server  LOG     [v0][AI-Gateway][a70818f2] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:19:31.054] Server  LOG     [v0][AI-Gateway][a70818f2] Vendor item: "Study start-up (e.g., 5-hour training and corresponding documentation, delegatio" | Country: US | Benchmarks: 150/5989
-[00:19:39.483] Server  LOG     [v0][AI-Gateway][a70818f2] ✓ AI Gateway success in 8430ms | Matches: 1 | Tokens: prompt=5220 completion=820 total=6040
-[00:19:39.484] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:19:39.484] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
-[00:19:39.484] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:19:39.501] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:19:39.511] Server  LOG     [v0][AI-Gateway][065dc73b] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:19:39.512] Server  LOG     [v0][AI-Gateway][065dc73b] Vendor item: "Study start-up (e.g., 5-hour training and corresponding documentation, delegatio" | Country: US | Benchmarks: 150/5989
-[00:19:46.068] Server  LOG     [v0][AI-Gateway][065dc73b] ✓ AI Gateway success in 6557ms | Matches: 1 | Tokens: prompt=5220 completion=568 total=5788
-[00:19:46.069] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:19:46.069] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
-[00:19:46.075] Server  LOG     [v0] Processing: "\"IRB submission communications, curriculum vitae, e...\"" "Country:" "US" "Decision:" "To Assess"
-[00:19:46.092] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:19:46.100] Server  LOG     [v0][AI-Gateway][72aca811] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:19:46.101] Server  LOG     [v0][AI-Gateway][72aca811] Vendor item: "IRB submission communications, curriculum vitae, etc. - Executive Leader (N=1)" | Country: US | Benchmarks: 150/5989
-[00:20:00.292] Server  LOG     [v0][AI-Gateway][72aca811] ✓ AI Gateway success in 14192ms | Matches: 2 | Tokens: prompt=5192 completion=1482 total=6674
-[00:20:00.292] Server  LOG     [v0] AI found 2 "matches for" "US"
-[00:20:00.293] Server  LOG     [v0]   Match 1: "Regulatory Affairs Consultant -  Per hou" | Confidence: MEDIUM | AI: true
-[00:20:00.293] Server  LOG     [v0]   Match 2: "Administrative/Personnel Costs - Per Vis" | Confidence: LOW | AI: true
-[00:20:00.293] Server  LOG     [v0] Processing: "\"IRB submission communications, curriculum vitae, e...\"" "Country:" "US" "Decision:" "To Assess"
-[00:20:00.302] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:20:00.310] Server  LOG     [v0][AI-Gateway][1b05bb11] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:20:00.310] Server  LOG     [v0][AI-Gateway][1b05bb11] Vendor item: "IRB submission communications, curriculum vitae, etc. - Project Manager (N=1)" | Country: US | Benchmarks: 150/5989
-[00:20:11.727] Server  LOG     [v0][AI-Gateway][1b05bb11] ✓ AI Gateway success in 11416ms | Matches: 0 | Tokens: prompt=5192 completion=1202 total=6394
-[00:20:11.727] Server  LOG     [v0] Using trigram fallback for: "IRB submission communications," "Country:" "US"
-[00:20:11.852] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:20:11.859] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:20:11.867] Server  LOG     [v0][AI-Gateway][dc1574e2] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:20:11.867] Server  LOG     [v0][AI-Gateway][dc1574e2] Vendor item: "Study start-up (e.g., 5-hour training and corresponding documentation, delegatio" | Country: US | Benchmarks: 150/5989
-[00:20:25.031] Server  LOG     [v0][AI-Gateway][dc1574e2] ✓ AI Gateway success in 13165ms | Matches: 0 | Tokens: prompt=5220 completion=1432 total=6652
-[00:20:25.032] Server  LOG     [v0] Using trigram fallback for: "Study start-up (e.g., 5-hour t" "Country:" "US"
-[00:20:25.224] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:20:25.230] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:20:25.238] Server  LOG     [v0][AI-Gateway][a3770e5e] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:20:25.238] Server  LOG     [v0][AI-Gateway][a3770e5e] Vendor item: "Study start-up (e.g., 5-hour training and corresponding documentation, delegatio" | Country: US | Benchmarks: 150/5989
-[00:20:30.235] Server  LOG     [v0][AI-Gateway][a3770e5e] ✓ AI Gateway success in 4997ms | Matches: 0 | Tokens: prompt=5220 completion=412 total=5632
-[00:20:30.235] Server  LOG     [v0] Using trigram fallback for: "Study start-up (e.g., 5-hour t" "Country:" "US"
-[00:20:30.432] Server  LOG     [v0] Processing: "\"Study start-up (e.g., 5-hour training and correspo...\"" "Country:" "US" "Decision:" "To Assess"
-[00:20:30.439] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:20:30.447] Server  LOG     [v0][AI-Gateway][3c33ab53] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:20:30.448] Server  LOG     [v0][AI-Gateway][3c33ab53] Vendor item: "Study start-up (e.g., 5-hour training and corresponding documentation, delegatio" | Country: US | Benchmarks: 150/5989
-[00:20:35.048] Server  LOG     [v0][AI-Gateway][3c33ab53] ✓ AI Gateway success in 4601ms | Matches: 1 | Tokens: prompt=5221 completion=354 total=5575
-[00:20:35.049] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:20:35.049] Server  LOG     [v0]   Match 1: "Pharmacist - Per Hour" | Confidence: HIGH | AI: true
-[00:20:35.049] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:20:35.058] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:20:35.066] Server  LOG     [v0][AI-Gateway][83d35e16] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:20:35.066] Server  LOG     [v0][AI-Gateway][83d35e16] Vendor item: "Attend monthly 1-hour meetings for up to 16 months, plus 4 1-hour ad hoc meeting" | Country: US | Benchmarks: 150/5989
-[00:20:41.268] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:20:41.677] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:20:41.855] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:20:41.961] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:20:41.961] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/56639302-fefe-48a5-9315-18ca0daf5015","route":"/assessments/[id]"}
-[00:20:41.961] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/assessments/56639302-fefe-48a5-9315-18ca0daf5015 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"http://localhost:3000/assessments/56639302-fefe-48a5-9315-18ca0daf5015","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782388841854} /_vercel/insights/view
-[00:20:42.488] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:20:42.584] Server  LOG     [v0] Comparisons API fetch result: 24 "items, error:" undefined
-[00:20:43.591] Server  LOG     [v0][AI-Gateway][83d35e16] ✓ AI Gateway success in 8526ms | Matches: 0 | Tokens: prompt=5219 completion=814 total=6033
-[00:20:43.592] Server  LOG     [v0] Using trigram fallback for: "Attend monthly 1-hour meetings" "Country:" "US"
-[00:20:43.753] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:20:43.759] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:20:43.768] Server  LOG     [v0][AI-Gateway][dde48325] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:20:43.768] Server  LOG     [v0][AI-Gateway][dde48325] Vendor item: "Attend monthly 1-hour meetings for up to 16 months, plus 4 1-hour ad hoc meeting" | Country: US | Benchmarks: 150/5989
-[00:20:44.230] Browser LOG     [v0] Comparisons fetch result: 24 items, error: undefined
-[00:20:44.230] Browser LOG     [v0] Has existing ai_matches: true
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:44.230] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_BENCHMARK_DATA
-[00:20:48.874] Server  LOG     [v0][AI-Gateway][dde48325] ✓ AI Gateway success in 5106ms | Matches: 0 | Tokens: prompt=5219 completion=370 total=5589
-[00:20:48.875] Server  LOG     [v0] Using trigram fallback for: "Attend monthly 1-hour meetings" "Country:" "US"
-[00:20:49.066] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:20:49.088] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:20:49.097] Server  LOG     [v0][AI-Gateway][d4025679] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:20:49.098] Server  LOG     [v0][AI-Gateway][d4025679] Vendor item: "Attend monthly 1-hour meetings for up to 16 months, plus 4 1-hour ad hoc meeting" | Country: US | Benchmarks: 150/5989
-[00:20:52.929] Server  LOG     [v0][AI-Gateway][d4025679] ✓ AI Gateway success in 3832ms | Matches: 1 | Tokens: prompt=5219 completion=261 total=5480
-[00:20:52.929] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:20:52.930] Server  LOG     [v0]   Match 1: "Pharmacist - Per Hour" | Confidence: HIGH | AI: true
-[00:20:52.930] Server  LOG     [v0] Processing: "\"Attend monthly 1-hour meetings for up to 16 months...\"" "Country:" "US" "Decision:" "To Assess"
-[00:20:52.937] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:20:52.946] Server  LOG     [v0][AI-Gateway][d38a98f9] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:20:52.946] Server  LOG     [v0][AI-Gateway][d38a98f9] Vendor item: "Attend monthly 1-hour meetings for up to 16 months, plus 4 1-hour ad hoc meeting" | Country: US | Benchmarks: 150/5989
-[00:20:57.767] Server  LOG     [v0][AI-Gateway][d38a98f9] ✓ AI Gateway success in 4821ms | Matches: 1 | Tokens: prompt=5218 completion=257 total=5475
-[00:20:57.767] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:20:57.768] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
-[00:20:57.768] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:20:57.775] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:20:57.782] Server  LOG     [v0][AI-Gateway][65a147a0] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:20:57.783] Server  LOG     [v0][AI-Gateway][65a147a0] Vendor item: "Study close-out (including 3-year archive of study documents) - 20 hours (estima" | Country: US | Benchmarks: 150/5989
-[00:21:06.144] Server  LOG     [v0][AI-Gateway][65a147a0] ✓ AI Gateway success in 8361ms | Matches: 0 | Tokens: prompt=5213 completion=866 total=6079
-[00:21:06.144] Server  LOG     [v0] Using trigram fallback for: "Study close-out (including 3-y" "Country:" "US"
-[00:21:06.308] Server  LOG     [v0]   Match 1: "Study Close out: including all activitie" | Confidence: LOW | AI: false
-[00:21:06.308] Server  LOG     [v0]   Match 2: "Study Close out: including all activitie" | Confidence: LOW | AI: false
-[00:21:06.308] Server  LOG     [v0]   Match 3: "Study Close out: including all activitie" | Confidence: LOW | AI: false
-[00:21:06.309] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:06.314] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:06.322] Server  LOG     [v0][AI-Gateway][774ce9d0] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:06.322] Server  LOG     [v0][AI-Gateway][774ce9d0] Vendor item: "Study close-out (including 3-year archive of study documents) - 20 hours (estima" | Country: US | Benchmarks: 150/5989
-[00:21:14.287] Server  LOG     [v0][AI-Gateway][774ce9d0] ✓ AI Gateway success in 7965ms | Matches: 0 | Tokens: prompt=5213 completion=816 total=6029
-[00:21:14.287] Server  LOG     [v0] Using trigram fallback for: "Study close-out (including 3-y" "Country:" "US"
-[00:21:14.456] Server  LOG     [v0]   Match 1: "Study Close out: including all activitie" | Confidence: LOW | AI: false
-[00:21:14.456] Server  LOG     [v0]   Match 2: "Study Close out: including all activitie" | Confidence: LOW | AI: false
-[00:21:14.456] Server  LOG     [v0]   Match 3: "Study Close out: including all activitie" | Confidence: LOW | AI: false
-[00:21:14.457] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:14.463] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:14.470] Server  LOG     [v0][AI-Gateway][6498779d] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:14.471] Server  LOG     [v0][AI-Gateway][6498779d] Vendor item: "Study close-out (including 3-year archive of study documents) - 20 hours (estima" | Country: US | Benchmarks: 150/5989
-[00:21:18.700] Server  LOG     [v0][AI-Gateway][6498779d] ✓ AI Gateway success in 4230ms | Matches: 1 | Tokens: prompt=5214 completion=307 total=5521
-[00:21:18.701] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:21:18.701] Server  LOG     [v0]   Match 1: "Pharmacist - Per Hour" | Confidence: HIGH | AI: true
-[00:21:18.701] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:18.708] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:18.716] Server  LOG     [v0][AI-Gateway][e799201c] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:18.716] Server  LOG     [v0][AI-Gateway][e799201c] Vendor item: "Study close-out (including 3-year archive of study documents) - 20 hours (estima" | Country: US | Benchmarks: 150/5989
-[00:21:23.495] Server  LOG     [v0][AI-Gateway][e799201c] ✓ AI Gateway success in 4779ms | Matches: 1 | Tokens: prompt=5213 completion=398 total=5611
-[00:21:23.496] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:21:23.496] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
-[00:21:23.496] Server  LOG     [v0] Processing: "\"Study close-out (including 3-year archive of study...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:23.505] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:23.523] Server  LOG     [v0][AI-Gateway][aa131aa5] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:23.524] Server  LOG     [v0][AI-Gateway][aa131aa5] Vendor item: "Study close-out (including 3-year archive of study documents) - 20 hours (estima" | Country: US | Benchmarks: 150/5989
-[00:21:29.305] Server  LOG     [v0][AI-Gateway][aa131aa5] ✓ AI Gateway success in 5782ms | Matches: 1 | Tokens: prompt=5213 completion=437 total=5650
-[00:21:29.306] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:21:29.306] Server  LOG     [v0]   Match 1: "Study Coordinator - Per Hour" | Confidence: HIGH | AI: true
-[00:21:29.306] Server  LOG     [v0] Processing: "\"Maintaining study logs and providing enrollment re...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:29.313] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:29.321] Server  LOG     [v0][AI-Gateway][0d0b982a] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:29.321] Server  LOG     [v0][AI-Gateway][0d0b982a] Vendor item: "Maintaining study logs and providing enrollment reports to RTI-HS every two week" | Country: US | Benchmarks: 150/5989
-[00:21:33.864] Server  LOG     [v0][AI-Gateway][0d0b982a] ✓ AI Gateway success in 4543ms | Matches: 1 | Tokens: prompt=5217 completion=374 total=5591
-[00:21:33.864] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:21:33.865] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
-[00:21:33.865] Server  LOG     [v0] Processing: "\"Coordinate patient enrollment activities (e.g., re...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:33.872] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:33.880] Server  LOG     [v0][AI-Gateway][b6e55068] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:33.880] Server  LOG     [v0][AI-Gateway][b6e55068] Vendor item: "Coordinate patient enrollment activities (e.g., recruit, screen, and consent pat" | Country: US | Benchmarks: 150/5989
-[00:21:41.317] Server  LOG     [v0][AI-Gateway][b6e55068] ✓ AI Gateway success in 7438ms | Matches: 2 | Tokens: prompt=5234 completion=639 total=5873
-[00:21:41.317] Server  LOG     [v0] AI found 2 "matches for" "US"
-[00:21:41.317] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
-[00:21:41.318] Server  LOG     [v0]   Match 2: "Study Coordinator - Per Hour" | Confidence: MEDIUM | AI: true
-[00:21:41.318] Server  LOG     [v0] Processing: "\"Follow-up patient activities (e.g., DCF completion...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:41.325] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:41.333] Server  LOG     [v0][AI-Gateway][88e2ffd9] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:41.333] Server  LOG     [v0][AI-Gateway][88e2ffd9] Vendor item: "Follow-up patient activities (e.g., DCF completion at 4 months) - 60 patients x " | Country: US | Benchmarks: 150/5989
-[00:21:45.592] Server  LOG     [v0][AI-Gateway][88e2ffd9] ✓ AI Gateway success in 4259ms | Matches: 1 | Tokens: prompt=5210 completion=297 total=5507
-[00:21:45.593] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:21:45.593] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
-[00:21:45.593] Server  LOG     [v0] Processing: "\"Complete pharmacy/field nurse survey at the end of...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:45.601] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:45.609] Server  LOG     [v0][AI-Gateway][a1fc47cf] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:45.609] Server  LOG     [v0][AI-Gateway][a1fc47cf] Vendor item: "Complete pharmacy/field nurse survey at the end of the study - Pharmacist (N=20)" | Country: US | Benchmarks: 150/5989
-[00:21:50.172] Server  LOG     [v0][AI-Gateway][a1fc47cf] ✓ AI Gateway success in 4563ms | Matches: 1 | Tokens: prompt=5195 completion=312 total=5507
-[00:21:50.173] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:21:50.173] Server  LOG     [v0]   Match 1: "Pharmacist - Per Hour" | Confidence: HIGH | AI: true
-[00:21:50.173] Server  LOG     [v0] Processing: "\"Complete pharmacy/field nurse survey at the end of...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:50.181] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:50.189] Server  LOG     [v0][AI-Gateway][3b62fa77] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:50.189] Server  LOG     [v0][AI-Gateway][3b62fa77] Vendor item: "Complete pharmacy/field nurse survey at the end of the study - Nurse (N=40)" | Country: US | Benchmarks: 150/5989
-[00:21:56.032] Server  LOG     [v0][AI-Gateway][3b62fa77] ✓ AI Gateway success in 5844ms | Matches: 1 | Tokens: prompt=5194 completion=561 total=5755
-[00:21:56.033] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:21:56.033] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: MEDIUM | AI: true
-[00:21:56.034] Server  LOG     [v0] Processing: "\"Legal review - Conducted in-house by VP/Senior Cou...\"" "Country:" "US" "Decision:" "To Assess"
-[00:21:56.042] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:21:56.050] Server  LOG     [v0][AI-Gateway][0c247484] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:21:56.051] Server  LOG     [v0][AI-Gateway][0c247484] Vendor item: "Legal review - Conducted in-house by VP/Senior Counsel (> 10 years of experience" | Country: US | Benchmarks: 150/5989
-[00:22:04.776] Server  LOG     [v0][AI-Gateway][0c247484] ✓ AI Gateway success in 8726ms | Matches: 0 | Tokens: prompt=5195 completion=833 total=6028
-[00:22:04.776] Server  LOG     [v0] Using trigram fallback for: "Legal review - Conducted in-ho" "Country:" "US"
-[00:22:04.906] Server  LOG     [v0] Processing: "\"Nursing visit notes - 60 patients x 1 hour per pat...\"" "Country:" "US" "Decision:" "To Assess"
-[00:22:04.911] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:22:04.919] Server  LOG     [v0][AI-Gateway][e4c00b3c] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:22:04.920] Server  LOG     [v0][AI-Gateway][e4c00b3c] Vendor item: "Nursing visit notes - 60 patients x 1 hour per patient x 2 visits until the pati" | Country: US | Benchmarks: 150/5989
-[00:22:10.564] Server  LOG     [v0][AI-Gateway][e4c00b3c] ✓ AI Gateway success in 5645ms | Matches: 1 | Tokens: prompt=5206 completion=429 total=5635
-[00:22:10.564] Server  LOG     [v0] AI found 1 "matches for" "US"
-[00:22:10.565] Server  LOG     [v0]   Match 1: "Nurse - Per Hour" | Confidence: HIGH | AI: true
-[00:22:10.565] Server  LOG     [v0] Processing: "\"Patient compensation for survey completion (ca. 30...\"" "Country:" "US" "Decision:" "To Assess"
-[00:22:10.573] Server  LOG     [v0] Filtered to 5989 "benchmarks for country:" "US"
-[00:22:10.580] Server  LOG     [v0][AI-Gateway][a80cf252] Calling AI Gateway with model: google/gemini-3-pro-preview
-[00:22:10.581] Server  LOG     [v0][AI-Gateway][a80cf252] Vendor item: "Patient compensation for survey completion (ca. 30 mins)" | Country: US | Benchmarks: 150/5989
-[00:22:18.201] Server  LOG     [v0][AI-Gateway][a80cf252] ✓ AI Gateway success in 7621ms | Matches: 3 | Tokens: prompt=5187 completion=846 total=6033
-[00:22:18.202] Server  LOG     [v0] AI found 3 "matches for" "US"
-[00:22:18.202] Server  LOG     [v0]   Match 1: "Patient Reimbursement, Stipend - Per Vis" | Confidence: HIGH | AI: true
-[00:22:18.202] Server  LOG     [v0]   Match 2: "Patient Reimbursement, Stipend - Per Vis" | Confidence: HIGH | AI: true
-[00:22:18.203] Server  LOG     [v0]   Match 3: "Subject Stipend per hour" | Confidence: MEDIUM | AI: true
-[00:22:18.203] Server  LOG     [v0] Updating 24 "comparison records"
-[00:22:18.204] Server  LOG     [v0] Updating line_item_id: "a70818f2-67f7-4b4a-b3b5-ebfc26613afb" "with" 1 "matches" "flag:" "GREEN"
-[00:22:18.457] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:18.457] Server  LOG     [v0] Updating line_item_id: "065dc73b-cda2-4c1c-9f3e-51bf56d0fcb0" "with" 1 "matches" "flag:" "GREEN"
-[00:22:18.747] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:18.747] Server  LOG     [v0] Updating line_item_id: "72aca811-dd9a-4b6c-92ed-942d32c07940" "with" 2 "matches" "flag:" "YELLOW"
-[00:22:18.848] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:18.849] Server  LOG     [v0] Updating line_item_id: "1b05bb11-f1ba-4def-854d-1a0c7fb7763c" "with" 0 "matches" "flag:" "NO_MATCH"
-[00:22:18.933] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:18.933] Server  LOG     [v0] Updating line_item_id: "dc1574e2-9d16-4c7b-bb16-df961c8cc1bf" "with" 0 "matches" "flag:" "NO_MATCH"
-[00:22:19.020] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.020] Server  LOG     [v0] Updating line_item_id: "a3770e5e-d954-4f58-8267-61fe127ebe48" "with" 0 "matches" "flag:" "NO_MATCH"
-[00:22:19.107] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.107] Server  LOG     [v0] Updating line_item_id: "3c33ab53-4325-4f7b-848f-d554183d5eef" "with" 1 "matches" "flag:" "GREEN"
-[00:22:19.191] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.191] Server  LOG     [v0] Updating line_item_id: "83d35e16-eec7-4b0c-9507-7cf96aae99e3" "with" 0 "matches" "flag:" "NO_MATCH"
-[00:22:19.305] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.306] Server  LOG     [v0] Updating line_item_id: "dde48325-4f65-409a-86a0-77a7f754d231" "with" 0 "matches" "flag:" "NO_MATCH"
-[00:22:19.417] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.417] Server  LOG     [v0] Updating line_item_id: "d4025679-e97a-48df-b3b0-57b21f5c4b8c" "with" 1 "matches" "flag:" "GREEN"
-[00:22:19.518] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.519] Server  LOG     [v0] Updating line_item_id: "d38a98f9-1673-48f2-894c-8e29929f6259" "with" 1 "matches" "flag:" "GREEN"
-[00:22:19.621] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.621] Server  LOG     [v0] Updating line_item_id: "65a147a0-1a3b-425a-b55e-5a765fe6a062" "with" 3 "matches" "flag:" "YELLOW"
-[00:22:19.707] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.708] Server  LOG     [v0] Updating line_item_id: "774ce9d0-1d86-4732-b85a-36900b789b6e" "with" 3 "matches" "flag:" "YELLOW"
-[00:22:19.792] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.792] Server  LOG     [v0] Updating line_item_id: "6498779d-ba27-45e8-87bb-290fee86104b" "with" 1 "matches" "flag:" "GREEN"
-[00:22:19.881] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.882] Server  LOG     [v0] Updating line_item_id: "e799201c-3ef3-41d6-8e14-00e10694b484" "with" 1 "matches" "flag:" "GREEN"
-[00:22:19.967] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:19.968] Server  LOG     [v0] Updating line_item_id: "aa131aa5-e0d9-4d65-baf0-c20e377d49fd" "with" 1 "matches" "flag:" "GREEN"
-[00:22:20.063] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:20.064] Server  LOG     [v0] Updating line_item_id: "0d0b982a-c83c-47da-9e63-2b45408da5fe" "with" 1 "matches" "flag:" "GREEN"
-[00:22:20.160] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:20.161] Server  LOG     [v0] Updating line_item_id: "b6e55068-5c8b-4aff-9b65-6c2b38174a1b" "with" 2 "matches" "flag:" "GREEN"
-[00:22:20.244] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:20.244] Server  LOG     [v0] Updating line_item_id: "88e2ffd9-9843-477c-bcd7-df5e76e2ec8a" "with" 1 "matches" "flag:" "GREEN"
-[00:22:20.328] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:20.328] Server  LOG     [v0] Updating line_item_id: "a1fc47cf-cf01-49d7-a6d0-54cafc76eeb1" "with" 1 "matches" "flag:" "GREEN"
-[00:22:20.412] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:20.412] Server  LOG     [v0] Updating line_item_id: "3b62fa77-c9ed-44d5-b92a-ba29ad3baa4b" "with" 1 "matches" "flag:" "YELLOW"
-[00:22:20.497] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:20.497] Server  LOG     [v0] Updating line_item_id: "0c247484-744a-459f-9855-6e9787000932" "with" 0 "matches" "flag:" "NO_MATCH"
-[00:22:20.614] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:20.614] Server  LOG     [v0] Updating line_item_id: "e4c00b3c-07d1-4c52-b623-9382742224c5" "with" 1 "matches" "flag:" "GREEN"
-[00:22:20.724] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:22:20.724] Server  LOG     [v0] Updating line_item_id: "a80cf252-1117-4d40-b57d-c6f85443798d" "with" 3 "matches" "flag:" "GREEN"
-[00:22:20.827] Server  LOG     [v0] Update result: 1 "rows updated, error:" "none"
-[00:23:05.453] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:23:05.810] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:23:06.091] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:23:06.099] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:23:06.099] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/assessments/56639302-fefe-48a5-9315-18ca0daf5015","route":"/assessments/[id]"}
-[00:23:06.099] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/assessments/56639302-fefe-48a5-9315-18ca0daf5015 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"http://localhost:3000/assessments/56639302-fefe-48a5-9315-18ca0daf5015","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1782388985921} /_vercel/insights/view
-[00:23:06.382] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:23:06.417] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:23:06.526] Server  LOG     [v0] Comparisons API fetch result: 24 "items, error:" undefined
-[00:23:08.513] Browser LOG     [v0] Comparisons fetch result: 24 items, error: undefined
-[00:23:08.513] Browser LOG     [v0] Has existing ai_matches: true
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:08.513] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:23:08.571] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:23:08.692] Server  LOG     [v0] Comparisons API fetch result: 24 "items, error:" undefined
-[00:23:09.300] Browser LOG     [v0] Comparisons fetch result: 24 items, error: undefined
-[00:23:09.300] Browser LOG     [v0] Has existing ai_matches: true
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.300] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:23:09.301] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.301] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.301] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.301] Browser LOG     [v0] Loaded ai_matches for line item: 0 matches originalFlag: NO_MATCH
-[00:23:09.301] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:23:09.301] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:50.624] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:50.630] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/assessments/a0c07ba2-93d9-41da-b8ab-099e836420c2 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements-1.vusercontent.net/assessments/a0c07ba2-93d9-41da-b8ab-099e836420c2","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117654012} /_vercel/insights/view
+[00:10:51.098] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:51.181] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:51.447] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:51.457] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:51.560] Server  LOG     [v0] Comparisons API fetch result: 32 "items, error:" undefined
+[00:10:51.699] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:10:51.791] Server  LOG     [v0] Comparisons API fetch result: 32 "items, error:" undefined
+[00:10:52.334] Browser LOG     [v0] Comparisons fetch result: 32 items, error: undefined
+[00:10:52.334] Browser LOG     [v0] Has existing ai_matches: true
+[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Comparisons fetch result: 32 items, error: undefined
+[00:10:52.526] Browser LOG     [v0] Has existing ai_matches: true
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
+[00:10:54.367] Server  LOG     [v0] createAdminClient using: "service_role"
