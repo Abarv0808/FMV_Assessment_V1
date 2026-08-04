@@ -1,138 +1,26 @@
-[00:00:00.839] Server  LOG      ✓ Ready in 516ms
-[00:00:03.232] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+[00:00:00.768] Server  LOG      ✓ Ready in 482ms
+[00:00:04.221] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:06.436] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+[00:00:06.065] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:06.669] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+[00:00:06.326] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:00:08.873] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:08.873] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:00:08.873] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-assessment-table-improvements-1.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117012039} /_vercel/insights/view
-[00:05:59.094] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+[00:00:08.938] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:08.938] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:00:08.938] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1t.vusercontent.net/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://vm-assessment-table-improvements-1t.vusercontent.net/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784216201533} /_vercel/insights/view
+[00:01:15.331] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:05:59.262] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-assessment-table-improvements-1.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117362651} /_vercel/insights/view
-[00:06:00.404] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:02.915] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:26.162] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /admin. Please move it to viewport export instead.
+[00:01:15.489] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1t.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-assessment-table-improvements-1t.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784216268457} /_vercel/insights/view
+[00:01:16.724] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:01:18.685] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:01:29.130] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /benchmarks. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:06:26.336] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"https://vm-assessment-table-improvements-1.vusercontent.net/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117389723} /_vercel/insights/view
-[00:06:28.694] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:06:28.848] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-assessment-table-improvements-1.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117392236} /_vercel/insights/view
-[00:06:29.298] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:29.934] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:30.144] Browser LOG     [v0] Assessments fetch result: 69 items, error: undefined
-[00:06:30.145] Browser LOG     [v0] Got 69 assessments from DB, mapping...
-[00:06:30.687] Browser LOG     [v0] Assessments fetch result: 69 items, error: undefined
-[00:06:30.687] Browser LOG     [v0] Got 69 assessments from DB, mapping...
-[00:06:34.118] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:06:34.297] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/assessments/8826151d-f6b0-44c8-bdcf-daba9e712ef5 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements-1.vusercontent.net/assessments/8826151d-f6b0-44c8-bdcf-daba9e712ef5","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117397684} /_vercel/insights/view
-[00:06:35.613] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:36.206] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:36.930] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:37.216] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
-[00:06:37.340] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:37.427] Server  LOG     [v0] assessment_audit_log table missing; run migration 012.
-[00:06:38.049] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:38.183] Server  LOG     [v0] Comparisons API fetch result: 17 "items, error:" undefined
-[00:06:38.384] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:06:38.494] Server  LOG     [v0] Comparisons API fetch result: 17 "items, error:" undefined
-[00:06:38.789] Browser LOG     [v0] Comparisons fetch result: 17 items, error: undefined
-[00:06:38.789] Browser LOG     [v0] Has existing ai_matches: true
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:06:38.789] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Comparisons fetch result: 17 items, error: undefined
-[00:06:38.920] Browser LOG     [v0] Has existing ai_matches: true
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 4 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:06:38.920] Browser LOG     [v0] Loaded ai_matches for line item: 5 matches originalFlag: null
-[00:10:45.478] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:10:45.606] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:45.642] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-assessment-table-improvements-1.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117649025} /_vercel/insights/view
-[00:10:46.125] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:10:46.267] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:46.284] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"https://vm-assessment-table-improvements-1.vusercontent.net/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117649669} /_vercel/insights/view
-[00:10:46.602] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:47.078] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:47.455] Browser LOG     [v0] Assessments fetch result: 69 items, error: undefined
-[00:10:47.455] Browser LOG     [v0] Got 69 assessments from DB, mapping...
-[00:10:47.455] Browser LOG     [v0] Assessments fetch result: 69 items, error: undefined
-[00:10:47.455] Browser LOG     [v0] Got 69 assessments from DB, mapping...
-[00:10:50.448] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /assessments/[id]. Please move it to viewport export instead.
-Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[00:10:50.624] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:50.630] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1.vusercontent.net/assessments/a0c07ba2-93d9-41da-b8ab-099e836420c2 color: rgb(120, 120, 120) color: inherit {"dp":"/assessments/[id]","o":"https://vm-assessment-table-improvements-1.vusercontent.net/assessments/a0c07ba2-93d9-41da-b8ab-099e836420c2","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784117654012} /_vercel/insights/view
-[00:10:51.098] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:51.181] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:51.447] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:51.457] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:51.560] Server  LOG     [v0] Comparisons API fetch result: 32 "items, error:" undefined
-[00:10:51.699] Server  LOG     [v0] createAdminClient using: "service_role"
-[00:10:51.791] Server  LOG     [v0] Comparisons API fetch result: 32 "items, error:" undefined
-[00:10:52.334] Browser LOG     [v0] Comparisons fetch result: 32 items, error: undefined
-[00:10:52.334] Browser LOG     [v0] Has existing ai_matches: true
-[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.334] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.335] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Comparisons fetch result: 32 items, error: undefined
-[00:10:52.526] Browser LOG     [v0] Has existing ai_matches: true
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 2 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 1 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:52.526] Browser LOG     [v0] Loaded ai_matches for line item: 3 matches originalFlag: null
-[00:10:54.367] Server  LOG     [v0] createAdminClient using: "service_role"
+[00:01:30.004] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:01:30.004] Browser LOG     [v0] Fetching benchmarks, SUPABASE_URL exists: true
+[00:01:30.004] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements-1t.vusercontent.net/benchmarks color: rgb(120, 120, 120) color: inherit {"dp":"/benchmarks","o":"https://vm-assessment-table-improvements-1t.vusercontent.net/benchmarks","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1784216282956} /_vercel/insights/view
+[00:01:31.194] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:01:31.522] Browser LOG     [v0] Fetched batch: 1000 files, from: 0
+[00:01:31.522] Browser LOG     [v0] Fetched batch: 1000 files, from: 1000
+[00:01:31.967] Browser LOG     [v0] Fetched batch: 1 files, from: 2000
+[00:01:32.187] Browser LOG     [v0] Fetched batch: 1000 files, from: 1000
+[00:01:32.329] Browser LOG     [v0] Fetched batch: 1 files, from: 2000
