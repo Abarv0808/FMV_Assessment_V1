@@ -860,7 +860,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   }, [id, comparisons, appendAudit])
   
   // Handle line item field updates (additional information, cost category)
-  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice" | "unitPrice", value: string | number | null) => {
+  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice" | "unitPrice" | "numberOfUnit", value: string | number | null) => {
     try {
       const response = await fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
@@ -910,6 +910,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           costCategory: "Cost Category",
           negotiatedPrice: "Negotiated Price",
           unitPrice: "Unit Price",
+          numberOfUnit: "Number of Unit",
           comment: "Comment"
         }
         appendAudit(`Updated ${fieldNames[field] || field} for line item`)

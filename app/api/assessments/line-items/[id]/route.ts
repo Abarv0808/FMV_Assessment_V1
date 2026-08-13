@@ -9,7 +9,7 @@ export async function PATCH(
     const { id } = await params
     const body = await request.json()
     console.log("[v0] PATCH line-item raw body:", JSON.stringify(body))
-    const { additionalInformation, costCategory, negotiatedPrice, unitPrice, decision, comment } = body
+    const { additionalInformation, costCategory, negotiatedPrice, unitPrice, numberOfUnit, decision, comment } = body
 
     const supabase = createAdminClient()
 
@@ -67,6 +67,12 @@ export async function PATCH(
     // negotiated-price branch above.
     if (unitPrice !== undefined) {
       extraData.unitPrice = unitPrice === null ? 0 : Number(unitPrice)
+    }
+    // Number of units also lives in extra_data. It multiplies into Total Cost,
+    // so clamp to a sane whole number >= 1 instead of trusting the payload.
+    if (numberOfUnit !== undefined) {
+      const parsedUnits = Math.floor(Number(numberOfUnit))
+      extraData.numberOfUnit = Number.isFinite(parsedUnits) && parsedUnits >= 1 ? parsedUnits : 1
     }
     if (comment !== undefined) {
       extraData.comment = comment

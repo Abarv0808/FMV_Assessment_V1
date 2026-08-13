@@ -48,7 +48,7 @@ interface ComparisonTableProps {
   onBenchmarkTypeChange?: (id: string, benchmarkType: BenchmarkType) => void
   onDecisionChange?: (id: string, decision: ItemDecision) => void
   onMatchSelect?: (id: string, match: any) => void
-  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice" | "unitPrice", value: string | number | null) => void
+  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice" | "unitPrice" | "numberOfUnit", value: string | number | null) => void
 }
 
 const flagConfig: Record<string, { label: string; color: string }> = {
@@ -201,6 +201,12 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   // persist on blur so we don't PATCH on every keystroke.
   const [unitPriceDrafts, setUnitPriceDrafts] = useState<Record<string, string>>({})
 
+  // "Number of Unit" uses an explicit pencil -> edit -> save/cancel flow
+  // (like Cost Description) rather than an always-on input, so the quantity
+  // can't be changed by an accidental click/scroll on a numeric field.
+  const [editingUnits, setEditingUnits] = useState<string | null>(null)
+  const [editUnitsValue, setEditUnitsValue] = useState("")
+
   // Per-row "user opened the Decision dropdown" gate. Radix Select fires
   // `onValueChange` during controlled-value reconciliation (without any user
   // pointer/keyboard input), and those echoes were corrupting the DB. We only
@@ -238,6 +244,34 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   const cancelEditingAdditionalInfo = () => {
     setEditingAdditionalInfo(null)
     setEditAdditionalInfoValue("")
+  }
+
+  // Handle "Number of Unit" edit
+  const startEditingUnits = (comparison: AssessmentComparison) => {
+    const current =
+      (comparison.lineItem as any).numberOfUnit ?? (comparison.lineItem as any).numberOfUnits ?? 1
+    setEditingUnits(comparison.lineItem.id)
+    setEditUnitsValue(String(current))
+  }
+
+  const saveUnits = (lineItemId: string) => {
+    const parsed = parseInt(editUnitsValue, 10)
+    // Quantity drives Total Cost, so guard against blank / 0 / negative /
+    // non-numeric input rather than persisting a value that would zero out or
+    // invert the row's cost.
+    if (!Number.isFinite(parsed) || parsed < 1) {
+      setEditingUnits(null)
+      setEditUnitsValue("")
+      return
+    }
+    onLineItemUpdate?.(lineItemId, "numberOfUnit", parsed)
+    setEditingUnits(null)
+    setEditUnitsValue("")
+  }
+
+  const cancelEditingUnits = () => {
+    setEditingUnits(null)
+    setEditUnitsValue("")
   }
   
   // Handle cost category change
@@ -708,8 +742,57 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       <span className="text-muted-foreground">—</span>
                     )}
                   </TableCell>
-                  <TableCell className="text-right">
-                    {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
+                  <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
+                    {editingUnits === comparison.lineItem.id ? (
+                      <div className="flex items-center gap-1 justify-end">
+                        <Input
+                          type="number"
+                          min={1}
+                          step={1}
+                          value={editUnitsValue}
+                          onChange={(e) => setEditUnitsValue(e.target.value)}
+                          autoFocus
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") saveUnits(comparison.lineItem.id)
+                            if (e.key === "Escape") cancelEditingUnits()
+                          }}
+                          className="h-7 w-[68px] text-right font-mono text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 text-green-600"
+                          onClick={() => saveUnits(comparison.lineItem.id)}
+                          aria-label="Save number of units"
+                        >
+                          <Check className="h-3.5 w-3.5" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 text-red-600"
+                          onClick={cancelEditingUnits}
+                          aria-label="Cancel editing number of units"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1 justify-end group">
+                        <span className="font-mono">
+                          {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
+                        </span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={() => startEditingUnits(comparison)}
+                          aria-label="Edit number of units"
+                        >
+                          <Pencil className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    )}
                   </TableCell>
                   <TableCell className="text-right font-mono">
                     {getEffectiveTotalCost({
