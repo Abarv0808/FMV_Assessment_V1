@@ -9,7 +9,7 @@ export async function PATCH(
     const { id } = await params
     const body = await request.json()
     console.log("[v0] PATCH line-item raw body:", JSON.stringify(body))
-    const { additionalInformation, costCategory, negotiatedPrice, decision, comment } = body
+    const { additionalInformation, costCategory, negotiatedPrice, unitPrice, decision, comment } = body
 
     const supabase = createAdminClient()
 
@@ -61,6 +61,12 @@ export async function PATCH(
     }
     if (decision !== undefined) {
       extraData.decision = decision
+    }
+    // The unit price is not a dedicated column: it lives inside the extra_data
+    // JSON appended to procedure_name, so it is updated here rather than in the
+    // negotiated-price branch above.
+    if (unitPrice !== undefined) {
+      extraData.unitPrice = unitPrice === null ? 0 : Number(unitPrice)
     }
     if (comment !== undefined) {
       extraData.comment = comment

@@ -75,6 +75,7 @@ import {
 import { ComparisonTable, getEffectiveTotalCost, getEffectiveUnitPrice } from "@/components/comparison/comparison-table"
 import { AssessmentOverview } from "@/components/comparison/assessment-overview"
 import type { Assessment, AssessmentComparison, AssessmentStatus, AuditEvent, BenchmarkType, DataSource, ItemDecision } from "@/lib/types"
+import { isNonAssessableDecision } from "@/lib/types"
 import { useAuth } from "@/lib/auth-context"
 import { dedupeBenchmarkMatches } from "@/lib/fuzzy-match"
 import {
@@ -534,10 +535,15 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     // Build rows from current comparisons (in-memory state = current at-time version)
     const rows = comparisons.map((comp, idx) => {
       const li = comp.lineItem
-      const selected =
-        (comp.userSelected
-          ? comp.possibleMatches?.find((m: any) => m.benchmarkId === comp.userSelected)
-          : null) || (comp.possibleMatches && comp.possibleMatches[0]) || null
+      // Items marked "Manual assessment" / "Not Applicable" are outside FMV
+      // benchmarking, so any benchmark data captured on an earlier run is
+      // withheld from the export exactly as it is hidden in the table.
+      const nonAssessable = isNonAssessableDecision(li.decision)
+      const selected = nonAssessable
+        ? null
+        : (comp.userSelected
+            ? comp.possibleMatches?.find((m: any) => m.benchmarkId === comp.userSelected)
+            : null) || (comp.possibleMatches && comp.possibleMatches[0]) || null
       const benchmarkValue =
         comp.selectedBenchmarkType === "p25" ? comp.benchmarkLow :
         comp.selectedBenchmarkType === "p50" ? comp.benchmarkMed :
@@ -563,6 +569,25 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       // External reports hide benchmark-related and internal-only columns.
       if (isExternal) {
         return { ...base, "Comment": li.comment || "" }
+      }
+
+      if (nonAssessable) {
+        return {
+          ...base,
+          "Flag": "No comparison needed",
+          "Matched Benchmark": "",
+          "Code": "",
+          "Match Confidence": "",
+          "Benchmark P25": "",
+          "Benchmark P50": "",
+          "Benchmark P75": "",
+          "Benchmark P90": "",
+          "Selected Benchmark Type": "",
+          "Selected Benchmark Value": "",
+          "Variance": "",
+          "Variance %": "",
+          "Comment": li.comment || "",
+        }
       }
 
       return {
@@ -835,7 +860,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   }, [id, comparisons, appendAudit])
   
   // Handle line item field updates (additional information, cost category)
-  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice", value: string | number | null) => {
+  const handleLineItemUpdate = useCallback(async (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice" | "unitPrice", value: string | number | null) => {
     try {
       const response = await fetch(`/api/assessments/line-items/${lineItemId}`, {
         method: "PATCH",
@@ -849,7 +874,9 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           if (comp.lineItem.id === lineItemId) {
             const updatedLineItem = {
               ...comp.lineItem,
-              [field]: value,
+              // unitPrice is a non-nullable number on the line item, so an
+              // emptied input falls back to 0 rather than null.
+              [field]: field === "unitPrice" ? (value ?? 0) : value,
               // Also update description if it's additionalInformation
               ...(field === "additionalInformation" ? { description: value } : {})
             }
@@ -857,7 +884,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
             // recompute the stored FMV variance/flag against the selected
             // benchmark. This keeps the Excel export and any consumers of the
             // stored variance in sync with the on-screen (dynamic) variance.
-            if (field === "negotiatedPrice") {
+            if (field === "negotiatedPrice" || field === "unitPrice") {
               const valMap: Record<BenchmarkType, number | undefined> = {
                 p90: comp.benchmark90th,
                 high: comp.benchmarkHigh,
@@ -882,6 +909,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
           additionalInformation: "Additional Information",
           costCategory: "Cost Category",
           negotiatedPrice: "Negotiated Price",
+          unitPrice: "Unit Price",
           comment: "Comment"
         }
         appendAudit(`Updated ${fieldNames[field] || field} for line item`)
@@ -1028,24 +1056,33 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
     let totalCostSum = 0
 
     const body = filteredComparisons.map((c, idx) => {
+      // Mirror the on-screen rule: items marked "Manual assessment" /
+      // "Not Applicable" are out of scope for benchmarking, so the report must
+      // not surface benchmark values left over from an earlier run.
+      const nonAssessable = isNonAssessableDecision(c.lineItem.decision)
       const selVal = getBenchmarkVal(c)
-      const hasVal = selVal > 0
+      const hasVal = !nonAssessable && selVal > 0
       const variancePct = hasVal ? ((getEffectiveUnitPrice(c.lineItem) - selVal) / selVal) * 100 : 0
       const dynFlag = variancePct > 15 ? "RED" : variancePct > 5 ? "YELLOW" : "GREEN"
-      const effFlag = hasVal
+      const effFlag = nonAssessable
+        ? "SKIPPED_BY_DECISION"
+        : hasVal
         ? dynFlag
         : c.flag && !computedFlags.has(c.flag)
           ? c.flag
           : "NO_MATCH"
       totalCostSum += getEffectiveTotalCost(c.lineItem)
 
-      const selMatch =
-        (c.userSelected
-          ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)
-          : null) || c.possibleMatches?.[0]
+      const selMatch = nonAssessable
+        ? null
+        : (c.userSelected
+            ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)
+            : null) || c.possibleMatches?.[0]
       const code = (selMatch as any)?.code || "-"
 
-      const benchmarkMatch = c.userSelected
+      const benchmarkMatch = nonAssessable
+        ? "No comparison needed"
+        : c.userSelected
         ? c.possibleMatches?.find((m: any) => m.benchmarkId === c.userSelected)?.procedureName || c.benchmarkDescription || "-"
         : c.benchmarkDescription || (c.possibleMatches?.length ? `${c.possibleMatches.length} matches` : "No match found")
 
@@ -1356,6 +1393,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                       <SelectItem value="Not amended">Not Amended</SelectItem>
                       <SelectItem value="Not accepted">Not Accepted</SelectItem>
                       <SelectItem value="Manual assessment">Manual Assessment</SelectItem>
+                      <SelectItem value="Not Applicable">Not Applicable</SelectItem>
                       <SelectItem value="Escalate">Escalate</SelectItem>
                     </SelectContent>
                   </Select>
