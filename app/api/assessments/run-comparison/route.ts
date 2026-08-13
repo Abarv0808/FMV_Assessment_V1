@@ -457,8 +457,9 @@ export async function POST(request: Request) {
 
       // Only run comparison for items with eligible decision statuses (To Assess, In-review, Pending, or Escalate)
       // Skip items with statuses like Accepted, Not amended, Not accepted,
-      // Manual assessment, Not Applicable.
-      // Note: "Manual assessment" and "Not Applicable" are additionally treated
+      // Manual assessment, Manually Accepted, Not Applicable.
+      // Note: "Manual assessment", "Manually Accepted" and "Not Applicable" are
+      // additionally treated
       // as non-assessable in the UI/exports (see isNonAssessableDecision in
       // lib/types.ts), so any benchmark data stored on an earlier run stays
       // hidden for as long as one of those decisions is set.
