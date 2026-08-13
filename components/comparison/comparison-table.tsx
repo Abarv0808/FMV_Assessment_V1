@@ -118,6 +118,12 @@ const decisionConfig: Record<
     label: "Manual assessment",
     color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
   },
+  // Accepted outside of FMV benchmarking: styled green like "Accepted"
+  // (it is an approval) while still being non-assessable.
+  "Manually Accepted": {
+    label: "Manually Accepted",
+    color: "text-green-500 bg-green-500/10 border-green-500/20",
+  },
   "Not Applicable": {
     label: "Not Applicable",
     color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
@@ -145,7 +151,7 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
   low: "Low",
 }
 
-const DECISION_OPTIONS: ItemDecision[] = ["To Assess", "In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Not Applicable", "Escalate"]
+const DECISION_OPTIONS: ItemDecision[] = ["To Assess", "In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Manually Accepted", "Not Applicable", "Escalate"]
 
 // Resolve the effective per-unit price for a line item: the negotiated price
 // supersedes the unit price when it has been entered (> 0), otherwise the unit

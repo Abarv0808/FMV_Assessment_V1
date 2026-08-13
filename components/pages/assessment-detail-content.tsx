@@ -1393,8 +1393,9 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                       <SelectItem value="Pending">Pending</SelectItem>
                       <SelectItem value="Not amended">Not Amended</SelectItem>
                       <SelectItem value="Not accepted">Not Accepted</SelectItem>
-                      <SelectItem value="Manual assessment">Manual Assessment</SelectItem>
-                      <SelectItem value="Not Applicable">Not Applicable</SelectItem>
+                    <SelectItem value="Manual assessment">Manual Assessment</SelectItem>
+                    <SelectItem value="Manually Accepted">Manually Accepted</SelectItem>
+                    <SelectItem value="Not Applicable">Not Applicable</SelectItem>
                       <SelectItem value="Escalate">Escalate</SelectItem>
                     </SelectContent>
                   </Select>
