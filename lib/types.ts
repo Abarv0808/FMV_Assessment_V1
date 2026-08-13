@@ -72,7 +72,7 @@ export interface AssessmentLineItem {
   costType?: string
   acceptedUnitPrice?: number
   acceptedTotalCost?: number
-  decision?: "To Assess" | "In-review" | "Accepted" | "Rejected" | "Pending" | "Needs Review" | "Not amended" | "Not accepted" | "Manual assessment" | "Escalate" | null
+  decision?: "To Assess" | "In-review" | "Accepted" | "Rejected" | "Pending" | "Needs Review" | "Not amended" | "Not accepted" | "Manual assessment" | "Not Applicable" | "Escalate" | null
   // Benchmark comparison fields
   benchmarkLow?: number
   benchmarkMed?: number
@@ -111,7 +111,20 @@ export interface BenchmarkFile {
 export type BenchmarkType = "p90" | "high" | "med" | "low"
 
 // Item decision type
-export type ItemDecision = "To Assess" | "In-review" | "Accepted" | "Pending" | "Not amended" | "Not accepted" | "Manual assessment" | "Escalate"
+export type ItemDecision = "To Assess" | "In-review" | "Accepted" | "Pending" | "Not amended" | "Not accepted" | "Manual assessment" | "Not Applicable" | "Escalate"
+
+// Decisions that take a line item out of FMV benchmarking entirely.
+// These items are never sent to the comparison engine, and any benchmark
+// results captured on an earlier run (e.g. while the item was still
+// "To Assess") must stay hidden for as long as the decision is set to one
+// of these values. Kept as a single source of truth so the UI, the export
+// and the comparison pipeline can never drift apart.
+export const NON_ASSESSABLE_DECISIONS = ["manual assessment", "not applicable"] as const
+
+export function isNonAssessableDecision(decision?: string | null): boolean {
+  if (!decision) return false
+  return (NON_ASSESSABLE_DECISIONS as readonly string[]).includes(decision.toLowerCase().trim())
+}
 
 // Extended line item with additional comparison fields
 export interface LineItemWithComparison extends AssessmentLineItem {

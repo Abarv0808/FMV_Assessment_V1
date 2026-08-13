@@ -39,6 +39,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Search, Pencil, Check, X } from "lucide-react"
 import type { AssessmentComparison, BenchmarkType, ItemDecision } from "@/lib/types"
+import { isNonAssessableDecision } from "@/lib/types"
 import { COST_CATEGORIES } from "@/lib/cost-categories"
 
 interface ComparisonTableProps {
@@ -47,7 +48,7 @@ interface ComparisonTableProps {
   onBenchmarkTypeChange?: (id: string, benchmarkType: BenchmarkType) => void
   onDecisionChange?: (id: string, decision: ItemDecision) => void
   onMatchSelect?: (id: string, match: any) => void
-  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice", value: string | number | null) => void
+  onLineItemUpdate?: (lineItemId: string, field: "additionalInformation" | "costCategory" | "comment" | "negotiatedPrice" | "unitPrice" | "numberOfUnit", value: string | number | null) => void
 }
 
 const flagConfig: Record<string, { label: string; color: string }> = {
@@ -117,6 +118,10 @@ const decisionConfig: Record<
     label: "Manual assessment",
     color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
   },
+  "Not Applicable": {
+    label: "Not Applicable",
+    color: "text-slate-400 bg-slate-400/10 border-slate-400/20",
+  },
   Escalate: {
     label: "Escalate",
     color: "text-purple-500 bg-purple-500/10 border-purple-500/20",
@@ -140,7 +145,7 @@ const benchmarkLabels: Record<BenchmarkType, string> = {
   low: "Low",
 }
 
-const DECISION_OPTIONS: ItemDecision[] = ["To Assess", "In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Escalate"]
+const DECISION_OPTIONS: ItemDecision[] = ["To Assess", "In-review", "Accepted", "Pending", "Not amended", "Not accepted", "Manual assessment", "Not Applicable", "Escalate"]
 
 // Resolve the effective per-unit price for a line item: the negotiated price
 // supersedes the unit price when it has been entered (> 0), otherwise the unit
@@ -191,6 +196,17 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   // keystroke, which previously caused dropped characters / input lag.
   const [negotiatedPriceDrafts, setNegotiatedPriceDrafts] = useState<Record<string, string>>({})
 
+  // Local draft state for the (editable) unit price input, keyed by line item id.
+  // Same rationale as the negotiated price above: keep typing local and only
+  // persist on blur so we don't PATCH on every keystroke.
+  const [unitPriceDrafts, setUnitPriceDrafts] = useState<Record<string, string>>({})
+
+  // "Number of Unit" uses an explicit pencil -> edit -> save/cancel flow
+  // (like Cost Description) rather than an always-on input, so the quantity
+  // can't be changed by an accidental click/scroll on a numeric field.
+  const [editingUnits, setEditingUnits] = useState<string | null>(null)
+  const [editUnitsValue, setEditUnitsValue] = useState("")
+
   // Per-row "user opened the Decision dropdown" gate. Radix Select fires
   // `onValueChange` during controlled-value reconciliation (without any user
   // pointer/keyboard input), and those echoes were corrupting the DB. We only
@@ -228,6 +244,34 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
   const cancelEditingAdditionalInfo = () => {
     setEditingAdditionalInfo(null)
     setEditAdditionalInfoValue("")
+  }
+
+  // Handle "Number of Unit" edit
+  const startEditingUnits = (comparison: AssessmentComparison) => {
+    const current =
+      (comparison.lineItem as any).numberOfUnit ?? (comparison.lineItem as any).numberOfUnits ?? 1
+    setEditingUnits(comparison.lineItem.id)
+    setEditUnitsValue(String(current))
+  }
+
+  const saveUnits = (lineItemId: string) => {
+    const parsed = parseInt(editUnitsValue, 10)
+    // Quantity drives Total Cost, so guard against blank / 0 / negative /
+    // non-numeric input rather than persisting a value that would zero out or
+    // invert the row's cost.
+    if (!Number.isFinite(parsed) || parsed < 1) {
+      setEditingUnits(null)
+      setEditUnitsValue("")
+      return
+    }
+    onLineItemUpdate?.(lineItemId, "numberOfUnit", parsed)
+    setEditingUnits(null)
+    setEditUnitsValue("")
+  }
+
+  const cancelEditingUnits = () => {
+    setEditingUnits(null)
+    setEditUnitsValue("")
   }
   
   // Handle cost category change
@@ -352,8 +396,14 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             const decisionConf =
               decisionConfig[comparison.lineItem.decision] ??
               decisionConfig["To Assess"]
+            // "Manual assessment" / "Not Applicable" take the item out of
+            // benchmarking. Results from an earlier run (when the item may
+            // still have been "To Assess") are suppressed on sight, so
+            // switching the decision hides them immediately without needing a
+            // re-run.
+            const isNonAssessable = isNonAssessableDecision(comparison.lineItem.decision)
             const selectedValue = getBenchmarkValue(comparison) ?? 0
-            const hasBenchmarkValue = selectedValue > 0
+            const hasBenchmarkValue = !isNonAssessable && selectedValue > 0
             // Variance is measured against the price the site will actually be
             // paid: the negotiated price supersedes the unit price when present
             // (matching the Total Cost logic). Use the live draft value so the
@@ -365,10 +415,19 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   ? null
                   : parseFloat(draftNegotiated)
                 : comparison.lineItem.negotiatedPrice ?? null
+            // The unit price is editable too, so honour its live draft value
+            // when computing variance / total cost.
+            const draftUnit = unitPriceDrafts[comparison.lineItem.id]
+            const effectiveUnit =
+              draftUnit !== undefined
+                ? draftUnit === ""
+                  ? null
+                  : parseFloat(draftUnit)
+                : comparison.lineItem.unitPrice ?? null
             const effectivePrice =
               effectiveNegotiated != null && effectiveNegotiated > 0
                 ? effectiveNegotiated
-                : comparison.lineItem.unitPrice
+                : effectiveUnit ?? 0
             const dynamicVariance = hasBenchmarkValue ? effectivePrice - selectedValue : 0
             const dynamicVariancePercent = hasBenchmarkValue ? (dynamicVariance / selectedValue) * 100 : 0
             const dynamicFlag: "GREEN" | "YELLOW" | "RED" = dynamicVariancePercent > 15 ? "RED" : dynamicVariancePercent > 5 ? "YELLOW" : "GREEN"
@@ -377,7 +436,9 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
             // (NO_MATCH / NO_BENCHMARK_DATA / NON_COMPARABLE / SKIPPED_BY_DECISION)
             // so we never falsely report "Within Range" for unmatched items.
             const computedFlags = new Set(["GREEN", "YELLOW", "RED"])
-            const effectiveFlag = hasBenchmarkValue
+            const effectiveFlag = isNonAssessable
+              ? "SKIPPED_BY_DECISION"
+              : hasBenchmarkValue
               ? dynamicFlag
               : comparison.flag && !computedFlags.has(comparison.flag)
                 ? comparison.flag
@@ -395,10 +456,11 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
 
             // Resolve the Code from the benchmark match the user selected,
             // falling back to the top suggested match when none is explicitly chosen.
-            const selectedMatch =
-              (comparison.userSelected
-                ? comparison.possibleMatches?.find((m: any) => m.benchmarkId === comparison.userSelected)
-                : null) || comparison.possibleMatches?.[0]
+            const selectedMatch = isNonAssessable
+              ? null
+              : (comparison.userSelected
+                  ? comparison.possibleMatches?.find((m: any) => m.benchmarkId === comparison.userSelected)
+                  : null) || comparison.possibleMatches?.[0]
             const selectedCode = (selectedMatch as any)?.code || null
 
             return (
@@ -494,7 +556,11 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     )}
                   </TableCell>
                   <TableCell className="min-w-[110px] max-w-[140px]" onClick={(e) => e.stopPropagation()}>
-                    {comparison.possibleMatches && comparison.possibleMatches.length > 0 ? (
+                    {isNonAssessable ? (
+                      <span className="text-[11px] text-muted-foreground italic whitespace-normal break-words leading-tight block">
+                        No comparison needed
+                      </span>
+                    ) : comparison.possibleMatches && comparison.possibleMatches.length > 0 ? (
                       <Button
                         variant="outline"
                         size="sm"
@@ -521,8 +587,38 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                   <TableCell className="text-[11px] text-muted-foreground">
                     {comparison.lineItem.unitType || "-"}
                   </TableCell>
-                  <TableCell className="text-right font-medium font-mono">
-                    {comparison.lineItem.unitPrice?.toLocaleString() ?? "-"}
+                  <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
+                    <Input
+                      type="number"
+                      value={
+                        unitPriceDrafts[comparison.lineItem.id] ??
+                        (comparison.lineItem.unitPrice ?? "").toString()
+                      }
+                      onChange={(e) => {
+                        setUnitPriceDrafts((prev) => ({
+                          ...prev,
+                          [comparison.lineItem.id]: e.target.value,
+                        }))
+                      }}
+                      onBlur={(e) => {
+                        const raw = e.target.value
+                        const value = raw === "" ? null : parseFloat(raw)
+                        const current = comparison.lineItem.unitPrice ?? null
+                        // Only persist when the value actually changed.
+                        if (value !== current && !(value === null && current === null)) {
+                          onLineItemUpdate?.(comparison.lineItem.id, "unitPrice", value as any)
+                        }
+                        // Drop the local draft so the input reflects canonical
+                        // state again (e.g. after a re-run updates the value).
+                        setUnitPriceDrafts((prev) => {
+                          const next = { ...prev }
+                          delete next[comparison.lineItem.id]
+                          return next
+                        })
+                      }}
+                      placeholder="Enter price"
+                      className="h-7 w-[110px] text-right font-mono text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
                   </TableCell>
                   <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
                     <Input
@@ -558,6 +654,9 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                     />
                   </TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
+                    {isNonAssessable ? (
+                      <span className="text-[11px] text-muted-foreground">—</span>
+                    ) : (
                     <Select
                       value={comparison.selectedBenchmarkType}
                       onValueChange={(val) => onBenchmarkTypeChange?.(comparison.id, val as BenchmarkType)}
@@ -579,6 +678,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         })}
                       </SelectContent>
                     </Select>
+                    )}
                   </TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
                     <Select
@@ -642,21 +742,64 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                       <span className="text-muted-foreground">—</span>
                     )}
                   </TableCell>
-                  <TableCell className="text-right">
-                    {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
+                  <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
+                    {editingUnits === comparison.lineItem.id ? (
+                      <div className="flex items-center gap-1 justify-end">
+                        <Input
+                          type="number"
+                          min={1}
+                          step={1}
+                          value={editUnitsValue}
+                          onChange={(e) => setEditUnitsValue(e.target.value)}
+                          autoFocus
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") saveUnits(comparison.lineItem.id)
+                            if (e.key === "Escape") cancelEditingUnits()
+                          }}
+                          className="h-7 w-[68px] text-right font-mono text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 text-green-600"
+                          onClick={() => saveUnits(comparison.lineItem.id)}
+                          aria-label="Save number of units"
+                        >
+                          <Check className="h-3.5 w-3.5" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 text-red-600"
+                          onClick={cancelEditingUnits}
+                          aria-label="Cancel editing number of units"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1 justify-end group">
+                        <span className="font-mono">
+                          {comparison.lineItem.numberOfUnit ?? comparison.lineItem.numberOfUnits ?? "-"}
+                        </span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={() => startEditingUnits(comparison)}
+                          aria-label="Edit number of units"
+                        >
+                          <Pencil className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    )}
                   </TableCell>
                   <TableCell className="text-right font-mono">
-                    {getEffectiveTotalCost(
-                      negotiatedPriceDrafts[comparison.lineItem.id] !== undefined
-                        ? {
-                            ...comparison.lineItem,
-                            negotiatedPrice:
-                              negotiatedPriceDrafts[comparison.lineItem.id] === ""
-                                ? null
-                                : parseFloat(negotiatedPriceDrafts[comparison.lineItem.id]),
-                          }
-                        : comparison.lineItem,
-                    ).toLocaleString()}
+                    {getEffectiveTotalCost({
+                      ...comparison.lineItem,
+                      negotiatedPrice: effectiveNegotiated,
+                      unitPrice: effectiveUnit ?? 0,
+                    }).toLocaleString()}
                   </TableCell>
                   <TableCell className="font-mono text-[11px]">
                     {selectedCode ? (
@@ -701,7 +844,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                           <div>
                             <p className="text-muted-foreground">Benchmark Low</p>
                             <p className="font-medium mt-1">
-                              {comparison.benchmarkLow
+                              {!isNonAssessable && comparison.benchmarkLow
                                 ? formatCurrency(comparison.benchmarkLow, comparison.lineItem.currency || "USD")
                                 : "-"}
                             </p>
@@ -709,7 +852,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                           <div>
                             <p className="text-muted-foreground">Benchmark Med</p>
                             <p className="font-medium mt-1">
-                              {comparison.benchmarkMed
+                              {!isNonAssessable && comparison.benchmarkMed
                                 ? formatCurrency(comparison.benchmarkMed, comparison.lineItem.currency || "USD")
                                 : "-"}
                             </p>
@@ -717,7 +860,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                           <div>
                             <p className="text-muted-foreground">Benchmark High</p>
                             <p className="font-medium mt-1">
-                              {comparison.benchmarkHigh
+                              {!isNonAssessable && comparison.benchmarkHigh
                                 ? formatCurrency(comparison.benchmarkHigh, comparison.lineItem.currency || "USD")
                                 : "-"}
                             </p>
@@ -725,7 +868,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                           <div>
                             <p className="text-muted-foreground">Benchmark 90th</p>
                             <p className="font-medium mt-1">
-                              {comparison.benchmark90th
+                              {!isNonAssessable && comparison.benchmark90th
                                 ? formatCurrency(comparison.benchmark90th, comparison.lineItem.currency || "USD")
                                 : "-"}
                             </p>
@@ -772,7 +915,7 @@ export function ComparisonTable({ comparisons, onComparisonChange, onBenchmarkTy
                         )}
 
                         {/* AI Suggestion */}
-                        {comparison.aiSuggestion && (
+                        {!isNonAssessable && comparison.aiSuggestion && (
                   <Card className="border-accent/30 bg-accent/5">
                     <div className="p-4">
                       <div className="flex items-start gap-3">
