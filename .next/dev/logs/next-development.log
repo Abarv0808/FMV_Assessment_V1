@@ -164,3 +164,12 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:03:24.468] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
 [00:03:24.468] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-3vqqu3jqdn8d.vercel.run/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://sb-3vqqu3jqdn8d.vercel.run/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1786631761378} /_vercel/insights/view
 [00:03:24.882] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-3vqqu3jqdn8d.vercel.run/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://sb-3vqqu3jqdn8d.vercel.run/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1786631761733} /_vercel/insights/view
+[00:03:51.945] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:03:52.867] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:52.980] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:03:53.168] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:03:53.168] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:03:53.168] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-3vqqu3jqdn8d.vercel.run/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://sb-3vqqu3jqdn8d.vercel.run/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1786631790077} /_vercel/insights/view
+[00:03:53.535] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-3vqqu3jqdn8d.vercel.run/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://sb-3vqqu3jqdn8d.vercel.run/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1786631790409} /_vercel/insights/view
