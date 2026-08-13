@@ -125,7 +125,7 @@ export default function MatchingRulesPage() {
   const load = useCallback(async () => {
     setLoading(true)
     try {
-      const res = await fetch("/api/admin/matching-rules")
+      const res = await fetch("/api/admin/matching-rules", { cache: "no-store" })
       const data = await res.json()
       setSynonymRules(data.synonymRules || [])
       setTherapeuticAreas(data.therapeuticAreas || [])
