@@ -30,7 +30,7 @@ export function AssessmentsContent() {
     const fetchAssessments = async () => {
       setIsLoading(true)
       try {
-        const response = await fetch("/api/assessments")
+        const response = await fetch("/api/assessments", { cache: "no-store" })
         const { assessments: dbAssessments, error } = await response.json()
         
         console.log("[v0] Assessments fetch result:", dbAssessments?.length, "items, error:", error)

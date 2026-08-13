@@ -140,7 +140,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       }
 
       // Fetch assessment via API (server-side to bypass RLS)
-      const assessmentResponse = await fetch(`/api/assessments/${id}`)
+      const assessmentResponse = await fetch(`/api/assessments/${id}`, { cache: "no-store" })
       const { assessment: assessmentData, error: assessmentError } = await assessmentResponse.json()
 
       if (assessmentError || !assessmentData) {
@@ -185,7 +185,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
 
       // Load the persisted audit trail so the History tab survives reloads.
       try {
-        const auditRes = await fetch(`/api/assessments/${id}/audit`)
+        const auditRes = await fetch(`/api/assessments/${id}/audit`, { cache: "no-store" })
         const { events } = await auditRes.json()
         if (Array.isArray(events)) {
           mappedAssessment.auditEvents = events
@@ -195,7 +195,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       }
 
       // Fetch comparisons via API (server-side to bypass RLS)
-      const comparisonsResponse = await fetch(`/api/assessments/${id}/comparisons`)
+      // no-store: this is the endpoint that surfaces comparison results. If a
+      // browser or corporate proxy serves a cached copy, a completed comparison
+      // can look "missing" for hours.
+      const comparisonsResponse = await fetch(`/api/assessments/${id}/comparisons`, { cache: "no-store" })
       const { comparisons: comparisonsData, error: comparisonsError } = await comparisonsResponse.json()
 
       console.log("[v0] Comparisons fetch result:", comparisonsData?.length, "items, error:", comparisonsError)

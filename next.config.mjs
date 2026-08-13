@@ -43,6 +43,35 @@ const nextConfig = {
   turbopack: {
     root: __dirname,
   },
+  async headers() {
+    return [
+      {
+        // API responses are always live data. Without an explicit Cache-Control,
+        // a response with no ETag/Last-Modified is eligible for *heuristic*
+        // caching (RFC 9111) by the browser HTTP cache and, more importantly, by
+        // corporate/enterprise forward proxies. That is how a user could run a
+        // comparison and keep being served the stale pre-comparison JSON for
+        // hours, while the same flow looks instant on a network that doesn't
+        // cache. no-store (plus the legacy Pragma/Expires pair for older
+        // proxies) makes every API read uncacheable end-to-end.
+        source: '/api/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate, max-age=0' },
+          { key: 'Pragma', value: 'no-cache' },
+          { key: 'Expires', value: '0' },
+        ],
+      },
+      {
+        // Baseline hardening for the deployed app.
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000' },
+        ],
+      },
+    ]
+  },
 }
 
 export default nextConfig
