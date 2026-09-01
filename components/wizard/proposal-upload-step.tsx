@@ -23,7 +23,7 @@ import { Upload, FileText, X, FileSpreadsheet, Database, ChevronRight, ChevronDo
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 import type { BenchmarkFile, BenchmarkSource, TrialPhase } from "@/lib/types"
-import { isPsoriasisIndication, TRIAL_PHASE_III_B } from "@/lib/types"
+import { TRIAL_PHASE_III_B } from "@/lib/types"
 import { format } from "date-fns"
 
 // Only allowed phases - filter out Phase I, II, III
@@ -99,9 +99,8 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
             uploadedAt: row.uploaded_at as string,
             uploadedBy: (row.uploaded_by as string) || "System",
           }))
-          // Phase IIIb is an indication-specific benchmark phase.
-          .filter(file => ALLOWED_PHASES.includes(file.trialPhase) ||
-            (file.trialPhase === TRIAL_PHASE_III_B && isPsoriasisIndication(file.indication)))
+          // Phase IIIb is available for every indication.
+          .filter(file => ALLOWED_PHASES.includes(file.trialPhase) || file.trialPhase === TRIAL_PHASE_III_B)
         
         setBenchmarkFiles(mappedFiles)
       } catch (err) {

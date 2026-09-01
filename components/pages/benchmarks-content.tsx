@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { useAuth } from "@/lib/auth-context"
 import type { BenchmarkFile, TrialPhase, BenchmarkSource } from "@/lib/types"
-import { isPsoriasisIndication, TRIAL_PHASE_III_B } from "@/lib/types"
+import { TRIAL_PHASE_III_B } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -234,9 +234,8 @@ export function BenchmarksContent() {
   // Filter benchmarks - only show allowed phases
   const filteredBenchmarks = useMemo(() => {
     return benchmarkFiles.filter((file) => {
-      // Phase IIIb is only valid for Psoriasis.
-      if (!ALLOWED_PHASES.includes(file.trialPhase) &&
-        !(file.trialPhase === TRIAL_PHASE_III_B && isPsoriasisIndication(file.indication))) {
+      // Phase IIIb is available for every indication.
+      if (!ALLOWED_PHASES.includes(file.trialPhase) && file.trialPhase !== TRIAL_PHASE_III_B) {
         return false
       }
       

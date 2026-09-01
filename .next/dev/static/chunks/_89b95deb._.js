@@ -842,10 +842,18 @@ __turbopack_context__.s([
     ()=>SECURITY_GROUPS,
     "THERAPEUTIC_AREAS",
     ()=>THERAPEUTIC_AREAS,
+    "TRIAL_PHASE_III_B",
+    ()=>TRIAL_PHASE_III_B,
     "USER_ROLES",
     ()=>USER_ROLES,
     "isNonAssessableDecision",
-    ()=>isNonAssessableDecision
+    ()=>isNonAssessableDecision,
+    "isPsoriasisIndication",
+    ()=>isPsoriasisIndication,
+    "isTrialPhaseAllowedForIndication",
+    ()=>isTrialPhaseAllowedForIndication,
+    "normalizeTrialPhase",
+    ()=>normalizeTrialPhase
 ]);
 const SECURITY_GROUPS = [
     "GME",
@@ -874,6 +882,24 @@ const USER_ROLES = [
     "APPROVER",
     "ADMIN"
 ];
+const TRIAL_PHASE_III_B = "Phase IIIb";
+function isPsoriasisIndication(indication) {
+    return indication?.trim().toLowerCase() === "psoriasis";
+}
+function isTrialPhaseAllowedForIndication(_indication, _phase) {
+    return true;
+}
+function normalizeTrialPhase(indication, phase) {
+    const normalized = phase?.trim().toLowerCase().replace(/\s+/g, " ");
+    if (normalized === "phase iiib" || normalized === "phase 3b") {
+        return TRIAL_PHASE_III_B;
+    }
+    if (normalized === "phase 4" || normalized === "phase iv") return "Phase IV";
+    if (normalized === "phase 2" || normalized === "phase ii") return "Phase II";
+    if (normalized === "phase 3" || normalized === "phase iii") return "Phase III";
+    if (normalized === "phase 1" || normalized === "phase i") return "Phase I";
+    return "All Phases";
+}
 const NON_ASSESSABLE_DECISIONS = [
     "manual assessment",
     "manually accepted",
