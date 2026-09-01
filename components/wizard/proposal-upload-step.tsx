@@ -23,6 +23,7 @@ import { Upload, FileText, X, FileSpreadsheet, Database, ChevronRight, ChevronDo
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 import type { BenchmarkFile, BenchmarkSource, TrialPhase } from "@/lib/types"
+import { isPsoriasisIndication, TRIAL_PHASE_III_B } from "@/lib/types"
 import { format } from "date-fns"
 
 // Only allowed phases - filter out Phase I, II, III
@@ -98,8 +99,9 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
             uploadedAt: row.uploaded_at as string,
             uploadedBy: (row.uploaded_by as string) || "System",
           }))
-          // Filter to only show All Phases and Phase IV
-          .filter(file => ALLOWED_PHASES.includes(file.trialPhase))
+          // Phase IIIb is an indication-specific benchmark phase.
+          .filter(file => ALLOWED_PHASES.includes(file.trialPhase) ||
+            (file.trialPhase === TRIAL_PHASE_III_B && isPsoriasisIndication(file.indication)))
         
         setBenchmarkFiles(mappedFiles)
       } catch (err) {
@@ -127,7 +129,7 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
       groups[file.indication][file.trialPhase].push(file)
     }
     
-    const phaseOrder = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IV"]
+    const phaseOrder = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IIIb", "Phase IV"]
     return Object.entries(groups)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([indication, phases]) => ({

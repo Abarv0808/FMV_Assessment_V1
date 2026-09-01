@@ -1,6 +1,7 @@
 // v3 - with file_name field
 import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
+import { normalizeTrialPhase } from "@/lib/types"
 
 function getDb() {
   return createClient(
@@ -25,13 +26,8 @@ export async function POST(request: NextRequest) {
     const db = getDb()
     const source = dataSource === "IQVIA GrantPlan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER"
     
-    // Map trial phase to valid database enum values (only All Phases and Phase IV allowed)
-    const phaseMap: Record<string, string> = {
-      "All Phases": "All Phases",
-      "Phase 4": "Phase IV",
-      "Phase IV": "Phase IV",
-    }
-    const phase = phaseMap[trialPhase] || "All Phases"
+    // Normalize to the canonical database value. Phase IIIb is valid only for Psoriasis.
+    const phase = normalizeTrialPhase(indication, trialPhase)
     
     // Fetch currency mapping from database
     const { data: currencyData } = await db.from("country_currencies").select("country, currency_code")

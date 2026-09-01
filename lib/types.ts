@@ -91,7 +91,35 @@ export interface AssessmentLineItem {
 // Benchmark data source types
 export type BenchmarkSource = "IQVIA_GRANTPLAN" | "IQVIA_GPI_GRANTSMANAGER"
 
-export type TrialPhase = "All Phases" | "Phase I" | "Phase II" | "Phase III" | "Phase IV"
+export type TrialPhase = "All Phases" | "Phase I" | "Phase II" | "Phase III" | "Phase IIIb" | "Phase IV"
+
+export const TRIAL_PHASE_III_B = "Phase IIIb" as const
+
+export function isPsoriasisIndication(indication: string | null | undefined): boolean {
+  return indication?.trim().toLowerCase() === "psoriasis"
+}
+
+export function isTrialPhaseAllowedForIndication(
+  indication: string | null | undefined,
+  phase: string | null | undefined,
+): boolean {
+  return phase !== TRIAL_PHASE_III_B || isPsoriasisIndication(indication)
+}
+
+export function normalizeTrialPhase(
+  indication: string | null | undefined,
+  phase: string | null | undefined,
+): TrialPhase {
+  const normalized = phase?.trim().toLowerCase().replace(/\s+/g, " ")
+  if (normalized === "phase iiib" || normalized === "phase 3b") {
+    return isPsoriasisIndication(indication) ? TRIAL_PHASE_III_B : "All Phases"
+  }
+  if (normalized === "phase 4" || normalized === "phase iv") return "Phase IV"
+  if (normalized === "phase 2" || normalized === "phase ii") return "Phase II"
+  if (normalized === "phase 3" || normalized === "phase iii") return "Phase III"
+  if (normalized === "phase 1" || normalized === "phase i") return "Phase I"
+  return "All Phases"
+}
 
 export interface BenchmarkFile {
   id: string

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { useAuth } from "@/lib/auth-context"
 import type { BenchmarkFile, TrialPhase, BenchmarkSource } from "@/lib/types"
+import { isPsoriasisIndication, TRIAL_PHASE_III_B } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -226,15 +227,16 @@ export function BenchmarksContent() {
   const filterOptions = useMemo(() => {
     const countries = [...new Set(benchmarkFiles.map((r) => r.country))].sort()
     const indications = [...new Set(benchmarkFiles.map((r) => r.indication))].sort()
-    const phases: TrialPhase[] = ALLOWED_PHASES
+    const phases: TrialPhase[] = [...ALLOWED_PHASES, TRIAL_PHASE_III_B]
     return { countries, indications, phases }
   }, [benchmarkFiles])
 
   // Filter benchmarks - only show allowed phases
   const filteredBenchmarks = useMemo(() => {
     return benchmarkFiles.filter((file) => {
-      // Only show All Phases and Phase IV
-      if (!ALLOWED_PHASES.includes(file.trialPhase)) {
+      // Phase IIIb is only valid for Psoriasis.
+      if (!ALLOWED_PHASES.includes(file.trialPhase) &&
+        !(file.trialPhase === TRIAL_PHASE_III_B && isPsoriasisIndication(file.indication))) {
         return false
       }
       
@@ -266,7 +268,7 @@ export function BenchmarksContent() {
     }
     
     // Sort indications: "All" first, then alphabetically. Then phases.
-    const phaseOrder = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IV"]
+    const phaseOrder = ["All Phases", "Phase I", "Phase II", "Phase III", "Phase IIIb", "Phase IV"]
     return Object.entries(groups)
       .sort(([a], [b]) => {
         // "All" indication should come first

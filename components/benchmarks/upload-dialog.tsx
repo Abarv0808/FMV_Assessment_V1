@@ -25,6 +25,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Upload, FileSpreadsheet, X, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { isPsoriasisIndication, isTrialPhaseAllowedForIndication, TRIAL_PHASE_III_B } from "@/lib/types"
 
 // All 10 indications - v2
 const INDICATIONS = [
@@ -230,7 +231,7 @@ function parseExcelFile(buffer: ArrayBuffer): ParsedCountry[] {
 interface FileWithMeta {
   file: File
   indication: Indication
-  trialPhase: "All Phases" | "Phase 4"
+  trialPhase: "All Phases" | "Phase 4" | typeof TRIAL_PHASE_III_B
   parsedCountries: ParsedCountry[]
   status: "pending" | "uploading" | "done" | "error"
   error?: string
@@ -283,7 +284,7 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
         
         // Try to detect indication and phase from filename
         let detectedIndication: Indication = "Gaucher"
-        let detectedPhase: "All Phases" | "Phase 4" = "All Phases"
+        let detectedPhase: "All Phases" | "Phase 4" | typeof TRIAL_PHASE_III_B = "All Phases"
         
         const lowerName = file.name.toLowerCase()
         for (const ind of INDICATIONS) {
@@ -293,9 +294,14 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
             break
           }
         }
-        if (lowerName.includes("phase4") || lowerName.includes("phase 4") || lowerName.includes("p4")) {
-          detectedPhase = "Phase 4"
-        }
+  if (lowerName.includes("phaseiiib") || lowerName.includes("phase iiib") || lowerName.includes("phase_iiib")) {
+    detectedPhase = TRIAL_PHASE_III_B
+  } else if (lowerName.includes("phase4") || lowerName.includes("phase 4") || lowerName.includes("p4")) {
+    detectedPhase = "Phase 4"
+  }
+  if (!isTrialPhaseAllowedForIndication(detectedIndication, detectedPhase)) {
+    detectedPhase = "All Phases"
+  }
         
         newFilesMeta.push({
           file,
@@ -321,10 +327,20 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
   }
 
   const updateFileIndication = (index: number, indication: Indication) => {
-    setFiles(prev => prev.map((f, i) => i === index ? { ...f, indication } : f))
+    setFiles(prev => prev.map((f, i) => {
+      if (i !== index) return f
+      return {
+        ...f,
+        indication,
+        trialPhase: isTrialPhaseAllowedForIndication(indication, f.trialPhase)
+          ? f.trialPhase
+          : "All Phases",
+      }
+    }))
   }
 
-  const updateFilePhase = (index: number, phase: "All Phases" | "Phase 4") => {
+  const updateFilePhase = (index: number, phase: "All Phases" | "Phase 4" | typeof TRIAL_PHASE_III_B) => {
+    if (!isTrialPhaseAllowedForIndication(files[index]?.indication, phase)) return
     setFiles(prev => prev.map((f, i) => i === index ? { ...f, trialPhase: phase } : f))
   }
 
@@ -503,7 +519,7 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
                             <Label className="text-xs text-muted-foreground mb-1 block">Trial Phase *</Label>
                             <Select 
                               value={fileMeta.trialPhase} 
-                              onValueChange={(val) => updateFilePhase(index, val as "All Phases" | "Phase 4")}
+                              onValueChange={(val) => updateFilePhase(index, val as "All Phases" | "Phase 4" | typeof TRIAL_PHASE_III_B)}
                             >
                               <SelectTrigger className="h-8 text-xs">
                                 <SelectValue />
@@ -511,6 +527,9 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
                               <SelectContent>
                                 <SelectItem value="All Phases" className="text-xs">All Phases</SelectItem>
                                 <SelectItem value="Phase 4" className="text-xs">Phase 4</SelectItem>
+                                {isPsoriasisIndication(fileMeta.indication) && (
+                                  <SelectItem value={TRIAL_PHASE_III_B} className="text-xs">{TRIAL_PHASE_III_B}</SelectItem>
+                                )}
                               </SelectContent>
                             </Select>
                           </div>
