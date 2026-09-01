@@ -739,12 +739,16 @@ function DropdownMenuSubContent({ className, ...props }) {
 "use strict";
 
 __turbopack_context__.s([
+    "NON_ASSESSABLE_DECISIONS",
+    ()=>NON_ASSESSABLE_DECISIONS,
     "SECURITY_GROUPS",
     ()=>SECURITY_GROUPS,
     "THERAPEUTIC_AREAS",
     ()=>THERAPEUTIC_AREAS,
     "USER_ROLES",
-    ()=>USER_ROLES
+    ()=>USER_ROLES,
+    "isNonAssessableDecision",
+    ()=>isNonAssessableDecision
 ]);
 const SECURITY_GROUPS = [
     "GME",
@@ -773,6 +777,15 @@ const USER_ROLES = [
     "APPROVER",
     "ADMIN"
 ];
+const NON_ASSESSABLE_DECISIONS = [
+    "manual assessment",
+    "manually accepted",
+    "not applicable"
+];
+function isNonAssessableDecision(decision) {
+    if (!decision) return false;
+    return NON_ASSESSABLE_DECISIONS.includes(decision.toLowerCase().trim());
+}
 }),
 "[project]/app/login/page.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
