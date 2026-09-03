@@ -1,12 +1,10 @@
 import { createClient } from "@/lib/supabase/server"
 import { NextResponse, type NextRequest } from "next/server"
 import * as XLSX from "xlsx"
-import { isPsoriasisIndication, TRIAL_PHASE_III_B } from "@/lib/types"
+import { TRIAL_PHASE_III_B } from "@/lib/types"
 
-// Only phases exposed in the UI may be downloaded; Phase IIIb is Psoriasis-only.
-const ALLOWED_PHASES = ["All Phases", "Phase IV"]
-const getAllowedPhases = (indication: string) =>
-  isPsoriasisIndication(indication) ? [...ALLOWED_PHASES, TRIAL_PHASE_III_B] : ALLOWED_PHASES
+// These are the phases exposed throughout the benchmark UI.
+const ALLOWED_PHASES = ["All Phases", "Phase IV", TRIAL_PHASE_III_B]
 
 // Fetch every row for a query, paginating past Supabase's 1000-row cap.
 async function fetchAll<T>(
@@ -35,7 +33,7 @@ export async function GET(request: NextRequest) {
     if (!indication) {
       return NextResponse.json({ success: false, error: "Missing 'indication' parameter" }, { status: 400 })
     }
-    const allowedPhases = getAllowedPhases(indication)
+    const allowedPhases = ALLOWED_PHASES
     if (phase && !allowedPhases.includes(phase)) {
       return NextResponse.json({ success: false, error: `Unsupported phase: ${phase}` }, { status: 400 })
     }

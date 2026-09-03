@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     const db = getDb()
     const source = dataSource === "IQVIA GrantPlan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER"
     
-    // Normalize to the canonical database value. Phase IIIb is valid only for Psoriasis.
+    // Normalize to the canonical database value, including Phase IIIb.
     const phase = normalizeTrialPhase(indication, trialPhase)
     
     // Fetch currency mapping from database

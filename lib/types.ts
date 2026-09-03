@@ -100,10 +100,10 @@ export function isPsoriasisIndication(indication: string | null | undefined): bo
 }
 
 export function isTrialPhaseAllowedForIndication(
-  indication: string | null | undefined,
-  phase: string | null | undefined,
+  _indication: string | null | undefined,
+  _phase: string | null | undefined,
 ): boolean {
-  return phase !== TRIAL_PHASE_III_B || isPsoriasisIndication(indication)
+  return true
 }
 
 export function normalizeTrialPhase(
@@ -112,7 +112,7 @@ export function normalizeTrialPhase(
 ): TrialPhase {
   const normalized = phase?.trim().toLowerCase().replace(/\s+/g, " ")
   if (normalized === "phase iiib" || normalized === "phase 3b") {
-    return isPsoriasisIndication(indication) ? TRIAL_PHASE_III_B : "All Phases"
+    return TRIAL_PHASE_III_B
   }
   if (normalized === "phase 4" || normalized === "phase iv") return "Phase IV"
   if (normalized === "phase 2" || normalized === "phase ii") return "Phase II"

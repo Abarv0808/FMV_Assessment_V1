@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { useAuth } from "@/lib/auth-context"
 import type { BenchmarkFile, TrialPhase, BenchmarkSource } from "@/lib/types"
-import { isPsoriasisIndication, TRIAL_PHASE_III_B } from "@/lib/types"
+import { TRIAL_PHASE_III_B } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -60,6 +60,7 @@ import { format } from "date-fns"
 import { BenchmarkUploadDialog } from "@/components/benchmarks/upload-dialog"
 
 const ALL_VALUE = "__all__"
+const COUNTRY_COLLATOR = new Intl.Collator("en", { sensitivity: "base", numeric: false })
 
 // Only allowed phases - filter out Phase I, II, III
 const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IV"]
@@ -234,9 +235,8 @@ export function BenchmarksContent() {
   // Filter benchmarks - only show allowed phases
   const filteredBenchmarks = useMemo(() => {
     return benchmarkFiles.filter((file) => {
-      // Phase IIIb is only valid for Psoriasis.
-      if (!ALLOWED_PHASES.includes(file.trialPhase) &&
-        !(file.trialPhase === TRIAL_PHASE_III_B && isPsoriasisIndication(file.indication))) {
+      // Phase IIIb is available for every indication.
+      if (!ALLOWED_PHASES.includes(file.trialPhase) && file.trialPhase !== TRIAL_PHASE_III_B) {
         return false
       }
       
@@ -280,10 +280,13 @@ export function BenchmarksContent() {
         indication,
         phases: Object.entries(phases)
           .sort(([a], [b]) => phaseOrder.indexOf(a) - phaseOrder.indexOf(b))
-          .map(([phase, files]) => ({
+            .map(([phase, files]) => ({
             phase,
-            // Sort the country rows alphabetically (A → Z)
-            files: [...files].sort((a, b) => a.country.localeCompare(b.country)),
+            // Always sort country rows deterministically (A → Z), independent of DB order.
+            files: [...files].sort((a, b) =>
+              COUNTRY_COLLATOR.compare(a.country.trim(), b.country.trim()) ||
+              a.id.localeCompare(b.id),
+            ),
           }))
       }))
   }, [filteredBenchmarks])
@@ -566,7 +569,7 @@ export function BenchmarksContent() {
                           <div>
                             <h3 className="font-semibold text-base">{indication}</h3>
                             <p className="text-sm text-muted-foreground">
-                              {uniqueCountries} countries | {totalProcedures.toLocaleString()} procedures | All Phases
+                              {uniqueCountries} countries | {totalProcedures.toLocaleString()} procedures | {phases.map((p) => p.phase).join(", ")}
                             </p>
                           </div>
                         </div>

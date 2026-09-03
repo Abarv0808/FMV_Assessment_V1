@@ -25,7 +25,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Upload, FileSpreadsheet, X, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { isPsoriasisIndication, isTrialPhaseAllowedForIndication, TRIAL_PHASE_III_B } from "@/lib/types"
+import { isTrialPhaseAllowedForIndication, TRIAL_PHASE_III_B } from "@/lib/types"
 
 // All 10 indications - v2
 const INDICATIONS = [
@@ -527,9 +527,7 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
                               <SelectContent>
                                 <SelectItem value="All Phases" className="text-xs">All Phases</SelectItem>
                                 <SelectItem value="Phase 4" className="text-xs">Phase 4</SelectItem>
-                                {isPsoriasisIndication(fileMeta.indication) && (
-                                  <SelectItem value={TRIAL_PHASE_III_B} className="text-xs">{TRIAL_PHASE_III_B}</SelectItem>
-                                )}
+                                <SelectItem value={TRIAL_PHASE_III_B} className="text-xs">{TRIAL_PHASE_III_B}</SelectItem>
                               </SelectContent>
                             </Select>
                           </div>
