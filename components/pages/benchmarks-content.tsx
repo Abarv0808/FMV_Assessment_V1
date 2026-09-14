@@ -331,13 +331,27 @@ export function BenchmarksContent() {
           open={uploadDialogOpen} 
           onOpenChange={setUploadDialogOpen}
           onSuccess={async () => {
-            // Refresh benchmark data after successful upload
+            // Refresh every page after upload so new Phase IIIb rows cannot be hidden by pagination.
             const supabase = createClient()
-            const { data } = await supabase
-              .from("benchmark_files")
-              .select("*")
-              .order("uploaded_at", { ascending: false })
-            
+            const pageSize = 1000
+            let from = 0
+            let allRows: Record<string, unknown>[] = []
+            let hasMore = true
+            while (hasMore) {
+              const { data, error } = await supabase
+                .from("benchmark_files")
+                .select("*")
+                .order("uploaded_at", { ascending: false })
+                .range(from, from + pageSize - 1)
+              if (error) {
+                console.error("[v0] Refresh after benchmark upload failed:", error.message)
+                break
+              }
+              allRows = [...allRows, ...(data ?? [])]
+              hasMore = (data?.length ?? 0) === pageSize
+              from += pageSize
+            }
+            const data = allRows
             if (data) {
               const mappedFiles: BenchmarkFile[] = data.map((row: Record<string, unknown>) => ({
                 id: row.id as string,

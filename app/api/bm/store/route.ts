@@ -11,6 +11,14 @@ function createDb() {
 
 export async function POST(request: NextRequest) {
   try {
+    const requesterRole = request.headers.get("x-fmv-role")
+    if (requesterRole !== "ADMIN") {
+      return NextResponse.json(
+        { success: false, error: "Only admin users can upload benchmark data" },
+        { status: 403 },
+      )
+    }
+
     const body = await request.json()
     const { indication, dataSource, trialPhase, uploadMode, countries } = body
 
