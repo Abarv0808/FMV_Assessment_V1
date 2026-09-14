@@ -61,6 +61,7 @@ export async function POST(request: NextRequest) {
 
     let filesCreated = 0
     let proceduresCreated = 0
+    const errors: string[] = []
 
     for (const country of countries) {
       const currency = currencyMap[country.country] || country.currency || "USD"
@@ -83,7 +84,9 @@ export async function POST(request: NextRequest) {
         .single()
 
       if (fileError) {
-        console.error("Error creating benchmark file:", fileError)
+        const message = `${country.country}: benchmark file insert failed${fileError.message ? ` (${fileError.message})` : ""}`
+        console.error("[v0]", message, fileError)
+        errors.push(message)
         continue
       }
 
@@ -123,7 +126,10 @@ export async function POST(request: NextRequest) {
 
         const { error: procError } = await db.from("benchmark_procedures").insert(procedures)
         if (procError) {
-          console.error("[v0] Error inserting procedures:", procError)
+          const message = `${country.country}: procedure insert failed${procError.message ? ` (${procError.message})` : ""}`
+          console.error("[v0]", message, procError)
+          errors.push(message)
+          await db.from("benchmark_files").delete().eq("id", fileData.id)
         } else {
           proceduresCreated += procedures.length
         }
@@ -131,15 +137,18 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({
-      success: true,
-      message: `Created ${filesCreated} files with ${proceduresCreated} procedures`,
+      success: errors.length === 0,
+      message: errors.length === 0
+        ? `Created ${filesCreated} files with ${proceduresCreated} procedures`
+        : `Upload completed with ${errors.length} error${errors.length === 1 ? "" : "s"}`,
+      error: errors.length > 0 ? errors.slice(0, 5).join("; ") : undefined,
       stats: {
         countriesProcessed: countries.length,
         benchmarkFilesCreated: filesCreated,
         proceduresInserted: proceduresCreated,
-        errors: []
+        errors,
       }
-    })
+    }, { status: errors.length === 0 ? 200 : 422 })
   } catch (error) {
     console.error("Upload error:", error)
     return NextResponse.json({ success: false, error: String(error) }, { status: 500 })

@@ -63,7 +63,7 @@ const ALL_VALUE = "__all__"
 const COUNTRY_COLLATOR = new Intl.Collator("en", { sensitivity: "base", numeric: false })
 
 // Only allowed phases - filter out Phase I, II, III
-const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IV"]
+const ALLOWED_PHASES: TrialPhase[] = ["All Phases", "Phase IIIb", "Phase IV"]
 
 export function BenchmarksContent() {
   const router = useRouter()
