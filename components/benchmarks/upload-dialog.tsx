@@ -25,6 +25,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Upload, FileSpreadsheet, X, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/lib/auth-context"
 import { isTrialPhaseAllowedForIndication, TRIAL_PHASE_III_B } from "@/lib/types"
 
 // All 10 indications - v2
@@ -238,6 +239,7 @@ interface FileWithMeta {
 }
 
 export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: BenchmarkUploadDialogProps) {
+  const { user } = useAuth()
   const [files, setFiles] = useState<FileWithMeta[]>([])
   const [dataSource, setDataSource] = useState<"IQVIA GrantPlan" | "IQVIA GPI">("IQVIA GrantPlan")
   const [step, setStep] = useState<"upload" | "preview" | "uploading" | "complete">("upload")
@@ -387,7 +389,10 @@ export function BenchmarkUploadDialog({ open, onOpenChange, onSuccess }: Benchma
       try {
         const response = await fetch("/api/bm/store", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-fmv-role": user?.role ?? "VIEWER",
+          },
           body: JSON.stringify({
             countries: fileMeta.parsedCountries,
             indication: fileMeta.indication,
