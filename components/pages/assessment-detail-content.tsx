@@ -793,6 +793,10 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       
       console.log("[v0] Comparison API result:", result)
       
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || "Comparison results could not be saved")
+      }
+
       if (result.success && result.results) {
         // Build a map of AI results by lineItemId for easy lookup
         const aiResultsMap = new Map(result.results.map((r: any) => [r.lineItemId, r]))
@@ -845,7 +849,16 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                 : null,
           }
         }))
-        console.log("[v0] Merged", aiResultsMap.size, "AI results into comparisons in-memory (no refetch)")
+        console.log("[v0] Merged", aiResultsMap.size, "AI results into comparisons in-memory")
+
+        // Confirm the persisted rows immediately so the UI and a reload agree.
+        const persistedResponse = await fetch(
+          `/api/assessments/${id}/comparisons?completedAt=${encodeURIComponent(result.completedAt || Date.now())}`,
+          { cache: "no-store" },
+        )
+        if (!persistedResponse.ok) {
+          throw new Error("Comparison completed, but saved results could not be reloaded")
+        }
 
         setComparisonComplete(true)
         appendAudit(`Completed AI Benchmark Comparison: ${result.message}`)
