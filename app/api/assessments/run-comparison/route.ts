@@ -177,7 +177,13 @@ Return up to 3 matches, sorted best-first. If nothing genuinely matches, return 
 // =====================================================
 
 export async function POST(request: Request) {
+  const runId = crypto.randomUUID()
+  const startedAt = Date.now()
+  const mark = (stage: string, extra: Record<string, unknown> = {}) =>
+    console.log(`[v0][comparison:${runId}] ${stage}`, { elapsedMs: Date.now() - startedAt, ...extra })
+
   console.log("[v0] Run comparison API called (AI-powered)")
+  mark("started")
   
   try {
     const body = await request.json()
@@ -241,6 +247,7 @@ export async function POST(request: Request) {
       }
     }
 
+    mark("line-items-loaded", { count: lineItems?.length ?? 0, error: lineItemsError?.message ?? null })
     console.log("[v0] Line items found:", lineItems?.length, "Error:", lineItemsError?.message)
 
     if (lineItemsError || !lineItems || lineItems.length === 0) {
@@ -353,6 +360,7 @@ export async function POST(request: Request) {
       
       // Log available countries in benchmark data
       const availableCountries = [...new Set(benchmarks.map((bm: any) => bm.benchmark_files?.country).filter(Boolean))]
+      mark("benchmarks-loaded", { count: benchmarks.length, countries: availableCountries.length })
       console.log("[v0] Benchmark procedures loaded:", benchmarks.length, "from", availableCountries.length, "countries")
       console.log("[v0] Available countries:", availableCountries.slice(0, 20).join(", "), availableCountries.length > 20 ? "..." : "")
     } catch (e: any) {
@@ -422,9 +430,10 @@ export async function POST(request: Request) {
     // 3. For each line item, use AI-powered semantic matching with country-specific filtering.
     // Runs with bounded concurrency so large assessments finish quickly instead of
     // awaiting one AI call at a time.
-    console.log("[v0] Starting AI-powered matching for", lineItems.length, "items...")
+  mark("matching-started", { lineItems: lineItems.length, concurrency: MATCH_CONCURRENCY, benchmarkCount: benchmarks.length })
+      console.log("[v0] Starting AI-powered matching for", lineItems.length, "items...")
 
-    const results: any[] = await mapWithConcurrency(lineItems, MATCH_CONCURRENCY, async (lineItem) => {
+  const results: any[] = await mapWithConcurrency(lineItems, MATCH_CONCURRENCY, async (lineItem) => {
       const procedureName = lineItem.procedure_name || ""
       const [description, extraDataStr] = procedureName.split("|||")
       const cleanDescription = description.trim()
@@ -726,6 +735,8 @@ export async function POST(request: Request) {
       }
     })
 
+    mark("matching-finished", { results: results.length, matched: results.filter((result) => result.matches?.length > 0).length })
+
     // 4. Update assessment_comparisons with results
     console.log("[v0] Updating", results.length, "comparison records")
     const persistenceErrors: string[] = []
@@ -837,9 +848,18 @@ export async function POST(request: Request) {
     const aiMatchCount = results.filter(r => r.matches.some((m: any) => m.isAIMatch)).length
     const fallbackCount = results.filter(r => r.matches.length > 0 && !r.matches.some((m: any) => m.isAIMatch)).length
 
+    mark("completed", { results: results.length, aiMatches: aiMatchCount, fallbackMatches: fallbackCount, persistenceErrors: persistenceErrors.length })
     return NextResponse.json({
       success: true,
+      runId,
       completedAt: new Date().toISOString(),
+      diagnostics: {
+        lineItems: lineItems.length,
+        benchmarks: benchmarks.length,
+        aiMatches: aiMatchCount,
+        fallbackMatches: fallbackCount,
+        totalDurationMs: Date.now() - startedAt,
+      },
       message: `Compared ${lineItems.length} items: ${aiMatchCount} AI matches, ${fallbackCount} trigram matches`,
       results: results.map(r => ({
         lineItemId: r.lineItemId,

@@ -126,6 +126,13 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   // Used to reject Radix Select onValueChange echoes that fire spuriously after re-renders.
   const lastKnownDecisionRef = useRef<Record<string, ItemDecision>>({})
   const [comparisonComplete, setComparisonComplete] = useState(false)
+  const [comparisonDiagnostics, setComparisonDiagnostics] = useState<{
+    lineItems: number
+    benchmarks: number
+    aiMatches: number
+    fallbackMatches: number
+    totalDurationMs: number
+  } | null>(null)
 
   // Try mock data first for backward compatibility
   const mockInitial = mockAssessments.find((a) => a.id === id)
@@ -798,6 +805,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       }
 
       if (result.success && result.results) {
+        if (result.diagnostics) setComparisonDiagnostics(result.diagnostics)
         // Build a map of AI results by lineItemId for easy lookup
         const aiResultsMap = new Map(result.results.map((r: any) => [r.lineItemId, r]))
         
@@ -1363,6 +1371,11 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
                         </>
                       )}
                     </Button>
+                    {comparisonDiagnostics && !isRunningComparison && (
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        Last run: {comparisonDiagnostics.lineItems} items, {comparisonDiagnostics.benchmarks.toLocaleString()} benchmarks, {comparisonDiagnostics.aiMatches} AI matches, {comparisonDiagnostics.fallbackMatches} fallback matches, completed in {(comparisonDiagnostics.totalDurationMs / 1000).toFixed(1)}s.
+                      </p>
+                    )}
                   </div>
                 )}
                 
