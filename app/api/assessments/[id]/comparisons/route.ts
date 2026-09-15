@@ -32,7 +32,10 @@ export async function GET(
       return NextResponse.json({ error: comparisonsError.message }, { status: 500 })
     }
     
-    return NextResponse.json({ comparisons: comparisonsData || [] })
+    return NextResponse.json(
+      { comparisons: comparisonsData || [] },
+      { headers: { "Cache-Control": "no-store, max-age=0" } },
+    )
     
   } catch (error: any) {
     console.error("[v0] Comparisons API error:", error)

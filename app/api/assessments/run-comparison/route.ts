@@ -728,6 +728,7 @@ export async function POST(request: Request) {
 
     // 4. Update assessment_comparisons with results
     console.log("[v0] Updating", results.length, "comparison records")
+    const persistenceErrors: string[] = []
 
     // DB has a check constraint allowing only a small set of flag values.
     // Map any extended flags to a constraint-safe value for persistence,
@@ -804,8 +805,11 @@ export async function POST(request: Request) {
         .select("id")
 
       console.log("[v0] Update result:", updated?.length || 0, "rows updated, error:", updateError?.message || "none")
+      if (updateError) {
+        persistenceErrors.push(`${result.lineItemId}: ${updateError.message}`)
+      }
 
-      if (!updated || updated.length === 0) {
+      if (!updateError && (!updated || updated.length === 0)) {
         console.log("[v0] No existing record, inserting new one")
         const { error: insertError } = await supabase
           .from("assessment_comparisons")
@@ -816,14 +820,26 @@ export async function POST(request: Request) {
             ai_matches: aiMatchesPayload
           })
         console.log("[v0] Insert error:", insertError?.message || "none")
+        if (insertError) {
+          persistenceErrors.push(`${result.lineItemId}: ${insertError.message}`)
+        }
       }
     })
+
+    if (persistenceErrors.length > 0) {
+      return NextResponse.json({
+        success: false,
+        error: "Comparison completed but results could not be fully saved.",
+        details: persistenceErrors.slice(0, 10),
+      }, { status: 500 })
+    }
 
     const aiMatchCount = results.filter(r => r.matches.some((m: any) => m.isAIMatch)).length
     const fallbackCount = results.filter(r => r.matches.length > 0 && !r.matches.some((m: any) => m.isAIMatch)).length
 
     return NextResponse.json({
       success: true,
+      completedAt: new Date().toISOString(),
       message: `Compared ${lineItems.length} items: ${aiMatchCount} AI matches, ${fallbackCount} trigram matches`,
       results: results.map(r => ({
         lineItemId: r.lineItemId,
