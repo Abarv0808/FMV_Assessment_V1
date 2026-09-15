@@ -13,3 +13,12 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:01:44.241] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:01:45.202] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:14.073] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:05:14.997] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:15.409] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:05:15.860] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:05:15.861] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:05:15.861] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-3ymyja6tr63r.vercel.run/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://sb-3ymyja6tr63r.vercel.run/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1789485601588} /_vercel/insights/view
+[00:05:16.223] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-3ymyja6tr63r.vercel.run/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://sb-3ymyja6tr63r.vercel.run/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1789485601842} /_vercel/insights/view
