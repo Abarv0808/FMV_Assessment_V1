@@ -54,3 +54,8 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:13:54.886] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
 [00:13:54.886] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-3ymyja6tr63r.vercel.run/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://sb-3ymyja6tr63r.vercel.run/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1789482489599} /_vercel/insights/view
 [00:13:55.425] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-3ymyja6tr63r.vercel.run/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://sb-3ymyja6tr63r.vercel.run/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1789482490040} /_vercel/insights/view
+[00:16:45.989] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:16:46.804] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:47.330] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
