@@ -6,7 +6,7 @@
 // "PhD student -> always link Data Entry", "IRB/EC submission -> initial fee by
 // default"). Rules are editable via the admin UI (three DB tables).
 
-import type { SupabaseClient } from "@supabase/supabase-js"
+import type { Db } from "@/lib/db/query-builder"
 
 // ---------------------------------------------------------------------------
 // Types
@@ -97,13 +97,13 @@ const MAX_MATCHES = 5
  * tables don't exist yet (migrations not run) or a query fails, returns empty
  * rule sets so the comparison pipeline is a no-op rather than throwing.
  */
-export async function loadMatchingRules(supabase: SupabaseClient): Promise<MatchingRules> {
+export async function loadMatchingRules(db: Db): Promise<MatchingRules> {
   const empty: MatchingRules = { synonymRules: [], therapeuticAreas: [], disambiguationRules: [] }
   try {
     const [syn, ta, dis] = await Promise.all([
-      supabase.from("fmv_synonym_rules").select("*").eq("enabled", true).order("priority", { ascending: true }),
-      supabase.from("fmv_therapeutic_areas").select("*").eq("enabled", true),
-      supabase.from("fmv_disambiguation_rules").select("*").eq("enabled", true).order("priority", { ascending: true }),
+      db.from("fmv_synonym_rules").select("*").eq("enabled", true).order("priority", { ascending: true }),
+      db.from("fmv_therapeutic_areas").select("*").eq("enabled", true),
+      db.from("fmv_disambiguation_rules").select("*").eq("enabled", true).order("priority", { ascending: true }),
     ])
 
     if (syn.error || ta.error || dis.error) {

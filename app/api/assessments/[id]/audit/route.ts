@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 
 // Until the 012_create_assessment_audit_log.sql migration is run, we degrade
 // gracefully instead of erroring so the rest of the page keeps working.
@@ -24,9 +24,8 @@ export async function GET(
 ) {
   try {
     const { id } = await params
-    const supabase = createAdminClient()
 
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from("assessment_audit_log")
       .select("*")
       .eq("assessment_id", id)
@@ -71,8 +70,7 @@ export async function POST(
       return NextResponse.json({ error: "action is required" }, { status: 400 })
     }
 
-    const supabase = createAdminClient()
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from("assessment_audit_log")
       .insert({
         assessment_id: id,

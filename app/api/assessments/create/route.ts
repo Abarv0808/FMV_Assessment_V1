@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 
 export async function POST(request: Request) {
   try {
@@ -16,9 +16,8 @@ export async function POST(request: Request) {
       benchmarkSource,
     } = body
 
-    const supabase = createAdminClient()
 
-    const { data: assessment, error } = await supabase
+    const { data: assessment, error } = await db
       .from("assessments")
       .insert({
         name,
@@ -46,7 +45,7 @@ export async function POST(request: Request) {
         benchmark_file_id: fileId
       }))
 
-      const { error: linkError } = await supabase
+      const { error: linkError } = await db
         .from("assessment_benchmark_files")
         .insert(benchmarkLinks)
 

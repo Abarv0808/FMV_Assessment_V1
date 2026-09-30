@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 
 const TABLE_BY_KIND: Record<string, string> = {
   synonym: "fmv_synonym_rules",
@@ -45,8 +45,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     // All three tables carry an updated_at column.
     patch.updated_at = new Date().toISOString()
 
-    const supabase = createAdminClient()
-    const { data, error } = await supabase.from(table).update(patch).eq("id", id).select().single()
+    const { data, error } = await db.from(table).update(patch).eq("id", id).select().single()
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json({ rule: data })
   } catch (e: any) {
@@ -61,8 +60,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     const table = tableFrom(request)
     if (!table) return NextResponse.json({ error: "Invalid or missing 'kind' query param" }, { status: 400 })
 
-    const supabase = createAdminClient()
-    const { error } = await supabase.from(table).delete().eq("id", id)
+    const { error } = await db.from(table).delete().eq("id", id)
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json({ success: true })
   } catch (e: any) {

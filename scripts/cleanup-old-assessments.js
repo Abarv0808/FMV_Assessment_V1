@@ -1,81 +1,66 @@
-import { createClient } from '@supabase/supabase-js'
+import { readFileSync } from 'fs'
+import path from 'path'
+import pg from 'pg'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+const required = ['DB_HOST', 'DB_NAME', 'DB_USER']
+const missing = required.filter((name) => !process.env[name])
+const password = process.env.DB_PASSWORD || process.env.AWS_SECRET_DEV
 
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing Supabase credentials')
+if (missing.length > 0 || !password) {
+  console.error('Missing database settings:', [...missing, ...(password ? [] : ['DB_PASSWORD'])].join(', '))
   process.exit(1)
 }
 
-const supabase = createClient(supabaseUrl, supabaseKey)
+const sslDisabled = (process.env.DB_SSL || 'require').toLowerCase() === 'disable'
+const caPath = process.env.DB_SSL_CA_PATH || path.join(process.cwd(), 'certs', 'rds-global-bundle.pem')
+
+const client = new pg.Client({
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT || 5442),
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password,
+  ssl: sslDisabled ? false : { ca: readFileSync(caPath, 'utf-8'), rejectUnauthorized: true },
+})
 
 async function cleanupOldAssessments() {
-  // Calculate date 8 days ago
   const cutoffDate = new Date()
   cutoffDate.setDate(cutoffDate.getDate() - 8)
   const cutoffISO = cutoffDate.toISOString()
-  
+
   console.log('Deleting assessments created before:', cutoffISO)
-  
-  // First, get the IDs of old assessments
-  const { data: oldAssessments, error: fetchError } = await supabase
-    .from('assessments')
-    .select('id, name, created_at')
-    .lt('created_at', cutoffISO)
-  
-  if (fetchError) {
-    console.error('Error fetching old assessments:', fetchError.message)
-    return
+
+  await client.connect()
+  try {
+    const { rows: oldAssessments } = await client.query(
+      'SELECT id, name, created_at FROM assessments WHERE created_at < $1',
+      [cutoffISO],
+    )
+
+    console.log('Found', oldAssessments.length, 'assessments to delete:')
+    oldAssessments.forEach((a) => console.log(' -', a.name, '(', a.created_at, ')'))
+
+    if (oldAssessments.length === 0) {
+      console.log('No old assessments to delete')
+      return
+    }
+
+    const assessmentIds = oldAssessments.map((a) => a.id)
+
+    await client.query('BEGIN')
+    await client.query('DELETE FROM assessment_comparisons WHERE assessment_id = ANY($1::uuid[])', [assessmentIds])
+    await client.query('DELETE FROM assessment_line_items WHERE assessment_id = ANY($1::uuid[])', [assessmentIds])
+    await client.query('DELETE FROM assessments WHERE id = ANY($1::uuid[])', [assessmentIds])
+    await client.query('COMMIT')
+
+    console.log('Deleted', assessmentIds.length, 'assessments and their line items and comparisons')
+  } catch (error) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Cleanup failed, no rows were deleted:', error.message)
+    process.exitCode = 1
+  } finally {
+    await client.end()
   }
-  
-  console.log('Found', oldAssessments?.length || 0, 'assessments to delete:')
-  oldAssessments?.forEach(a => console.log(' -', a.name, '(', a.created_at, ')'))
-  
-  if (!oldAssessments || oldAssessments.length === 0) {
-    console.log('No old assessments to delete')
-    return
-  }
-  
-  const assessmentIds = oldAssessments.map(a => a.id)
-  
-  // Delete comparisons for these assessments
-  const { error: compError } = await supabase
-    .from('assessment_comparisons')
-    .delete()
-    .in('assessment_id', assessmentIds)
-  
-  if (compError) {
-    console.error('Error deleting comparisons:', compError.message)
-  } else {
-    console.log('Deleted comparisons')
-  }
-  
-  // Delete line items for these assessments
-  const { error: lineItemError } = await supabase
-    .from('assessment_line_items')
-    .delete()
-    .in('assessment_id', assessmentIds)
-  
-  if (lineItemError) {
-    console.error('Error deleting line items:', lineItemError.message)
-  } else {
-    console.log('Deleted line items')
-  }
-  
-  // Delete the assessments
-  const { error: assessmentError } = await supabase
-    .from('assessments')
-    .delete()
-    .in('id', assessmentIds)
-  
-  if (assessmentError) {
-    console.error('Error deleting assessments:', assessmentError.message)
-  } else {
-    console.log('Deleted', assessmentIds.length, 'assessments')
-  }
-  
-  console.log('Cleanup complete!')
 }
 
 cleanupOldAssessments()

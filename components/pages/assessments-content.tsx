@@ -25,7 +25,7 @@ export function AssessmentsContent() {
   const [allAssessments, setAllAssessments] = useState<Assessment[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  // Fetch assessments from API (uses server-side Supabase to bypass RLS)
+  // Fetch assessments from the server API (the database is only reachable server-side)
   useEffect(() => {
     const fetchAssessments = async () => {
       setIsLoading(true)

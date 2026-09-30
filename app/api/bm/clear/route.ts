@@ -1,12 +1,11 @@
-import { createClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 import { NextResponse } from "next/server"
 
 export async function DELETE() {
   try {
-    const supabase = await createClient()
     
     // First, delete all benchmark procedures
-    const { error: procError } = await supabase
+    const { error: procError } = await db
       .from("benchmark_procedures")
       .delete()
       .neq("id", "00000000-0000-0000-0000-000000000000") // Delete all (neq with impossible value)
@@ -16,7 +15,7 @@ export async function DELETE() {
     }
     
     // Then delete all benchmark files
-    const { error: fileError } = await supabase
+    const { error: fileError } = await db
       .from("benchmark_files")
       .delete()
       .neq("id", "00000000-0000-0000-0000-000000000000") // Delete all

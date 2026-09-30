@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 
 // Fresh API v1 - no benchmark_procedures query at all
 export async function POST(request: Request) {
@@ -15,14 +15,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing required data" }, { status: 400 })
     }
     
-    const supabase = createAdminClient()
     
     // Insert line items one by one
     let insertedCount = 0
     for (let i = 0; i < vendorLineItems.length; i++) {
       const item = vendorLineItems[i]
       
-      const { data: lineItem, error: lineError } = await supabase
+      const { data: lineItem, error: lineError } = await db
         .from("assessment_line_items")
         .insert({
           assessment_id: assessmentId,
@@ -49,7 +48,7 @@ export async function POST(request: Request) {
         insertedCount++
         
         // Create comparison record
-        await supabase.from("assessment_comparisons").insert({
+        await db.from("assessment_comparisons").insert({
           assessment_id: assessmentId,
           line_item_id: lineItem.id,
           flag: "NO_MATCH",
@@ -61,7 +60,7 @@ export async function POST(request: Request) {
     console.log("[v0] Inserted", insertedCount, "line items")
     
     // Update assessment status
-    await supabase
+    await db
       .from("assessments")
       .update({ status: "completed" })
       .eq("id", assessmentId)

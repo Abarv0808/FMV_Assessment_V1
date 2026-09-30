@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 
 const TABLE_BY_KIND: Record<string, string> = {
   synonym: "fmv_synonym_rules",
@@ -16,11 +16,10 @@ function toArray(v: any): string[] {
 // GET -> all three rule sets.
 export async function GET() {
   try {
-    const supabase = createAdminClient()
     const [syn, ta, dis] = await Promise.all([
-      supabase.from("fmv_synonym_rules").select("*").order("priority", { ascending: true }),
-      supabase.from("fmv_therapeutic_areas").select("*").order("name", { ascending: true }),
-      supabase.from("fmv_disambiguation_rules").select("*").order("priority", { ascending: true }),
+      db.from("fmv_synonym_rules").select("*").order("priority", { ascending: true }),
+      db.from("fmv_therapeutic_areas").select("*").order("name", { ascending: true }),
+      db.from("fmv_disambiguation_rules").select("*").order("priority", { ascending: true }),
     ])
 
     if (syn.error || ta.error || dis.error) {
@@ -55,7 +54,6 @@ export async function POST(request: Request) {
     const table = TABLE_BY_KIND[kind]
     if (!table) return NextResponse.json({ error: "Invalid or missing 'kind'" }, { status: 400 })
 
-    const supabase = createAdminClient()
     let payload: Record<string, any>
 
     if (kind === "synonym") {
@@ -91,7 +89,7 @@ export async function POST(request: Request) {
       }
     }
 
-    const { data, error } = await supabase.from(table).insert(payload).select().single()
+    const { data, error } = await db.from(table).insert(payload).select().single()
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json({ rule: data })
   } catch (e: any) {

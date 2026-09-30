@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/table"
 import { Upload, FileText, X, FileSpreadsheet, Database, ChevronRight, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { createClient } from "@/lib/supabase/client"
 import type { BenchmarkFile, BenchmarkSource, TrialPhase } from "@/lib/types"
 import { TRIAL_PHASE_III_B } from "@/lib/types"
 import { format } from "date-fns"
@@ -46,44 +45,22 @@ export function ProposalUploadStep({ data, onChange }: ProposalUploadStepProps) 
   const [isLoading, setIsLoading] = useState(false)
   const [expandedIndications, setExpandedIndications] = useState<Set<string>>(new Set())
 
-  // Fetch benchmark files from Supabase
+  // Fetch benchmark files from the server API
   useEffect(() => {
     async function fetchBenchmarks() {
       if (!data.benchmarkSource) return
       
       setIsLoading(true)
       try {
-        const supabase = createClient()
         const sourceValue = data.benchmarkSource === "grantplan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER"
-        
-        // Fetch ALL files using pagination to bypass 1000 row limit
-        let allFiles: Record<string, unknown>[] = []
-        let from = 0
-        const pageSize = 1000
-        let hasMore = true
-        
-        while (hasMore) {
-          const { data: fetchedData, error } = await supabase
-            .from("benchmark_files")
-            .select("*")
-            .eq("source", sourceValue)
-            .order("indication", { ascending: true })
-            .range(from, from + pageSize - 1)
-          
-          if (error) {
-            console.error("[v0] Error fetching benchmarks:", error)
-            setBenchmarkFiles([])
-            return
-          }
-          
-          if (fetchedData && fetchedData.length > 0) {
-            allFiles = [...allFiles, ...fetchedData]
-            from += pageSize
-            hasMore = fetchedData.length === pageSize
-          } else {
-            hasMore = false
-          }
+        const response = await fetch(`/api/benchmarks/files?source=${sourceValue}`, { cache: "no-store" })
+        const result = await response.json()
+        if (!response.ok) {
+          console.error("[v0] Error fetching benchmarks:", result.error)
+          setBenchmarkFiles([])
+          return
         }
+        const allFiles: Record<string, unknown>[] = result.files || []
         
         const mappedFiles: BenchmarkFile[] = allFiles
           .map((row: Record<string, unknown>) => ({

@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 
 export async function POST(request: Request) {
   console.log("[v0] Store Items API called")
   
   try {
-    const supabase = createAdminClient()
     const body = await request.json()
     
     const { assessmentId, lineItems } = body
@@ -31,7 +30,7 @@ export async function POST(request: Request) {
         decision: item.decision || null
       })
       
-      const { data, error } = await supabase
+      const { data, error } = await db
         .from("assessment_line_items")
         .insert({
           assessment_id: assessmentId,
@@ -49,7 +48,7 @@ export async function POST(request: Request) {
         insertedIds.push(data.id)
         
         // Create comparison record
-        const { error: compError } = await supabase
+        const { error: compError } = await db
           .from("assessment_comparisons")
           .insert({
             assessment_id: assessmentId,
@@ -68,7 +67,7 @@ export async function POST(request: Request) {
     console.log("[v0] Inserted", insertedIds.length, "line items")
     
     // Update assessment status
-    await supabase
+    await db
       .from("assessments")
       .update({ status: "completed" })
       .eq("id", assessmentId)

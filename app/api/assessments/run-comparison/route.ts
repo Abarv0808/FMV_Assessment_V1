@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { db, query } from "@/lib/db"
 import { generateObject } from "ai"
 import { z } from "zod"
 import { fuzzyMatchScore, scoreToConfidence, dedupeBenchmarkMatches } from "@/lib/fuzzy-match"
@@ -202,11 +202,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing assessmentId" }, { status: 400 })
     }
 
-    const supabase = createAdminClient()
 
     // 1. Fetch assessment line items
     console.log("[v0] Fetching line items...")
-    const { data: lineItems, error: lineItemsError } = await supabase
+    const { data: lineItems, error: lineItemsError } = await db
       .from("assessment_line_items")
       .select("id, procedure_name, country, vendor_cost, currency")
       .eq("assessment_id", assessmentId)
@@ -233,7 +232,7 @@ export async function POST(request: Request) {
         const previous = extraData.decision
         extraData.decision = newDecision
         const newProcName = `${desc}|||${JSON.stringify(extraData)}`
-        const { error: persistError } = await supabase
+        const { error: persistError } = await db
           .from("assessment_line_items")
           .update({ procedure_name: newProcName })
           .eq("id", lineItemId)
@@ -283,7 +282,7 @@ export async function POST(request: Request) {
         console.log("[v0] Country variants for benchmark lookup:", countryVariants.join(", "))
 
         // First, get benchmark_file IDs for the countries we need
-        const { data: countryFiles, error: countryError } = await supabase
+        const { data: countryFiles, error: countryError } = await db
           .from("benchmark_files")
           .select("id, country")
           .in("country", countryVariants)
@@ -307,42 +306,21 @@ export async function POST(request: Request) {
       const PAGE_SIZE = 1000
       const MAX_PAGES = 50 // safety: up to 50,000 rows
       const rawBenchmarks: any[] = []
-      
-      for (let page = 0; page < MAX_PAGES; page++) {
-        let pageQuery = supabase
-          .from("benchmark_procedures")
-          .select(`
-            id,
-            procedure_name,
-            procedure_code,
-            category,
-            p25,
-            p50,
-            p75,
-            p90,
-            p100,
-            benchmark_file_id,
-            benchmark_files(country)
-          `)
-          .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
-        
-        if (fileIdFilter) {
-          pageQuery = pageQuery.in("benchmark_file_id", fileIdFilter)
-        }
-        
-        const { data: pageData, error: pageError } = await pageQuery
-        
-        if (pageError) {
-          console.log("[v0] Benchmark page", page, "error:", pageError.message)
-          break
-        }
-        
-        if (!pageData || pageData.length === 0) break
-        
-        rawBenchmarks.push(...pageData)
-        console.log("[v0] Loaded benchmark page", page + 1, "size:", pageData.length, "running total:", rawBenchmarks.length)
-        
-        if (pageData.length < PAGE_SIZE) break // last page
+
+      try {
+        const { rows } = await query(
+          `SELECT bp.id, bp.procedure_name, bp.procedure_code, bp.category,
+                  bp.p25, bp.p50, bp.p75, bp.p90, bp.p100, bp.benchmark_file_id,
+                  json_build_object('country', bf.country) AS benchmark_files
+             FROM benchmark_procedures bp
+             LEFT JOIN benchmark_files bf ON bf.id = bp.benchmark_file_id
+            WHERE ($1::uuid[] IS NULL OR bp.benchmark_file_id = ANY($1::uuid[]))
+            LIMIT $2`,
+          [fileIdFilter ?? null, PAGE_SIZE * MAX_PAGES],
+        )
+        rawBenchmarks.push(...rows)
+      } catch (benchmarkError: any) {
+        console.log("[v0] Benchmark load error:", benchmarkError.message)
       }
       
       // Filter out metadata rows
@@ -371,14 +349,14 @@ export async function POST(request: Request) {
       console.log("[v0] No benchmark data found, marking all as NO_MATCH")
       
       for (const lineItem of lineItems) {
-        const { data: existing } = await supabase
+        const { data: existing } = await db
           .from("assessment_comparisons")
           .select("id")
           .eq("line_item_id", lineItem.id)
           .single()
         
         if (!existing) {
-          await supabase
+          await db
             .from("assessment_comparisons")
             .insert({
               assessment_id: assessmentId,
@@ -387,7 +365,7 @@ export async function POST(request: Request) {
               ai_description: "No benchmark data available for comparison"
             })
         } else {
-          await supabase
+          await db
             .from("assessment_comparisons")
             .update({
               flag: "NO_MATCH",
@@ -414,7 +392,7 @@ export async function POST(request: Request) {
 
     // Load the editable FMV domain-knowledge rules once for this run. Degrades
     // to empty (no-op) if the rule tables don't exist yet.
-    const matchingRules = await loadMatchingRules(supabase)
+    const matchingRules = await loadMatchingRules(db)
     console.log(
       "[v0] Matching rules loaded:",
       matchingRules.synonymRules.length, "synonym,",
@@ -755,7 +733,7 @@ export async function POST(request: Request) {
       // existing comparison record, otherwise the benchmark data that the decision
       // was based on would be lost on every re-run. Leave any existing record intact.
       if (result.flag === "SKIPPED_BY_DECISION") {
-        const { data: existing } = await supabase
+        const { data: existing } = await db
           .from("assessment_comparisons")
           .select("id, flag, ai_matches")
           .eq("line_item_id", result.lineItemId)
@@ -787,7 +765,7 @@ export async function POST(request: Request) {
         // No prior record exists (decision was already finalized before any
         // comparison ran). Insert a sentinel so the UI shows "no comparison needed".
         console.log("[v0] No prior record for skipped item, inserting sentinel:", result.lineItemId)
-        await supabase
+        await db
           .from("assessment_comparisons")
           .insert({
             assessment_id: assessmentId,
@@ -806,7 +784,7 @@ export async function POST(request: Request) {
         ? result.matches
         : [{ __meta: true, originalFlag: result.flag, skipReason: (result as any).skipReason || null }]
 
-      const { data: updated, error: updateError } = await supabase
+      const { data: updated, error: updateError } = await db
         .from("assessment_comparisons")
         .update({
           flag: dbFlag,
@@ -822,7 +800,7 @@ export async function POST(request: Request) {
 
       if (!updateError && (!updated || updated.length === 0)) {
         console.log("[v0] No existing record, inserting new one")
-        const { error: insertError } = await supabase
+        const { error: insertError } = await db
           .from("assessment_comparisons")
           .insert({
             assessment_id: assessmentId,

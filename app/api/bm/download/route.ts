@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 import { NextResponse, type NextRequest } from "next/server"
 import * as XLSX from "xlsx"
 import { TRIAL_PHASE_III_B } from "@/lib/types"
@@ -6,7 +6,7 @@ import { TRIAL_PHASE_III_B } from "@/lib/types"
 // These are the phases exposed throughout the benchmark UI.
 const ALLOWED_PHASES = ["All Phases", "Phase IV", TRIAL_PHASE_III_B]
 
-// Fetch every row for a query, paginating past Supabase's 1000-row cap.
+// Fetch every row for a query in pages so large benchmark sets stay memory-bounded.
 async function fetchAll<T>(
   runQuery: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: { message: string } | null }>,
 ): Promise<T[]> {
@@ -38,11 +38,10 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: false, error: `Unsupported phase: ${phase}` }, { status: 400 })
     }
 
-    const supabase = await createClient()
 
     // 1. Find the matching benchmark files (metadata) for this indication/phase.
     const files = await fetchAll<Record<string, unknown>>((from, to) => {
-      let q = supabase
+      let q = db
         .from("benchmark_files")
         .select("id, file_name, source, country, indication, trial_phase, currency")
         .eq("indication", indication)
@@ -61,7 +60,7 @@ export async function GET(request: NextRequest) {
 
     // 2. Pull all procedure rows for those files.
     const procedures = await fetchAll<Record<string, unknown>>((from, to) =>
-      supabase
+      db
         .from("benchmark_procedures")
         .select(
           "benchmark_file_id, procedure_code, procedure_name, category, p25, p50, p75, p90, p100, mean, sample_size, source_ref",

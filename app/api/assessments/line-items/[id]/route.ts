@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 
 export async function PATCH(
   request: Request,
@@ -11,11 +11,10 @@ export async function PATCH(
     console.log("[v0] PATCH line-item raw body:", JSON.stringify(body))
     const { additionalInformation, costCategory, negotiatedPrice, unitPrice, numberOfUnit, decision, comment } = body
 
-    const supabase = createAdminClient()
 
     // If updating negotiatedPrice, do it directly on the column
     if (negotiatedPrice !== undefined) {
-      const { error: priceError } = await supabase
+      const { error: priceError } = await db
         .from("assessment_line_items")
         .update({ negotiated_price: negotiatedPrice })
         .eq("id", id)
@@ -30,7 +29,7 @@ export async function PATCH(
     }
 
     // Get current line item to update procedure_name field
-    const { data: lineItem, error: fetchError } = await supabase
+    const { data: lineItem, error: fetchError } = await db
       .from("assessment_line_items")
       .select("procedure_name")
       .eq("id", id)
@@ -82,7 +81,7 @@ export async function PATCH(
     const newProcedureName = `${newDescription}|||${JSON.stringify(extraData)}`
 
     // Update line item
-    const { error: updateError } = await supabase
+    const { error: updateError } = await db
       .from("assessment_line_items")
       .update({ procedure_name: newProcedureName })
       .eq("id", id)

@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 import { useAuth } from "@/lib/auth-context"
 import type { BenchmarkFile, TrialPhase, BenchmarkSource } from "@/lib/types"
 import { TRIAL_PHASE_III_B } from "@/lib/types"
@@ -153,50 +152,26 @@ export function BenchmarksContent() {
     setExpandedIndications(new Set())
   }
 
-  // Fetch benchmark files from Supabase
+  // Fetch benchmark files from the server API
   useEffect(() => {
     async function fetchBenchmarks() {
       setIsLoading(true)
-      console.log("[v0] Fetching benchmarks, SUPABASE_URL exists:", !!process.env.NEXT_PUBLIC_SUPABASE_URL)
       try {
-        const supabase = createClient()
-        
-        // Fetch ALL files using pagination to bypass 1000 row limit
-        let allFiles: Record<string, unknown>[] = []
-        let from = 0
-        const pageSize = 1000
-        let hasMore = true
-        
-        while (hasMore) {
-          const { data, error } = await supabase
-            .from("benchmark_files")
-            .select("*")
-            .order("uploaded_at", { ascending: false })
-            .range(from, from + pageSize - 1)
-          
-          if (error) {
-            console.error("[v0] Error fetching benchmarks:", error.message, error.code)
-            setBenchmarkFiles([])
-            return
-          }
-          
-          console.log("[v0] Fetched batch:", data?.length || 0, "files, from:", from)
-          
-          if (data && data.length > 0) {
-            allFiles = [...allFiles, ...data]
-            from += pageSize
-            hasMore = data.length === pageSize
-          } else {
-            hasMore = false
-          }
+        const response = await fetch("/api/benchmarks/files", { cache: "no-store" })
+        const result = await response.json()
+        if (!response.ok) {
+          console.error("[v0] Error fetching benchmarks:", result.error)
+          setBenchmarkFiles([])
+          return
         }
+        const allFiles: Record<string, unknown>[] = result.files || []
         
         
         
         if (allFiles.length === 0) {
           setBenchmarkFiles([])
         } else {
-          // Map Supabase data to BenchmarkFile type
+          // Map database rows to BenchmarkFile type
           const mappedFiles: BenchmarkFile[] = allFiles.map((row: Record<string, unknown>) => ({
             id: row.id as string,
             fileName: row.file_name as string,
@@ -332,26 +307,12 @@ export function BenchmarksContent() {
           onOpenChange={setUploadDialogOpen}
           onSuccess={async () => {
             // Refresh every page after upload so new Phase IIIb rows cannot be hidden by pagination.
-            const supabase = createClient()
-            const pageSize = 1000
-            let from = 0
-            let allRows: Record<string, unknown>[] = []
-            let hasMore = true
-            while (hasMore) {
-              const { data, error } = await supabase
-                .from("benchmark_files")
-                .select("*")
-                .order("uploaded_at", { ascending: false })
-                .range(from, from + pageSize - 1)
-              if (error) {
-                console.error("[v0] Refresh after benchmark upload failed:", error.message)
-                break
-              }
-              allRows = [...allRows, ...(data ?? [])]
-              hasMore = (data?.length ?? 0) === pageSize
-              from += pageSize
+            const response = await fetch("/api/benchmarks/files", { cache: "no-store" })
+            const result = await response.json()
+            if (!response.ok) {
+              console.error("[v0] Refresh after benchmark upload failed:", result.error)
             }
-            const data = allRows
+            const data: Record<string, unknown>[] = result.files || []
             if (data) {
               const mappedFiles: BenchmarkFile[] = data.map((row: Record<string, unknown>) => ({
                 id: row.id as string,

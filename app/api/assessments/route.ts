@@ -1,38 +1,27 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { db, query } from "@/lib/db"
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
     const statusFilter = searchParams.get("status")
     
-    const supabase = createAdminClient()
     
-    // Fetch assessments with line item count
-    let query = supabase
-      .from("assessments")
-      .select(`
-        *,
-        assessment_line_items(count)
-      `)
-    
-    // Apply status filter if provided
-    if (statusFilter) {
-      query = query.eq("status", statusFilter)
-    }
-    
-    const { data: assessments, error } = await query.order("created_at", { ascending: false })
-    
-    if (error) {
-      return NextResponse.json({ assessments: [], error: error.message }, { status: 200 })
-    }
+    const { rows: assessments } = await query(
+      `SELECT a.*,
+              (SELECT count(*)::int FROM assessment_line_items li WHERE li.assessment_id = a.id) AS line_items_count
+         FROM assessments a
+        WHERE ($1::text IS NULL OR a.status::text = $1)
+        ORDER BY a.created_at DESC`,
+      [statusFilter],
+    )
     
     // Also fetch flagged counts (comparisons with RED or YELLOW flag)
     const assessmentIds = assessments?.map(a => a.id) || []
     let flaggedCounts: Record<string, number> = {}
     
     if (assessmentIds.length > 0) {
-      const { data: flaggedData } = await supabase
+      const { data: flaggedData } = await db
         .from("assessment_comparisons")
         .select("assessment_id, flag")
         .in("assessment_id", assessmentIds)
@@ -48,7 +37,7 @@ export async function GET(request: Request) {
     // Map assessments with counts
     const mappedAssessments = assessments?.map(a => ({
       ...a,
-      line_items_count: a.assessment_line_items?.[0]?.count || 0,
+      line_items_count: a.line_items_count || 0,
       flagged_count: flaggedCounts[a.id] || 0
     })) || []
     

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createAdminClient } from "@/lib/supabase/server"
+import { query } from "@/lib/db"
 
 export async function GET(
   request: Request,
@@ -7,31 +7,24 @@ export async function GET(
 ) {
   try {
     const { id } = await params
-    const supabase = createAdminClient()
     
-    // Fetch comparisons with line items using server-side client (bypasses RLS)
-    const { data: comparisonsData, error: comparisonsError } = await supabase
-      .from("assessment_comparisons")
-      .select(`
-        *,
-        assessment_line_items!inner (
-          id,
-          procedure_name,
-          country,
-          vendor_cost,
-          currency,
-          negotiated_price
-        )
-      `)
-      .eq("assessment_id", id)
-      .order("created_at", { ascending: true })
-    
-    console.log("[v0] Comparisons API fetch result:", comparisonsData?.length, "items, error:", comparisonsError?.message)
-    
-    if (comparisonsError) {
-      return NextResponse.json({ error: comparisonsError.message }, { status: 500 })
-    }
-    
+    const { rows: comparisonsData } = await query(
+      `SELECT c.*,
+              json_build_object(
+                'id', li.id,
+                'procedure_name', li.procedure_name,
+                'country', li.country,
+                'vendor_cost', li.vendor_cost,
+                'currency', li.currency,
+                'negotiated_price', li.negotiated_price
+              ) AS assessment_line_items
+         FROM assessment_comparisons c
+         JOIN assessment_line_items li ON li.id = c.line_item_id
+        WHERE c.assessment_id = $1
+        ORDER BY c.created_at ASC`,
+      [id],
+    )
+
     return NextResponse.json(
       { comparisons: comparisonsData || [] },
       { headers: { "Cache-Control": "no-store, max-age=0" } },

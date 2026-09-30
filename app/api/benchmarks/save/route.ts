@@ -1,14 +1,7 @@
 // v3 - with file_name field
 import { NextRequest, NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
+import { db } from "@/lib/db"
 import { normalizeTrialPhase } from "@/lib/types"
-
-function getDb() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,7 +16,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "Indication is required" }, { status: 400 })
     }
     
-    const db = getDb()
     const source = dataSource === "IQVIA GrantPlan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER"
     
     // Normalize to the canonical database value, including Phase IIIb.

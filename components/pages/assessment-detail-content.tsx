@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import * as XLSX from "xlsx"
 import { jsPDF } from "jspdf"
 import autoTable from "jspdf-autotable"
-import { createClient } from "@/lib/supabase/client"
 import { AppShell } from "@/components/app-shell"
 import { Button } from "@/components/ui/button"
 import {
@@ -138,7 +137,7 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
   const mockInitial = mockAssessments.find((a) => a.id === id)
   const [assessment, setAssessment] = useState<Assessment | undefined>(mockInitial)
 
-  // Fetch real assessment data from Supabase
+  // Fetch real assessment data from the server API
   useEffect(() => {
     async function fetchAssessment() {
       // If mock data exists, use it
@@ -772,13 +771,9 @@ export function AssessmentDetailContent({ id }: AssessmentDetailContentProps) {
       }
       
       // First fetch the linked benchmark file IDs for this assessment
-      const supabase = createClient()
-      const { data: benchmarkLinks } = await supabase
-        .from("assessment_benchmark_files")
-        .select("benchmark_file_id")
-        .eq("assessment_id", id)
-      
-      const benchmarkFileIds = benchmarkLinks?.map(link => link.benchmark_file_id) || []
+      const linksResponse = await fetch(`/api/assessments/${id}/benchmark-links`, { cache: "no-store" })
+      const linksResult = await linksResponse.json()
+      const benchmarkFileIds: string[] = linksResult.benchmarkFileIds || []
       console.log("[v0] Linked benchmark files for comparison:", benchmarkFileIds.length)
       
       // Send the current in-memory decisions as authoritative overrides so any

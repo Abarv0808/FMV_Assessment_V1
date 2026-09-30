@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase/server"
+import { db } from "@/lib/db"
 
 export async function GET(request: NextRequest) {
-  const supabase = await createClient()
   
   // Get a sample of benchmark procedures to see what data we have
-  const { data: procedures, error } = await supabase
+  const { data: procedures, error } = await db
     .from("benchmark_procedures")
     .select("*")
     .limit(20)
@@ -15,7 +14,7 @@ export async function GET(request: NextRequest) {
   }
   
   // Get file info
-  const { data: files } = await supabase
+  const { data: files } = await db
     .from("benchmark_files")
     .select("*")
     .limit(5)

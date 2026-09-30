@@ -1,18 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
+import { db } from "@/lib/db"
 import { normalizeTrialPhase } from "@/lib/types"
-
-function createDb() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-}
+import { isAdminRequest } from "@/lib/auth/server"
 
 export async function POST(request: NextRequest) {
   try {
-    const requesterRole = request.headers.get("x-fmv-role")
-    if (requesterRole !== "ADMIN") {
+    if (!(await isAdminRequest(request))) {
       return NextResponse.json(
         { success: false, error: "Only admin users can upload benchmark data" },
         { status: 403 },
@@ -26,7 +19,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })
     }
 
-    const db = createDb()
     const source = dataSource === "IQVIA GrantPlan" ? "IQVIA_GRANTPLAN" : "IQVIA_GPI_GRANTSMANAGER"
     
     // Normalize to the canonical database value, including Phase IIIb.
