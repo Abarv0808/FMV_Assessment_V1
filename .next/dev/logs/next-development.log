@@ -10,3 +10,12 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 [00:00:09.946] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
 [00:00:09.946] Browser LOG     %c[Vercel Web Analytics]%c [view] https://vm-assessment-table-improvements.vusercontent.net/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"https://vm-assessment-table-improvements.vusercontent.net/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1790844943382} /_vercel/insights/view
 [00:00:10.486] Server  ERROR   [v0] Exception fetching assessments: Error: Missing required environment variable DB_HOST
+[00:05:50.705] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:05:51.379] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:51.538] Server  WARN     ⚠ Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:05:51.769] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:05:51.769] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:05:51.769] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-7jpcl9i4bdww.vercel.run/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://sb-7jpcl9i4bdww.vercel.run/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1790845286946} /_vercel/insights/view
+[00:05:52.132] Browser LOG     %c[Vercel Web Analytics]%c [view] https://sb-7jpcl9i4bdww.vercel.run/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"https://sb-7jpcl9i4bdww.vercel.run/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1790845287263} /_vercel/insights/view
